@@ -1,7 +1,12 @@
 # 01 BILDUNG EDUCATION
 
 ## Themen
-bildung, schule, education, lernen, learning, student, curriculum, tokkatsu, waldorf, sudbury
+bildung, schule, education, lernen, learning, student, curriculum, tokkatsu, waldorf, sudbury, pilot, dänemark
+
+## Verwandte Themen in 99_unsortiert
+- [buch.pdf](../99_unsortiert/buch.pdf) - Vollständiges Buch-Manuskript
+- [buch (1).pdf](../99_unsortiert/buch%20(1).pdf) - Alternative Buch-Version
+- [🚀 __PERFEKT! ICH SCHREIBE JETZT KOMPLETTEN PAPER D.pdf](../99_unsortiert/🚀%20__PERFEKT!%20ICH%20SCHREIBE%20JETZT%20KOMPLETTEN%20PAPER%20D.pdf)
 
 ## Dateien
 

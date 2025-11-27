@@ -3,6 +3,12 @@
 ## Themen
 wahrheit, erkenntnis, philosophie, epistemologie, authentizität, authenticity, selbst, bewusstsein, consciousness, sinn
 
+## Verwandte Themen in 99_unsortiert
+- [global_manipulation_struktur](../99_unsortiert/global_manipulation_struktur) - Elite-Kontrolle, Bilderberg, systemische Manipulation
+- [mk-ultra_monarch_kontinuitaet](../99_unsortiert/mk-ultra_monarch_kontinuitaet) - Operation Paperclip, CIA, Gedankenkontrolle
+- [operation_paperclip_kontinuität](../99_unsortiert/operation_paperclip_kontinuität) - Nazi-Wissenschaftler, USA
+- [grenzen_naturwissenschaft_holismus.pdf](../99_unsortiert/grenzen_naturwissenschaft_holismus.pdf) - Erkenntnistheorie
+
 ## Dateien
 
 - [21123123.txt](./21123123.txt) (20.0KB)

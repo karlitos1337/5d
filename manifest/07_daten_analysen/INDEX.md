@@ -1,7 +1,11 @@
 # 07 DATEN ANALYSEN
 
 ## Themen
-.csv, .json, analysis, validierung, matrix, chart, data, timeline, projektion, wahrscheinlichkeit
+.csv, .json, analysis, validierung, matrix, chart, data, timeline, projektion, wahrscheinlichkeit, szenario
+
+## Verwandte Themen in 99_unsortiert
+- [SCHRITT2_Visuelle_Plots.pdf](../99_unsortiert/SCHRITT2_Visuelle_Plots.pdf) - Visualisierungen
+- [SCHRITT3_Referenzen_Methode.pdf](../99_unsortiert/SCHRITT3_Referenzen_Methode.pdf) - Methodik
 
 ## Dateien
 
