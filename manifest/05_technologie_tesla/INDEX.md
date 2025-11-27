@@ -4,7 +4,7 @@
 tesla, patent, transmission, electrical, energy, apparatus, signaling, ki, quantencomputer, technologie, automation
 
 ## Verwandte Themen in 99_unsortiert
-- [Valvular conduit.pdf](../99_unsortiert/Valvular%20conduit.pdf) - Tesla Patent
+- [tesla_valvular_conduit_patent.pdf](../99_unsortiert/tesla_valvular_conduit_patent.pdf) - Tesla Patent
 - [5D-EXTRACTOR.py](../99_unsortiert/5D-EXTRACTOR.py) - Automation Tool
 
 ## Dateien

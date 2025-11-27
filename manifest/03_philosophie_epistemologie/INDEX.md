@@ -4,10 +4,10 @@
 wahrheit, erkenntnis, philosophie, epistemologie, authentizität, authenticity, selbst, bewusstsein, consciousness, sinn
 
 ## Verwandte Themen in 99_unsortiert
-- [global_manipulation_struktur](../99_unsortiert/global_manipulation_struktur) - Elite-Kontrolle, Bilderberg, systemische Manipulation
-- [mk-ultra_monarch_kontinuitaet](../99_unsortiert/mk-ultra_monarch_kontinuitaet) - Operation Paperclip, CIA, Gedankenkontrolle
-- [operation_paperclip_kontinuität](../99_unsortiert/operation_paperclip_kontinuität) - Nazi-Wissenschaftler, USA
-- [grenzen_naturwissenschaft_holismus.pdf](../99_unsortiert/grenzen_naturwissenschaft_holismus.pdf) - Erkenntnistheorie
+- [elite_kontrolle_bilderberg_wef.md](../99_unsortiert/elite_kontrolle_bilderberg_wef.md) - Elite-Kontrolle, Bilderberg, WEF
+- [cia_gedankenkontrolle_mkultra_monarch.md](../99_unsortiert/cia_gedankenkontrolle_mkultra_monarch.md) - MK-Ultra, CIA Gedankenkontrolle
+- [nazi_wissenschaftler_paperclip_nasa.md](../99_unsortiert/nazi_wissenschaftler_paperclip_nasa.md) - Operation Paperclip, Nazi-Wissenschaftler
+- [wissenschaft_grenzen_holismus.pdf](../99_unsortiert/wissenschaft_grenzen_holismus.pdf) - Erkenntnistheorie
 
 ## Dateien
 

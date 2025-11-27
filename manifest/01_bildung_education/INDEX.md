@@ -4,9 +4,10 @@
 bildung, schule, education, lernen, learning, student, curriculum, tokkatsu, waldorf, sudbury, pilot, dänemark
 
 ## Verwandte Themen in 99_unsortiert
-- [buch.pdf](../99_unsortiert/buch.pdf) - Vollständiges Buch-Manuskript
-- [buch (1).pdf](../99_unsortiert/buch%20(1).pdf) - Alternative Buch-Version
-- [🚀 __PERFEKT! ICH SCHREIBE JETZT KOMPLETTEN PAPER D.pdf](../99_unsortiert/🚀%20__PERFEKT!%20ICH%20SCHREIBE%20JETZT%20KOMPLETTEN%20PAPER%20D.pdf)
+- [5d_gesamtwerk_komplett.pdf](../99_unsortiert/5d_gesamtwerk_komplett.pdf) - 5D Gesamtwerk
+- [5d_buch_manuskript_v1.pdf](../99_unsortiert/5d_buch_manuskript_v1.pdf) - Buch-Manuskript V1
+- [5d_buch_manuskript_v2.pdf](../99_unsortiert/5d_buch_manuskript_v2.pdf) - Buch-Manuskript V2
+- [paper_entwurf_komplett.pdf](../99_unsortiert/paper_entwurf_komplett.pdf) - Paper-Entwurf
 
 ## Dateien
 

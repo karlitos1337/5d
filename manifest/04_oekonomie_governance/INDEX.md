@@ -4,7 +4,7 @@
 ökonomie, dezentral, partizipation, governance, kooperation, netzwerk, demokratie, wirtschaft, investment, roi, finanzierung
 
 ## Verwandte Themen in 99_unsortiert
-- [Kollektives Arbeitsrecht - Fragen  8.docx](../99_unsortiert/Kollektives%20Arbeitsrecht%20-%20Fragen%20%208.docx) - Arbeitsrecht
+- [arbeitsrecht_kollektiv_fragen.docx](../99_unsortiert/arbeitsrecht_kollektiv_fragen.docx) - Arbeitsrecht
 
 ## Dateien
 
