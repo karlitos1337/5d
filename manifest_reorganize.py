@@ -84,6 +84,76 @@ class ManifestOrganizer:
             pass
         return ""
     
+    def organize_subcategories(self, dry_run=True):
+        """Sortiert Dateien in Unterkategorien"""
+        subcategory_rules = {
+            "01_bildung_education": {
+                "kapitel": ["kapitel_"],
+                "synthesen": ["mega", "extended"],
+                "daten": [".csv", ".json"],
+                "quellen": ["quellen", "top-25"]
+            },
+            "02_neurobiologie_psychologie": {
+                "kapitel": ["kapitel_"],
+                "anleitungen": ["anleitung", "training"]
+            },
+            "03_philosophie_epistemologie": {
+                "kapitel": ["kapitel_"],
+                "essays": ["paradox", "denkbiografie"]
+            },
+            "04_oekonomie_governance": {
+                "kapitel": ["kapitel_"],
+                "konzepte": ["prompt", "quantencomputer"]
+            },
+            "05_technologie_tesla": {
+                "patente": [".pdf", "apparatus", "transmission", "signaling"],
+                "ki_automation": ["ki_", "automation"],
+                "notizen": [".txt", "tesla"]
+            },
+            "06_synthesen_kompilationen": {
+                "master": ["master", "000-"],
+                "mega": ["mega-"],
+                "finale": ["final"],
+                "strukturen": ["struktur", "schritt"]
+            },
+            "07_daten_analysen": {
+                "csv": [".csv"],
+                "visualisierungen": [".png"],
+                "analysen": ["analysis", "validierung", "matrix"]
+            },
+            "08_personal_biografie": {
+                "kapitel": ["kapitel_"],
+                "reflexionen": ["reflexion", "mein_", "zwanglos"],
+                "dokumente": [".pdf", ".docx", "arletz", "pablö"]
+            }
+        }
+        
+        for category_dir in self.manifest_dir.iterdir():
+            if not category_dir.is_dir() or category_dir.name not in subcategory_rules:
+                continue
+            
+            files = [f for f in category_dir.iterdir() if f.is_file() and f.name != "INDEX.md"]
+            rules = subcategory_rules[category_dir.name]
+            
+            for file in files:
+                filename_lower = file.name.lower()
+                
+                # Finde passende Unterkategorie
+                subcategory = None
+                for subcat, keywords in rules.items():
+                    if any(kw in filename_lower for kw in keywords):
+                        subcategory = subcat
+                        break
+                
+                if subcategory:
+                    target = category_dir / subcategory / file.name
+                    if dry_run:
+                        print(f"   📄 {file.name} → {subcategory}/")
+                    else:
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.move(str(file), str(target))
+                        print(f"   ✅ {file.name} → {category_dir.name}/{subcategory}/")
+    
     def organize(self, dry_run=True):
         """Organisiert alle Manifest-Dateien thematisch"""
         files = [f for f in self.manifest_dir.iterdir() if f.is_file()]
@@ -169,9 +239,17 @@ if __name__ == "__main__":
     
     # Dry Run oder Execute
     execute = "--execute" in sys.argv
-    organizer.organize(dry_run=not execute)
+    subcat = "--subcategories" in sys.argv
     
-    if execute:
-        print("\n📝 Erstelle INDEX-Dateien...")
-        organizer.create_index()
-        print("\n✅ Organisation abgeschlossen!")
+    if subcat:
+        print("📂 5D UNTERKATEGORIEN ORGANISATION\n")
+        organizer.organize_subcategories(dry_run=not execute)
+        if execute:
+            print("\n✅ Unterkategorien-Organisation abgeschlossen!")
+    else:
+        organizer.organize(dry_run=not execute)
+        
+        if execute:
+            print("\n📝 Erstelle INDEX-Dateien...")
+            organizer.create_index()
+            print("\n✅ Organisation abgeschlossen!")
