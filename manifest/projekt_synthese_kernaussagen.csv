@@ -1,0 +1,20 @@
+Dimension,Kernaussage,Status,Evidenzstärke,Quellen_Web
+Philosophie,"Bewusstsein ist fundamentales Quantenphänomen, nicht Nebenprodukt",✅,Theoretisch (Faggin/D'Ariano 2023-25),"web:64,web:15"
+Philosophie,Panpsychismus: Geistige Eigenschaften bereits auf atomarer Ebene,⚠️,Philosophisch umstritten (Spät 2016),web:10
+Philosophie,Qualia-Problem: Subjektives Erleben nicht durch Formeln erfassbar,✅,Phänomenologisch gesichert (Chalmers),web:14
+Philosophie,Intentionalität: Bewusstsein bezieht sich auf Handlungsziele,✅,Brentano/Searle: Konzeptuell robust,web:14
+Psychologie,Neuronale Korrelate (NCC) messbar via EEG/fMRT,✅,"Experimentell (Dellert 2020-22, fMRT/EEG)","web:16,web:53"
+Psychologie,Dissoziation Bewusstsein/Taskrelevanz nachgewiesen,✅,Experimentell (NeuroImage 2021-22),web:16
+Psychologie,Cognitive Reappraisal reduziert Affekte neurobiologisch,✅,"Meta-Analyse (Ochsner 2004, Urry 2009)",web:19
+Psychologie,40-Hz-Gamma-Wellen korrelieren mit Bewusstseinszuständen,⚠️,"Hameroff-Hypothese, experimentell unklar",web:67
+Quantenphysik,Quantenverschränkung: Korrelation unabhängig von Distanz,✅,Quantenmechanik Lehrbuch-Standard,web:15
+Quantenphysik,Verschränkung im Gehirn: NMR-Signal verschwindet bei Schlaf,⚠️,"Explorativ (Fisher 2022, NMR-Studie)",web:18
+Quantenphysik,Orch OR: Mikrotubuli als mögliche Quantenprozessoren,⚠️,Kontrovers (Tegmark-Kritik 2000),"web:67,web:70"
+Quantenphysik,20-Qubit-Verschränkung experimentell realisiert (Innsbruck 2018),✅,Peer-reviewed (Nature Physics 2018),web:51
+Bildungssystem,Deutsche Früh-Selektion (Klasse 4) verschwendet Potenzial,✅,"Hattie 2024, OECD-Bildungsberichte",web:71
+Bildungssystem,Bildungschancen stark abhängig von sozioökonomischem Status,✅,"IQB-Bildungstrend 2018, UNESCO 2020","web:32,web:35"
+Bildungssystem,Corona verschärfte Bildungsarmut durch Digitalisierungsdefizit,✅,"Bildungsmonitor 2020, BBK-Analyse","web:30,web:31"
+Bildungssystem,Polen-Reform: Längeres gemeinsames Lernen → PISA-Verbesserung,✅,PISA-Daten Polen 2012-2018,web:26
+Interdisziplinär,Luhmann: Bewusstsein (psychisch) ≠ Kommunikation (sozial),✅,Luhmann Systemtheorie (1984),"web:46,web:48"
+Interdisziplinär,Strukturelle Kopplung ohne operationale Verschmelzung,✅,Soziologische Theorie gesichert,"web:47,web:50"
+Interdisziplinär,Bewusstseinsentwicklung als Bildungsziel (Spiral Dynamics),⚠️,Pädagogische Praxis (Karlhosang 2023),web:68

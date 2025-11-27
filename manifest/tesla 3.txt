@@ -1,0 +1,90 @@
+Großer Übersetzungsblock als reiner Copy-Text. Quelle: US-Patent Nr. 725,605, 14. April 1903. 
+
+—
+Nr. 725.605. Erteilt am 14. April 1903.
+N. Tesla.
+SYSTEM ZUR SIGNALÜBERTRAGUNG.
+Anmeldung eingereicht am 16. Juli 1900. Kein Modell. 
+
+Vereinigtes Patentamt der Vereinigten Staaten
+Nikola Tesla, New York, N.Y.
+System zur Signalübertragung.
+Spezifikation als Teil des Patents Nr. 725.605, datiert 14. April 1903.
+Anmeldung vom 16. Juli 1900, Seriennr. 23.847. (Kein Modell.) 
+
+An alle, die es angeht:
+
+Ich, Nikola Tesla, Staatsbürger der Vereinigten Staaten, wohnhaft im Borough Manhattan, New York City, County und Staat New York, habe bestimmte neue und nützliche Verbesserungen an Systemen zur Signalübertragung erfunden. Nachstehend die Spezifikation mit Bezug auf die beigefügten Zeichnungen, die Bestandteil dieser Schrift sind. 
+
+Hintergrund und Problem:
+In bestimmten Systemen zur Übermittlung verständlicher Nachrichten oder zur Steuerung der Bewegungen und Operationen entfernter Automaten werden elektrische Impulse oder Störungen, erzeugt durch geeignete Apparate, durch natürliche Medien zu einem entfernten Empfangskreis geleitet, der auf diese Impulse reagieren kann und dadurch andere Vorrichtungen steuert. Üblicherweise ist ein hochsensitives Spezialgerät mit dem Empfangskreis verbunden, das, um es noch empfindlicher zu machen und die Anfälligkeit gegen fremde Störungen zu verringern, sorgfältig so eingestellt wird, dass es mit dem Sender „in Resonanz“ ist. Trotz guter Konstruktion und Abstimmung bleiben Grenzen: mit zunehmender Entfernung sinkt die im abgestimmten Kreis verfügbare Energie, die Empfänger müssen empfindlicher werden und reagieren dann eher auch auf Ober- oder Untertöne. Bei sehr hohen Frequenzen ist die Zahl wirksamer Obertöne groß, wodurch Empfänger leicht durch Fremdeinflüsse gestört werden, besonders bei sehr kurzen Wellen aus Hertz’schen Funkensendern. Für praktische Anwendungen ist Exklusivität/Privatheit der Signale wesentlich. Starke elektrische Störungen wirken auf empfindliche Empfänger über Hunderte Meilen auf dem Land und noch weiter über See. Ziel: diese Nachteile beseitigen und viele Sende-/Empfangsstellen selektiv, exklusiv und störsicher betreiben. 
+
+Erfindungsgedanke:
+Kombination aus Mitteln, die zwei oder mehr Arten/Klassen von Störungen oder Impulsserien mit unterscheidbarem Charakter erzeugen, und einem entfernten Empfänger, der zwei oder mehr Kreise unterschiedlicher elektrischer Eigenschaften (jeweils abgestimmt) umfasst, die auf die verschiedenen Impulsarten ansprechen, wobei der Empfänger nur durch das Zusammenwirken dieser Kreise oder der von ihnen gesteuerten Instrumente arbeitet. Bereits der Einsatz von zwei Impulsarten erhöht die Sicherheit gegen Störungen so stark, dass dies in den meisten Fällen für zuverlässige, exklusive Übertragung genügt. In Sonderfällen können mehr verwendet werden, vergleichbar einem Kombinationsschloss. Sicherheit steigt außerdem durch geeignete Wahl der Impulsarten und deren Reihenfolge. 
+
+Grundausführung (Fig. 1–2):
+Am Sender zwei spiralförmige Spulen/Leiter S₁, S₂. Ihre inneren Enden gehen an erhöhte Klemmen D₁, D₂, die äußeren an Erdplatte E. Beide Systeme D₁–S₁–E und D₂–S₂–E haben verschieden gewählte Schwingungsperioden, so dass die Punkte maximalen Drucks an den erhöhten Terminals liegen. Erregung je über Primärkreise P₁, P₂ in Nähe der Sekundärsysteme; verstellbare Induktivitäten L₁, L₂ dienen zur Abstimmung. Die Primärkreise enthalten Kondensatoren C₁, C₂ und Bürstenhalter B₁, B₂, die gegen eine gezahnte Scheibe D laufen, welche periodisch Entladungen der Kondensatoren auslöst. Durch geeignete Einstellung lässt sich die Reihenfolge bzw. der Zeitabstand der Entladungen in P₁ und P₂ festlegen. So geraten die Sekundärsysteme D₁–S₁–E und D₂–S₂–E in freie Schwingung, jede mit eigener Frequenz; die beiden Schwingungen koppeln über die Erde ein und breiten sich zum Empfänger aus. 
+
+Am Empfänger (Fig. 2) zwei gleichartig gebaute, auf die Senderkreise abgestimmte Systeme e–s₁–d₁ und e–s₂–d₂. Jede Empfangsspule s₁, s₂ ist von einem lokalen Stromkreis überbrückt mit: empfindlichem Element a₁ bzw. a₂, Batterie b₁ bzw. b₂, Widerstand r₁ bzw. r₂ und Relais R₁ bzw. R₂. Die Relais betätigen Armaturen l₁, l₂; deren gleichzeitiger Kontaktabschluss c₁, c₂ schließt einen weiteren Kreis mit Batterie b₃, Widerstand r₃ und Relais R₃. Dadurch arbeitet R₃ nur, wenn beide abgestimmten Kreise gleichzeitig ansprechen. Fremdstörungen, die nur einen Kreis reizen, genügen nicht. Ergebnis: deutlich höherer Störschutz und Privatheit. Die Reihenfolge/der Zeitabstand der Entladungen in den Primärkreisen kann zusätzlich als „Code“ dienen, da R₃ nur bei bestimmter Reihenfolge gleichzeitig anzieht. 
+
+Varianten (Fig. 3–5):
+– Fig. 3: Ein einzelnes Sendesystem e–s₃–d₃ wird teilweise über eine rotierende Scheibe D₃ kurzzeitig überbrückt oder mit Kondensator G₃ belastet, wodurch sich periodisch die Eigenfrequenz ändert. Ergebnis: schnell aufeinanderfolgende Impulsarten aus einem Kreis.
+– Fig. 4: Periodisches Kurzschließen eines Kopplungskreises p–l mittels Induktionsspule L₃ und Scheibe D₄ mit isolierenden/leitenden Segmenten, um zwei Impulsarten zu erzeugen.
+– Fig. 5: Drei verschiedene Schwingungen durch periodisches Einschleifen von Windungen einer Spule L₄ via rotierender Scheibe B₅ mit zwei Vorsprüngen p₅ und drei Bürsten n₅ im 120°-Winkel.
+Am Empfänger entsprechend zwei oder drei abgestimmte Kreise, oder ein einzelner „mitlaufend“ synchronisierter Kreis. Grundprinzip bleibt: Betrieb nur durch das Zusammenwirken mehrerer selektiv abgestimmter Teilkreise. 
+
+Allgemeiner Hinweis:
+Das Verfahren gilt sowohl für Übertragung durch natürliche Medien (z. B. Erde, Atmosphäre) als auch für beliebige Leitmedien. 
+
+Ansprüche (übersetzt): 
+
+1. System zur elektrischen Energieübertragung mit Mitteln zur Erzeugung von zwei oder mehr unterscheidbaren Impulsarten und Empfangskreisen, die jeweils nur auf eine Art ansprechen, sowie einem Empfangsgerät, das vom Zusammenwirken dieser Kreise abhängt.
+2. System zur Übertragung elektrischer Impulse und zum Betrieb/Steuern von Signal- oder anderen Apparaten: Sender für zwei oder mehr Impulsarten, sensible Empfangskreise je nur für eine Art, und ein Empfänger, der vom Zusammenwirken abhängt.
+3. Wie 2), plus lokaler Stromkreis, der nur durch das Zusammenwirken der sensiblen Kreise geschlossen wird und daran angeschlossenes Empfangsgerät.
+4. Wie 2), mit Mitteln, die die Zeitabstände der Emission der verschiedenen Impulsarten variieren; Empfänger abhängig vom Zusammenwirken.
+5. Sender für mehrere unterscheidbare Impulsarten; Empfänger mit mehreren Kreisen, in jedem ein sensibles Element und ein Relais; ein Empfangsgerät im lokalen Kreis, das nur durch gleichzeitiges Anziehen aller Relais arbeitet.
+6. Sender für zwei oder mehr Serien elektrischer Schwingungen/Impulse verschiedener Frequenzen; Empfänger mit mehreren selektiv abgestimmten Kreisen; Signalgerät abhängig vom Zusammenwirken.
+7. Mehrere Sendeelemente, je eine charakteristische Impulsserie erzeugend, mit Einstell-/Regelmitteln; Empfänger mit mehreren selektiv abgestimmten Kreisen, deren Zusammenwirken für den Betrieb erforderlich ist.
+8. Sender, der Impulsserien unterscheidbarer Art in vorgegebener Reihenfolge erzeugt; Empfänger mit entsprechend reagierenden abgestimmten Kreisen, abhängig vom Zusammenwirken in entsprechender Reihenfolge.
+9. Empfänger mit mehreren sensiblen, jeweils auf verschiedene Impulsarten abgestimmten Kreisen; ein davon gesteuerter Empfangskreis und ein daran angeschlossenes Gerät, das nur bei gemeinsamem Abschluss durch zwei oder mehr dieser Kreise arbeitet.
+10. System zur Energieübertragung mit Mitteln zur Erzeugung/Übertragung von zwei oder mehr Impulsen unterschiedlicher Periodizitäten, die zusammen ein Signal in vorbestimmter Folge bilden.
+11. System mit Sender, der in einem oder mehreren Kreisen Schwingungen/Impulse unterschiedlichen Charakters aufprägt; Empfänger mit mehreren Kreisen, die jeweils auf eine Sender-Impulsart ansprechen; Empfänger abhängig vom Zusammenwirken der Empfangskreise.
+12. System mit Sender-Transformator, auf dessen Sekundärseite Schwingungen/Impulse unterschiedlichen Charakters aufgeprägt werden; Empfänger mit mehreren Kreisen, je auf eine Sekundär-Impulsart abgestimmt, und ein vom Zusammenwirken abhängiger Empfänger.
+13. System mit Sender-Transformator, auf dessen Sekundärseite Schwingungen/Impulse verschiedener Periodizitäten in vorgegebener Reihenfolge aufgeprägt werden; Empfänger mit mehreren Kreisen, die jeweils auf eine Periodizität ansprechen; Empfänger abhängig vom Zusammenwirken.
+14. Signalsystem: Erzeugung einer Serie elektrischer Impulse unterschiedlicher Periodizitäten; Empfangskreise mit unterschiedlichen Eigenperioden; Anzeigevorrichtung, die nur eine sinnvolle Anzeige gibt, wenn in einer vorgegebenen Reihenfolge Ströme in den Empfangskreisen induziert werden.
+15. System: zwei oder mehr Kreise, die sich in mindestens einer elektrischen Konstante unterscheiden; Mittel zu deren Erregung; Anzeigevorrichtung, die nur durch das Zusammenwirken von zwei oder mehr durch Sende-Wellen erzeugten Strömen arbeitet.
+16. System: Sender erzeugt elektrische Wellen/Schwingungen variierenden Charakters in vorbestimmter Reihenfolge; Empfangsinstrument, das darauf anspricht und dessen Betrieb von eben dieser Reihenfolge abhängt. 
+
+Großer Übersetzungsblock aus „tesla 3.txt“ – Patentbeschreibung fortgesetzt. Reiner Copy-Text.
+
+—
+[Beschreibung der Figuren 1–2, Sendestation und Empfangsstation]
+
+In Fig. 1 sind S₁ und S₂ zwei spiralförmig gewickelte Spulen/Leiter. Ihre inneren Enden sind mit erhöhten Klemmen D₁ bzw. D₂ verbunden, die äußeren Enden mit einer Erdplatte E. Die beiden Systeme D₁–S₁–E und D₂–S₂–E haben unterschiedlich gewählte Schwingungsperioden; ihre Längen sind so bemessen, dass die Punkte maximalen Drucks an den erhöhten Terminals D₁, D₂ liegen. Elektrische Schwingungen werden in gewünschter Weise aufgeprägt, zweckmäßig über Primärkreise P₁ und P₂ in der Nähe der Sekundärsysteme. Verstellinduktivitäten L₁, L₂ liegen in den Primärkreisen, um die Schwingungsraten zu regeln. In der Zeichnung umschließen P₁ und P₂ die Spulen S₁, S₂; beide Primärkreise sind in Serie verbunden über L₁, L₂, Leiter F, Kondensatoren C₁, C₂, Bürstenhalter B₁, B₂ und eine gezahnte Scheibe D, die mit F und, falls gewünscht, mit E verbunden ist. So entstehen zwei unabhängige Primärkreise. C₁ und C₂ sind so bemessen und L₁ und L₂ so eingestellt, dass jeder Primärkreis in enger Resonanz mit seinem Sekundärsystem schwingt. B₁ und B₂ sind unabhängig winkel- und bei Bedarf seitlich verstellbar, sodass sich jede gewünschte Reihenfolge bzw. jeder gewünschte Zeitabstand der Entladungen in den beiden Primärkreisen einstellen lässt. Die Kondensatoren werden aus einer geeigneten Hochspannungsquelle S gespeist. Dreht sich die Scheibe D, so bringen ihre Zähne p die Kondensatoren in rascher Folge zur Entladung über die Leitstäbe/Bürsten n; damit geraten die Sekundärsysteme D₁–S₁–E und D₂–S₂–E in freie Schwingung, jedes mit seiner Eigenfrequenz, für eine gewisse Zeit pro Entladung. Beide Schwingungen werden über E in den Boden eingekoppelt und breiten sich bis zur Empfangsstation aus. Dort sind zwei ähnliche, passend abgestimmte Systeme e–s₁–d₁ und e–s₂–d₂ vorhanden, die jeweils ausschließlich auf eine der beiden Sendeschwingungen ansprechen.
+
+Jede Empfangsspule s₁, s₂ ist durch einen lokalen Kreis mit empfindlichem Element a₁ bzw. a₂, Batterie b₁/b₂, Widerstand r₁/r₂ und Relais R₁/R₂ überbrückt. Die Relais betätigen Armaturen l₁, l₂; schließen beide gleichzeitig die Kontakte c₁, c₂, so wird ein weiterer Kreis mit Batterie b₃, Widerstand r₃ und Relais R₃ geschlossen. R₃ arbeitet also nur, wenn beide abgestimmten Teilkreise zugleich ansprechen; Störungen, die nur einen Kreis reizen, genügen nicht. Zusätzlich kann die Reihenfolge bzw. der Zeitabstand der Primärentladungen als „Code“ genutzt werden, da R₃ nur bei passender Abfolge beider Teilkreise anzieht. 
+
+[Allgemeiner Hinweis zur Störsicherheit]
+
+Die Beeinflussbarkeit eines Empfängers durch fremde Störungen und das Risiko, dass Signale von Nichtadressaten empfangen werden, lassen sich nicht nur durch eine höhere Zahl zusammenwirkender Impulsserien verringern, sondern auch durch geschickte Wahl ihres Charakters und ihrer Abfolge. Es gibt viele Arten, Impulse beliebiger Wellenlänge, Form, Zahl oder Ordnung zu erzeugen und sie so zusammenwirken zu lassen, dass der Empfänger nur dann arbeitet, wenn die vorgesehenen Bedingungen erfüllt sind. Um die praktische Umsetzung zu erleichtern, wurde oben der einfachste derzeit bekannte Plan beschrieben. 
+
+[Abgewandelte Ausführungen – Figuren 3–5, Beispiele]
+
+Fig. 3: Ein einzelnes Sendesystem e–s₃–d₃ wird periodisch durch eine rotierende Scheibe kurzzeitig überbrückt oder mit einem Kondensator belastet; dadurch ändert sich in schneller Folge die Eigenfrequenz. Ergebnis: mehrere unterscheidbare Impulsarten aus einem einzigen Kreis.
+Fig. 4: Periodisches Kurzschließen eines Kopplungskreises p–l mittels Induktionsspule und einer Scheibe mit isolierenden/leitenden Segmenten, um zwei Impulsarten zu erzeugen.
+Fig. 5: Erzeugung dreier verschiedener Schwingungen durch zeitweises Zuschalten von Windungen einer Spule via rotierender Scheibe mit Vorsprüngen und drei Bürsten im 120°-Winkel. Am Empfänger entsprechend zwei oder drei abgestimmte Kreise, oder ein synchron mitlaufender Kreis. Grundprinzip bleibt: Betrieb nur durch Zusammenwirken mehrerer selektiv abgestimmter Teilkreise. 
+
+[Ansprüche – Abschluss (Auszug bestätigt)]
+
+Anspruch 16: System zur Übertragung elektrischer Energie mit einem Sender, der elektrische Wellen/Schwingungen variierenden Charakters in vorbestimmter Reihenfolge erzeugt, und einem darauf ansprechenden Empfangsinstrument, dessen Betrieb von eben dieser Reihenfolge abhängt. – Nikola Tesla. 
+
+[Funktionslogik der Relais und Codierung]
+Die Relais lassen sich so einstellen, dass nur bei einer bestimmten Reihenfolge oder einem bestimmten Zeitabstand der Entladungen in den beiden Primärkreisen die Kontakte gleichzeitig schließen und dadurch das Ausgabegerät arbeiten. Abweichende Reihenfolge oder Abstände lösen keine Aktion aus. So entsteht zusätzlicher Schutz gegen Fremdstörungen, und man kann Signale senden, indem man nur die Reihenfolge der Entladungen variiert. Alternativ kann man zur Signalcodierung einfach die Periode eines Sendekreises ändern, etwa durch Verändern der Primärinduktivität. 
+
+
+[Hinweis zu Einfachvarianten]
+Mehrere getrennte Sendeelemente sind nicht zwingend nötig. Auch ein einzelner Sender kann durch periodische Umschaltungen nacheinander Impulsarten mit unterschiedlichen Merkmalen erzeugen. Der Empfänger arbeitet dann nur, wenn die abgestimmten Teilkreise in der vorgesehenen Abfolge gemeinsam ansprechen. 
+
+
+[Anspruchsabschluss und Unterzeichnung]
+Die letzten Ansprüche fassen zusammen: Sender erzeugt Schwingungen unterschiedlicher Art in vorbestimmter Reihenfolge; Empfänger hat mehrere selektiv abgestimmte Kreise; Betrieb hängt vom Zusammenwirken in eben dieser Reihenfolge ab. Unterzeichnet: Nikola Tesla. Zeugen: John C. Kerr, Richard S. Donovan. Patentnr. 725,605, erteilt am 14. April 1903.

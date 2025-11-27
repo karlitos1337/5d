@@ -1,0 +1,203 @@
+{
+  "Titel": "VON ZENTRAL ZU DEZENTRAL: Ein Integrales Manifest für menschliche Potenzialentfaltung",
+  "Autor": "Patrick (K(L)ARLETZ)",
+  "Umfang_geschätzt": "~200.000 Wörter (650-700 akademische Seiten)",
+  "Status": "Kapitel 0-9 komplett | Kapitel 10+ in Arbeit",
+  "Kapitelstruktur": {
+    "Kapitel_0": {
+      "Titel": "WARUM ICH SPRECHE - Einleitung",
+      "Wörter": 13370,
+      "Kernthesen": [
+        "Größte Krankheit ist Selbsteinschränkung",
+        "Von zentral zu dezentral als Grundprinzip",
+        "Tesla als Warnung, nicht Vorbild",
+        "Persönliche Motivation für das Werk"
+      ],
+      "Datei": "kapitel_0_einleitung.md"
+    },
+    "Kapitel_1_Master": {
+      "Titel": "DIE INTELLIGENZFORMEL - Dimensionale Strukturen intrinsischen Motivationspotenzials",
+      "Wörter": 39371,
+      "Kernthesen": [
+        "4 Dimensionen der Intelligenz: 1D (Urinstinkte) → 2D (Selbstregulation) → 3D (Systemintelligenz) → 4D (Dezentrale Kollaboration)",
+        "5 Kernkomponenten: Autonomie, Intrinsische Motivation, Resilienz, Soziale Partizipation, Authentizität",
+        "Überschneidungen mit ALLEN anderen Kapiteln systematisch integriert",
+        "Neurobiologische + systemtheoretische Fundierung"
+      ],
+      "Datei": "kapitel_5_master_mit_ueberschneidungen.md",
+      "Besonderheit": "Master-Version mit 15.000 Wörter Cross-References"
+    },
+    "Kapitel_2": {
+      "Titel": "PHILOSOPHISCHE GRUNDLAGEN - Formloser Dekonstruktivismus mit Empathie",
+      "Wörter": 17813,
+      "Kernthesen": [
+        "Wahrheit mit Liebe",
+        "Jede Meinung wichtig außer meiner",
+        "Bewusster Schaden ist ausgeschlossen",
+        "Authentizität als dekonstruktives Prinzip",
+        "Vergebung als systemische Notwendigkeit"
+      ],
+      "Datei": "kapitel_2_philosophische_grundlagen.md"
+    },
+    "Kapitel_3": {
+      "Titel": "NEUROBIOLOGISCHE BASIS - Von Urinstinkten zu Regulation",
+      "Wörter": 19042,
+      "Kernthesen": [
+        "Der Körper weiß mehr als der Verstand",
+        "7 Urinstinkte nach Panksepp",
+        "Polyvagale Theorie: Ventral Vagal (Sicherheit) | Sympathetisch (Alarm) | Dorsal Vagal (Shutdown)",
+        "Sichere Bindung als neurobiologische Notwendigkeit",
+        "Trauma durch Zwang: somatische Deprivation"
+      ],
+      "Datei": "kapitel_3_neurobiologische_basis.md"
+    },
+    "Kapitel_4": {
+      "Titel": "PERSÖNLICHE ARCHÄOLOGIE - Meine Biografie als Beweis",
+      "Wörter": 14234,
+      "Kernthesen": [
+        "ADHD-Diagnose als Systemfehler, nicht individuelle Störung",
+        "Hyperaktivität = SEEKING-System (1D)",
+        "Aufmerksamkeitsdefizit = Multiperspektivismus (3D)",
+        "Nicht anpassbar = Dezentrales Denken (4D)",
+        "Ich bin nicht geheilt. Ich bin verstanden."
+      ],
+      "Datei": "kapitel_4_persoenliche_archaeologie.md"
+    },
+    "Kapitel_5_kurz": {
+      "Titel": "MEINE EIGENEN GESETZE - Persönliche Prinzipien",
+      "Wörter": 10052,
+      "Kernthesen": [
+        "Resonanzprinzipien",
+        "Lebensgesetze aus eigener Erfahrung",
+        "Integration von Urinstinkten in Alltag"
+      ],
+      "Datei": "kapitel_5_meine_eigenen_gesetze.md"
+    },
+    "Kapitel_6": {
+      "Titel": "DIE BILDUNGSKRISE - Evidenz struktureller Zerstörung",
+      "Wörter": 18536,
+      "Kernthesen": [
+        "51% deutsche Jugendliche: chronischer Stress",
+        "37% chronische Erschöpfung (Burnout mit 15-18 Jahren!)",
+        "Teen-Suizide folgen Schulkalender mathematisch präzise",
+        "Cortisol-Kaskade: Schulstress → Depression → Shutdown",
+        "Alternative funktionieren: Sudbury (87-90% College), Waldorf (68th percentile by Grade 8)",
+        "Zentrale Kontrolle sabotiert Intelligenzentwicklung"
+      ],
+      "Datei": "kapitel_6_bildungskrise.md"
+    },
+    "Kapitel_7": {
+      "Titel": "DEZENTRALE ÖKONOMIE - Kooperativen, Wirtschaftsdemokratie",
+      "Wörter": 14585,
+      "Kernthesen": [
+        "3 Millionen Kooperativen weltweit, 280 Millionen Menschen",
+        "90% Langzeitstabilität vs. 62% zentrale Unternehmen",
+        "Mondragon: 80.000 Arbeiter, 60+ Jahre Erfolg, 3% Arbeitslosigkeit während Spanien 22% hatte",
+        "Kooperativen aktivieren 3D-4D-Intelligenz",
+        "Zentrale Kontrolle = Fragilität + Entfremdung"
+      ],
+      "Datei": "kapitel_7_dezentrale_oekonomie.md"
+    },
+    "Kapitel_8": {
+      "Titel": "PARTIZIPATIVE GOVERNANCE - Citizens Assemblies, Deliberative Demokratie",
+      "Wörter": 16973,
+      "Kernthesen": [
+        "300+ Citizens Assemblies weltweit seit 2010",
+        "Belgien: Systemisch integriert, Vertrauen +12-18 Punkte",
+        "Irland: Ehe-Gleichheit + Abtreibung durch Citizens Assemblies",
+        "Frankreich: 150 Bürger, 149 Klimamaßnahmen",
+        "Partizipative Demokratie aktiviert 4D-Intelligenz",
+        "Repräsentative Demokratie = 1:100.000 Disconnect"
+      ],
+      "Datei": "kapitel_8_partizipative_governance.md"
+    },
+    "Kapitel_9": {
+      "Titel": "KULTUR & AUTHENTIZITÄT - Organische Bewegungen vs. Co-optierte Kultur",
+      "Wörter": 8920,
+      "Kernthesen": [
+        "Authentische Kultur entsteht dezentral",
+        "Co-optierte Kultur = zentrale Kontrolle",
+        "Kultur als lebendige Resonanz"
+      ],
+      "Datei": "kapitel_9_kultur_authentizitaet.md"
+    },
+    "Feedback_Schleife": {
+      "Titel": "KONSISTENZ-ANALYSE - Kapitel 0, 1, 2",
+      "Wörter": 10030,
+      "Funktion": "Meta-Reflexion der Kohärenz des Werks",
+      "Datei": "feedback_schleife_kap_0_1_2.md"
+    }
+  },
+  "Statistische_Übersicht": {
+    "Gesamtwörter_bisher": 188895,
+    "Akademische_Seiten_geschätzt": 629,
+    "Kapitel_komplett": 9,
+    "Kapitel_geplant": "10-15 weitere",
+    "Quellen_recherchiert": 71,
+    "Dimensionen_integriert": 5
+  },
+  "Interdisziplinäre_Integration": {
+    "Philosophie": [
+      "Dekonstruktivismus",
+      "Panpsychismus",
+      "Authentizität",
+      "Vergebung"
+    ],
+    "Psychologie": [
+      "DICE-Modell",
+      "Bewusstseinsmodelle",
+      "Emotionsregulation",
+      "Trauma-Theorie"
+    ],
+    "Neurobiologie": [
+      "Urinstinkte (Panksepp)",
+      "Polyvagale Theorie (Porges)",
+      "Neuronale Korrelate",
+      "Cortisol-Kaskade"
+    ],
+    "Quantenphysik": [
+      "Quantenverschränkung",
+      "Orch OR (Penrose-Hameroff)",
+      "Bewusstsein als Quantenphänomen (Faggin)"
+    ],
+    "Systemtheorie": [
+      "Luhmann",
+      "Autopoiesis",
+      "Strukturelle Kopplung",
+      "Emergenz"
+    ],
+    "Bildungsforschung": [
+      "Sudbury-Modell",
+      "Waldorf",
+      "Self-Directed Learning",
+      "Bildungskrise-Daten"
+    ],
+    "Ökonomie": [
+      "Kooperativen",
+      "Wirtschaftsdemokratie",
+      "Mondragon",
+      "ICA-Prinzipien"
+    ],
+    "Politikwissenschaft": [
+      "Citizens Assemblies",
+      "Deliberative Demokratie",
+      "Subsidiarität",
+      "Partizipation"
+    ],
+    "Soziologie": [
+      "Dezentralisierung",
+      "Fragmentierung",
+      "Authentizität vs. Masken"
+    ]
+  },
+  "Rote_Fäden": [
+    "Von zentral zu dezentral (durchgängig)",
+    "Tesla als Warnung (Kapitel 0, 2, implizit überall)",
+    "Authentizität (Kapitel 0, 1, 2, 4, 5, 9)",
+    "Empathie + Liebe (Kapitel 0, 1, 2, 3)",
+    "4-Dimensionen-Intelligenz (Kapitel 1 → alle anderen)",
+    "Bewusster Schaden ausgeschlossen (Kapitel 2 → Ethik)",
+    "Neurobiologische Fundierung (Kapitel 3 → 6, 8)",
+    "Evidenz + Daten (Kapitel 6, 7, 8)"
+  ]
+}

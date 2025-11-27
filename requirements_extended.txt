@@ -1,0 +1,20 @@
+# 5D Extended Toolkit Requirements
+
+# Core
+requests~=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Discord Bot
+discord.py>=2.3.0
+
+# Dashboard
+streamlit>=1.29.0
+plotly>=5.18.0
+pandas>=2.1.0
+
+# Optional: Telegram Bot
+# python-telegram-bot>=20.7
+
+# Dev
+pytest>=7.4.0
