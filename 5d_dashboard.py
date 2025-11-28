@@ -410,8 +410,26 @@ def main():
             **Authentizität (Au):** 0.91 ✅  
             Kongruenz, Wahrheit, Selbstausdruck
             """)
-            
-            st.info("🎯 **Gesamt-IMP: 0.77** (Top 1% weltweit)")
+            # Formel und verifizierte Berechnung
+            try:
+                from models.imp import calculate_imp_verified
+                dims = {'A': 0.95, 'IM': 0.88, 'R': 0.82, 'SP': 0.79, 'Au': 0.91}
+                res = calculate_imp_verified(dims)
+                c1, c2, c3 = st.columns(3)
+                with c1:
+                    st.metric("IMP (multiplikativ)", f"{res['raw_multiplicative']:.3f}", "Mathematisch korrekt")
+                with c2:
+                    st.metric("IMP (gewichtet)", f"{res['weighted_additive']:.3f}", "Falls Adjustment")
+                with c3:
+                    st.metric("IMP (normiert)", f"{res['normalized']:.3f}")
+                st.code(f"""
+Formel: {res['formula_used']}
+A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims['Au']}
+= {res['raw_multiplicative']:.3f}
+""")
+                st.warning("⚠️ Falls 0.77 verwendet wird, MUSS Berechnungsweg dokumentiert sein!")
+            except Exception:
+                st.info("Formel-Berechnung nicht verfügbar. Stelle sicher, dass `models/imp.py` existiert.")
     
     with tab2:
         st.header("Action Plan & Projekte")
