@@ -118,6 +118,38 @@ chmod +x RUN_ALL.sh
 ./RUN_ALL.sh
 ```
 
+### PrivateGPT Integration (lokales RAG über 5d-Daten)
+
+- Voraussetzungen:
+	- Abhängigkeiten von `private-gpt-main` installiert (z. B. im Dev-Container: `python -m pip install -e private-gpt-main`)
+	- Optional lokales LLM (Ollama oder LlamaCPP) gemäß `private-gpt-main/settings-local.yaml`
+- Python-Version-Hinweis:
+	- PrivateGPT verlangt Python 3.11.x. Bevorzugter Weg: `.venv-pgpt` via Setup‑Skript:
+	```bash
+	bash integrations/setup_pgpt_venv.sh
+	# danach
+	PGPT_PROFILES=5d-minimal bash integrations/private_gpt_5d.sh all
+	```
+	- Manuell (Alternative):
+	```bash
+	sudo apt update && sudo apt install -y python3.11 python3.11-venv
+	python3.11 -m venv .venv-pgpt
+	. .venv-pgpt/bin/activate
+	python -m pip install -U pip
+	python -m pip install fastapi uvicorn injector python-multipart "gradio==4.44.0" \
+	  chromadb "llama-index-core>=0.13,<0.15" llama-index-embeddings-huggingface llama-index-vector-stores-chroma \
+	  sentence-transformers einops
+	python -m pip install -e private-gpt-main
+	```
+- Ingest + Server starten:
+	```bash
+	PGPT_PROFILES=local bash integrations/private_gpt_5d.sh all
+	# Oder getrennt:
+	PGPT_PROFILES=local bash integrations/private_gpt_5d.sh ingest
+	PGPT_PROFILES=local bash integrations/private_gpt_5d.sh serve
+	```
+- Standard-URL: `http://localhost:8001` (UI aktiviert). Das Skript setzt `PGPT_PROFILES=local` und aktiviert lokale Ingestion.
+
 - Einzelne Komponenten:
 	- Extractor: `python 5d_extractor.py`
 	- Research: `python 5d_research_scraper.py`

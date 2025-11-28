@@ -1,0 +1,23 @@
+# Python Artefakte
+__pycache__/
+*.pyc
+
+# Virtuelle Umgebungen
+.venv-pgpt/
+.venv/
+
+# PrivateGPT / LlamaIndex Caches
+local_data/
+# Modelle im Root sollen versioniert werden; nur PrivateGPT interne Caches bleiben durch deren eigene .gitignore ausgeschlossen
+tiktoken_cache/
+
+# Simulationsergebnisse (optional auskommentieren falls Versionierung gewünscht)
+simulations/*.json
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+*.log

@@ -39,5 +39,5 @@ fuzzywuzzy>=0.18.0
 python-Levenshtein>=0.21.0
 
 # PDF Extraction
-PyPDF2>=3.0.0
+pypdf>=3.0.0
 # Alternative: pdfplumber>=0.10.0

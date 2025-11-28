@@ -1,9 +1,20 @@
 import pytest
 from pathlib import Path
 import json
+import sys, os
+
+# Root auf sys.path legen, damit `models` importierbar ist
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
 from models.schemas import Solutions, Project, DimensionScore
-from 5d_extractor import FiveDExtractor
+import importlib.machinery, importlib.util, os
+# Lade den Extraktor direkt aus dem Projektwurzelpfad
+_path=os.path.join(ROOT, "5d_extractor.py")
+_spec=importlib.util.spec_from_loader("mod", importlib.machinery.SourceFileLoader("mod", _path))
+_mod=importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_mod)
+FiveDExtractor=_mod.FiveDExtractor
 
 
 @pytest.fixture

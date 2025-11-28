@@ -16,10 +16,16 @@ except Exception:
 # ÄNDERUNG: Konfiguration, PDF und Fuzzy Matching
     CONFIG, load_config = None, None
 try:
-    import PyPDF2
+    from pypdf import PdfReader
     HAS_PDF = True
 except Exception:
     HAS_PDF = False
+# ÄNDERUNG: Fuzzy Matching optional
+try:
+    from fuzzywuzzy import fuzz
+    HAS_FUZZY = True
+except Exception:
+    HAS_FUZZY = False
 # ÄNDERUNG: Pydantic-Validierung optional
 try:
     from models.schemas import Solutions, Project, DimensionScore
@@ -29,11 +35,6 @@ except Exception:
 
 class FiveDExtractor:
     def __init__(self, manifest_dir="manifest", extra_dirs=None, config_path: str | None = None):
-try:
-    from fuzzywuzzy import fuzz
-    HAS_FUZZY = True
-except Exception:
-    HAS_FUZZY = False
         """Extractor für Kern-Manifest + optionale zusätzliche Pfade.
 
         extra_dirs: Liste zusätzlicher Verzeichnisse (z.B. ["external/system-genesis", "external/resonance-formulas"]).
@@ -57,7 +58,9 @@ except Exception:
                 'pdf_extraction': {'method': 'pypdf', 'max_pages': 50},
             }
         }
-        self.manifest_dir = Path(self.config['extractor'].get('manifest_dir', manifest_dir))
+        # Stelle sicher, dass der übergebene manifest_dir Vorrang hat
+        self.config['extractor']['manifest_dir'] = manifest_dir or self.config['extractor'].get('manifest_dir', 'manifest')
+        self.manifest_dir = Path(self.config['extractor']['manifest_dir'])
         self.extra_dirs = [Path(p) for p in (extra_dirs or [])]
         self.imp_keywords = {
             'A': ['autonomie', 'freiheit', 'wahl', 'selbstbestimmung'],
@@ -78,7 +81,7 @@ except Exception:
         if suffix == '.pdf' and HAS_PDF:
             try:
                 with file.open('rb') as f:
-                    reader = PyPDF2.PdfReader(f)
+                    reader = PdfReader(f)
                     max_pages = int(self.config['extractor'].get('pdf_extraction', {}).get('max_pages', 50))
                     pages = reader.pages[:max_pages]
                     return '\n'.join((p.extract_text() or '') for p in pages)
@@ -164,22 +167,21 @@ except Exception:
         solutions = raw_output.get('solutions', {})
         plan = raw_output.get('plan', {})
         # Projekte generieren
-        projects_list = []
-        for name in solutions.get('Projekte', []) or []:
-            projects_list.append(Project(name=name))
-        # ROI/Pilots
+        # Erzeuge Projekte direkt mit validierbaren Feldern (damit Parser greift)
+        raw_names = solutions.get('Projekte', []) or []
         roi_vals = solutions.get('ROI', []) or []
         pilots_vals = solutions.get('Pilots', []) or []
-        for i, p in enumerate(projects_list):
-            if i < len(roi_vals):
-                p.roi = roi_vals[i]
-            if i < len(pilots_vals):
-                p.pilots = pilots_vals[i]
-        # Investment: nur zuordnen, wenn Längen passen
         inv_vals = solutions.get('Investment', []) or []
-        if inv_vals and len(inv_vals) == len(projects_list):
-            for i, p in enumerate(projects_list):
-                p.investment = inv_vals[i]
+        projects_list = []
+        for i, name in enumerate(raw_names):
+            proj_kwargs = {'name': name}
+            if i < len(roi_vals):
+                proj_kwargs['roi'] = roi_vals[i]
+            if i < len(pilots_vals):
+                proj_kwargs['pilots'] = pilots_vals[i]
+            if inv_vals and len(inv_vals) == len(raw_names):
+                proj_kwargs['investment'] = inv_vals[i]
+            projects_list.append(Project(**proj_kwargs))
         # DimensionScores
         dim_scores = []
         for dim in ['A', 'IM', 'R', 'SP', 'Au']:
@@ -187,7 +189,7 @@ except Exception:
                 dim_scores.append(DimensionScore(dimension=dim, score=raw, source='manifest'))
         validated = Solutions(projects=projects_list, dimension_scores=dim_scores, plan=plan)
         with open(filename, 'w', encoding='utf-8') as f:
-            json.dump(validated.dict(), f, indent=2, ensure_ascii=False)
+            json.dump(validated.model_dump(), f, indent=2, ensure_ascii=False)
         print(f"\n💾 {filename} gespeichert (Pydantic-validiert)")
     
     def generate_action_plan(self, solutions):
