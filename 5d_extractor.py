@@ -20,6 +20,12 @@ try:
     HAS_PDF = True
 except Exception:
     HAS_PDF = False
+# ÄNDERUNG: Pydantic-Validierung optional
+try:
+    from models.schemas import Solutions, Project, DimensionScore
+    HAS_PYDANTIC = True
+except Exception:
+    HAS_PYDANTIC = False
 
 class FiveDExtractor:
     def __init__(self, manifest_dir="manifest", extra_dirs=None, config_path: str | None = None):
@@ -147,6 +153,42 @@ except Exception:
                     solutions[f'{dim}-Score'].append(score_match.group(1) if score_match else 'HIGH')
 
         return solutions
+
+    def save_solutions_validated(self, raw_output: dict, filename: str = '5d_solutions.json') -> None:
+        """Validiert & speichert via Pydantic; fällt zurück auf Raw-JSON bei Fehlern."""
+        if not HAS_PYDANTIC:
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(raw_output, f, indent=2, ensure_ascii=False)
+            print(f"\n💾 {filename} gespeichert (ohne Pydantic-Validierung)")
+            return
+        solutions = raw_output.get('solutions', {})
+        plan = raw_output.get('plan', {})
+        # Projekte generieren
+        projects_list = []
+        for name in solutions.get('Projekte', []) or []:
+            projects_list.append(Project(name=name))
+        # ROI/Pilots
+        roi_vals = solutions.get('ROI', []) or []
+        pilots_vals = solutions.get('Pilots', []) or []
+        for i, p in enumerate(projects_list):
+            if i < len(roi_vals):
+                p.roi = roi_vals[i]
+            if i < len(pilots_vals):
+                p.pilots = pilots_vals[i]
+        # Investment: nur zuordnen, wenn Längen passen
+        inv_vals = solutions.get('Investment', []) or []
+        if inv_vals and len(inv_vals) == len(projects_list):
+            for i, p in enumerate(projects_list):
+                p.investment = inv_vals[i]
+        # DimensionScores
+        dim_scores = []
+        for dim in ['A', 'IM', 'R', 'SP', 'Au']:
+            for raw in solutions.get(f'{dim}-Score', []) or []:
+                dim_scores.append(DimensionScore(dimension=dim, score=raw, source='manifest'))
+        validated = Solutions(projects=projects_list, dimension_scores=dim_scores, plan=plan)
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(validated.dict(), f, indent=2, ensure_ascii=False)
+        print(f"\n💾 {filename} gespeichert (Pydantic-validiert)")
     
     def generate_action_plan(self, solutions):
         """Generiert NEXT STEPS"""
@@ -177,11 +219,14 @@ except Exception:
         for phase, action in plan.items():
             print(f"  {phase}: {action}")
         
-        # JSON Export
+        # JSON Export (validiert wenn möglich)
         output = {'solutions': solutions, 'plan': plan}
-        with open('5d_solutions.json', 'w') as f:
-            json.dump(output, f, indent=2, ensure_ascii=False)
-        print("\n💾 5d_solutions.json gespeichert")
+        try:
+            self.save_solutions_validated(output, filename='5d_solutions.json')
+        except Exception as e:
+            with open('5d_solutions.json', 'w', encoding='utf-8') as f:
+                json.dump(output, f, indent=2, ensure_ascii=False)
+            print(f"\n💾 5d_solutions.json gespeichert (Raw-Fallback: {e})")
 
 if __name__ == "__main__":
     extractor = FiveDExtractor()

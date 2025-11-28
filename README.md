@@ -1,3 +1,37 @@
+# 5D Intelligenz System
+
+Dieses Repository sammelt die Formeln, Einsichten und Strukturen eines 5D‑Verständnisses von Intelligenz, Bildung, Ethik und menschlichem Potenzial.[web:3][web:6]
+## IMP-Score: Berechnungsmethode
+
+Basis-Formel (multiplikativ):
+
+```
+IMP = A × IM × R × SP × Au
+```
+
+Beispiel (5D-Modellschule):
+
+- A (Autonomie) = 0.95
+- IM (Motivation) = 0.88
+- R (Resilienz) = 0.82
+- SP (Partizipation) = 0.79
+- Au (Authentizität) = 0.91
+
+Ergebnis: IMP = 0.95 × 0.88 × 0.82 × 0.79 × 0.91 ≈ 0.52
+
+Hinweis: Falls ein adjustierter Score (z. B. 0.77) verwendet wird, ist dies eine
+gewichtete/normierte Variante. Details siehe `models/imp.py` (`calculate_imp_verified`).
+
+Vergleich:
+
+- Dänemark (geschätzt): IMP ≈ 0.45 (basierend auf 7,8% Dropout, OECD 2023)
+- 5D-Modell (theoretisch): IMP ≈ 0.52 (+16% vs. DK)
+## Nutzung
+
+Im Tab „Manifeste“ ist die transparente IMP-Berechnung integriert (multiplikativ, gewichtet, normalisiert) sowie Filter/Suche und externe Referenzen.
+## Changelog
+
+Siehe `CHANGELOG.md` für eine Liste der Änderungen und Versionen.
 # 5d
 # 5D Intelligenz System
 

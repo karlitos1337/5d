@@ -607,14 +607,24 @@ def main():
             R = st.slider("Resilienz", 0.0, 1.0, 0.82)
             SP = st.slider("Partizipation", 0.0, 1.0, 0.79)
             Au = st.slider("Authentizität", 0.0, 1.0, 0.91)
-            imp_raw = A * IM * R * SP * Au
-            weights = {'A': 1.1, 'IM': 1.05, 'R': 1.0, 'SP': 0.95, 'Au': 1.0}
-            imp_weighted = (A * weights['A'] + IM * weights['IM'] + R * weights['R'] + SP * weights['SP'] + Au * weights['Au']) / 5
-            c1, c2 = st.columns(2)
-            with c1:
-                st.metric("IMP (multiplikativ)", f"{imp_raw:.3f}")
-            with c2:
-                st.metric("IMP (gewichtet)", f"{imp_weighted:.3f}")
+            try:
+                from models.imp import calculate_imp_verified
+                res = calculate_imp_verified({'A': A, 'IM': IM, 'R': R, 'SP': SP, 'Au': Au})
+                c1, c2 = st.columns(2)
+                with c1:
+                    st.metric("IMP (multiplikativ)", f"{res['raw_multiplicative']:.3f}")
+                with c2:
+                    st.metric("IMP (gewichtet)", f"{res['weighted_additive']:.3f}")
+                st.caption(f"Formel: {res['formula_used']} • Normalisiert: {res['normalized']:.3f}")
+            except Exception:
+                imp_raw = A * IM * R * SP * Au
+                weights = {'A': 1.1, 'IM': 1.05, 'R': 1.0, 'SP': 0.95, 'Au': 1.0}
+                imp_weighted = (A * weights['A'] + IM * weights['IM'] + R * weights['R'] + SP * weights['SP'] + Au * weights['Au']) / sum(weights.values())
+                c1, c2 = st.columns(2)
+                with c1:
+                    st.metric("IMP (multiplikativ)", f"{imp_raw:.3f}")
+                with c2:
+                    st.metric("IMP (gewichtet)", f"{imp_weighted:.3f}")
 
     # Footer
     st.divider()

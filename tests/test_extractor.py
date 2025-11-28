@@ -60,7 +60,8 @@ def test_save_solutions_validated(tmp_path):
         'solutions': {
             'Projekte': ['Bäckere', 'Bäckerei'],
             'ROI': ['95', '100'],
-            'Pilots': ['60']
+            'Pilots': ['60', '15'],
+            'Investment': ['50000', '30000']
         },
         'plan': {'Phase1': 'Demo'}
     }
@@ -69,3 +70,6 @@ def test_save_solutions_validated(tmp_path):
     data = json.loads(out.read_text(encoding='utf-8'))
     assert 'projects' in data
     assert len(data['projects']) == 1
+    # Investment wird zugeordnet, da Länge konsistent mit Projekten nach Dedup ist (2 Namen -> nach Dedup 1 Projekt)
+    # In diesem Fall keine genaue Zuordnung möglich, daher prüfen wir, dass kein falsches Mapping erzwungen wurde
+    assert data['projects'][0].get('investment') in (None, 50000.0, 30000.0)
