@@ -1,0 +1,22 @@
+{
+  "art": "autopoietisch",
+  "parameter": {
+    "n_agents": 80,
+    "steps": 200,
+    "zwang": 0.2,
+    "freiheit": 0.7,
+    "peers": 0.5,
+    "lehrer_support": 0.5,
+    "aufgaben_vielfalt": 0.6
+  },
+  "metriken": {
+    "A": 1.0,
+    "IM": 0.9999470839834901,
+    "R": 1.0,
+    "SP": 1.0,
+    "Au": 1.0,
+    "IMP": 0.9999470839834901,
+    "dropout_total": 0
+  },
+  "timestamp": "20251128_082129"
+}

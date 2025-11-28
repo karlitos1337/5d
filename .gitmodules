@@ -1,0 +1,6 @@
+[submodule "external/system-genesis"]
+	path = external/system-genesis
+	url = https://github.com/karlitos1337/universal-system-genesis-5d.git
+[submodule "external/resonance-formulas"]
+	path = external/resonance-formulas
+	url = https://github.com/karlitos1337/resonance-formula-5d-intelligence.git

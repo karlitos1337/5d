@@ -25,5 +25,17 @@ echo "📈 Step 4: Launching Dashboard..."
 echo "👉 Opening http://localhost:8501 in your browser..."
 streamlit run 5d_dashboard.py
 
+# Optional: External Merge (nur wenn Submodules vorhanden)
+# echo ""
+# echo "🔀 Optional: Merging external 5D solutions..."
+# python merge_external_solutions.py
+
+# Optional: Resonance→IMP Mapping (nicht-invasiv; erzeugt 5d_solutions_adjusted.json)
+# python apply_resonance_mapping.py
+
+# Optional: Weitere Streamlit-Apps (separat starten)
+# streamlit run gol_streamlit.py
+# streamlit run zwi_streamlit.py
+
 # Note: Discord Bot requires DISCORD_TOKEN
 # python 5d_discord_bot.py

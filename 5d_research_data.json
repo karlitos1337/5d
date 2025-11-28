@@ -1,0 +1,416 @@
+{
+  "self-directed learning": {
+    "arxiv": [
+      {
+        "title": "Active learning for data streams: a survey",
+        "authors": [
+          "\nDavide Cacciarelli\n",
+          "\nMurat Kulahci\n"
+        ],
+        "summary": "Online active learning is a paradigm in machine learning that aims to select the most informative data points to label from a data stream. The problem of minimizing the cost associated with collecting",
+        "published": "2023-02-17T14:24:13Z",
+        "link": "http://arxiv.org/abs/2302.08893v4"
+      },
+      {
+        "title": "On the Similarities of Embeddings in Contrastive Learning",
+        "authors": [
+          "\nChungpa Lee\n",
+          "\nSehee Lim\n",
+          "\nKibok Lee\n",
+          "\nJy-yong Sohn\n"
+        ],
+        "summary": "Contrastive learning operates on a simple yet effective principle: Embeddings of positive pairs are pulled together, while those of negative pairs are pushed apart. In this paper, we propose a unified",
+        "published": "2025-06-11T14:21:05Z",
+        "link": "http://arxiv.org/abs/2506.09781v2"
+      },
+      {
+        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
+        "authors": [
+          "\nHarkirat Singh Behl\n",
+          "\nAtılım Güneş Baydin\n",
+          "\nPhilip H. S. Torr\n"
+        ],
+        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
+        "published": "2019-05-17T18:45:25Z",
+        "link": "http://arxiv.org/abs/1905.07435v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Reconfiguring tutor-peer roles to foster critical thinking in medical PBL assisted by tutor-managed chatGPT.",
+        "authors": [
+          "Wang R",
+          "Liu C",
+          "Yi F"
+        ],
+        "published": "2025 Nov 27",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41308655/"
+      },
+      {
+        "title": "Enhancing lifelong learning skills in pharmacy education: A scoping review of the literature.",
+        "authors": [
+          "Nguyen VPV",
+          "Fernandez NA",
+          "Benson H"
+        ],
+        "published": "2025 Nov 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41308402/"
+      },
+      {
+        "title": "\"The Structural Rigidity of the U.S. is Missing in Mexico and the Diversity and Freedom of Mexico is Missing in the U.S.\": Experiences of Autism Service Providers Along the U.S.-Mexico Border.",
+        "authors": [
+          "Orendain Soto C",
+          "Dueñas AD",
+          "Castellón FA"
+        ],
+        "published": "2025 Nov 27",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41307614/"
+      }
+    ],
+    "timestamp": "2025-11-28T06:43:13.052843"
+  },
+  "intrinsic motivation education": {
+    "arxiv": [
+      {
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "authors": [
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
+        ],
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
+      },
+      {
+        "title": "Cinema, Fermi Problems, & General Education",
+        "authors": [
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
+        ],
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
+      },
+      {
+        "title": "Creating Experience value to build student satisfaction in higher education",
+        "authors": [
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
+        ],
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Effects of Immersive Virtual Reality-Based Exercise Intervention on Psychological and Physiological Outcomes in College Students: A Randomized Controlled Trial.",
+        "authors": [
+          "Liu W",
+          "McDonough DJ",
+          "Oginni J"
+        ],
+        "published": "2025 Nov 13",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41307454/"
+      },
+      {
+        "title": "Mental health and creativity in university students: a multidimensional mediation model of cognition, emotion, and motivation.",
+        "authors": [
+          "Zhu S",
+          "Leng X"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41307015/"
+      },
+      {
+        "title": "When Home Helps or Hurts: A Moderated Mediation Analysis of Work Meaning, Intrinsic Motivation, and Life Satisfaction Across Family Flexibility Profiles.",
+        "authors": [
+          "Dughi T",
+          "Rad D",
+          "Roman A"
+        ],
+        "published": "2025 Oct 24",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41301254/"
+      }
+    ],
+    "timestamp": "2025-11-28T06:43:15.097804"
+  },
+  "autonomy supportive teaching": {
+    "arxiv": [
+      {
+        "title": "Closing the Gap between Teaching and Assessment",
+        "authors": [
+          "\nChandralekha Singh\n"
+        ],
+        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
+        "published": "2017-01-09T21:29:02Z",
+        "link": "http://arxiv.org/abs/1701.02356v1"
+      },
+      {
+        "title": "Distribution Matching for Machine Teaching",
+        "authors": [
+          "\nXiaofeng Cao\n",
+          "\nIvor W. Tsang\n"
+        ],
+        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
+        "published": "2021-05-06T09:32:57Z",
+        "link": "http://arxiv.org/abs/2105.13809v1"
+      },
+      {
+        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
+        "authors": [
+          "\nMartin S. Feather\n",
+          "\nAlessandro Pinto\n"
+        ],
+        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
+        "published": "2023-05-16T18:24:12Z",
+        "link": "http://arxiv.org/abs/2305.11902v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Lived experiences of First Nations children in Therapeutic Residential Care.",
+        "authors": [
+          "Day K",
+          "McPherson L",
+          "Canosa A"
+        ],
+        "published": "2025 Nov 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41308514/"
+      },
+      {
+        "title": "Pilot study of the use of a voice-controlled robotic scope holder for laparoscopic learning by residents in supervised autonomy.",
+        "authors": [
+          "Duchateau F",
+          "Agostini A",
+          "Crochet P"
+        ],
+        "published": "2025 Nov 25",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41308503/"
+      },
+      {
+        "title": "Effect of Active Pedagogical Models on Basic Psychological Needs and Intention to Do Physical Exercise.",
+        "authors": [
+          "Calle O",
+          "Antúnez A",
+          "Ibáñez SJ"
+        ],
+        "published": "2025 Nov 17",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41301377/"
+      }
+    ],
+    "timestamp": "2025-11-28T06:43:17.361543"
+  },
+  "polyvagal theory education": {
+    "arxiv": [
+      {
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "authors": [
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
+        ],
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
+      },
+      {
+        "title": "Cinema, Fermi Problems, & General Education",
+        "authors": [
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
+        ],
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
+      },
+      {
+        "title": "Creating Experience value to build student satisfaction in higher education",
+        "authors": [
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
+        ],
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
+        "authors": [
+          "Porges SW"
+        ],
+        "published": "2025 Jun",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+      },
+      {
+        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
+        "authors": [
+          "Goffi F",
+          "Maggioni E",
+          "Bianchi AM"
+        ],
+        "published": "2025 Jul 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
+      },
+      {
+        "title": "Neuroception of psychological safety scale (NPSS): validation with a UK based adult community sample.",
+        "authors": [
+          "Cogan N",
+          "Morton L",
+          "Campbell J"
+        ],
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
+      }
+    ],
+    "timestamp": "2025-11-28T06:43:19.828201"
+  },
+  "democratic schools": {
+    "arxiv": [
+      {
+        "title": "Democratic Policy Development using Collective Dialogues and AI",
+        "authors": [
+          "\nAndrew Konya\n",
+          "\nLisa Schirch\n",
+          "\nColin Irwin\n",
+          "\nAviv Ovadya\n"
+        ],
+        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
+        "published": "2023-11-03T21:12:57Z",
+        "link": "http://arxiv.org/abs/2311.02242v1"
+      },
+      {
+        "title": "The robustness of democratic consensus",
+        "authors": [
+          "\nFabio Fagnani\n",
+          "\nJean-Charles Delvenne\n"
+        ],
+        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
+        "published": "2015-02-15T01:02:01Z",
+        "link": "http://arxiv.org/abs/1502.04264v1"
+      },
+      {
+        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
+        "authors": [
+          "\nCliver Oliver Turpo Benique\n"
+        ],
+        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
+        "published": "2025-07-14T02:32:04Z",
+        "link": "http://arxiv.org/abs/2507.14191v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Lipid nanocapsule-chitosan and iota-carrageenan hydrogel composite for sustained hydrophobic drug delivery.",
+        "authors": [
+          "Mukubwa GK",
+          "Safari JB",
+          "Tetana ZN"
+        ],
+        "published": "2025 Nov 27",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41309759/"
+      },
+      {
+        "title": "Socio-Emotional, Behavior and Cognitive Disorders Associated with Exposure to Trace Metals: A Cross-Sectional Pilot Study in School-Age Children in Haut-Katanga Province.",
+        "authors": [
+          "Mbuyamba EB",
+          "Mande JN",
+          "Obadia PM"
+        ],
+        "published": "2025 Nov 6",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41300622/"
+      },
+      {
+        "title": "Molecular insights into seasonal trematode infections in Bithynia Snails: host lineages, parasite diversity, and Opisthorchis viverrini susceptibility in southern Lao PDR.",
+        "authors": [
+          "Bunchom N",
+          "Saijuntha W",
+          "Andrews RH"
+        ],
+        "published": "2025 Nov 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41299646/"
+      }
+    ],
+    "timestamp": "2025-11-28T06:43:21.923170"
+  },
+  "student agency": {
+    "arxiv": [
+      {
+        "title": "Active Inference as a Model of Agency",
+        "authors": [
+          "\nLancelot Da Costa\n",
+          "\nSamuel Tenka\n",
+          "\nDominic Zhao\n",
+          "\nNoor Sajid\n"
+        ],
+        "summary": "Is there a canonical way to think of agency beyond reward maximisation? In this paper, we show that any type of behaviour complying with physically sound assumptions about how macroscopic biological a",
+        "published": "2024-01-23T17:09:25Z",
+        "link": "http://arxiv.org/abs/2401.12917v1"
+      },
+      {
+        "title": "Sense of agency, gender, and students' perception in open-ended physics labs",
+        "authors": [
+          "\nZ. Yasemin Kalender\n",
+          "\nMartin Stein\n",
+          "\nN. G. Holmes\n"
+        ],
+        "summary": "Instructional physics labs are critical junctures for many STEM majors to develop an understanding of experimentation in the sciences. Students can acquire useful experimental skills and grow their id",
+        "published": "2020-07-15T01:47:21Z",
+        "link": "http://arxiv.org/abs/2007.07427v1"
+      },
+      {
+        "title": "Semi-supervised Crowd Counting via Density Agency",
+        "authors": [
+          "\nHui Lin\n",
+          "\nZhiheng Ma\n",
+          "\nXiaopeng Hong\n",
+          "\nYaowei Wang\n",
+          "\nZhou Su\n"
+        ],
+        "summary": "In this paper, we propose a new agency-guided semi-supervised counting approach. First, we build a learnable auxiliary structure, namely the density agency to bring the recognized foreground regional ",
+        "published": "2022-09-07T06:34:00Z",
+        "link": "http://arxiv.org/abs/2209.02955v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Psychological resilience impact career exploration and decision-making self-efficacy through hope.",
+        "authors": [
+          "Bu X",
+          "Du Y",
+          "Guo L"
+        ],
+        "published": "2025 Nov 27",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41307558/"
+      },
+      {
+        "title": "Targeting Multidrug Resistance in Cancer: Impact of Retinoids, Rexinoids, and Carotenoids on ABC Transporters.",
+        "authors": [
+          "Čižmáriková M",
+          "Háziková V",
+          "Michalková R"
+        ],
+        "published": "2025 Nov 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41303640/"
+      },
+      {
+        "title": "Adaptation and Psychometric Validation of the Spanish Version of Two Measures of Agentic Engagement.",
+        "authors": [
+          "Guerrero E",
+          "Guilera G",
+          "Aza A"
+        ],
+        "published": "2025 Nov 13",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41301347/"
+      }
+    ],
+    "timestamp": "2025-11-28T06:43:24.005183"
+  }
+}

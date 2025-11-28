@@ -9,10 +9,50 @@ import os
 from pathlib import Path
 from collections import defaultdict
 import json
+# ÄNDERUNG: Konfiguration und PDF-Extraktion
+try:
+    from config.loader import CONFIG, load_config
+except Exception:
+# ÄNDERUNG: Konfiguration, PDF und Fuzzy Matching
+    CONFIG, load_config = None, None
+try:
+    import PyPDF2
+    HAS_PDF = True
+except Exception:
+    HAS_PDF = False
 
 class FiveDExtractor:
-    def __init__(self, manifest_dir="manifest"):
-        self.manifest_dir = Path(manifest_dir)
+    def __init__(self, manifest_dir="manifest", extra_dirs=None, config_path: str | None = None):
+try:
+    from fuzzywuzzy import fuzz
+    HAS_FUZZY = True
+except Exception:
+    HAS_FUZZY = False
+        """Extractor für Kern-Manifest + optionale zusätzliche Pfade.
+
+        extra_dirs: Liste zusätzlicher Verzeichnisse (z.B. ["external/system-genesis", "external/resonance-formulas"]).
+        Diese werden rekursiv gescannt, aber NICHT in die Haupt-JSON gemischt – separater Merge empfohlen.
+        """
+        # Konfiguration laden
+        cfg = None
+        if config_path and load_config:
+            try:
+                cfg = load_config(config_path)
+            except Exception:
+                cfg = CONFIG
+        else:
+            cfg = CONFIG
+        self.config = cfg or {
+            'extractor': {
+                'manifest_dir': manifest_dir or 'manifest',
+                'output_file': '5d_solutions.json',
+                'recursive': True,
+                'file_types': ['*.md', '*.txt', '*.pdf'],
+                'pdf_extraction': {'method': 'pypdf', 'max_pages': 50},
+            }
+        }
+        self.manifest_dir = Path(self.config['extractor'].get('manifest_dir', manifest_dir))
+        self.extra_dirs = [Path(p) for p in (extra_dirs or [])]
         self.imp_keywords = {
             'A': ['autonomie', 'freiheit', 'wahl', 'selbstbestimmung'],
             'IM': ['motivation', 'interesse', 'neugier', 'intrinsisch'],
@@ -21,35 +61,91 @@ class FiveDExtractor:
             'Au': ['authentizität', 'wahrheit', 'kongruenz', 'selbst']
         }
         
+    def extract_text(self, file: Path) -> str:
+        """Extrahiert Text aus .md/.txt/.pdf (PDF bis max_pages)."""
+        suffix = file.suffix.lower()
+        if suffix in {'.md', '.txt'}:
+            try:
+                return file.read_text(encoding='utf-8')
+            except Exception:
+                return file.read_text(errors='ignore')
+        if suffix == '.pdf' and HAS_PDF:
+            try:
+                with file.open('rb') as f:
+                    reader = PyPDF2.PdfReader(f)
+                    max_pages = int(self.config['extractor'].get('pdf_extraction', {}).get('max_pages', 50))
+                    pages = reader.pages[:max_pages]
+                    return '\n'.join((p.extract_text() or '') for p in pages)
+            except Exception as e:
+                print(f"⚠️ PDF-Fehler {file.name}: {e}")
+                return ''
+        return ''
+
     def load_manifests(self):
-        """Lädt alle .md und .pdf aus manifest/"""
+        """Lädt REKURSIV .md/.txt/.pdf aus Hauptmanifest + optionale extra_dirs."""
         texts = {}
-        for file in self.manifest_dir.glob("*.md"):
-            texts[file.name] = file.read_text(encoding='utf-8')
-        print(f"✅ {len(texts)} Manifests geladen")
+        count = 0
+        recursive = bool(self.config['extractor'].get('recursive', True))
+        file_types = self.config['extractor'].get('file_types', ['*.md'])
+        globber = self.manifest_dir.rglob if recursive else self.manifest_dir.glob
+        for ext in file_types:
+            for file in globber(ext):
+                rel = str(file.relative_to(self.manifest_dir)) if file.is_relative_to(self.manifest_dir) else file.name
+                texts[rel] = self.extract_text(file)
+                count += 1
+        for extra in self.extra_dirs:
+            if extra.exists():
+                for ext in file_types:
+                    for file in (extra.rglob(ext) if recursive else extra.glob(ext)):
+                        key = f"{extra.name}:{file.relative_to(extra)}"
+                        texts[key] = self.extract_text(file)
+                        count += 1
+        print(f"✅ {count} Dateien geladen (inkl. extra_dirs, mit PDF-Unterstützung)")
         return texts
     
+    def _extract_projects_regex(self, text: str):
+        pattern = (self.config.get('patterns', {}) or {}).get('project')
+        if not pattern:
+            pattern = r'(Bäcker[ei]|Garten|Imker[ei]|Holz|Kräuter|Werkstatt)'
+        return re.findall(pattern, text, re.I | re.DOTALL)
+
+    def _extract_projects_fuzzy(self, text: str, threshold: int = 80):
+        if not HAS_FUZZY:
+            return []
+        candidates = self._extract_projects_regex(text)
+        unique = []
+        for name in candidates:
+            if not any(fuzz.ratio(str(name).lower(), str(u).lower()) > threshold for u in unique):
+                unique.append(name)
+        return unique
+
     def extract_solutions(self, texts):
-        """Extrahiert konkrete Lösungen nach 5D"""
+        """Extrahiert konkrete Lösungen nach 5D (Regex + optional Fuzzy)."""
         solutions = defaultdict(list)
-        
+
+        inv_pat = (self.config.get('patterns', {}) or {}).get('investment', r'Investment.?([\d.,]+)')
+        roi_pat = (self.config.get('patterns', {}) or {}).get('roi', r'ROI.?([\d]+)')
+        pilots_pat = (self.config.get('patterns', {}) or {}).get('pilots', r'Pilot.?([\d]+)')
+
         for filename, text in texts.items():
-            # Lösungen finden (Investment, Projekte, ROI, Pilots)
-            projects = re.findall(r'(Bäcker[ei]|Garten|Imker[ei]|Holz|Kräuter).*?Investment.*?(\d+[.,]?\d*)', text, re.I | re.DOTALL)
-            roi = re.findall(r'ROI.*?(\d+)', text)
-            pilots = re.findall(r'Pilot.*?(\d+)', text)
-            
-            solutions['Projekte'].extend([p[0] for p in projects])
-            solutions['ROI'].extend(roi)
+            # Projekte
+            proj_names = self._extract_projects_fuzzy(text) or self._extract_projects_regex(text)
+            solutions['Projekte'].extend([str(p) for p in proj_names])
+
+            # Investment/ROI/Pilots
+            investments = re.findall(inv_pat, text, re.I | re.DOTALL)
+            rois = re.findall(roi_pat, text, re.I | re.DOTALL)
+            pilots = re.findall(pilots_pat, text, re.I | re.DOTALL)
+            solutions['ROI'].extend(rois)
             solutions['Pilots'].extend(pilots)
-            
-            # 5D-IMP Scores finden
+            # Hinweis: Investments separat nutzen, aktuell kein Feld in Schema-Legacy
+
+            # 5D-Keywords & Scores
             for dim, keywords in self.imp_keywords.items():
-                for kw in keywords:
-                    if kw.lower() in text.lower():
-                        score_match = re.search(rf'{dim}\s*[\d.,]+', text)
-                        solutions[f'{dim}-Score'].append(score_match.group(0) if score_match else 'HIGH')
-        
+                if any(kw.lower() in text.lower() for kw in keywords):
+                    score_match = re.search(rf'{dim}\s*[:\-]?\s*([\d.,]+)', text)
+                    solutions[f'{dim}-Score'].append(score_match.group(1) if score_match else 'HIGH')
+
         return solutions
     
     def generate_action_plan(self, solutions):

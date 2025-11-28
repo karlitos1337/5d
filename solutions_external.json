@@ -1,0 +1,83 @@
+{
+  "ext_genesis_terms": [
+    "Genesis"
+  ],
+  "ext_genesis_raw": [
+    {
+      "file": "external/system-genesis/MANIFEST.md",
+      "terms": [
+        "Genesis"
+      ]
+    },
+    {
+      "file": "external/system-genesis/FEEDBACK_ANALYSIS.md",
+      "terms": [
+        "Genesis"
+      ]
+    },
+    {
+      "file": "external/system-genesis/PROJECT_SUMMARY.md",
+      "terms": [
+        "Genesis"
+      ]
+    },
+    {
+      "file": "external/system-genesis/README.md",
+      "terms": [
+        "Genesis"
+      ]
+    }
+  ],
+  "ext_resonanz_terms": [
+    "Kohärenz",
+    "Resonanz"
+  ],
+  "ext_resonanz_raw": [
+    {
+      "file": "external/resonance-formulas/AI_HUMAN_COOPERATION_ANALYSIS.md",
+      "terms": [
+        "Resonanz"
+      ]
+    },
+    {
+      "file": "external/resonance-formulas/MANIFEST.md",
+      "terms": [
+        "Resonanz",
+        "Kohärenz"
+      ]
+    },
+    {
+      "file": "external/resonance-formulas/CONSISTENCY.md",
+      "terms": [
+        "Resonanz",
+        "Kohärenz"
+      ]
+    },
+    {
+      "file": "external/resonance-formulas/PHASE_6_VALIDATION_SUMMARY.md",
+      "terms": [
+        "Resonanz",
+        "Kohärenz"
+      ]
+    },
+    {
+      "file": "external/resonance-formulas/README.md",
+      "terms": [
+        "Resonanz",
+        "Kohärenz"
+      ]
+    },
+    {
+      "file": "external/resonance-formulas/RESULTS.md",
+      "terms": [
+        "Resonanz"
+      ]
+    },
+    {
+      "file": "external/resonance-formulas/TEST_SUMMARY.md",
+      "terms": [
+        "Resonanz"
+      ]
+    }
+  ]
+}

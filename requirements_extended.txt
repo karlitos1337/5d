@@ -12,9 +12,32 @@ discord.py>=2.3.0
 streamlit>=1.29.0
 plotly>=5.18.0
 pandas>=2.1.0
+networkx>=3.2.0
 
 # Optional: Telegram Bot
 # python-telegram-bot>=20.7
 
 # Dev
 pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+
+# Visualization (Game of Life)
+matplotlib>=3.7.0
+Pillow>=10.0.0
+
+# Optional: Export (GIF/MP4)
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.9
+
+# Validation & Config
+pydantic>=2.5.0
+pyyaml>=6.0.1
+
+# Fuzzy Matching
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.21.0
+
+# PDF Extraction
+PyPDF2>=3.0.0
+# Alternative: pdfplumber>=0.10.0

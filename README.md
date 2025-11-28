@@ -66,3 +66,70 @@ ZWANGLOSE Systeme aktivieren ALLE Ebenen automatisch
 Autor: Karl  
 Status: laufende Arbeit  
 Stand: 27.11.2025
+
+## Quickstart (Tools & Apps)
+
+- Voraussetzungen: Python 3.10+
+
+- Installation:
+
+```bash
+pip install -r requirements_extended.txt
+```
+
+- Komplettlauf (Extraktion → Research → GitHub → Dashboard):
+
+```bash
+chmod +x RUN_ALL.sh
+./RUN_ALL.sh
+```
+
+- Einzelne Komponenten:
+	- Extractor: `python 5d_extractor.py`
+	- Research: `python 5d_research_scraper.py`
+	- GitHub Explorer: `python 5d_github_api.py`
+	- Dashboard: `streamlit run 5d_dashboard.py`
+
+- Game of Life (Streamlit Demo):
+
+```bash
+streamlit run gol_streamlit.py
+```
+
+	- Optionaler Export (GIF/MP4):
+		- Zusätzliche Pakete sind bereits in `requirements_extended.txt` enthalten (`imageio`, `imageio-ffmpeg`).
+		- System-FFmpeg kann für MP4 nötig sein:
+
+```bash
+sudo apt update && sudo apt install -y ffmpeg
+```
+
+- Zwanglosigkeits‑Modell (Streamlit):
+
+```bash
+streamlit run zwi_streamlit.py
+```
+
+- Autopoietische Klasse (Streamlit):
+
+```bash
+streamlit run autopoietic_streamlit.py
+```
+
+- Partizipations‑Netzwerke (Streamlit):
+
+```bash
+streamlit run partnet_streamlit.py
+```
+
+- Discord‑Bot (separat, benötigt Token):
+
+```bash
+export DISCORD_TOKEN=... 
+python 5d_discord_bot.py
+```
+
+Hinweise:
+- JSON‑Schemas und deutschsprachige Keys bitte beibehalten (Dashboard/Bot erwarten sie).
+- Optional: Externe Repos unter `external/` via Submodule einbinden und mit `merge_external_solutions.py` mergen.
+- Optional: Ein Mapping von Resonanz → IMP kann in `mapping_resonance_imp.md` dokumentiert werden; ein separates Skript kann daraus nicht‑invasiv Vorschläge generieren.

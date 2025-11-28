@@ -1,0 +1,63 @@
+# 5D Extractor Configuration
+extractor:
+  manifest_dir: "manifest"
+  output_file: "5d_solutions.json"
+  recursive: true
+  file_types:
+    - "*.md"
+    - "*.txt"
+    - "*.pdf"
+  pdf_extraction:
+    method: "pypdf"  # or "pdfminer"
+    max_pages: 50
+
+keywords:
+  A:
+    - "autonomie"
+    - "freiheit"
+    - "wahl"
+    - "selbstbestimmung"
+    - "self-directed"
+  IM:
+    - "motivation"
+    - "interesse"
+    - "neugier"
+    - "intrinsisch"
+    - "flow"
+  R:
+    - "resilienz"
+    - "sicherheit"
+    - "polyvagal"
+    - "ventral"
+    - "trauma-informed"
+  SP:
+    - "partizipation"
+    - "kooperation"
+    - "netzwerk"
+    - "tokkatsu"
+    - "demokratisch"
+  Au:
+    - "authentizität"
+    - "wahrheit"
+    - "kongruenz"
+    - "selbst"
+
+patterns:
+  project: "(?i)(bäcker(ei)?|garten|imker(ei)?|holz|kräuter|werkstatt)"
+  investment: "(?i)investment.?([\d.,]+)"
+  roi: "(?i)roi.?([\d%]+)"
+  pilots: "(?i)pilot.?([\d]+)"
+
+defaults:
+  high_score: 0.75
+  missing_score: 0.5
+
+dashboard:
+  port: 8501
+  title: "5D Intelligence Dashboard"
+  denmark_baseline:
+    A: 0.75
+    IM: 0.70
+    R: 0.65
+    SP: 0.75
+    Au: 0.70

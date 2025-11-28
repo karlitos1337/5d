@@ -1,0 +1,31 @@
+name: 5D Tests & Validation
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements_extended.txt
+          pip install pytest pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2
+      - name: Run Tests
+        run: pytest -v --cov=. --cov-report=xml
+      - name: Validate JSON Schema (optional)
+        run: |
+          python - << 'PY'
+          import json
+          from models.schemas import Solutions
+          try:
+            with open('5d_solutions.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+            Solutions(**data)
+          except FileNotFoundError:
+            print('No 5d_solutions.json present; skipping validation.')
+          PY
