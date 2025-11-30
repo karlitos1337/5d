@@ -318,7 +318,7 @@ def main():
         st.metric("Research Papers", total_papers, "🔍")
     
     # Tabs (Launcher + Inhalte)
-    tab0, tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["🧭 Launcher", "📊 IMP Analysis", "🚀 Projects", "📚 Research", "💻 GitHub", "🧬 Game of Life", "🤝 Zwanglosigkeit", "📜 Manifeste"])
+    tab0, tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["🧭 Launcher", "📊 IMP Analysis", "🚀 Projects", "📚 Research", "💻 GitHub", "🧬 Game of Life", "🤝 Zwanglosigkeit", "🌌 Bewusstsein", "📜 Manifeste"])
 
     # Launcher: Kategorien + Startbefehle/Verweise
     with tab0:
@@ -529,6 +529,41 @@ A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims
         render_zwi_demo(key_prefix="tab6_")
 
     with tab7:
+        st.header("🌌 Bewusstseinsdimensionen: 1D bis 5D")
+        st.caption("Interaktive Visualisierung der Bewusstseinsebenen mit Vergangenheit/Gegenwart/Zukunft-Szenarien")
+        
+        # Zeige Link zur HTML-Datei (als Workaround für Embedding-Probleme)
+        import os
+        if os.path.exists('bewusstsein_evolution.html'):
+            file_size = os.path.getsize('bewusstsein_evolution.html')
+            st.success(f"✅ Visualisierung verfügbar ({file_size/1024:.1f} KB)")
+            
+            # Link zum direkten Öffnen
+            st.markdown("### 📊 Visualisierung öffnen:")
+            st.markdown("""
+            **Option 1:** [➡️ In neuem Tab öffnen](/bewusstsein_evolution.html){:target="_blank"}
+            
+            **Option 2:** Kopiere diese URL in einen neuen Browser-Tab:
+            ```
+            [DEINE-CODESPACE-URL]/bewusstsein_evolution.html
+            ```
+            (Ersetze die Port-URL mit `/bewusstsein_evolution.html` am Ende)
+            """)
+            
+            # Versuche trotzdem Embedding
+            st.divider()
+            st.subheader("Eingebettete Vorschau:")
+            try:
+                with open('bewusstsein_evolution.html', 'r', encoding='utf-8') as f:
+                    html_content = f.read()
+                st.components.v1.html(html_content, height=4000, scrolling=True)
+            except Exception as e:
+                st.warning(f"⚠️ Embedding fehlgeschlagen: {e}")
+                st.info("👆 Nutze die Links oben zum direkten Öffnen")
+        else:
+            st.error("❌ `bewusstsein_evolution.html` nicht gefunden.")
+    
+    with tab8:
         st.header("Manifeste – Zusammenfassung & Quellen")
         st.caption("Automatisch extrahierte Übersichten aus `manifest/**`. Externe Quellen dienen als Bezug; eigene Texte werden nicht als Autorität gewertet.")
 
