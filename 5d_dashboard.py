@@ -85,7 +85,7 @@ def create_roi_chart(solutions):
 
 
 # --- Abschnitts-Renderer (für Tabs und Launcher) ---
-def render_gol_demo(HAS_PLOTLY_local=None):
+def render_gol_demo(HAS_PLOTLY_local=None, key_prefix=""):
     """Render Conway's Game of Life Demo-Abschnitt (kapselt bisherigen Tab-Inhalt)."""
     st.header("Conway's Game of Life (Demo)")
     st.caption("Nicht-blockierende Mini-Demo. Für volle Kontrolle nutze `gol_streamlit.py` oder die CLI.")
@@ -93,11 +93,11 @@ def render_gol_demo(HAS_PLOTLY_local=None):
     # Settings
     col_a, col_b, col_c = st.columns(3)
     with col_a:
-        preset = st.selectbox("Preset", ["glider", "blinker", "toad", "gosper", "lwss", "pulsar"], index=0, key="gol_preset")
+        preset = st.selectbox("Preset", ["glider", "blinker", "toad", "gosper", "lwss", "pulsar"], index=0, key=f"{key_prefix}gol_preset")
     with col_b:
-        size = st.slider("Größe (N)", 10, 80, 30 if preset != "gosper" else 50, 1, key="gol_size")
+        size = st.slider("Größe (N)", 10, 80, 30 if preset != "gosper" else 50, 1, key=f"{key_prefix}gol_size")
     with col_c:
-        steps = st.slider("Steps", 1, 100, 10, 1, key="gol_steps")
+        steps = st.slider("Steps", 1, 100, 10, 1, key=f"{key_prefix}gol_steps")
 
     # Local helpers (klein halten, keine I/O)
     import numpy as np
@@ -167,14 +167,14 @@ def render_gol_demo(HAS_PLOTLY_local=None):
     # Controls
     c1, c2, c3 = st.columns(3)
     with c1:
-        if st.button("Step", key="gol_step_btn"):
+        if st.button("Step", key=f"{key_prefix}gol_step_btn"):
             grid = gol_step(grid)
     with c2:
-        if st.button("10 Steps", key="gol_10_btn"):
+        if st.button("10 Steps", key=f"{key_prefix}gol_10_btn"):
             for _ in range(10):
                 grid = gol_step(grid)
     with c3:
-        if st.button("Reset", key="gol_reset_btn"):
+        if st.button("Reset", key=f"{key_prefix}gol_reset_btn"):
             grid = grid_for_preset(size, preset)
 
     # Persist
@@ -190,18 +190,18 @@ def render_gol_demo(HAS_PLOTLY_local=None):
         st.text("\n".join("".join('#' if c else '.' for c in row) for row in grid))
 
 
-def render_zwi_demo(HAS_PLOTLY_local=None):
+def render_zwi_demo(HAS_PLOTLY_local=None, key_prefix=""):
     """Render Zwanglosigkeits-Spiel Abschnitt (kapselt bisherigen Tab-Inhalt)."""
     st.header("Zwanglosigkeits-Spiel (Non-Coercive Interaction)")
     st.caption("Modellierte, zwanglosigkeitsbasierte Wechselwirkungen: Kooperation mit beidseitiger Zustimmung vs. kurzfristige Zwangsgewinne.")
 
     ca, cb, cc = st.columns(3)
     with ca:
-        z_n = st.slider("Agenten-Grid N", 10, 80, 30, 1, key="zwi_n")
+        z_n = st.slider("Agenten-Grid N", 10, 80, 30, 1, key=f"{key_prefix}zwi_n")
     with cb:
-        z_coercer_ratio = st.slider("Anteil Zwinger (%)", 0, 100, 10, 1, key="zwi_ratio")
+        z_coercer_ratio = st.slider("Anteil Zwinger (%)", 0, 100, 10, 1, key=f"{key_prefix}zwi_ratio")
     with cc:
-        z_consent_thr = st.slider("Zustimmungsschwelle", 0.0, 1.0, 0.5, 0.01, key="zwi_thr")
+        z_consent_thr = st.slider("Zustimmungsschwelle", 0.0, 1.0, 0.5, 0.01, key=f"{key_prefix}zwi_thr")
 
     import numpy as np
     rng = np.random.default_rng(42)
@@ -250,17 +250,17 @@ def render_zwi_demo(HAS_PLOTLY_local=None):
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        if st.button("Step (Zwanglos)", key="zwi_step"):
+        if st.button("Step (Zwanglos)", key=f"{key_prefix}zwi_step"):
             z_types, z_will, z_pay = interaction_step(z_types, z_will, z_pay, thr=z_consent_thr)
     with c2:
-        if st.button("10 Steps (Zwanglos)", key="zwi_10"):
+        if st.button("10 Steps (Zwanglos)", key=f"{key_prefix}zwi_10"):
             for _ in range(10):
                 z_types, z_will, z_pay = interaction_step(z_types, z_will, z_pay, thr=z_consent_thr)
     with c3:
-        if st.button("Reset (Zwanglos)", key="zwi_reset"):
+        if st.button("Reset (Zwanglos)", key=f"{key_prefix}zwi_reset"):
             z_types, z_will, z_pay = init_world(z_n, z_coercer_ratio)
     with c4:
-        mode = st.selectbox("Visualisierung", ["Willingness", "Payoff", "Type"], index=0, key="zwi_mode")
+        mode = st.selectbox("Visualisierung", ["Willingness", "Payoff", "Type"], index=0, key=f"{key_prefix}zwi_mode")
 
     st.session_state[key] = (z_types, z_will, z_pay)
 
@@ -374,11 +374,11 @@ def main():
         if st.session_state.get("launcher_show_gol"):
             st.divider()
             st.subheader("🧬 Game of Life – Inline")
-            render_gol_demo()
+            render_gol_demo(key_prefix="launcher_")
         if st.session_state.get("launcher_show_zwi"):
             st.divider()
             st.subheader("🤝 Zwanglosigkeit – Inline")
-            render_zwi_demo()
+            render_zwi_demo(key_prefix="launcher_")
     
     with tab1:
         st.header("IMP Score Analyse")
@@ -514,10 +514,10 @@ A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims
                         st.divider()
 
     with tab5:
-        render_gol_demo()
+        render_gol_demo(key_prefix="tab5_")
     
     with tab6:
-        render_zwi_demo()
+        render_zwi_demo(key_prefix="tab6_")
 
     with tab7:
         st.header("Manifeste – Zusammenfassung & Quellen")

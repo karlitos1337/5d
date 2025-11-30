@@ -37,6 +37,26 @@
     ],
     "pubmed": [
       {
+        "title": "V.T.O.B.S.-Learning birth mechanics in virtual reality: a controlled cohort study in undergraduate medical education.",
+        "authors": [
+          "Adams J",
+          "Klein C",
+          "Ludwig S"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41312483/"
+      },
+      {
+        "title": "Characterizing potential subtypes and influencing factors of self-directed learning competence among clinical nurses in China by latent profile analysis.",
+        "authors": [
+          "Zhisheng Z",
+          "Mingju C",
+          "Ruichu Z"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41312033/"
+      },
+      {
         "title": "Reconfiguring tutor-peer roles to foster critical thinking in medical PBL assisted by tutor-managed chatGPT.",
         "authors": [
           "Wang R",
@@ -45,29 +65,9 @@
         ],
         "published": "2025 Nov 27",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41308655/"
-      },
-      {
-        "title": "Enhancing lifelong learning skills in pharmacy education: A scoping review of the literature.",
-        "authors": [
-          "Nguyen VPV",
-          "Fernandez NA",
-          "Benson H"
-        ],
-        "published": "2025 Nov 26",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41308402/"
-      },
-      {
-        "title": "\"The Structural Rigidity of the U.S. is Missing in Mexico and the Diversity and Freedom of Mexico is Missing in the U.S.\": Experiences of Autism Service Providers Along the U.S.-Mexico Border.",
-        "authors": [
-          "Orendain Soto C",
-          "Dueñas AD",
-          "Castellón FA"
-        ],
-        "published": "2025 Nov 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41307614/"
       }
     ],
-    "timestamp": "2025-11-28T06:43:13.052843"
+    "timestamp": "2025-11-29T14:13:50.615928"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -107,6 +107,16 @@
     ],
     "pubmed": [
       {
+        "title": "Assessing the role of physical activity in shaping students' academic motivation: the mediating role of mental health.",
+        "authors": [
+          "Ma D",
+          "Akram H",
+          "Li S"
+        ],
+        "published": "2025 Nov 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41316117/"
+      },
+      {
         "title": "Effects of Immersive Virtual Reality-Based Exercise Intervention on Psychological and Physiological Outcomes in College Students: A Randomized Controlled Trial.",
         "authors": [
           "Liu W",
@@ -124,19 +134,9 @@
         ],
         "published": "2025",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41307015/"
-      },
-      {
-        "title": "When Home Helps or Hurts: A Moderated Mediation Analysis of Work Meaning, Intrinsic Motivation, and Life Satisfaction Across Family Flexibility Profiles.",
-        "authors": [
-          "Dughi T",
-          "Rad D",
-          "Roman A"
-        ],
-        "published": "2025 Oct 24",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41301254/"
       }
     ],
-    "timestamp": "2025-11-28T06:43:15.097804"
+    "timestamp": "2025-11-29T14:13:52.417321"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,37 +172,36 @@
     ],
     "pubmed": [
       {
-        "title": "Lived experiences of First Nations children in Therapeutic Residential Care.",
+        "title": "\"After a long day of play, I get tired and forget to unfurl my bed net\": a qualitative study exploring factors affecting insecticide-treated bed net use among school-aged children in eastern Uganda.",
         "authors": [
-          "Day K",
-          "McPherson L",
-          "Canosa A"
+          "Sebatta DE",
+          "Alexander S",
+          "Rek J"
         ],
-        "published": "2025 Nov 26",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41308514/"
+        "published": "2025 Nov 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41316295/"
       },
       {
-        "title": "Pilot study of the use of a voice-controlled robotic scope holder for laparoscopic learning by residents in supervised autonomy.",
+        "title": "Factors influencing the completion of advance directives in cancer patients: a descriptive survey.",
         "authors": [
-          "Duchateau F",
-          "Agostini A",
-          "Crochet P"
+          "Hwang W",
+          "Do J"
         ],
-        "published": "2025 Nov 25",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41308503/"
+        "published": "2025 Nov 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41316189/"
       },
       {
-        "title": "Effect of Active Pedagogical Models on Basic Psychological Needs and Intention to Do Physical Exercise.",
+        "title": "Assessing the role of physical activity in shaping students' academic motivation: the mediating role of mental health.",
         "authors": [
-          "Calle O",
-          "Antúnez A",
-          "Ibáñez SJ"
+          "Ma D",
+          "Akram H",
+          "Li S"
         ],
-        "published": "2025 Nov 17",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41301377/"
+        "published": "2025 Nov 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41316117/"
       }
     ],
-    "timestamp": "2025-11-28T06:43:17.361543"
+    "timestamp": "2025-11-29T14:13:54.245716"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -270,7 +269,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-11-28T06:43:19.828201"
+    "timestamp": "2025-11-29T14:13:55.973330"
   },
   "democratic schools": {
     "arxiv": [
@@ -308,6 +307,24 @@
     ],
     "pubmed": [
       {
+        "title": "Conceptualising and Reimagining Professionalism in Different Contexts: From Nurse to Nursing Lecturer.",
+        "authors": [
+          "Litvin R"
+        ],
+        "published": "2026 Jan",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41313797/"
+      },
+      {
+        "title": "Changes in the recent habitat suitability of Euro-Mediterranean Anopheles species due to land-use and climate.",
+        "authors": [
+          "Merkenschlager C",
+          "Bangelesa F",
+          "Paeth H"
+        ],
+        "published": "2025 Nov 27",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41310860/"
+      },
+      {
         "title": "Lipid nanocapsule-chitosan and iota-carrageenan hydrogel composite for sustained hydrophobic drug delivery.",
         "authors": [
           "Mukubwa GK",
@@ -316,29 +333,9 @@
         ],
         "published": "2025 Nov 27",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41309759/"
-      },
-      {
-        "title": "Socio-Emotional, Behavior and Cognitive Disorders Associated with Exposure to Trace Metals: A Cross-Sectional Pilot Study in School-Age Children in Haut-Katanga Province.",
-        "authors": [
-          "Mbuyamba EB",
-          "Mande JN",
-          "Obadia PM"
-        ],
-        "published": "2025 Nov 6",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41300622/"
-      },
-      {
-        "title": "Molecular insights into seasonal trematode infections in Bithynia Snails: host lineages, parasite diversity, and Opisthorchis viverrini susceptibility in southern Lao PDR.",
-        "authors": [
-          "Bunchom N",
-          "Saijuntha W",
-          "Andrews RH"
-        ],
-        "published": "2025 Nov 26",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41299646/"
       }
     ],
-    "timestamp": "2025-11-28T06:43:21.923170"
+    "timestamp": "2025-11-29T14:13:57.901971"
   },
   "student agency": {
     "arxiv": [
@@ -381,36 +378,36 @@
     ],
     "pubmed": [
       {
-        "title": "Psychological resilience impact career exploration and decision-making self-efficacy through hope.",
+        "title": "Effects of a semester-long massage practice on low back pain and physical fitness in university students.",
         "authors": [
-          "Bu X",
-          "Du Y",
-          "Guo L"
+          "Erzeybek MS",
+          "Kaya F",
+          "Eynur BR"
         ],
-        "published": "2025 Nov 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41307558/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41316640/"
       },
       {
-        "title": "Targeting Multidrug Resistance in Cancer: Impact of Retinoids, Rexinoids, and Carotenoids on ABC Transporters.",
+        "title": "Examining the use of props to assist undergraduates in developing a sustainable yoga practice.",
         "authors": [
-          "Čižmáriková M",
-          "Háziková V",
-          "Michalková R"
+          "Jahani S",
+          "Haberlin S",
+          "Roig Ralls Y"
         ],
-        "published": "2025 Nov 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41303640/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41316569/"
       },
       {
-        "title": "Adaptation and Psychometric Validation of the Spanish Version of Two Measures of Agentic Engagement.",
+        "title": "Implant-retaining management of cranioplasty-related surgical infections.",
         "authors": [
-          "Guerrero E",
-          "Guilera G",
-          "Aza A"
+          "Korhonen TK",
+          "Mee H",
+          "Helmy A"
         ],
-        "published": "2025 Nov 13",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41301347/"
+        "published": "2025 Nov 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41314345/"
       }
     ],
-    "timestamp": "2025-11-28T06:43:24.005183"
+    "timestamp": "2025-11-29T14:13:59.687930"
   }
 }

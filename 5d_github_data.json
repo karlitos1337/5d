@@ -5,11 +5,11 @@
         "name": "LearnDataScience",
         "full_name": "nborwankar/LearnDataScience",
         "description": "Open Content for self-directed learning in data science",
-        "stars": 2983,
+        "stars": 2982,
         "forks": 1652,
         "language": "Jupyter Notebook",
         "url": "https://github.com/nborwankar/LearnDataScience",
-        "updated": "2025-11-07T06:16:48Z"
+        "updated": "2025-11-28T18:12:00Z"
       },
       {
         "name": "deep_learning_topology_opt",
@@ -264,56 +264,56 @@
   "trending": {
     "education": [
       {
-        "name": "21-INVOCATION-CODEX",
+        "name": "how-to-data-science",
         "stars": 0,
-        "url": "https://github.com/mar2707/21-INVOCATION-CODEX"
+        "url": "https://github.com/MasterHasanm/how-to-data-science"
       },
       {
-        "name": "autopsy-case-analysis-by-lockenkoepflein",
+        "name": "cs2-external",
         "stars": 0,
-        "url": "https://github.com/MSLwebdevhead/autopsy-case-analysis-by-lockenkoepflein"
+        "url": "https://github.com/beni8833/cs2-external"
       },
       {
-        "name": "Online-IDE",
+        "name": "Ez-Quiz-App",
         "stars": 0,
-        "url": "https://github.com/yoyocilliangdfsb/Online-IDE"
+        "url": "https://github.com/deromokhtar/Ez-Quiz-App"
       },
       {
-        "name": "CyberSecurity-Keylogger",
-        "stars": 1,
-        "url": "https://github.com/GelvinDimens/CyberSecurity-Keylogger"
+        "name": "Skolverket-MCP",
+        "stars": 0,
+        "url": "https://github.com/mimanshaherbals-bot/Skolverket-MCP"
       },
       {
-        "name": "matematiikkakilpailut.github.io",
-        "stars": 2,
-        "url": "https://github.com/matematiikkakilpailut/matematiikkakilpailut.github.io"
+        "name": "forth-2uy",
+        "stars": 0,
+        "url": "https://github.com/tuan2431/forth-2uy"
       }
     ],
     "learning": [
       {
-        "name": "shkumaraman.github.io",
-        "stars": 2,
-        "url": "https://github.com/shkumaraman/shkumaraman.github.io"
-      },
-      {
-        "name": "swiftdo.github.io",
-        "stars": 7,
-        "url": "https://github.com/swiftdo/swiftdo.github.io"
-      },
-      {
-        "name": "research_groups_computer_vision",
-        "stars": 2,
-        "url": "https://github.com/eu1234567890/research_groups_computer_vision"
-      },
-      {
-        "name": "TySVA",
+        "name": "Designing-Hybrid-AI-Systems",
         "stars": 0,
-        "url": "https://github.com/Maurellone/TySVA"
+        "url": "https://github.com/Removed-navajo219/Designing-Hybrid-AI-Systems"
       },
       {
-        "name": "LearningTasks4Programming",
-        "stars": 2,
-        "url": "https://github.com/RobertRingel/LearningTasks4Programming"
+        "name": "Rock-Paper-Scissors-Project",
+        "stars": 0,
+        "url": "https://github.com/idothisforfun-hehe/Rock-Paper-Scissors-Project"
+      },
+      {
+        "name": "Stable-Diffusion",
+        "stars": 2596,
+        "url": "https://github.com/FurkanGozukara/Stable-Diffusion"
+      },
+      {
+        "name": "typing-game",
+        "stars": 0,
+        "url": "https://github.com/FauzanOktavianto/typing-game"
+      },
+      {
+        "name": "S22-Understanding-Async-Requests",
+        "stars": 1,
+        "url": "https://github.com/kptung/S22-Understanding-Async-Requests"
       }
     ],
     "pedagogy": [
@@ -321,6 +321,11 @@
         "name": "RAGKET",
         "stars": 3,
         "url": "https://github.com/Ayanop267/RAGKET"
+      },
+      {
+        "name": "ph-submissions",
+        "stars": 147,
+        "url": "https://github.com/programminghistorian/ph-submissions"
       },
       {
         "name": "neuraflow",
@@ -336,33 +341,28 @@
         "name": "jekyll",
         "stars": 538,
         "url": "https://github.com/programminghistorian/jekyll"
-      },
-      {
-        "name": "instructor-training",
-        "stars": 184,
-        "url": "https://github.com/carpentries/instructor-training"
       }
     ],
     "edtech": [
-      {
-        "name": "senjun-courses",
-        "stars": 151,
-        "url": "https://github.com/senjun-team/senjun-courses"
-      },
-      {
-        "name": "parallel-arabic",
-        "stars": 24,
-        "url": "https://github.com/selmetwa/parallel-arabic"
-      },
       {
         "name": "exam-seating-arranger",
         "stars": 0,
         "url": "https://github.com/Bossr1387/exam-seating-arranger"
       },
       {
+        "name": "Next-Voters",
+        "stars": 3,
+        "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
+      },
+      {
         "name": "TatvaX-AI-PROTOTYPE",
         "stars": 0,
         "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
+      },
+      {
+        "name": "nextjs-math-course",
+        "stars": 3,
+        "url": "https://github.com/maciekt07/nextjs-math-course"
       },
       {
         "name": "ai-recruitment-assistant",
@@ -371,5 +371,5 @@
       }
     ]
   },
-  "timestamp": "2025-11-28T06:43:25.144339"
+  "timestamp": "2025-11-29T14:14:00.811305"
 }
