@@ -264,56 +264,56 @@
   "trending": {
     "education": [
       {
-        "name": "lisp-8zj",
+        "name": "explorart",
         "stars": 0,
-        "url": "https://github.com/MRDEVOP/lisp-8zj"
+        "url": "https://github.com/stephanievanoverberghe/explorart"
       },
       {
-        "name": "prolog-ooj",
-        "stars": 1,
-        "url": "https://github.com/reddywhop/prolog-ooj"
+        "name": "gocast",
+        "stars": 212,
+        "url": "https://github.com/TUM-Dev/gocast"
       },
       {
-        "name": "lab",
-        "stars": 1,
-        "url": "https://github.com/navchandar/lab"
+        "name": "maestro7it_education",
+        "stars": 6,
+        "url": "https://github.com/QuadDarv1ne/maestro7it_education"
       },
       {
-        "name": "Julia_Modeling_Workshop",
-        "stars": 0,
-        "url": "https://github.com/FreeGgOnline/Julia_Modeling_Workshop"
+        "name": "graphest",
+        "stars": 123,
+        "url": "https://github.com/unageek/graphest"
       },
       {
-        "name": "MiTm-Basic",
-        "stars": 1,
-        "url": "https://github.com/sigmabuben/MiTm-Basic"
+        "name": "R-Instat",
+        "stars": 41,
+        "url": "https://github.com/IDEMSInternational/R-Instat"
       }
     ],
     "learning": [
       {
-        "name": "learning-center",
+        "name": "mano-project.github.io",
         "stars": 0,
-        "url": "https://github.com/ArunReddy960/learning-center"
+        "url": "https://github.com/mano-project/mano-project.github.io"
       },
       {
-        "name": "GoAnyBusiness",
-        "stars": 0,
-        "url": "https://github.com/salmane123455/GoAnyBusiness"
-      },
-      {
-        "name": "lab",
+        "name": "java-learning-journey",
         "stars": 1,
-        "url": "https://github.com/navchandar/lab"
+        "url": "https://github.com/hardnead/java-learning-journey"
       },
       {
-        "name": "learning-center",
-        "stars": 0,
-        "url": "https://github.com/Smindlo97/learning-center"
+        "name": "fastify-playground",
+        "stars": 1,
+        "url": "https://github.com/Sumith-Kumar-Saini/fastify-playground"
       },
       {
-        "name": "-Programming-for-Beginners---Your-First-Guide-to-Entering-the-World-of-Technology-",
+        "name": "Course-Python-LLM-Finance",
         "stars": 0,
-        "url": "https://github.com/AMN-h0b/-Programming-for-Beginners---Your-First-Guide-to-Entering-the-World-of-Technology-"
+        "url": "https://github.com/sanztheo/Course-Python-LLM-Finance"
+      },
+      {
+        "name": "to-do-list",
+        "stars": 0,
+        "url": "https://github.com/yeszi/to-do-list"
       }
     ],
     "pedagogy": [
@@ -345,19 +345,19 @@
     ],
     "edtech": [
       {
-        "name": "ApexCoachAI",
-        "stars": 0,
-        "url": "https://github.com/sh-fleekbiz/ApexCoachAI"
+        "name": "Learnevo",
+        "stars": 3,
+        "url": "https://github.com/reza-khalili-dev/Learnevo"
       },
       {
-        "name": "ai-recruitment-assistant",
+        "name": "exam-seating-arranger",
         "stars": 0,
-        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
+        "url": "https://github.com/Bossr1387/exam-seating-arranger"
       },
       {
-        "name": "neuropilot",
-        "stars": 1,
-        "url": "https://github.com/Rwiddhi03/neuropilot"
+        "name": "TatvaX-AI-PROTOTYPE",
+        "stars": 0,
+        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
       },
       {
         "name": "FocusFlow-app",
@@ -365,11 +365,11 @@
         "url": "https://github.com/masddffee/FocusFlow-app"
       },
       {
-        "name": "parallel-arabic",
-        "stars": 24,
-        "url": "https://github.com/selmetwa/parallel-arabic"
+        "name": "ApexCoachAI",
+        "stars": 0,
+        "url": "https://github.com/sh-fleekbiz/ApexCoachAI"
       }
     ]
   },
-  "timestamp": "2025-11-30T08:36:39.661759"
+  "timestamp": "2025-11-30T10:54:56.112626"
 }

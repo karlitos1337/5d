@@ -390,7 +390,12 @@ def main():
             if imp_fig is not None:
                 st.plotly_chart(imp_fig, width='stretch')
             else:
-                st.warning("Plotly nicht installiert – Radar-Diagramm entfällt. Installiere mit: pip install plotly")
+                st.warning("Plotly nicht installiert – zeige Balkendiagramm als Fallback.")
+                import pandas as _pd
+                _dims = ['Autonomie', 'Motivation', 'Resilienz', 'Partizipation', 'Authentizität']
+                _vals = [0.95, 0.88, 0.82, 0.79, 0.91]
+                _df = _pd.DataFrame({'Dimension': _dims, 'Score': _vals}).set_index('Dimension')
+                st.bar_chart(_df)
         
         with col2:
             st.subheader("5D Dimensionen")
@@ -446,8 +451,12 @@ A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims
         if roi_fig is not None:
             st.plotly_chart(roi_fig, width='stretch')
         else:
-            st.warning("Plotly fehlt – einfache ROI-Werte anzeigen:")
-            st.write(roi_values)
+            st.warning("Plotly fehlt – zeige Balkendiagramm als Fallback.")
+            import pandas as _pd
+            if not roi_values:
+                roi_values = [0.0]
+            _df = _pd.DataFrame({'Projekt': [f'P{i+1}' for i in range(len(roi_values))], 'ROI': roi_values}).set_index('Projekt')
+            st.bar_chart(_df)
         
         # Projekte
         projekte = list(set(solutions.get('solutions', {}).get('Projekte', [])))

@@ -27,18 +27,31 @@ class DimensionScore(BaseModel):
 
     @field_validator('score', mode='before')
     def parse_score(cls, v):
-        """Konvertiert 'HIGH', 'A,' etc. zu numerisch."""
+        """Konvertiert 'HIGH', 'A,' etc. zu numerisch; normalisiert auf 0-1."""
         if isinstance(v, str):
             s = v.strip()
             if s.upper() == 'HIGH':
                 return 0.75
             import re
             m = re.search(r'(\d+\.\d+|\d+)', s.replace(',', '.'))
-            return float(m.group(1)) if m else 0.5
-        try:
-            return float(v)
-        except Exception:
-            return 0.5
+            score = float(m.group(1)) if m else 0.5
+        else:
+            try:
+                score = float(v)
+            except Exception:
+                score = 0.5
+        
+        # Normalisierung auf 0-1 Bereich (falls Werte > 1.0 z.B. aus Skalen 1-5)
+        if score > 1.0:
+            # Annahme: Skala 1-5 oder 0-10 → normalisiere auf 0-1
+            if score <= 5.0:
+                score = score / 5.0  # 5.0 → 1.0, 3.0 → 0.6, etc.
+            elif score <= 10.0:
+                score = score / 10.0  # 10.0 → 1.0, 7.5 → 0.75
+            else:
+                score = min(score / 100.0, 1.0)  # Prozent-Werte 0-100 → 0-1
+        
+        return min(max(score, 0.0), 1.0)  # Clamping auf [0, 1]
 
 
 class Project(BaseModel):

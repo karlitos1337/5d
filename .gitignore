@@ -3,12 +3,9 @@ __pycache__/
 *.pyc
 
 # Virtuelle Umgebungen
-.venv-pgpt/
 .venv/
 
-# PrivateGPT / LlamaIndex Caches
-local_data/
-# Modelle im Root sollen versioniert werden; nur PrivateGPT interne Caches bleiben durch deren eigene .gitignore ausgeschlossen
+# LLM Caches (lokal, optional ignorieren)
 tiktoken_cache/
 
 # Simulationsergebnisse (optional auskommentieren falls Versionierung gewünscht)

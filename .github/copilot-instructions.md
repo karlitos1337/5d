@@ -2,10 +2,12 @@
 
 Ziel: Schnell produktiv arbeiten, ohne die projekt­spezifischen Datenflüsse oder Dateischnittstellen zu brechen. Beziehe dich auf konkrete Dateien und bestehende Muster in diesem Repo.
 
+Wichtige Leitplanke: KEIN PrivateGPT/PGPT, keine RAG/LLM-Server-Setups in diesem Repo. Fokus: Kern‑5D‑Pipeline und Streamlit‑Frontends.
+
 ### Big Picture Architektur
 - **Daten-Pipeline**: `5d_extractor.py` (Manifest-Parser) → `5d_research_scraper.py` (arXiv/PubMed) → `5d_github_api.py` (GitHub Suche) → JSON Outputs
 - **Frontends**: `5d_dashboard.py` (Hauptdashboard), `autopoietic_streamlit.py`, `zwi_streamlit.py`, `gol_streamlit.py`, `partnet_streamlit.py` (Simulationen)
-- **Integration**: Optional `5d_discord_bot.py` (Discord Commands), PrivateGPT RAG (lokales LLM via `integrations/private_gpt_5d.sh`)
+- **Integration**: Optional `5d_discord_bot.py` (Discord Commands)
 - **Orchestrierung**: `RUN_ALL.sh` führt die Hauptpipeline aus und startet das Dashboard
 - **Datenfluss/Artefakte**:
   - `5d_solutions.json` aus Extractor (validiert via `models/schemas.py`)
@@ -16,7 +18,7 @@ Ziel: Schnell produktiv arbeiten, ohne die projekt­spezifischen Datenflüsse od
   - Dashboard/Bot lesen diese JSONs und degradieren graceful bei fehlenden Dateien
 
 ### Setup & Workflows
-- **Environment**: Python 3.10+ empfohlen (3.11 für PrivateGPT). Dev-Container: Ubuntu 24.04.3 LTS
+- **Environment**: Python 3.10+ empfohlen. Dev-Container: Ubuntu 24.04.3 LTS
 - **Installation**:
   ```bash
   pip install -r requirements_extended.txt
@@ -42,12 +44,43 @@ Ziel: Schnell produktiv arbeiten, ohne die projekt­spezifischen Datenflüsse od
   pytest tests/                        # Pytest-Suite mit Fixtures
   pytest tests/test_extractor.py -v   # Einzeltest
   ```
-- **PrivateGPT RAG** (lokales LLM über 5d-Daten):
-  ```bash
-  bash integrations/setup_pgpt_venv.sh  # Erstellt .venv-pgpt (Python 3.11)
-  PGPT_PROFILES=5d-minimal bash integrations/private_gpt_5d.sh all  # Ingest + Server
-  # Alternative Profile: local, ollama-pg (siehe private-gpt-main/settings-*.yaml)
-  ```
+ 
+
+### Agent-Verhalten (Prompt-Kern)
+- Kein Aufbau/Erwähnung von PrivateGPT, Ollama oder anderen externen RAG‑Stacks.
+- Bevorzugte Tasks: Extractor, Research‑Scraper, GitHub‑Explorer, Dashboard, Simulationen, Merge‑Skripte.
+- Änderungen minimal-invasiv: Schemas/JSONs kompatibel halten (additiv statt umbauen).
+- Netzwerkzugriffe robust: Timeouts, Fehler fangen, leere Listen zurückgeben.
+- Streamlit: Keine blockierenden Operationen im Renderpfad; I/O in `load_data()` kapseln.
+- Visualisierungs‑Fallbacks nutzen (Plotly‑Alternativen sind in `5d_dashboard.py` enthalten).
+
+### Debug-Playbook (Schnellhilfe)
+- Dashboard zeigt nichts/Bild fehlt:
+  - Healthcheck: `curl -s http://localhost:8501/_stcore/health` → erwartet `ok`.
+  - Neustart:
+    ```bash
+    pkill -f streamlit || true
+    streamlit run 5d_dashboard.py --server.port 8501 --server.headless true
+    ```
+  - Statischer Fallback: Datei `5d_static_view.html` öffnen.
+- Leere Daten:
+  - Pipeline neu laufen lassen:
+    ```bash
+    python 5d_extractor.py && python 5d_research_scraper.py && python 5d_github_api.py
+    ```
+  - Größen prüfen: `ls -lh 5d_*.json`
+- Score‑Validierung > 1.0:
+  - Bereits gelöst via Normalisierung in `models/schemas.py` (kein Handlungsbedarf).
+- Geringer Speicherplatz:
+  - Caches leeren:
+    ```bash
+    rm -rf ~/.cache/pip ~/.cache/huggingface 2>/dev/null || true
+    ```
+
+### Erfolgs-Checks (Akzeptanzkriterien)
+- `5d_solutions.json` > 10KB, `5d_research_data.json` > 10KB, `5d_github_data.json` > 20KB.
+- Dashboard unter `http://localhost:8501` lädt und zeigt IMP/ROI/Projekte.
+- Keine Vorkommen von „PrivateGPT“, „PGPT“ oder `private-gpt-main` im Repo.
 
 ### Konventionen & Schnittstellen (bitte erhalten)
 - Sprache/Labels: Nutzer-facing Texte und JSON-Keys sind DE (z. B. `"Projekte"`, `"ROI"`, `"Pilots"`). Nicht umbenennen, ohne Dashboard/Bot mit anzupassen.
