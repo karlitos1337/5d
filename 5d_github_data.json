@@ -264,56 +264,56 @@
   "trending": {
     "education": [
       {
-        "name": "how-to-data-science",
+        "name": "lisp-8zj",
         "stars": 0,
-        "url": "https://github.com/MasterHasanm/how-to-data-science"
+        "url": "https://github.com/MRDEVOP/lisp-8zj"
       },
       {
-        "name": "cs2-external",
-        "stars": 0,
-        "url": "https://github.com/beni8833/cs2-external"
+        "name": "prolog-ooj",
+        "stars": 1,
+        "url": "https://github.com/reddywhop/prolog-ooj"
       },
       {
-        "name": "Ez-Quiz-App",
-        "stars": 0,
-        "url": "https://github.com/deromokhtar/Ez-Quiz-App"
+        "name": "lab",
+        "stars": 1,
+        "url": "https://github.com/navchandar/lab"
       },
       {
-        "name": "Skolverket-MCP",
+        "name": "Julia_Modeling_Workshop",
         "stars": 0,
-        "url": "https://github.com/mimanshaherbals-bot/Skolverket-MCP"
+        "url": "https://github.com/FreeGgOnline/Julia_Modeling_Workshop"
       },
       {
-        "name": "forth-2uy",
-        "stars": 0,
-        "url": "https://github.com/tuan2431/forth-2uy"
+        "name": "MiTm-Basic",
+        "stars": 1,
+        "url": "https://github.com/sigmabuben/MiTm-Basic"
       }
     ],
     "learning": [
       {
-        "name": "Designing-Hybrid-AI-Systems",
+        "name": "learning-center",
         "stars": 0,
-        "url": "https://github.com/Removed-navajo219/Designing-Hybrid-AI-Systems"
+        "url": "https://github.com/ArunReddy960/learning-center"
       },
       {
-        "name": "Rock-Paper-Scissors-Project",
+        "name": "GoAnyBusiness",
         "stars": 0,
-        "url": "https://github.com/idothisforfun-hehe/Rock-Paper-Scissors-Project"
+        "url": "https://github.com/salmane123455/GoAnyBusiness"
       },
       {
-        "name": "Stable-Diffusion",
-        "stars": 2596,
-        "url": "https://github.com/FurkanGozukara/Stable-Diffusion"
-      },
-      {
-        "name": "typing-game",
-        "stars": 0,
-        "url": "https://github.com/FauzanOktavianto/typing-game"
-      },
-      {
-        "name": "S22-Understanding-Async-Requests",
+        "name": "lab",
         "stars": 1,
-        "url": "https://github.com/kptung/S22-Understanding-Async-Requests"
+        "url": "https://github.com/navchandar/lab"
+      },
+      {
+        "name": "learning-center",
+        "stars": 0,
+        "url": "https://github.com/Smindlo97/learning-center"
+      },
+      {
+        "name": "-Programming-for-Beginners---Your-First-Guide-to-Entering-the-World-of-Technology-",
+        "stars": 0,
+        "url": "https://github.com/AMN-h0b/-Programming-for-Beginners---Your-First-Guide-to-Entering-the-World-of-Technology-"
       }
     ],
     "pedagogy": [
@@ -345,31 +345,31 @@
     ],
     "edtech": [
       {
-        "name": "exam-seating-arranger",
+        "name": "ApexCoachAI",
         "stars": 0,
-        "url": "https://github.com/Bossr1387/exam-seating-arranger"
-      },
-      {
-        "name": "Next-Voters",
-        "stars": 3,
-        "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
-      },
-      {
-        "name": "TatvaX-AI-PROTOTYPE",
-        "stars": 0,
-        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
-      },
-      {
-        "name": "nextjs-math-course",
-        "stars": 3,
-        "url": "https://github.com/maciekt07/nextjs-math-course"
+        "url": "https://github.com/sh-fleekbiz/ApexCoachAI"
       },
       {
         "name": "ai-recruitment-assistant",
         "stars": 0,
         "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
+      },
+      {
+        "name": "neuropilot",
+        "stars": 1,
+        "url": "https://github.com/Rwiddhi03/neuropilot"
+      },
+      {
+        "name": "FocusFlow-app",
+        "stars": 4,
+        "url": "https://github.com/masddffee/FocusFlow-app"
+      },
+      {
+        "name": "parallel-arabic",
+        "stars": 24,
+        "url": "https://github.com/selmetwa/parallel-arabic"
       }
     ]
   },
-  "timestamp": "2025-11-29T14:14:00.811305"
+  "timestamp": "2025-11-30T08:36:39.661759"
 }

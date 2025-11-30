@@ -1,0 +1,30 @@
+# APPARATUS FOR UTILIZING EFFECTS TRANSMITTED FROM A DISTANCE TO A RECEIVING DEVICE THROUGH NATURAL MEDIA
+
+## Page 1
+
+
+
+## Page 2
+
+
+
+## Page 3
+
+
+
+## Page 4
+
+
+
+## Page 5
+
+
+
+## Page 6
+
+
+
+## Page 7
+
+
+

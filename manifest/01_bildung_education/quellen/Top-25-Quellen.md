@@ -6,14 +6,14 @@
 
 1. **Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs"**
    - Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60
-   - URL: https://www.renyi.hu/~p_erdos/1960-10.pdf
+   - URL: https://www.renyi.hu/~p_erdos/1960-10.md
    - **Warum**: Gründungstext der Perkolationstheorie
    - **Zitate**: 6,930+
    - **Unabdingbar für**: Mathematische Fundierung von ρ_c
 
 2. **Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"**
    - Journal of Consciousness Studies 2(3), 200-219
-   - URL: https://consc.net/papers/facing.pdf
+   - URL: https://consc.net/papers/facing.md
    - **Warum**: Definiert das Hard Problem; zentral für philosophische Relevanz
    - **Zitate**: 6,930+
    - **Unabdingbar für**: Philosophischer Kontext
@@ -207,8 +207,8 @@ Use Tier 5-6:
 
 | Paper | URL |
 |-------|-----|
-| Erdős & Rényi (1960) | https://www.renyi.hu/~p_erdos/1960-10.pdf |
-| Chalmers (1995) | https://consc.net/papers/facing.pdf |
+| Erdős & Rényi (1960) | https://www.renyi.hu/~p_erdos/1960-10.md |
+| Chalmers (1995) | https://consc.net/papers/facing.md |
 | Massimini (2005) | https://www.science.org/doi/10.1126/science.1117256 |
 | Hudetz (2012) | https://pubmed.ncbi.nlm.nih.gov/23153273/ |
 | Tagliazucchi (2016) | https://royalsocietypublishing.org/doi/10.1098/rsif.2015.1027 |

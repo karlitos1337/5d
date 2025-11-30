@@ -21,7 +21,7 @@ except Exception:
             'manifest_dir': 'manifest',
             'output_file': '5d_solutions.json',
             'recursive': True,
-            'file_types': ['*.md', '*.txt', '*.pdf'],
+            'file_types': ['*.md', '*.txt', '*.md'],
             'pdf_extraction': {'method': 'pypdf', 'max_pages': 50},
         },
         'defaults': {'high_score': 0.75, 'missing_score': 0.5},

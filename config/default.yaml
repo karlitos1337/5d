@@ -6,7 +6,7 @@ extractor:
   file_types:
     - "*.md"
     - "*.txt"
-    - "*.pdf"
+    - "*.md"
   pdf_extraction:
     method: "pypdf"  # or "pdfminer"
     max_pages: 50

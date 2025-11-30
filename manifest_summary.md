@@ -401,7 +401,7 @@ Bis jetzt haben wir untersucht: Wie Authentizität unterdrückt wird (Kapitel 1-
 bildung, schule, education, lernen, learning, student, curriculum, tokkatsu, waldorf, sudbury, pilot, dänemark
 
 #### Verwandte Themen in 99_unsortiert (Ebene 2)
-- [5d_gesamtwerk_komplett.pdf](../99_unsortiert/5d_gesamtwerk_komplett.pdf) - 5D Gesamtwerk - [5d_buch_manuskript_v1.pdf](../99_unsortiert/5d_buch_manuskript_v1.pdf) - Buch-Manuskript V1 - [5d_buch_manuskript_v2.pdf](../99_unsortiert/5d_buch_manuskript_v2.pdf) - Buch-Manuskript V2 - [paper_entwurf_komplett.pdf](../99_unsortiert/paper_entwurf_komplett.pdf) - Paper-Entwurf
+- [5d_gesamtwerk_komplett.md](../99_unsortiert/5d_gesamtwerk_komplett.md) - 5D Gesamtwerk - [5d_buch_manuskript_v1.md](../99_unsortiert/5d_buch_manuskript_v1.md) - Buch-Manuskript V1 - [5d_buch_manuskript_v2.md](../99_unsortiert/5d_buch_manuskript_v2.md) - Buch-Manuskript V2 - [paper_entwurf_komplett.md](../99_unsortiert/paper_entwurf_komplett.md) - Paper-Entwurf
 
 #### Dateien (Ebene 2)
 - [5D-Intelligenz-Akademisch (1).md](./5D-Intelligenz-Akademisch (1).md) (51.3KB) - [5D-Intelligenz-Akademisch.md](./5D-Intelligenz-Akademisch.md) (51.3KB) - [Audiobook_RealVoice_Script.md](./Audiobook_RealVoice_Script.md) (53.0KB) - [MEGA-5D-MIT-DÄNEMARK-JAPAN (1).md](./MEGA-5D-MIT-DÄNEMARK-JAPAN (1).md) (17.5KB) - [MEGA-5D-MIT-DÄNEMARK-JAPAN.md](./MEGA-5D-MIT-DÄNEMARK-JAPAN.md) (17.5KB) - [MEGA-EXTENDED-Neurobiologie-Mechanik-Dänemark-Japan (1).md](./MEGA-EXTENDED-Neurobiologie-Mechanik-Dänemark-Japan (1).md) (23.2KB) - [MEGA-EXTENDED-Neurobiologie-Mechanik-Dänemark-Japan.md](./MEGA-EXTENDED-Neurobiologie-Mechanik-Dänemark-Japan.md) (23.2KB) - [Neues Textdokument (3).txt](./Neues Textdokument (3).txt) (9.9KB) - [Neues Textdokument.txt](./Neues Textdokument.txt) (13.8KB) - [Top-25-Quellen
@@ -765,7 +765,7 @@ Die Evidenz ist überwältigend. **Gegenwärtige, zentrale, kontrollorientierte 
 #### Die unverzichtbarsten, hochzitiersten Referenzen für Ihr Modell (Ebene 2)
 
 #### TIER 1: FUNDAMENTALE PAPERS (6,000-7,000 Zitierungen) (Ebene 3)
-1. **Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs"** - Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60 - URL: https://www.renyi.hu/~p_erdos/1960-10.pdf - **Warum**: Gründungstext der Perkolationstheorie - **Zitate**: 6,930+ - **Unabdingbar für**: Mathematische Fundierung von ρ_c 2. **Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"** - Journal of Consciousness Studies 2(3), 200-219 - URL: https://consc.net/papers/facing.pdf - **Warum**: Definiert das Hard Problem; zentral für philosophische Relevanz - **Zitate**: 6,930+ - **Unabdingbar für**: Philosophischer Kontext 3. **Tononi, G. (2004). "An information integration theory of consciousness"** - BMC Neuroscience 5(1), 42 - URL: https://bmcneurosci.biomedcentral.com/articles/10.1186/1471-2202-5-42 - *
+1. **Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs"** - Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60 - URL: https://www.renyi.hu/~p_erdos/1960-10.md - **Warum**: Gründungstext der Perkolationstheorie - **Zitate**: 6,930+ - **Unabdingbar für**: Mathematische Fundierung von ρ_c 2. **Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"** - Journal of Consciousness Studies 2(3), 200-219 - URL: https://consc.net/papers/facing.md - **Warum**: Definiert das Hard Problem; zentral für philosophische Relevanz - **Zitate**: 6,930+ - **Unabdingbar für**: Philosophischer Kontext 3. **Tononi, G. (2004). "An information integration theory of consciousness"** - BMC Neuroscience 5(1), 42 - URL: https://bmcneurosci.biomedcentral.com/articles/10.1186/1471-2202-5-42 - *
 
 #### TIER 2: KERN-VALIDIERUNGEN (300-500 Zitierungen) (Ebene 3)
 4. **Newman, M.E.J. (2003). "The structure and function of complex networks"** - SIAM Review 45(2), 167–256 - **Warum**: Moderne, umfassende Review der Netzwerktheorie - **Zitate**: 2,000+ - **Nutzen**: Spektrale Eigenschaften, Giant Component, Perkolation 5. **Bak, P., Tang, C., & Wiesenfeld, K. (1987). "Self-organized criticality"** - Phys. Rev. Lett. 59(4), 381 - **Warum**: Erklärt, warum Systeme sich zu kritischen Zuständen selbst-organisieren - **Zitate**: 500+ - **Nutzen**: Evolutionäre Vorhersage, warum Gehirne zu ρ ≈ ρ_c evolviert haben 6. **Massimini, M., et al. (2005). "Breakdown of cortical effective connectivity during sleep"** - Science 309(5744), 2228-2232 - **Warum**: TMS-EEG zeigt Zusammenbruch der Propagation im NREM-Schlaf - **Zitate**: 500+ - **Nutzen**: Direkte experime
@@ -794,7 +794,7 @@ Die Evidenz ist überwältigend. **Gegenwärtige, zentrale, kontrollorientierte 
 ``` Use Tier 5-6: - Chalmers (1995) - Hard Problem Wikipedia - IIT Wikipedia - Nagel (1974) ``` ---
 
 #### DOWNLOAD-LINKS (KOSTENLOS VERFÜGBAR) (Ebene 2)
-| Paper | URL | |-------|-----| | Erdős & Rényi (1960) | https://www.renyi.hu/~p_erdos/1960-10.pdf | | Chalmers (1995) | https://consc.net/papers/facing.pdf | | Massimini (2005) | https://www.science.org/doi/10.1126/science.1117256 | | Hudetz (2012) | https://pubmed.ncbi.nlm.nih.gov/23153273/ | | Tagliazucchi (2016) | https://royalsocietypublishing.org/doi/10.1098/rsif.2015.1027 | | Sudbury Valley (2005) | https://sudburyvalley.org/essays/outcomes-0 | | Waldorf Study (2024) | https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2024.1323535/full | | Tononi (2004) | https://bmcneurosci.biomedcentral.com/articles/10.1186/1471-2202-5-42 | ---
+| Paper | URL | |-------|-----| | Erdős & Rényi (1960) | https://www.renyi.hu/~p_erdos/1960-10.md | | Chalmers (1995) | https://consc.net/papers/facing.md | | Massimini (2005) | https://www.science.org/doi/10.1126/science.1117256 | | Hudetz (2012) | https://pubmed.ncbi.nlm.nih.gov/23153273/ | | Tagliazucchi (2016) | https://royalsocietypublishing.org/doi/10.1098/rsif.2015.1027 | | Sudbury Valley (2005) | https://sudburyvalley.org/essays/outcomes-0 | | Waldorf Study (2024) | https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2024.1323535/full | | Tononi (2004) | https://bmcneurosci.biomedcentral.com/articles/10.1186/1471-2202-5-42 | ---
 
 #### GESAMTFAZIT FÜR EXTERNE VALIDIERUNG (Ebene 2)
 **Umfang der externen Belegung**: 70-75% **Originale Integration**: 20-25% **Spekulation**: 5-10% **Das Modell ist HOCHGRADIG extern validiert.**
@@ -1536,10 +1536,10 @@ Die neurobiologische Wahrheit, die dieses Kapitel enthüllt: **Du kannst Mensche
 wahrheit, erkenntnis, philosophie, epistemologie, authentizität, authenticity, selbst, bewusstsein, consciousness, sinn
 
 #### Verwandte Themen in 99_unsortiert (Ebene 2)
-- [elite_kontrolle_bilderberg_wef.md](../99_unsortiert/elite_kontrolle_bilderberg_wef.md) - Elite-Kontrolle, Bilderberg, WEF - [cia_gedankenkontrolle_mkultra_monarch.md](../99_unsortiert/cia_gedankenkontrolle_mkultra_monarch.md) - MK-Ultra, CIA Gedankenkontrolle - [nazi_wissenschaftler_paperclip_nasa.md](../99_unsortiert/nazi_wissenschaftler_paperclip_nasa.md) - Operation Paperclip, Nazi-Wissenschaftler - [wissenschaft_grenzen_holismus.pdf](../99_unsortiert/wissenschaft_grenzen_holismus.pdf) - Erkenntnistheorie
+- [elite_kontrolle_bilderberg_wef.md](../99_unsortiert/elite_kontrolle_bilderberg_wef.md) - Elite-Kontrolle, Bilderberg, WEF - [cia_gedankenkontrolle_mkultra_monarch.md](../99_unsortiert/cia_gedankenkontrolle_mkultra_monarch.md) - MK-Ultra, CIA Gedankenkontrolle - [nazi_wissenschaftler_paperclip_nasa.md](../99_unsortiert/nazi_wissenschaftler_paperclip_nasa.md) - Operation Paperclip, Nazi-Wissenschaftler - [wissenschaft_grenzen_holismus.md](../99_unsortiert/wissenschaft_grenzen_holismus.md) - Erkenntnistheorie
 
 #### Dateien (Ebene 2)
-- [21123123.txt](./21123123.txt) (20.0KB) - [Denkbiografie Wahrheit Wirkung.pdf](./Denkbiografie Wahrheit Wirkung.pdf) (17.3KB) - [Para_Der_Stadt_Paradox_Vollstaendige_Ausarbeitung.md](./Para_Der_Stadt_Paradox_Vollstaendige_Ausarbeitung.md) (43.2KB) - [intelligenz_würde_spiritualität.pdf](./intelligenz_würde_spiritualität.pdf) (189.2KB) - [kapitel_0_einleitung.md](./kapitel_0_einleitung.md) (13.2KB) - [kapitel_2_philosophische_grundlagen.md](./kapitel_2_philosophische_grundlagen.md) (17.7KB) - [kapitel_9_kultur_authentizitaet (1).md](./kapitel_9_kultur_authentizitaet (1).md) (8.8KB) - [kapitel_9_kultur_authentizitaet.md](./kapitel_9_kultur_authentizitaet.md) (8.8KB) - [letzte_grenze_erkenntnis.pdf](./letzte_grenze_erkenntnis.pdf) (150.0KB) - [objektiv.txt](./objektiv.txt) (10.8KB)
+- [21123123.txt](./21123123.txt) (20.0KB) - [Denkbiografie Wahrheit Wirkung.md](./Denkbiografie Wahrheit Wirkung.md) (17.3KB) - [Para_Der_Stadt_Paradox_Vollstaendige_Ausarbeitung.md](./Para_Der_Stadt_Paradox_Vollstaendige_Ausarbeitung.md) (43.2KB) - [intelligenz_würde_spiritualität.md](./intelligenz_würde_spiritualität.md) (189.2KB) - [kapitel_0_einleitung.md](./kapitel_0_einleitung.md) (13.2KB) - [kapitel_2_philosophische_grundlagen.md](./kapitel_2_philosophische_grundlagen.md) (17.7KB) - [kapitel_9_kultur_authentizitaet (1).md](./kapitel_9_kultur_authentizitaet (1).md) (8.8KB) - [kapitel_9_kultur_authentizitaet.md](./kapitel_9_kultur_authentizitaet.md) (8.8KB) - [letzte_grenze_erkenntnis.md](./letzte_grenze_erkenntnis.md) (150.0KB) - [objektiv.txt](./objektiv.txt) (10.8KB)
 
 ### Datei: manifest/03_philosophie_epistemologie/essays/Para_Der_Stadt_Paradox_Vollstaendige_Ausarbeitung.md
 #### PARA DER STADT PARADOX (Ebene 1)
@@ -2064,7 +2064,7 @@ Die zentrale Einsicht: **Echte Kultur kann nicht zentral kontrolliert oder produ
 - [arbeitsrecht_kollektiv_fragen.docx](../99_unsortiert/arbeitsrecht_kollektiv_fragen.docx) - Arbeitsrecht
 
 #### Dateien (Ebene 2)
-- [PROJECT-PROMPT.md](./PROJECT-PROMPT.md) (9.0KB) - [kapitel_7_dezentrale_oekonomie.md](./kapitel_7_dezentrale_oekonomie.md) (14.4KB) - [kapitel_8_partizipative_governance.md](./kapitel_8_partizipative_governance.md) (16.8KB) - [quantencomputer_dezentralisiert.pdf](./quantencomputer_dezentralisiert.pdf) (153.2KB)
+- [PROJECT-PROMPT.md](./PROJECT-PROMPT.md) (9.0KB) - [kapitel_7_dezentrale_oekonomie.md](./kapitel_7_dezentrale_oekonomie.md) (14.4KB) - [kapitel_8_partizipative_governance.md](./kapitel_8_partizipative_governance.md) (16.8KB) - [quantencomputer_dezentralisiert.md](./quantencomputer_dezentralisiert.md) (153.2KB)
 
 ### Datei: manifest/04_oekonomie_governance/kapitel/kapitel_7_dezentrale_oekonomie.md
 #### KAPITEL 7: DEZENTRALE ÖKONOMIE (Ebene 1)
@@ -2365,10 +2365,10 @@ Dieses Projekt verkörpert das Prinzip: > "Die stärkste Form von Kraft ist die 
 tesla, patent, transmission, electrical, energy, apparatus, signaling, ki, quantencomputer, technologie, automation
 
 #### Verwandte Themen in 99_unsortiert (Ebene 2)
-- [tesla_valvular_conduit_patent.pdf](../99_unsortiert/tesla_valvular_conduit_patent.pdf) - Tesla Patent - [5D-EXTRACTOR.py](../99_unsortiert/5D-EXTRACTOR.py) - Automation Tool
+- [tesla_valvular_conduit_patent.md](../99_unsortiert/tesla_valvular_conduit_patent.md) - Tesla Patent - [5D-EXTRACTOR.py](../99_unsortiert/5D-EXTRACTOR.py) - Automation Tool
 
 #### Dateien (Ebene 2)
-- [5_d_mitdenk_automationsversion.md](./5_d_mitdenk_automationsversion.md) (4.3KB) - [5d Mitdenk Automationsversion.docx](./5d Mitdenk Automationsversion.docx) (13.4KB) - [5d Mitdenk Automationsversion.pdf](./5d Mitdenk Automationsversion.pdf) (21.7KB) - [APPARATUS FOR TRANSMITTING ELECTRICAL ENERGY.pdf](./APPARATUS FOR TRANSMITTING ELECTRICAL ENERGY.pdf) (336.3KB) - [APPARATUS FOR UTILIZING EFFECTS TRANSMITTED FROM A DISTANCE TO A RECEIVING DEVICE THROUGH NATURAL MEDIA.pdf](./APPARATUS FOR UTILIZING EFFECTS TRANSMITTED FROM A DISTANCE TO A RECEIVING DEVICE THROUGH NATURAL MEDIA.pdf) (738.1KB) - [ART OF TRANSMITTING ELECTRICAL ENERGY THROUGH THE NATURAL MEDIUMS.pdf](./ART OF TRANSMITTING ELECTRICAL ENERGY THROUGH THE NATURAL MEDIUMS.pdf) (491.9KB) - [METHOD OF SIGNALING.pdf](./METHOD OF SI
+- [5_d_mitdenk_automationsversion.md](./5_d_mitdenk_automationsversion.md) (4.3KB) - [5d Mitdenk Automationsversion.docx](./5d Mitdenk Automationsversion.docx) (13.4KB) - [5d Mitdenk Automationsversion.md](./5d Mitdenk Automationsversion.md) (21.7KB) - [APPARATUS FOR TRANSMITTING ELECTRICAL ENERGY.md](./APPARATUS FOR TRANSMITTING ELECTRICAL ENERGY.md) (336.3KB) - [APPARATUS FOR UTILIZING EFFECTS TRANSMITTED FROM A DISTANCE TO A RECEIVING DEVICE THROUGH NATURAL MEDIA.md](./APPARATUS FOR UTILIZING EFFECTS TRANSMITTED FROM A DISTANCE TO A RECEIVING DEVICE THROUGH NATURAL MEDIA.md) (738.1KB) - [ART OF TRANSMITTING ELECTRICAL ENERGY THROUGH THE NATURAL MEDIUMS.md](./ART OF TRANSMITTING ELECTRICAL ENERGY THROUGH THE NATURAL MEDIUMS.md) (491.9KB) - [METHOD OF SIGNALING.md](./METHOD OF SI
 
 ### Datei: manifest/05_technologie_tesla/ki_automation/5_d_mitdenk_automationsversion.md
 #### 5D-Mitdenk‑ und Automations‑Version (Ebene 1)
@@ -3993,7 +3993,7 @@ Die Welt ist in Krise. Nicht weil Menschen böse sind. Sondern weil die **System
 .csv, .json, analysis, validierung, matrix, chart, data, timeline, projektion, wahrscheinlichkeit, szenario
 
 #### Verwandte Themen in 99_unsortiert (Ebene 2)
-- [analyse_visuelle_plots_schritt2.pdf](../99_unsortiert/analyse_visuelle_plots_schritt2.pdf) - Visualisierungen - [analyse_referenzen_methode_schritt3.pdf](../99_unsortiert/analyse_referenzen_methode_schritt3.pdf) - Methodik
+- [analyse_visuelle_plots_schritt2.md](../99_unsortiert/analyse_visuelle_plots_schritt2.md) - Visualisierungen - [analyse_referenzen_methode_schritt3.md](../99_unsortiert/analyse_referenzen_methode_schritt3.md) - Methodik
 
 #### Dateien (Ebene 2)
 - [23423432423.csv](./23423432423.csv) (0.9KB) - [5D_intelligence_analysis.md](./5D_intelligence_analysis.md) (16.2KB) - [Externe-Validierung-Matrix.md](./Externe-Validierung-Matrix.md) (10.4KB) - [Figure_1vscode.png](./Figure_1vscode.png) (34.2KB) - [Master_Analysis_Complete.csv](./Master_Analysis_Complete.csv) (8.3KB) - [Schritt-Deliverable-Seiten-Inhalt.csv](./Schritt-Deliverable-Seiten-Inhalt.csv) (0.4KB) - [comprehensive_structure.png](./comprehensive_structure.png) (238.7KB) - [dumplicate.csv](./dumplicate.csv) (0.0KB) - [flowchart (1).png](./flowchart (1).png) (311.9KB) - [flowchart.png](./flowchart.png) (311.9KB) - [generated-image.png](./generated-image.png) (1.3MB) - [impact_timeline_10_100_jahre.csv](./impact_timeline_10_100_jahre.csv) (2.6KB) - [phase_transition.png](./phase_tr
@@ -4167,7 +4167,7 @@ Wenn Sie dieses Modell in einer Arbeit zitieren möchten: ``` "Das Bewusstseins-
 mein, zwanglos, weg, denkbiografie, archaeologie, persönlich, beobachtung, reflexion, arletz, pablö
 
 #### Dateien (Ebene 2)
-- [Beobachtung Verstehen.docx](./Beobachtung Verstehen.docx) (8.0KB) - [Beobachtung Verstehen.pdf](./Beobachtung Verstehen.pdf) (27.8KB) - [K(L)ARLETZ.pdf](./K(L)ARLETZ.pdf) (16.1MB) - [Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf](./Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf) (223.7KB) - [Pablö.pdf](./Pablö.pdf) (1.5MB) - [Vollstaendige-Quellensammlung (1).md](./Vollstaendige-Quellensammlung (1).md) (25.4KB) - [Vollstaendige-Quellensammlung.md](./Vollstaendige-Quellensammlung.md) (25.4KB) - [kapitel_4_persoenliche_archaeologie.md](./kapitel_4_persoenliche_archaeologie.md) (14.1KB) - [kapitel_5_meine_eigenen_gesetze.md](./kapitel_5_meine_eigenen_gesetze.md) (9.9KB) - [mein_zwangloser_weg_final](./mein_zwangloser_weg_final) (27.8KB) - [mein_zwangloser_weg_final (1)](./mein_zwangloser_weg_
+- [Beobachtung Verstehen.docx](./Beobachtung Verstehen.docx) (8.0KB) - [Beobachtung Verstehen.md](./Beobachtung Verstehen.md) (27.8KB) - [K(L)ARLETZ.md](./K(L)ARLETZ.md) (16.1MB) - [Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md](./Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md) (223.7KB) - [Pablö.md](./Pablö.md) (1.5MB) - [Vollstaendige-Quellensammlung (1).md](./Vollstaendige-Quellensammlung (1).md) (25.4KB) - [Vollstaendige-Quellensammlung.md](./Vollstaendige-Quellensammlung.md) (25.4KB) - [kapitel_4_persoenliche_archaeologie.md](./kapitel_4_persoenliche_archaeologie.md) (14.1KB) - [kapitel_5_meine_eigenen_gesetze.md](./kapitel_5_meine_eigenen_gesetze.md) (9.9KB) - [mein_zwangloser_weg_final](./mein_zwangloser_weg_final) (27.8KB) - [mein_zwangloser_weg_final (1)](./mein_zwangloser_weg_
 
 ### Datei: manifest/08_personal_biografie/Vollstaendige-Quellensammlung (1).md
 #### UMFASSENDE QUELLENSAMMLUNG: EXTERNE BELEGUNG ALLER SYSTEME (Ebene 1)
@@ -4175,10 +4175,10 @@ mein, zwanglos, weg, denkbiografie, archaeologie, persönlich, beobachtung, refl
 #### TEIL A: KERN-PERKOLATIONSTHEORIE UND NETZWERKPHYSIK (Ebene 2)
 
 #### A1. Grundlagen der Perkolationstheorie (Erdős-Rényi Modell) (Ebene 3)
-**[1] Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs."** - Publikation: Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60 - Disponible: https://www.renyi.hu/~p_erdos/1960-10.pdf - Seminalwerk: Gründungstext der Perkolationstheorie - Hauptresultat: Mathematische Vorhersage des kritischen Schwellenwerts ρ_c = 1/(N-1) - Zitation: Alle modernen Perkolations-Forschung zitiert dieses Paper (~6,930+ Zitierungen in Google Scholar) **[2] Newman, M.E.J. (2003). "The structure and function of complex networks."** - Publikation: SIAM Review 45(2), 167–256 - Disponible: https://doi.org/10.1137/S003614450342480 - Umfassende Review über 40+ Jahre Perkolations- und Netzwerk-Theorie - Bewusstsein: Detaillierte Behandlung von Phasenübergängen, Giant Component, spektrale Eigenschaften - Mod
+**[1] Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs."** - Publikation: Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60 - Disponible: https://www.renyi.hu/~p_erdos/1960-10.md - Seminalwerk: Gründungstext der Perkolationstheorie - Hauptresultat: Mathematische Vorhersage des kritischen Schwellenwerts ρ_c = 1/(N-1) - Zitation: Alle modernen Perkolations-Forschung zitiert dieses Paper (~6,930+ Zitierungen in Google Scholar) **[2] Newman, M.E.J. (2003). "The structure and function of complex networks."** - Publikation: SIAM Review 45(2), 167–256 - Disponible: https://doi.org/10.1137/S003614450342480 - Umfassende Review über 40+ Jahre Perkolations- und Netzwerk-Theorie - Bewusstsein: Detaillierte Behandlung von Phasenübergängen, Giant Component, spektrale Eigenschaften - Mod
 
 #### A2. Self-Organized Criticality (SOC) (Ebene 3)
-**[5] Bak, P., Tang, C., & Wiesenfeld, K. (1987). "Self-organized criticality: An explanation of 1/f noise."** - Publikation: Phys. Rev. Lett. 59(4), 381 (Juli 1, 1988 - Vollversion) - Disponible: http://www.scholarpedia.org/article/Self-organized_criticality; https://psychsafety.com/wp-content/uploads/2025/04/SOC.pdf - Seminalwerk: Erklärung, warum biologische Systeme sich zu kritischen Zuständen selbst-organisieren - Intuition: Sandhaufen-Modell — immer mehr Sand hinzufügen führt zu Lawinen - Hypothese: Das Gehirn könnte sich durch Hebbian Learning zu ρ ≈ ρ_c selbst-organisiert haben (evolutionäre Vorteile) - Impact: ~500+ Zitierungen, einer der einflussreichsten Papers der modernen Physik **[6] Mora, T., & Bialek, W. (2011). "Are biological systems poised at criticality?"** - Publikatio
+**[5] Bak, P., Tang, C., & Wiesenfeld, K. (1987). "Self-organized criticality: An explanation of 1/f noise."** - Publikation: Phys. Rev. Lett. 59(4), 381 (Juli 1, 1988 - Vollversion) - Disponible: http://www.scholarpedia.org/article/Self-organized_criticality; https://psychsafety.com/wp-content/uploads/2025/04/SOC.md - Seminalwerk: Erklärung, warum biologische Systeme sich zu kritischen Zuständen selbst-organisieren - Intuition: Sandhaufen-Modell — immer mehr Sand hinzufügen führt zu Lawinen - Hypothese: Das Gehirn könnte sich durch Hebbian Learning zu ρ ≈ ρ_c selbst-organisiert haben (evolutionäre Vorteile) - Impact: ~500+ Zitierungen, einer der einflussreichsten Papers der modernen Physik **[6] Mora, T., & Bialek, W. (2011). "Are biological systems poised at criticality?"** - Publikatio
 
 #### TEIL B: BEWUSSTSEINSTHEORIE UND NEUROWISSENSCHAFT (Ebene 2)
 
@@ -4200,7 +4200,7 @@ mein, zwanglos, weg, denkbiografie, archaeologie, persönlich, beobachtung, refl
 #### TEIL C: PHILOSOPHIE UND DAS HARD PROBLEM (Ebene 2)
 
 #### C1. Chalmers' Hard Problem of Consciousness (Ebene 3)
-**[17] Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"** - Publikation: Journal of Consciousness Studies 2(3), 200-219 - Disponible: https://consc.net/papers/facing.pdf; https://personal.lse.ac.uk/ROBERT49/teaching/ph103/pdf/chalmers1995.pdf - Seminalwerk: Definiert das "Hard Problem" als zentral verschieden von "Easy Problems" - Zentral: Warum führt neuronale Aktivität zu subjektiver Erfahrung? - Impact: 6,930+ Zitierungen (einer der meistzitierten Philosophie-Papers!) - Unser Ansatz: Löst das Hard Problem durch 5D-Interpretation (Ontologie der Bedeutung) **[18] Hard Problem of Consciousness (Wikipedia)** - URL: https://en.wikipedia.org/wiki/Hard_problem_of_consciousness - Übersicht: Verschiedene Ansätze zur Lösung (Dualismus, Funktionalismus, Illusionismus, etc.) - Phi
+**[17] Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"** - Publikation: Journal of Consciousness Studies 2(3), 200-219 - Disponible: https://consc.net/papers/facing.md; https://personal.lse.ac.uk/ROBERT49/teaching/ph103/pdf/chalmers1995.md - Seminalwerk: Definiert das "Hard Problem" als zentral verschieden von "Easy Problems" - Zentral: Warum führt neuronale Aktivität zu subjektiver Erfahrung? - Impact: 6,930+ Zitierungen (einer der meistzitierten Philosophie-Papers!) - Unser Ansatz: Löst das Hard Problem durch 5D-Interpretation (Ontologie der Bedeutung) **[18] Hard Problem of Consciousness (Wikipedia)** - URL: https://en.wikipedia.org/wiki/Hard_problem_of_consciousness - Übersicht: Verschiedene Ansätze zur Lösung (Dualismus, Funktionalismus, Illusionismus, etc.) - Phi
 
 #### TEIL D: NEUROTRANSMITTER UND CHEMISCHE BASIS (Ebene 2)
 
@@ -4294,10 +4294,10 @@ Alle Hauptbehauptungen sind durch externe Literatur belegt: ✓ **Perkolationsth
 #### TEIL A: KERN-PERKOLATIONSTHEORIE UND NETZWERKPHYSIK (Ebene 2)
 
 #### A1. Grundlagen der Perkolationstheorie (Erdős-Rényi Modell) (Ebene 3)
-**[1] Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs."** - Publikation: Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60 - Disponible: https://www.renyi.hu/~p_erdos/1960-10.pdf - Seminalwerk: Gründungstext der Perkolationstheorie - Hauptresultat: Mathematische Vorhersage des kritischen Schwellenwerts ρ_c = 1/(N-1) - Zitation: Alle modernen Perkolations-Forschung zitiert dieses Paper (~6,930+ Zitierungen in Google Scholar) **[2] Newman, M.E.J. (2003). "The structure and function of complex networks."** - Publikation: SIAM Review 45(2), 167–256 - Disponible: https://doi.org/10.1137/S003614450342480 - Umfassende Review über 40+ Jahre Perkolations- und Netzwerk-Theorie - Bewusstsein: Detaillierte Behandlung von Phasenübergängen, Giant Component, spektrale Eigenschaften - Mod
+**[1] Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs."** - Publikation: Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60 - Disponible: https://www.renyi.hu/~p_erdos/1960-10.md - Seminalwerk: Gründungstext der Perkolationstheorie - Hauptresultat: Mathematische Vorhersage des kritischen Schwellenwerts ρ_c = 1/(N-1) - Zitation: Alle modernen Perkolations-Forschung zitiert dieses Paper (~6,930+ Zitierungen in Google Scholar) **[2] Newman, M.E.J. (2003). "The structure and function of complex networks."** - Publikation: SIAM Review 45(2), 167–256 - Disponible: https://doi.org/10.1137/S003614450342480 - Umfassende Review über 40+ Jahre Perkolations- und Netzwerk-Theorie - Bewusstsein: Detaillierte Behandlung von Phasenübergängen, Giant Component, spektrale Eigenschaften - Mod
 
 #### A2. Self-Organized Criticality (SOC) (Ebene 3)
-**[5] Bak, P., Tang, C., & Wiesenfeld, K. (1987). "Self-organized criticality: An explanation of 1/f noise."** - Publikation: Phys. Rev. Lett. 59(4), 381 (Juli 1, 1988 - Vollversion) - Disponible: http://www.scholarpedia.org/article/Self-organized_criticality; https://psychsafety.com/wp-content/uploads/2025/04/SOC.pdf - Seminalwerk: Erklärung, warum biologische Systeme sich zu kritischen Zuständen selbst-organisieren - Intuition: Sandhaufen-Modell — immer mehr Sand hinzufügen führt zu Lawinen - Hypothese: Das Gehirn könnte sich durch Hebbian Learning zu ρ ≈ ρ_c selbst-organisiert haben (evolutionäre Vorteile) - Impact: ~500+ Zitierungen, einer der einflussreichsten Papers der modernen Physik **[6] Mora, T., & Bialek, W. (2011). "Are biological systems poised at criticality?"** - Publikatio
+**[5] Bak, P., Tang, C., & Wiesenfeld, K. (1987). "Self-organized criticality: An explanation of 1/f noise."** - Publikation: Phys. Rev. Lett. 59(4), 381 (Juli 1, 1988 - Vollversion) - Disponible: http://www.scholarpedia.org/article/Self-organized_criticality; https://psychsafety.com/wp-content/uploads/2025/04/SOC.md - Seminalwerk: Erklärung, warum biologische Systeme sich zu kritischen Zuständen selbst-organisieren - Intuition: Sandhaufen-Modell — immer mehr Sand hinzufügen führt zu Lawinen - Hypothese: Das Gehirn könnte sich durch Hebbian Learning zu ρ ≈ ρ_c selbst-organisiert haben (evolutionäre Vorteile) - Impact: ~500+ Zitierungen, einer der einflussreichsten Papers der modernen Physik **[6] Mora, T., & Bialek, W. (2011). "Are biological systems poised at criticality?"** - Publikatio
 
 #### TEIL B: BEWUSSTSEINSTHEORIE UND NEUROWISSENSCHAFT (Ebene 2)
 
@@ -4319,7 +4319,7 @@ Alle Hauptbehauptungen sind durch externe Literatur belegt: ✓ **Perkolationsth
 #### TEIL C: PHILOSOPHIE UND DAS HARD PROBLEM (Ebene 2)
 
 #### C1. Chalmers' Hard Problem of Consciousness (Ebene 3)
-**[17] Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"** - Publikation: Journal of Consciousness Studies 2(3), 200-219 - Disponible: https://consc.net/papers/facing.pdf; https://personal.lse.ac.uk/ROBERT49/teaching/ph103/pdf/chalmers1995.pdf - Seminalwerk: Definiert das "Hard Problem" als zentral verschieden von "Easy Problems" - Zentral: Warum führt neuronale Aktivität zu subjektiver Erfahrung? - Impact: 6,930+ Zitierungen (einer der meistzitierten Philosophie-Papers!) - Unser Ansatz: Löst das Hard Problem durch 5D-Interpretation (Ontologie der Bedeutung) **[18] Hard Problem of Consciousness (Wikipedia)** - URL: https://en.wikipedia.org/wiki/Hard_problem_of_consciousness - Übersicht: Verschiedene Ansätze zur Lösung (Dualismus, Funktionalismus, Illusionismus, etc.) - Phi
+**[17] Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"** - Publikation: Journal of Consciousness Studies 2(3), 200-219 - Disponible: https://consc.net/papers/facing.md; https://personal.lse.ac.uk/ROBERT49/teaching/ph103/pdf/chalmers1995.md - Seminalwerk: Definiert das "Hard Problem" als zentral verschieden von "Easy Problems" - Zentral: Warum führt neuronale Aktivität zu subjektiver Erfahrung? - Impact: 6,930+ Zitierungen (einer der meistzitierten Philosophie-Papers!) - Unser Ansatz: Löst das Hard Problem durch 5D-Interpretation (Ontologie der Bedeutung) **[18] Hard Problem of Consciousness (Wikipedia)** - URL: https://en.wikipedia.org/wiki/Hard_problem_of_consciousness - Übersicht: Verschiedene Ansätze zur Lösung (Dualismus, Funktionalismus, Illusionismus, etc.) - Phi
 
 #### TEIL D: NEUROTRANSMITTER UND CHEMISCHE BASIS (Ebene 2)
 
@@ -4603,22 +4603,22 @@ Dateien, die noch thematisch zugeordnet werden müssen. Diese enthalten oft krit
 #### Kategorisierungs-Vorschläge (Ebene 2)
 
 #### Philosophie / Systemkritik ✅ UMBENANNT (Ebene 3)
-- `elite_kontrolle_bilderberg_wef.md` - Bilderberg, WEF, Elite-Netzwerke, globale Kontrolle - `elite_kontrolle_bilderberg_wef_DUPLIKAT.md` - Duplikat - `cia_gedankenkontrolle_mkultra_monarch.md` - MK-Ultra, Monarch, CIA Gedankenkontrolle - `nazi_wissenschaftler_paperclip_nasa.md` - Operation Paperclip, NS-Wissenschaftler - `wissenschaft_grenzen_holismus.pdf` - Erkenntnistheorie, Wissenschaftsgrenzen
+- `elite_kontrolle_bilderberg_wef.md` - Bilderberg, WEF, Elite-Netzwerke, globale Kontrolle - `elite_kontrolle_bilderberg_wef_DUPLIKAT.md` - Duplikat - `cia_gedankenkontrolle_mkultra_monarch.md` - MK-Ultra, Monarch, CIA Gedankenkontrolle - `nazi_wissenschaftler_paperclip_nasa.md` - Operation Paperclip, NS-Wissenschaftler - `wissenschaft_grenzen_holismus.md` - Erkenntnistheorie, Wissenschaftsgrenzen
 
 #### Technologie ✅ UMBENANNT (Ebene 3)
-- `tesla_valvular_conduit_patent.pdf` - Tesla Patent - `5D-EXTRACTOR.py` - Automation Tool (Duplikat im Root)
+- `tesla_valvular_conduit_patent.md` - Tesla Patent - `5D-EXTRACTOR.py` - Automation Tool (Duplikat im Root)
 
 #### Bildung / Manuskripte ✅ UMBENANNT (Ebene 3)
-- `5d_gesamtwerk_komplett.pdf` - Vollständiges 5D Gesamtwerk - `5d_buch_manuskript_v1.pdf` - Buch-Manuskript Version 1 - `5d_buch_manuskript_v2.pdf` - Buch-Manuskript Version 2 - `paper_entwurf_komplett.pdf` - Paper-Entwurf
+- `5d_gesamtwerk_komplett.md` - Vollständiges 5D Gesamtwerk - `5d_buch_manuskript_v1.md` - Buch-Manuskript Version 1 - `5d_buch_manuskript_v2.md` - Buch-Manuskript Version 2 - `paper_entwurf_komplett.md` - Paper-Entwurf
 
 #### Analysen / Methodik ✅ UMBENANNT (Ebene 3)
-- `analyse_visuelle_plots_schritt2.pdf` - Visualisierungen - `analyse_referenzen_methode_schritt3.pdf` - Methodische Grundlagen
+- `analyse_visuelle_plots_schritt2.md` - Visualisierungen - `analyse_referenzen_methode_schritt3.md` - Methodische Grundlagen
 
 #### Ökonomie ✅ UMBENANNT (Ebene 3)
 - `arbeitsrecht_kollektiv_fragen.docx` - Arbeitsrecht Fragen
 
 #### Temporäre/Unklare Dateien ✅ UMBENANNT (Ebene 3)
-- `patrick_notizen.pdf` - Patrick's Notizen - `paste_temp.pdf` - Temporäre Paste - `download_temp.pdf` - Download Temp - `unbenannt_01.pdf` / `unbenannt_02.pdf` - Unbenannte Dokumente - `temp_dokument.pdf` - Temporäres Dokument - `academy-regular.ovpn` - VPN Konfiguration - `Marlin-2.1.x.code-workspace` - VS Code Workspace - `error_hull_show` - Fehler-Log - `extractor` - Extractor Binary
+- `patrick_notizen.md` - Patrick's Notizen - `paste_temp.md` - Temporäre Paste - `download_temp.md` - Download Temp - `unbenannt_01.md` / `unbenannt_02.md` - Unbenannte Dokumente - `temp_dokument.md` - Temporäres Dokument - `academy-regular.ovpn` - VPN Konfiguration - `Marlin-2.1.x.code-workspace` - VS Code Workspace - `error_hull_show` - Fehler-Log - `extractor` - Extractor Binary
 
 #### Dateien (Thematisch sortiert) (Ebene 2)
 
@@ -4626,22 +4626,22 @@ Dateien, die noch thematisch zugeordnet werden müssen. Diese enthalten oft krit
 - [elite_kontrolle_bilderberg_wef.md](./elite_kontrolle_bilderberg_wef.md) (13.0KB) - Bilderberg, WEF, globale Elite - [elite_kontrolle_bilderberg_wef_DUPLIKAT.md](./elite_kontrolle_bilderberg_wef_DUPLIKAT.md) (13.0KB) - [cia_gedankenkontrolle_mkultra_monarch.md](./cia_gedankenkontrolle_mkultra_monarch.md) (11.0KB) - MK-Ultra, Monarch - [nazi_wissenschaftler_paperclip_nasa.md](./nazi_wissenschaftler_paperclip_nasa.md) (8.7KB) - Operation Paperclip
 
 #### Wissenschaft & Philosophie (Ebene 3)
-- [wissenschaft_grenzen_holismus.pdf](./wissenschaft_grenzen_holismus.pdf) (163.0KB)
+- [wissenschaft_grenzen_holismus.md](./wissenschaft_grenzen_holismus.md) (163.0KB)
 
 #### 5D Manuskripte & Papers (Ebene 3)
-- [5d_gesamtwerk_komplett.pdf](./5d_gesamtwerk_komplett.pdf) (525.0KB) - [5d_buch_manuskript_v1.pdf](./5d_buch_manuskript_v1.pdf) (820.0KB) - [5d_buch_manuskript_v2.pdf](./5d_buch_manuskript_v2.pdf) (1.1MB) - [paper_entwurf_komplett.pdf](./paper_entwurf_komplett.pdf) (544.0KB)
+- [5d_gesamtwerk_komplett.md](./5d_gesamtwerk_komplett.md) (525.0KB) - [5d_buch_manuskript_v1.md](./5d_buch_manuskript_v1.md) (820.0KB) - [5d_buch_manuskript_v2.md](./5d_buch_manuskript_v2.md) (1.1MB) - [paper_entwurf_komplett.md](./paper_entwurf_komplett.md) (544.0KB)
 
 #### Analysen & Methodik (Ebene 3)
-- [analyse_visuelle_plots_schritt2.pdf](./analyse_visuelle_plots_schritt2.pdf) (174.0KB) - [analyse_referenzen_methode_schritt3.pdf](./analyse_referenzen_methode_schritt3.pdf) (229.0KB)
+- [analyse_visuelle_plots_schritt2.md](./analyse_visuelle_plots_schritt2.md) (174.0KB) - [analyse_referenzen_methode_schritt3.md](./analyse_referenzen_methode_schritt3.md) (229.0KB)
 
 #### Technologie (Ebene 3)
-- [tesla_valvular_conduit_patent.pdf](./tesla_valvular_conduit_patent.pdf) (545.0KB) - [5D-EXTRACTOR.py](./5D-EXTRACTOR.py) (3.5KB)
+- [tesla_valvular_conduit_patent.md](./tesla_valvular_conduit_patent.md) (545.0KB) - [5D-EXTRACTOR.py](./5D-EXTRACTOR.py) (3.5KB)
 
 #### Ökonomie & Recht (Ebene 3)
 - [arbeitsrecht_kollektiv_fragen.docx](./arbeitsrecht_kollektiv_fragen.docx) (60.0KB)
 
 #### Temporär / Unklar (Ebene 3)
-- [patrick_notizen.pdf](./patrick_notizen.pdf) (295.0KB) - [paste_temp.pdf](./paste_temp.pdf) (2.7MB) - [download_temp.pdf](./download_temp.pdf) (328.0KB) - [unbenannt_01.pdf](./unbenannt_01.pdf) (235.0KB) - [unbenannt_02.pdf](./unbenannt_02.pdf) (326.0KB) - [temp_dokument.pdf](./temp_dokument.pdf) (326.0KB)
+- [patrick_notizen.md](./patrick_notizen.md) (295.0KB) - [paste_temp.md](./paste_temp.md) (2.7MB) - [download_temp.md](./download_temp.md) (328.0KB) - [unbenannt_01.md](./unbenannt_01.md) (235.0KB) - [unbenannt_02.md](./unbenannt_02.md) (326.0KB) - [temp_dokument.md](./temp_dokument.md) (326.0KB)
 
 #### System/Config (Ebene 3)
 - [academy-regular.ovpn](./academy-regular.ovpn) (3.3KB) - [Marlin-2.1.x.code-workspace](./Marlin-2.1.x.code-workspace) (0.2KB) - [error_hull_show](./error_hull_show) (0.0KB) - [extractor](./extractor) (0.0KB) - [erstelle-zusammenfassung-aller-AU0s.PmjQOWtlaHsrkoBKQ.md](./erstelle-zusammenfassung-aller-AU0s.PmjQOWtlaHsrkoBKQ.md) (0.3KB)

@@ -22,7 +22,7 @@ class FiveDExtractor:
         }
         
     def load_manifests(self):
-        """Lädt alle .md und .pdf aus manifest/"""
+        """Lädt alle .md und .md aus manifest/"""
         texts = {}
         for file in self.manifest_dir.glob("*.md"):
             texts[file.name] = file.read_text(encoding='utf-8')

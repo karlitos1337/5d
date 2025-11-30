@@ -54,7 +54,7 @@ class FiveDExtractor:
                 'manifest_dir': manifest_dir or 'manifest',
                 'output_file': '5d_solutions.json',
                 'recursive': True,
-                'file_types': ['*.md', '*.txt', '*.pdf'],
+                'file_types': ['*.md', '*.txt', '*.md'],
                 'pdf_extraction': {'method': 'pypdf', 'max_pages': 50},
             }
         }
@@ -71,14 +71,14 @@ class FiveDExtractor:
         }
         
     def extract_text(self, file: Path) -> str:
-        """Extrahiert Text aus .md/.txt/.pdf (PDF bis max_pages)."""
+        """Extrahiert Text aus .md/.txt/.md (PDF bis max_pages)."""
         suffix = file.suffix.lower()
         if suffix in {'.md', '.txt'}:
             try:
                 return file.read_text(encoding='utf-8')
             except Exception:
                 return file.read_text(errors='ignore')
-        if suffix == '.pdf' and HAS_PDF:
+        if suffix == '.md' and HAS_PDF:
             try:
                 with file.open('rb') as f:
                     reader = PdfReader(f)
@@ -91,7 +91,7 @@ class FiveDExtractor:
         return ''
 
     def load_manifests(self):
-        """Lädt REKURSIV .md/.txt/.pdf aus Hauptmanifest + optionale extra_dirs."""
+        """Lädt REKURSIV .md/.txt/.md aus Hauptmanifest + optionale extra_dirs."""
         texts = {}
         count = 0
         recursive = bool(self.config['extractor'].get('recursive', True))

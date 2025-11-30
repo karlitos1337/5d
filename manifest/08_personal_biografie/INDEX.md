@@ -6,10 +6,10 @@ mein, zwanglos, weg, denkbiografie, archaeologie, persönlich, beobachtung, refl
 ## Dateien
 
 - [Beobachtung Verstehen.docx](./Beobachtung Verstehen.docx) (8.0KB)
-- [Beobachtung Verstehen.pdf](./Beobachtung Verstehen.pdf) (27.8KB)
-- [K(L)ARLETZ.pdf](./K(L)ARLETZ.pdf) (16.1MB)
-- [Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf](./Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf) (223.7KB)
-- [Pablö.pdf](./Pablö.pdf) (1.5MB)
+- [Beobachtung Verstehen.md](./Beobachtung Verstehen.md) (27.8KB)
+- [K(L)ARLETZ.md](./K(L)ARLETZ.md) (16.1MB)
+- [Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md](./Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md) (223.7KB)
+- [Pablö.md](./Pablö.md) (1.5MB)
 - [Vollstaendige-Quellensammlung (1).md](./Vollstaendige-Quellensammlung (1).md) (25.4KB)
 - [Vollstaendige-Quellensammlung.md](./Vollstaendige-Quellensammlung.md) (25.4KB)
 - [kapitel_4_persoenliche_archaeologie.md](./kapitel_4_persoenliche_archaeologie.md) (14.1KB)

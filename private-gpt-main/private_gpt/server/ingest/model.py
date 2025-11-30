@@ -11,7 +11,7 @@ class IngestedDoc(BaseModel):
         examples=[
             {
                 "page_label": "2",
-                "file_name": "Sales Report Q3 2023.pdf",
+                "file_name": "Sales Report Q3 2023.md",
             }
         ]
     )

@@ -32,7 +32,7 @@ def _try_loading_included_file_formats() -> dict[str, type[BaseReader]]:
 
     default_file_reader_cls: dict[str, type[BaseReader]] = {
         ".hwp": HWPReader,
-        ".pdf": PDFReader,
+        ".md": PDFReader,
         ".docx": DocxReader,
         ".pptx": PptxReader,
         ".ppt": PptxReader,

@@ -104,13 +104,13 @@ Falls gewünscht, kann eine Version mit direkter Ansprache für Kurse, Trainings
 
 [^1_1]: Neues-Textdokument-2.txt
 
-[^1_2]: Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf
+[^1_2]: Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md
 
-[^1_3]: Unbenanntes-Dokument-1.pdf
+[^1_3]: Unbenanntes-Dokument-1.md
 
-[^1_4]: patricks-bla-bla-bla.pdf
+[^1_4]: patricks-bla-bla-bla.md
 
-[^1_5]: Unbenanntes-Dokument.pdf
+[^1_5]: Unbenanntes-Dokument.md
 
 
 ---
@@ -149,9 +149,9 @@ Wer vertiefen oder eine komplette, sprechfertige Traineranleitung zu einzelnen K
 
 [^2_4]: Neues-Textdokument-2.txt
 
-[^2_5]: Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf
+[^2_5]: Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md
 
-[^2_6]: paste.txt.pdf
+[^2_6]: paste.txt.md
 
 
 ---
@@ -306,11 +306,11 @@ Du bist jetzt der Reflexionskünstler, kein reiner Analytiker: Das Ziel ist, dur
 
 [^6_1]: Para_Der_Stadt_Paradox_Vollstaendige_Ausarbeitung.md
 
-[^6_2]: paste.txt.pdf
+[^6_2]: paste.txt.md
 
 [^6_3]: kapitel_5_intelligenzformel.md
 
-[^6_4]: K-L-ARLETZ.pdf
+[^6_4]: K-L-ARLETZ.md
 
 [^6_5]: kapitel_5_meine_eigenen_gesetze.md
 
@@ -343,13 +343,13 @@ Dieser Text kann als tägliche Übung, Trainingseinheit oder Inspirationsvorlage
 
 [^7_1]: Neues-Textdokument-2.txt
 
-[^7_2]: Denkbiografie-Wahrheit-Wirkung.pdf
+[^7_2]: Denkbiografie-Wahrheit-Wirkung.md
 
 [^7_3]: kapitel_0_einleitung.md
 
-[^7_4]: paste.txt.pdf
+[^7_4]: paste.txt.md
 
-[^7_5]: Pablo.pdf
+[^7_5]: Pablo.md
 
 
 ---
@@ -557,13 +557,13 @@ Das ist dein funktionierendes Anleitungs-Protokoll — wissenschaftlich fundiert
 
 <div align="center">⁂</div>
 
-[^8_1]: Pablo.pdf
+[^8_1]: Pablo.md
 
 [^8_2]: kapitel_3_neurobiologische_basis.md
 
-[^8_3]: K-L-ARLETZ.pdf
+[^8_3]: K-L-ARLETZ.md
 
-[^8_4]: Mein_zwangloser_Weg_in_die_Zukunft_FINAL.pdf
+[^8_4]: Mein_zwangloser_Weg_in_die_Zukunft_FINAL.md
 
-[^8_5]: paste.txt.pdf
+[^8_5]: paste.txt.md
 

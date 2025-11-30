@@ -74,7 +74,7 @@ Ziel: Schnell produktiv arbeiten, ohne die projekt­spezifischen Datenflüsse od
 
 ### Implementierungsdetails & Muster
 - **Extractor** (`5d_extractor.py`):
-  - Scannt `manifest/` rekursiv (via `config/default.yaml`: `recursive: true`, `file_types: ['*.md', '*.txt', '*.pdf']`)
+  - Scannt `manifest/` rekursiv (via `config/default.yaml`: `recursive: true`, `file_types: ['*.md', '*.txt', '*.md']`)
   - Regex für Projekte/ROI/Pilots; IMP-Keywords in `config/default.yaml` unter `keywords: {A, IM, R, SP, Au}`
   - Nutzt Pydantic-Schemas (`models/schemas.py`) für Validierung: `DimensionScore`, `Project`, `Solutions`
   - Fuzzy Matching für Projektnamen (z.B. "Bäckereii" → "Bäckerei" via `normalize_name()`)

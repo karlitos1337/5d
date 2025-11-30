@@ -106,7 +106,7 @@ class ManifestOrganizer:
                 "konzepte": ["prompt", "quantencomputer"]
             },
             "05_technologie_tesla": {
-                "patente": [".pdf", "apparatus", "transmission", "signaling"],
+                "patente": [".md", "apparatus", "transmission", "signaling"],
                 "ki_automation": ["ki_", "automation"],
                 "notizen": [".txt", "tesla"]
             },
@@ -124,7 +124,7 @@ class ManifestOrganizer:
             "08_personal_biografie": {
                 "kapitel": ["kapitel_"],
                 "reflexionen": ["reflexion", "mein_", "zwanglos"],
-                "dokumente": [".pdf", ".docx", "arletz", "pablö"]
+                "dokumente": [".md", ".docx", "arletz", "pablö"]
             }
         }
         

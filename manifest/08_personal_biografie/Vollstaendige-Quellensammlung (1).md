@@ -6,7 +6,7 @@
 
 **[1] Erdős, P., & Rényi, A. (1960). "On the evolution of random graphs."**
 - Publikation: Publ. Math. Inst. Hungar. Acad. Sci. 5(1), 17–60
-- Disponible: https://www.renyi.hu/~p_erdos/1960-10.pdf
+- Disponible: https://www.renyi.hu/~p_erdos/1960-10.md
 - Seminalwerk: Gründungstext der Perkolationstheorie
 - Hauptresultat: Mathematische Vorhersage des kritischen Schwellenwerts ρ_c = 1/(N-1)
 - Zitation: Alle modernen Perkolations-Forschung zitiert dieses Paper (~6,930+ Zitierungen in Google Scholar)
@@ -20,7 +20,7 @@
 
 **[3] Kane, M.J. (2017). "Percolation Threshold Results on Erdős–Rényi Graphs"**
 - Publikation: ArXiv 1712.01835
-- Disponible: https://arxiv.org/pdf/1712.01835.pdf
+- Disponible: https://arxiv.org/pdf/1712.01835.md
 - Spezialisiert: Perkolation für endliche Graphen (nicht nur asymptotisch)
 - Methodisch: Verwendet Stochastische Approximation, Functional Martingale CLT
 - Relevant: N=100 Neuronen ist exakt im "finite graph" Regime dieses Papers
@@ -35,7 +35,7 @@
 
 **[5] Bak, P., Tang, C., & Wiesenfeld, K. (1987). "Self-organized criticality: An explanation of 1/f noise."**
 - Publikation: Phys. Rev. Lett. 59(4), 381 (Juli 1, 1988 - Vollversion)
-- Disponible: http://www.scholarpedia.org/article/Self-organized_criticality; https://psychsafety.com/wp-content/uploads/2025/04/SOC.pdf
+- Disponible: http://www.scholarpedia.org/article/Self-organized_criticality; https://psychsafety.com/wp-content/uploads/2025/04/SOC.md
 - Seminalwerk: Erklärung, warum biologische Systeme sich zu kritischen Zuständen selbst-organisieren
 - Intuition: Sandhaufen-Modell — immer mehr Sand hinzufügen führt zu Lawinen
 - Hypothese: Das Gehirn könnte sich durch Hebbian Learning zu ρ ≈ ρ_c selbst-organisiert haben (evolutionäre Vorteile)
@@ -137,7 +137,7 @@
 
 **[17] Chalmers, D.J. (1995). "Facing Up to the Problem of Consciousness"**
 - Publikation: Journal of Consciousness Studies 2(3), 200-219
-- Disponible: https://consc.net/papers/facing.pdf; https://personal.lse.ac.uk/ROBERT49/teaching/ph103/pdf/chalmers1995.pdf
+- Disponible: https://consc.net/papers/facing.md; https://personal.lse.ac.uk/ROBERT49/teaching/ph103/pdf/chalmers1995.md
 - Seminalwerk: Definiert das "Hard Problem" als zentral verschieden von "Easy Problems"
 - Zentral: Warum führt neuronale Aktivität zu subjektiver Erfahrung?
 - Impact: 6,930+ Zitierungen (einer der meistzitierten Philosophie-Papers!)

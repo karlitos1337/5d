@@ -4,8 +4,8 @@
 .csv, .json, analysis, validierung, matrix, chart, data, timeline, projektion, wahrscheinlichkeit, szenario
 
 ## Verwandte Themen in 99_unsortiert
-- [analyse_visuelle_plots_schritt2.pdf](../99_unsortiert/analyse_visuelle_plots_schritt2.pdf) - Visualisierungen
-- [analyse_referenzen_methode_schritt3.pdf](../99_unsortiert/analyse_referenzen_methode_schritt3.pdf) - Methodik
+- [analyse_visuelle_plots_schritt2.md](../99_unsortiert/analyse_visuelle_plots_schritt2.md) - Visualisierungen
+- [analyse_referenzen_methode_schritt3.md](../99_unsortiert/analyse_referenzen_methode_schritt3.md) - Methodik
 
 ## Dateien
 
