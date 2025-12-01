@@ -49,6 +49,16 @@ This repository contains comprehensive documentation across multiple knowledge d
 - See governance alternatives in `04_oekonomie_governance/`
 
 ### For Philosophers
+### Weltkarte (MVP)
+- Interaktive Karte mit Heatmap, IMP‑Choropleth, Schulen & Zeitreise.
+- Schnellstart:
+	```bash
+	cd web/5d-map
+	python3 -m http.server 5500
+	$BROWSER http://localhost:5500
+	```
+- Details: `web/5d-map/README.md` · Kurz‑Anweisung: `md_copilot_ki_anweisung`
+
 - Epistemological foundations in `03_philosophie_epistemologie/`
 - Systems theory applications in `06_synthesen_kompilationen/`
 
