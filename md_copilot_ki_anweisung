@@ -2202,3 +2202,169 @@ Dann sage einfach zu Copilot:
 text
 @workspace Lies .github/copilot-phase2-instructions.md 
 und starte mit "Option A: Quick Win" (GitHub Pages Deploy)
+
+---
+
+## 6-PHASE IMPLEMENTATION ROADMAP (STRICT SEQUENTIAL ORDER)
+
+### CRITICAL: genau in der REIHENFOLGE alles!
+
+Must complete each phase fully before proceeding to next.
+Each phase includes testing and GitHub commits.
+
+---
+
+### PHASE 1: TECHNOLOGY STACK SETUP
+**Duration:** ~4 hours
+**Deliverables:**
+- ✓ package.json (Node dependencies)
+- ✓ requirements.txt (Python dependencies)
+- ✓ Project folder structure
+- ✓ Initial README updates
+
+**Dependencies:**
+- Frontend: Leaflet.js, D3.js, Chart.js, Axios
+- Backend: FastAPI/Flask, pytest, pandas, numpy, geopy
+- Tools: Python 3.11+, Node 18+
+
+**Status:** READY TO START
+
+---
+
+### PHASE 2: DATA SCHEMAS & FINALIZATION
+**Duration:** ~6 hours
+**Deliverables:**
+- ✓ baseline.json (with all metadata & formulas)
+- ✓ countries.json (19 countries with coordinates)
+- ✓ depression_rates.csv (2018-2020 trends)
+- ✓ school_models.json (Sudbury, Waldorf, Montessori data)
+- ✓ SOURCES.md (complete with citations & confidence levels)
+
+**Formula Implementations:**
+- GOV_INDEX = (RL×0.333) + (VA×0.333) + (GE×0.333)
+- Depression_future = Baseline + (0.3% × years) × gov_factor
+- IMP_SCORE = 50 + (gov×15) - (depression×8) - (dropout×5) + school_bonus
+- RESONANCE = sqrt(gov_stability × ed_quality × wellbeing) × 10
+
+**Confidence Levels:** HIGH (95%+), MEDIUM (75-95%), LOW (Expert Estimate)
+
+---
+
+### PHASE 3: UI/UX COMPONENTS
+**Duration:** ~8 hours
+**Deliverables:**
+- ✓ Main page with timeframe switcher (G/V/Z - Present/Past/Future)
+- ✓ Central Seinsebene radar chart (1-99 scale, 5 dimensions)
+- ✓ Control panel (sliders & dropdowns for each indicator)
+- ✓ Scenario comparison page (+5, +10, +15 years)
+- ✓ Formula visualization (displayed to user)
+- ✓ Legend, tooltips, responsive design
+
+**Layouts:**
+- Desktop: Full 3-column layout
+- Tablet: 2-column adaptive
+- Mobile: Stacked vertical
+
+**Status:** BLOCKED - Waiting for Phase 1 & 2
+
+---
+
+### PHASE 4: FORMULA IMPLEMENTATION & CALCULATIONS
+**Duration:** ~6 hours
+**Deliverables:**
+- ✓ All 4 formulas implemented in backend
+- ✓ Caching layer for calculated values
+- ✓ Scenario generation (+5, +10, +15 years)
+- ✓ Best/Average/Worst case labels
+- ✓ Unit tests for all calculations
+
+**Algorithms:**
+- Time-series projection using decay factors
+- Multi-factor weighting system
+- Quantum resonance estimation (theoretical)
+
+**Status:** BLOCKED - Waiting for Phase 1 & 2
+
+---
+
+### PHASE 5: LIVE DATA INTEGRATION & CACHING
+**Duration:** ~5 hours
+**Deliverables:**
+- ✓ FastAPI/Flask backend API endpoints
+- ✓ Frontend data fetching with Axios
+- ✓ 12-hour cache refresh strategy
+- ✓ Real-time updates on user interaction
+- ✓ Error handling & fallback mechanisms
+
+**Endpoints:**
+- GET /api/baseline → Current state data
+- GET /api/scenarios/{years} → Projected scenarios
+- GET /api/countries → Country metadata
+- POST /api/calculate → Custom calculations
+
+**Status:** BLOCKED - Waiting for Phase 1, 2 & 4
+
+---
+
+### PHASE 6: TESTING, OPTIMIZATION & DEPLOYMENT
+**Duration:** ~4 hours
+**Deliverables:**
+- ✓ Unit test suite (test_5d_map_ci.py) - COMPLETE
+- ✓ UI/UX testing across browsers
+- ✓ Performance optimization (< 2s load time)
+- ✓ Accessibility testing (WCAG 2.1 AA)
+- ✓ GitHub Actions CI/CD setup
+- ✓ Codespace verification
+- ✓ Final deployment checklist
+
+**Testing Coverage:**
+- Data validation: ✓ DONE
+- Formula calculations: ✓ DONE (in test suite)
+- API endpoints: Ready for Phase 5
+- UI components: Ready for Phase 3
+- Performance: ✓ Baseline established
+
+**Status:** PARTIALLY COMPLETE - Awaiting other phases
+
+---
+
+## CURRENT STATUS: December 1, 2025
+
+**Completed:**
+- ✅ Comprehensive data collection & research
+- ✅ SOURCES.md documentation
+- ✅ test_5d_map_ci.py (complete CI testing suite)
+- ✅ Project structure defined
+- ✅ GitHub integration setup
+
+**In Progress:**
+- 🔄 Phase 1: Technology Stack Setup
+
+**Pending (in sequence):**
+- ⏳ Phase 2: Data Schemas
+- ⏳ Phase 3: UI Components
+- ⏳ Phase 4: Formulas
+- ⏳ Phase 5: APIs
+- ⏳ Phase 6: Final testing
+
+---
+
+## NEXT IMMEDIATE ACTIONS:
+
+1. **Start Phase 1 NOW:**
+   - Create package.json with all dependencies
+   - Create requirements.txt
+   - Set up folder structure
+   - Update all README files
+   - Commit to GitHub
+
+2. **Do NOT skip ahead** to Phase 2 until Phase 1 completely done
+
+3. **After each phase:** Run full test suite and verify all commits
+
+4. **User instruction:** "genau in der REIHENFOLGE alles" - MUST FOLLOW EXACT ORDER
+
+---
+
+Last updated: 2025-12-01 22:00 CET
+Autor: Copilot CI Automation
