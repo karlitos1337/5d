@@ -8,8 +8,10 @@ let cachedData = {};
 let legendCtl = null;
 let selectedYear = null;
 
-function setLoading(isLoading) {
+function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
+  const msgEl = document.querySelector('.loading-spinner p');
+  if (msgEl) msgEl.textContent = message;
 }
 
 function updateLastUpdateTime() {

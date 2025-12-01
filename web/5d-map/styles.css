@@ -34,11 +34,21 @@ body {
   background: #fff;
   color: var(--color-text);
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
 }
 .btn--primary {
   background: var(--color-primary);
   color: #fff;
   border-color: transparent;
+}
+.btn--primary:hover {
+  background: #1a6a75;
 }
 
 main { height: calc(100vh - 132px); }
@@ -79,3 +89,110 @@ main { height: calc(100vh - 132px); }
 /* Zeitreise Controls */
 #time-controls input[type=range] { accent-color: var(--color-primary); }
 #time-controls { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(252, 252, 249, 0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+body.loading .loading-overlay {
+  display: flex;
+}
+
+.loading-spinner {
+  text-align: center;
+  color: var(--color-text);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e0e0e0;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Mobile Optimierung */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem;
+  }
+  
+  .app-header h1 {
+    font-size: 20px;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  
+  .btn {
+    font-size: 12px;
+    padding: 0.5rem 0.5rem;
+  }
+  
+  main {
+    height: calc(100vh - 180px);
+  }
+  
+  #map {
+    min-height: 60vh;
+  }
+  
+  .app-footer {
+    flex-direction: column;
+    padding: 0.5rem;
+    font-size: 12px;
+  }
+  
+  .legend {
+    font-size: 11px;
+    padding: 0.4rem 0.6rem;
+    min-width: 120px;
+  }
+  
+  #time-controls {
+    font-size: 12px;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .app-header h1 {
+    font-size: 18px;
+  }
+}

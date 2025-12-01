@@ -1,0 +1,34 @@
+{
+  "name": "5d-map",
+  "version": "1.0.0",
+  "description": "Interactive world map for 5D Intelligence Framework with live data",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 5500",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "install:playwright": "playwright install"
+  },
+  "keywords": [
+    "education",
+    "5d-intelligence",
+    "leaflet",
+    "data-visualization",
+    "world-map"
+  ],
+  "author": "Karl (karlitos1337)",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@vitest/ui": "^1.0.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karlitos1337/5d.git"
+  }
+}

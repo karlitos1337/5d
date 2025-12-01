@@ -9,23 +9,29 @@
 
 ### Dashboard & UI
 - [ ] Dashboard: Caching-Strategie für große JSON-Dateien
-- [ ] Weltkarte: Radar-Charts in IMP-Popups (Chart.js)
+- [x] Weltkarte: Radar-Charts in IMP-Popups (Chart.js)
 - [ ] Zeitreise-Feature: Baseline-Daten erweitern
-- [ ] Mobile Optimierung (responsive Grid für Buttons)
+- [x] Mobile Optimierung (responsive Grid für Buttons)
+- [x] Loading-Overlay mit Spinner
+- [x] Button-Tooltips und Accessibility
 
 ### Tests & CI
 - [x] Pre-Commit Hook einrichten
 - [x] Flake8 Linting integrieren
 - [x] JSON Validation hinzufügen
+- [x] Frontend Unit Tests (Vitest)
+- [x] E2E Tests (Playwright)
+- [x] Web Vitals Performance Monitoring
 - [ ] Discord Bot Tests erweitern
 - [ ] Integration Tests für Pipeline-Schritte
-- [ ] GitHub Actions für Auto-Deploy
+- [x] GitHub Actions für Auto-Deploy
 
 ### Deployment
-- [ ] GitHub Pages Setup für Weltkarte
+- [x] GitHub Pages Setup für Weltkarte (Workflow ready)
+- [ ] GitHub Pages aktivieren (manual step)
 - [ ] Service Worker für Offline-Modus
 - [ ] CSP Headers für Sicherheit
-- [ ] Cross-Browser Testing
+- [x] Cross-Browser Testing (Playwright: Chrome, Firefox, Safari, Mobile)
 
 ### Dokumentation
 - [x] Copilot Instructions aktualisieren
