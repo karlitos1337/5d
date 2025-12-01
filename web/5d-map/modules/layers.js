@@ -78,6 +78,37 @@ export function createIMPLayer(data) {
   return layer;
 }
 
+export function createTimeHeatmapLayer(data, year) {
+  const { countries, depressionSeries, dropoutSeries } = data || {};
+  if (!countries || !Array.isArray(countries) || !depressionSeries || !dropoutSeries) {
+    return L.layerGroup();
+  }
+  const points = [];
+  for (const c of countries) {
+    const iso3 = c.iso3; const lat = Number(c.lat); const lng = Number(c.lng);
+    if (!iso3 || Number.isNaN(lat) || Number.isNaN(lng)) continue;
+    const depVal = depressionSeries[iso3]?.[year];
+    const drpVal = dropoutSeries[iso3]?.[year];
+    if (depVal == null && drpVal == null) continue;
+    const vals = [];
+    if (typeof depVal === 'number') vals.push(depVal);
+    if (typeof drpVal === 'number') vals.push(drpVal);
+    if (!vals.length) continue;
+    const intensity = Math.max(0, Math.min(1, (vals.reduce((a,b)=>a+b,0)/vals.length) / 100));
+    points.push([lat, lng, intensity]);
+  }
+  return L.heatLayer(points, {
+    radius: 25,
+    blur: 15,
+    maxZoom: 17,
+    gradient: {
+      0.0: '#22C55E',
+      0.5: '#E8814A',
+      1.0: '#C0152F'
+    }
+  });
+}
+
 export function createIMPLegendControl() {
   const grades = [0, 0.33, 0.66, 1.0];
   const getColor = (v) => (v < 0.33 ? '#22C55E' : v < 0.66 ? '#E8B84A' : '#C0152F');

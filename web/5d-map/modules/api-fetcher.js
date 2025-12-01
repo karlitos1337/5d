@@ -57,7 +57,28 @@ export async function fetchAllData() {
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
     const text = await res.text();
-    return reduceLatestByCode(parseCSV(text), 'Code');
+    const rows = parseCSV(text);
+    return reduceLatestByCode(rows, 'Code');
+  }).catch(() => ({}));
+
+  // Depression Jahres‑Serien (iso3 -> {year: value})
+  const depressionSeries = await fetchWithCache('owid_depression_series', async () => {
+    try {
+      const url = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+      const text = await res.text();
+      const rows = parseCSV(text);
+      const series = {};
+      for (const r of rows) {
+        const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
+        const val = r[valueKey];
+        if (!code || !year || val == null || Number.isNaN(val)) continue;
+        if (!series[code]) series[code] = {};
+        series[code][year] = val;
+      }
+      return series;
+    } catch { return {}; }
   }).catch(() => ({}));
 
   // Dropout: World Bank JSON (alle Länder, neuerster Wert)
@@ -77,6 +98,23 @@ export async function fetchAllData() {
     const map = {};
     for (const [k, v] of Object.entries(latest)) map[k] = v.value;
     return map;
+  }).catch(() => ({}));
+
+  // Dropout Jahres‑Serien
+  const dropoutSeries = await fetchWithCache('wb_dropout_series', async () => {
+    try {
+      const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
+      const data = await fetchJSON(url);
+      const rows = Array.isArray(data) ? data[1] || [] : [];
+      const series = {};
+      for (const r of rows) {
+        const iso3 = r?.countryiso3code; const year = Number(r?.date); const val = r?.value == null ? null : Number(r.value);
+        if (!iso3 || !year || val == null || Number.isNaN(val)) continue;
+        if (!series[iso3]) series[iso3] = {};
+        series[iso3][year] = val;
+      }
+      return series;
+    } catch { return {}; }
   }).catch(() => ({}));
 
   // WGI‑Proxies (World Bank Governance Indicators), Werte in [-2.5, 2.5]
@@ -164,6 +202,19 @@ export async function fetchAllData() {
       sources: { dep, drp, wgi_rl: wgi_rl_raw[iso3], wgi_va: wgi_va_raw[iso3], wgi_ge: wgi_ge_raw[iso3] }
     };
   }
+
+  // Zeitreise: verfügbare Jahre (Schnittmenge oder Vereinigung) für Slider
+  const yearSet = new Set();
+  for (const iso3 of Object.keys(depressionSeries)) {
+    Object.keys(depressionSeries[iso3]).forEach(y => yearSet.add(Number(y)));
+  }
+  for (const iso3 of Object.keys(dropoutSeries)) {
+    Object.keys(dropoutSeries[iso3]).forEach(y => yearSet.add(Number(y)));
+  }
+  const years = Array.from(yearSet).filter(y => Number.isFinite(y)).sort((a,b)=>a-b);
+  result.seriesYears = years;
+  result.depressionSeries = depressionSeries;
+  result.dropoutSeries = dropoutSeries;
 
   return result;
 }

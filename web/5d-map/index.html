@@ -14,12 +14,17 @@
       <button id="layer-status-quo" class="btn btn--primary">Status Quo</button>
       <button id="layer-schools" class="btn">Alternative Schulen</button>
       <button id="layer-imp" class="btn">IMP‑Score</button>
-      <button id="layer-time" class="btn" disabled>Zeitreise</button>
+      <button id="layer-time" class="btn">Zeitreise</button>
     </div>
   </header>
 
   <main>
     <div id="map"></div>
+    <div id="time-controls" style="display:none;padding:0.5rem 1rem;max-width:480px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
+      <label for="year-slider"><strong>Jahr: <span id="year-label">—</span></strong></label>
+      <input type="range" id="year-slider" min="2000" max="2025" value="2025" step="1" style="width:100%;" />
+      <small>Zeigt Heatmap für ausgewähltes Jahr (Depression/Dropout). Fallback: Nur vorhandene Werte.</small>
+    </div>
   </main>
 
   <footer class="app-footer">

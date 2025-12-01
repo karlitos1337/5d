@@ -75,3 +75,7 @@ main { height: calc(100vh - 132px); }
   border-radius: 3px;
 }
 .legend-note { margin-top: .25rem; color: var(--color-text-secondary); }
+
+/* Zeitreise Controls */
+#time-controls input[type=range] { accent-color: var(--color-primary); }
+#time-controls { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }

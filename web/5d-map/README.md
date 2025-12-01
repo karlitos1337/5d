@@ -7,6 +7,7 @@ Interaktive 5D‑Weltkarte mit Heatmap (Status Quo), IMP‑Choropleth, Legende u
 - IMP‑Choropleth: Proxy‑basierter IMP (A×IM×R×SP×Au) inkl. Legende, Popups & WGI‑Normalisierung
 - Marker‑Layer: Alternative Schulen aus `data/schools.json`
 - Client‑Caching (LocalStorage, 1h TTL) mit Fallbacks
+- Zeitreise‑Layer: Jahresauswahl für historische Heatmaps (Depression/Dropout)
 
 ## Formeln (Kurz)
 - Heatmap‑Intensität: `I = clamp((avg(dep%,dropout%))/100, 0, 1)`
@@ -29,6 +30,12 @@ Die IMP‑Legende (unten rechts) gruppiert Intervalle:
 
 Farbcodierung invertiert konventionell „Rot = schlecht“ da IMP auf inversen Risikowerten (Dropout/Depression) basiert.
 
+## Zeitreise
+- Slider zeigt verfügbare Jahre (vereinigte Menge aus Depression & Dropout Serien).
+- Werte pro Jahr werden direkt aus den Originalreihen extrahiert (kein Imputing; fehlende Werte werden ignoriert).
+- Intensität pro Jahr: Mittel der vorhandenen Prozentwerte (Depression, Dropout) / 100.
+- Fallback: Ist für ein Land ein Wert im gewählten Jahr nicht vorhanden, wird nur der vorhandene genutzt; fehlen beide → Land entfällt.
+
 ## Lokal starten
 ```bash
 cd web/5d-map
@@ -40,6 +47,7 @@ Schnelltest:
 1. "Status Quo" → Heatmap erscheint ohne Fehler in Konsole.
 2. "IMP-Score" → Choropleth + Legende sichtbar, Popup zeigt WGI Rohwerte.
 3. Netzwerk offline schalten → letztes Caching (<=1h) weiter nutzbar.
+4. "Zeitreise" aktivieren → Slider bewegt sich; Jahr ändert Heatmap.
 
 ## Struktur
 ```
