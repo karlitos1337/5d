@@ -1,10 +1,6 @@
 [flake8]
 max-line-length = 120
-ignore = 
-    E501,  # line too long (handled by max-line-length)
-    W503,  # line break before binary operator
-    E203,  # whitespace before ':'
-    E402,  # module level import not at top of file
+ignore = E501,W503,E203,E402
 exclude = 
     .git,
     __pycache__,
