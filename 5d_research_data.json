@@ -67,7 +67,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41310627/"
       }
     ],
-    "timestamp": "2025-11-30T10:54:45.766746"
+    "timestamp": "2025-12-01T14:57:22.889975"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -136,7 +136,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41307015/"
       }
     ],
-    "timestamp": "2025-11-30T10:54:47.551398"
+    "timestamp": "2025-12-01T14:57:26.623259"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,6 +172,26 @@
     ],
     "pubmed": [
       {
+        "title": "Addressing the false dichotomy between autonomy and preservation of life: Clinical, legal, and ethical considerations in severe and longstanding anorexia nervosa.",
+        "authors": [
+          "Ayton A",
+          "Ibrahim A",
+          "Solmi M"
+        ],
+        "published": "2025 Nov 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41319454/"
+      },
+      {
+        "title": "Eating Well When Living With an Intellectual Disability-Exploring the Carer: Client Relationship in Residential Settings.",
+        "authors": [
+          "Özdemir A",
+          "Chapman H",
+          "Hall R"
+        ],
+        "published": "2025 Nov",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41319222/"
+      },
+      {
         "title": "A Book Review of 'the Anxious Generation' by Jonathan Haidt.",
         "authors": [
           "Deka PP",
@@ -179,28 +199,9 @@
         ],
         "published": "2025 Nov 29",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41317144/"
-      },
-      {
-        "title": "\"After a long day of play, I get tired and forget to unfurl my bed net\": a qualitative study exploring factors affecting insecticide-treated bed net use among school-aged children in eastern Uganda.",
-        "authors": [
-          "Sebatta DE",
-          "Alexander S",
-          "Rek J"
-        ],
-        "published": "2025 Nov 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41316295/"
-      },
-      {
-        "title": "Factors influencing the completion of advance directives in cancer patients: a descriptive survey.",
-        "authors": [
-          "Hwang W",
-          "Do J"
-        ],
-        "published": "2025 Nov 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41316189/"
       }
     ],
-    "timestamp": "2025-11-30T10:54:49.672855"
+    "timestamp": "2025-12-01T14:57:28.898006"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -268,7 +269,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-11-30T10:54:51.434408"
+    "timestamp": "2025-12-01T14:57:31.268871"
   },
   "democratic schools": {
     "arxiv": [
@@ -306,6 +307,16 @@
     ],
     "pubmed": [
       {
+        "title": "Ark(+): Supervised training a single high-performance AI foundation model from many differently labeled datasets-no label consolidation required.",
+        "authors": [
+          "Ma D",
+          "Pang J",
+          "Senthil Velan S"
+        ],
+        "published": "2025 Oct 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41319624/"
+      },
+      {
         "title": "Conceptualising and Reimagining Professionalism in Different Contexts: From Nurse to Nursing Lecturer.",
         "authors": [
           "Litvin R"
@@ -322,19 +333,9 @@
         ],
         "published": "2025 Nov 27",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41310860/"
-      },
-      {
-        "title": "Lipid nanocapsule-chitosan and iota-carrageenan hydrogel composite for sustained hydrophobic drug delivery.",
-        "authors": [
-          "Mukubwa GK",
-          "Safari JB",
-          "Tetana ZN"
-        ],
-        "published": "2025 Nov 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41309759/"
       }
     ],
-    "timestamp": "2025-11-30T10:54:53.169624"
+    "timestamp": "2025-12-01T14:57:33.767379"
   },
   "student agency": {
     "arxiv": [
@@ -377,6 +378,15 @@
     ],
     "pubmed": [
       {
+        "title": "Perceived academic control, growth mindset, self-regulation, and life satisfaction in chinese students: A mixed methods study featuring interpretative phenomenological analysis.",
+        "authors": [
+          "Hao Y",
+          "Zhou Y"
+        ],
+        "published": "2025 Nov 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41319427/"
+      },
+      {
         "title": "Competency-based education for teaching the concept of communication.",
         "authors": [
           "Wittenberg E",
@@ -395,18 +405,8 @@
         ],
         "published": "2025 Nov 19",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41317425/"
-      },
-      {
-        "title": "Multidimensional sleep health and psychological distress: associations in a Community-Dwelling population.",
-        "authors": [
-          "Furihata R",
-          "Tateyama Y",
-          "Shimamoto T"
-        ],
-        "published": "2025 Nov 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41317241/"
       }
     ],
-    "timestamp": "2025-11-30T10:54:54.970509"
+    "timestamp": "2025-12-01T14:57:35.862583"
   }
 }

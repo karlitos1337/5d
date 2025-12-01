@@ -1,0 +1,77 @@
+:root {
+  --color-primary: #21808D;
+  --color-success: #22C55E;
+  --color-warning: #E8814A;
+  --color-error: #C0152F;
+  --color-bg: #FCFCF9;
+  --color-surface: #FFFFFE;
+  --color-text: #134252;
+  --color-text-secondary: #626C7C;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid #e6e6e6;
+}
+.controls { display: flex; gap: .5rem; flex-wrap: wrap; }
+.btn {
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  border: 1px solid #cfd8dc;
+  background: #fff;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: transparent;
+}
+
+main { height: calc(100vh - 132px); }
+#map { width: 100%; height: 100%; }
+
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-surface);
+  border-top: 1px solid #e6e6e6;
+}
+.app-footer nav a { color: var(--color-text); text-decoration: none; margin-right: .5rem; }
+.app-footer nav a:hover { text-decoration: underline; }
+
+/* Marker Icons per Typ (für divIcon) */
+.school-marker { font-size: 20px; line-height: 20px; }
+
+/* Choropleth Legende */
+.legend {
+  background: rgba(255,255,255,0.95);
+  padding: .5rem .75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: .5rem;
+  color: var(--color-text);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  min-width: 150px;
+}
+.legend i {
+  display: inline-block;
+  width: 14px; height: 14px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  border-radius: 3px;
+}
+.legend-note { margin-top: .25rem; color: var(--color-text-secondary); }

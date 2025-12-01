@@ -318,7 +318,7 @@ def main():
         st.metric("Research Papers", total_papers, "🔍")
     
     # Tabs (Launcher + Inhalte)
-    tab0, tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["🧭 Launcher", "📊 IMP Analysis", "🚀 Projects", "📚 Research", "💻 GitHub", "🧬 Game of Life", "🤝 Zwanglosigkeit", "🌌 Bewusstsein", "📜 Manifeste"])
+    tab0, tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["🧭 Launcher", "📊 IMP Analysis", "🚀 Projects", "📚 Research", "💻 GitHub", "🧬 Game of Life", "🤝 Zwanglosigkeit", "📜 Manifeste", "🌍 Weltgraphen", "📈 X‑Y Graphen", "🧪 Test Graph"]) 
 
     # Launcher: Kategorien + Startbefehle/Verweise
     with tab0:
@@ -529,41 +529,6 @@ A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims
         render_zwi_demo(key_prefix="tab6_")
 
     with tab7:
-        st.header("🌌 Bewusstseinsdimensionen: 1D bis 5D")
-        st.caption("Interaktive Visualisierung der Bewusstseinsebenen mit Vergangenheit/Gegenwart/Zukunft-Szenarien")
-        
-        # Zeige Link zur HTML-Datei (als Workaround für Embedding-Probleme)
-        import os
-        if os.path.exists('bewusstsein_evolution.html'):
-            file_size = os.path.getsize('bewusstsein_evolution.html')
-            st.success(f"✅ Visualisierung verfügbar ({file_size/1024:.1f} KB)")
-            
-            # Link zum direkten Öffnen
-            st.markdown("### 📊 Visualisierung öffnen:")
-            st.markdown("""
-            **Option 1:** [➡️ In neuem Tab öffnen](/bewusstsein_evolution.html){:target="_blank"}
-            
-            **Option 2:** Kopiere diese URL in einen neuen Browser-Tab:
-            ```
-            [DEINE-CODESPACE-URL]/bewusstsein_evolution.html
-            ```
-            (Ersetze die Port-URL mit `/bewusstsein_evolution.html` am Ende)
-            """)
-            
-            # Versuche trotzdem Embedding
-            st.divider()
-            st.subheader("Eingebettete Vorschau:")
-            try:
-                with open('bewusstsein_evolution.html', 'r', encoding='utf-8') as f:
-                    html_content = f.read()
-                st.components.v1.html(html_content, height=4000, scrolling=True)
-            except Exception as e:
-                st.warning(f"⚠️ Embedding fehlgeschlagen: {e}")
-                st.info("👆 Nutze die Links oben zum direkten Öffnen")
-        else:
-            st.error("❌ `bewusstsein_evolution.html` nicht gefunden.")
-    
-    with tab8:
         st.header("Manifeste – Zusammenfassung & Quellen")
         st.caption("Automatisch extrahierte Übersichten aus `manifest/**`. Externe Quellen dienen als Bezug; eigene Texte werden nicht als Autorität gewertet.")
 
@@ -687,6 +652,204 @@ A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims
                     st.metric("IMP (multiplikativ)", f"{imp_raw:.3f}")
                 with c2:
                     st.metric("IMP (gewichtet)", f"{imp_weighted:.3f}")
+
+    with tab8:
+        st.header("Weltgraphen – Themen • Papers • Repos")
+        st.caption("Netzwerkansicht: Verbindet Research‑Themen mit Papers und GitHub‑Repos.")
+
+        # Build simple network graph from research + github
+        try:
+            import networkx as nx
+            import plotly.graph_objects as _go
+            G = nx.Graph()
+            # Add topic nodes
+            topics = list(research.keys())[:8]
+            for t in topics:
+                G.add_node(f"T:{t}", kind="topic")
+                for p in research.get(t, {}).get('arxiv', [])[:3]:
+                    pid = f"A:{p.get('title','')[:40]}"  # shorten
+                    G.add_node(pid, kind="paper")
+                    G.add_edge(f"T:{t}", pid)
+                for p in research.get(t, {}).get('pubmed', [])[:2]:
+                    pid = f"P:{p.get('title','')[:40]}"
+                    G.add_node(pid, kind="paper")
+                    G.add_edge(f"T:{t}", pid)
+            # Link github repos to closest matching topics (name contains keyword)
+            repos = github.get('repositories', {})
+            for t in topics:
+                for repo in repos.get(t, [])[:3]:
+                    rid = f"R:{repo.get('name','')[:40]}"
+                    G.add_node(rid, kind="repo")
+                    G.add_edge(f"T:{t}", rid)
+
+            if len(G.nodes) == 0:
+                st.warning("Keine Daten für Weltgraph – bitte Scraper/Explorer ausführen.")
+            else:
+                pos = nx.spring_layout(G, seed=42, k=0.6)
+                # Build edges for plotly
+                edge_x, edge_y = [], []
+                for u, v in G.edges():
+                    x0, y0 = pos[u]
+                    x1, y1 = pos[v]
+                    edge_x += [x0, x1, None]
+                    edge_y += [y0, y1, None]
+                edge_trace = _go.Scatter(x=edge_x, y=edge_y, mode='lines', line=dict(width=1, color='#888'), hoverinfo='none')
+                # Build node traces by kind
+                def node_trace(kind, color, size):
+                    xs, ys, texts = [], [], []
+                    for n, d in G.nodes(data=True):
+                        if d.get('kind') == kind:
+                            x, y = pos[n]
+                            xs.append(x); ys.append(y); texts.append(n[2:])
+                    return _go.Scatter(x=xs, y=ys, mode='markers+text', text=texts, textposition='top center',
+                                       marker=dict(size=size, color=color, opacity=0.85), name=kind)
+                fig = _go.Figure(data=[edge_trace,
+                                        node_trace('topic', '#1f77b4', 14),
+                                        node_trace('paper', '#2ca02c', 10),
+                                        node_trace('repo', '#ff7f0e', 12)])
+                fig.update_layout(showlegend=True, title="Weltgraph: Topics ↔ Papers ↔ Repos",
+                                  margin=dict(l=10, r=10, t=40, b=10), xaxis=dict(visible=False), yaxis=dict(visible=False))
+                st.plotly_chart(fig, use_container_width=True)
+        except Exception:
+            st.warning("NetworkX/Plotly nicht verfügbar – installiere mit: pip install networkx plotly")
+
+    with tab9:
+        st.header("X‑Y Graphen nach 5D‑Prinzip")
+        st.caption("Unabhängige, einfache Streudiagramme: Dimension vs. Wirtschafts-Schadindex (synthetisch).")
+        # Erzeuge unabhängige, synthetische Daten (keine Abhängigkeit von Scraper)
+        import numpy as _np
+        _rng = _np.random.default_rng(5)
+        # 5D Dimensionen (Schieberegler zur Grundlage)
+        cA, cB, cC, cD, cE = st.columns(5)
+        with cA:
+            _A = st.slider("A", 0.0, 1.0, 0.75)
+        with cB:
+            _IM = st.slider("IM", 0.0, 1.0, 0.70)
+        with cC:
+            _R = st.slider("R", 0.0, 1.0, 0.65)
+        with cD:
+            _SP = st.slider("SP", 0.0, 1.0, 0.75)
+        with cE:
+            _Au = st.slider("Au", 0.0, 1.0, 0.70)
+
+        st.markdown("""
+        Nach 5D‑Prinzip: Höhere Werte in A/IM/R/SP/Au reduzieren systemische Schäden (Kurzfrist‑Profit ≠ Langfrist‑Wohl).
+        Wir zeigen synthetisch: je höher die Dimension, desto niedriger ein "Wirtschafts‑Schadindex" (WSI).
+        """)
+
+        # Synthetischer WSI: invers zu Dimension + Rauschen
+        def mk_series(base, n=200):
+            x = _rng.uniform(0.0, 1.0, n)
+            # Schadindex fällt mit x und Grundniveau base
+            y = (1.0 - x) * (1.0 - base) + _rng.normal(0, 0.05, n)
+            return x, y
+        pairs = {
+            'Autonomie (A)': mk_series(_A),
+            'Motivation (IM)': mk_series(_IM),
+            'Resilienz (R)': mk_series(_R),
+            'Partizipation (SP)': mk_series(_SP),
+            'Authentizität (Au)': mk_series(_Au),
+        }
+
+        # Visualisierung: Plotly oder Fallback
+        try:
+            import plotly.graph_objects as _go
+            _fig = _go.Figure()
+            palette = {
+                'Autonomie (A)': '#1f77b4',
+                'Motivation (IM)': '#ff7f0e',
+                'Resilienz (R)': '#2ca02c',
+                'Partizipation (SP)': '#9467bd',
+                'Authentizität (Au)': '#8c564b',
+            }
+            for name, (x, y) in pairs.items():
+                _fig.add_trace(_go.Scatter(x=x, y=y, mode='markers', name=name,
+                                           marker=dict(size=6, color=palette.get(name, '#333'), opacity=0.7)))
+            _fig.update_layout(title="WSI vs. Dimension (synthetisch)",
+                               xaxis_title="Dimension (0..1)", yaxis_title="Wirtschafts‑Schadindex (niedriger = besser)",
+                               legend=dict(orientation='h'))
+            st.plotly_chart(_fig, use_container_width=True)
+        except Exception:
+            st.warning("Plotly nicht verfügbar – Fallback Tabellenansicht.")
+            import pandas as _pd
+            rows = []
+            for name, (x, y) in pairs.items():
+                for xi, yi in zip(x[:50], y[:50]):
+                    rows.append({'Dimension': name, 'x': float(xi), 'WSI': float(yi)})
+            st.dataframe(_pd.DataFrame(rows))
+
+        st.divider()
+        st.subheader("Zukunftsauswirkungs‑Graph (projiziert)")
+        st.caption("Hypothetische Entwicklung des Wirtschafts‑Schadindex (WSI) über die Zeit bei 5D‑Adoption.")
+        # Sektoren: Autofahren (1D/Verbrenner), Fliegen, Schifffahrt
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            adopt_auto = st.slider("Auto 5D‑Adoption (Jahre bis 50%)", 1, 20, 8)
+        with c2:
+            adopt_flight = st.slider("Flug 5D‑Adoption (Jahre bis 50%)", 1, 30, 15)
+        with c3:
+            adopt_ship = st.slider("Schiff 5D‑Adoption (Jahre bis 50%)", 1, 30, 20)
+
+        # Projektionsmodell: WSI_t = WSI0 * (1 - adoption_curve(t)) + noise
+        # adoption_curve(t) ~ logistic mit T50 = adopt_*
+        _T = 30
+        _t = _np.arange(0, _T)
+        def logistic_adopt(t, T50):
+            k = 0.25  # Steilheit
+            return 1.0 / (1.0 + _np.exp(-k * (t - T50)))
+        base = { 'Auto': 0.8, 'Flug': 0.9, 'Schiff': 0.85 }  # aktueller hoher Schaden
+        T50s = { 'Auto': adopt_auto, 'Flug': adopt_flight, 'Schiff': adopt_ship }
+        proj = {}
+        for name in base:
+            curve = logistic_adopt(_t, T50s[name])
+            wsi = base[name] * (1.0 - 0.6 * curve) + _rng.normal(0, 0.02, _T)  # 60% Reduktion bei hoher Adoption
+            proj[name] = wsi.clip(0.0, 1.0)
+
+        try:
+            import plotly.graph_objects as _go
+            fig2 = _go.Figure()
+            palette2 = { 'Auto': '#d62728', 'Flug': '#17becf', 'Schiff': '#7f7f7f' }
+            for name, y in proj.items():
+                fig2.add_trace(_go.Scatter(x=list(_t), y=list(y), mode='lines', name=name,
+                                           line=dict(width=3, color=palette2.get(name, '#333'))))
+            fig2.update_layout(title="WSI Projektion bei 5D‑Adoption",
+                               xaxis_title="Jahre", yaxis_title="WSI (niedriger = besser)",
+                               legend=dict(orientation='h'))
+            st.plotly_chart(fig2, use_container_width=True)
+        except Exception:
+            st.warning("Plotly nicht verfügbar – einfache Tabelle.")
+            import pandas as _pd
+            dfp = _pd.DataFrame({ 'Jahr': _t, **proj })
+            st.dataframe(dfp.head(15))
+
+    with tab10:
+        st.header("Test Graph – Kopie IMP Radar")
+        st.caption("Unabhängiger Test: gleiche Darstellung wie IMP‑Radar, mit einstellbaren Werten.")
+        dims = ['Autonomie', 'Motivation', 'Resilienz', 'Partizipation', 'Authentizität']
+        cA, cB, cC, cD, cE = st.columns(5)
+        with cA:
+            tA = st.slider("A", 0.0, 1.0, 0.95, 0.01)
+        with cB:
+            tIM = st.slider("IM", 0.0, 1.0, 0.88, 0.01)
+        with cC:
+            tR = st.slider("R", 0.0, 1.0, 0.82, 0.01)
+        with cD:
+            tSP = st.slider("SP", 0.0, 1.0, 0.79, 0.01)
+        with cE:
+            tAu = st.slider("Au", 0.0, 1.0, 0.91, 0.01)
+        vals = [tA, tIM, tR, tSP, tAu]
+        # Plotly Radar oder Fallback
+        try:
+            import plotly.graph_objects as _go
+            fig = _go.Figure()
+            fig.add_trace(_go.Scatterpolar(r=vals, theta=dims, fill='toself', name='Test 5D', line_color='#00aa00'))
+            fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 1])), showlegend=True, title="Test: IMP‑Radar")
+            st.plotly_chart(fig, use_container_width=True)
+        except Exception:
+            st.warning("Plotly nicht verfügbar – Balken‑Fallback.")
+            import pandas as _pd
+            _df = _pd.DataFrame({'Dimension': dims, 'Score': vals}).set_index('Dimension')
+            st.bar_chart(_df)
 
     # Footer
     st.divider()

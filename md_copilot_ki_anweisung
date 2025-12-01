@@ -1,0 +1,816 @@
+# 🚀 VOLLSTÄNDIGER COPILOT-PROMPT FÜR VSCODE: LIVE 5D-INTELLIGENZ WELTKARTE
+
+```markdown
+# 5D-INTELLIGENZ LIVE WELTKARTE - COPILOT ANWEISUNG
+
+## PROJEKT-ÜBERSICHT
+Erstelle eine interaktive, live-aktualisierte Weltkarte zur Visualisierung des 5D-Intelligenz-Frameworks mit folgenden Anforderungen:
+
+---
+
+## 1. TECHNOLOGIE-STACK
+
+### Frontend
+- **HTML5** + **CSS3** + **Vanilla JavaScript** (keine komplexen Frameworks)
+- **Leaflet.js** für Kartendarstellung (CDN: https://unpkg.com/leaflet@1.9.4/dist/leaflet.js)
+- **Leaflet.heat** für Heatmap-Layer
+- **Chart.js** für Popup-Visualisierungen (Radar-Charts für IMP-Komponenten)
+
+### Datenquellen (APIs mit Live-Updates)
+1. **World Bank API** - Bildungsstatistiken
+   - Endpoint: `https://api.worldbank.org/v2/country/{ISO}/indicator/{INDICATOR}?format=json`
+   - Indicators: SE.PRM.DROPOUT.ZS (Dropout), SE.XPD.TOTL.GD.ZS (Bildungsausgaben)
+
+2. **Our World in Data API** (inoffiziell via CSV)
+   - Depression: `https://ourworldindata.org/grapher/depression-prevalence.csv`
+   - Mental Health: `https://ourworldindata.org/grapher/mental-health-data.csv`
+
+3. **OECD API** - PISA & Teacher Data
+   - Endpoint: `https://stats.oecd.org/restsdmx/sdmx.ashx/GetData/`
+
+4. **WHO GHO API** - Mental Health Statistics
+   - Endpoint: `https://ghoapi.azureedge.net/api/{INDICATOR}`
+
+5. **Alternative Schools Database** (statisch, von mir gepflegt)
+   - Hardcoded JSON mit Sudbury/Waldorf Locations & Outcomes
+
+---
+
+## 2. DATEI-STRUKTUR
+
+```
+5d-map/
+├── index.html          # Haupt-HTML-Datei
+├── styles.css          # CSS (5D-Design-System)
+├── app.js              # Hauptlogik
+├── data/
+│   ├── countries.json  # ISO-Codes, Koordinaten, Namen
+│   ├── schools.json    # Alternative Schulen (Sudbury, Waldorf)
+│   └── cache.json      # Cache für API-Daten (1h TTL)
+├── modules/
+│   ├── api-fetcher.js  # API-Calls & Caching
+│   ├── map-renderer.js # Leaflet-Karte Setup
+│   ├── layers.js       # Layer-Management (Heatmaps, Marker)
+│   └── popups.js       # Popup-Content-Generator
+└── README.md           # Dokumentation
+```
+
+---
+
+## 3. FUNKTIONALE ANFORDERUNGEN
+
+### 3.1 Karten-Layers (Toggle per Button)
+
+#### Layer 1: Status Quo Heatmap
+- **Datenquelle:** WHO Depression Prevalence, World Bank Dropout Rates
+- **Visualisierung:** Farb-Heatmap (Rot = kritisch, Grün = gut)
+- **Metriken:**
+  - Depression 18-24 Jahre (%)
+  - Schulstress-Level (wo verfügbar)
+  - Dropout-Rate (%)
+  - Lehrer-Burnout (%)
+
+#### Layer 2: Alternative Schulen (Marker)
+- **Datenquelle:** schools.json (statisch, manuell gepflegt)
+- **Marker-Typen:**
+  - 🟢 Sudbury-Schulen
+  - 🔵 Waldorf-Schulen
+  - 🟡 Folk High Schools (Dänemark)
+  - 🟣 Tokkatsu-Schulen (Japan)
+- **Popup-Content:**
+  - Name, Gründungsjahr, Schülerzahl
+  - Key Outcomes (College-Rate, Zufriedenheit)
+  - Link zu Details
+
+#### Layer 3: IMP-Score Choropleth
+- **Datenquelle:** Berechnet aus API-Daten
+- **Formel:**
+  ```
+  IMP = (Autonomy * IntrinsicMotivation * Resilience * Participation * Authenticity)
+  
+  // Gewichtung (0-1 Scale):
+  Autonomy = 1 - (CentralizationIndex / 100)
+  IntrinsicMotivation = 1 - (ExternalPressure / 100)
+  Resilience = 1 - (DepressionRate / 100)
+  Participation = DemocraticIndex / 100
+  Authenticity = LifeSatisfaction / 10
+  ```
+- **Visualisierung:** Länder eingefärbt (Dunkelgrün = IMP 0.7+, Rot = IMP <0.3)
+
+#### Layer 4: Zeitreise (Slider)
+- **Zeitraum:** 2015 → 2025 → 2050 (Projektion)
+- **Datenquelle:** World Bank/WHO historische Daten + Projektionsmodell
+- **Visualisierung:** Animierte Veränderung der Heatmap
+
+---
+
+### 3.2 Interaktionen
+
+#### Hover über Land
+```
+// Zeige Tooltip mit:
+- Land-Name
+- Depression: XX%
+- Dropout: XX%
+- IMP-Score: 0.XX
+```
+
+#### Klick auf Land
+```
+// Öffne Detailseite mit:
+- Radar-Chart (5 IMP-Komponenten)
+- Zeitverlauf-Graph (Depression/Dropout 2015-2025)
+- Vergleich zu Nachbarländern
+- Links zu Quellen
+```
+
+#### Klick auf Schul-Marker
+```
+// Popup mit:
+- Schul-Foto (wenn vorhanden)
+- "Sudbury Valley School, MA, USA"
+- "Gegründet: 1968 | Schüler: 200"
+- "Outcomes: 87% College, 82% Zufriedenheit"
+- Button: "Mehr erfahren" → Link zu Kapitel-Markdown
+```
+
+---
+
+### 3.3 Live-Updates
+
+#### Automatischer Reload alle 1 Stunde
+```
+setInterval(() => {
+  fetchAllAPIs();
+  updateLayers();
+}, 3600000); // 1h in ms
+```
+
+#### Cache-Strategie
+```
+// Wenn API-Call fehlschlägt oder Rate-Limit:
+if (cache.timestamp > Date.now() - 3600000) {
+  return cache.data; // Nutze 1h alten Cache
+} else {
+  try {
+    newData = await fetchAPI();
+    cache.update(newData);
+  } catch {
+    return cache.data; // Fallback zu altem Cache
+  }
+}
+```
+
+#### Loading-States
+- Spinner während API-Calls
+- "Letzte Aktualisierung: 14:30 Uhr" im Footer
+- Fehlermeldung bei API-Ausfall (mit letztem Cache-Datum)
+
+---
+
+## 4. DESIGN-SPEZIFIKATION (5D-Ästhetik)
+
+### 4.1 Farbschema (aus 5D-Framework)
+```
+:root {
+  /* Primärfarben */
+  --color-primary: #21808D;        /* Teal - 5D-Modell */
+  --color-success: #22C55E;        /* Grün - Positive Outcomes */
+  --color-warning: #E8814A;        /* Orange - Kritische Werte */
+  --color-error: #C0152F;          /* Rot - Alarmstufe */
+  
+  /* Neutrals */
+  --color-bg: #FCFCF9;             /* Creme - Hintergrund */
+  --color-surface: #FFFFFE;        /* Weiß - Cards */
+  --color-text: #134252;           /* Dunkel-Teal - Text */
+  --color-text-secondary: #626C7C; /* Grau - Sekundärtext */
+  
+  /* Opacity für Overlays */
+  --opacity-heatmap: 0.6;
+  --opacity-hover: 0.8;
+}
+```
+
+### 4.2 Typografie
+```
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+h1 { font-size: 32px; font-weight: 700; }
+h2 { font-size: 24px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+```
+
+### 4.3 Layout
+```
+┌────────────────────────────────────────┐
+│  Header: "5D-Intelligenz Global"      │
+│  [Status Quo] [Schulen] [IMP] [Zeit]  │ ← Toggle-Buttons
+├────────────────────────────────────────┤
+│                                        │
+│                                        │
+│          KARTE (Fullscreen)            │
+│                                        │
+│                                        │
+├────────────────────────────────────────┤
+│  Footer: "Letzte Aktualisierung: ..."  │
+│  [Datenquellen] [Über] [GitHub]        │
+└────────────────────────────────────────┘
+```
+
+---
+
+## 5. CODE-STRUKTUR
+
+### 5.1 index.html (Minimal-Gerüst)
+```
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5D-Intelligenz Weltkarte</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🌍 5D-Intelligenz Global</h1>
+        <div class="controls">
+            <button id="layer-status-quo" class="btn btn--primary">Status Quo</button>
+            <button id="layer-schools" class="btn">Alternative Schulen</button>
+            <button id="layer-imp" class="btn">IMP-Score</button>
+            <button id="layer-time" class="btn">Zeitreise</button>
+        </div>
+    </header>
+    
+    <div id="map"></div>
+    
+    <footer>
+        <p>Letzte Aktualisierung: <span id="last-update">Lädt...</span></p>
+        <a href="#sources">Datenquellen</a> | 
+        <a href="#about">Über das Projekt</a> | 
+        <a href="https://github.com/karlitos1337/5d" target="_blank">GitHub</a>
+    </footer>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    
+    <!-- Chart.js für Popups -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Custom JS Modules -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
+```
+
+### 5.2 app.js (Haupt-Controller)
+```
+import { fetchAllData } from './modules/api-fetcher.js';
+import { initMap, addLayer, removeLayer } from './modules/map-renderer.js';
+import { createHeatmapLayer, createSchoolMarkers, createIMPLayer } from './modules/layers.js';
+
+// Globale State
+let map;
+let activeLayer = null;
+let cachedData = {};
+
+// Initialisierung
+async function init() {
+    // 1. Karte initialisieren
+    map = initMap('map', , 2); // Zentriert auf Welt
+    
+    // 2. Daten laden
+    showLoadingSpinner();
+    cachedData = await fetchAllData();
+    hideLoadingSpinner();
+    updateLastUpdateTime();
+    
+    // 3. Default Layer (Status Quo)
+    activateLayer('status-quo');
+    
+    // 4. Event Listeners
+    document.getElementById('layer-status-quo').addEventListener('click', () => activateLayer('status-quo'));
+    document.getElementById('layer-schools').addEventListener('click', () => activateLayer('schools'));
+    document.getElementById('layer-imp').addEventListener('click', () => activateLayer('imp'));
+    document.getElementById('layer-time').addEventListener('click', () => activateLayer('time'));
+    
+    // 5. Auto-Refresh alle 1h
+    setInterval(refreshData, 3600000);
+}
+
+// Layer-Wechsel
+function activateLayer(layerName) {
+    // Entferne alten Layer
+    if (activeLayer) {
+        removeLayer(map, activeLayer);
+    }
+    
+    // Button-States
+    document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+    document.getElementById(`layer-${layerName}`).classList.add('btn--primary');
+    
+    // Füge neuen Layer hinzu
+    switch(layerName) {
+        case 'status-quo':
+            activeLayer = createHeatmapLayer(cachedData.depression, cachedData.dropout);
+            break;
+        case 'schools':
+            activeLayer = createSchoolMarkers(cachedData.schools);
+            break;
+        case 'imp':
+            activeLayer = createIMPLayer(cachedData);
+            break;
+        case 'time':
+            showTimeSlider();
+            break;
+    }
+    
+    if (activeLayer) {
+        addLayer(map, activeLayer);
+    }
+}
+
+// Daten-Refresh
+async function refreshData() {
+    console.log('Refreshing data...');
+    cachedData = await fetchAllData();
+    updateLastUpdateTime();
+    
+    // Reaktiviere aktuellen Layer mit neuen Daten
+    const currentLayerName = document.querySelector('.btn--primary').id.replace('layer-', '');
+    activateLayer(currentLayerName);
+}
+
+// Hilfsfunktionen
+function updateLastUpdateTime() {
+    const now = new Date();
+    document.getElementById('last-update').textContent = now.toLocaleString('de-DE');
+}
+
+function showLoadingSpinner() {
+    document.body.classList.add('loading');
+}
+
+function hideLoadingSpinner() {
+    document.body.classList.remove('loading');
+}
+
+// Start
+init();
+```
+
+### 5.3 modules/api-fetcher.js
+```
+const CACHE_TTL = 3600000; // 1 Stunde in ms
+let cache = loadFromLocalStorage() || {};
+
+export async function fetchAllData() {
+    const data = {};
+    
+    // 1. Depression Data (WHO/Our World in Data)
+    data.depression = await fetchWithCache(
+        'depression',
+        'https://ourworldindata.org/grapher/depression-prevalence.csv',
+        parseCSV
+    );
+    
+    // 2. Dropout Data (World Bank)
+    data.dropout = await fetchWithCache(
+        'dropout',
+        'https://api.worldbank.org/v2/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=300',
+        parseWorldBankJSON
+    );
+    
+    // 3. Life Satisfaction (OECD)
+    data.lifeSatisfaction = await fetchWithCache(
+        'lifeSatisfaction',
+        'https://stats.oecd.org/restsdmx/sdmx.ashx/GetData/BLI/...', // Anpassen
+        parseOECDData
+    );
+    
+    // 4. Alternative Schools (statisch)
+    data.schools = await fetch('./data/schools.json').then(r => r.json());
+    
+    return data;
+}
+
+async function fetchWithCache(key, url, parser) {
+    // Check Cache
+    if (cache[key] && cache[key].timestamp > Date.now() - CACHE_TTL) {
+        console.log(`Using cached data for ${key}`);
+        return cache[key].data;
+    }
+    
+    // Fetch neu
+    try {
+        const response = await fetch(url);
+        const rawData = await response.text();
+        const parsedData = parser(rawData);
+        
+        // Cache speichern
+        cache[key] = {
+            data: parsedData,
+            timestamp: Date.now()
+        };
+        saveToLocalStorage(cache);
+        
+        return parsedData;
+    } catch (error) {
+        console.error(`Error fetching ${key}:`, error);
+        
+        // Fallback zu altem Cache
+        if (cache[key]) {
+            console.warn(`Using stale cache for ${key}`);
+            return cache[key].data;
+        }
+        
+        return null;
+    }
+}
+
+function parseCSV(csv) {
+    // Einfacher CSV-Parser
+    const lines = csv.split('\n');
+    const headers = lines.split(',');
+    
+    return lines.slice(1).map(line => {
+        const values = line.split(',');
+        const obj = {};
+        headers.forEach((header, i) => {
+            obj[header] = values[i];
+        });
+        return obj;
+    });
+}
+
+function parseWorldBankJSON(json) {
+    const data = JSON.parse(json);
+    return data; // World Bank API hat Meta in , Daten in[1]
+}
+
+function parseOECDData(xml) {
+    // SDMX-XML Parser (vereinfacht)
+    // TODO: Implementieren
+}
+
+function loadFromLocalStorage() {
+    try {
+        return JSON.parse(localStorage.getItem('5d-map-cache'));
+    } catch {
+        return null;
+    }
+}
+
+function saveToLocalStorage(data) {
+    localStorage.setItem('5d-map-cache', JSON.stringify(data));
+}
+```
+
+### 5.4 modules/layers.js
+```
+export function createHeatmapLayer(depressionData, dropoutData) {
+    // Kombiniere Depression & Dropout zu Heatmap-Punkten
+    const points = [];
+    
+    depressionData.forEach(country => {
+        const dropout = dropoutData.find(d => d.countryiso3code === country.Code);
+        
+        if (country.Latitude && country.Longitude) {
+            // Intensität = (Depression + Dropout) / 2
+            const intensity = (
+                parseFloat(country.Value) + 
+                (dropout ? parseFloat(dropout.value) : 0)
+            ) / 2;
+            
+            points.push([
+                parseFloat(country.Latitude),
+                parseFloat(country.Longitude),
+                intensity / 100 // Normalize zu 0-1
+            ]);
+        }
+    });
+    
+    return L.heatLayer(points, {
+        radius: 25,
+        blur: 15,
+        maxZoom: 17,
+        gradient: {
+            0.0: '#22C55E', // Grün
+            0.5: '#E8814A', // Orange
+            1.0: '#C0152F'  // Rot
+        }
+    });
+}
+
+export function createSchoolMarkers(schools) {
+    const markerGroup = L.layerGroup();
+    
+    schools.forEach(school => {
+        const icon = L.divIcon({
+            className: `school-marker school-marker--${school.type}`,
+            html: getIconForType(school.type),
+            iconSize: 
+        });
+        
+        const marker = L.marker([school.lat, school.lng], { icon })
+            .bindPopup(createSchoolPopup(school));
+        
+        markerGroup.addLayer(marker);
+    });
+    
+    return markerGroup;
+}
+
+export function createIMPLayer(data) {
+    // Berechne IMP-Score pro Land
+    const countries = calculateIMPScores(data);
+    
+    // Erstelle Choropleth (benötigt GeoJSON)
+    return L.geoJSON(countriesGeoJSON, {
+        style: (feature) => {
+            const country = countries.find(c => c.code === feature.properties.iso_a3);
+            const imp = country ? country.impScore : 0.5;
+            
+            return {
+                fillColor: getColorForIMP(imp),
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.7
+            };
+        },
+        onEachFeature: (feature, layer) => {
+            const country = countries.find(c => c.code === feature.properties.iso_a3);
+            layer.bindPopup(createIMPPopup(country));
+        }
+    });
+}
+
+function calculateIMPScores(data) {
+    // IMP = A × IM × R × SP × Au
+    return data.countries.map(country => {
+        const autonomy = 1 - (country.centralizationIndex / 100);
+        const intrinsic = 1 - (country.externalPressure / 100);
+        const resilience = 1 - (country.depressionRate / 100);
+        const participation = country.democraticIndex / 100;
+        const authenticity = country.lifeSatisfaction / 10;
+        
+        return {
+            ...country,
+            impScore: autonomy * intrinsic * resilience * participation * authenticity
+        };
+    });
+}
+
+function getColorForIMP(imp) {
+    if (imp >= 0.7) return '#22C55E'; // Grün
+    if (imp >= 0.5) return '#E8814A'; // Orange
+    return '#C0152F'; // Rot
+}
+
+function getIconForType(type) {
+    const icons = {
+        'sudbury': '🟢',
+        'waldorf': '🔵',
+        'folk-high': '🟡',
+        'tokkatsu': '🟣'
+    };
+    return icons[type] || '⚪';
+}
+
+function createSchoolPopup(school) {
+    return `
+        <div class="school-popup">
+            <h3>${school.name}</h3>
+            <p><strong>Typ:</strong> ${school.type}</p>
+            <p><strong>Gegründet:</strong> ${school.founded}</p>
+            <p><strong>Schüler:</strong> ${school.students}</p>
+            <hr>
+            <p><strong>Outcomes:</strong></p>
+            <ul>
+                <li>College-Rate: ${school.outcomes.college}%</li>
+                <li>Zufriedenheit: ${school.outcomes.satisfaction}%</li>
+            </ul>
+            <a href="${school.detailsLink}" target="_blank">Mehr erfahren →</a>
+        </div>
+    `;
+}
+
+function createIMPPopup(country) {
+    return `
+        <div class="imp-popup">
+            <h3>${country.name}</h3>
+            <p><strong>IMP-Score:</strong> ${country.impScore.toFixed(2)}</p>
+            <canvas id="radar-${country.code}" width="200" height="200"></canvas>
+            <script>
+                // Chart.js Radar Chart
+                new Chart(document.getElementById('radar-${country.code}'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['Autonomie', 'Intrinsisch', 'Resilienz', 'Partizipation', 'Authentizität'],
+                        datasets: [{
+                            data: [
+                                ${country.autonomy},
+                                ${country.intrinsic},
+                                ${country.resilience},
+                                ${country.participation},
+                                ${country.authenticity}
+                            ],
+                            backgroundColor: 'rgba(33, 128, 141, 0.2)',
+                            borderColor: 'rgba(33, 128, 141, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: { min: 0, max: 1 }
+                        }
+                    }
+                });
+            </script>
+        </div>
+    `;
+}
+```
+
+---
+
+## 6. DATEN-DATEIEN
+
+### data/schools.json
+```
+[
+  {
+    "name": "Sudbury Valley School",
+    "type": "sudbury",
+    "lat": 42.3601,
+    "lng": -71.0589,
+    "founded": 1968,
+    "students": 200,
+    "outcomes": {
+      "college": 87,
+      "satisfaction": 82
+    },
+    "detailsLink": "https://github.com/karlitos1337/5d/blob/main/manifest/01_bildung_education/synthesen/..."
+  },
+  {
+    "name": "Rudolf Steiner Schule Berlin",
+    "type": "waldorf",
+    "lat": 52.5200,
+    "lng": 13.4050,
+    "founded": 1928,
+    "students": 450,
+    "outcomes": {
+      "college": 75,
+      "satisfaction": 78
+    },
+    "detailsLink": "..."
+  }
+]
+```
+
+---
+
+## 7. DEPLOYMENT
+
+### Option A: GitHub Pages (Kostenlos)
+```
+# 1. Push Code zu GitHub
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/karlitos1337/5d-map.git
+git push -u origin main
+
+# 2. In GitHub Settings → Pages
+# Source: main branch, / (root)
+
+# Live unter: https://karlitos1337.github.io/5d-map/
+```
+
+### Option B: Netlify (Kostenlos + Auto-Updates)
+```
+# 1. netlify.toml erstellen
+[build]
+  publish = "."
+
+# 2. Bei Netlify einloggen & Repo verbinden
+# Auto-Deploy bei jedem Git Push
+```
+
+---
+
+## 8. COPILOT ANWEISUNGEN
+
+### Für Initial Setup:
+```
+@workspace /new Erstelle eine neue 5D-Intelligenz Weltkarte mit Leaflet.js basierend auf der oben beschriebenen Struktur. Beginne mit index.html, styles.css und app.js. Implementiere zuerst die Basis-Karte mit Leaflet und einem einfachen Heatmap-Layer für Depression-Daten.
+```
+
+### Für API-Integration:
+```
+Implementiere in modules/api-fetcher.js die Funktionen zum Fetchen von:
+1. WHO Depression-Daten via Our World in Data CSV
+2. World Bank Dropout-Daten via REST API
+3. Caching-Logik mit 1h TTL in localStorage
+4. Fehlerbehandlung mit Fallback zu altem Cache
+```
+
+### Für Layer-Erweiterung:
+```
+Erstelle in modules/layers.js die Funktion createIMPLayer(), die:
+1. IMP-Scores pro Land berechnet (Formel: A × IM × R × SP × Au)
+2. Eine Choropleth-Karte mit GeoJSON erstellt
+3. Länder nach IMP-Score einfärbt (Grün 0.7+, Orange 0.5-0.7, Rot <0.5)
+4. Popups mit Radar-Charts für die 5 Komponenten zeigt
+```
+
+### Für Styling:
+```
+Wende das 5D-Design-System in styles.css an:
+- Primärfarbe: #21808D (Teal)
+- Success: #22C55E (Grün)
+- Warning: #E8814A (Orange)
+- Error: #C0152F (Rot)
+- Hintergrund: #FCFCF9 (Creme)
+- Font: Inter, fallback system fonts
+```
+
+---
+
+## 9. TESTING CHECKLIST
+
+- [ ] Karte lädt korrekt (Leaflet funktioniert)
+- [ ] API-Calls funktionieren (oder Fallback zu Cache)
+- [ ] Alle 4 Layer sind toggle-bar
+- [ ] Heatmap zeigt korrekte Farben (Grün bis Rot)
+- [ ] Schul-Marker sind klickbar & Popups zeigen Infos
+- [ ] IMP-Layer färbt Länder korrekt ein
+- [ ] Zeitslider funktioniert (wenn implementiert)
+- [ ] Responsive auf Mobile
+- [ ] Loading-States während API-Calls
+- [ ] "Letzte Aktualisierung" zeigt korrektes Datum
+- [ ] Cache wird nach 1h automatisch aktualisiert
+- [ ] Keine Fehler in Browser-Konsole
+
+---
+
+## 10. NÄCHSTE SCHRITTE (NACH MVP)
+
+1. **3D-Modus:** Three.js für Säulen-Darstellung von IMP-Scores
+2. **Animationen:** GSAP für smooth Layer-Transitions
+3. **Vergleichs-Modus:** Split-Screen für Land-Vergleiche
+4. **Stories:** Nutzer können Erfahrungsberichte zu Schulen hinzufügen
+5. **Export:** PNG/PDF-Export der aktuellen Kartenansicht
+6. **API:** Eigene REST API für andere Projekte
+
+---
+
+## KONTAKT & SUPPORT
+
+- **GitHub Issues:** https://github.com/karlitos1337/5d/issues
+- **Dokumentation:** [Link zu README]
+- **Datenquellen:** Siehe Footer der Website
+
+---
+
+**Version:** 1.0  
+**Letzte Aktualisierung:** 01.12.2025  
+**Autor:** Karl (karlitos1337)  
+**Lizenz:** MIT (Open Source)
+```
+
+***
+
+# 🎉 FERTIG! 
+
+Diese Markdown-Datei enthält:
+✅ **Vollständige Technologie-Spezifikation**
+✅ **Code-Struktur mit allen Dateien**
+✅ **API-Integration mit Live-Updates**
+✅ **Design-System (5D-Farben)**
+✅ **Deployment-Anleitungen**
+✅ **Konkrete Copilot-Prompts**
+✅ **Testing-Checkliste**
+
+**Du kannst diese Datei:**
+1. In dein VSCode-Projekt kopieren (als `COPILOT_INSTRUCTIONS.md`)
+2. Copilot mit `@workspace` auf diese Datei verweisen
+3. Schrittweise die Features implementieren lassen
+
+**Soll ich noch etwas anpassen oder ergänzen?** 🚀
+
+[1](https://streamlit.io/gallery)

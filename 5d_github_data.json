@@ -264,56 +264,56 @@
   "trending": {
     "education": [
       {
-        "name": "explorart",
+        "name": "mtpc",
         "stars": 0,
-        "url": "https://github.com/stephanievanoverberghe/explorart"
+        "url": "https://github.com/gbr-ufs/mtpc"
       },
       {
-        "name": "gocast",
-        "stars": 212,
-        "url": "https://github.com/TUM-Dev/gocast"
+        "name": "PKC-Korean-Learning",
+        "stars": 0,
+        "url": "https://github.com/PKC0412/PKC-Korean-Learning"
       },
       {
-        "name": "maestro7it_education",
-        "stars": 6,
-        "url": "https://github.com/QuadDarv1ne/maestro7it_education"
+        "name": "lab",
+        "stars": 1,
+        "url": "https://github.com/navchandar/lab"
       },
       {
-        "name": "graphest",
-        "stars": 123,
-        "url": "https://github.com/unageek/graphest"
+        "name": "kiddo-coin-capers",
+        "stars": 1,
+        "url": "https://github.com/Yashkothari-29/kiddo-coin-capers"
       },
       {
-        "name": "R-Instat",
-        "stars": 41,
-        "url": "https://github.com/IDEMSInternational/R-Instat"
+        "name": "Oak-Web-Application",
+        "stars": 25,
+        "url": "https://github.com/oaknational/Oak-Web-Application"
       }
     ],
     "learning": [
       {
-        "name": "mano-project.github.io",
+        "name": "PKC-Korean-Learning",
         "stars": 0,
-        "url": "https://github.com/mano-project/mano-project.github.io"
+        "url": "https://github.com/PKC0412/PKC-Korean-Learning"
       },
       {
-        "name": "java-learning-journey",
+        "name": "lab",
         "stars": 1,
-        "url": "https://github.com/hardnead/java-learning-journey"
+        "url": "https://github.com/navchandar/lab"
       },
       {
-        "name": "fastify-playground",
+        "name": "kiddo-coin-capers",
         "stars": 1,
-        "url": "https://github.com/Sumith-Kumar-Saini/fastify-playground"
+        "url": "https://github.com/Yashkothari-29/kiddo-coin-capers"
       },
       {
-        "name": "Course-Python-LLM-Finance",
-        "stars": 0,
-        "url": "https://github.com/sanztheo/Course-Python-LLM-Finance"
+        "name": "spanish-study-telegram-bot",
+        "stars": 1,
+        "url": "https://github.com/ACNoonan/spanish-study-telegram-bot"
       },
       {
-        "name": "to-do-list",
+        "name": "O-clock",
         "stars": 0,
-        "url": "https://github.com/yeszi/to-do-list"
+        "url": "https://github.com/GitFreed/O-clock"
       }
     ],
     "pedagogy": [
@@ -321,6 +321,11 @@
         "name": "RAGKET",
         "stars": 3,
         "url": "https://github.com/Ayanop267/RAGKET"
+      },
+      {
+        "name": "Lucian-Academy",
+        "stars": 0,
+        "url": "https://github.com/luciangreen/Lucian-Academy"
       },
       {
         "name": "ph-submissions",
@@ -336,40 +341,35 @@
         "name": "Philosophy",
         "stars": 1,
         "url": "https://github.com/luciangreen/Philosophy"
-      },
-      {
-        "name": "jekyll",
-        "stars": 538,
-        "url": "https://github.com/programminghistorian/jekyll"
       }
     ],
     "edtech": [
       {
-        "name": "Learnevo",
+        "name": "kiddo-coin-capers",
+        "stars": 1,
+        "url": "https://github.com/Yashkothari-29/kiddo-coin-capers"
+      },
+      {
+        "name": "ApexCoachAI",
+        "stars": 0,
+        "url": "https://github.com/shmindmaster/ApexCoachAI"
+      },
+      {
+        "name": "nextjs-math-course",
         "stars": 3,
-        "url": "https://github.com/reza-khalili-dev/Learnevo"
+        "url": "https://github.com/maciekt07/nextjs-math-course"
+      },
+      {
+        "name": "Next-Voters",
+        "stars": 3,
+        "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
       },
       {
         "name": "exam-seating-arranger",
         "stars": 0,
         "url": "https://github.com/Bossr1387/exam-seating-arranger"
-      },
-      {
-        "name": "TatvaX-AI-PROTOTYPE",
-        "stars": 0,
-        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
-      },
-      {
-        "name": "FocusFlow-app",
-        "stars": 4,
-        "url": "https://github.com/masddffee/FocusFlow-app"
-      },
-      {
-        "name": "ApexCoachAI",
-        "stars": 0,
-        "url": "https://github.com/sh-fleekbiz/ApexCoachAI"
       }
     ]
   },
-  "timestamp": "2025-11-30T10:54:56.112626"
+  "timestamp": "2025-12-01T14:57:37.009331"
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5D‑Intelligenz Weltkarte</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>🌍 5D‑Intelligenz Global</h1>
+    <div class="controls">
+      <button id="layer-status-quo" class="btn btn--primary">Status Quo</button>
+      <button id="layer-schools" class="btn">Alternative Schulen</button>
+      <button id="layer-imp" class="btn">IMP‑Score</button>
+      <button id="layer-time" class="btn" disabled>Zeitreise</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="map"></div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Letzte Aktualisierung: <span id="last-update">Lädt…</span></p>
+    <nav>
+      <a href="#sources">Datenquellen</a> ·
+      <a href="#about">Über</a> ·
+      <a href="https://github.com/karlitos1337/5d" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+<style>
+  /* Fallback, falls styles.css nicht lädt */
+  #map { min-height: 70vh; }
+  .btn[disabled] { opacity: .6; cursor: not-allowed; }
+  body.loading { cursor: progress; }
+  body.loading .btn { pointer-events: none; opacity: .7; }
+  .app-header, .app-footer { padding: .75rem 1rem; }
+</style>
+</html>
