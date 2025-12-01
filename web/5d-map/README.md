@@ -36,6 +36,18 @@ Farbcodierung invertiert konventionell „Rot = schlecht“ da IMP auf inversen 
 - Intensität pro Jahr: Mittel der vorhandenen Prozentwerte (Depression, Dropout) / 100.
 - Fallback: Ist für ein Land ein Wert im gewählten Jahr nicht vorhanden, wird nur der vorhandene genutzt; fehlen beide → Land entfällt.
 
+## Baseline (Fester Ausgangswert)
+Die Datei `data/baseline.json` enthält einen Snapshot (Latest-Werte) für Depression, Dropout und WGI‑Indikatoren. Beim Laden:
+- Fehlende Live-Werte werden mit Baseline aufgefüllt (live Daten haben Vorrang).
+- Popups kennzeichnen Werte mit dem Hinweis "Baseline aktiviert".
+- Aktualisierung: Neue Baseline erzeugen und Datei ersetzen.
+
+Update-Workflow:
+```bash
+git add web/5d-map/data/baseline.json
+git commit -m "chore: update baseline snapshot"
+```
+
 ## Lokal starten
 ```bash
 cd web/5d-map

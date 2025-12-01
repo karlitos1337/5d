@@ -31,6 +31,7 @@ export function createIMPPopup(feature, info) {
   const wgiVA = info?.sources?.wgi_va;
   const wgiGE = info?.sources?.wgi_ge;
   const dims = info?.dims || {};
+  const baselineFlag = info?.sources?.baseline ? ' (Baseline aktiviert)' : '';
 
   // Formel: IMP_raw = A × IM × R × SP × Au, clamp[0,1]
   // A = 1 − Dropout, IM = 1 − Depression, R=SP=Au=0.5 (Platzhalter)
@@ -38,7 +39,7 @@ export function createIMPPopup(feature, info) {
     <div class="imp-popup">
       <h3>${name}</h3>
       <p><small>${iso3}</small></p>
-      <p><strong>IMP:</strong> ${pct(info.score)}</p>
+      <p><strong>IMP:</strong> ${pct(info.score)}${baselineFlag}</p>
       <hr>
       <p><strong>Dimensionen</strong></p>
       <ul>
@@ -49,7 +50,7 @@ export function createIMPPopup(feature, info) {
         <li>Au (Gov. Effectiveness): ${pct(dims.Au)} ${wgiGE != null ? `(WGI GE.EST: ${Number(wgiGE).toFixed(2)})` : ''}</li>
       </ul>
       <p><em>Formel:</em> IMP = A × IM × R × SP × Au;<br>
-      <small>Normalisierung: WGI (−2.5..2.5) → (x+2.5)/5</small></p>
+      <small>Normalisierung: WGI (−2.5..2.5) → (x+2.5)/5. Baseline füllt fehlende Werte.</small></p>
     </div>
   `;
 }

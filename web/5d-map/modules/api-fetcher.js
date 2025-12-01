@@ -50,6 +50,9 @@ export async function fetchAllData() {
   // Länder-Zentroiddaten (lokal)
   const countries = await fetchWithCache('countries', () => fetchJSON('./data/countries.json'))
     .catch(() => []);
+  // Baseline Snapshot (feste Ausgangswerte)
+  const baseline = await fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json'))
+    .catch(() => null);
 
   // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
   const depressionMap = await fetchWithCache('owid_depression', async () => {
@@ -172,6 +175,25 @@ export async function fetchAllData() {
   const wgi_va = normalizeWGI(wgi_va_raw); // SP
   const wgi_ge = normalizeWGI(wgi_ge_raw); // Au
 
+  // Baseline-Merge: Fehlende Werte aus Baseline einpflegen (nur Latest-Level, nicht Serien)
+  function mergeMissing(target, baseSection) {
+    if (!baseSection) return;
+    for (const [iso3, val] of Object.entries(baseSection)) {
+      if (target[iso3] == null) target[iso3] = val;
+    }
+  }
+  if (baseline) {
+    mergeMissing(depressionMap, baseline.depression_latest);
+    mergeMissing(dropoutMap, baseline.dropout_latest);
+    // WGI Rohwerte baseline in raw maps, danach erneut normalisieren für konsistente Skala
+    mergeMissing(wgi_rl_raw, baseline.wgi_rl);
+    mergeMissing(wgi_va_raw, baseline.wgi_va);
+    mergeMissing(wgi_ge_raw, baseline.wgi_ge);
+  }
+  const wgi_rl_full = normalizeWGI(wgi_rl_raw);
+  const wgi_va_full = normalizeWGI(wgi_va_raw);
+  const wgi_ge_full = normalizeWGI(wgi_ge_raw);
+
   // Heatmap-Punkte: Mittelwert aus normierten (%) Werten, sofern vorhanden
   result.heatmapPoints = [];
   for (const c of countries) {
@@ -205,21 +227,23 @@ export async function fetchAllData() {
   // IMP_raw = A * IM * R * SP * Au; clamp auf [0,1]
   result.impByISO3 = {};
   const clamp01 = (x) => Math.max(0, Math.min(1, x));
-  for (const iso3 of Object.keys({ ...depressionMap, ...dropoutMap, ...wgi_rl, ...wgi_va, ...wgi_ge })) {
+  for (const iso3 of Object.keys({ ...depressionMap, ...dropoutMap, ...wgi_rl_full, ...wgi_va_full, ...wgi_ge_full })) {
     const dep = depressionMap[iso3]; // %
     const drp = dropoutMap[iso3]; // %
     const A = drp == null ? 0.5 : (1 - clamp01(Number(drp) / 100));
     const IM = dep == null ? 0.5 : (1 - clamp01(Number(dep) / 100));
-    const R = wgi_rl[iso3] ?? 0.5;
-    const SP = wgi_va[iso3] ?? 0.5;
-    const Au = wgi_ge[iso3] ?? 0.5;
+    const R = wgi_rl_full[iso3] ?? 0.5;
+    const SP = wgi_va_full[iso3] ?? 0.5;
+    const Au = wgi_ge_full[iso3] ?? 0.5;
     const raw = clamp01(A * IM * R * SP * Au);
     result.impByISO3[iso3] = {
       score: raw,
       dims: { A, IM, R, SP, Au },
-      sources: { dep, drp, wgi_rl: wgi_rl_raw[iso3], wgi_va: wgi_va_raw[iso3], wgi_ge: wgi_ge_raw[iso3] }
+      sources: { dep, drp, wgi_rl: wgi_rl_raw[iso3], wgi_va: wgi_va_raw[iso3], wgi_ge: wgi_ge_raw[iso3], baseline: Boolean(baseline) }
     };
   }
+
+  result.baselineApplied = Boolean(baseline);
 
   // Zeitreise: verfügbare Jahre (Schnittmenge oder Vereinigung) für Slider
   const yearSet = new Set();
