@@ -53,22 +53,27 @@ export async function fetchAllData() {
 
   // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
   const depressionMap = await fetchWithCache('owid_depression', async () => {
-    const url = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-    const text = await res.text();
-    const rows = parseCSV(text);
-    return reduceLatestByCode(rows, 'Code');
+    const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+    try {
+      const res = await fetch(remoteUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+      const text = await res.text();
+      const rows = parseCSV(text);
+      return reduceLatestByCode(rows, 'Code');
+    } catch (e) {
+      console.warn('Depression remote fetch fehlgeschlagen, nutze lokalen Fallback:', e.message);
+      // Lokaler Fallback (Sample CSV im Repo)
+      const localRes = await fetch('./data/depression_sample.csv');
+      const localText = await localRes.text();
+      const localRows = parseCSV(localText);
+      return reduceLatestByCode(localRows, 'Code');
+    }
   }).catch(() => ({}));
 
   // Depression Jahres‑Serien (iso3 -> {year: value})
   const depressionSeries = await fetchWithCache('owid_depression_series', async () => {
-    try {
-      const url = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-      const text = await res.text();
-      const rows = parseCSV(text);
+    const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+    const buildSeries = (rows) => {
       const series = {};
       for (const r of rows) {
         const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
@@ -78,7 +83,20 @@ export async function fetchAllData() {
         series[code][year] = val;
       }
       return series;
-    } catch { return {}; }
+    };
+    try {
+      const res = await fetch(remoteUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+      const text = await res.text();
+      const rows = parseCSV(text);
+      return buildSeries(rows);
+    } catch (e) {
+      console.warn('Depression series remote fetch fehlgeschlagen, Fallback lokal:', e.message);
+      const localRes = await fetch('./data/depression_sample.csv');
+      const localText = await localRes.text();
+      const localRows = parseCSV(localText);
+      return buildSeries(localRows);
+    }
   }).catch(() => ({}));
 
   // Dropout: World Bank JSON (alle Länder, neuerster Wert)
