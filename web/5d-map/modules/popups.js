@@ -49,8 +49,38 @@ export function createIMPPopup(feature, info) {
         <li>SP (Voice & Accountability): ${pct(dims.SP)} ${wgiVA != null ? `(WGI VA.EST: ${Number(wgiVA).toFixed(2)})` : ''}</li>
         <li>Au (Gov. Effectiveness): ${pct(dims.Au)} ${wgiGE != null ? `(WGI GE.EST: ${Number(wgiGE).toFixed(2)})` : ''}</li>
       </ul>
+      <canvas id="imp-radar-${iso3}" width="220" height="220"></canvas>
       <p><em>Formel:</em> IMP = A × IM × R × SP × Au;<br>
-      <small>Normalisierung: WGI (−2.5..2.5) → (x+2.5)/5. Baseline füllt fehlende Werte.</small></p>
+      <small>Skala Radar: 1–100. WGI normalisiert: (x+2.5)/5×100. Baseline füllt fehlende Werte.</small></p>
     </div>
   `;
+}
+
+export function initRadarChart(iso3, dims) {
+  try {
+    const el = document.getElementById(`imp-radar-${iso3}`);
+    if (!el || typeof Chart === 'undefined') return;
+    const toPct = (x) => (x == null ? 50 : Math.max(0, Math.min(100, x * 100)));
+    const data = [toPct(dims.A), toPct(dims.IM), toPct(dims.R), toPct(dims.SP), toPct(dims.Au)];
+    new Chart(el, {
+      type: 'radar',
+      data: {
+        labels: ['A', 'IM', 'R', 'SP', 'Au'],
+        datasets: [{
+          data,
+          backgroundColor: 'rgba(33, 128, 141, 0.2)',
+          borderColor: 'rgba(33, 128, 141, 1)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(33, 128, 141, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { r: { min: 0, max: 100, ticks: { stepSize: 20 } } },
+        plugins: { legend: { display: false } }
+      }
+    });
+  } catch (e) {
+    console.warn('Radar init failed:', e);
+  }
 }

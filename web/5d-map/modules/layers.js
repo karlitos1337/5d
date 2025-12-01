@@ -1,4 +1,4 @@
-import { createSchoolPopup, createIMPPopup } from './popups.js';
+import { createSchoolPopup, createIMPPopup, initRadarChart } from './popups.js';
 
 // Einfache Beispielpunkte (lat, lng, intensität 0..1) für Offline‑Heatmap
 const SAMPLE_POINTS = [
@@ -70,6 +70,9 @@ export function createIMPLayer(data) {
       const iso3 = feature?.properties?.ISO_A3 || feature?.id;
       const info = impByISO3[iso3];
       layer.bindPopup(createIMPPopup(feature, info));
+      layer.on('popupopen', () => {
+        if (info?.dims) initRadarChart(iso3, info.dims);
+      });
       layer.on('mouseover', function () { this.setStyle({ weight: 1.2 }); });
       layer.on('mouseout', function () { this.setStyle({ weight: 0.6 }); });
     }
