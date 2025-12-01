@@ -8,6 +8,7 @@ Interaktive 5D‑Weltkarte mit Heatmap (Status Quo), IMP‑Choropleth, Legende u
 - Marker‑Layer: Alternative Schulen aus `data/schools.json`
 - Client‑Caching (LocalStorage, 1h TTL) mit Fallbacks
 - Zeitreise‑Layer: Jahresauswahl für historische Heatmaps (Depression/Dropout)
+ - Optional: OWID Proxy (`owid_proxy.py`) für CORS‑freie CSV‑Fetches
 
 ## Formeln (Kurz)
 - Heatmap‑Intensität: `I = clamp((avg(dep%,dropout%))/100, 0, 1)`
@@ -53,6 +54,13 @@ git commit -m "chore: update baseline snapshot"
 cd web/5d-map
 python3 -m http.server 5500
 # Öffnen: http://localhost:5500
+```
+
+OWID Proxy (optional, anderer Port):
+```bash
+cd web/5d-map
+python3 owid_proxy.py 5510
+# Frontend nutzt automatisch zuerst http://localhost:5510/proxy/depression-prevalence.csv
 ```
 
 Schnelltest:

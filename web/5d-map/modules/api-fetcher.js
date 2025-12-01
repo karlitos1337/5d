@@ -56,9 +56,14 @@ export async function fetchAllData() {
 
   // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
   const depressionMap = await fetchWithCache('owid_depression', async () => {
+    const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
     const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
     try {
-      const res = await fetch(remoteUrl, { cache: 'no-store' });
+      // Erst lokaler Proxy (CORS-frei), dann Remote
+      let res = await fetch(proxyUrl, { cache: 'no-store' });
+      if (!res.ok) {
+        res = await fetch(remoteUrl, { cache: 'no-store' });
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
       const text = await res.text();
       const rows = parseCSV(text);
@@ -75,6 +80,7 @@ export async function fetchAllData() {
 
   // Depression Jahres‑Serien (iso3 -> {year: value})
   const depressionSeries = await fetchWithCache('owid_depression_series', async () => {
+    const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
     const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
     const buildSeries = (rows) => {
       const series = {};
@@ -88,7 +94,10 @@ export async function fetchAllData() {
       return series;
     };
     try {
-      const res = await fetch(remoteUrl, { cache: 'no-store' });
+      let res = await fetch(proxyUrl, { cache: 'no-store' });
+      if (!res.ok) {
+        res = await fetch(remoteUrl, { cache: 'no-store' });
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
       const text = await res.text();
       const rows = parseCSV(text);
