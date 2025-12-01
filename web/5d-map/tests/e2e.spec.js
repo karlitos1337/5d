@@ -155,7 +155,7 @@ test.describe('Performance Tests', () => {
   });
 
   test('should not have console errors', async ({ page }) => {
-    const errors: string[] = [];
+    const errors = [];
     page.on('console', msg => {
       if (msg.type() === 'error') {
         errors.push(msg.text());

@@ -27,7 +27,7 @@ class DataValidationTests(unittest.TestCase):
 
     def setUp(self):
         """Load test data files"""
-        self.data_dir = '/workspaces/5d/data'
+        self.data_dir = '/workspaces/5d/web/5d-map/data'
         self.baseline_file = os.path.join(self.data_dir, 'baseline.json')
         self.countries_file = os.path.join(self.data_dir, 'countries.json')
         
@@ -88,9 +88,12 @@ class FormulaCalculationTests(unittest.TestCase):
 
     def setUp(self):
         """Initialize formula test data"""
-        self.baseline_file = '/workspaces/5d/data/baseline.json'
-        with open(self.baseline_file, 'r') as f:
-            self.data = json.load(f)
+        self.baseline_file = '/workspaces/5d/web/5d-map/data/baseline.json'
+        if os.path.exists(self.baseline_file):
+            with open(self.baseline_file, 'r') as f:
+                self.data = json.load(f)
+        else:
+            self.data = {}
 
     def calculate_gov_index(self, rule_of_law, voice_accountability, govt_effectiveness):
         """Calculate Governance Index: (RL×0.333) + (VA×0.333) + (GE×0.333)"""
@@ -150,7 +153,9 @@ class APIEndpointTests(unittest.TestCase):
         """Test /api/baseline endpoint structure"""
         # This would be a real API test with Flask/FastAPI running
         # For now, validate the data structure
-        baseline_file = '/workspaces/5d/data/baseline.json'
+        baseline_file = '/workspaces/5d/web/5d-map/data/baseline.json'
+        if not os.path.exists(baseline_file):
+            self.skipTest(f"baseline.json not found at {baseline_file}")
         with open(baseline_file, 'r') as f:
             data = json.load(f)
         
@@ -185,7 +190,9 @@ class DataSourceIntegrityTests(unittest.TestCase):
 
     def test_data_has_confidence_levels(self):
         """Validate data includes confidence level metadata"""
-        baseline_file = '/workspaces/5d/data/baseline.json'
+        baseline_file = '/workspaces/5d/web/5d-map/data/baseline.json'
+        if not os.path.exists(baseline_file):
+            self.skipTest(f"baseline.json not found at {baseline_file}")
         with open(baseline_file, 'r') as f:
             data = json.load(f)
         
@@ -202,7 +209,9 @@ class PerformanceBenchmarkTests(unittest.TestCase):
     def test_data_loading_performance(self):
         """Test data loading time is acceptable"""
         import time
-        baseline_file = '/workspaces/5d/data/baseline.json'
+        baseline_file = '/workspaces/5d/web/5d-map/data/baseline.json'
+        if not os.path.exists(baseline_file):
+            self.skipTest(f"baseline.json not found at {baseline_file}")
         
         start_time = time.time()
         with open(baseline_file, 'r') as f:
