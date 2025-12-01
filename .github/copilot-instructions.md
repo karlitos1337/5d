@@ -19,6 +19,7 @@ Ziel: Schnell produktiv arbeiten, ohne Datenflüsse/Verträge zu brechen. Fokus 
   - `python 5d_github_api.py` → `5d_github_data.json`
   - `streamlit run 5d_dashboard.py` (Port 8501)
 - Tests: `pytest tests/` oder gezielt `pytest tests/test_extractor.py -v`.
+- **Git Workflow**: Pre-Commit Hook (`.git/hooks/pre-commit`) führt automatisch Tests aus vor jedem Commit. Commits werden blockiert bei Test-Failures. TODO-Liste in `TODO.md` tracken.
 
 ### Schneller Start (Try it)
 - Setup: `pip install -r requirements_extended.txt`
