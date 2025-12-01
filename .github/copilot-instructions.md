@@ -63,11 +63,13 @@ Ziel: Schnell produktiv arbeiten, ohne Datenflüsse/Verträge zu brechen. Fokus 
 
 ### Weltkarte (Frontend)
 - Vollständige Spezifikation: `docs/5d-map/COPILOT_INSTRUCTIONS.md` (Pointer → `md_copilot_ki_anweisung`).
+- Kurz‑Anweisung (MVP, präzise Formeln & Pfade): `md_copilot_ki_anweisung`.
 - Stack: Static Web (HTML/CSS/JS), Leaflet + Leaflet.heat + Chart.js, ohne Backend.
 - Scope: Unabhängig von Python‑Pipeline; nutzt öffentliche APIs (World Bank/OWID/OECD/WHO) mit lokalem Cache (1h TTL).
 - Implementiert: Status‑Quo‑Heatmap (OWID/WorldBank), IMP‑Choropleth mit WGI‑Proxies (RL.EST/VA.EST/GE.EST) und Legende.
 - Quick start:
   - `cd web/5d-map && python3 -m http.server 5500`
   - Öffnen: `http://localhost:5500`, Layer‑Buttons: „Status Quo“, „Alternative Schulen“, „IMP‑Score“.
+  - Zeitreise: Button „Zeitreise“, Slider erscheint; Baseline (`data/baseline.json`) für feste Ausgangswerte.
 
 Referenzen: `5d_extractor.py`, `5d_dashboard.py`, `5d_research_scraper.py`, `5d_github_api.py`, `5d_discord_bot.py`, `models/schemas.py`, `models/imp.py`, `config/default.yaml`, `tests/`.
