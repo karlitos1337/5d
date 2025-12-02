@@ -193,7 +193,7 @@ Size: 700x350px mini-maps, 700x500px for World Map
 
 ## 🧪 Phase 4: Eigene Apps & Tests einbauen
 
-**Status:** 🔄 IN PROGRESS (3/4 standalone apps integrated)
+**Status:** ✅ COMPLETE (4/4 standalone apps integrated, 100%)
 
 ### Apps integrieren (per Page)
 1. **IMP Analysis:** `models/imp.py` → Live-Rechner
@@ -202,9 +202,9 @@ Size: 700x350px mini-maps, 700x500px for World Map
 4. **GitHub:** Repo-Trends + Activity-Chart
 5. ✅ **Game of Life:** `gol_streamlit.py` → Page 5 (666 lines, Conway rules, patterns)
 6. ✅ **Non-Coercion:** `zwi_streamlit.py` → Page 6 (106 lines, grid ABM, cooperation)
-7. **World Map:** `web/5d-map/` embed via iframe
+7. **World Map:** `web/5d-map/` embed via iframe (standalone, already deployed)
 8. ✅ **Autopoietic Class:** `autopoietic_streamlit.py` → Page 9 (509 lines, 5D ABM, dropout simulation)
-9. ❓ **Participation Networks:** `partnet_streamlit.py` → Page 10 candidate (120 lines, network diffusion)
+9. ✅ **Participation Networks:** `partnet_streamlit.py` → Page 10 (460 lines, network diffusion, 3 topologies)
 
 ### Tests mit wissenschaftlicher Basis
 - [x] `tests/test_imp_scientific.py` ✅ (11 tests, done)
