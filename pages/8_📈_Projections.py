@@ -7,6 +7,8 @@ Adoption Curves, Economic Impact, Scenario Modeling
 import streamlit as st
 import numpy as np
 from datetime import datetime
+from streamlit_folium import st_folium
+import folium
 
 st.set_page_config(
     page_title="5D Projections",
@@ -286,10 +288,17 @@ def main():
         
         st.divider()
         
-        st.subheader("🗺️ Regional Projections")
+        st.subheader("🗺️ Regional Projections for 2040")
+        
+        from utils.map_helpers import create_regional_adoption_map, render_minimap
+        
+        m = create_regional_adoption_map()
+        render_minimap(m, "Projected 5D Intelligence adoption rates by region (2040 estimates)")
+        
+        st.divider()
         
         st.markdown("""
-        **Adoption by Region (2040):**
+        **Detailed Breakdown:**
         
         🇪🇺 **Europe:** 40-60%
         - Nordics führend (70%+)

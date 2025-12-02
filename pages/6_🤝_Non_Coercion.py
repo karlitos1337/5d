@@ -7,6 +7,8 @@ Cooperation vs. Coercion Simulation
 import streamlit as st
 import numpy as np
 from datetime import datetime
+from streamlit_folium import st_folium
+import folium
 
 st.set_page_config(
     page_title="5D Non-Coercion",
@@ -303,10 +305,17 @@ def main():
         
         st.divider()
         
-        st.subheader("🗺️ Global Examples")
+        st.subheader("🗺️ Global Examples of Successful Commons")
+        
+        from utils.map_helpers import create_cooperation_examples_map, render_minimap
+        
+        m = create_cooperation_examples_map()
+        render_minimap(m, "Ostrom's documented examples: forests, water systems, fishing communities (centuries of success)")
+        
+        st.divider()
         
         st.markdown("""
-        **Erfolgreiche Commons:**
+        **Categories:**
         
         🌊 **Fishing Communities:**
         - Japan: Coastal fishing (centuries)

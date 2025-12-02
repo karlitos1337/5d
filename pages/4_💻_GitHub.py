@@ -8,6 +8,8 @@ import streamlit as st
 import json
 from pathlib import Path
 from datetime import datetime
+from streamlit_folium import st_folium
+import folium
 
 st.set_page_config(
     page_title="5D GitHub & Open Source",
@@ -203,14 +205,13 @@ def main():
         
         st.divider()
         
-        # Mini Map Placeholder
+        # Mini Map
         st.subheader("🗺️ Developer Community")
-        st.info("""
-        **Coming Soon:**
-        - Entwickler-Standorte (Heatmap)
-        - Contributions pro Land
-        - Hauptentwickler-Hubs
-        """)
+        
+        from utils.map_helpers import create_developer_community_map, render_minimap
+        
+        m = create_developer_community_map()
+        render_minimap(m, "Global distribution of EdTech developers (GitHub community)")
         
         st.divider()
         

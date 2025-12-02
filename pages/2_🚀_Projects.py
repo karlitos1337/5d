@@ -8,6 +8,8 @@ import streamlit as st
 import json
 import sys
 from pathlib import Path
+from streamlit_folium import st_folium
+import folium
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -204,10 +206,13 @@ def main():
         
         st.divider()
         
-        # Mini world map placeholder
-        st.subheader("🗺️ Global Distribution")
+        # Mini world map
+        st.subheader("🗺️ Global Distribution of Alternative Schools")
         
-        st.info("🚧 Mini-Karte wird in Phase 3 integriert (Folium/Plotly)")
+        from utils.map_helpers import create_alternative_schools_map, render_minimap
+        
+        m = create_alternative_schools_map()
+        render_minimap(m, "Sample of documented alternative schools worldwide (Sudbury, Democratic, Folk High Schools)")
         
         # Placeholder: Show countries
         if solutions:

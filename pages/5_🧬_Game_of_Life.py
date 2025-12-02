@@ -7,6 +7,8 @@ Cellular Automaton Simulation (1970)
 import streamlit as st
 import numpy as np
 from datetime import datetime
+from streamlit_folium import st_folium
+import folium
 
 st.set_page_config(
     page_title="5D Game of Life",

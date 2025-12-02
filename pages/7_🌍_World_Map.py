@@ -8,6 +8,8 @@ import streamlit as st
 import json
 from pathlib import Path
 from datetime import datetime
+from streamlit_folium import st_folium
+import folium
 
 st.set_page_config(
     page_title="5D World Map",
@@ -167,16 +169,49 @@ def main():
         **Grund:** CORS, LocalStorage, API-Calls
         """)
         
-        # Check if server is running
-        try:
-            import requests
-            response = requests.get('http://localhost:5500', timeout=2)
-            if response.status_code == 200:
-                st.components.v1.iframe("http://localhost:5500", height=600, scrolling=True)
-            else:
-                st.warning("⚠️ 5D-Map Server nicht erreichbar (Port 5500)")
-        except:
-            st.warning("⚠️ 5D-Map Server nicht erreichbar - starte mit `make serve-map`")
+        # Create Folium map with IMP data
+        m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+        
+        # Add countries with IMP proxy scores
+        if countries:
+            for country_name, data in list(countries.items())[:20]:  # Limit to 20 for performance
+                coords = {
+                    'Denmark': [56.26, 9.50], 'Norway': [60.47, 8.47], 'Finland': [61.92, 25.75],
+                    'Sweden': [60.13, 18.64], 'Germany': [51.17, 10.45], 'USA': [37.09, -95.71],
+                    'Brazil': [-14.24, -51.93], 'India': [20.59, 78.96], 'China': [35.86, 104.20],
+                    'UK': [55.38, -3.44], 'France': [46.23, 2.21], 'Japan': [36.20, 138.25],
+                }.get(country_name)
+                
+                if coords:
+                    imp = calculate_imp_proxy(
+                        data.get('depression', 0),
+                        data.get('dropout', 0),
+                        data.get('governance', 0)
+                    )
+                    
+                    color = '#00ff00' if imp > 0.7 else '#ffff00' if imp > 0.5 else '#ffa500' if imp > 0.4 else '#ff0000'
+                    
+                    folium.CircleMarker(
+                        location=coords,
+                        radius=imp * 20,
+                        popup=f"<b>{country_name}</b><br>IMP: {imp:.2f}<br>Depression: {data.get('depression', 0):.1f}%<br>Dropout: {data.get('dropout', 0):.1f}%",
+                        color=color,
+                        fill=True,
+                        fillOpacity=0.6
+                    ).add_to(m)
+        
+        # Add alternative schools
+        if schools:
+            for school in schools[:10]:  # Limit to 10
+                folium.Marker(
+                    location=school.get('coords', [0, 0]),
+                    popup=f"<b>{school.get('name', 'School')}</b><br>{school.get('type', 'Alternative')}",
+                    icon=folium.Icon(color='green', icon='school', prefix='fa')
+                ).add_to(m)
+        
+        st_folium(m, width=700, height=500)
+        
+        st.info("💡 For full interactive experience with time-travel and layers: [Open 5D-Map](http://localhost:5500) (requires `make serve-map`)")
         
         st.divider()
         
