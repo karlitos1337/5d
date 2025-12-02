@@ -499,6 +499,20 @@ docker run -p 8501:8501 5d-dashboard
                     "Export für weitere Analysen"
                 ],
                 "für_wen": "Forscher, Bildungsentwickler"
+            },
+            {
+                "icon": "🕸️",
+                "name": "Partizipations-Netzwerke",
+                "file": "pages/10_🕸️_Participation_Networks.py",
+                "beschreibung": "Wissens-Diffusion in Netzwerken",
+                "inhalt": [
+                    "3 Topologien: Erdős-Rényi, Small-World, Scale-Free",
+                    "Granovetter Weak Ties, Watts-Strogatz, Barabási-Albert",
+                    "Aktivierungs-Schwellen & Sharing-Wahrscheinlichkeit",
+                    "SP-Proxy: Clustering × Finale Aktivierung",
+                    "R-Proxy: 1 - (t_50 / steps)"
+                ],
+                "für_wen": "Netzwerk-Forscher, Organisationsentwickler"
             }
         ]
         
