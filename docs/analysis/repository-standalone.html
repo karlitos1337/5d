@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5D Repository Analyse | 8 Domänen & 5 Dimensionen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900">
+    <div id="app"></div>
+    
+    <!-- React & Dependencies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { motion } = window.FramerMotion;
+
+        function App() {
+            const [darkMode, setDarkMode] = useState(false);
+            const [activeSection, setActiveSection] = useState('overview');
+
+            useEffect(() => {
+                if (darkMode) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }, [darkMode]);
+
+            const sections = [
+                { id: 'overview', title: 'Übersicht' },
+                { id: 'methodology', title: 'Methodik' },
+                { id: 'findings', title: 'Ergebnisse' },
+                { id: 'architecture', title: 'Architektur' }
+            ];
+
+            return (
+                <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                    {/* Header */}
+                    <header className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+                        <div className="max-w-7xl mx-auto px-4 py-4">
+                            <div className="flex justify-between items-center">
+                                <h1 className="text-xl font-bold">5D Repository Analyse</h1>
+                                <div className="flex gap-4">
+                                    {sections.map(s => (
+                                        <a key={s.id} href={`#${s.id}`} className="text-sm hover:text-blue-600">{s.title}</a>
+                                    ))}
+                                    <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+                                        {darkMode ? '☀️' : '🌙'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="pt-20">
+                        {/* Overview Section */}
+                        <section id="overview" className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900">
+                            <div className="max-w-6xl mx-auto px-4">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="text-center"
+                                >
+                                    <h2 className="text-5xl font-bold mb-6">Vollständige Analyse des GitHub-Repositorys "5d"</h2>
+                                    <p className="text-xl mb-8 max-w-4xl mx-auto">
+                                        Eine umfassende Bewertung basierend auf 8 Domänenordnern (01–08) und 5 Dimensionen: 
+                                        neurobiologisch, psychologisch, philosophisch, ökonomisch und technologisch.
+                                    </p>
+                                    <img 
+                                        src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/625305a7-efb4-4bf5-9d58-245146c5b516/50bf8e0f-c7f2-4ce0-9de2-90d90bf5e18a.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiI2MjUzMDVhNy1lZmI0LTRiZjUtOWQ1OC0yNDUxNDZjNWI1MTYiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.Xq1hrEYXR18mexLMZtDL8O6mnBI1N1Fdqb1AYTZFSaI"
+                                        alt="5D Architecture Visualization"
+                                        className="w-full max-w-4xl mx-auto rounded-xl shadow-2xl"
+                                    />
+                                </motion.div>
+                            </div>
+                        </section>
+
+                        {/* Methodology Section */}
+                        <section id="methodology" className="py-16 bg-white dark:bg-gray-800">
+                            <div className="max-w-6xl mx-auto px-4">
+                                <h2 className="text-4xl font-bold mb-12 text-center">5D Methodologie</h2>
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    {[
+                                        { title: 'Define', desc: 'Projektumfang festlegen' },
+                                        { title: 'Design', desc: 'Lösungsformulierung' },
+                                        { title: 'Develop', desc: 'Iterative Entwicklung' },
+                                        { title: 'Debug', desc: 'Komplexitätsbewältigung' },
+                                        { title: 'Deliver', desc: 'Implementierung' },
+                                        { title: 'Feedback', desc: 'Kontinuierliche Validierung' }
+                                    ].map((item, i) => (
+                                        <div key={i} className="p-6 rounded-xl bg-gray-50 dark:bg-gray-700 shadow-lg">
+                                            <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                                            <p className="text-gray-700 dark:text-gray-300">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Findings Section */}
+                        <section id="findings" className="py-16 bg-slate-50 dark:bg-gray-900">
+                            <div className="max-w-6xl mx-auto px-4">
+                                <h2 className="text-4xl font-bold mb-12 text-center">Analyseergebnisse</h2>
+                                <div className="space-y-6">
+                                    {[
+                                        { title: '8 Domänenordner', content: 'Strukturierung nach Domain-Driven Design Prinzipien' },
+                                        { title: '5 Dimensionen', content: 'Multidimensionale Betrachtungsweise' },
+                                        { title: 'SQL-Datenmodell', content: '635 KB Datei für Backend-Datenmodellierung' },
+                                        { title: 'Dokumentationsbedarf', content: 'Kritischer Mangel identifiziert' }
+                                    ].map((finding, i) => (
+                                        <div key={i} className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg">
+                                            <h3 className="text-xl font-semibold mb-3">{finding.title}</h3>
+                                            <p className="text-gray-700 dark:text-gray-300">{finding.content}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Architecture Section */}
+                        <section id="architecture" className="py-16 bg-white dark:bg-gray-800">
+                            <div className="max-w-6xl mx-auto px-4">
+                                <h2 className="text-4xl font-bold mb-12 text-center">Architektur-Integration</h2>
+                                <div className="grid md:grid-cols-2 gap-8">
+                                    <div className="space-y-4">
+                                        <h3 className="text-2xl font-semibold mb-4">SOLID-Prinzipien</h3>
+                                        {[
+                                            'Single Responsibility',
+                                            'Open/Closed',
+                                            'Liskov Substitution',
+                                            'Interface Segregation',
+                                            'Dependency Inversion'
+                                        ].map((principle, i) => (
+                                            <div key={i} className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700">
+                                                <p className="font-medium">{principle}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/625305a7-efb4-4bf5-9d58-245146c5b516/25d259e4-670c-4194-b8e7-c0a25d752d3e.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiI2MjUzMDVhNy1lZmI0LTRiZjUtOWQ1OC0yNDUxNDZjNWI1MTYiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.Xq1hrEYXR18mexLMZtDL8O6mnBI1N1Fdqb1AYTZFSaI"
+                                            alt="DDD Architecture"
+                                            className="w-full rounded-xl shadow-lg"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Footer */}
+                        <footer className="py-8 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+                            <div className="max-w-6xl mx-auto px-4 text-center">
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    Basierend auf der Analyse des 5D-Repositories | 
+                                    <a href="https://github.com/karlitos1337/5d" className="text-blue-600 hover:underline ml-2">GitHub Repository</a>
+                                </p>
+                            </div>
+                        </footer>
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('app'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
