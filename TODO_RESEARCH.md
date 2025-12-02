@@ -525,11 +525,12 @@
       - Keine Überverkauf von Hypothesen als Fakten
       - Offenheit für Kritik und Falsifikation
 
-- [ ] **Evidenzmatrix transparent machen**
+- [x] **Evidenzmatrix transparent machen** ✅
   - In `docs/CLAIMS_EVIDENCE_MATRIX.md`:
     - Spalte: „Evidenz-Stärke" (stark, mittel, schwach, keine)
     - Spalte: „Persönliche Intuition" (hoch, mittel, niedrig)
     - Warnung: Wo Intuition > Evidenz → explizit als Spekulation kennzeichnen
+  - **Status:** 40 Behauptungen dokumentiert (45% Fakt, 40% Hypothese, 15% Spekulation)
 
 - [ ] **Repo-Selbst-Tracking**
   - Nutzen: `5d_github_api.py` + `5d_github_data.json`
