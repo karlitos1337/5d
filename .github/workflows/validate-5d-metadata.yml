@@ -1,0 +1,151 @@
+name: Validate 5D Metadata & Structure
+
+on:
+  pull_request:
+    paths:
+      - '0[1-8]_*/**.md'
+      - '99_unsortiert/*.md'
+      - 'WISSENS_INDEX.md'
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+      
+      - name: Validate YAML frontmatter in .md files
+        run: |
+          python -c "
+          import os, sys, glob, yaml
+          from pathlib import Path
+          
+          errors = []
+          warnings = []
+          
+          # Scan all markdown files in relevant directories
+          md_files = glob.glob('0[1-8]_*/**/*.md', recursive=True) + glob.glob('99_unsortiert/*.md')
+          
+          print(f'📄 Scanning {len(md_files)} markdown files...')
+          
+          for md_file in md_files:
+              with open(md_file, 'r', encoding='utf-8') as f:
+                  content = f.read()
+              
+              if content.startswith('---'):
+                  try:
+                      # Extract YAML frontmatter
+                      parts = content.split('---', 2)
+                      if len(parts) >= 3:
+                          frontmatter = yaml.safe_load(parts[1])
+                          
+                          # Check required fields
+                          required = ['title', 'author', 'domain', 'date_created']
+                          missing = [r for r in required if r not in frontmatter]
+                          
+                          if missing:
+                              errors.append(f'{md_file}: Missing metadata: {missing}')
+                          
+                          # Check optional but recommended fields
+                          recommended = ['references', 'tags']
+                          missing_recommended = [r for r in recommended if r not in frontmatter]
+                          if missing_recommended:
+                              warnings.append(f'{md_file}: Missing recommended metadata: {missing_recommended}')
+                          
+                          # Validate references format (if present)
+                          if 'references' in frontmatter:
+                              refs = frontmatter['references']
+                              if not isinstance(refs, list):
+                                  errors.append(f'{md_file}: references must be a list')
+                              else:
+                                  for ref in refs:
+                                      if not isinstance(ref, str):
+                                          errors.append(f'{md_file}: Invalid reference format: {ref}')
+                          
+                          print(f'✅ {md_file}')
+                      else:
+                          errors.append(f'{md_file}: Malformed YAML frontmatter (missing closing ---)')
+                  except yaml.YAMLError as e:
+                      errors.append(f'{md_file}: Invalid YAML: {e}')
+                  except Exception as e:
+                      errors.append(f'{md_file}: Parsing error: {e}')
+              else:
+                  errors.append(f'{md_file}: Missing YAML frontmatter (must start with ---)')
+          
+          # Print warnings (non-blocking)
+          if warnings:
+              print('\n⚠️  Warnings (non-blocking):')
+              for w in warnings:
+                  print(f'  - {w}')
+          
+          # Print errors and fail if any
+          if errors:
+              print('\n❌ Metadata validation failed:')
+              for e in errors:
+                  print(f'::error::{e}')
+              sys.exit(1)
+          else:
+              print('\n✅ All Markdown files have valid metadata!')
+          "
+      
+      - name: Check WISSENS_INDEX.md exists
+        run: |
+          if [ ! -f "WISSENS_INDEX.md" ]; then
+            echo "::error::WISSENS_INDEX.md does not exist in repository root"
+            exit 1
+          fi
+          echo "✅ WISSENS_INDEX.md exists"
+      
+      - name: Ensure WISSENS_INDEX.md is updated (on PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          # Check if any content files changed
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD | grep -E '^0[1-8]_.*\.md$' || true)
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            # Check if WISSENS_INDEX.md was also updated
+            INDEX_CHANGED=$(git diff --name-only origin/main...HEAD | grep 'WISSENS_INDEX.md' || true)
+            
+            if [ -z "$INDEX_CHANGED" ]; then
+              echo "::warning::Content files changed but WISSENS_INDEX.md was not updated. Consider updating the index."
+            else
+              echo "✅ WISSENS_INDEX.md was updated"
+            fi
+          fi
+      
+      - name: Validate BibTeX references (if exists)
+        run: |
+          if [ -f "07_daten_analysen/5d-relevant-sources.bib" ]; then
+            python -c "
+            import re, sys
+            
+            with open('07_daten_analysen/5d-relevant-sources.bib', 'r') as f:
+                content = f.read()
+            
+            # Extract all BibTeX keys
+            keys = re.findall(r'@\w+\{([^,]+),', content)
+            
+            if len(keys) != len(set(keys)):
+                duplicates = [k for k in keys if keys.count(k) > 1]
+                print(f'::error::Duplicate BibTeX keys found: {set(duplicates)}')
+                sys.exit(1)
+            
+            print(f'✅ {len(keys)} unique BibTeX entries validated')
+            "
+          else
+            echo "⚠️  No BibTeX file found (07_daten_analysen/5d-relevant-sources.bib)"
+          fi
