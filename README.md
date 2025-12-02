@@ -21,7 +21,8 @@ This repository contains comprehensive documentation across multiple knowledge d
 - **[📖 Wiki Home](wiki/)** - Complete 5D-Intelligence overview with detailed glossary
 - **[📊 Manifest Summary](manifest_summary.md)** - Hierarchical overview of all project documents
 - **[💡 Concepts & Definitions](wiki/Home)** - Detailed explanations of key terms
- - **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
+- **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
+- **[🔬 Research Roadmap](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, open questions
 
 ## 🗂️ Project Structure
 
@@ -101,6 +102,12 @@ make serve-map  # serves web/5d-map on port 5500
 This project thrives on intellectual exchange and critical discussion. We welcome feedback, contributions, and cross-disciplinary insights.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Development Roadmaps
+
+- **[TODO.md](TODO.md)** - Infrastructure, deployment, CI/CD tasks (13/15 complete, 87%)
+- **[TODO_MULTIPAGE.md](TODO_MULTIPAGE.md)** - Dashboard features, UI/UX, scientific validation
+- **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, theoretical coherence
 
 ## 🧬 Why This Matters
 

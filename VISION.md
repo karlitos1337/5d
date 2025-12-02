@@ -1,5 +1,16 @@
 # 🌐 5D-Intelligenz-Framework: Vision & Philosophie
 
+⚠️ **Terminologie-Warnung:** „5D" wird in vielen Kontexten unterschiedlich verwendet. Unser 5D-Intelligenzframework ist **NICHT**:
+- ❌ New-Age-5D-Bewusstsein (Lichtkörper, Dimensionsaufstieg, Esoterik)
+- ❌ 5. physikalische Dimension (Kaluza-Klein-Theorie, String Theory)
+- ❌ Islamisches 5D-Bildungsmodell (Körper/Geist/Seele/Sozial/Spirituell)
+- ❌ Policy-5D (Policy-Evaluationsframework mit 5 Kriterien)
+- ❌ Touristische 5D-Resilienz (Destination Resilience Framework)
+
+**Unsere Definition:** 5D = **5 interdisziplinäre Dimensionen** (Neurobiologie, Psychologie, Philosophie, Ökonomie, Technologie) auf **5 Abstraktionsebenen** (Basal → Transzendierend). Siehe [5D-Landschaft Vergleich](06_synthesen_kompilationen/5d_landschaft.md) für Details.
+
+---
+
 ## Was ist das 5D-Intelligenz-Modell?
 
 Das **5D-Intelligenz-Framework** ist ein **interdisziplinäres Forschungsprojekt**, das Intelligenz nicht mehr eindimensional (IQ) misst, sondern als **multidimensionales, verantwortungsvolles Potenzial** begreift.

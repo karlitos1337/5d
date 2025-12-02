@@ -46,10 +46,19 @@ Siehe `docs/REMAINING_TASKS.md` für Details zu verbleibenden manuellen Schritte
 - [x] User Guide für Weltkarte (docs/USER_GUIDE.md)
 - [x] Contributing Guidelines (CONTRIBUTING.md)
 - [x] API-Dokumentation für externe Systeme
+- [x] Forschungs-Roadmap (TODO_RESEARCH.md)
 
 ## Erledigte Aufgaben
 - [x] Git Pre-Commit Hook mit Test-Validierung
 - [x] Copilot Instructions merge mit md_copilot_ki_anweisung
 
 ---
-**Letzte Aktualisierung:** 2025-12-01
+
+## Siehe auch
+
+- **TODO_MULTIPAGE.md** – Dashboard-Features, UI/UX, wissenschaftliche Validierung
+- **TODO_RESEARCH.md** – Wissenschaftliche Grundlagen, empirische Testbarkeit, theoretische Kohärenz
+- **docs/REMAINING_TASKS.md** – Verbleibende manuelle Schritte (GitHub Pages)
+
+---
+**Letzte Aktualisierung:** 2025-12-02
