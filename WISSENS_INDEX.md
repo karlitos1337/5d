@@ -11,11 +11,11 @@
 - Biografie: [`08_personal_biografie/`](08_personal_biografie/)
 
 ## 🔗 Querverweise
-- Neuroplastizität ↔ Flow-Theorie: [`02_neurobiologie_psychologie/neuroplastizitaet.md`] ⟷ [`02_neurobiologie_psychologie/flow_zustaende.md`]
-- Commons basiertes Lernen (OSSU/IB) ↔ Wirtschaftskultur: [`04_oekonomie_governance/commons.md`] ⟷ [`01_bildung_education/ossu_ib_bridge.md`]
-- Philosophie der Zwanglosigkeit: [`03_philosophie_epistemologie/wege_der_zwanglosigkeit.md`]
-- Probabilistische Entscheidungsmodelle: [`02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md`]
-- Systemische Validierung: [`05_technologie_tesla/csrankings.md`] ⟷ [`07_daten_analysen/5d-relevant-sources.bib`]
+- Neuroplastizität ↔ Flow-Theorie: [`02_neurobiologie_psychologie/neuroplastizitaet.md`](02_neurobiologie_psychologie/neuroplastizitaet.md) ⟷ [`02_neurobiologie_psychologie/flow_zustaende.md`](02_neurobiologie_psychologie/flow_zustaende.md)
+- Commons basiertes Lernen (OSSU/IB) ↔ Wirtschaftskultur: [`04_oekonomie_governance/commons.md`](04_oekonomie_governance/commons.md) ⟷ [`01_bildung_education/ossu_ib_bridge.md`](01_bildung_education/ossu_ib_bridge.md)
+- Philosophie der Zwanglosigkeit: [`03_philosophie_epistemologie/wege_der_zwanglosigkeit.md`](03_philosophie_epistemologie/wege_der_zwanglosigkeit.md)
+- Probabilistische Entscheidungsmodelle: [`02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md`](02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md)
+- Systemische Validierung: [`05_technologie_tesla/csrankings.md`](05_technologie_tesla/csrankings.md) ⟷ [`07_daten_analysen/5d-relevant-sources.bib`](07_daten_analysen/5d-relevant-sources.bib)
 
 ## ⚡ Meta-Komponenten
 | Komponente                  | Ort im Repo                           | Funktion                   |
