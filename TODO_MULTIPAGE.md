@@ -219,7 +219,7 @@ Size: 700x350px mini-maps, 700x500px for World Map
 - [x] `tests/test_participation_networks.py` ✅ (16 tests: network topology, weak ties, diffusion, IMP proxies)
 
 **Total: 161 scientific tests (11+12+16+14+21+24+20+27+16)**
-**Status: 151 passed, 0 skipped ✅ (all BibTeX references added, 59 total entries)**
+**Status: 151 passed, 0 skipped ✅ (all BibTeX references added, 64 total entries)**
 - [ ] `tests/test_maps_rendering.py` (Karten-Daten korrekt?)
 
 ---

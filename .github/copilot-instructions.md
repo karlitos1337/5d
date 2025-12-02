@@ -531,4 +531,4 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 - Phase 3: Mini-maps on all 7 geographic pages (100%)
 - Phase 4: App integration 4/4 complete (100%) ✅
 - Phase 8: 161 scientific tests, 151/151 passing (100%) ✅
-- BibTeX: 59 scientific references, all validations passing
+- BibTeX: 64 scientific references, all validations passing
