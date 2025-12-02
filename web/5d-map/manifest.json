@@ -1,0 +1,131 @@
+{
+  "name": "5D Intelligence Map",
+  "short_name": "5D-Map",
+  "description": "Interactive world map visualizing 5D intelligence dimensions (Autonomy, Intrinsic Motivation, Resilience, Social Participation, Authenticity) with status-quo heatmaps, IMP-score choropleth, alternative schools, and time-travel feature.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#16213e",
+  "orientation": "any",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "./icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Status-Quo Heatmap",
+      "short_name": "Heatmap",
+      "description": "Show depression & dropout rates",
+      "url": "./index.html?view=heatmap",
+      "icons": [{ "src": "./icons/heatmap-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "IMP-Score Choropleth",
+      "short_name": "IMP",
+      "description": "Show multidimensional IMP proxy",
+      "url": "./index.html?view=imp",
+      "icons": [{ "src": "./icons/imp-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Alternative Schools",
+      "short_name": "Schools",
+      "description": "Show alternative education projects",
+      "url": "./index.html?view=schools",
+      "icons": [{ "src": "./icons/school-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Time Travel",
+      "short_name": "History",
+      "description": "View historical data trends",
+      "url": "./index.html?view=timeline",
+      "icons": [{ "src": "./icons/timeline-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "categories": [
+    "education",
+    "research",
+    "visualization",
+    "science"
+  ],
+  "screenshots": [
+    {
+      "src": "./screenshots/desktop-heatmap.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Status-Quo Heatmap on Desktop"
+    },
+    {
+      "src": "./screenshots/mobile-imp.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "IMP-Score Choropleth on Mobile"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "share_target": {
+    "action": "./share.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+5dmap",
+      "url": "./index.html?location=%s"
+    }
+  ]
+}

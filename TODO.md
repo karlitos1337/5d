@@ -29,7 +29,7 @@
 ### Deployment
 - [x] GitHub Pages Setup für Weltkarte (Workflow ready)
 - [ ] GitHub Pages aktivieren (manual step)
-- [ ] Service Worker für Offline-Modus
+- [x] Service Worker für Offline-Modus
 - [ ] CSP Headers für Sicherheit
 - [x] Cross-Browser Testing (Playwright: Chrome, Firefox, Safari, Mobile)
 
