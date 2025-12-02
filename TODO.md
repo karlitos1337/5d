@@ -4,7 +4,7 @@
 
 ### Pipeline & Core
 - [x] Extractor: Robustheit bei fehlenden Dateien verbessern
-- [ ] Research Scraper: Rate-Limiting für arXiv optimieren
+- [x] Research Scraper: Rate-Limiting für arXiv optimieren
 - [ ] GitHub API: Token-Refresh-Logik implementieren
 
 ### Dashboard & UI
