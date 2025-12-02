@@ -22,7 +22,7 @@
 - [x] Frontend Unit Tests (Vitest)
 - [x] E2E Tests (Playwright)
 - [x] Web Vitals Performance Monitoring
-- [ ] Discord Bot Tests erweitern
+- [x] Discord Bot Tests erweitern
 - [ ] Integration Tests für Pipeline-Schritte
 - [x] GitHub Actions für Auto-Deploy
 
