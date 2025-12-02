@@ -46,6 +46,15 @@ pip install -r requirements_extended.txt
 ./start.sh  # or: make start
 ```
 
+**What `start.sh` does:**
+1. Runs `5d_extractor.py` (manifest → JSON)
+2. Runs `5d_research_scraper.py` (arXiv/PubMed → JSON)
+3. Runs `5d_github_api.py` (GitHub → JSON)
+4. Starts Streamlit dashboard (background, port 8501)
+5. Serves 5D-Map (background, port 5500)
+
+**Logs:** Check `logs/streamlit.log` and `logs/map-server.log` for debugging.
+
 ### Individual Pipeline Steps
 ```bash
 python 5d_extractor.py          # → 5d_solutions.json
@@ -53,6 +62,12 @@ python 5d_research_scraper.py   # → 5d_research_data.json
 python 5d_github_api.py         # → 5d_github_data.json
 streamlit run 5d_dashboard.py   # → http://localhost:8501
 ```
+
+**Pipeline Dependencies:**
+- Extractor is independent (reads `manifest/` only)
+- Research Scraper needs internet (arXiv, PubMed, OWID, World Bank)
+- GitHub API needs `GITHUB_TOKEN` for higher rate limits
+- Dashboard reads all 3 JSON files (graceful fallbacks if missing)
 
 ### Run 5D-Map Locally
 ```bash
@@ -66,8 +81,15 @@ python3 owid_proxy.py 5510
 ```bash
 pytest tests/                    # All tests
 pytest tests/test_extractor.py -v  # Specific module with verbose output
+pytest tests/test_imp_scientific.py  # Scientific validation tests
 make test                        # Quick run via Makefile
 ```
+
+**Test Structure:**
+- `test_extractor.py` – Manifest parsing, Pydantic validation, project deduplication
+- `test_imp_scientific.py` – IMP calculation against peer-reviewed formulas (11 tests)
+- `test_anonymization.py` – GDPR compliance patterns
+- `test_surveys.py` – Likert scale validation
 
 ### Environment Variables
 - `GITHUB_TOKEN` – Higher rate limits for GitHub API (optional)
@@ -79,12 +101,37 @@ make test                        # Quick run via Makefile
 - `5d_solutions.json` – Extracted 5D dimension scores from manifest
 - `5d_research_data.json` – Scraped academic papers
 - `5d_github_data.json` – GitHub repo metadata
+- `solutions_external.json` – External solutions from `external/` submodules (optional)
+- `5d_solutions_merged.json` – Combined core + external (optional)
+
+### JSON Structure (5d_solutions.json)
+```json
+{
+  "solutions": {
+    "Projekte": ["Bäckerei", "Garten", "Imkerei"],
+    "ROI": [485, 95, 120],
+    "Pilots": [3, 5, 2],
+    "Investment": [50000, 30000, 25000],
+    "A-Score": [0.85, 0.90, 0.80],
+    "IM-Score": [0.78, 0.88, 0.82],
+    "R-Score": [0.80, 0.85, 0.75],
+    "SP-Score": [0.75, 0.79, 0.77],
+    "Au-Score": [0.82, 0.91, 0.88]
+  },
+  "plan": {
+    "Phase 1": "Extract projects with ROI",
+    "Phase 2": "Validate 5D dimensions",
+    "Phase 3": "Deploy visualization"
+  }
+}
+```
 
 ### Schema Evolution Pattern
 1. Update `models/schemas.py` (Pydantic models)
 2. Adjust producer scripts (`5d_extractor.py`, etc.)
 3. Update consumer scripts (`5d_dashboard.py`, etc.)
 4. Add tests in `tests/` to verify backward compatibility
+5. Run `pytest tests/test_extractor.py` to validate changes
 
 **Example (Score Normalization):**
 ```python
@@ -95,7 +142,26 @@ class DimensionScore(BaseModel):
     @field_validator('score', mode='before')
     def parse_score(cls, v):
         # Handles: 'HIGH' → 0.75, '3.5' → 0.7, percentages, etc.
+        # Scales: 1-5 → 0-1, 0-10 → 0-1, 0-100% → 0-1
         # Always clamps to [0, 1]
+```
+
+### Pydantic Validation Patterns
+```python
+# Project name normalization (typo correction)
+@field_validator('name', mode='before')
+def normalize_name(cls, v):
+    s = str(v).strip().title()
+    s = s.replace('Bäckereii', 'Bäckerei')  # Fix common typos
+    return s
+
+# Robust number parsing (comma/dot, percentages)
+@field_validator('roi', mode='before')
+def parse_numbers(cls, v):
+    if isinstance(v, str):
+        s = v.replace('%', '').replace(',', '.')
+        return float(re.search(r'(\d+\.\d+|\d+)', s).group(1))
+    return float(v)
 ```
 
 ## Project-Specific Conventions
@@ -167,10 +233,32 @@ NEUROBIOLOGY_QUESTIONS = [
 - Manual trigger: `pytest tests/`
 
 ### Test Categories
-- `test_extractor.py` – Manifest parsing, Pydantic validation
+- `test_extractor.py` – Manifest parsing, Pydantic validation, project deduplication
+- `test_imp_scientific.py` – IMP calculation against peer-reviewed formulas
+  - 11 tests validating multiplicative formula
+  - Scientific references (Deci & Ryan 1985, Csíkszentmihályi 1990, Porges 2011)
+  - BibTeX validation (checks `07_daten_analysen/5d-relevant-sources.bib`)
+  - Data source validation (World Bank, OECD)
 - `test_anonymization.py` – GDPR compliance for survey data
 - `test_surveys.py` – Likert validation, completeness checks
-- `test_formulas_scoring.py` – IMP calculation accuracy
+
+### Scientific Test Pattern
+```python
+def test_realistic_5d_model():
+    """
+    Test IMP with realistic alternative education scores.
+    
+    Scientific Basis: Sudbury Valley School, Folk High Schools, Tokkatsu
+    References: greenberg1992legacy, nielsen1989danish, lewis1995educating
+    
+    Expected: 0.95 × 0.88 × 0.82 × 0.79 × 0.91 ≈ 0.4928
+    """
+    dimensions = {'A': 0.95, 'IM': 0.88, 'R': 0.82, 'SP': 0.79, 'Au': 0.91}
+    result = calculate_imp_verified(dimensions)
+    
+    assert abs(result['raw_multiplicative'] - 0.4928) < 0.01
+    assert result['formula_used'] == 'A × IM × R × SP × Au'
+```
 
 ### Writing New Tests
 ```python
@@ -217,6 +305,16 @@ git push                # Triggers GitHub Actions for 5D-Map
 ```
 5d/
 ├── manifest/               # Human-curated knowledge (01-08, 99)
+│   ├── 01_bildung_education/
+│   ├── 02_neurobiologie_psychologie/
+│   ├── 03_philosophie_epistemologie/
+│   ├── 04_oekonomie_governance/
+│   ├── 05_technologie_tesla/
+│   ├── 06_synthesen_kompilationen/
+│   ├── 07_daten_analysen/
+│   │   └── 5d-relevant-sources.bib  # Central BibTeX repository
+│   ├── 08_personal_biografie/
+│   └── 99_unsortiert/
 ├── formeln/                # Scientific formulas (001-157)
 ├── config/                 # default.yaml + loader.py
 ├── models/                 # schemas.py (Pydantic), imp.py
@@ -224,13 +322,55 @@ git push                # Triggers GitHub Actions for 5D-Map
 ├── surveys/                # Survey questions with citations
 ├── storage/                # anonymize.py (GDPR patterns)
 ├── web/5d-map/             # Interactive Leaflet map
+│   ├── index.html
+│   ├── app.js
+│   ├── styles.css
+│   ├── data/
+│   │   ├── schools.json
+│   │   └── baseline.json
+│   └── owid_proxy.py       # Optional CORS proxy
 ├── tests/                  # Pytest suite
+│   ├── test_extractor.py
+│   ├── test_imp_scientific.py
+│   ├── test_anonymization.py
+│   └── test_surveys.py
+├── pages/                  # Streamlit multi-page app
+│   ├── 1_📊_IMP_Analysis.py
+│   ├── 2_🚀_Projects.py
+│   └── ...  # 6 more pages (coming soon)
 ├── 5d_extractor.py         # Stage 1: Manifest → JSON
 ├── 5d_research_scraper.py  # Stage 2: Research APIs → JSON
 ├── 5d_github_api.py        # Stage 3: GitHub metadata → JSON
-├── 5d_dashboard.py         # Main Streamlit UI
-└── RUN_ALL.sh              # Orchestration script
+├── 5d_dashboard.py         # Wiki/Home page (main entry point)
+├── merge_external_solutions.py  # Merge external/ submodules
+├── manifest_summary.py     # Generate manifest_summary.json/md
+├── start.sh                # Full pipeline + dashboard + map
+├── RUN_ALL.sh              # Alternative orchestration script
+└── TODO_MULTIPAGE.md       # Roadmap for multi-page dashboard
 ```
+
+## Multi-Page Dashboard Architecture
+
+**Current Structure (v2.0):**
+- `5d_dashboard.py` → Wiki/Home page (beginner-friendly entry point)
+- `pages/1_📊_IMP_Analysis.py` → Scientific validation with BibTeX
+- `pages/2_🚀_Projects.py` → ROI analysis (Heckman methodology)
+- `pages/3-8_*.py` → Coming soon (Research, GitHub, Game of Life, etc.)
+
+**Navigation Pattern:**
+```python
+# Sidebar navigation with st.page_link()
+st.page_link("pages/1_📊_IMP_Analysis.py", label="📊 IMP-Analyse", icon="📊")
+st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
+```
+
+**Page Template:**
+1. Header: Title + scientific basis sidebar
+2. Metrics: 4 columns with st.metric()
+3. Main content: Left column (info) + Right column (interactive tools)
+4. Formulas: 3 tabs (IMP, ROI, Success Metrics)
+5. Scientific References: Expandable section with BibTeX citations
+6. Mini-map placeholder: Reserved for Folium/Plotly integration
 
 ---
 
