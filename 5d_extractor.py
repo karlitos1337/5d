@@ -72,12 +72,27 @@ class FiveDExtractor:
         
     def extract_text(self, file: Path) -> str:
         """Extrahiert Text aus .md/.txt/.md (PDF bis max_pages)."""
+        if not file.exists():
+            print(f"⚠️ Datei existiert nicht: {file}")
+            return ''
+        
+        if not file.is_file():
+            print(f"⚠️ Kein reguläres File: {file}")
+            return ''
+        
         suffix = file.suffix.lower()
         if suffix in {'.md', '.txt'}:
             try:
                 return file.read_text(encoding='utf-8')
-            except Exception:
-                return file.read_text(errors='ignore')
+            except UnicodeDecodeError:
+                try:
+                    return file.read_text(errors='ignore')
+                except Exception as e:
+                    print(f"⚠️ Fehler beim Lesen von {file.name}: {e}")
+                    return ''
+            except Exception as e:
+                print(f"⚠️ Fehler beim Lesen von {file.name}: {e}")
+                return ''
         if suffix == '.md' and HAS_PDF:
             try:
                 with file.open('rb') as f:
@@ -94,21 +109,52 @@ class FiveDExtractor:
         """Lädt REKURSIV .md/.txt/.md aus Hauptmanifest + optionale extra_dirs."""
         texts = {}
         count = 0
+        
+        # Prüfe ob Hauptverzeichnis existiert
+        if not self.manifest_dir.exists():
+            print(f"❌ Manifest-Verzeichnis existiert nicht: {self.manifest_dir}")
+            print(f"   Erstelle Verzeichnis: {self.manifest_dir}")
+            self.manifest_dir.mkdir(parents=True, exist_ok=True)
+            return texts
+        
+        if not self.manifest_dir.is_dir():
+            print(f"❌ Manifest-Pfad ist kein Verzeichnis: {self.manifest_dir}")
+            return texts
+        
         recursive = bool(self.config['extractor'].get('recursive', True))
         file_types = self.config['extractor'].get('file_types', ['*.md'])
         globber = self.manifest_dir.rglob if recursive else self.manifest_dir.glob
+        
         for ext in file_types:
-            for file in globber(ext):
-                rel = str(file.relative_to(self.manifest_dir)) if file.is_relative_to(self.manifest_dir) else file.name
-                texts[rel] = self.extract_text(file)
-                count += 1
+            try:
+                for file in globber(ext):
+                    rel = str(file.relative_to(self.manifest_dir)) if file.is_relative_to(self.manifest_dir) else file.name
+                    text = self.extract_text(file)
+                    if text:  # Nur hinzufügen wenn Text extrahiert wurde
+                        texts[rel] = text
+                        count += 1
+            except Exception as e:
+                print(f"⚠️ Fehler beim Durchsuchen mit Pattern {ext}: {e}")
+        
         for extra in self.extra_dirs:
-            if extra.exists():
-                for ext in file_types:
+            if not extra.exists():
+                print(f"⚠️ Extra-Verzeichnis existiert nicht: {extra}")
+                continue
+            if not extra.is_dir():
+                print(f"⚠️ Extra-Pfad ist kein Verzeichnis: {extra}")
+                continue
+            
+            for ext in file_types:
+                try:
                     for file in (extra.rglob(ext) if recursive else extra.glob(ext)):
                         key = f"{extra.name}:{file.relative_to(extra)}"
-                        texts[key] = self.extract_text(file)
-                        count += 1
+                        text = self.extract_text(file)
+                        if text:
+                            texts[key] = text
+                            count += 1
+                except Exception as e:
+                    print(f"⚠️ Fehler in {extra} mit Pattern {ext}: {e}")
+        
         print(f"✅ {count} Dateien geladen (inkl. extra_dirs, mit PDF-Unterstützung)")
         return texts
     

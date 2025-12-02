@@ -3,7 +3,7 @@
 ## Aktuelle Aufgaben
 
 ### Pipeline & Core
-- [ ] Extractor: Robustheit bei fehlenden Dateien verbessern
+- [x] Extractor: Robustheit bei fehlenden Dateien verbessern
 - [ ] Research Scraper: Rate-Limiting für arXiv optimieren
 - [ ] GitHub API: Token-Refresh-Logik implementieren
 
