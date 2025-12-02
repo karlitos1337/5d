@@ -11,6 +11,10 @@ tiktoken_cache/
 # Simulationsergebnisse (optional auskommentieren falls Versionierung gewünscht)
 simulations/*.json
 
+# Node / JS
+node_modules/
+package-lock.json
+
 # Editor / OS
 .DS_Store
 .idea/
