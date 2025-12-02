@@ -423,7 +423,19 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
   - ✅ Pipeline & Core (Extractor, Research Scraper, GitHub API)
   - ✅ Dashboard & UI (Caching, Weltkarte, Mobile optimization)
   - ✅ Tests & CI (Pre-commit hooks, GitHub Actions, E2E tests)
+  - ✅ Documentation (Forschungs-Roadmap, 5D-Landschaft Vergleich)
   - ❌ Deployment: GitHub Pages manual activation pending
+
+**Research Roadmap:** See TODO_RESEARCH.md in repository root (NEW)
+- **Status:** 85+ research tasks across 12 sections
+- **Scope:** Scientific foundations, empirical testability, theoretical coherence
+- **Sections:** Meta, 5D-Begriff, Neuro, Philosophie, Öko, Gaia, Evolution, Governance, Kausalmodelle, Abgrenzung, Testbarkeit, Integration, Reflexion & Ethik
+- **Timeline:** 4 phases (Q1-Q4 2026)
+- **Key Deliverables:**
+  - Evidenzmatrix (Fakt ✅, Hypothese ⚠️, Spekulation 🔮)
+  - Minimalexperimente (Game of Life, Governance-Panel)
+  - Ethik-Manifest (Bias-Log, Abbruchkriterien)
+  - 5D-Landschaft Vergleich (7 alternative 5D-Modelle dokumentiert)
 
 **Multi-Page Dashboard:** See TODO_MULTIPAGE.md in repository root
 - **Status:** 2/8 pages completed (Phase 1)
