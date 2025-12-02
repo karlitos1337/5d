@@ -1,5 +1,7 @@
 # Full Survey Specification
 
+Note: The long-form survey specification previously stored as `docs/SURVEY_SPEC_FULL.md` was consolidated into this file and the duplicate removed (see git history for the removal commit). Use this file as the single, human-readable reference; the canonical, importable implementations remain in `surveys/`.
+
 This file contains the full survey specification and example code extracted from the agent instructions. The canonical, importable code remains in `surveys/` (use those files for production runs and tests). This document is a human-readable reference for editors and reviewers.
 
 ---
