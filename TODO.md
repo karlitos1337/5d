@@ -35,7 +35,7 @@
 
 ### Dokumentation
 - [x] Copilot Instructions aktualisieren
-- [ ] User Guide für Weltkarte (docs/USER_GUIDE.md)
+- [x] User Guide für Weltkarte (docs/USER_GUIDE.md)
 - [ ] Contributing Guidelines (CONTRIBUTING.md)
 - [ ] API-Dokumentation für externe Systeme
 
