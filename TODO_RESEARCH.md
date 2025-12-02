@@ -515,15 +515,22 @@
 
 **Ziel:** Transparenz, Bias-Bewusstsein, Abbruchkriterien
 
-- [ ] **ETHIK_MANIFEST.md anlegen**
-  - Location: Root oder `docs/`
+- [x] **ETHIK_MANIFEST.md anlegen** ✅
+  - Location: Root (`ETHIK_MANIFEST.md`)
   - Inhalte:
     - **Bias-Log:** Wo dominiert persönliche Intuition?
+      - 5 Ideologische Biases (Pro-Autonomie, Anti-Koercion, etc.)
+      - 5 Methodische Biases (Confirmation, Publication, Selection, Measurement, Temporal)
+      - 3 Persönliche Biases (Schulsystem-Trauma, Libertär, Technokratisch)
     - **Abbruch-/Umbaukriterien:** Wann ist das Framework falsifiziert?
+      - 4 Kategorien: Empirisch, Theoretisch, Ethisch, Community Feedback
+      - 15+ konkrete Schwellenwerte (r<0.30, α<0.60, p>0.05, etc.)
     - **Forschungs-Ethos:** „Mit mir selbst schlafen können"
-      - Transparenz über Unsicherheiten
-      - Keine Überverkauf von Hypothesen als Fakten
-      - Offenheit für Kritik und Falsifikation
+      - Open Science (Open Data, Code, Access, Pre-Registration)
+      - Epistemische Demut (Fakt vs. Hypothese vs. Spekulation)
+      - Pluralismus (Globale Perspektiven, Interdisziplinarität)
+      - Impact (Nutzen für Schulen, Governance, Individuen)
+    - **Review-Checkpoints:** Q1-Q4 2026 (quartalsweise Reflexion)
 
 - [x] **Evidenzmatrix transparent machen** ✅
   - In `docs/CLAIMS_EVIDENCE_MATRIX.md`:
