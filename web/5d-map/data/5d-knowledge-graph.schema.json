@@ -14,7 +14,7 @@
           "label": { "type": "string" },
           "dimension": {
             "type": "string",
-            "enum": ["neurobiologisch", "psychologisch", "philosophisch", "oekonomisch", "technologisch", "synthese", "daten", "biografie"]
+            "enum": ["neurobiologisch", "psychologisch", "philosophisch", "ökonomisch", "technologisch", "synthese", "daten", "biografie"]
           },
           "folder": { "type": "string" },
           "file": { "type": "string" },
