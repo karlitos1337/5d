@@ -8,7 +8,7 @@
 - [x] GitHub API: Token-Refresh-Logik implementieren
 
 ### Dashboard & UI
-- [ ] Dashboard: Caching-Strategie für große JSON-Dateien
+- [x] Dashboard: Caching-Strategie für große JSON-Dateien
 - [x] Weltkarte: Radar-Charts in IMP-Popups (Chart.js)
 - [ ] Zeitreise-Feature: Baseline-Daten erweitern
 - [x] Mobile Optimierung (responsive Grid für Buttons)

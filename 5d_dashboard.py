@@ -24,33 +24,49 @@ st.set_page_config(
     layout="wide"
 )
 
-@st.cache_data
+@st.cache_data(ttl=300)  # Cache for 5 minutes
 def load_data():
-    """Lädt alle 5D Daten"""
+    """Lädt alle 5D Daten mit Caching (TTL: 5 Minuten)"""
     data = {}
     
     try:
-        with open('5d_solutions.json', 'r') as f:
+        with open('5d_solutions.json', 'r', encoding='utf-8') as f:
             data['solutions'] = json.load(f)
-    except:
+    except FileNotFoundError:
+        st.warning("⚠️ 5d_solutions.json nicht gefunden")
+        data['solutions'] = {'plan': {}, 'solutions': {}}
+    except json.JSONDecodeError as e:
+        st.error(f"❌ Fehler beim Parsen von 5d_solutions.json: {e}")
+        data['solutions'] = {'plan': {}, 'solutions': {}}
+    except Exception as e:
+        st.error(f"❌ Fehler beim Laden von 5d_solutions.json: {e}")
         data['solutions'] = {'plan': {}, 'solutions': {}}
     
     try:
-        with open('5d_research_data.json', 'r') as f:
+        with open('5d_research_data.json', 'r', encoding='utf-8') as f:
             data['research'] = json.load(f)
-    except:
+    except FileNotFoundError:
+        st.info("ℹ️ 5d_research_data.json nicht gefunden – führe 5d_research_scraper.py aus")
+        data['research'] = {}
+    except Exception as e:
+        st.warning(f"⚠️ Research-Daten: {e}")
         data['research'] = {}
     
     try:
-        with open('5d_github_data.json', 'r') as f:
+        with open('5d_github_data.json', 'r', encoding='utf-8') as f:
             data['github'] = json.load(f)
-    except:
+    except FileNotFoundError:
+        st.info("ℹ️ 5d_github_data.json nicht gefunden – führe 5d_github_api.py aus")
+        data['github'] = {}
+    except Exception as e:
+        st.warning(f"⚠️ GitHub-Daten: {e}")
         data['github'] = {}
     
     return data
 
+@st.cache_data
 def create_imp_chart():
-    """IMP Score Radar Chart"""
+    """IMP Score Radar Chart (gecacht)"""
     if not HAS_PLOTLY:
         return None
     dimensions = ['Autonomie', 'Motivation', 'Resilienz', 'Partizipation', 'Authentizität']
@@ -62,8 +78,12 @@ def create_imp_chart():
     fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 1])), showlegend=True, title="IMP Score: 5D vs. Dänemark")
     return fig
 
-def create_roi_chart(solutions):
-    """ROI Visualization"""
+@st.cache_data
+def create_roi_chart(solutions_json):
+    """ROI Visualization (gecacht)"""
+    # Convert dict to JSON string for cache key stability
+    solutions = json.loads(solutions_json) if isinstance(solutions_json, str) else solutions_json
+    
     roi_data = solutions.get('solutions', {}).get('ROI', [])
     if not roi_data:
         roi_data = ['95', '485']
@@ -446,8 +466,9 @@ A={dims['A']} × IM={dims['IM']} × R={dims['R']} × SP={dims['SP']} × Au={dims
         
         st.divider()
         
-        # ROI Chart
-        roi_fig, roi_values = create_roi_chart(solutions)
+        # ROI Chart (convert to JSON string for caching)
+        solutions_json = json.dumps(solutions)
+        roi_fig, roi_values = create_roi_chart(solutions_json)
         if roi_fig is not None:
             st.plotly_chart(roi_fig, width='stretch')
         else:
