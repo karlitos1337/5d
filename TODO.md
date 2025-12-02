@@ -10,7 +10,7 @@
 ### Dashboard & UI
 - [x] Dashboard: Caching-Strategie für große JSON-Dateien
 - [x] Weltkarte: Radar-Charts in IMP-Popups (Chart.js)
-- [ ] Zeitreise-Feature: Baseline-Daten erweitern
+- [x] Zeitreise-Feature: Baseline-Daten erweitern
 - [x] Mobile Optimierung (responsive Grid für Buttons)
 - [x] Loading-Overlay mit Spinner
 - [x] Button-Tooltips und Accessibility
