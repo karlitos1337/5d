@@ -237,7 +237,7 @@
         "forks": 5,
         "language": "Jupyter Notebook",
         "url": "https://github.com/NULabNortheastern/digitalassignmentshowcase",
-        "updated": "2025-11-25T00:27:43Z"
+        "updated": "2025-12-02T16:50:08Z"
       },
       {
         "name": "badgelab",
@@ -264,56 +264,56 @@
   "trending": {
     "education": [
       {
-        "name": "student",
+        "name": "RemoteBrick",
+        "stars": 4,
+        "url": "https://github.com/JuniorJacki/RemoteBrick"
+      },
+      {
+        "name": "Mimir",
+        "stars": 0,
+        "url": "https://github.com/mendax0110/Mimir"
+      },
+      {
+        "name": "hogwarts",
+        "stars": 6,
+        "url": "https://github.com/databayt/hogwarts"
+      },
+      {
+        "name": "schoolcode",
         "stars": 1,
-        "url": "https://github.com/Ayush12r/student"
+        "url": "https://github.com/luka-loehr/schoolcode"
       },
       {
-        "name": "musicer",
-        "stars": 2,
-        "url": "https://github.com/EDROOR27/musicer"
-      },
-      {
-        "name": "darzeliai",
-        "stars": 9,
-        "url": "https://github.com/vilnius/darzeliai"
-      },
-      {
-        "name": "21-INVOCATION-CODEX",
-        "stars": 0,
-        "url": "https://github.com/mar2707/21-INVOCATION-CODEX"
-      },
-      {
-        "name": "autopsy-case-analysis-by-lockenkoepflein",
-        "stars": 0,
-        "url": "https://github.com/MSLwebdevhead/autopsy-case-analysis-by-lockenkoepflein"
+        "name": "hedy",
+        "stars": 1593,
+        "url": "https://github.com/hedyorg/hedy"
       }
     ],
     "learning": [
       {
-        "name": "mini-fullstack-project",
-        "stars": 3,
-        "url": "https://github.com/mlx376/mini-fullstack-project"
-      },
-      {
-        "name": "lab",
-        "stars": 1,
-        "url": "https://github.com/navchandar/lab"
-      },
-      {
-        "name": "git-learning",
-        "stars": 1,
-        "url": "https://github.com/Computer-Science-Department-ChNU/git-learning"
-      },
-      {
-        "name": "research_groups_computer_vision",
+        "name": "ZoltarFinancial",
         "stars": 2,
-        "url": "https://github.com/eu1234567890/research_groups_computer_vision"
+        "url": "https://github.com/apod-1/ZoltarFinancial"
       },
       {
-        "name": "TySVA",
-        "stars": 0,
-        "url": "https://github.com/Maurellone/TySVA"
+        "name": "training",
+        "stars": 203,
+        "url": "https://github.com/nextflow-io/training"
+      },
+      {
+        "name": "content",
+        "stars": 9863,
+        "url": "https://github.com/mdn/content"
+      },
+      {
+        "name": "Frappe-ERPNext-Tutorial-Mastery",
+        "stars": 63,
+        "url": "https://github.com/mohamed-ameer/Frappe-ERPNext-Tutorial-Mastery"
+      },
+      {
+        "name": "LearnCard",
+        "stars": 59,
+        "url": "https://github.com/learningeconomy/LearnCard"
       }
     ],
     "pedagogy": [
@@ -345,9 +345,9 @@
     ],
     "edtech": [
       {
-        "name": "mini-course",
-        "stars": 2,
-        "url": "https://github.com/ashsajal1/mini-course"
+        "name": "Empirical-Core",
+        "stars": 30,
+        "url": "https://github.com/empirical-org/Empirical-Core"
       },
       {
         "name": "exam-seating-arranger",
@@ -360,9 +360,9 @@
         "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
       },
       {
-        "name": "Next-Voters",
-        "stars": 3,
-        "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
+        "name": "HASKI-Backend",
+        "stars": 4,
+        "url": "https://github.com/HASKI-RAK/HASKI-Backend"
       },
       {
         "name": "ai-recruitment-assistant",
@@ -371,5 +371,5 @@
       }
     ]
   },
-  "timestamp": "2025-12-02T07:13:25.019870"
+  "timestamp": "2025-12-02T20:38:05.233934"
 }

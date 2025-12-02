@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
 """
-5D Dashboard - Home / Overview Page
-Multi-Page Streamlit App - Main Entry Point
+5D Live Dashboard - Streamlit
+Visualisiert IMP Scores, Projekte, Research, GitHub Trends
 """
 
 import streamlit as st
 import json
+import pandas as pd
 from datetime import datetime
-from pathlib import Path
+
+# Plotly optional laden (Fallback, falls nicht installiert)
+try:
+    import plotly.graph_objects as go
+    import plotly.express as px
+    HAS_PLOTLY = True
+except Exception:
+    HAS_PLOTLY = False
 
 # Page Config
 st.set_page_config(
     page_title="5D Intelligence Dashboard",
     page_icon="🎯",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
 @st.cache_data(ttl=300)  # Cache for 5 minutes

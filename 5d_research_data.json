@@ -37,6 +37,16 @@
     ],
     "pubmed": [
       {
+        "title": "EXPRESS: Medical Students' Perceptions of AI-Generated Practice Questions as Learning Tools.",
+        "authors": [
+          "Tate H",
+          "Bicknell BT",
+          "Fiore P"
+        ],
+        "published": "2025 Dec 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41328776/"
+      },
+      {
         "title": "Effects of a \"credit bank\" intervention on the professional identity and public stigma among nursing students: A randomized controlled trial.",
         "authors": [
           "Qiu C",
@@ -55,19 +65,9 @@
         ],
         "published": "2025 Jan-Dec",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323141/"
-      },
-      {
-        "title": "V.T.O.B.S.-Learning birth mechanics in virtual reality: a controlled cohort study in undergraduate medical education.",
-        "authors": [
-          "Adams J",
-          "Klein C",
-          "Ludwig S"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41312483/"
       }
     ],
-    "timestamp": "2025-12-02T07:13:14.500275"
+    "timestamp": "2025-12-02T20:36:49.887282"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -107,6 +107,16 @@
     ],
     "pubmed": [
       {
+        "title": "A cluster randomized trial of a health coach-led patient activation program in type 2 diabetes in Singapore - a study protocol.",
+        "authors": [
+          "Lee JHB",
+          "Yeo LS",
+          "Soon WSW"
+        ],
+        "published": "2025 Dec 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41327015/"
+      },
+      {
         "title": "How sports-implied packaging of protein powder products enhances the purchase intention of Generation Z: evidence from multiple experiments.",
         "authors": [
           "Hu C",
@@ -124,19 +134,9 @@
         ],
         "published": "2025",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323909/"
-      },
-      {
-        "title": "Assessing the role of physical activity in shaping students' academic motivation: the mediating role of mental health.",
-        "authors": [
-          "Ma D",
-          "Akram H",
-          "Li S"
-        ],
-        "published": "2025 Nov 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41316117/"
       }
     ],
-    "timestamp": "2025-12-02T07:13:16.282798"
+    "timestamp": "2025-12-02T20:36:52.752900"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,6 +172,16 @@
     ],
     "pubmed": [
       {
+        "title": "Unlocking the potential of augmented reality in education: Insights from a systematic review of AR-enhanced instructional approaches.",
+        "authors": [
+          "Anuar WMFF",
+          "Mokmin NAM",
+          "Mohamad Asri SF"
+        ],
+        "published": "2025 Nov",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41328852/"
+      },
+      {
         "title": "Addressing the false dichotomy between autonomy and preservation of life: Clinical, legal, and ethical considerations in severe and longstanding anorexia nervosa.",
         "authors": [
           "Ayton A",
@@ -190,18 +200,9 @@
         ],
         "published": "2025 Nov",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41319222/"
-      },
-      {
-        "title": "A Book Review of 'the Anxious Generation' by Jonathan Haidt.",
-        "authors": [
-          "Deka PP",
-          "Choudhury A"
-        ],
-        "published": "2025 Nov 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41317144/"
       }
     ],
-    "timestamp": "2025-12-02T07:13:18.055818"
+    "timestamp": "2025-12-02T20:36:55.751996"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -269,7 +270,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-02T07:13:19.828359"
+    "timestamp": "2025-12-02T20:36:58.710905"
   },
   "democratic schools": {
     "arxiv": [
@@ -307,36 +308,37 @@
     ],
     "pubmed": [
       {
-        "title": "Reflections on non-WEIRD behavior change and the next generation of physical activity research: A commentary on Simpson et al. (2025).",
+        "title": "Genomic analysis and antimicrobial resistance of Vibrio cholerae isolated during Zambia's 2023 cholera epidemic.",
         "authors": [
-          "Beggan A",
-          "McGannon KR"
+          "Ng'ombe H",
+          "Luchen CC",
+          "Bote L"
         ],
-        "published": "2026 Jan",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41326138/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41329510/"
       },
       {
-        "title": "Microbial communities in mine waste- contaminated soil of Sub-Saharan Africa: potential application for ecoremediation.",
+        "title": "Prevalence and Determinants of Constipation in Community-Dwelling Adult Women in the Democratic Republic of Congo: A Cross-Sectional Study.",
         "authors": [
-          "Uwimbabazi A",
-          "Ramasamy S",
-          "Mwamba TM"
+          "Nzinga AL",
+          "Reman T",
+          "Mukwege D"
         ],
-        "published": "2025 Dec 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41324703/"
+        "published": "2025 Dec 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41329357/"
       },
       {
-        "title": "Allergic Rhinitis and Its Impact on Asthma (ARIA)-EAACI Guidelines-2024-2025 Revision: Part I-Guidelines on Intranasal Treatments.",
+        "title": "A new order parameter model for the structural phase transitions in VO(2)-based solid solutions.",
         "authors": [
-          "Sousa-Pinto B",
-          "Bousquet J",
-          "Vieira RJ"
+          "Kim IH",
+          "Ri JS",
+          "Kang UI"
         ],
-        "published": "2025 Dec 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41324154/"
+        "published": "2026 Jan 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41328454/"
       }
     ],
-    "timestamp": "2025-12-02T07:13:21.887310"
+    "timestamp": "2025-12-02T20:37:01.667438"
   },
   "student agency": {
     "arxiv": [
@@ -407,6 +409,6 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323915/"
       }
     ],
-    "timestamp": "2025-12-02T07:13:23.886290"
+    "timestamp": "2025-12-02T20:37:04.692652"
   }
 }

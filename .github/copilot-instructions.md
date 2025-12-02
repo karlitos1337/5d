@@ -1,595 +1,239 @@
-## 5D – Copilot-Instruktionen (prägnant, projektbezogen)
+# 5D Intelligence Framework – AI Coding Agent Instructions
 
-Ziel: Schnell produktiv arbeiten, ohne Datenflüsse/Verträge zu brechen. Fokus auf Kern‑Pipeline, JSON‑Schnittstellen und Streamlit‑UIs dieses Repos.
+**Goal:** Help AI agents be immediately productive without breaking data contracts, pipelines, or scientific rigor.
 
-### Architektur & Datenfluss
-- Pipeline: `5d_extractor.py` → `5d_research_scraper.py` → `5d_github_api.py` → JSON Artefakte.
-- UIs: `5d_dashboard.py` (Haupt), plus `autopoietic_streamlit.py`, `zwi_streamlit.py`, `gol_streamlit.py`, `partnet_streamlit.py`.
-- Bot: Optional `5d_discord_bot.py` liest dieselben JSONs.
-- Orchestrierung: `RUN_ALL.sh` führt (1)–(3) aus und startet das Dashboard.
+## Big Picture Architecture
 
-### Setup & Workflows
-- Python: 3.10+ (Dev‑Container: Ubuntu 24.04.3 LTS).
-- Install: `pip install -r requirements_extended.txt`.
-- Config: `config/default.yaml` (geladen via `config/loader.py`) statt Hardcoding nutzen.
-- Tokens: `export GITHUB_TOKEN=...` (API Limits), `export DISCORD_TOKEN=...` (Bot).
-- Run (Einzelschritte):
-  - `python 5d_extractor.py` → schreibt `5d_solutions.json`
-  - `python 5d_research_scraper.py` → `5d_research_data.json`
-  - `python 5d_github_api.py` → `5d_github_data.json`
-  - `streamlit run 5d_dashboard.py` (Port 8501)
-- Tests: `pytest tests/` oder gezielt `pytest tests/test_extractor.py -v`.
-- **Git Workflow**: Pre-Commit Hook (`.git/hooks/pre-commit`) führt automatisch aus:
-# Copilot/Agent Instructions — 5d (kurz)
-
-Kurz: konzentriere Änderungen auf Pipeline‑contracts, JSON‑artefakte und Streamlit‑UIs. Kleine, rückwärtskompatible PRs; prüfe Tests vor Commit.
-
-- **Big picture**: `5d_extractor.py` → `5d_research_scraper.py` → `5d_github_api.py` → JSON output read by `5d_dashboard.py` and other Streamlit apps.
-- **Read first**: `config/loader.py`, `config/default.yaml`, `models/schemas.py`, `models/imp.py`, `storage/anonymize.py`, `RUN_ALL.sh`, `README.md`.
-
-- **Common commands**:
-    - Install: `pip install -r requirements_extended.txt`
-    - Full pipeline: `./RUN_ALL.sh` (or run each `python` step)
-    - Dashboard: `streamlit run 5d_dashboard.py`
-    - Tests: `pytest tests/` or `pytest tests/test_extractor.py -q`
-
-- **Env vars**: `GITHUB_TOKEN` (optional, higher rate limits), `DISCORD_TOKEN` (bot).
-
-- **Data contracts**:
-    - Core JSON filenames: `5d_solutions.json`, `5d_research_data.json`, `5d_github_data.json` — keep stable.
-    - Validate changes via `models/schemas.py` (pydantic). Update schemas + tests when shape changes.
-    - Use `storage/anonymize.py` patterns for any participant data.
-
-- **Conventions & patterns**:
-    - Manifest scanning configured in `config/default.yaml` and implemented in `5d_extractor.py`.
-    - Research scrapers use conservative timeouts and explicit `time.sleep(1)` between requests.
-    - Streamlit: cache expensive loads with `@st.cache_data`; avoid blocking network calls in render path.
-    - Domain formulas live in `formeln/` (human-readable) and are implemented in `analysis/` or `models/`.
-
-- **Testing & commits**:
-    - Pre-commit hook (`.git/hooks/pre-commit`) runs syntax checks and core tests; failing core tests block commits. Run `pytest` locally.
-
-- **Quick dev flow for changes**:
-    1. Update code in small PR, run `pytest`.
-    2. If JSON shape changes, update `models/schemas.py` and dashboard readers.
-    3. Add/adjust tests under `tests/` and run them.
-
-- **No-go**: do not introduce RAG/LLM external infra (PrivateGPT/Ollama) or rename public JSON keys without explicit approval.
-
-Wenn du willst, erweitere ich diese Datei mit kurze Beispiele (code snippets) für: JSON validation, an anonymization unit test, oder a minimal PR checklist. Feedback? 
-        "max": 99999,
-        "purpose": "Regional clustering (anonymized)"
-    },
-    "federal_state": {
-        "type": "text",
-        "max_length": 50
-    },
-    "country": {
-        "type": "select",
-        "source": "ISO_3166_countries",
-        "default": "DE"
-    },
-    "life_satisfaction": {
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5, 6],  # Schulnoten-System
-        "label": "Wie bewerten Sie Ihr aktuelles Leben insgesamt?",
-        "reverse_coded": True  # 1=Sehr gut, 6=Ungenügend
-    },
-    "future_expectation": {
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "label": "Wie zuversichtlich blicken Sie in die Zukunft?"
-    },
-    "past_evaluation": {
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "label": "Wie bewerten Sie Ihre bisherige Lebensgeschichte?"
-    },
-    "financial_situation": {
-        "type": "select",
-        "options": ["Sehr gut", "Gut", "Befriedigend", "Ausreichend", "Schwierig"],
-        "coding": {"Sehr gut": 5, "Gut": 4, "Befriedigend": 3, "Ausreichend": 2, "Schwierig": 1}
-    }
-}
+### Core Pipeline (Sequential Data Flow)
+```
+5d_extractor.py → 5d_research_scraper.py → 5d_github_api.py → JSON artifacts
+                                                                     ↓
+                               5d_dashboard.py + specialized Streamlit apps
+                                              ↓
+                                     5d_discord_bot.py (optional)
 ```
 
-#### 5D-Dimensionsfragen (Mindestens 10 pro Dimension)
+**Key principle:** JSON files are the stable contract between pipeline stages. Never rename core JSON keys without team approval.
 
-##### 1D: Neurobiologisch
+### Interactive Visualization
+- **5D-Map** (`web/5d-map/`): Leaflet-based world map with live data visualization
+  - Heatmaps (depression, dropout rates via OWID/World Bank APIs)
+  - IMP-Score choropleth (multidimensional proxy calculation)
+  - Alternative schools markers
+  - Time-travel slider for historical data
+  - Client-side caching (LocalStorage, 1h TTL)
+
+### Scientific Foundations
+- **5 Dimensions:** Autonomy (A), Intrinsic Motivation (IM), Resilience (R), Social Participation (SP), Authenticity (Au)
+- **IMP Formula:** `IMP = A × IM × R × SP × Au` (see `models/imp.py`)
+- **Data sources:** Manifest files (`manifest/`) contain human-curated knowledge, formulas in `formeln/` (001-157)
+
+## Essential Files to Read First
+
+| File | Purpose |
+|------|---------|
+| `config/default.yaml` | All configurable parameters (manifest paths, keywords, defaults) |
+| `models/schemas.py` | Pydantic validation for all JSON outputs – **change here first** |
+| `models/imp.py` | IMP calculation formulas (multiplicative & weighted) |
+| `storage/anonymize.py` | Data privacy patterns (GDPR compliance for surveys) |
+| `web/5d-map/README.md` | Map architecture, formulas, caching strategy |
+
+## Developer Workflows
+
+### Quick Start
+```bash
+pip install -r requirements_extended.txt
+./start.sh  # or: make start
+```
+
+### Individual Pipeline Steps
+```bash
+python 5d_extractor.py          # → 5d_solutions.json
+python 5d_research_scraper.py   # → 5d_research_data.json
+python 5d_github_api.py         # → 5d_github_data.json
+streamlit run 5d_dashboard.py   # → http://localhost:8501
+```
+
+### Run 5D-Map Locally
+```bash
+cd web/5d-map
+python3 -m http.server 5500  # → http://localhost:5500
+# Optional CORS proxy for OWID:
+python3 owid_proxy.py 5510
+```
+
+### Testing
+```bash
+pytest tests/                    # All tests
+pytest tests/test_extractor.py -v  # Specific module with verbose output
+make test                        # Quick run via Makefile
+```
+
+### Environment Variables
+- `GITHUB_TOKEN` – Higher rate limits for GitHub API (optional)
+- `DISCORD_TOKEN` – Required only for Discord bot (`5d_discord_bot.py`)
+
+## Critical Data Contracts
+
+### JSON Filenames (NEVER rename without approval)
+- `5d_solutions.json` – Extracted 5D dimension scores from manifest
+- `5d_research_data.json` – Scraped academic papers
+- `5d_github_data.json` – GitHub repo metadata
+
+### Schema Evolution Pattern
+1. Update `models/schemas.py` (Pydantic models)
+2. Adjust producer scripts (`5d_extractor.py`, etc.)
+3. Update consumer scripts (`5d_dashboard.py`, etc.)
+4. Add tests in `tests/` to verify backward compatibility
+
+**Example (Score Normalization):**
+```python
+# models/schemas.py
+class DimensionScore(BaseModel):
+    score: float = Field(..., ge=0.0, le=1.0)
+    
+    @field_validator('score', mode='before')
+    def parse_score(cls, v):
+        # Handles: 'HIGH' → 0.75, '3.5' → 0.7, percentages, etc.
+        # Always clamps to [0, 1]
+```
+
+## Project-Specific Conventions
+
+### Streamlit Performance
+```python
+@st.cache_data  # ALWAYS use for expensive file loads
+def load_json(filepath):
+    return json.load(open(filepath))
+```
+
+### API Rate Limiting
+```python
+# Research scrapers
+time.sleep(1)  # Between requests to arXiv/OWID/World Bank
+```
+
+### Configuration over Hardcoding
+```python
+# ❌ Bad
+manifest_dir = "manifest"
+
+# ✅ Good
+from config.loader import load_config
+config = load_config()
+manifest_dir = config['extractor']['manifest_dir']
+```
+
+### IMP Calculation (Verifiable)
+```python
+from models.imp import calculate_imp_verified
+
+result = calculate_imp_verified({
+    'A': 0.75, 'IM': 0.70, 'R': 0.65, 'SP': 0.75, 'Au': 0.70
+})
+# Returns: {'raw_multiplicative': 0.179, 'normalized': 0.179, ...}
+```
+
+## Scientific Rigor Requirements
+
+When adding new features/functions, **ALWAYS** address:
+
+1. **Scientific Basis** → Create info-box with citation
+2. **Validation Status** → Badge: "Own Research" vs "Peer-Reviewed"
+3. **Data Source** → Link + download button
+4. **User Questions** → Extend FAQ proactively
+5. **UI Clarity** → Check against 50-UI-Tips (UX guidelines)
+
+**Example Pattern:**
 ```python
 # surveys/dimension_1_neurobiology.py
 NEUROBIOLOGY_QUESTIONS = [
     {
         "id": "neuro_flow_frequency",
-        "question": "Wie häufig erleben Sie Flow-Zustände (vollständiges Aufgehen in einer Tätigkeit)?",
+        "question": "Wie häufig erleben Sie Flow-Zustände?",
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
-        "labels": ["Nie", "Selten", "Manchmal", "Häufig", "Sehr häufig"],
         "reference": "Csikszentmihalyi, M. (1990). Flow: The Psychology of Optimal Experience.",
-        "bibtex_key": "csikszentmihalyi1990flow"
-    },
-    {
-        "id": "neuro_attention_span",
-        "question": "Wie schätzen Sie Ihre Konzentrationsfähigkeit ein?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Posner, M. I., & Petersen, S. E. (1990). The attention system of the human brain.",
-        "bibtex_key": "posner1990attention"
-    },
-    {
-        "id": "neuro_neuroplasticity",
-        "question": "Wie gut können Sie sich an neue Situationen anpassen?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Kolb, B., & Whishaw, I. Q. (1998). Brain plasticity and behavior.",
-        "bibtex_key": "kolb1998plasticity"
-    },
-    # ... 7+ weitere Fragen
-]
-```
-
-##### 2D: Psychologisch
-```python
-# surveys/dimension_2_psychology.py
-PSYCHOLOGY_QUESTIONS = [
-    {
-        "id": "psych_intrinsic_motivation",
-        "question": "Wie stark fühlen Sie sich intrinsisch (von innen heraus) motiviert bei Ihren Haupttätigkeiten?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Deci, E. L., & Ryan, R. M. (2000). Self-determination theory.",
-        "bibtex_key": "deci2000sdt",
-        "sub_dimension": "Autonomy"
-    },
-    {
-        "id": "psych_growth_mindset",
-        "question": "Inwieweit glauben Sie, dass Sie durch Anstrengung Ihre Fähigkeiten verbessern können?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Dweck, C. S. (2006). Mindset: The new psychology of success.",
-        "bibtex_key": "dweck2006mindset",
-        "sub_dimension": "Competence"
-    },
-    # ... 8+ weitere Fragen (Selbstwirksamkeit, soziale Verbundenheit, etc.)
-]
-```
-
-##### 3D: Philosophisch
-```python
-# surveys/dimension_3_philosophy.py
-PHILOSOPHY_QUESTIONS = [
-    {
-        "id": "philo_critical_thinking",
-        "question": "Wie wichtig ist Ihnen die Hinterfragung etablierter Wahrheiten?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Paul, R., & Elder, L. (2006). Critical thinking.",
-        "bibtex_key": "paul2006critical"
-    },
-    {
-        "id": "philo_epistemic_pluralism",
-        "question": "Wie offen sind Sie gegenüber unterschiedlichen Wissensformen (wissenschaftlich, kulturell, intuitiv)?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Santos, B. d. S. (2014). Epistemologies of the South.",
-        "bibtex_key": "santos2014epistemologies"
-    },
-    # ... 8+ weitere Fragen
-]
-```
-
-##### 4D: Ökonomisch
-```python
-# surveys/dimension_4_economics.py
-ECONOMICS_QUESTIONS = [
-    {
-        "id": "econ_participation",
-        "question": "Wie wichtig ist Ihnen Mitbestimmung in wirtschaftlichen Entscheidungen?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Albert, M., & Hahnel, R. (1991). The political economy of participatory economics.",
-        "bibtex_key": "albert1991parecon"
-    },
-    {
-        "id": "econ_commons",
-        "question": "Wie wichtig ist Ihnen gemeinschaftliches Eigentum an Ressourcen?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Ostrom, E. (1990). Governing the commons.",
-        "bibtex_key": "ostrom1990commons"
-    },
-    # ... 8+ weitere Fragen
-]
-```
-
-##### 5D: Technologisch
-```python
-# surveys/dimension_5_technology.py
-TECHNOLOGY_QUESTIONS = [
-    {
-        "id": "tech_open_source",
-        "question": "Wie wichtig ist Ihnen Open-Source-Software?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Raymond, E. S. (1999). The cathedral and the bazaar.",
-        "bibtex_key": "raymond1999cathedral"
-    },
-    {
-        "id": "tech_digital_autonomy",
-        "question": "Wie wichtig ist Ihnen Kontrolle über Ihre digitalen Daten?",
-        "type": "likert",
-        "scale": [1, 2, 3, 4, 5],
-        "reference": "Zuboff, S. (2019). The age of surveillance capitalism.",
-        "bibtex_key": "zuboff2019surveillance"
-    },
-    # ... 8+ weitere Fragen
-]
-```
-
-### Datenverarbeitung & Formeln
-
-#### Integration von GDrive-Formeln
-```python
-# analysis/calculate_5d_scores.py
-import json
-from models.imp import calculate_imp_verified
-
-def calculate_dimension_score(responses, dimension):
-    \"\"\"
-    Berechnet aggregierten Score pro Dimension.
-    Verwendet Formeln aus /formeln/ Ordner.
-    
-    Args:
-        responses: Dict mit Antworten
-        dimension: str - 'neurobiology', 'psychology', etc.
-    
-    Returns:
-        dict mit raw_score, normalized_score, sub_scores
-    \"\"\"
-    dimension_questions = load_dimension_questions(dimension)
-    
-    raw_scores = []
-    for question in dimension_questions:
-        qid = question['id']
-        if qid in responses:
-            raw_scores.append(responses[qid])
-    
-    # Durchschnitt (5-Punkt-Likert)
-    avg_score = sum(raw_scores) / len(raw_scores) if raw_scores else 0
-    
-    # Normalisierung (0-1)
-    normalized = (avg_score - 1) / 4  # Likert 1-5 -> 0-1
-    
-    return {
-        'dimension': dimension,
-        'raw_score': avg_score,
-        'normalized_score': normalized,
-        'n_questions': len(raw_scores),
-        'completeness': len(raw_scores) / len(dimension_questions)
+        "bibtex_key": "csikszentmihalyi1990flow"  # Must exist in 07_daten_analysen/5d-relevant-sources.bib
     }
-
-def calculate_5d_intelligence_profile(all_responses):
-    \"\"\"
-    Generiert vollständiges 5D-Profil.
-    \"\"\"
-    dimensions = ['neurobiology', 'psychology', 'philosophy', 'economics', 'technology']
-    
-    profile = {
-        'entrance_data': extract_entrance_data(all_responses),
-        'dimension_scores': {},
-        'aggregate_score': 0,
-        'timestamp': datetime.now().isoformat()
-    }
-    
-    for dim in dimensions:
-        profile['dimension_scores'][dim] = calculate_dimension_score(all_responses, dim)
-    
-    # Aggregierter Score (gleichgewichtet)
-    aggregate = sum([s['normalized_score'] for s in profile['dimension_scores'].values()]) / 5
-    profile['aggregate_score'] = aggregate
-    
-    # Optional: IMP-Score Integration
-    if 'imp_components' in all_responses:
-        profile['imp_score'] = calculate_imp_verified(all_responses['imp_components'])
-    
-    return profile
+]
 ```
 
-#### Clustering & Segmentierung
+## Testing Strategy
+
+### Pre-Commit Hook
+- Automatically runs: syntax checks + core tests
+- Failing core tests **block commits**
+- Manual trigger: `pytest tests/`
+
+### Test Categories
+- `test_extractor.py` – Manifest parsing, Pydantic validation
+- `test_anonymization.py` – GDPR compliance for survey data
+- `test_surveys.py` – Likert validation, completeness checks
+- `test_formulas_scoring.py` – IMP calculation accuracy
+
+### Writing New Tests
 ```python
-# analysis/cluster_responses.py
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-import pandas as pd
-
-def cluster_participants(all_profiles):
-    \"\"\"
-    Clustert Teilnehmer basierend auf 5D-Profilen.
+def test_new_feature():
+    # Arrange
+    input_data = {...}
     
-    Verwendet: K-Means (k=5 als Default)
-    Features: Dimension-Scores + Entrance-Daten
-    \"\"\"
-    df = pd.DataFrame(all_profiles)
+    # Act
+    result = process_data(input_data)
     
-    # Feature-Extraktion
-    features = []
-    for profile in all_profiles:
-        feature_vector = [
-            profile['dimension_scores']['neurobiology']['normalized_score'],
-            profile['dimension_scores']['psychology']['normalized_score'],
-            profile['dimension_scores']['philosophy']['normalized_score'],
-            profile['dimension_scores']['economics']['normalized_score'],
-            profile['dimension_scores']['technology']['normalized_score'],
-            profile['entrance_data']['life_satisfaction'],
-            profile['entrance_data']['financial_situation']
-        ]
-        features.append(feature_vector)
-    
-    # Standardisierung
-    scaler = StandardScaler()
-    features_scaled = scaler.fit_transform(features)
-    
-    # Clustering
-    kmeans = KMeans(n_clusters=5, random_state=42)
-    clusters = kmeans.fit_predict(features_scaled)
-    
-    return {
-        'cluster_labels': clusters.tolist(),
-        'cluster_centers': kmeans.cluster_centers_.tolist(),
-        'n_clusters': 5
-    }
+    # Assert
+    assert result['normalized_score'] >= 0.0
+    assert result['normalized_score'] <= 1.0
 ```
 
-### Visualisierung
+## What NOT to Do
 
-```python
-# analysis/visualize_results.py
-import plotly.graph_objects as go
-import plotly.express as px
+❌ **Rename public JSON keys** without team discussion  
+❌ **Introduce RAG/LLM external infrastructure** (PrivateGPT/Ollama)  
+❌ **Store personal data** outside `storage/anonymize.py` patterns  
+❌ **Hardcode values** that should be in `config/default.yaml`  
+❌ **Skip tests** when changing data schemas  
+❌ **Make blocking network calls** in Streamlit render paths  
 
-def generate_dimension_radar_chart(profile):
-    \"\"\"
-    Erzeugt Radar-Chart für 5D-Profil.
-    \"\"\"
-    dimensions = ['Neurobiologie', 'Psychologie', 'Philosophie', 'Ökonomie', 'Technologie']
-    scores = [
-        profile['dimension_scores']['neurobiology']['normalized_score'],
-        profile['dimension_scores']['psychology']['normalized_score'],
-        profile['dimension_scores']['philosophy']['normalized_score'],
-        profile['dimension_scores']['economics']['normalized_score'],
-        profile['dimension_scores']['technology']['normalized_score']
-    ]
-    
-    fig = go.Figure(data=go.Scatterpolar(
-        r=scores,
-        theta=dimensions,
-        fill='toself',
-        name='5D-Profil'
-    ))
-    
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(visible=True, range=[0, 1])
-        ),
-        showlegend=False,
-        title='5D-Intelligence Profil'
-    )
-    
-    return fig
+## Quick Reference Commands
 
-def generate_cluster_heatmap(cluster_data, profiles):
-    \"\"\"
-    Heatmap der Cluster-Zentren.
-    \"\"\"
-    # Implementierung...
-    pass
+```bash
+# Development
+./start.sh              # Full pipeline + dashboard
+make serve-map          # Just the 5D-Map
+streamlit run 5d_dashboard.py --server.port 8502  # Custom port
 
-def generate_time_series(longitudinal_data):
-    \"\"\"
-    Zeitverlauf falls mehrfache Teilnahme (opt-in).
-    \"\"\"
-    # Implementierung...
-    pass
+# Testing
+pytest tests/ -v        # Verbose
+pytest -k "test_extractor"  # Specific pattern
+
+# Deployment
+git push                # Triggers GitHub Actions for 5D-Map
+# Manual: Settings → Pages → Source: GitHub Actions
 ```
 
-### Authentifizierung & Datenschutz
-
-```python
-# auth/github_oauth.py
-import os
-import hashlib
-import secrets
-
-class GitHubAuth:
-    \"\"\"GitHub OAuth nur für Zugangskontrolle, KEINE Daten-Persistierung.\"\"\"
-    
-    def __init__(self):
-        self.client_id = os.getenv('GITHUB_CLIENT_ID')
-        self.client_secret = os.getenv('GITHUB_CLIENT_SECRET')
-    
-    def generate_session_token(self):
-        \"\"\"Generiert anonyme Session-ID.\"\"\"
-        return secrets.token_urlsafe(32)
-    
-    def authenticate(self, code):
-        \"\"\"OAuth-Flow, gibt nur Session-Token zurück.\"\"\"
-        # 1. Exchange code for access_token
-        # 2. Validiere dass User existiert
-        # 3. Generiere anonyme Session
-        # 4. LÖSCHE alle GitHub-Daten sofort
-        
-        session_token = self.generate_session_token()
-        
-        # KEINE Speicherung von:
-        # - github_username
-        # - github_email
-        # - github_id
-        
-        return {
-            'session_token': session_token,
-            'expires_at': datetime.now() + timedelta(hours=24)
-        }
-
-# storage/anonymize.py
-def anonymize_response(response_data):
-    \"\"\"
-    Entfernt ALLE identifizierenden Informationen.
-    \"\"\"
-    # Generiere eindeutige, aber nicht-rückverfolgbare ID
-    anonymous_id = hashlib.sha256(
-        (str(uuid.uuid4()) + secrets.token_hex(16)).encode()
-    ).hexdigest()
-    
-    cleaned_response = {
-        'id': anonymous_id,
-        'responses': response_data['responses'],
-        'timestamp': datetime.now().isoformat(),
-        'version': '1.0.0'
-    }
-    
-    # Explizit entfernen:
-    prohibited_keys = ['username', 'email', 'github_id', 'ip_address', 'user_agent']
-    for key in prohibited_keys:
-        if key in cleaned_response:
-            del cleaned_response[key]
-    
-    return cleaned_response
-```
-
-### Implementierungs-Roadmap
-
-#### Phase 1: Fragebogen-Development (Priorität 1)
-- [ ] `surveys/entrance_questions.py` mit vollständigem Schema
-- [ ] `surveys/dimension_X_*.py` für alle 5 Dimensionen (mindestens 10 Fragen je)
-- [ ] `surveys/validator.py` für Input-Validierung
-- [ ] `surveys/bibtex_sources.bib` mit allen wissenschaftlichen Quellen
-
-#### Phase 2: Web-Interface (Priorität 1)
-- [ ] `web/survey-app/` mit React/Vite
-- [ ] GitHub OAuth Integration
-- [ ] Progressives Multi-Step-Formular
-- [ ] DSGVO-Consent-Management
-- [ ] Offline-Fähigkeit (Progressive Web App)
-
-#### Phase 3: Datenverarbeitung (Priorität 2)
-- [ ] `analysis/calculate_5d_scores.py`
-- [ ] `analysis/cluster_responses.py`
-- [ ] `analysis/visualize_results.py`
-- [ ] Integration mit GDrive-Formeln
-- [ ] Export-Funktionen (CSV, JSON, BibTeX)
-
-#### Phase 4: Dokumentation (Priorität 2)
-- [ ] Wiki: Methodik, Fragebogen-Design, Ethik
-- [ ] README: Schnellstart für Teilnehmer
-- [ ] CONTRIBUTING: Richtlinien für neue Fragen
-- [ ] API-Dokumentation für Forscher
-
-#### Phase 5: Testing & Validierung (Priorität 1)
-- [ ] Unit-Tests für alle Berechnungen
-- [ ] Validierung der Fragebogen-Zuverlässigkeit (Cronbach's Alpha)
-- [ ] Pilotphase mit 50-100 Teilnehmern
-- [ ] Iterative Verbesserung basierend auf Feedback
-
-### Code-Generierungs-Richtlinien für Copilot
-
-**Beim Generieren von Survey-Code:**
-
-1. **Immer wissenschaftliche Quelle angeben**:
-   ```python
-   # Referenz: Csikszentmihalyi (1990) - Flow Theory
-   # BibTeX: csikszentmihalyi1990flow
-   FLOW_THRESHOLD = 0.7
-   ```
-
-2. **Likert-Skalen konsistent verwenden**:
-   ```python
-   LIKERT_5 = [1, 2, 3, 4, 5]  # Standard
-   LIKERT_LABELS_DE = ["Stimme überhaupt nicht zu", "Stimme nicht zu", "Neutral", "Stimme zu", "Stimme voll zu"]
-   ```
-
-3. **Validierung einbauen**:
-   ```python
-   def validate_likert_response(value, scale=[1,2,3,4,5]):
-       assert value in scale, f"Invalid Likert value: {value}"
-       return True
-   ```
-
-4. **Anonymität garantieren**:
-   ```python
-   PROHIBITED_FIELDS = ['name', 'email', 'username', 'github_id', 'ip']
-   
-   def ensure_anonymity(data):
-       for field in PROHIBITED_FIELDS:
-           assert field not in data, f"Prohibited field found: {field}"
-   ```
-
-5. **Tests schreiben**:
-   ```python
-   def test_anonymization():
-       response = {'question_1': 3, 'user_id': 'SHOULD_NOT_EXIST'}
-       anonymized = anonymize_response(response)
-       assert 'user_id' not in anonymized
-       assert 'id' in anonymized
-       assert len(anonymized['id']) == 64  # SHA256 hex
-   ```
-
-### Datei-Locations
+## File Structure Overview
 
 ```
 5d/
-├── surveys/
-│   ├── entrance_questions.py
-│   ├── dimension_1_neurobiology.py
-│   ├── dimension_2_psychology.py
-│   ├── dimension_3_philosophy.py
-│   ├── dimension_4_economics.py
-│   ├── dimension_5_technology.py
-│   ├── validator.py
-│   └── bibtex_sources.bib
-├── analysis/
-│   ├── calculate_5d_scores.py
-│   ├── cluster_responses.py
-│   └── visualize_results.py
-├── auth/
-│   ├── github_oauth.py
-│   └── session_manager.py
-├── storage/
-│   ├── anonymize.py
-│   └── database.py  # SQLite
-├── web/
-│   └── survey-app/  # React + Vite
-├── tests/
-│   ├── test_surveys.py
-│   ├── test_anonymization.py
-│   └── test_calculations.py
-└── wiki/
-    ├── Survey-Methodology.md
-    ├── Question-Design.md
-    ├── Data-Processing.md
-    └── Ethics-GDPR.md
-```
-
-### Ethik & DSGVO
-
-**Consent-Text (Beispiel)**:
-```markdown
-## Einwilligungserklärung
-
-Mit Ihrer Teilnahme erklären Sie sich einverstanden:
-
-1. ✅ Ihre Antworten werden **vollständig anonymisiert** gespeichert
-2. ✅ **Keine personenbezogenen Daten** (Name, E-Mail, GitHub-Username) werden gespeichert
-3. ✅ Daten werden nur für **wissenschaftliche Forschung** im 5D-Framework verwendet
-4. ✅ Alle Daten sind **Open Science** - aggregierte Ergebnisse werden veröffentlicht
-5. ✅ Sie können jederzeit **Löschung** beantragen (via GitHub Issue mit Session-Token)
-
-**Datenschutz**: DSGVO-konform, lokale Speicherung, keine Cloud-Services.
-
-[ ] Ich habe die Datenschutzerklärung gelesen und stimme zu
+├── manifest/               # Human-curated knowledge (01-08, 99)
+├── formeln/                # Scientific formulas (001-157)
+├── config/                 # default.yaml + loader.py
+├── models/                 # schemas.py (Pydantic), imp.py
+├── analysis/               # calculate_5d_scores.py, cluster_responses.py
+├── surveys/                # Survey questions with citations
+├── storage/                # anonymize.py (GDPR patterns)
+├── web/5d-map/             # Interactive Leaflet map
+├── tests/                  # Pytest suite
+├── 5d_extractor.py         # Stage 1: Manifest → JSON
+├── 5d_research_scraper.py  # Stage 2: Research APIs → JSON
+├── 5d_github_api.py        # Stage 3: GitHub metadata → JSON
+├── 5d_dashboard.py         # Main Streamlit UI
+└── RUN_ALL.sh              # Orchestration script
 ```
 
 ---
 
-**Version**: 2.0.0 (erweitert mit akademischem Survey-Framework)  
-**Letzte Aktualisierung**: 2025-12-02  
-**Status**: Spezifikation vollständig, Implementierung Priorität 1
+**Version:** 2.0  
+**Last Updated:** December 2, 2025  
+**Dev Container:** Ubuntu 24.04.3 LTS, Python 3.10+
