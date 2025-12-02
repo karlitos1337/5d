@@ -37,7 +37,7 @@
 - [x] Copilot Instructions aktualisieren
 - [x] User Guide für Weltkarte (docs/USER_GUIDE.md)
 - [x] Contributing Guidelines (CONTRIBUTING.md)
-- [ ] API-Dokumentation für externe Systeme
+- [x] API-Dokumentation für externe Systeme
 
 ## Erledigte Aufgaben
 - [x] Git Pre-Commit Hook mit Test-Validierung
