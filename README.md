@@ -59,6 +59,28 @@ This repository contains comprehensive documentation across multiple knowledge d
 	```
 - Details: `web/5d-map/README.md` · Kurz‑Anweisung: `md_copilot_ki_anweisung`
 
+## 🛠 Dev Quickstart
+
+These commands help developers run the main pipeline and preview the UI locally.
+
+Install dependencies:
+```bash
+pip install -r requirements_extended.txt
+```
+
+Make the starter script executable and run it (runs extractor, scrapers and UI servers):
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+Alternatively use `make`:
+```bash
+make start   # runs ./start.sh
+make test    # runs pytest
+make serve-map  # serves web/5d-map on port 5500
+```
+
 - Epistemological foundations in `03_philosophie_epistemologie/`
 - Systems theory applications in `06_synthesen_kompilationen/`
 
