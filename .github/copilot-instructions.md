@@ -20,101 +20,43 @@ Ziel: Schnell produktiv arbeiten, ohne Datenflüsse/Verträge zu brechen. Fokus 
   - `streamlit run 5d_dashboard.py` (Port 8501)
 - Tests: `pytest tests/` oder gezielt `pytest tests/test_extractor.py -v`.
 - **Git Workflow**: Pre-Commit Hook (`.git/hooks/pre-commit`) führt automatisch aus:
-  - TODO-Liste Check (zeigt offene Tasks)
-  - Python Syntax Validation
-  - Flake8 Linting (non-blocking warnings)
-  - Core Tests (pytest) - **blockiert bei Failures**
-  - JSON Validation
-  - Commits werden blockiert bei Test-Failures. TODO-Liste in `TODO.md` tracken.
+# Copilot/Agent Instructions — 5d (kurz)
 
-### Schneller Start (Try it)
-- Setup: `pip install -r requirements_extended.txt`
-- Test: `pytest -q tests/test_extractor.py`
-- Pipeline: `python 5d_extractor.py && python 5d_research_scraper.py && python 5d_github_api.py`
-- Dashboard: `streamlit run 5d_dashboard.py`
+Kurz: konzentriere Änderungen auf Pipeline‑contracts, JSON‑artefakte und Streamlit‑UIs. Kleine, rückwärtskompatible PRs; prüfe Tests vor Commit.
 
-### Datenverträge (beibehalten)
-- Dateien: `5d_solutions.json`, `5d_research_data.json`, `5d_github_data.json`.
-- Extractor‑Output: Pydantic‑validiert (`models/schemas.py`):
-  - `Solutions = { projects: Project[], dimension_scores: DimensionScore[], plan: {} }`
-  - Dashboard liest zusätzlich legacy Felder unter `solutions` (wenn vorhanden) und fällt weich zurück, falls leer.
-- Research/GitHub: Map nach Keywords/Queries; enthalten `timestamp` und reichen für UI‑Abschnitte.
-- Sprache/Keys: Nutzer‑Facing in DE (z. B. `"Projekte"`, `"ROI"`, `"Pilots"`). Nicht umbenennen ohne UI/Bot‑Update.
+- **Big picture**: `5d_extractor.py` → `5d_research_scraper.py` → `5d_github_api.py` → JSON output read by `5d_dashboard.py` and other Streamlit apps.
+- **Read first**: `config/loader.py`, `config/default.yaml`, `models/schemas.py`, `models/imp.py`, `storage/anonymize.py`, `RUN_ALL.sh`, `README.md`.
 
-### Muster & Konventionen
-- Extractor (`5d_extractor.py`):
-  - Rekursiver Scan `manifest/` (Dateitypen/Regex aus `config/default.yaml`).
-  - Zahlen robust parsen, Projekte deduplizieren (siehe `models/schemas.py`).
-- Research (`5d_research_scraper.py`):
-  - arXiv (Atom/XML) + PubMed (E‑Utilities JSON). 10s Timeout, `time.sleep(1)` Rate‑Limit beibehalten.
-- GitHub (`5d_github_api.py`):
-  - `search_queries` definieren Suchthemen; optional `GITHUB_TOKEN` für höhere Limits.
-- IMP (`models/imp.py`):
-  - `calculate_imp_verified({'A','IM','R','SP','Au'})` liefert `raw_multiplicative`, `weighted_additive`, `normalized` (Gewichte dokumentiert).
-- Streamlit (`5d_dashboard.py`):
-  - Datenzugriff in `@st.cache_data`‑Funktionen; keine Blocking‑Ops im Renderpfad; Plotly‑Fallbacks vorhanden.
+- **Common commands**:
+    - Install: `pip install -r requirements_extended.txt`
+    - Full pipeline: `./RUN_ALL.sh` (or run each `python` step)
+    - Dashboard: `streamlit run 5d_dashboard.py`
+    - Tests: `pytest tests/` or `pytest tests/test_extractor.py -q`
 
-### Guardrails (Änderungen sicher)
-- JSON additiv erweitern statt Keys umzubenennen; Dateinamen stabil halten.
-- Netzwerkzugriffe robust: Timeouts/Fehler → leere Listen; kein harter Abbruch.
-- Keine RAG/PrivateGPT/Ollama‑Setups in diesem Repo; Fokus auf Kern‑5D‑Tools.
+- **Env vars**: `GITHUB_TOKEN` (optional, higher rate limits), `DISCORD_TOKEN` (bot).
 
-### Diagnose & Recovery
-- Dashboard leer? Pipeline neu ausführen und Dateigröße prüfen: `ls -lh 5d_*.json`.
-- Healthcheck: `curl -s http://localhost:8501/_stcore/health` → `ok` erwartet.
-- Neustart UI: `pkill -f streamlit || true && streamlit run 5d_dashboard.py --server.headless true`.
-- GitHub Limits: `export GITHUB_TOKEN=...`; Bot: `export DISCORD_TOKEN=...`.
+- **Data contracts**:
+    - Core JSON filenames: `5d_solutions.json`, `5d_research_data.json`, `5d_github_data.json` — keep stable.
+    - Validate changes via `models/schemas.py` (pydantic). Update schemas + tests when shape changes.
+    - Use `storage/anonymize.py` patterns for any participant data.
 
-### Externe Quellen (optional)
-- Submodules unter `external/` möglich (siehe Ordnerstruktur); Merge via `merge_external_solutions.py` erzeugt `solutions_external.json`/`5d_solutions_merged.json` additiv.
+- **Conventions & patterns**:
+    - Manifest scanning configured in `config/default.yaml` and implemented in `5d_extractor.py`.
+    - Research scrapers use conservative timeouts and explicit `time.sleep(1)` between requests.
+    - Streamlit: cache expensive loads with `@st.cache_data`; avoid blocking network calls in render path.
+    - Domain formulas live in `formeln/` (human-readable) and are implemented in `analysis/` or `models/`.
 
-### Weltkarte (Frontend)
-- Vollständige Spezifikation: `docs/5d-map/COPILOT_INSTRUCTIONS.md` (Pointer → `md_copilot_ki_anweisung`).
-- Kurz‑Anweisung (MVP, präzise Formeln & Pfade): `md_copilot_ki_anweisung`.
-- Stack: Static Web (HTML/CSS/JS), Leaflet + Leaflet.heat + Chart.js, ohne Backend.
-- Scope: Unabhängig von Python‑Pipeline; nutzt öffentliche APIs (World Bank/OWID/OECD/WHO) mit lokalem Cache (1h TTL).
-- Implementiert: Status‑Quo‑Heatmap (OWID/WorldBank), IMP‑Choropleth mit WGI‑Proxies (RL.EST/VA.EST/GE.EST) und Legende.
-- Quick start:
-  - `cd web/5d-map && python3 -m http.server 5500`
-  - Öffnen: `http://localhost:5500`, Layer‑Buttons: „Status Quo“, „Alternative Schulen“, „IMP‑Score“.
-  - Zeitreise: Button „Zeitreise“, Slider erscheint; Baseline (`data/baseline.json`) für feste Ausgangswerte.
+- **Testing & commits**:
+    - Pre-commit hook (`.git/hooks/pre-commit`) runs syntax checks and core tests; failing core tests block commits. Run `pytest` locally.
 
-Referenzen: `5d_extractor.py`, `5d_dashboard.py`, `5d_research_scraper.py`, `5d_github_api.py`, `5d_discord_bot.py`, `models/schemas.py`, `models/imp.py`, `config/default.yaml`, `tests/`.
+- **Quick dev flow for changes**:
+    1. Update code in small PR, run `pytest`.
+    2. If JSON shape changes, update `models/schemas.py` and dashboard readers.
+    3. Add/adjust tests under `tests/` and run them.
 
----
+- **No-go**: do not introduce RAG/LLM external infra (PrivateGPT/Ollama) or rename public JSON keys without explicit approval.
 
-## 🎯 Akademisches Erhebungsinstrument (NEU)
-
-### Vision: 5D-Intelligence Survey Framework
-
-Entwicklung eines **wissenschaftlich validierten Fragebogens** zur Erhebung multidimensionaler Intelligenz-Daten:
-
-#### Kernprinzipien
-1. **Absolute Anonymität**: GitHub OAuth nur als Zugangskontrolle, KEINE Speicherung personenbezogener Daten
-2. **Akademische Validität**: Alle Fragen wissenschaftlich fundiert mit BibTeX-Quellen
-3. **Interdisziplinarität**: 5 Dimensionen gleichwertig abgebildet
-4. **DSGVO-Konformität**: Local-first, keine Cloud-Abhängigkeit, explizites Consent
-5. **Open Science**: Alle Algorithmen, Formeln und Daten transparent
-
-### Fragebogen-Architektur
-
-#### Eingangsfragen (Demografisch, anonym)
-```python
-# surveys/entrance_questions.py
-ENTRANCE_SCHEMA = {
-    "employment_status": {
-        "type": "select",
-        "options": ["Angestellt", "Selbstständig", "Student", "Arbeitssuchend", "Rentner", "Sonstiges"],
-        "required": True
-    },
-    "education_level": {
-        "type": "select",
-        "options": ["Kein Abschluss", "Hauptschule", "Realschule", "Abitur", "Bachelor", "Master", "Promotion"],
-        "required": True
-    },
-    "postal_code": {
-        "type": "number",
-        "min": 10000,
+Wenn du willst, erweitere ich diese Datei mit kurze Beispiele (code snippets) für: JSON validation, an anonymization unit test, oder a minimal PR checklist. Feedback? 
         "max": 99999,
         "purpose": "Regional clustering (anonymized)"
     },
