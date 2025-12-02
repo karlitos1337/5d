@@ -1,7 +1,8 @@
 Param(
     [switch]$Install,
     [switch]$Tests,
-    [switch]$Dashboard
+    [switch]$Dashboard,
+    [switch]$Hook
 )
 
 # UV Script: schnelle Umgebung + typische Aktionen
@@ -43,4 +44,15 @@ if ($PSBoundParameters.ContainsKey('Tests') -and -not $Dashboard -and -not $Inst
     Write-Host "Ruff Lint..."; ruff check .
     Write-Host "Black Check..."; black --check .
     Write-Host "Mypy..."; mypy src
+}
+
+if ($Hook) {
+    # Pre-Commit installieren/aktualisieren
+    if (Get-Command uv -ErrorAction SilentlyContinue) {
+        uv pip install pre-commit
+    } else {
+        pip install pre-commit
+    }
+    pre-commit install
+    Write-Host "Pre-commit Hook installiert." -ForegroundColor Green
 }
