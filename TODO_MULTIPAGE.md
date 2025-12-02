@@ -13,6 +13,31 @@ Jedes Thema wird zu einer eigenen Page mit:
 
 ## 📊 Phase 1: Dashboard Pages (Struktur)
 
+### 0. Wiki/Home - Hauptseite (PRIORITY 1) ✅
+- [x] Page erstellen: `5d_dashboard.py` (neu: als Wiki/Guide)
+- [x] Installation für Anfänger (ohne Vorkenntnisse)
+  - [x] GitHub Codespaces (empfohlen)
+  - [x] Lokal (Windows/macOS/Linux)
+  - [x] Docker (fortgeschritten)
+- [x] Alle Befehle erklärt (freundlich, ohne Abwertung)
+  - [x] 10 wichtigste Befehle mit expandable Details
+  - [x] Begriffe-Glossar (Terminal, Python, Git, JSON, etc.)
+- [x] Navigation zu allen anderen Pages
+  - [x] Sidebar mit page_link() zu fertigen Seiten
+  - [x] Übersicht aller 8 Seiten mit Beschreibung
+- [x] Schnellstart-Guide (3 Schritte)
+  - [x] Code öffnen → Dashboard starten → Erkunden
+  - [x] 5D Framework erklärt (Formel, Dimensionen)
+- [x] Troubleshooting-Sektion
+  - [x] 6 FAQs (häufigste Probleme)
+  - [x] 10-Punkte Checkliste
+  - [x] Links zu Community/Docs
+- [x] Links zu allen Ressourcen (Docs, BibTeX, GitHub)
+  - [x] Dokumentation (User Guide, API, Contributing, Deployment)
+  - [x] Code & Daten (GitHub, BibTeX, Manifest, Formeln)
+  - [x] Externe Ressourcen (OWID, World Bank, WHO, arXiv, PubMed)
+- [ ] Video-Tutorials (optional, später)
+
 ### 1. IMP Analysis (✅ DONE)
 - [x] Scientific validation with BibTeX
 - [x] Peer-reviewed sources linked
