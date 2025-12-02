@@ -21,6 +21,7 @@ This repository contains comprehensive documentation across multiple knowledge d
 - **[📖 Wiki Home](wiki/)** - Complete 5D-Intelligence overview with detailed glossary
 - **[📊 Manifest Summary](manifest_summary.md)** - Hierarchical overview of all project documents
 - **[💡 Concepts & Definitions](wiki/Home)** - Detailed explanations of key terms
+ - **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
 
 ## 🗂️ Project Structure
 
