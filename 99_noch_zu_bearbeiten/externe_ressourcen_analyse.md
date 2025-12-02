@@ -491,7 +491,7 @@ Folgende **10 neue Einträge** müssen in `07_daten_analysen/5d-relevant-sources
 % --- BATCH 1-2 (bereits dokumentiert, hier zur Vollständigkeit) ---
 
 @misc{fmhy2025,
-  title = {FreeMedieHeckYeah: The Largest Collection of Free Stuff on the Internet},
+  title = {FreeMediaHeckYeah: The Largest Collection of Free Stuff on the Internet},
   author = {{FMHY Community}},
   year = {2025},
   howpublished = {\\url{https://fmhy.net}},
