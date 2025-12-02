@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5D Repository Struktur-Analyse | 8 Domänen & 5 Dimensionen</title>
+    <meta name="description" content="Umfassende Analyse des 5D-Repositories mit Fokus auf 8 Domänenordner und 5 Dimensionen" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
+      import RepositoryAnalysis from './src/RepositoryAnalysis.jsx';
+      import './src/index.css';
+      
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        React.createElement(React.StrictMode, null,
+          React.createElement(RepositoryAnalysis)
+        )
+      );
+    </script>
+  </body>
+</html>
