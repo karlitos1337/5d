@@ -2,7 +2,9 @@ Param(
     [switch]$Install,
     [switch]$Tests,
     [switch]$Dashboard,
-    [switch]$Hook
+    [switch]$Hook,
+    [switch]$ValidateMd,
+    [switch]$Fix
 )
 
 # UV Script: schnelle Umgebung + typische Aktionen
@@ -55,4 +57,11 @@ if ($Hook) {
     }
     pre-commit install
     Write-Host "Pre-commit Hook installiert." -ForegroundColor Green
+}
+
+if ($ValidateMd) {
+    # Manifest Markdown validieren; optional fixen
+    $fixFlag = ""
+    if ($Fix) { $fixFlag = "--fix" }
+    C:/Users/1/Documents/ki/resonance-formula-5d-intelligence/5d/.venv/Scripts/python.exe scripts/validate_manifest_md.py manifest $fixFlag
 }
