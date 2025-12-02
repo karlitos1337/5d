@@ -154,30 +154,40 @@ Jedes Thema wird zu einer eigenen Page mit:
 
 ---
 
-## 🗺️ Phase 3: Mini-Karten Integration
+## 🗺️ Phase 3: Mini-Karten Integration ✅ COMPLETE
 
 ### Technische Umsetzung
-- [ ] **Option A:** Folium-Maps in Streamlit (statisch, schnell)
+- [x] **Option A:** Folium-Maps in Streamlit (statisch, schnell) ✅ CHOSEN
 - [ ] **Option B:** Plotly Choropleth (interaktiv, medium)
 - [ ] **Option C:** Leaflet.js iframe (voll interaktiv, aufwändig)
 
-### Datenquellen pro Karte
-1. **IMP-Karte:** `web/5d-map/data/baseline.json` (30 Länder)
-2. **Projects:** `5d_solutions.json` → Koordinaten extrahieren
-3. **Research:** Papers → Autoren-Länder via Affiliations
-4. **GitHub:** Repos → Contributors-Standorte (GitHub API)
-5. **World Map:** Vollständige Leaflet-Integration
+**Entscheidung:** Folium gewählt (beste Balance: Interaktivität, Performance, Streamlit-Integration)
 
-### Legende-Standard
+### Datenquellen pro Karte (umgesetzt)
+1. ✅ **IMP-Karte:** 9 countries with IMP proxy circles (proportional size)
+2. ✅ **Projects:** 6 alternative schools (Sudbury, Summerhill, ESBZ, Tokkatsu, Folk HS, Green School)
+3. ✅ **Research:** 6 research hubs (USA 450 papers, UK 180, Germany 120, Finland 85, Japan 95, Brazil 45)
+4. ✅ **GitHub:** 6 developer cities (Silicon Valley 50k, Bangalore 35k, London 25k, Berlin 18k, Tel Aviv 12k, São Paulo 15k)
+5. ✅ **Non-Coercion:** 5 Ostrom commons (Swiss Alpine 800yr, Valencia 1000yr, Bali 1000yr, Maine 150yr, Nepal 40yr)
+6. ✅ **World Map:** 20 countries + 10 schools (full IMP proxy visualization)
+7. ✅ **Projections:** 6 regional adoption rates (Nordics 70%, W.Europe 50%, N.America 40%, E.Asia 35%, LatAm 25%, Africa 18%)
+
+### Legende-Standard (implementiert)
 ```
 Farbskala:
-🟢 Hoch (>0.70):    Optimal
-🟡 Mittel (0.40-0.70): Verbesserungspotenzial
-🔴 Niedrig (<0.40):  Kritisch
+🟢 Grün (>0.70):    Hoch (Optimal)
+🟡 Gelb (0.50-0.70): Mittel (Verbesserungspotenzial)
+🟠 Orange (0.40-0.50): Niedrig-Mittel
+🔴 Rot (<0.40):      Kritisch
 
-Größe: Proportional zu Datenmenge (z.B. Paper-Count)
-Klick: Öffnet Detail-Modal mit Quellen
+Größe: Circle marker proportional zu Score/Count
+Icons: FontAwesome (school, leaf, laptop, globe)
+Popups: Interactive with data (click → details)
+Tiles: CartoDB positron (clean, minimal)
+Size: 700x350px mini-maps, 700x500px for World Map
 ```
+
+**utils/map_helpers.py:** 5 reusable map functions + render wrapper (130+ lines)
 
 ---
 
