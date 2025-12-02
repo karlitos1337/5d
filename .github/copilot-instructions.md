@@ -372,6 +372,52 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 5. Scientific References: Expandable section with BibTeX citations
 6. Mini-map placeholder: Reserved for Folium/Plotly integration
 
+## Current Development Status & Roadmap
+
+### 📋 Active TODO Lists
+
+**General Tasks:** See [TODO.md](../TODO.md)
+- **Status:** 13/15 tasks completed (87%)
+- **Remaining:** 1 manual infrastructure task (GitHub Pages activation)
+- **Key completions:**
+  - ✅ Pipeline & Core (Extractor, Research Scraper, GitHub API)
+  - ✅ Dashboard & UI (Caching, Weltkarte, Mobile optimization)
+  - ✅ Tests & CI (Pre-commit hooks, GitHub Actions, E2E tests)
+  - ❌ Deployment: GitHub Pages manual activation pending
+
+**Multi-Page Dashboard:** See [TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md)
+- **Status:** 2/8 pages completed (Phase 1)
+- **Completed Pages:**
+  - ✅ Wiki/Home (5d_dashboard.py) - Entry point with installation guides
+  - ✅ IMP Analysis (pages/1_📊_IMP_Analysis.py) - Scientific validation
+  - ✅ Projects (pages/2_🚀_Projects.py) - ROI analysis with Heckman methodology
+- **Remaining Pages (6):**
+  - 📚 Research (arXiv, PubMed, WHO, World Bank)
+  - 💻 GitHub (Open Source metrics, Activity scores)
+  - 🧬 Game of Life (Conway 1970, cellular automata)
+  - 🤝 Non-Coercion (Ostrom commons, cooperation models)
+  - 🌍 World Map (Full Leaflet.js integration)
+  - 📈 Projections (Future scenarios, adoption curves)
+
+**Page Requirements (per TODO_MULTIPAGE.md):**
+1. Scientific sources (BibTeX + peer-reviewed papers)
+2. Formulas with justification and sources
+3. Own apps/tests/simulations integrated
+4. Mini world map with country/region data
+5. Color-coded legend with % impact indicators
+6. Interactive clickable regions → detail views
+
+**Next Priority Actions:**
+1. Complete remaining 6 pages (Phase 1)
+2. Add mini-maps to all pages (Phase 3: Folium/Plotly/Leaflet)
+3. Expand scientific tests for each topic (Phase 8)
+4. Activate GitHub Pages for 5D-Map deployment
+
+**Progress Tracking:**
+- General TODO: [TODO.md](../TODO.md) - Infrastructure, CI/CD, deployment
+- Dashboard TODO: [TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md) - Content, features, scientific validation
+- Both files are actively maintained and should be consulted before major changes
+
 ---
 
 **Version:** 2.0  
