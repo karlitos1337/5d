@@ -18,7 +18,7 @@ Dieser Mega-Index aggregiert die umfassendsten kostenlosen Bildungsressourcen de
 
 ---
 
-## 🔴 KRITISCH: FMHYB64 (FreeMedieHeckYeah)
+## 🔴 KRITISCH: FMHYB64 (FreeMediaHeckYeah)
 
 ### **Hauptressource**
 - **URL**: https://fmhy.net  
