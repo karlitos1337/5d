@@ -28,9 +28,17 @@
 
 ### Deployment
 - [x] GitHub Pages Setup für Weltkarte (Workflow ready)
-- [ ] GitHub Pages aktivieren (manual step - siehe docs/DEPLOYMENT.md)
+- [ ] GitHub Pages aktivieren (manual step - siehe docs/DEPLOYMENT.md + docs/REMAINING_TASKS.md)
 - [x] Service Worker für Offline-Modus
 - [x] CSP Headers für Sicherheit
+
+---
+
+## 📊 Gesamtfortschritt: 13/15 (87%)
+
+**Verbleibend:** 1 manueller Infrastruktur-Task (GitHub Pages Aktivierung)
+
+Siehe `docs/REMAINING_TASKS.md` für Details zu verbleibenden manuellen Schritten.
 - [x] Cross-Browser Testing (Playwright: Chrome, Firefox, Safari, Mobile)
 
 ### Dokumentation
