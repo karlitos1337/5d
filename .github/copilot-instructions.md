@@ -376,7 +376,7 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 
 ### 📋 Active TODO Lists
 
-**General Tasks:** See [TODO.md](../TODO.md)
+**General Tasks:** See TODO.md in repository root
 - **Status:** 13/15 tasks completed (87%)
 - **Remaining:** 1 manual infrastructure task (GitHub Pages activation)
 - **Key completions:**
@@ -385,7 +385,7 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
   - ✅ Tests & CI (Pre-commit hooks, GitHub Actions, E2E tests)
   - ❌ Deployment: GitHub Pages manual activation pending
 
-**Multi-Page Dashboard:** See [TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md)
+**Multi-Page Dashboard:** See TODO_MULTIPAGE.md in repository root
 - **Status:** 2/8 pages completed (Phase 1)
 - **Completed Pages:**
   - ✅ Wiki/Home (5d_dashboard.py) - Entry point with installation guides
@@ -399,7 +399,7 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
   - 🌍 World Map (Full Leaflet.js integration)
   - 📈 Projections (Future scenarios, adoption curves)
 
-**Page Requirements (per [TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md)):**
+**Page Requirements (per TODO_MULTIPAGE.md):**
 1. Scientific sources (BibTeX + peer-reviewed papers)
 2. Formulas with justification and sources
 3. Own apps/tests/simulations integrated
@@ -426,8 +426,8 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 4. Activate GitHub Pages for 5D-Map deployment
 
 **Progress Tracking:**
-- General TODO: [TODO.md](/workspaces/5d/TODO.md) - Infrastructure, CI/CD, deployment (13/15 tasks, 87%)
-- Dashboard TODO: [TODO_MULTIPAGE.md](/workspaces/5d/TODO_MULTIPAGE.md) - Content, features, scientific validation (8/8 pages Phase 1, 100%)
+- General TODO: See TODO.md - Infrastructure, CI/CD, deployment (13/15 tasks, 87%)
+- Dashboard TODO: See TODO_MULTIPAGE.md - Content, features, scientific validation (8/8 pages Phase 1, 100%)
 - Both files are actively maintained and should be consulted before major changes
 
 ---
