@@ -16,14 +16,14 @@
     - `07_daten_analysen/` – Datensätze, empirische Validierung
   - Neue Struktur: `research/` Namespace vs. Integration in 0x-Ordner
 
-- [ ] **Zentrales Literatur-File definieren**
-  - Location: `07_daten_analysen/LITERATUR_INDEX.md`
+- [x] **Zentrales Literatur-File definieren** ✅
+  - Location: `07_daten_analysen/LITERATUR_INDEX.md` (DONE)
   - Verweise auf:
-    - `5d-relevant-sources.bib` (59 entries, BibTeX)
-    - `SOURCES.md` (allgemeine Quellen)
-    - `RAUM_QUELLEN_INDEX.md` (räumliche Datenquellen)
-    - `WISSENS_INDEX.md` (Wissensmanagement)
-  - Kategorisierung: Neuro, Öko, Sozial, Philosophie, Governance
+    - `5d-relevant-sources.bib` (64 entries, BibTeX) ✅
+    - `SOURCES.md` (allgemeine Quellen) ✅
+    - `RAUM_QUELLEN_INDEX.md` (räumliche Datenquellen) ✅
+    - `WISSENS_INDEX.md` (Wissensmanagement) ✅
+  - Kategorisierung: Neuro, Öko, Sozial, Philosophie, Governance ✅
 
 - [ ] **Dokumentationsstandard erweitern**
   - In `docs/README.md` ergänzen:
