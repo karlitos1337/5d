@@ -22,6 +22,12 @@ if ($Install) {
     } else {
         pip install -r requirements_extended.txt
     }
+    # Dev-Tools
+    if (Get-Command uv -ErrorAction SilentlyContinue) {
+        uv pip install ruff black mypy
+    } else {
+        pip install ruff black mypy
+    }
 }
 
 if ($Tests) {
@@ -30,4 +36,11 @@ if ($Tests) {
 
 if ($Dashboard) {
     C:/Users/1/Documents/ki/resonance-formula-5d-intelligence/5d/.venv/Scripts/python.exe -m streamlit run 5d_dashboard.py
+}
+
+# Zusatzbefehle: Lint/Format/Types
+if ($PSBoundParameters.ContainsKey('Tests') -and -not $Dashboard -and -not $Install) {
+    Write-Host "Ruff Lint..."; ruff check .
+    Write-Host "Black Check..."; black --check .
+    Write-Host "Mypy..."; mypy src
 }
