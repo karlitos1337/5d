@@ -23,7 +23,7 @@
 - [x] E2E Tests (Playwright)
 - [x] Web Vitals Performance Monitoring
 - [x] Discord Bot Tests erweitern
-- [ ] Integration Tests für Pipeline-Schritte
+- [x] Integration Tests für Pipeline-Schritte
 - [x] GitHub Actions für Auto-Deploy
 
 ### Deployment
