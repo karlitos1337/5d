@@ -37,6 +37,26 @@
     ],
     "pubmed": [
       {
+        "title": "Effects of a \"credit bank\" intervention on the professional identity and public stigma among nursing students: A randomized controlled trial.",
+        "authors": [
+          "Qiu C",
+          "Ni X",
+          "Wang Y"
+        ],
+        "published": "2025 Nov 13",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41325672/"
+      },
+      {
+        "title": "Students' Learning Preferences in Studying Sex- and Gender-Sensitive Medicine: An Exploratory Multimethod Study.",
+        "authors": [
+          "Modderkolk L",
+          "Jurrius A",
+          "Oertelt-Prigione S"
+        ],
+        "published": "2025 Jan-Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41323141/"
+      },
+      {
         "title": "V.T.O.B.S.-Learning birth mechanics in virtual reality: a controlled cohort study in undergraduate medical education.",
         "authors": [
           "Adams J",
@@ -45,29 +65,9 @@
         ],
         "published": "2025",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41312483/"
-      },
-      {
-        "title": "Characterizing potential subtypes and influencing factors of self-directed learning competence among clinical nurses in China by latent profile analysis.",
-        "authors": [
-          "Zhisheng Z",
-          "Mingju C",
-          "Ruichu Z"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41312033/"
-      },
-      {
-        "title": "Application of scenario simulation based on boppps model in physical diagnostics--a practical exploration of integrated teaching mode for cardiac physical examination and electrocardiogram.",
-        "authors": [
-          "Wu B",
-          "Chen T",
-          "Mei X"
-        ],
-        "published": "2025 Nov 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41310627/"
       }
     ],
-    "timestamp": "2025-12-01T14:57:22.889975"
+    "timestamp": "2025-12-02T07:13:14.500275"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -107,6 +107,25 @@
     ],
     "pubmed": [
       {
+        "title": "How sports-implied packaging of protein powder products enhances the purchase intention of Generation Z: evidence from multiple experiments.",
+        "authors": [
+          "Hu C",
+          "Bin J",
+          "Zhang W"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41323995/"
+      },
+      {
+        "title": "Readiness for competition across sports and genders: a study on psychological skills intervention.",
+        "authors": [
+          "Alecu S",
+          "Onea GA"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41323909/"
+      },
+      {
         "title": "Assessing the role of physical activity in shaping students' academic motivation: the mediating role of mental health.",
         "authors": [
           "Ma D",
@@ -115,28 +134,9 @@
         ],
         "published": "2025 Nov 28",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41316117/"
-      },
-      {
-        "title": "Effects of Immersive Virtual Reality-Based Exercise Intervention on Psychological and Physiological Outcomes in College Students: A Randomized Controlled Trial.",
-        "authors": [
-          "Liu W",
-          "McDonough DJ",
-          "Oginni J"
-        ],
-        "published": "2025 Nov 13",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41307454/"
-      },
-      {
-        "title": "Mental health and creativity in university students: a multidimensional mediation model of cognition, emotion, and motivation.",
-        "authors": [
-          "Zhu S",
-          "Leng X"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41307015/"
       }
     ],
-    "timestamp": "2025-12-01T14:57:26.623259"
+    "timestamp": "2025-12-02T07:13:16.282798"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -201,7 +201,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41317144/"
       }
     ],
-    "timestamp": "2025-12-01T14:57:28.898006"
+    "timestamp": "2025-12-02T07:13:18.055818"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -269,7 +269,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-01T14:57:31.268871"
+    "timestamp": "2025-12-02T07:13:19.828359"
   },
   "democratic schools": {
     "arxiv": [
@@ -307,35 +307,36 @@
     ],
     "pubmed": [
       {
-        "title": "Ark(+): Supervised training a single high-performance AI foundation model from many differently labeled datasets-no label consolidation required.",
+        "title": "Reflections on non-WEIRD behavior change and the next generation of physical activity research: A commentary on Simpson et al. (2025).",
         "authors": [
-          "Ma D",
-          "Pang J",
-          "Senthil Velan S"
-        ],
-        "published": "2025 Oct 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41319624/"
-      },
-      {
-        "title": "Conceptualising and Reimagining Professionalism in Different Contexts: From Nurse to Nursing Lecturer.",
-        "authors": [
-          "Litvin R"
+          "Beggan A",
+          "McGannon KR"
         ],
         "published": "2026 Jan",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41313797/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41326138/"
       },
       {
-        "title": "Changes in the recent habitat suitability of Euro-Mediterranean Anopheles species due to land-use and climate.",
+        "title": "Microbial communities in mine waste- contaminated soil of Sub-Saharan Africa: potential application for ecoremediation.",
         "authors": [
-          "Merkenschlager C",
-          "Bangelesa F",
-          "Paeth H"
+          "Uwimbabazi A",
+          "Ramasamy S",
+          "Mwamba TM"
         ],
-        "published": "2025 Nov 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41310860/"
+        "published": "2025 Dec 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41324703/"
+      },
+      {
+        "title": "Allergic Rhinitis and Its Impact on Asthma (ARIA)-EAACI Guidelines-2024-2025 Revision: Part I-Guidelines on Intranasal Treatments.",
+        "authors": [
+          "Sousa-Pinto B",
+          "Bousquet J",
+          "Vieira RJ"
+        ],
+        "published": "2025 Dec 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41324154/"
       }
     ],
-    "timestamp": "2025-12-01T14:57:33.767379"
+    "timestamp": "2025-12-02T07:13:21.887310"
   },
   "student agency": {
     "arxiv": [
@@ -378,35 +379,34 @@
     ],
     "pubmed": [
       {
-        "title": "Perceived academic control, growth mindset, self-regulation, and life satisfaction in chinese students: A mixed methods study featuring interpretative phenomenological analysis.",
+        "title": "A profile of injuries within an Australian State Emergency Service Agency: a retrospective study.",
         "authors": [
-          "Hao Y",
-          "Zhou Y"
+          "Marvin G",
+          "Canetti EFD",
+          "Orr R"
         ],
-        "published": "2025 Nov 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41319427/"
+        "published": "2025 Dec 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41327053/"
       },
       {
-        "title": "Competency-based education for teaching the concept of communication.",
+        "title": "Contraceptive use among sexually active school-going adolescents in three Southeast Asian Countries: a cross-sectional study.",
         "authors": [
-          "Wittenberg E",
-          "Goldsmith JV",
-          "Maffucci J"
+          "Purwatiningsih Y",
+          "Suparmi",
+          "Masitoh S"
         ],
-        "published": "2025 Nov-Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41318180/"
+        "published": "2025 Dec 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41326955/"
       },
       {
-        "title": "Within healthcare education how do simulated patients enable (or not) the transfer of learning into clinical practice: A realist review.",
+        "title": "Voice, vulnerability, and expressive growth: investigating AI anxiety and performance appraisal in voice arts education.",
         "authors": [
-          "Donovan KO",
-          "Connolly M",
-          "Browne F"
+          "Ouyang D"
         ],
-        "published": "2025 Nov 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41317425/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41323915/"
       }
     ],
-    "timestamp": "2025-12-01T14:57:35.862583"
+    "timestamp": "2025-12-02T07:13:23.886290"
   }
 }

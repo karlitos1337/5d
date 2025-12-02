@@ -264,36 +264,36 @@
   "trending": {
     "education": [
       {
-        "name": "mtpc",
-        "stars": 0,
-        "url": "https://github.com/gbr-ufs/mtpc"
-      },
-      {
-        "name": "PKC-Korean-Learning",
-        "stars": 0,
-        "url": "https://github.com/PKC0412/PKC-Korean-Learning"
-      },
-      {
-        "name": "lab",
+        "name": "student",
         "stars": 1,
-        "url": "https://github.com/navchandar/lab"
+        "url": "https://github.com/Ayush12r/student"
       },
       {
-        "name": "kiddo-coin-capers",
-        "stars": 1,
-        "url": "https://github.com/Yashkothari-29/kiddo-coin-capers"
+        "name": "musicer",
+        "stars": 2,
+        "url": "https://github.com/EDROOR27/musicer"
       },
       {
-        "name": "Oak-Web-Application",
-        "stars": 25,
-        "url": "https://github.com/oaknational/Oak-Web-Application"
+        "name": "darzeliai",
+        "stars": 9,
+        "url": "https://github.com/vilnius/darzeliai"
+      },
+      {
+        "name": "21-INVOCATION-CODEX",
+        "stars": 0,
+        "url": "https://github.com/mar2707/21-INVOCATION-CODEX"
+      },
+      {
+        "name": "autopsy-case-analysis-by-lockenkoepflein",
+        "stars": 0,
+        "url": "https://github.com/MSLwebdevhead/autopsy-case-analysis-by-lockenkoepflein"
       }
     ],
     "learning": [
       {
-        "name": "PKC-Korean-Learning",
-        "stars": 0,
-        "url": "https://github.com/PKC0412/PKC-Korean-Learning"
+        "name": "mini-fullstack-project",
+        "stars": 3,
+        "url": "https://github.com/mlx376/mini-fullstack-project"
       },
       {
         "name": "lab",
@@ -301,19 +301,19 @@
         "url": "https://github.com/navchandar/lab"
       },
       {
-        "name": "kiddo-coin-capers",
+        "name": "git-learning",
         "stars": 1,
-        "url": "https://github.com/Yashkothari-29/kiddo-coin-capers"
+        "url": "https://github.com/Computer-Science-Department-ChNU/git-learning"
       },
       {
-        "name": "spanish-study-telegram-bot",
-        "stars": 1,
-        "url": "https://github.com/ACNoonan/spanish-study-telegram-bot"
+        "name": "research_groups_computer_vision",
+        "stars": 2,
+        "url": "https://github.com/eu1234567890/research_groups_computer_vision"
       },
       {
-        "name": "O-clock",
+        "name": "TySVA",
         "stars": 0,
-        "url": "https://github.com/GitFreed/O-clock"
+        "url": "https://github.com/Maurellone/TySVA"
       }
     ],
     "pedagogy": [
@@ -323,14 +323,14 @@
         "url": "https://github.com/Ayanop267/RAGKET"
       },
       {
-        "name": "Lucian-Academy",
-        "stars": 0,
-        "url": "https://github.com/luciangreen/Lucian-Academy"
-      },
-      {
         "name": "ph-submissions",
         "stars": 147,
         "url": "https://github.com/programminghistorian/ph-submissions"
+      },
+      {
+        "name": "Lucian-Academy",
+        "stars": 0,
+        "url": "https://github.com/luciangreen/Lucian-Academy"
       },
       {
         "name": "neuraflow",
@@ -345,19 +345,19 @@
     ],
     "edtech": [
       {
-        "name": "kiddo-coin-capers",
-        "stars": 1,
-        "url": "https://github.com/Yashkothari-29/kiddo-coin-capers"
+        "name": "mini-course",
+        "stars": 2,
+        "url": "https://github.com/ashsajal1/mini-course"
       },
       {
-        "name": "ApexCoachAI",
+        "name": "exam-seating-arranger",
         "stars": 0,
-        "url": "https://github.com/shmindmaster/ApexCoachAI"
+        "url": "https://github.com/Bossr1387/exam-seating-arranger"
       },
       {
-        "name": "nextjs-math-course",
-        "stars": 3,
-        "url": "https://github.com/maciekt07/nextjs-math-course"
+        "name": "TatvaX-AI-PROTOTYPE",
+        "stars": 0,
+        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
       },
       {
         "name": "Next-Voters",
@@ -365,11 +365,11 @@
         "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
       },
       {
-        "name": "exam-seating-arranger",
+        "name": "ai-recruitment-assistant",
         "stars": 0,
-        "url": "https://github.com/Bossr1387/exam-seating-arranger"
+        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
       }
     ]
   },
-  "timestamp": "2025-12-01T14:57:37.009331"
+  "timestamp": "2025-12-02T07:13:25.019870"
 }
