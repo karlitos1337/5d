@@ -2,6 +2,59 @@
 
 Alle nennenswerten Änderungen werden hier dokumentiert. Format basiert auf Keep a Changelog; Versionierung folgt Semantic Versioning.
 
+## [2.6.0] - 2025-12-02
+
+### Added - Research Roadmap (TODO_RESEARCH.md)
+- **Comprehensive scientific planning:** 85+ research tasks across 12 sections
+- **4-phase timeline:** Q1-Q4 2026 (Grundlagen → Empirische Validierung → Theoretische Vertiefung → Integration & Reflexion)
+- **Sections:**
+  - 0. Meta/Organisation (Repository-Struktur, Literatur-Index, Dokumentationsstandard)
+  - 1. Klärung des 5D-Begriffs (Abgrenzung zu New Age, Physik, religiösen Modellen)
+  - 2. Neurowissenschaftliche Spur (Network Sampling, DMN, Polyvagal, Inhibitionsmodelle)
+  - 3. Philosophie des Geistes (Phänomenologie, enaktive Kognition, Bewusstseinszustände)
+  - 4. Verhaltensökonomie/Motivation (SDT, Agency, Commons Governance)
+  - 5. Gaia, Autopoiesis, Sympoiesis (Selbstorganisation, nicht-koerzitive Evolvabilität)
+  - 6. Ökosysteme und Evolution (Hypermutabilität, Trockengebiete, Musterbildung)
+  - 7. Soziale Systeme, Governance, Urbanität (Community-led, partizipative Stadtgestaltung)
+  - 8. Informations- und Kausalmodelle (Pearl do-calculus, non-coercive persuasion)
+  - 9. Abgrenzung zu 5D-Mythologien (7 alternative 5D-Modelle dokumentiert)
+  - 10. Empirische Testbarkeit (Evidenzmatrix, Minimalexperimente)
+  - 11. Integration ins Repo (README, Issue-Templates)
+  - 12. Reflexion & Ethik (Bias-Log, Abbruchkriterien, Ethik-Manifest)
+
+### Added - 5D-Landschaft Vergleich (06_synthesen_kompilationen/5d_landschaft.md)
+- **7 alternative 5D-Modelle dokumentiert:**
+  - Islamisches 5D-Bildungsmodell (Körper/Geist/Seele/Sozial/Spirituell)
+  - Policy-5D (Policy-Evaluationsframework)
+  - AIR-5D (Accountability/Impartiality/Responsiveness/Democracy/Rule of Law)
+  - Touristische 5D-Resilienz (Destination Resilience)
+  - New-Age-5D-Bewusstsein (Lichtkörper, Dimensionsaufstieg, Esoterik)
+  - 5. Physikalische Dimension (Kaluza-Klein, String Theory)
+  - Weitere (5D-BIM, 5D-Cinema, 5D-Ultraschall)
+- **Kriterienkatalog:** Domäne, Ziel, Empirie, Zwangsgrad, Relation zu 5d-Framework
+- **Vergleichstabelle:** Kompatibel ✅, Orthogonal ⚠️, Inkompatibel ❌
+
+### Changed - Documentation Updates
+- **VISION.md:** Terminologie-Warnung zu Beginn (5D ≠ New Age, Physik, etc.)
+- **README.md:** 
+  - Research Roadmap in Quick Navigation
+  - Development Roadmaps Sektion (TODO.md, TODO_MULTIPAGE.md, TODO_RESEARCH.md)
+- **TODO.md:** Link zu TODO_RESEARCH.md, "Siehe auch" Sektion
+- **.github/copilot-instructions.md:** Research Roadmap Sektion mit Deliverables
+
+### Key Deliverables (Planned Q1-Q4 2026)
+- **Evidenzmatrix** (`docs/CLAIMS_EVIDENCE_MATRIX.md`): Fakt ✅, Hypothese ⚠️, Spekulation 🔮
+- **Minimalexperimente:** Game of Life (koerzitiv vs. nicht-koerzitiv), Governance-Panel (WGI vs. HDI)
+- **Ethik-Manifest** (`ETHIK_MANIFEST.md`): Bias-Log, Abbruch-/Umbaukriterien, Forschungs-Ethos
+- **Issue-Templates:** research_neuro.md, research_eco.md, theory.md, ethics.md
+
+### Statistics
+- **Files added:** 2 (TODO_RESEARCH.md: 815 lines, 5d_landschaft.md: 287 lines)
+- **Files changed:** 4 (TODO.md, README.md, VISION.md, copilot-instructions.md)
+- **Total:** 6 files, 1100+ insertions
+
+---
+
 ## [2.5.0] - 2025-12-02
 
 ### Added - Dashboard Pages (Phase 1 Complete: 10/10)
