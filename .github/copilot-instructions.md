@@ -399,7 +399,7 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
   - 🌍 World Map (Full Leaflet.js integration)
   - 📈 Projections (Future scenarios, adoption curves)
 
-**Page Requirements (per TODO_MULTIPAGE.md):**
+**Page Requirements (per [TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md)):**
 1. Scientific sources (BibTeX + peer-reviewed papers)
 2. Formulas with justification and sources
 3. Own apps/tests/simulations integrated
@@ -426,8 +426,8 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 4. Activate GitHub Pages for 5D-Map deployment
 
 **Progress Tracking:**
-- General TODO: [TODO.md](../TODO.md) - Infrastructure, CI/CD, deployment (13/15 tasks, 87%)
-- Dashboard TODO: [TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md) - Content, features, scientific validation (8/8 pages Phase 1, 100%)
+- General TODO: [TODO.md](/workspaces/5d/TODO.md) - Infrastructure, CI/CD, deployment (13/15 tasks, 87%)
+- Dashboard TODO: [TODO_MULTIPAGE.md](/workspaces/5d/TODO_MULTIPAGE.md) - Content, features, scientific validation (8/8 pages Phase 1, 100%)
 - Both files are actively maintained and should be consulted before major changes
 
 ---
