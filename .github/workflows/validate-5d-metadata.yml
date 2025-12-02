@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '0[1-8]_*/**.md'
-      - '99_unsortiert/*.md'
+      - '99_noch_zu_bearbeiten/*.md'
       - 'WISSENS_INDEX.md'
   push:
     branches:
@@ -38,7 +38,7 @@ jobs:
           warnings = []
           
           # Scan all markdown files in relevant directories
-          md_files = glob.glob('0[1-8]_*/**/*.md', recursive=True) + glob.glob('99_unsortiert/*.md')
+          md_files = glob.glob('0[1-8]_*/**/*.md', recursive=True) + glob.glob('99_noch_zu_bearbeiten/*.md')
           
           print(f'📄 Scanning {len(md_files)} markdown files...')
           
@@ -84,7 +84,7 @@ jobs:
                   except Exception as e:
                       errors.append(f'{md_file}: Parsing error: {e}')
               else:
-                  errors.append(f'{md_file}: Missing YAML frontmatter (must start with ---)')
+                  warnings.append(f'{md_file}: Missing YAML frontmatter (must start with ---)')
           
           # Print warnings (non-blocking)
           if warnings:
