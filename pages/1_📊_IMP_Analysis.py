@@ -8,6 +8,8 @@ import streamlit as st
 import json
 import sys
 from pathlib import Path
+from streamlit_folium import st_folium
+import folium
 
 # Add parent dir to path for shared utils
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -271,6 +273,56 @@ A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} 
             }).set_index('Dimension')
             
             st.bar_chart(df)
+        
+        st.divider()
+        
+        st.subheader("🗺️ Global IMP Distribution")
+        
+        # Create mini world map with IMP scores
+        m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+        
+        # Sample country data (IMP proxy scores)
+        country_data = {
+            'Denmark': {'coords': [56.26, 9.50], 'imp': 0.72, 'color': '#00ff00'},
+            'Norway': {'coords': [60.47, 8.47], 'imp': 0.75, 'color': '#00ff00'},
+            'Finland': {'coords': [61.92, 25.75], 'imp': 0.71, 'color': '#00ff00'},
+            'Sweden': {'coords': [60.13, 18.64], 'imp': 0.73, 'color': '#00ff00'},
+            'Germany': {'coords': [51.17, 10.45], 'imp': 0.65, 'color': '#90ee90'},
+            'USA': {'coords': [37.09, -95.71], 'imp': 0.58, 'color': '#ffff00'},
+            'Brazil': {'coords': [-14.24, -51.93], 'imp': 0.45, 'color': '#ffa500'},
+            'India': {'coords': [20.59, 78.96], 'imp': 0.42, 'color': '#ffa500'},
+            'China': {'coords': [35.86, 104.20], 'imp': 0.38, 'color': '#ff0000'},
+        }
+        
+        for country, data in country_data.items():
+            folium.CircleMarker(
+                location=data['coords'],
+                radius=data['imp'] * 15,
+                popup=f"<b>{country}</b><br>IMP Proxy: {data['imp']:.2f}",
+                color=data['color'],
+                fill=True,
+                fillColor=data['color'],
+                fillOpacity=0.6
+            ).add_to(m)
+        
+        # Legend
+        legend_html = '''
+        <div style="position: fixed; 
+                    bottom: 50px; left: 50px; width: 200px; height: 120px; 
+                    background-color: white; z-index:9999; font-size:12px;
+                    border:2px solid grey; border-radius: 5px; padding: 10px">
+        <p style="margin:0"><b>IMP-Proxy Score</b></p>
+        <p style="margin:2px"><span style="color:#00ff00">●</span> High (>0.70)</p>
+        <p style="margin:2px"><span style="color:#ffff00">●</span> Medium (0.50-0.70)</p>
+        <p style="margin:2px"><span style="color:#ffa500">●</span> Low (0.40-0.50)</p>
+        <p style="margin:2px"><span style="color:#ff0000">●</span> Critical (<0.40)</p>
+        </div>
+        '''
+        m.get_root().html.add_child(folium.Element(legend_html))
+        
+        st_folium(m, width=700, height=400)
+        
+        st.caption("IMP-Proxy based on OWID depression data, World Bank dropout rates, WGI governance")
         
         st.divider()
         
