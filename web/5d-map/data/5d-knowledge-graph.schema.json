@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/karlitos1337/5d/web/5d-map/data/5d-knowledge-graph.schema.json",
+  "title": "5D Knowledge Graph Schema",
+  "description": "Strukturierte Darstellung des 5D-Wissensökosystems für die interaktive Karte",
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "dimension": {
+            "type": "string",
+            "enum": ["neurobiologisch", "psychologisch", "philosophisch", "ökonomisch", "technologisch", "synthese", "daten", "biografie"]
+          },
+          "folder": { "type": "string" },
+          "file": { "type": "string" },
+          "description": { "type": "string" },
+          "coordinates": {
+            "type": "object",
+            "properties": {
+              "x": { "type": "number", "minimum": 0, "maximum": 1000 },
+              "y": { "type": "number", "minimum": 0, "maximum": 1000 }
+            },
+            "required": ["x", "y"]
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "validiert_via": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "csrankings_score": { "type": ["number", "null"] },
+              "views_last_14d": { "type": "integer" },
+              "clones_last_14d": { "type": "integer" }
+            }
+          }
+        },
+        "required": ["id", "label", "dimension", "coordinates"]
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "type": { "type": "string", "enum": ["synthese", "zitat", "feedback", "erweiterung"] },
+          "strength": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "required": ["source", "target", "type"]
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "visible_by_default": { "type": "boolean" },
+          "description": { "type": "string" }
+        },
+        "required": ["id", "name"]
+      }
+    }
+  },
+  "required": ["nodes", "edges", "layers"]
+}
