@@ -216,8 +216,10 @@ Size: 700x350px mini-maps, 700x500px for World Map
 - [x] `tests/test_world_map_data.py` ✅ (20 tests: IMP-proxy formula, IHME/WB/WGI validation)
 - [x] `tests/test_projections.py` ✅ (27 tests: logistic curves, Rogers diffusion, economic impact)
 
-**Total: 145 scientific tests (11+12+16+14+21+24+20+27)**
-**Status: 124 passed, 0 skipped ✅ (all BibTeX references added, 56 total entries)**
+- [x] `tests/test_participation_networks.py` ✅ (16 tests: network topology, weak ties, diffusion, IMP proxies)
+
+**Total: 161 scientific tests (11+12+16+14+21+24+20+27+16)**
+**Status: 151 passed, 0 skipped ✅ (all BibTeX references added, 59 total entries)**
 - [ ] `tests/test_maps_rendering.py` (Karten-Daten korrekt?)
 
 ---

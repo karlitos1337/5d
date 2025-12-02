@@ -271,10 +271,16 @@ NEUROBIOLOGY_QUESTIONS = [
   - Economic impact: NPV formula, Perry BCR 7.16, 88% crime reduction savings
   - Regional: Nordics 70%, W.Europe 50%, N.America 40%, E.Asia 35%, LatAm 25%, Africa 18%
   - References: Rogers 2003, Bass 1969, Verhulst 1838, Heckman 2006
+- `test_participation_networks.py` – Network topology and diffusion (16 tests)
+  - 3 topologies: Erdős-Rényi, Watts-Strogatz, Barabási-Albert
+  - Weak ties theory: bridges, betweenness, clustering
+  - Diffusion dynamics: threshold model, speed vs topology, seed fraction
+  - IMP proxies: SP (clustering×activation), R (1-t_50/steps), IM (share×(1-threshold))
+  - References: Granovetter 1973, Watts & Strogatz 1998, Barabási & Albert 1999
 - `test_anonymization.py` – GDPR compliance for survey data
 - `test_surveys.py` – Likert validation, completeness checks
 
-**Total: 145+ scientific tests across 10 test files**
+**Total: 161+ scientific tests across 11 test files**
 
 ### Scientific Test Pattern
 ```python
@@ -467,7 +473,7 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 - autopoietic_streamlit.py → Page 9 (509 lines, 5D dynamics, dropout) ✅
 - partnet_streamlit.py → Page 10 (460 lines, network diffusion, 3 topologies) ✅
 
-✅ **Phase 8 Complete:** Scientific tests for all 8 topics (100%)
+✅ **Phase 8 Complete:** Scientific tests for all 10 pages (100%)
 - test_imp_scientific.py: 11 tests (IMP formula, scientific validation)
 - test_projects.py: 12 tests (Heckman NPV, alternative education models)
 - test_research_sources.py: 16 tests (arXiv/PubMed, API compliance, data quality)
@@ -476,12 +482,14 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 - test_non_coercion.py: 24 tests (Nash equilibrium, Ostrom principles, cooperation)
 - test_world_map_data.py: 20 tests (IMP-proxy formula, IHME/WB/WGI validation)
 - test_projections.py: 27 tests (logistic curves, Rogers diffusion, economic impact)
-- **Total: 145 scientific tests, 124/124 passing (100%) ✅**
+- test_participation_networks.py: 16 tests (network topology, weak ties, diffusion)
+- **Total: 161 scientific tests, 151/151 passing (100%) ✅**
 
-✅ **BibTeX Complete:** 56 scientific references added
+✅ **BibTeX Complete:** 59 scientific references added
 - Original 38 entries (Deci & Ryan 1985, Csíkszentmihályi 1990, Porges 2011, Heckman 2006, etc.)
 - Batch 4: 12 entries (Conway 1970, Gardner 1970, Wolfram 2002, Rendell 2016, Ostrom 1990, Axelrod 1984, Nash 1950, Hardin 1968, Rogers 2003, Bass 1969, Verhulst 1838, Moore 1991)
 - Batch 5: 6 entries (IHME GBD 2019, World Bank EdStats, WGI, OECD BLI, UNDP HDI, World Happiness 2024)
+- Batch 6: 3 entries (Granovetter 1973, Watts & Strogatz 1998, Barabási & Albert 1999)
 - All test validations now passing
 
 **Next Priority Actions:**
@@ -498,7 +506,7 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
   - Phase 1 (Pages): ✅ 10/10 pages (100%)
   - Phase 3 (Mini-Maps): ✅ 7/7 geographic pages (100%)
   - Phase 4 (Apps): ✅ 4/4 integrated (100%)
-  - Phase 8 (Tests): ✅ 7/7 test files created (100%), 124/124 passing (100%)
+  - Phase 8 (Tests): ✅ 9/9 test files created (100%), 151/151 passing (100%)
 - Both files are actively maintained and should be consulted before major changes
 
 ---
@@ -510,5 +518,5 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 - Phase 1: All 10 dashboard pages complete (100%)
 - Phase 3: Mini-maps on all 7 geographic pages (100%)
 - Phase 4: App integration 4/4 complete (100%) ✅
-- Phase 8: 145 scientific tests, 124/124 passing (100%) ✅
-- BibTeX: 56 scientific references, all validations passing
+- Phase 8: 161 scientific tests, 151/151 passing (100%) ✅
+- BibTeX: 59 scientific references, all validations passing

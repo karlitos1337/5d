@@ -57,13 +57,13 @@ def main():
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("Pages", "9", help="Themen-Seiten im Dashboard")
+        st.metric("📄 Pages", "10", help="Themen-Seiten im Dashboard")
     
     with col2:
-        st.metric("Quellen", "56", help="Wissenschaftliche Referenzen (BibTeX)")
+        st.metric("📚 Quellen", "59", help="Wissenschaftliche Referenzen (BibTeX)")
     
     with col3:
-        st.metric("Tests", "145", help="Wissenschaftliche Tests (124/124 passing)")
+        st.metric("🧪 Tests", "161", help="Wissenschaftliche Tests (151/151 passing)")
     
     with col4:
         st.metric("Länder", "30+", help="Daten verfügbar")
