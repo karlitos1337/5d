@@ -57,13 +57,13 @@ def main():
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("Pages", "8", help="Themen-Seiten im Dashboard")
+        st.metric("Pages", "9", help="Themen-Seiten im Dashboard")
     
     with col2:
-        st.metric("Quellen", "50+", help="Wissenschaftliche Referenzen")
+        st.metric("Quellen", "56", help="Wissenschaftliche Referenzen (BibTeX)")
     
     with col3:
-        st.metric("Tests", "17", help="Automatisierte Tests")
+        st.metric("Tests", "145", help="Wissenschaftliche Tests (124/124 passing)")
     
     with col4:
         st.metric("Länder", "30+", help="Daten verfügbar")
@@ -476,15 +476,29 @@ docker run -p 8501:8501 5d-dashboard
             {
                 "icon": "📈",
                 "name": "Projektionen",
-                "file": "pages/8_📈_Projections.py (coming soon)",
+                "file": "pages/8_📈_Projections.py",
                 "beschreibung": "Zukunftsszenarien",
                 "inhalt": [
                     "Logistische Adoptionskurven",
-                    "Sektoren: Auto, Flug, Schiff",
-                    "Wirtschafts-Schadindex (WSI)",
-                    "Interaktive Zeitskalen"
+                    "Rogers' Diffusion Theorie",
+                    "Regionale Prognosen (2025-2050)",
+                    "Ökonomische Impact-Analyse"
                 ],
                 "für_wen": "Policy-Maker, Zukunftsforscher"
+            },
+            {
+                "icon": "🧪",
+                "name": "Autopoietische Klasse",
+                "file": "pages/9_🧪_Autopoietic_Class.py",
+                "beschreibung": "5D-Simulations-Labor",
+                "inhalt": [
+                    "Agent-based Model (ABM)",
+                    "5 Dimensionen über Zeit",
+                    "Parameter: Zwang, Freiheit, Peers, Support",
+                    "Dropout-Simulation",
+                    "Export für weitere Analysen"
+                ],
+                "für_wen": "Forscher, Bildungsentwickler"
             }
         ]
         
