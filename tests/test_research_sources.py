@@ -20,8 +20,10 @@ class TestResearchDataSources:
             with open('5d_research_data.json', 'r') as f:
                 data = json.load(f)
             
-            # Check for main sections
-            assert 'arxiv' in data or 'pubmed' in data, "Missing research sections"
+            # Check for main sections (data organized by keywords)
+            # Each keyword has arxiv/pubmed subsections
+            has_content = len(data) > 0 and any('arxiv' in v or 'pubmed' in v for v in data.values() if isinstance(v, dict))
+            assert has_content, "Missing research data"
             
             # If arXiv data exists, validate structure
             if 'arxiv' in data:
@@ -71,7 +73,8 @@ class TestResearchDataSources:
         )
         
         assert 0 <= relevance <= 1, "Relevance score in [0,1]"
-        assert abs(relevance - 0.74) < 0.01, "Calculation matches expected value"
+        # 0.3*0.8 + 0.2*0.9 + 0.3*0.7 + 0.2*0.6 = 0.24 + 0.18 + 0.21 + 0.12 = 0.75
+        assert abs(relevance - 0.75) < 0.01, "Calculation matches expected value"
     
     def test_keyword_coverage(self):
         """Test that key research topics are covered"""

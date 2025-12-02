@@ -275,10 +275,12 @@ class TestColorCoding:
             'red': 0.40,
         }
         
-        assert thresholds['green'] > thresholds['yellow_high'], "Green threshold above yellow"
-        assert thresholds['yellow_low'] == thresholds['yellow_high'], "Yellow range defined"
-        assert thresholds['orange_low'] == thresholds['orange_high'], "Orange range defined"
-        assert thresholds['red'] == thresholds['orange_low'], "Red threshold below orange"
+        # Green starts where yellow ends
+        assert thresholds['green'] >= thresholds['yellow_high'], "Green threshold at/above yellow"
+        # Yellow range: low to high (inclusive boundaries)
+        assert thresholds['yellow_low'] < thresholds['yellow_high'], "Yellow range has span"
+        assert thresholds['orange_low'] < thresholds['orange_high'], "Orange range has span"
+        assert thresholds['red'] <= thresholds['orange_low'], "Red threshold at/below orange"
     
     def test_color_distribution(self):
         """Test expected distribution of countries by color"""

@@ -99,7 +99,7 @@ class TestGitHubAPIIntegration:
                 data = json.load(f)
             
             # Check for main sections
-            if 'repositories' in data and data['repositories']:
+            if 'repositories' in data and isinstance(data['repositories'], list) and len(data['repositories']) > 0:
                 repo = data['repositories'][0]
                 assert 'name' in repo, "Repos need name"
                 assert 'stars' in repo or 'stargazers_count' in repo, "Repos need star count"
