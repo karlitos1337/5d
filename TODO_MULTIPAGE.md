@@ -193,15 +193,18 @@ Size: 700x350px mini-maps, 700x500px for World Map
 
 ## 🧪 Phase 4: Eigene Apps & Tests einbauen
 
+**Status:** 🔄 IN PROGRESS (3/4 standalone apps integrated)
+
 ### Apps integrieren (per Page)
 1. **IMP Analysis:** `models/imp.py` → Live-Rechner
 2. **Projects:** Projekt-ROI-Simulator
 3. **Research:** Paper-Filter + Keyword-Graph
 4. **GitHub:** Repo-Trends + Activity-Chart
-5. **Game of Life:** `gol_streamlit.py` embed (iframe oder direkt)
-6. **Non-Coercion:** `zwi_streamlit.py` embed
+5. ✅ **Game of Life:** `gol_streamlit.py` → Page 5 (666 lines, Conway rules, patterns)
+6. ✅ **Non-Coercion:** `zwi_streamlit.py` → Page 6 (106 lines, grid ABM, cooperation)
 7. **World Map:** `web/5d-map/` embed via iframe
-8. **Autopoietic:** `autopoietic_streamlit.py` (neue Page?)
+8. ✅ **Autopoietic Class:** `autopoietic_streamlit.py` → Page 9 (509 lines, 5D ABM, dropout simulation)
+9. ❓ **Participation Networks:** `partnet_streamlit.py` → Page 10 candidate (120 lines, network diffusion)
 
 ### Tests mit wissenschaftlicher Basis
 - [x] `tests/test_imp_scientific.py` ✅ (11 tests, done)
@@ -214,7 +217,7 @@ Size: 700x350px mini-maps, 700x500px for World Map
 - [x] `tests/test_projections.py` ✅ (27 tests: logistic curves, Rogers diffusion, economic impact)
 
 **Total: 145 scientific tests (11+12+16+14+21+24+20+27)**
-**Status: 120 passed, 4 skipped (BibTeX references not yet added)**
+**Status: 124 passed, 0 skipped ✅ (all BibTeX references added, 56 total entries)**
 - [ ] `tests/test_maps_rendering.py` (Karten-Daten korrekt?)
 
 ---
