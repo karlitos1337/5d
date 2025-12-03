@@ -16,7 +16,7 @@ Dieses Dokument ist der zentrale Einstiegspunkt für alle wissenschaftlichen Que
 
 ### 1. BibTeX-Repository (Hauptquelle)
 - **Datei:** [`5d-relevant-sources.bib`](5d-relevant-sources.bib)
-- **Einträge:** 64 peer-reviewed Quellen
+- **Einträge:** 80 peer-reviewed + externe Ressourcen (Update: 2025-12-03)
 - **Format:** BibTeX (APA 7th Edition konform)
 - **Kategorien:**
   - Neurobiologie & Psychologie (SDT, Polyvagal, Flow)
@@ -24,6 +24,7 @@ Dieses Dokument ist der zentrale Einstiegspunkt für alle wissenschaftlichen Que
   - Ökonomie & Governance (Ostrom, Acemoglu, Sen, North)
   - Evolution & Komplexität (Game of Life, Network Theory)
   - Mental Health & Globale Daten (WHO, IHME GBD, World Bank)
+  - Externe Ressourcen (AI Benchmarks, Physics, Free Learning)
 
 ### 2. Allgemeine Quellen
 - **Datei:** [`../../SOURCES.md`](../../SOURCES.md)
@@ -266,15 +267,45 @@ git commit -m "docs: add Pearl 2009 (Causality) to BibTeX (Kausalmodelle)"
 
 ---
 
+---
+
+## 🆕 Batch 9: Externe Ressourcen (2025-12-03)
+
+**Neue Einträge (10 kritische Ressourcen):**
+
+### AI & Technology
+- `artificialanalysis2025` – Live AI Model Benchmarks (GPT-5, Claude 4, Grok 3)
+- `awesomecheatsheets2024` – 30+ Programming Cheatsheets (39.9k stars)
+
+### Physics & Science
+- `feynman1963lectures` – Feynman Lectures on Physics (legendary free edition)
+- `bach2025opticalillusions` – 140+ Optical Illusions (neuroplasticity research)
+- `phet2025simulations` – 100+ HTML5 Science Simulations (K-12 + university)
+
+### Data & Economics
+- `ourworldindata2024` – Global Statistics & Data Visualization (89M visitors, already used in 5D-Map!)
+- `atlashks2025` – Harvard Economic Complexity Atlas (trade, growth predictions)
+
+### Education & Resources
+- `academictorrents2025` – Scientific Data Sharing via BitTorrent (81TB+ legal datasets)
+- `fmhy2025` – 10000+ Free Resources (OSSU, textbooks, courses)
+- `freeprogrammingbooks2025` – 8000+ Free Programming Books (243k stars)
+
+**Integration:** Siehe `99_noch_zu_bearbeiten/externe_ressourcen_analyse.md` für vollständige Analyse und Action Items.
+
+---
+
 ## 📖 Siehe auch
 
 - **[TODO_RESEARCH.md](../../TODO_RESEARCH.md)** – Forschungs-Roadmap (85+ Tasks, Q1-Q4 2026)
 - **[5D-Landschaft](../../06_synthesen_kompilationen/5d_landschaft.md)** – Vergleich 7 alternativer 5D-Modelle
-- **[ETHIK_MANIFEST.md](../../ETHIK_MANIFEST.md)** – Bias-Log, Abbruchkriterien (TODO)
-- **[CLAIMS_EVIDENCE_MATRIX.md](../../docs/CLAIMS_EVIDENCE_MATRIX.md)** – Evidenzmatrix (TODO)
+- **[ETHIK_MANIFEST.md](../../ETHIK_MANIFEST.md)** – Bias-Log, Abbruchkriterien
+- **[CLAIMS_EVIDENCE_MATRIX.md](../../docs/CLAIMS_EVIDENCE_MATRIX.md)** – Evidenzmatrix (40 Behauptungen)
+- **[externe_ressourcen_analyse.md](../../99_noch_zu_bearbeiten/externe_ressourcen_analyse.md)** – 38 analysierte URLs mit Prioritäten
 
 ---
 
+**Last Updated:** 2025-12-03, 16:00 CET  
 **Maintainer:** Siehe [CONTRIBUTING.md](../../CONTRIBUTING.md) für Beiträge  
 **License:** CC BY 4.0 (Quellen), MIT (Code)  
 **Contact:** GitHub Issues → https://github.com/karlitos1337/5d/issues
