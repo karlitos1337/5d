@@ -560,13 +560,18 @@
     - Doku-Qualität (Anteil Fakten vs. Hypothesen vs. Spekulationen)
   - Fallstudie: Repo als Beispiel für transparente Forschung
 
-- [ ] **Regelmäßige Reflexions-Checkpoints**
-  - Frequenz: Alle 3 Monate
+- [x] **Regelmäßige Reflexions-Checkpoints** ✅
+  - Frequenz: Alle 3 Monate (Q1, Q2, Q3, Q4)
   - Aufgaben:
     - Review dieser TODO-Liste (Fortschritt, neue Fragen)
     - Ethik-Sektion aktualisieren (Bias-Log, Evidenzmatrix)
     - Abbruchkriterien prüfen (Wurde etwas falsifiziert?)
-  - Dokumentation in `docs/REFLEXION_LOG.md`
+  - Dokumentation in `docs/REFLEXION_LOG.md` ✅
+  - **Status:** Template erstellt mit 4 quartalsweisen Checkpoints:
+    * Q1 2026 (März): Minimalexperimente, Bias-Check, Literatur-Update
+    * Q2 2026 (Juni): Survey-Daten (n>100), Faktorenanalyse, Preprint
+    * Q3 2026 (September): Fallstudien (n>10 Schulen), Externe Validierung
+    * Q4 2026 (Dezember): Publikation, Funding, Community Growth, Framework-Status
 
 ---
 
