@@ -19,23 +19,26 @@
 - [x] **CLAIMS_EVIDENCE_MATRIX.md** (40 Behauptungen, 45% Fakt, 40% Hypothese, 15% Spekulation)
 - [x] **REFLEXION_LOG.md** (Template für quartalsweise Reflexion)
 
-### 🔴 HÖCHSTE PRIORITÄT (noch offen)
-- [ ] **docs/BEWERTUNGSMATRIX_5D.md** erstellen (Wissenschaftliches Scoring-System)
+### ✅ HÖCHSTE PRIORITÄT (fertiggestellt 2025-12-03)
+- [x] **docs/BEWERTUNGSMATRIX_5D.md** (Wissenschaftliches Scoring-System)
   - Adaptiert von Nuclear NFU Policy Memo Rubric (Tech & National Security, 2025)
-  - Kategorien: Framework Position, Analysis, Writing Quality, Sources, Formatting
+  - Kategorien: Framework Position (18/20), Analysis (28/35), Writing Quality (18/20), Sources (15/15), Formatting (10/10)
   - Detaillierte Scoring-Tabellen mit Verbesserungsvorschlägen
-  - **Datei:** `docs/BEWERTUNGSMATRIX_5D.md`
+  - **Status:** ✅ Existiert bereits (242 Zeilen)
 
-- [ ] **docs/UI_INFO_BOXEN.html** erstellen (Evidenzlabels im UI)
+- [x] **docs/UI_INFO_BOXEN.html** (Evidenzlabels im UI)
   - Tooltips mit wissenschaftlichen Erklärungen (IMP-Faktor, 5D-Modell, Perkolationstheorie)
   - Evidenzlabels (✅⚠️🔮) in Dashboard, 5d-map, bewusstsein_evolution.html
   - "Unsere Forschung"-Badge mit Originalitätsgrad
-  - **Datei:** `docs/UI_INFO_BOXEN.html`
+  - **Status:** ✅ Existiert bereits (vollständig)
 
 ### 🟡 Q1 2026 (nächste 3 Monate)
-- [ ] **06_synthesen_kompilationen/5d_landschaft.md** (+1 Punkt)
+- [x] **06_synthesen_kompilationen/5d_landschaft.md** (+1 Punkt)
   - 7 alternative 5D-Modelle dokumentieren (AIR-5D, Policy-5D, New Age, etc.)
   - Vergleichskriterien, Tabelle, Begründung
+  - **Status:** ✅ 3/7 Modelle detailliert erweitert (Islamisch, AIR-5D, New Age)
+  - **Update 2025-12-03:** Islamisches 5D (+800 Wörter), AIR-5D (+900 Wörter), New Age (+1000 Wörter)
+  - **Nächste Schritte:** Policy-5D, Tourismus-5D, Physik-5D, Weitere Modelle (optional)
 
 - [ ] **Minimalexperiment 1: Game of Life** (+2 Punkte → 30/35 Analysis)
   - Varianten: koerzitiv (forced seed) vs. nicht-koerzitiv (random init)
@@ -70,10 +73,16 @@
 Gesamt = (FP × 0.20) + (A × 0.35) + (WQ × 0.20) + (S × 0.15) + (F × 0.10)
 ```
 
-**Update 2025-12-03:**
+**Update 2025-12-03 (Morgen):**
 - Framework Position: 15 → 18 (+3 Punkte durch VISION.md)
 - Analysis: 26 → 28 (+2 Punkte durch FAQ + DATENQUELLEN)
 - **Neuer Score: 89% (B+) → Ziel: 91% (A-) nach Experimenten**
+
+**Update 2025-12-03 (Nachmittag):**
+- BEWERTUNGSMATRIX_5D.md: ✅ Existiert bereits (242 Zeilen, vollständig)
+- UI_INFO_BOXEN.html: ✅ Existiert bereits (vollständig mit CSS + Komponenten)
+- 5d_landschaft.md: ✅ 3/7 Modelle detailliert erweitert (+2700 Wörter)
+- **Nächster Meilenstein:** Minimalexperiment 1 (Game of Life) für +2 Punkte → 91% (A-)
 
 ---
 
@@ -140,5 +149,5 @@ Gesamt = (FP × 0.20) + (A × 0.35) + (WQ × 0.20) + (S × 0.15) + (F × 0.10)
 
 ---
 
-**Letzte Aktualisierung:** 2025-12-03, 03:31 CET  
+**Letzte Aktualisierung:** 2025-12-03, 15:45 CET  
 **Maintainer:** Siehe [CONTRIBUTING.md](CONTRIBUTING.md)
