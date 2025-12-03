@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "name": "Constructive",
+      "phase_diff": 0,
+      "type": "constructive",
+      "amplitude_ratio": 2.0
+    },
+    {
+      "name": "Destructive",
+      "phase_diff": 3.141592653589793,
+      "type": "destructive",
+      "amplitude_ratio": 3.677618315237422e-15
+    },
+    {
+      "name": "Mixed",
+      "phase_diff": 1.5707963267948966,
+      "type": "mixed",
+      "amplitude_ratio": 1.4142148735324194
+    }
+  ],
+  "timestamp": "2025-12-03T08:55:16.716469",
+  "experiment": "interference_music"
+}

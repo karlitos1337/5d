@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-12-03T08:54:02.436539",
+  "experiment": "wave_packet_soccer",
+  "measurements": [
+    {
+      "goalkeeper_pos": [
+        5.0,
+        1.0
+      ],
+      "measured_pos": [
+        4.773869346733669,
+        6.633165829145729
+      ],
+      "probability": 1.6843518752729646e-06
+    }
+  ],
+  "final_state": {
+    "measured": true,
+    "position": [
+      4.773869346733669,
+      6.633165829145729
+    ]
+  }
+}

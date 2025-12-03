@@ -1,0 +1,106 @@
+{
+  "timestamp": "2025-12-03T08:52:01.365764",
+  "experiment": "superposition_minecraft",
+  "config": {
+    "world_size": 10,
+    "diamond_probability": 0.1,
+    "num_measurements": 10
+  },
+  "results": {
+    "diamonds_found": 0,
+    "success_rate": 0.0,
+    "expected_rate": 0.1
+  },
+  "measurements": [
+    {
+      "step": 1,
+      "position": [
+        5,
+        7
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 2,
+      "position": [
+        0,
+        9
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 3,
+      "position": [
+        4,
+        4
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 4,
+      "position": [
+        2,
+        5
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 5,
+      "position": [
+        2,
+        6
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 6,
+      "position": [
+        0,
+        9
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 7,
+      "position": [
+        7,
+        4
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 8,
+      "position": [
+        5,
+        5
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 9,
+      "position": [
+        9,
+        0
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    },
+    {
+      "step": 10,
+      "position": [
+        1,
+        6
+      ],
+      "result": "stone",
+      "total_diamonds": 0
+    }
+  ]
+}

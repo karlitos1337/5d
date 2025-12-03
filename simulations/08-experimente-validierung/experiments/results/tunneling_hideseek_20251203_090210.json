@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-12-03T09:02:10.458654",
+  "experiment": "tunneling_hideseek",
+  "parameters": {
+    "barrier_height": 10,
+    "barrier_width": 2,
+    "particle_energy": 5,
+    "tunneling_probability": 3.2104140529794826e-06
+  },
+  "attempts": [
+    {
+      "success": 

@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-12-03T08:52:52.873915",
+  "experiment": "entanglement_pokemon",
+  "pokemon_a": "Pikachu A",
+  "pokemon_b": "Pikachu B",
+  "measurements": [
+    {
+      "action": "heal",
+      "target": "A",
+      "amount": 20,
+      "hp_a": 70,
+      "hp_b": 70,
+      "entangled": true
+    },
+    {
+      "action": "damage",
+      "target": "B",
+      "amount": 15,
+      "hp_a": 55,
+      "hp_b": 55,
+      "entangled": true
+    },
+    {
+      "action": "heal",
+      "target": "A",
+      "amount": 30,
+      "hp_a": 85,
+      "hp_b": 85,
+      "entangled": true
+    },
+    {
+      "action": "separate",
+      "hp_a": 85,
+      "hp_b": 85,
+      "entangled": false
+    }
+  ],
+  "final_state": {
+    "hp_a": 100,
+    "hp_b": 55,
+    "entangled": false
+  }
+}
