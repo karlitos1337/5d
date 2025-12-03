@@ -22,3 +22,18 @@ package-lock.json
 
 # Logs
 *.log
+
+# External Resources (große Repos nicht versionieren)
+external/sources/data-engineer-handbook-main/
+external/sources/javascript-algorithms-master/
+external/sources/complexity-nxt/
+external/sources/Awesome-Gamedev-main/
+external/sources/gpt4free-main/
+external/sources/free-programming-books-main/
+external/sources/Ebook-Translator-Calibre-Plugin-master/
+external/sources/FMHY-SafeGuard-main/
+
+# Archives (Installers, alte Versionen)
+external/archives/*.msi
+external/archives/*.exe
+external/archives/old_versions/
