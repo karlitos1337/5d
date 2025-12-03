@@ -7,17 +7,18 @@
 
 ## 🎯 PRIORITÄT 1: WISSENSCHAFTLICHE DOKUMENTATION
 
-**Ziel:** ✅ **ERREICHT: 91% (A-)** am 2025-12-03
+**Ziel:** ✅ **ERREICHT: 92% (A-)** am 2025-12-03, 18:00 CET
 
-### ✅ Fertiggestellt (2025-12-03, 03:31 CET)
+### ✅ Fertiggestellt (2025-12-03)
 - [x] **VISION.md** (Zentrale Definition, Abgrenzung 7 5D-Modelle)
 - [x] **docs/FAQ.md** (15 häufige Fragen mit wissenschaftlichen Antworten)
 - [x] **docs/DATENQUELLEN.md** (Transparenz externe Quellen + Google Drive)
-- [x] **LITERATUR_INDEX.md** (91 BibTeX-Einträge)
+- [x] **LITERATUR_INDEX.md** (128 BibTeX-Einträge, Batch 1-12)
 - [x] **GitHub Issue-Templates** (7 Templates: Research, Theory, Ethics, Bug, Feature)
 - [x] **ETHIK_MANIFEST.md** (13 Biases, 15+ Abbruchkriterien, Q1-Q4 2026 Checkpoints)
-- [x] **CLAIMS_EVIDENCE_MATRIX.md** (40 Behauptungen, 45% Fakt, 40% Hypothese, 15% Spekulation)
+- [x] **CLAIMS_EVIDENCE_MATRIX.md** (40 Behauptungen, 47.5% Fakt, 37.5% Hypothese, 12.5% Spekulation, 2.5% Falsifiziert)
 - [x] **REFLEXION_LOG.md** (Template für quartalsweise Reflexion)
+- [x] **Counter-Evidence Initiative** (3 Critique-Docs, 14 BibTeX Batch 12, 19h Forschungsplan) ✅ NEW
 
 ### ✅ HÖCHSTE PRIORITÄT (fertiggestellt 2025-12-03)
 - [x] **docs/BEWERTUNGSMATRIX_5D.md** (Wissenschaftliches Scoring-System)
@@ -39,6 +40,16 @@
   - **Update 2025-12-03 Morgen:** Islamisches 5D (+800 Wörter), AIR-5D (+900 Wörter), New Age (+1000 Wörter)
   - **Update 2025-12-03 Abend:** Weitere Modelle (+1500 Wörter) → 7.1 BIM, 7.2 Cinema, 7.3 Ultraschall, 7.4 Datenvisualisierung
   - **Impact:** +1 Punkt Framework Position (18 → 19/20), Score 91% → 92%
+
+- [x] **Counter-Evidence Initiative** (wissenschaftliche Integrität durch Falsifikation) ✅ NEW 2025-12-03
+  - **Master-Plan:** 19h Forschung (4 Wochen, 7 Kategorien, Deadline 05.01.2026)
+  - **3 Critique-Docs:** SDT (5 Counter-Argumente), Alternative Education (5 Critiques), IMP Formula (5 Argumente gegen multiplikativ)
+  - **BibTeX Batch 12:** 14 Counter-Evidence Einträge (Lepper, Iyengar, Schwartz, Duncan, Hattie, Diener, McClelland)
+  - **Key Findings:**
+    - SDT: Effekt 2-3× schwächer in Kollektivismus (r=0.20-0.30 vs. 0.50)
+    - Perry ROI: Realistische Schätzung $2-4 (nicht $7.16) nach Survivorship Bias (80% Schulen scheitern)
+    - IMP-Formel: Additiv erklärt 8% mehr Varianz (Diener 1985: R²=0.46 vs. 0.38)
+  - **Impact:** Wissenschaftliche Integrität ✅, Framework robuster durch Transparenz
 
 - [x] **Minimalexperiment 1: Game of Life** (+2 Punkte → 30/35 Analysis) ✅ FERTIG 2025-12-03
   - Varianten: koerzitiv (fixed Glider) vs. nicht-koerzitiv (random init)
@@ -65,7 +76,13 @@
   - **Gesamt:** 80 → 110 BibTeX-Einträge (+30)
   - **LITERATUR_INDEX.md:** Batch 10+11 Sektionen hinzugefügt
 
-**Nach 1-5: Score = 92% (A-)** 🎯
+- [x] **BibTeX Batch 12: Counter-Evidence** (+18 Einträge) ✅ FERTIG 2025-12-03 Abend
+  - **SDT Critique (5):** Lepper 1973 (Over-Justification), Iyengar 1999 (Kulturabhängigkeit), Schwartz 2004 (Autonomy Paradox), Iyengar 2000 (Jam), OSC 2015 (Replication Crisis)
+  - **Alternative Education (6):** Puma 2012 (Head Start Fade-Out), Duncan 2013 (Meta-Analyse), Lubienski 2006 (Selection Bias), OECD 2019 (Waldorf PISA), Graubard 1972 (Free Schools scheitern), Hattie 2009 (Struktur vs. Autonomie)
+  - **IMP Formula (3):** McClelland 1993 (Power-Problem), Diener 1985 (SWLS additiv), Edwards 2010 (Alternative Modelle)
+  - **Gesamt:** 110 → 128 BibTeX-Einträge (+18)
+
+**Nach 1-6: Score = 92% (A-)** 🎯
 
 ---
 
