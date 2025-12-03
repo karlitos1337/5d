@@ -3,6 +3,7 @@ Helper functions for Folium mini-maps across dashboard pages
 """
 
 import folium
+import streamlit as st
 from streamlit_folium import st_folium
 
 def create_alternative_schools_map():

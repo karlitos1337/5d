@@ -67,7 +67,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323141/"
       }
     ],
-    "timestamp": "2025-12-02T20:36:49.887282"
+    "timestamp": "2025-12-03T01:00:53.896920"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -136,7 +136,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323909/"
       }
     ],
-    "timestamp": "2025-12-02T20:36:52.752900"
+    "timestamp": "2025-12-03T01:00:57.251133"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,6 +172,16 @@
     ],
     "pubmed": [
       {
+        "title": "Socio-ecological factors influencing dietary behaviours among adolescents and young adults in rural Eastern Uganda: A qualitative study.",
+        "authors": [
+          "Buyinza T",
+          "Buzigi E",
+          "Kitimbo J"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41329677/"
+      },
+      {
         "title": "Unlocking the potential of augmented reality in education: Insights from a systematic review of AR-enhanced instructional approaches.",
         "authors": [
           "Anuar WMFF",
@@ -190,19 +200,9 @@
         ],
         "published": "2025 Nov 29",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41319454/"
-      },
-      {
-        "title": "Eating Well When Living With an Intellectual Disability-Exploring the Carer: Client Relationship in Residential Settings.",
-        "authors": [
-          "Özdemir A",
-          "Chapman H",
-          "Hall R"
-        ],
-        "published": "2025 Nov",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41319222/"
       }
     ],
-    "timestamp": "2025-12-02T20:36:55.751996"
+    "timestamp": "2025-12-03T01:00:59.921704"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -270,7 +270,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-02T20:36:58.710905"
+    "timestamp": "2025-12-03T01:01:02.898284"
   },
   "democratic schools": {
     "arxiv": [
@@ -308,6 +308,16 @@
     ],
     "pubmed": [
       {
+        "title": "Patient involvement in the biopsychosocial integrated primary care model: A qualitative study in three health districts of South Kivu, Democratic Republic of Congo.",
+        "authors": [
+          "Kasongo BM",
+          "Molima CEN",
+          "Mparanyi GJ"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41329678/"
+      },
+      {
         "title": "Genomic analysis and antimicrobial resistance of Vibrio cholerae isolated during Zambia's 2023 cholera epidemic.",
         "authors": [
           "Ng'ombe H",
@@ -326,19 +336,9 @@
         ],
         "published": "2025 Dec 2",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41329357/"
-      },
-      {
-        "title": "A new order parameter model for the structural phase transitions in VO(2)-based solid solutions.",
-        "authors": [
-          "Kim IH",
-          "Ri JS",
-          "Kang UI"
-        ],
-        "published": "2026 Jan 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41328454/"
       }
     ],
-    "timestamp": "2025-12-02T20:37:01.667438"
+    "timestamp": "2025-12-03T01:01:05.907151"
   },
   "student agency": {
     "arxiv": [
@@ -409,6 +409,6 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323915/"
       }
     ],
-    "timestamp": "2025-12-02T20:37:04.692652"
+    "timestamp": "2025-12-03T01:01:08.897116"
   }
 }

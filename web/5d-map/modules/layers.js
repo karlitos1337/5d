@@ -140,3 +140,49 @@ function getIconForType(type) {
   const icons = { sudbury: '🟢', waldorf: '🔵', 'folk-high': '🟡', tokkatsu: '🟣' };
   return icons[type] || '⚪';
 }
+
+// Validierungsring: zeichnet einen dezenten Ring um Länder mit verifizierten Daten
+export function createValidationRingLayer(data) {
+  const { countries, validatedISO3 } = data || {};
+  const group = L.layerGroup();
+  if (!Array.isArray(countries) || !Array.isArray(validatedISO3)) return group;
+  const set = new Set(validatedISO3);
+  for (const c of countries) {
+    const { iso3, lat, lng } = c || {};
+    if (!iso3 || typeof lat !== 'number' || typeof lng !== 'number') continue;
+    if (!set.has(iso3)) continue;
+    const circle = L.circle([lat, lng], {
+      radius: 300000, // 300 km
+      color: '#2dd4bf',
+      weight: 2,
+      fill: false,
+      opacity: 0.9
+    }).bindTooltip(`✔️ Validiert: ${c.name || iso3}`, { permanent: false });
+    group.addLayer(circle);
+  }
+  return group;
+}
+
+// Quellen-Layer: zeigt Abdeckung/Zahl der Quellen pro Land als kleine Marker
+export function createSourcesLayer(data) {
+  const { countries, sourcesByISO3 } = data || {};
+  const group = L.layerGroup();
+  if (!Array.isArray(countries) || !sourcesByISO3) return group;
+  for (const c of countries) {
+    const { iso3, lat, lng } = c || {};
+    if (!iso3 || typeof lat !== 'number' || typeof lng !== 'number') continue;
+    const info = sourcesByISO3[iso3];
+    const count = Number(info?.count || 0);
+    const categories = Array.isArray(info?.categories) ? info.categories.join(', ') : '—';
+    const color = count >= 10 ? '#22C55E' : count >= 3 ? '#E8B84A' : '#C0152F';
+    const m = L.circleMarker([lat, lng], {
+      radius: Math.max(4, Math.min(12, count)),
+      color,
+      fillColor: color,
+      fillOpacity: 0.7,
+      weight: 1
+    }).bindPopup(`<b>${c.name || iso3}</b><br/>Quellen: ${count}<br/><small>${categories}</small>`);
+    group.addLayer(m);
+  }
+  return group;
+}

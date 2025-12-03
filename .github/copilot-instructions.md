@@ -523,8 +523,46 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 
 ---
 
+## Dashboard Debugging & Common Issues
+
+### Known Issues (Pages 2-8)
+See `DASHBOARD_BUG_ANALYSIS.md` for complete analysis.
+
+**Quick Diagnostic Checklist:**
+1. **JSON files missing?** → Run `./start.sh` or individual extractors
+2. **Maps not rendering?** → Check `pip list | grep folium` (needs streamlit-folium)
+3. **Data structure errors?** → Validate JSON with `python -c "import json; json.load(open('file.json'))"`
+4. **Import errors?** → Install extended deps: `pip install -r requirements_extended.txt`
+
+**Debug Individual Page:**
+```bash
+streamlit run pages/2_🚀_Projects.py  # Test single page
+```
+
+**Browser Console Errors (F12 → Console):**
+- `Cannot read properties of undefined` → Data validation issue (see Problem 5 in DASHBOARD_BUG_ANALYSIS.md)
+- `404 Not Found` → JSON files missing (run extractors)
+- `folium is not defined` → Missing dependency
+
+**Quick Fixes:**
+```bash
+# Regenerate all data
+python 5d_extractor.py && python 5d_research_scraper.py && python 5d_github_api.py
+
+# Install map dependencies (if missing)
+pip install streamlit-folium folium plotly
+
+# Or install all extended dependencies
+pip install -r requirements_extended.txt
+
+# Test with verbose logging
+streamlit run 5d_dashboard.py --logger.level=debug
+```
+
+---
+
 **Version:** 2.5  
-**Last Updated:** December 3, 2025 - 00:15 CET  
+**Last Updated:** December 3, 2025 - 00:45 CET  
 **Dev Container:** Ubuntu 24.04.3 LTS, Python 3.10+  
 **Major Milestones:**
 - Phase 1: All 10 dashboard pages complete (100%)
@@ -532,3 +570,4 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 - Phase 4: App integration 4/4 complete (100%) ✅
 - Phase 8: 161 scientific tests, 151/151 passing (100%) ✅
 - BibTeX: 70 scientific references, all validations passing
+- Debugging: DASHBOARD_BUG_ANALYSIS.md with 5 common issues documented

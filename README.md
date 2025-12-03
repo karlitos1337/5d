@@ -52,7 +52,7 @@ This repository contains comprehensive documentation across multiple knowledge d
 
 ### For Philosophers
 ### Weltkarte (MVP)
-- Interaktive Karte mit Heatmap, IMP‑Choropleth, Schulen & Zeitreise.
+- Interaktive Karte mit Heatmap, IMP‑Choropleth, Schulen, Validierungsring, Quellen‑Layer & Zeitreise.
 - Schnellstart:
 	```bash
 	cd web/5d-map
@@ -60,6 +60,16 @@ This repository contains comprehensive documentation across multiple knowledge d
 	$BROWSER http://localhost:5500
 	```
 - Details: `web/5d-map/README.md` · Kurz‑Anweisung: `md_copilot_ki_anweisung`
+
+#### Datenvalidierung (CI)
+- GitHub Action: `.github/workflows/validate-5d-metadata.yml`
+- Validiert JSON‑Artefakte und Metadaten (Schema, Schlüssel, Vollständigkeit)
+- Trigger: PRs auf `main` und Änderungen in `manifest/`, `models/`, `web/5d-map/data/`
+- Lokal prüfen:
+	```bash
+	pytest tests/ -k "metadata|world_map_data" -v
+	```
+- Ergebnisse erscheinen als PR‑Check. Bei Fehlern: Logs prüfen und Keys gemäß `models/schemas.py` korrigieren.
 
 ## 🛠 Dev Quickstart
 

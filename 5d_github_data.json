@@ -6,7 +6,7 @@
         "full_name": "nborwankar/LearnDataScience",
         "description": "Open Content for self-directed learning in data science",
         "stars": 2982,
-        "forks": 1652,
+        "forks": 1653,
         "language": "Jupyter Notebook",
         "url": "https://github.com/nborwankar/LearnDataScience",
         "updated": "2025-11-28T18:12:00Z"
@@ -84,6 +84,16 @@
         "updated": "2022-06-11T02:52:40Z"
       },
       {
+        "name": "Project2029",
+        "full_name": "JonJLevesque/Project2029",
+        "description": "Project 2029: A comprehensive policy framework for democratic renewal. 31 chapters covering electoral reform, tax justice, housing, healthcare,   education, criminal justice transformation, and AI governance. The progressive counter to Project 2025. 70+ legislative requirements, implementation checklists, and activist materials.",
+        "stars": 1,
+        "forks": 0,
+        "language": "HTML",
+        "url": "https://github.com/JonJLevesque/Project2029",
+        "updated": "2025-12-02T21:05:29Z"
+      },
+      {
         "name": "Presidential-Inaugural-Speech-Analysis",
         "full_name": "leolamk/Presidential-Inaugural-Speech-Analysis",
         "description": "Inauguration speech is a ceremony marking the commencement of a new term of President of America. Often, in this speech, President addresses his policies and future presidential plans. In this study, our goal is to investigate the unfound pattern in these speeches. We focus on the differences in between Republican Presidents and Democratic Presidents as well as Presidents who received graduate school education and Presidents who did not. We want to see if different educational and political backgrounds will have impacts on the topic, word length, sentence length, and emotion of their inauguration speeches.",
@@ -92,16 +102,6 @@
         "language": "R",
         "url": "https://github.com/leolamk/Presidential-Inaugural-Speech-Analysis",
         "updated": "2018-09-26T20:27:07Z"
-      },
-      {
-        "name": "democratic-school-manifesto",
-        "full_name": "jostylr/democratic-school-manifesto",
-        "description": "A manifesto of the principles behind democratic education",
-        "stars": 0,
-        "forks": 0,
-        "language": null,
-        "url": "https://github.com/jostylr/democratic-school-manifesto",
-        "updated": "2014-08-12T10:54:46Z"
       }
     ],
     "intrinsic motivation": [
@@ -223,11 +223,11 @@
         "name": "mathtutorbench",
         "full_name": "eth-lre/mathtutorbench",
         "description": "Benchmark for Measuring Open-ended Pedagogical Capabilities of LLM Tutors, EMNLP 2025 Oral",
-        "stars": 25,
-        "forks": 4,
+        "stars": 26,
+        "forks": 5,
         "language": "Python",
         "url": "https://github.com/eth-lre/mathtutorbench",
-        "updated": "2025-11-27T04:09:53Z"
+        "updated": "2025-12-03T00:59:45Z"
       },
       {
         "name": "digitalassignmentshowcase",
@@ -264,63 +264,73 @@
   "trending": {
     "education": [
       {
-        "name": "RemoteBrick",
-        "stars": 4,
-        "url": "https://github.com/JuniorJacki/RemoteBrick"
-      },
-      {
-        "name": "Mimir",
+        "name": "armenian-javascript-community",
         "stars": 0,
-        "url": "https://github.com/mendax0110/Mimir"
+        "url": "https://github.com/chonvalle/armenian-javascript-community"
       },
       {
-        "name": "hogwarts",
-        "stars": 6,
-        "url": "https://github.com/databayt/hogwarts"
+        "name": "Soft-Skill-Lab",
+        "stars": 0,
+        "url": "https://github.com/xylrahsx/Soft-Skill-Lab"
       },
       {
-        "name": "schoolcode",
+        "name": "mechanicsdsl",
         "stars": 1,
-        "url": "https://github.com/luka-loehr/schoolcode"
+        "url": "https://github.com/MechanicsDSL/mechanicsdsl"
       },
       {
-        "name": "hedy",
-        "stars": 1593,
-        "url": "https://github.com/hedyorg/hedy"
+        "name": "racket-wv8",
+        "stars": 0,
+        "url": "https://github.com/JediKefas/racket-wv8"
+      },
+      {
+        "name": "canvas-gpa-calculator",
+        "stars": 1,
+        "url": "https://github.com/gavin-ho1/canvas-gpa-calculator"
       }
     ],
     "learning": [
       {
-        "name": "ZoltarFinancial",
-        "stars": 2,
-        "url": "https://github.com/apod-1/ZoltarFinancial"
+        "name": "cka_study_exercises",
+        "stars": 0,
+        "url": "https://github.com/KOKO1904/cka_study_exercises"
       },
       {
-        "name": "training",
-        "stars": 203,
-        "url": "https://github.com/nextflow-io/training"
+        "name": "armenian-javascript-community",
+        "stars": 0,
+        "url": "https://github.com/chonvalle/armenian-javascript-community"
       },
       {
-        "name": "content",
-        "stars": 9863,
-        "url": "https://github.com/mdn/content"
+        "name": "myplanet",
+        "stars": 28,
+        "url": "https://github.com/open-learning-exchange/myplanet"
       },
       {
-        "name": "Frappe-ERPNext-Tutorial-Mastery",
-        "stars": 63,
-        "url": "https://github.com/mohamed-ameer/Frappe-ERPNext-Tutorial-Mastery"
+        "name": "kubernetes-for-students",
+        "stars": 0,
+        "url": "https://github.com/emrah13-13/kubernetes-for-students"
       },
       {
-        "name": "LearnCard",
-        "stars": 59,
-        "url": "https://github.com/learningeconomy/LearnCard"
+        "name": "CKingTextbook",
+        "stars": 0,
+        "url": "https://github.com/joshraygit/CKingTextbook"
       }
     ],
     "pedagogy": [
       {
+        "name": "Lucian-Academy",
+        "stars": 0,
+        "url": "https://github.com/luciangreen/Lucian-Academy"
+      },
+      {
         "name": "RAGKET",
         "stars": 3,
         "url": "https://github.com/Ayanop267/RAGKET"
+      },
+      {
+        "name": "instructor-training",
+        "stars": 184,
+        "url": "https://github.com/carpentries/instructor-training"
       },
       {
         "name": "ph-submissions",
@@ -328,48 +338,38 @@
         "url": "https://github.com/programminghistorian/ph-submissions"
       },
       {
-        "name": "Lucian-Academy",
-        "stars": 0,
-        "url": "https://github.com/luciangreen/Lucian-Academy"
-      },
-      {
         "name": "neuraflow",
         "stars": 5,
         "url": "https://github.com/xFufly/neuraflow"
-      },
-      {
-        "name": "Philosophy",
-        "stars": 1,
-        "url": "https://github.com/luciangreen/Philosophy"
       }
     ],
     "edtech": [
       {
-        "name": "Empirical-Core",
-        "stars": 30,
-        "url": "https://github.com/empirical-org/Empirical-Core"
-      },
-      {
-        "name": "exam-seating-arranger",
-        "stars": 0,
-        "url": "https://github.com/Bossr1387/exam-seating-arranger"
-      },
-      {
-        "name": "TatvaX-AI-PROTOTYPE",
-        "stars": 0,
-        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
-      },
-      {
-        "name": "HASKI-Backend",
-        "stars": 4,
-        "url": "https://github.com/HASKI-RAK/HASKI-Backend"
-      },
-      {
         "name": "ai-recruitment-assistant",
         "stars": 0,
         "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
+      },
+      {
+        "name": "MnemoApp",
+        "stars": 6,
+        "url": "https://github.com/ShadowCCS/MnemoApp"
+      },
+      {
+        "name": "neuropilot",
+        "stars": 1,
+        "url": "https://github.com/Rwiddhi03/neuropilot"
+      },
+      {
+        "name": "kolibri",
+        "stars": 955,
+        "url": "https://github.com/learningequality/kolibri"
+      },
+      {
+        "name": "Next-Voters",
+        "stars": 3,
+        "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
       }
     ]
   },
-  "timestamp": "2025-12-02T20:38:05.233934"
+  "timestamp": "2025-12-03T01:01:09.043831"
 }

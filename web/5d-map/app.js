@@ -1,6 +1,6 @@
 import { fetchAllData } from './modules/api-fetcher.js';
 import { initMap, addLayer, removeLayer } from './modules/map-renderer.js';
-import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer } from './modules/layers.js';
+import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer, createValidationRingLayer, createSourcesLayer } from './modules/layers.js';
 
 let map;
 let activeLayer = null;
@@ -39,6 +39,12 @@ function activateLayer(layerName) {
       activeLayer = createIMPLayer(cachedData);
       legendCtl = createIMPLegendControl();
       legendCtl.addTo(map);
+      break;
+    case 'validation':
+      activeLayer = createValidationRingLayer(cachedData);
+      break;
+    case 'sources':
+      activeLayer = createSourcesLayer(cachedData);
       break;
     case 'time':
       if (!selectedYear) {
@@ -95,6 +101,8 @@ async function init() {
   document.getElementById('layer-status-quo')?.addEventListener('click', () => activateLayer('status-quo'));
   document.getElementById('layer-schools')?.addEventListener('click', () => activateLayer('schools'));
   document.getElementById('layer-imp')?.addEventListener('click', () => activateLayer('imp'));
+  document.getElementById('layer-validation')?.addEventListener('click', () => activateLayer('validation'));
+  document.getElementById('layer-sources')?.addEventListener('click', () => activateLayer('sources'));
   document.getElementById('layer-time')?.addEventListener('click', () => activateLayer('time'));
 
   const yearSlider = document.getElementById('year-slider');
