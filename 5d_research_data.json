@@ -67,7 +67,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323141/"
       }
     ],
-    "timestamp": "2025-12-03T01:28:12.539056"
+    "timestamp": "2025-12-03T07:23:46.848485"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -136,7 +136,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323909/"
       }
     ],
-    "timestamp": "2025-12-03T01:28:15.531722"
+    "timestamp": "2025-12-03T07:23:49.889037"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -202,7 +202,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41319454/"
       }
     ],
-    "timestamp": "2025-12-03T01:28:18.538006"
+    "timestamp": "2025-12-03T07:23:52.850603"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -270,7 +270,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-03T01:28:21.534041"
+    "timestamp": "2025-12-03T07:23:55.837514"
   },
   "democratic schools": {
     "arxiv": [
@@ -308,6 +308,14 @@
     ],
     "pubmed": [
       {
+        "title": "Towards a transparent and reproducible AI-assisted research paper writing.",
+        "authors": [
+          "Park J"
+        ],
+        "published": "2025 Dec 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41331701/"
+      },
+      {
         "title": "Patient involvement in the biopsychosocial integrated primary care model: A qualitative study in three health districts of South Kivu, Democratic Republic of Congo.",
         "authors": [
           "Kasongo BM",
@@ -326,19 +334,9 @@
         ],
         "published": "2025 Dec",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41329510/"
-      },
-      {
-        "title": "Prevalence and Determinants of Constipation in Community-Dwelling Adult Women in the Democratic Republic of Congo: A Cross-Sectional Study.",
-        "authors": [
-          "Nzinga AL",
-          "Reman T",
-          "Mukwege D"
-        ],
-        "published": "2025 Dec 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41329357/"
       }
     ],
-    "timestamp": "2025-12-03T01:28:24.544737"
+    "timestamp": "2025-12-03T07:23:58.867895"
   },
   "student agency": {
     "arxiv": [
@@ -381,34 +379,36 @@
     ],
     "pubmed": [
       {
-        "title": "A profile of injuries within an Australian State Emergency Service Agency: a retrospective study.",
+        "title": "Using reporting guidelines to improve the reproducibility of cooking Christmas tree meringues: the \"People tasting trees\" cluster-randomised controlled trial.",
         "authors": [
-          "Marvin G",
-          "Canetti EFD",
-          "Orr R"
+          "Vinatier C",
+          "Fahed E",
+          "Chollet Y"
         ],
-        "published": "2025 Dec 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41327053/"
+        "published": "2025 Dec 3",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41331702/"
       },
       {
-        "title": "Contraceptive use among sexually active school-going adolescents in three Southeast Asian Countries: a cross-sectional study.",
+        "title": "Morphological resemblance to injections elicits fear, disgust, and reduced conservation intent toward insects.",
         "authors": [
-          "Purwatiningsih Y",
-          "Suparmi",
-          "Masitoh S"
+          "Prokop P",
+          "Todáková S",
+          "Fančovičová J"
         ],
         "published": "2025 Dec 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41326955/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41330984/"
       },
       {
-        "title": "Voice, vulnerability, and expressive growth: investigating AI anxiety and performance appraisal in voice arts education.",
+        "title": "Female, woman and/or girl Athlete Injury pRevention (FAIR) practical recommendations: International Olympic Committee (IOC) consensus meeting held in Lausanne, Switzerland, 2025.",
         "authors": [
-          "Ouyang D"
+          "Crossley KM",
+          "Whittaker JL",
+          "Patterson B"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41323915/"
+        "published": "2025 Dec 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41330629/"
       }
     ],
-    "timestamp": "2025-12-03T01:28:27.532999"
+    "timestamp": "2025-12-03T07:24:01.855652"
   }
 }

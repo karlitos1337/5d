@@ -37,3 +37,4 @@ external/sources/FMHY-SafeGuard-main/
 external/archives/*.msi
 external/archives/*.exe
 external/archives/old_versions/
+simulations/data/cifar-10-python.tar.gz

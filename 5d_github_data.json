@@ -264,63 +264,63 @@
   "trending": {
     "education": [
       {
-        "name": "think",
+        "name": "MairuCLI",
         "stars": 0,
-        "url": "https://github.com/Hardcore-bioengineering120/think"
-      },
-      {
-        "name": "SJTU-Jokes",
-        "stars": 0,
-        "url": "https://github.com/aaadsadas/SJTU-Jokes"
-      },
-      {
-        "name": "staycurious",
-        "stars": 0,
-        "url": "https://github.com/ghosterre/staycurious"
-      },
-      {
-        "name": "miniob",
-        "stars": 0,
-        "url": "https://github.com/earnestweakening147/miniob"
+        "url": "https://github.com/anestec-rd/MairuCLI"
       },
       {
         "name": "crush",
         "stars": 0,
         "url": "https://github.com/samkiell/crush"
+      },
+      {
+        "name": "feeds",
+        "stars": 2,
+        "url": "https://github.com/4thWaveAI/feeds"
+      },
+      {
+        "name": "HydroLearn",
+        "stars": 0,
+        "url": "https://github.com/licm13/HydroLearn"
+      },
+      {
+        "name": "ai-shifu",
+        "stars": 235,
+        "url": "https://github.com/ai-shifu/ai-shifu"
       }
     ],
     "learning": [
       {
-        "name": "SJTU-Jokes",
+        "name": "anamul-hoque-shourov",
         "stars": 0,
-        "url": "https://github.com/aaadsadas/SJTU-Jokes"
+        "url": "https://github.com/anamul-hoque-shourov/anamul-hoque-shourov"
       },
       {
-        "name": "staycurious",
-        "stars": 0,
-        "url": "https://github.com/ghosterre/staycurious"
+        "name": "Think-Like-a-Data-Scientist",
+        "stars": 1,
+        "url": "https://github.com/Mesho2022/Think-Like-a-Data-Scientist"
       },
       {
-        "name": "myplanet",
-        "stars": 28,
-        "url": "https://github.com/open-learning-exchange/myplanet"
+        "name": "the-watcher-ssr",
+        "stars": 0,
+        "url": "https://github.com/SAQLAINComsats/the-watcher-ssr"
       },
       {
-        "name": "AI-Human-Collaboration-Protocol",
+        "name": "the-watcher-ssr",
         "stars": 0,
-        "url": "https://github.com/bolufagbulu/AI-Human-Collaboration-Protocol"
+        "url": "https://github.com/bien000/the-watcher-ssr"
       },
       {
-        "name": "evomics-docs",
+        "name": "Designing-Hybrid-AI-Systems",
         "stars": 0,
-        "url": "https://github.com/MrBrawlYT/evomics-docs"
+        "url": "https://github.com/Removed-navajo219/Designing-Hybrid-AI-Systems"
       }
     ],
     "pedagogy": [
       {
-        "name": "Lucian-Academy",
-        "stars": 0,
-        "url": "https://github.com/luciangreen/Lucian-Academy"
+        "name": "ph-submissions",
+        "stars": 147,
+        "url": "https://github.com/programminghistorian/ph-submissions"
       },
       {
         "name": "RAGKET",
@@ -328,14 +328,14 @@
         "url": "https://github.com/Ayanop267/RAGKET"
       },
       {
+        "name": "Lucian-Academy",
+        "stars": 0,
+        "url": "https://github.com/luciangreen/Lucian-Academy"
+      },
+      {
         "name": "instructor-training",
         "stars": 184,
         "url": "https://github.com/carpentries/instructor-training"
-      },
-      {
-        "name": "ph-submissions",
-        "stars": 147,
-        "url": "https://github.com/programminghistorian/ph-submissions"
       },
       {
         "name": "neuraflow",
@@ -345,31 +345,31 @@
     ],
     "edtech": [
       {
+        "name": "SportsScience",
+        "stars": 0,
+        "url": "https://github.com/seif4d/SportsScience"
+      },
+      {
+        "name": "exam-seating-arranger",
+        "stars": 0,
+        "url": "https://github.com/Bossr1387/exam-seating-arranger"
+      },
+      {
+        "name": "classroomio",
+        "stars": 1333,
+        "url": "https://github.com/classroomio/classroomio"
+      },
+      {
         "name": "TatvaX-AI-PROTOTYPE",
         "stars": 0,
         "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
       },
       {
-        "name": "ai-recruitment-assistant",
-        "stars": 0,
-        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
-      },
-      {
-        "name": "MnemoApp",
-        "stars": 6,
-        "url": "https://github.com/ShadowCCS/MnemoApp"
-      },
-      {
-        "name": "neuropilot",
+        "name": "stcats-ops",
         "stars": 1,
-        "url": "https://github.com/Rwiddhi03/neuropilot"
-      },
-      {
-        "name": "kolibri",
-        "stars": 955,
-        "url": "https://github.com/learningequality/kolibri"
+        "url": "https://github.com/williamalexakis/stcats-ops"
       }
     ]
   },
-  "timestamp": "2025-12-03T01:28:27.665628"
+  "timestamp": "2025-12-03T07:24:01.993598"
 }
