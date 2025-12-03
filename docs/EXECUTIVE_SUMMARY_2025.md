@@ -299,28 +299,48 @@ Das Framework definiert **5 Komplexitätsebenen** für verschiedene Systeme:
 
 ## 🚀 **Nächste Schritte (Q1-Q4 2026)**
 
+### **🎯 GESAMTZIEL: Research Agenda 2026-2028**
+
+**Siehe:** **[research_agenda.md](../08-experimente-validierung/experiments/research_agenda.md)** - Vollständiger 7-Experimente-Plan
+
+**Master-Hypothese:** 5D-Systeme > 1D-Kontroll-Systeme in **Stabilität, Transfer, Glück, Innovation**
+
+**Priority 1-2 (Start JETZT):**
+- **Woche 1:** AI-Simulation (PyTorch 5D-Net vs. Baseline, MNIST+CIFAR10, Adversarial Robustness)
+- **Woche 4:** Meta-Survey (5D-Score vs. Big5/IQ, n=1000, R²>0.45 erwartet)
+
 ### **Q1 2026 (Januar-März)**
+- [ ] **AI-Simulation (Research Agenda #4):** PyTorch 5D-Net Implementation, MNIST+Noise, Transfer CIFAR10 (1 Woche) ⭐ **PRIORITY 1**
+- [ ] **Meta-Survey (Research Agenda #7):** 5D-Score vs. Big5/IQ, n=1000, Prolific/MTurk (1 Monat) ⭐ **PRIORITY 2**
 - [ ] Minimalexperiment 2: Governance-Panel (WGI Voice vs. HDI, n>30 Länder) ✅ Teilweise (9 Länder)
 - [ ] IMP-Calculator: Survey-Datensammlung (n>50)
 - [ ] BibTeX erweitern (134 → 150 Einträge)
 - [ ] Pre-Registration OSF (4-Modell-Vergleich, Hypothesen vor Datensammlung)
+- [ ] **Authentizität-RCT Start (Research Agenda #5):** n=200, 8 Wochen, Masken vs. Echt (Q1 Ende)
 
 ### **Q2 2026 (April-Juni)**
+- [ ] **Bildung-RCT Start (Research Agenda #1):** Sudbury vs. Standard, n=100 Kinder (8-12J), 6 Monate ⭐ **HIGH IMPACT**
+- [ ] **Neuro-EEG Pilot (Research Agenda #2):** 1D→4D Korrelation, n=40, HRV+EEG+Kollaboration (3 Monate)
 - [ ] 5D-Survey: n>400 (Likert-Skalen, alle 5 Dimensionen)
 - [ ] Faktorenanalyse: Sind A, IM, R, SP, Au distinkt? (PCA, Cronbach's α)
 - [ ] Korrelation: IMP vs. Life Satisfaction, HDI, WHO Depression
 - [ ] 4-Modell-Vergleich: Multiplikativ, Additiv, Geometric Mean, Weighted
+- [ ] **Wirtschaft-Studie Start (Research Agenda #3):** Kooperativen vs. GmbH, n=20 Firmen, 2 Jahre longitudinal
 
 ### **Q3 2026 (Juli-September)**
+- [ ] **Ökologie-Feldstudie Start (Research Agenda #6):** Permakultur vs. Monokultur, n=20 Felder (1ha), 12 Monate
 - [ ] Alternative Schulen: Empirische Daten sammeln (Dropout, Zufriedenheit, ROI)
 - [ ] Fallstudien: 10-15 Schulen (Sudbury, Summerhill, ESBZ, etc.)
 - [ ] Externe Validierung: Peer-Review, Externe Forscher
+- [ ] **Erste Papers:** AI-Simulation + Meta-Survey (arXiv → Nature Human Behaviour)
 
 ### **Q4 2026 (Oktober-Dezember)**
+- [ ] **3 Papers Target:** AI-Simulation (ICLR), Meta-Survey (Psych Science), Authentizität-RCT (J. Personality)
 - [ ] Preprint: ArXiv/PsyArXiv (IMP-Framework, erste Evidenz)
-- [ ] Peer-Review: Journal-Submission (z.B. Frontiers in Psychology)
+- [ ] Peer-Review: Journal-Submission (z.B. Frontiers in Psychology, Nature Human Behaviour)
 - [ ] Replication: Open Data + Code (OSF, GitHub)
 - [ ] Publikation: Erste wissenschaftliche Publikation
+- [ ] **TEDx-Vorbereitung:** 5D-Zwanglosigkeits-Revolution (Research Agenda Jahr 2 Ziel)
 
 ---
 

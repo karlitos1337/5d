@@ -1,7 +1,37 @@
 # TODO – 5D-Forschungsplanung
 
-**Status:** Draft (2025-12-02)  
+**Status:** Active Development (2025-12-03)  
 **Scope:** Wissenschaftliche Grundlagen, empirische Testbarkeit, theoretische Kohärenz
+
+---
+
+## 🎯 **GESAMTZIEL: Research Agenda 2026-2028**
+
+**Siehe:** **[research_agenda.md](08-experimente-validierung/experiments/research_agenda.md)** - Vollständiger 7-Experimente-Plan
+
+**Master-Hypothese:** 5D-Systeme > 1D-Kontroll-Systeme in **Stabilität, Transfer, Glück, Innovation**
+
+### **7 Forschungsdesigns (1 Woche bis 2 Jahre)**
+
+| # | Experiment | Aufwand | Impact | Paper-Chance | Start | Status |
+|---|------------|---------|--------|--------------|-------|--------|
+| **4** | AI-Simulation (5D-Net vs. Baseline) | 🟢 1 Woche | ⭐⭐⭐⭐ | 90% | **HEUTE** | ⏳ Priority 1 |
+| **7** | Meta-Survey (5D-Score vs. Big5/IQ) | 🟡 1 Monat | ⭐⭐⭐⭐⭐ | 95% | Woche 2 | ⏳ Priority 2 |
+| **5** | Authentizität-RCT (Masken vs. Echt) | 🟡 8 Wochen | ⭐⭐⭐⭐ | 85% | Q1 2026 | ⏳ Priority 3 |
+| **1** | Bildung-RCT (Sudbury vs. Standard) | 🔴 6 Monate | ⭐⭐⭐⭐⭐⭐ | 98% | Q1 2026 | ⏳ Priority 4 |
+| **2** | Neuro-EEG (1D→4D Korrelation) | 🟠 3 Monate | ⭐⭐⭐⭐⭐ | 92% | Q2 2026 | ⏳ Priority 5 |
+| **3** | Wirtschaft (Kooperativen vs. GmbH) | 🔴 2 Jahre | ⭐⭐⭐⭐⭐ | 95% | Q2 2026 | ⏳ Long-term |
+| **6** | Ökologie (Permakultur vs. Monokultur) | 🔴 1 Jahr | ⭐⭐⭐⭐ | 88% | Q3 2026 | ⏳ Long-term |
+
+**Roadmap:**
+- **Woche 1:** AI-Simulation + GitHub-Experiments (PyTorch 5D-Net)
+- **Woche 4:** Meta-Survey launch (n=1000, Prolific/MTurk)
+- **Monat 3:** Authentizität-RCT + erste Paper (arXiv)
+- **Monat 6:** Bildung-RCT Start + Neuro-Pilot
+- **Jahr 1:** 3 Papers (arXiv → Nature Human Behaviour)
+- **Jahr 2:** Full Validation + TEDx
+
+**Implementierung:** Alle Experimente werden im Ordner `08-experimente-validierung/experiments/` dokumentiert und Code in `simulations/` gepflegt.
 
 ---
 

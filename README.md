@@ -140,8 +140,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ### Development Roadmaps
 
 - **[TODO.md](TODO.md)** - Infrastructure, deployment, CI/CD tasks (13/15 complete, 87%)
-- **[TODO_MULTIPAGE.md](TODO_MULTIPAGE.md)** - Dashboard features, UI/UX, scientific validation
+- **[TODO_MULTIPAGE.md](TODO_MULTIPAGE.md)** - Dashboard features, UI/UX, scientific validation (10/10 pages, 100%)
 - **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, theoretical coherence (85+ tasks)
+- **[Research Agenda 2026-2028](08-experimente-validierung/experiments/research_agenda.md)** - ⭐ **GESAMTZIEL:** 7 Experimente (1 Woche bis 2 Jahre) - AI-Simulation, Meta-Survey, Bildung-RCT, Neuro-EEG
 
 ### Scientific Documentation
 

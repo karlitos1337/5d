@@ -245,6 +245,7 @@ Unser **5D-Framework** ist **NICHT**:
 - **[EXECUTIVE_SUMMARY_2025.md](docs/EXECUTIVE_SUMMARY_2025.md)** - ⭐ **NEW!** Vollständige Übersicht mit Week 1 Research (341 Zeilen, 92% A-)
 - **[README.md](README.md)** - Projektübersicht, Quick Start
 - **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Forschungs-Roadmap (85+ Tasks)
+- **[Research Agenda 2026-2028](08-experimente-validierung/experiments/research_agenda.md)** - ⭐ **GESAMTZIEL:** 7 Experimente (AI-Sim, Meta-Survey, Bildung-RCT, Neuro-EEG, Wirtschaft, Ökologie)
 - **[docs/FAQ.md](docs/FAQ.md)** - 15 häufige Fragen mit Antworten
 
 ### Wissenschaftliche Grundlagen
