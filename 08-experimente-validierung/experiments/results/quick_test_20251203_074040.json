@@ -1,0 +1,27 @@
+{
+  "5d_net": {
+    "noise_0.0": {
+      "accuracy": 93.45
+    },
+    "noise_0.3": {
+      "accuracy": 30.55
+    }
+  },
+  "baseline": {
+    "noise_0.0": {
+      "accuracy": 90.1
+    },
+    "noise_0.3": {
+      "accuracy": 76.0
+    }
+  },
+  "comparison": {
+    "noise_30_improvement": -48.80000000000001,
+    "hypothesis_confirmed": false,
+    "config": {
+      "epochs": 2,
+      "train_samples": 10000,
+      "test_samples": 2000
+    }
+  }
+}
