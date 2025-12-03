@@ -1,4 +1,4 @@
-.PHONY: start test serve-map clean
+.PHONY: start test serve-map clean test-map-ci
 
 start:
 	./start.sh
@@ -12,3 +12,6 @@ serve-map:
 clean:
 	rm -rf node_modules package-lock.json
 	rm -rf __pycache__ */__pycache__ || true
+
+test-map-ci:
+	pytest -k "metadata or world_map_data" -v --disable-warnings

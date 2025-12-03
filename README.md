@@ -60,6 +60,7 @@ This repository contains comprehensive documentation across multiple knowledge d
 	$BROWSER http://localhost:5500
 	```
 - Details: `web/5d-map/README.md` · Kurz‑Anweisung: `md_copilot_ki_anweisung`
+ - Validierung & Quellen: `docs/VALIDATION_AND_SOURCES.md`
 
 #### Datenvalidierung (CI)
 - GitHub Action: `.github/workflows/validate-5d-metadata.yml`

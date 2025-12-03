@@ -264,41 +264,41 @@
   "trending": {
     "education": [
       {
-        "name": "armenian-javascript-community",
+        "name": "think",
         "stars": 0,
-        "url": "https://github.com/chonvalle/armenian-javascript-community"
+        "url": "https://github.com/Hardcore-bioengineering120/think"
       },
       {
-        "name": "Soft-Skill-Lab",
+        "name": "SJTU-Jokes",
         "stars": 0,
-        "url": "https://github.com/xylrahsx/Soft-Skill-Lab"
+        "url": "https://github.com/aaadsadas/SJTU-Jokes"
       },
       {
-        "name": "mechanicsdsl",
-        "stars": 1,
-        "url": "https://github.com/MechanicsDSL/mechanicsdsl"
-      },
-      {
-        "name": "racket-wv8",
+        "name": "staycurious",
         "stars": 0,
-        "url": "https://github.com/JediKefas/racket-wv8"
+        "url": "https://github.com/ghosterre/staycurious"
       },
       {
-        "name": "canvas-gpa-calculator",
-        "stars": 1,
-        "url": "https://github.com/gavin-ho1/canvas-gpa-calculator"
+        "name": "miniob",
+        "stars": 0,
+        "url": "https://github.com/earnestweakening147/miniob"
+      },
+      {
+        "name": "crush",
+        "stars": 0,
+        "url": "https://github.com/samkiell/crush"
       }
     ],
     "learning": [
       {
-        "name": "cka_study_exercises",
+        "name": "SJTU-Jokes",
         "stars": 0,
-        "url": "https://github.com/KOKO1904/cka_study_exercises"
+        "url": "https://github.com/aaadsadas/SJTU-Jokes"
       },
       {
-        "name": "armenian-javascript-community",
+        "name": "staycurious",
         "stars": 0,
-        "url": "https://github.com/chonvalle/armenian-javascript-community"
+        "url": "https://github.com/ghosterre/staycurious"
       },
       {
         "name": "myplanet",
@@ -306,14 +306,14 @@
         "url": "https://github.com/open-learning-exchange/myplanet"
       },
       {
-        "name": "kubernetes-for-students",
+        "name": "AI-Human-Collaboration-Protocol",
         "stars": 0,
-        "url": "https://github.com/emrah13-13/kubernetes-for-students"
+        "url": "https://github.com/bolufagbulu/AI-Human-Collaboration-Protocol"
       },
       {
-        "name": "CKingTextbook",
+        "name": "evomics-docs",
         "stars": 0,
-        "url": "https://github.com/joshraygit/CKingTextbook"
+        "url": "https://github.com/MrBrawlYT/evomics-docs"
       }
     ],
     "pedagogy": [
@@ -345,6 +345,11 @@
     ],
     "edtech": [
       {
+        "name": "TatvaX-AI-PROTOTYPE",
+        "stars": 0,
+        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
+      },
+      {
         "name": "ai-recruitment-assistant",
         "stars": 0,
         "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
@@ -363,13 +368,8 @@
         "name": "kolibri",
         "stars": 955,
         "url": "https://github.com/learningequality/kolibri"
-      },
-      {
-        "name": "Next-Voters",
-        "stars": 3,
-        "url": "https://github.com/Krishiv-Thakuria/Next-Voters"
       }
     ]
   },
-  "timestamp": "2025-12-03T01:01:09.043831"
+  "timestamp": "2025-12-03T01:28:27.665628"
 }
