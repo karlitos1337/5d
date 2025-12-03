@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Learning 🌌 - Wähle dein Abenteuer!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌌 Quantum Learning Platform</h1>
+            <p class="subtitle">Lerne Quantenmechanik durch das, was DU liebst! ❤️</p>
+        </header>
+
+        <section class="imp-tracker">
+            <h2>📊 Dein 5D-Intelligence Score</h2>
+            <div class="imp-bars">
+                <div class="dimension">
+                    <span class="label">🎯 Autonomie (A):</span>
+                    <div class="bar"><div id="bar-a" class="fill" style="width: 0%"></div></div>
+                    <span id="score-a" class="score">0.00</span>
+                </div>
+                <div class="dimension">
+                    <span class="label">🔥 Motivation (IM):</span>
+                    <div class="bar"><div id="bar-im" class="fill" style="width: 0%"></div></div>
+                    <span id="score-im" class="score">0.00</span>
+                </div>
+                <div class="dimension">
+                    <span class="label">💪 Resilienz (R):</span>
+                    <div class="bar"><div id="bar-r" class="fill" style="width: 0%"></div></div>
+                    <span id="score-r" class="score">0.00</span>
+                </div>
+                <div class="dimension">
+                    <span class="label">🤝 Sozial (SP):</span>
+                    <div class="bar"><div id="bar-sp" class="fill" style="width: 0%"></div></div>
+                    <span id="score-sp" class="score">0.00</span>
+                </div>
+                <div class="dimension">
+                    <span class="label">✨ Authentizität (Au):</span>
+                    <div class="bar"><div id="bar-au" class="fill" style="width: 0%"></div></div>
+                    <span id="score-au" class="score">0.00</span>
+                </div>
+                <div class="dimension imp-total">
+                    <span class="label">🌟 IMP-Score:</span>
+                    <div class="bar"><div id="bar-imp" class="fill imp" style="width: 0%"></div></div>
+                    <span id="score-imp" class="score">0.00</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="interest-picker">
+            <h2>🎮 Wähle dein Interesse:</h2>
+            <div class="cards">
+                <div class="card" data-interest="minecraft" onclick="selectInterest('minecraft')">
+                    <div class="icon">⛏️</div>
+                    <h3>Minecraft</h3>
+                    <p>Superposition</p>
+                    <p class="hint">Diamanten HIER & DA gleichzeitig! 💎</p>
+                </div>
+                
+                <div class="card" data-interest="pokemon" onclick="selectInterest('pokemon')">
+                    <div class="icon">🐾</div>
+                    <h3>Pokemon</h3>
+                    <p>Entanglement</p>
+                    <p class="hint">Zwei Pikachus, ein Herz! ⚡</p>
+                </div>
+                
+                <div class="card" data-interest="soccer" onclick="selectInterest('soccer')">
+                    <div class="icon">⚽</div>
+                    <h3>Fußball</h3>
+                    <p>Wave Packets</p>
+                    <p class="hint">Ball als Welle, nicht Punkt! 🌊</p>
+                </div>
+                
+                <div class="card" data-interest="music" onclick="selectInterest('music')">
+                    <div class="icon">🎵</div>
+                    <h3>Musik</h3>
+                    <p>Interference</p>
+                    <p class="hint">Wellen addieren = Stille?! 🔇</p>
+                </div>
+                
+                <div class="card" data-interest="hideseek" onclick="selectInterest('hideseek')">
+                    <div class="icon">👻</div>
+                    <h3>Versteckspiel</h3>
+                    <p>Tunneling</p>
+                    <p class="hint">Durch Wände gehen! 🧱</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats" id="stats" style="display: none;">
+            <h3>📈 Deine Session-Stats:</h3>
+            <div class="stat-grid">
+                <div class="stat">
+                    <span class="stat-value" id="time-spent">0:00</span>
+                    <span class="stat-label">Zeit verbracht</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="interactions">0</span>
+                    <span class="stat-label">Interaktionen</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="retries">0</span>
+                    <span class="stat-label">Versuche</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="completion">0%</span>
+                    <span class="stat-label">Fortschritt</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>🔬 Wissenschaftlich fundiert | 5D Intelligence Framework</p>
+            <p class="small">Deine Daten bleiben privat (lokal gespeichert)</p>
+        </footer>
+    </div>
+
+    <script src="js/imp_tracker.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

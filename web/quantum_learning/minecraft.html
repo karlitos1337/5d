@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛏️ Minecraft Superposition - Quantum Learning</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <style>
+        .lesson-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .lesson-text {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-canvas {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn:active {
+            transform: scale(0.95);
+        }
+        
+        .quantum-explanation {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 1024px) {
+            .lesson-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lesson-container">
+        <header style="text-align: center; margin-bottom: 30px;">
+            <h1>⛏️ Minecraft & Quantenmechanik</h1>
+            <p class="subtitle">Diamanten sind ÜBERALL gleichzeitig... bis du misst! 💎</p>
+            <a href="index.html" class="btn">🏠 Zurück zur Auswahl</a>
+        </header>
+
+        <div class="lesson-grid">
+            <div class="lesson-text">
+                <h2>🎮 Das Experiment</h2>
+                <p>In der Quantenwelt sind Teilchen nicht an EINEM Ort. Sie sind an ALLEN Orten gleichzeitig!</p>
+                
+                <p>In Minecraft:</p>
+                <ul>
+                    <li>💎 Jeder Block enthält einen Diamanten... vielleicht!</li>
+                    <li>⛏️ Erst wenn du MISST (abbaust), entscheidet sich das Universum</li>
+                    <li>🎲 Wahrscheinlichkeit: 10% für Diamant, 90% für Stein</li>
+                </ul>
+
+                <div class="quantum-explanation">
+                    <h3>🔬 Die Quantenphysik dahinter:</h3>
+                    <p><strong>Superposition</strong> bedeutet: Ein Teilchen ist in MEHREREN Zuständen gleichzeitig!</p>
+                    <p>Formel: |ψ⟩ = √0.1|Diamant⟩ + √0.9|Stein⟩</p>
+                    <p>Erst die <strong>Messung</strong> (Wellenkollaps) erzwingt eine Entscheidung!</p>
+                </div>
+
+                <h3>🎯 Deine Aufgabe:</h3>
+                <ol>
+                    <li>Klicke auf einen Block → Messen!</li>
+                    <li>Sieh zu, wie die Quantenwelle kollabiert 💥</li>
+                    <li>Wie viele Diamanten findest du?</li>
+                </ol>
+
+                <h3>🤔 Zum Nachdenken:</h3>
+                <ul>
+                    <li>Sind Diamanten WIRKLICH überall, bevor ich messe?</li>
+                    <li>Kann ich die Messung "rückgängig" machen?</li>
+                    <li>Was passiert mit Blöcken, die ich NICHT abbaue?</li>
+                </ul>
+            </div>
+
+            <div class="lesson-canvas">
+                <div id="canvas-container"></div>
+                <div class="controls">
+                    <button class="btn" onclick="resetWorld()">🔄 Neue Welt</button>
+                    <button class="btn" onclick="measureAll()">💥 Alle messen</button>
+                    <button class="btn" onclick="showHint()">💡 Tipp</button>
+                </div>
+                <div id="stats-display" style="margin-top: 20px; text-align: center; font-size: 1.1em;">
+                    <p><strong>Gemessen:</strong> <span id="measured-count">0</span> / 100</p>
+                    <p><strong>Diamanten:</strong> <span id="diamond-count">0</span> 💎</p>
+                    <p><strong>Erfolgsrate:</strong> <span id="success-rate">0%</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/imp_tracker.js"></script>
+    <script src="js/quantum_minecraft.js"></script>
+</body>
+</html>
