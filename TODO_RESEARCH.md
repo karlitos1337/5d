@@ -72,7 +72,7 @@
 - [x] **Zentrales Literatur-File definieren** ✅
   - Location: `07_daten_analysen/LITERATUR_INDEX.md` (DONE)
   - Verweise auf:
-    - `5d-relevant-sources.bib` (64 entries, BibTeX) ✅
+    - `5d-relevant-sources.bib` (134 entries, BibTeX) ✅
     - `SOURCES.md` (allgemeine Quellen) ✅
     - `RAUM_QUELLEN_INDEX.md` (räumliche Datenquellen) ✅
     - `WISSENS_INDEX.md` (Wissensmanagement) ✅
@@ -157,7 +157,7 @@
     - DMN (Default Mode Network) & Frontoparietal Network (task-positive)
     - Polyvagal Theory (Porges 2011) – autonomic regulation
     - Flow & Neural Signatures (Csíkszentmihályi, fMRI studies)
-  - BibTeX-Einträge ergänzen (aktuell 59 → Ziel 80+)
+  - BibTeX-Einträge ergänzen (aktuell 134 → Ziel 150+ Q1 2026)
 
 - [ ] **Netzwerk-Topologie analysieren**
   - Skripte in `07_daten_analysen/`:

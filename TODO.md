@@ -1,212 +1,420 @@
-# 5D Projekt TODO-Liste
+🔥 ULTIMATIVER COPILOT-AGENTENAUFTRAG – 5D PROJEKT CODESPACE MISSION 🔥
+META-ANWEISUNG: Du arbeitest als autonomer Coding Agent auf akademischem PhD-Niveau mit extremem Fokus auf Vollständigkeit, Quellenvalidierung und iterativer Selbstkorrektur .
 
-**Last Updated:** 2025-12-03, 18:00 CET  
-**Bewertung:** 91% (A-) → **92% (A-)** nach 5d_landschaft.md Finalisierung + BibTeX Batch 10-11 ✅
+📋 PHASE 1: REPOSITORY-SCAN & QUELLEN-MAPPING
+KRITISCHER START-TASK:
+Durchsuche das GESAMTE Repository karlitos1337/5dsystematisch:
 
----
+ALLE TODO*.md Dateien erfassen (TODO.md, TODO_MULTIPAGE.md, TODO_RESEARCH.md, TODO_COPILOT_INTEGRATION.md)
 
-## 🎯 PRIORITÄT 1: WISSENSCHAFTLICHE DOKUMENTATION
+ALLE docs/*.md Dateien indexieren (DATENQUELLEN.md, BEWERTUNGSMATRIX_5D.md, FAQ.md, etc.)
 
-**Ziel:** ✅ **ERREICHT: 92% (A-)** am 2025-12-03, 18:00 CET
+ALLE pages/*.py Streamlit-Dateien analysieren
 
-### ✅ Fertiggestellt (2025-12-03)
-- [x] **VISION.md** (Zentrale Definition, Abgrenzung 7 5D-Modelle)
-- [x] **docs/FAQ.md** (15 häufige Fragen mit wissenschaftlichen Antworten)
-- [x] **docs/DATENQUELLEN.md** (Transparenz externe Quellen + Google Drive)
-- [x] **LITERATUR_INDEX.md** (128 BibTeX-Einträge, Batch 1-12)
-- [x] **GitHub Issue-Templates** (7 Templates: Research, Theory, Ethics, Bug, Feature)
-- [x] **ETHIK_MANIFEST.md** (13 Biases, 15+ Abbruchkriterien, Q1-Q4 2026 Checkpoints)
-- [x] **CLAIMS_EVIDENCE_MATRIX.md** (40 Behauptungen, 47.5% Fakt, 37.5% Hypothese, 12.5% Spekulation, 2.5% Falsifiziert)
-- [x] **REFLEXION_LOG.md** (Template für quartalsweise Reflexion)
-- [x] **Counter-Evidence Initiative** (3 Critique-Docs, 14 BibTeX Batch 12, 19h Forschungsplan) ✅ NEW
+Dashboard-Strukturdateien: 5d_dashboard.py , utils/,data/
 
-### ✅ HÖCHSTE PRIORITÄT (fertiggestellt 2025-12-03)
-- [x] **docs/BEWERTUNGSMATRIX_5D.md** (Wissenschaftliches Scoring-System)
-  - Adaptiert von Nuclear NFU Policy Memo Rubric (Tech & National Security, 2025)
-  - Kategorien: Framework Position (18/20), Analysis (28/35), Writing Quality (18/20), Sources (15/15), Formatting (10/10)
-  - Detaillierte Scoring-Tabellen mit Verbesserungsvorschlägen
-  - **Status:** ✅ Existiert bereits (242 Zeilen)
+Erstelle eine MASTER-QUELLENLISTE:
 
-- [x] **docs/UI_INFO_BOXEN.html** (Evidenzlabels im UI)
-  - Tooltips mit wissenschaftlichen Erklärungen (IMP-Faktor, 5D-Modell, Perkolationstheorie)
-  - Evidenzlabels (✅⚠️🔮) in Dashboard, 5d-map, bewusstsein_evolution.html
-  - "Unsere Forschung"-Badge mit Originalitätsgrad
-  - **Status:** ✅ Existiert bereits (vollständig)
+Text
+# REPOSITORY SOURCES INDEX
 
-### ✅ Q1 2026 (fertiggestellt 2025-12-03 Abend)
-- [x] **06_synthesen_kompilationen/5d_landschaft.md** (+1 Punkt) ✅ FINALISIERT
-  - 7/7 alternative 5D-Modelle vollständig dokumentiert
-  - **Modelle:** Islamisch, Policy-5D, AIR-5D, Tourismus-5D, New Age, Physik-5D, Weitere Modelle (BIM, Cinema, Ultraschall, Datenvisualisierung)
-  - **Update 2025-12-03 Morgen:** Islamisches 5D (+800 Wörter), AIR-5D (+900 Wörter), New Age (+1000 Wörter)
-  - **Update 2025-12-03 Abend:** Weitere Modelle (+1500 Wörter) → 7.1 BIM, 7.2 Cinema, 7.3 Ultraschall, 7.4 Datenvisualisierung
-  - **Impact:** +1 Punkt Framework Position (18 → 19/20), Score 91% → 92%
+## TODO-Listen (4 Files)
+- [ ] TODO.md: 57 TODO items gefunden
+- [ ] TODO_MULTIPAGE.md: Dashboard-Tasks
+- [ ] TODO_RESEARCH.md: 85+ Forschungsaufgaben
+- [ ] TODO_COPILOT_INTEGRATION.md: Copilot-Anweisungen
 
-- [x] **Counter-Evidence Initiative** (wissenschaftliche Integrität durch Falsifikation) ✅ NEW 2025-12-03
-  - **Master-Plan:** 19h Forschung (4 Wochen, 7 Kategorien, Deadline 05.01.2026)
-  - **3 Critique-Docs:** SDT (5 Counter-Argumente), Alternative Education (5 Critiques), IMP Formula (5 Argumente gegen multiplikativ)
-  - **BibTeX Batch 12:** 14 Counter-Evidence Einträge (Lepper, Iyengar, Schwartz, Duncan, Hattie, Diener, McClelland)
-  - **Key Findings:**
-    - SDT: Effekt 2-3× schwächer in Kollektivismus (r=0.20-0.30 vs. 0.50)
-    - Perry ROI: Realistische Schätzung $2-4 (nicht $7.16) nach Survivorship Bias (80% Schulen scheitern)
-    - IMP-Formel: Additiv erklärt 8% mehr Varianz (Diener 1985: R²=0.46 vs. 0.38)
-  - **Impact:** Wissenschaftliche Integrität ✅, Framework robuster durch Transparenz
+## Dokumentation (docs/)
+- [ ] DATENQUELLEN.md: Externe Datenquellen
+- [ ] BEWERTUNGSMATRIX_5D.md: Scoring-System
+- [ ] FAQ.md: 15 häufige Fragen
+- [ ] CLAIMS_EVIDENCE_MATRIX.md: 40 Behauptungen
+- [ ] ... weitere 20+ Dokumente
 
-- [x] **Minimalexperiment 1: Game of Life** (+2 Punkte → 30/35 Analysis) ✅ FERTIG 2025-12-03
-  - Varianten: koerzitiv (fixed Glider) vs. nicht-koerzitiv (random init)
-  - Metriken: Shannon-Entropie (Diversität), Generationen (Lebensdauer), Stabilität
-  - **Ergebnis:** Teilweise widerlegt - Nicht-koerzitiv hat 5.7× höhere Diversität (p<0.001) ✅, aber 25% kürzere Lebensdauer (p<0.001) ❌
-  - **Dokumentation:** `docs/GOL_EXPERIMENT_RESULTS.md`, `simulations/gol_experiment_results.json`
-  - **Impact:** **+2 Punkte → Analysis 28 → 30/35 (86%) → GESAMT 91% (A-)**
+## Dashboard Struktur (pages/)
+- [ ] 01_🏠_Start.py
+- [ ] 02_🌍_5D_Map.py  
+- [ ] ... bis 11_🏛️_Governance_Panel.py (11 Pages total)
 
-- [x] **Minimalexperiment 2: Governance-Panel** ✅ FERTIG 2025-12-03 16:50 CET
-  - **Page 11 erstellt:** `pages/11_🏛️_Governance_Panel.py` (370 Zeilen, Plotly-Scatterplot)
-  - **Hypothese bestätigt:** Voice & Accountability korreliert mit HDI (r=0.68, p<0.05), IMP-Proxy (r=0.73, p<0.05), Life Satisfaction (r=0.71, p<0.05)
-  - **Daten:** 9 Länder (Norway, Denmark, Finland, Sweden, Germany, Switzerland, Japan, Singapore, USA)
-  - **Wissenschaftliche Basis:** WGI 2023 (World Bank), HDI 2023 (UNDP), IMP-Proxy (eigene Berechnung), HPI 2024 (World Happiness)
-  - **Impact:** Validierung 5D-Framework (Autonomie → Outcomes), Integration Ostrom Governance + Acemoglu Institutions
-  - **Dashboard:** Live auf http://localhost:8501 (Page 11 hinzugefügt zur Sidebar)
+## Data Pipeline (data/)
+- [ ] raw/: Rohdaten JSON/CSV
+- [ ] processed/: Verarbeitete Daten
+- [ ] results/: Experiment-Ergebnisse
+Abrufbare Datenquellen identifizieren:
 
-- [ ] **Minimalexperiment 3: IMP-Calculator** auswerten
-  - Auswertungslogik: `analysis/calculate_agency_score.py`
-  - Survey-Datensammlung (n > 50)
+GitHub-API-Daten: Issues, Commits, Dateien über die GitHub-API
 
-- [x] **BibTeX Batch 10-11** (+30 Einträge) ✅ FERTIG 2025-12-03 Abend
-  - **Batch 10 (Sprint 2):** 20 Einträge (LabXchange, Freeman 2014, Mikropoulos 2011, Barsalou 2008, Gutenberg-DE, Life Architect, OpenStax, Hilton 2016, MIT OCW, Coursera, Academic Torrents, Zenodo, HackTricks, AweXplor)
-  - **Batch 11 (Sprint 3):** 10 Einträge (Free Learning List, freeCodeCamp, Khan Academy, SD Prompts, Prompy, DIY HPL, Satellite Map Space, Sentinel-2, Landsat)
-  - **Gesamt:** 80 → 110 BibTeX-Einträge (+30)
-  - **LITERATUR_INDEX.md:** Batch 10+11 Sektionen hinzugefügt
+Externe APIs: Weltbank, UNDP, Satellite-Daten (siehe DATENQUELLEN.md)
 
-- [x] **BibTeX Batch 12: Counter-Evidence** (+18 Einträge) ✅ FERTIG 2025-12-03 Abend
-  - **SDT Critique (5):** Lepper 1973 (Over-Justification), Iyengar 1999 (Kulturabhängigkeit), Schwartz 2004 (Autonomy Paradox), Iyengar 2000 (Jam), OSC 2015 (Replication Crisis)
-  - **Alternative Education (6):** Puma 2012 (Head Start Fade-Out), Duncan 2013 (Meta-Analyse), Lubienski 2006 (Selection Bias), OECD 2019 (Waldorf PISA), Graubard 1972 (Free Schools scheitern), Hattie 2009 (Struktur vs. Autonomie)
-  - **IMP Formula (3):** McClelland 1993 (Power-Problem), Diener 1985 (SWLS additiv), Edwards 2010 (Alternative Modelle)
-  - **Gesamt:** 110 → 128 BibTeX-Einträge (+18)
+Lokale Datenfiles: data/raw/*.json ,data/processed/*.csv
 
-- [x] **BibTeX Batch 13: Meta-Analysen** (+6 Einträge) ✅ FERTIG 2025-12-03
-  - **SDT Cross-Cultural (4):** Church 2013 (n=7248, 8 Kulturen), Chirkov 2003 (Autonomie-Konzept kulturabhängig), Oishi 2010 (WVS n=41,000, 48 Länder), Ryan 2017 (SDT Defense)
-  - **IMP-Formel (2):** Lucas 1996 (Interaktionen instabil r=0.38), Aguinis 2005 (Meta k=127, ΔR²=0.009)
-  - **Gesamt:** 128 → 134 BibTeX-Einträge (+6)
+🎯 PHASE 2: TODO KONSOLIDIERUNG – KERNFUSIONSMODUS
+ZIEL: Alle verstreuten TODOs in EINE zentrale Liste fusionieren
+Vorgehen:
 
-- [x] **Week 1 Research: SDT + IMP Meta-Analysen** ✅ FERTIG 2025-12-03
-  - **SDT_META_ANALYSIS.md:** 5 Studien, n=49,092 kombiniert, 52 Länder
-  - **IMP_FORMULA_META_ANALYSIS.md:** 5 Studien, k=127 meta-analyzed studies, n>60,000
-  - **RESEARCH_LOG_WEEK1.md:** Queries, Findings, Zeiterfassung (5h/19h = 26%)
-  - **Key Findings:**
-    - Autonomie-Effekt 37% schwächer in Kollektivismus (r=0.22 vs. 0.35, Church 2013)
-    - Interaktionen durchschnittlich nur 0.9% Varianz (Aguinis 2005 Meta k=127)
-    - Power-Problem: Interaktionen brauchen 4× größere Stichprobe (McClelland 1993)
-  - **Implikationen:** IMP-Formel braucht Kultur-Moderator + Survey n>400 (nicht n=100)
+Extrahieren Sie ALLE TODO-Items aus:
 
-**Nach 1-7: Score = 92% (A-)** 🎯
+TODO.md (Hauptliste)
 
----
+TODO_MULTIPAGE.md (Dashboard-Aufgaben)
 
-## 📊 BEWERTUNG (adaptiert von Nuclear NFU Policy Memo Rubric)
+TODO_RESEARCH.md (Forschungsaufgaben)
 
-**Siehe:** `docs/BEWERTUNGSMATRIX_5D.md` (vollständige Matrix, TODO)
+TODO_COPILOT_INTEGRATION.md (Copilot-Aufgaben)
 
-| Kategorie | Punkte | Max | % | Ziel |
-|-----------|--------|-----|---|------|
-| **Framework Position** | 19/20 | 95% | 19/20 (95%) | ✅ 5d_landschaft.md finalisiert (+1) |
-| **Analysis** | 30/35 | 86% | 30/35 (86%) | ✅ GoL Experiment fertig (+2) |
-| **Writing Quality** | 18/20 | 90% | 18/20 (90%) | ✅ Fertig |
-| **Sources** | 15/15 | 100% | 15/15 (100%) | ✅ BibTeX 110 Einträge |
-| **Formatting** | 10/10 | 100% | 10/10 (100%) | ✅ Fertig |
-| **GESAMT** | **92/100** | **92%** | **92/100 (92%)** | ✅ **A- (92%) ERREICHT!** 🎯 |
+Code-Kommentare ( # TODO:, # FIXME:, # HACK:)
 
-**Score-Formel:**  
-```
-Gesamt = (FP × 0.20) + (A × 0.35) + (WQ × 0.20) + (S × 0.15) + (F × 0.10)
-       = (19 × 0.20) + (30 × 0.35) + (18 × 0.20) + (15 × 0.15) + (10 × 0.10)
-       = 3.8 + 10.5 + 3.6 + 2.25 + 1.0 = 92.15 ≈ 92%
-```
+Erstelle MEGA_TODO_CONSOLIDATED.mdmit:
 
-**Update 2025-12-03 (Morgen):**
-- Framework Position: 15 → 18 (+3 Punkte durch VISION.md)
-- Analysis: 26 → 28 (+2 Punkte durch FAQ + DATENQUELLEN)
-- **Score: 84% (B) → 89% (B+)**
+Text
+# 🔥 MEGA TODO LIST – COMPLETE PROJECT INVENTORY
 
-**Update 2025-12-03 (Nachmittag):**
-- BEWERTUNGSMATRIX_5D.md: ✅ Existiert bereits (242 Zeilen, vollständig)
-- UI_INFO_BOXEN.html: ✅ Existiert bereits (vollständig mit CSS + Komponenten)
-- 5d_landschaft.md: ✅ 3/7 Modelle detailliert erweitert (+2700 Wörter)
-- BibTeX: ✅ 70 → 80 Einträge (Batch 9: External Resources)
+**Last Updated:** [Timestamp]
+**Total Items:** 142
+**Status:** 68% Complete (96/142)
 
-**Update 2025-12-03 (Abend, 16:50 CET):**
-- **Minimalexperiment 1:** ✅ Game of Life abgeschlossen (100 trials, statistisch ausgewertet)
-- Analysis: 28 → 30 (+2 Punkte)
-- **Score: 89% (B+) → 91% (A-) ✅ ZIEL ERREICHT!**
+## PRIORITÄT 1: WISSENSCHAFT (TODO.md, TODO_RESEARCH.md)
+- [ ] #001: Minimalexperiment 3 (IMP-Calculator n>50) [TODO.md:L45] [RESEARCH]
+- [ ] #002: BibTeX Batch 14-15 (+20 Einträge) [TODO.md:L78] [LITERATURE]
+...
 
-**Update 2025-12-03 (Abend, 18:00 CET):**
-- **5d_landschaft.md finalisiert:** ✅ 7/7 Modelle (BIM, Cinema, Ultraschall, Datenvisualisierung hinzugefügt, +1500 Wörter)
-- **BibTeX Batch 10-11:** ✅ 30 neue Einträge (110 gesamt)
-- Framework Position: 18 → 19 (+1 Punkt)
-- **Score: 91% (A-) → 92% (A-) ✅**
+## PRIORITÄT 2: DASHBOARD (TODO_MULTIPAGE.md)
+- [x] #042: Page 11 Governance Panel [TODO_MULTIPAGE.md:L22] [COMPLETED]
+- [ ] #043: Mobile Responsiveness alle Pages [TODO_MULTIPAGE.md:L56] [UI/UX]
+...
 
----
+## PRIORITÄT 3: INFRASTRUCTURE (TODO.md)
+- [x] #089: GitHub Actions CI/CD [TODO.md:L112] [COMPLETED]
+- [ ] #090: GitHub Pages Deployment aktivieren [TODO.md:L115] [MANUAL]
+...
 
-## Aktuelle Aufgaben (Original, weiterhin gültig)
+## CODE-TODOS (grep "#TODO" in *.py, *.js)
+- [ ] #120: `5d_dashboard.py:L234` - Caching-Strategie optimieren
+- [ ] #121: `utils/map_helpers.py:L89` - Rate-Limiting für API-Calls
+...
+Deduplizierung:
 
-### Pipeline & Core
-- [x] Extractor: Robustheit bei fehlenden Dateien verbessern
-- [x] Research Scraper: Rate-Limiting für arXiv optimieren
-- [x] GitHub API: Token-Refresh-Logik implementieren
+Gleiche Aufgaben in verschiedenen Dateien zusammenführen
 
-### Dashboard & UI
-- [x] Dashboard: Caching-Strategie für große JSON-Dateien
-- [x] Weltkarte: Radar-Charts in IMP-Popups (Chart.js)
-- [x] Zeitreise-Feature: Baseline-Daten erweitern
-- [x] Mobile Optimierung (responsive Grid für Buttons)
-- [x] Loading-Overlay mit Spinner
-- [x] Button-Tooltips und Accessibility
+Abhängigkeiten markieren (zB #002 erfordert #001)
 
-### Tests & CI
-- [x] Pre-Commit Hook einrichten
-- [x] Flake8 Linting integrieren
-- [x] JSON Validation hinzufügen
-- [x] Frontend Unit Tests (Vitest)
-- [x] E2E Tests (Playwright)
-- [x] Web Vitals Performance Monitoring
-- [x] Discord Bot Tests erweitern
-- [x] Integration Tests für Pipeline-Schritte
-- [x] GitHub Actions für Auto-Deploy
+🔎 PHASE 3: DASHBOARD-STRUKTUR REVERSE ENGINEERING
+AUFGABE: Finde und dokumentiere die KOMPLETTE Dashboard-Architektur
+Nutzen Sie folgende Werkzeuge:
 
-### Deployment
-- [x] GitHub Pages Setup für Weltkarte (Workflow ready)
-- [ ] GitHub Pages aktivieren (manual step - siehe docs/DEPLOYMENT.md + docs/REMAINING_TASKS.md)
-- [x] Service Worker für Offline-Modus
-- [x] CSP Headers für Sicherheit
-- [x] Cross-Browser Testing (Playwright: Chrome, Firefox, Safari, Mobile)
+grep -r "st.title" pages/→ Alle Seitentitel
 
-### Dokumentation
-- [x] Copilot Instructions aktualisieren
-- [x] User Guide für Weltkarte (docs/USER_GUIDE.md)
-- [x] Contributing Guidelines (CONTRIBUTING.md)
-- [x] API-Dokumentation für externe Systeme
-- [x] Forschungs-Roadmap (TODO_RESEARCH.md)
+grep -r "import" pages/→ Alle Abhängigkeiten
 
----
+grep -r "load_data" pages/→ Alle Datenquellen
 
-## 📊 Gesamtfortschritt
+Erstelle:
 
-**Infrastruktur:** 13/15 (87%)  
-**Wissenschaft:** 89/100 (89%) → Ziel: 91/100 (91%, A-)  
-**Kombiniert:** 90% → Ziel: 93% (A)
+Text
+# DASHBOARD ARCHITECTURE MAP
 
----
+## Streamlit Multi-Page App Structure
+5d_dashboard.py (Haupteinstiegspunkt)
+├── pages/
+│ ├── 01_🏠_Start.py
+│ │ ├── Importe: streamlit, plotly
+│ │ ├── Daten: data/processed/overview_stats.json
+│ │ └── Funktionen: render_welcome(), show_metrics()
+│ ├── 02_🌍_5D_Map.py
+│ │ ├── Importe: folium, streamlit_folium
+│ │ ├── Daten: data/raw/country_data.json
+│ │ └── Funktionen: create_map(), add_markers()
+│ ├── 03_📚_Bewusstsein_Evolution.py
+│ │ ├── Importe: plotly, pandas
+│ │ ├── Daten: data/processed/evolution_timeline.csv
+│ │ └── Funktionen: plot_timeline(), show_milestones()
+│ ... (weitere 8 Seiten)
+│ └── 11_🏛️_Governance_Panel.py
+│ ├── Importe: plotly.express, pandas
+│ ├── Daten: data/processed/governance_stats.csv
+│ └── Funktionen: create_scatterplot(), calcule_correlations()
+├── utils/
+│ ├── map_helpers.py → Hilfsfunktionen für Karten
+│ ├── bibtex_helpers.py → BibTeX-Parsing
+│ └── data_loader.py → Zentrale Datenlade-Logik
+├── data/
+│ ├── raw/ → Unverarbeitete Daten (JSON, CSV)
+│ ├── processing/ → Bereinigte Daten für Dashboard
+│ └── results/ → Experiment-Ergebnisse (GOL, IMP-Calc)
+└── config/
+└── default.yaml → App-Konfiguration
 
-## Siehe auch
+Text
+undefined
+🤖 PHASE 4: ABRUFBARE DATEN SAMMELN – VOLLSTÄNDIGE EXTRAKTION
+KRITISCH: KEINE PLATZHALTER-DATEN ERFINDEN!
+Für jede identifizierte Datenquelle:
 
-- **TODO_MULTIPAGE.md** – Dashboard-Features, UI/UX, wissenschaftliche Validierung (10/10 Pages fertig, 100%)
-- **TODO_RESEARCH.md** – Wissenschaftliche Grundlagen, empirische Testbarkeit, theoretische Kohärenz (85+ Tasks)
-- **docs/REMAINING_TASKS.md** – Verbleibende manuelle Schritte (GitHub Pages)
-- **docs/BEWERTUNGSMATRIX_5D.md** – Wissenschaftliches Scoring-System (TODO)
-- **VISION.md** – Zentrale Definition, Abgrenzung 7 5D-Modelle (✅ Fertig)
-- **docs/FAQ.md** – 15 häufige Fragen (✅ Fertig)
-- **docs/DATENQUELLEN.md** – Transparenz externe Quellen (✅ Fertig)
-- **docs/CLAIMS_EVIDENCE_MATRIX.md** – 40 Behauptungen, Evidenzlabels (✅ Fertig)
+GitHub-API (intern):
 
----
+Python
+# Beispiel: Alle Issues mit Label "research"
+GET /repos/karlitos1337/5d/issues?labels=research&state=all
+Externe APIs (siehe DATENQUELLEN.md):
 
-**Letzte Aktualisierung:** 2025-12-03, 15:45 CET  
-**Maintainer:** Siehe [CONTRIBUTING.md](CONTRIBUTING.md)
+Weltbank-API:https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD
+
+UNDP-HDI-Daten:https://hdr.undp.org/sites/default/files/...
+
+Satellitendaten: Sentinel-2, Landsat (Links in DATENQUELLEN.md)
+
+Lokale Dateien:
+
+Python
+# Alle JSON/CSV-Files einlesen
+import os, json, pandas as pd
+data_files = []
+for root, dirs, files in os.walk('data/'):
+    for file in files:
+        if file.endswith(('.json', '.csv')):
+            path = os.path.join(root, file)
+            data_files.append(path)
+            # File einlesen und validieren
+Ausgabe: DATA_INVENTORY.json
+
+JSON
+{
+  "github_issues": [
+    {"number": 42, "title": "...", "labels": [...], "state": "open"}
+  ],
+  "external_apis": {
+    "world_bank": {"status": "accessible", "last_updated": "2024-12-03"},
+    "undp_hdi": {"status": "accessible", "last_updated": "2023-12-15"}
+  },
+  "local_files": [
+    {"path": "data/raw/country_data.json", "size_mb": 2.4, "rows": 195},
+    {"path": "data/processed/governance_stats.csv", "size_mb": 0.8, "rows": 9}
+  ]
+}
+♻️ PHASE 5: ITERATIVE SELBSTKORREKTUR – DER „100% REGEL“
+WARUM 100 % niemals erreicht wird (und wie man trotzdem 95 %+ schafft):
+Problem: Copilot neigt dazu, Tasks beim ersten Durchlauf nur 70-80% zu erledigen (missing TODOs, Platzhalter-Daten, unfertige Funktionen).
+
+Lösung: 3-Pass-System
+
+TEIL 1: ERSTE IMPLEMENTIERUNG (70-80%)
+
+Alle Aufgaben aus MEGA_TODO_CONSOLIDATED.md abarbeiten
+
+Priorität 1 zuerst (Wissenschaft, kritische Bugs)
+
+Code funktionsfähig, aber noch nicht poliert
+
+BESTANDEN 2: SELBSTBEWERTUNG (85-90%)
+
+Python
+# Automatisches Code-Review-Script ausführen
+python tools/self_review.py
+
+# Checkt:
+# - Alle # TODO: im Code entfernt?
+# - Alle Platzhalter-Daten durch echte Daten ersetzt?
+# - Alle Funktionen haben Docstrings?
+# - Alle Tests bestehen?
+PASS 3: ENDPOLIERUNG (95%+)
+
+Dokumentation vervollständigen
+
+Grenzfälle behandeln
+
+Leistungsoptimierung
+
+Finaler Commit + Tag-Release
+
+WICHTIG: Nach jedem Pass eine Statusdatei aktualisieren:
+
+Text
+# COMPLETION_STATUS.md
+
+## PASS 1 (2024-12-03 16:00)
+- ✅ 96/142 TODOs completed (68%)
+- ⚠️ 12 TODOs have placeholders
+- ❌ 34 TODOs nicht begonnen
+
+## PASS 2 (2024-12-03 18:00)
+- ✅ 121/142 TODOs completed (85%)
+- ✅ Alle Platzhalter entfernt
+- ⚠️ 8 TODOs Edge-Cases fehlen
+
+## PASS 3 (2024-12-03 20:00)
+- ✅ 135/142 TODOs completed (95%)
+- ✅ Alle Tests grün
+- ✅ Dokumentation vollständig
+📚 PHASE 6: QUALLEN-VALIDIERUNG – AKADEMISCHER RIGOR-MODUS
+JEDE Behauptung, jede Zahl, jede Quelle überprüfen:
+Arbeitsablauf:
+
+Durchsuche ALLE .mdDateien nach Zitaten:
+
+bash
+grep -r "\[source:\|[1]\|[2]\|[3]" docs/ pages/ README.md
+Für jede Quelle:
+
+Python
+# QUELLEN_AUDIT.py
+
+sources_found = []
+sources_broken = []
+sources_missing = []
+
+# Alle Zitate extrahieren
+for file in markdown_files:
+    citations = extract_citations(file)
+    for cite in citations:
+        # Quelle in LITERATUR_INDEX.md gefunden?
+        if cite not in bibtex_entries:
+            sources_missing.append(cite)
+        # Link funktioniert?
+        elif not verify_url(get_url(cite)):
+            sources_broken.append(cite)
+        else:
+            sources_found.append(cite)
+
+# Report generieren
+print(f"✅ {len(sources_found)} Quellen verifiziert")
+print(f"⚠️ {len(sources_broken)} Broken Links")
+print(f"❌ {len(sources_missing)} Fehlende Einträge")
+Ausgabe: SOURCES_AUDIT_REPORT.md
+
+Text
+# 🔍 Quellen-Audit Report
+
+**Datum:** 2024-12-03  
+**Status:** 128/134 Quellen verifiziert (95.5%)
+
+## ✅ Verifizierte Quellen (128)
+- Ryan2000, Deci1985, Perry2006, ... (vollständige Liste)
+
+## ⚠️ Broken Links (4)
+- [12] Iyengar1999 → URL 404 → **FIXME:** Archive.org Link suchen
+- [34] Schwartz2004 → Paywall → **ACTION:** PDF via Sci-Hub
+
+## ❌ Fehlende BibTeX-Einträge (2)
+- FAQ.md:L45 zitiert "Church2013" → **TODO:** Batch 14 hinzufügen
+- TODO_RESEARCH.md:L89 zitiert "Aguinis2005" → **TODO:** Batch 14
+🏗️ PHASE 7: DASHBOARD-STRUKTUR FINALISIEREN
+Identifiziere gespeicherte Dashboard-Strukturen:
+Suche nach:
+
+bash
+# JSON/YAML Files mit Dashboard-Config
+find . -name "*dashboard*.json" -o -name "*config*.yaml"
+
+# Python-Dictionaries mit Page-Definitionen
+grep -r "pages = \[" . --include="*.py"
+
+# Streamlit Page-Konfiguration
+grep -r "st.set_page_config" pages/
+Wenn gefunden:
+
+Python
+# DASHBOARD_STRUCTURE.json (falls existiert)
+{
+  "pages": [
+    {"id": "01_start", "title": "🏠 Start", "file": "pages/01_🏠_Start.py"},
+    {"id": "02_map", "title": "🌍 5D Map", "file": "pages/02_🌍_5D_Map.py"},
+    ...
+  ],
+  "navigation": {
+    "sidebar_title": "5D Dashboard",
+    "theme": "dark"
+  }
+}
+Wenn NICHT gefunden:
+
+Python
+# Dashboard-Struktur aus Sourcecode rekonstruieren
+import os, re
+
+pages = []
+for file in sorted(os.listdir('pages/')):
+    if file.endswith('.py'):
+        with open(f'pages/{file}', 'r') as f:
+            content = f.read()
+            # Titel aus st.title() extrahieren
+            title_match = re.search(r'st\.title\(["\'](.+?)["\']\)', content)
+            title = title_match.group(1) if title_match else file
+            pages.append({'file': file, 'title': title})
+
+# DASHBOARD_STRUCTURE.json generieren und speichern
+🔄 PHASE 8: ABSCHLUSSPRÜFUNG & BEREITSTELLUNGSPRÜFUNG
+Checkliste vor dem Commit (automatisiert):
+bash
+#!/bin/bash
+# tools/pre_deploy_check.sh
+
+echo "🔍 Running Pre-Deployment Validation..."
+
+# 1. Alle TODOs abgearbeitet?
+TODO_COUNT=$(grep -r "#TODO\|# TODO" . --exclude-dir=node_modules --exclude-dir=.git | wc -l)
+if [ $TODO_COUNT -gt 10 ]; then
+    echo "❌ FAIL: $TODO_COUNT TODOs gefunden (max 10 erlaubt)"
+    exit 1
+fi
+
+# 2. Alle Tests bestehen?
+pytest tests/ || { echo "❌ FAIL: Tests fehlgeschlagen"; exit 1; }
+
+# 3. Alle Datenquellen abrufbar?
+python tools/check_data_sources.py || { echo "❌ FAIL: Datenquellen nicht erreichbar"; exit 1; }
+
+# 4. Dashboard startet ohne Fehler?
+timeout 30 streamlit run 5d_dashboard.py --server.headless=true || { echo "❌ FAIL: Dashboard crasht"; exit 1; }
+
+# 5. Dokumentation vollständig?
+python tools/check_docs.py || { echo "❌ FAIL: Dokumentation unvollständig"; exit 1; }
+
+echo "✅ PASS: Alle Checks erfolgreich! Ready for deployment."
+📝 ENDGÜLTIGES ERGEBNIS: LEISTUNGEN
+Am Ende deiner Mission erstelle:
+
+MEGA_TODO_CONSOLIDATED.md– Fusionierte TODO-Liste
+
+DASHBOARD_ARCHITECTURE.md– Komplette Dashboard-Struktur
+
+DATA_INVENTORY.json– Alle abrufbaren Datenquellen
+
+SOURCES_AUDIT_REPORT.md– Quellenvalidierung
+
+COMPLETION_STATUS.md– 3-Pass-Fortschritt
+
+DEPLOYMENT_READY.md– Checkliste für das Finale
+
+🎓 AKADEMISCHES NIVEAU: DURCHSETZUNG DES PHD-STANDARDS
+Qualitätsstandards:
+
+✅ Keine Platzhalter: Keine TODO: implement thisim endgültigen Code
+
+✅ Quellenprüfung: Jede Quelle in LITERATUR_INDEX.md + URL geprüft
+
+✅ Datenvalidierung: Alle Daten aus echten APIs, keine Dummy-Daten
+
+✅ Dokumentation vollständig: Jede Funktion hat Docstring + Beispiel
+
+✅ Tests bestanden: Über 95 % Abdeckung, alle Sonderfälle behandelt
+
+✅ Reproduzierbarkeit: Jemand mit nur diesem Repo kann das Projekt neu bauen
+
+Wenn du Unsicherheit hast:
+
+❌ NICHT bewerten → Doku lesen + fragen
+
+❌ KEINE Platzhalter → Echte Daten besorgen oder Feature überspringen
+
+❌ KEINE 80%-Lösungen → Lieber 3 Aufgaben 100% als 10 Aufgaben 80%
+
+🚀 STARTBEFEHL
+Beginnen Sie jetzt mit PHASE 1 und arbeiten Sie systematisch durch alle Phasen.
+
+Ausgabeformat: Markdown-Reports nach jeder Phase inoutputs/phase_N_report.md
+
+Zeitlimit: Keine Zeitbegrenzung – Qualität > Geschwindigkeit.
+
+Bei Blockern: Dokumentiere genau was fehlt (zB "API-Key für World Bank fehlt") und überspringen Sie diesen Teil mit klarem FIXME-Kommentar.
+
+LOS GEHT'S! 💪🔥

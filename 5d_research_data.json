@@ -67,7 +67,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323141/"
       }
     ],
-    "timestamp": "2025-12-03T07:23:46.848485"
+    "timestamp": "2025-12-03T15:55:25.349399"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -136,7 +136,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41323909/"
       }
     ],
-    "timestamp": "2025-12-03T07:23:49.889037"
+    "timestamp": "2025-12-03T15:55:28.360759"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,6 +172,16 @@
     ],
     "pubmed": [
       {
+        "title": "Operative Outcomes and Training Equity in Appendicectomy: Are Core Surgical Trainees Getting a Fair Chance?",
+        "authors": [
+          "Nayak A",
+          "Amoako-Adjei O",
+          "Arshad R"
+        ],
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41333234/"
+      },
+      {
         "title": "Socio-ecological factors influencing dietary behaviours among adolescents and young adults in rural Eastern Uganda: A qualitative study.",
         "authors": [
           "Buyinza T",
@@ -190,19 +200,9 @@
         ],
         "published": "2025 Nov",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41328852/"
-      },
-      {
-        "title": "Addressing the false dichotomy between autonomy and preservation of life: Clinical, legal, and ethical considerations in severe and longstanding anorexia nervosa.",
-        "authors": [
-          "Ayton A",
-          "Ibrahim A",
-          "Solmi M"
-        ],
-        "published": "2025 Nov 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41319454/"
       }
     ],
-    "timestamp": "2025-12-03T07:23:52.850603"
+    "timestamp": "2025-12-03T15:55:32.433175"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -270,7 +270,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-03T07:23:55.837514"
+    "timestamp": "2025-12-03T15:55:34.773594"
   },
   "democratic schools": {
     "arxiv": [
@@ -308,6 +308,15 @@
     ],
     "pubmed": [
       {
+        "title": "Early generational and partisan divides in vaccine acceptance in USA during the COVID-19 pandemic.",
+        "authors": [
+          "Alonso G",
+          "Kiesel S"
+        ],
+        "published": "2025 Oct 30",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41334594/"
+      },
+      {
         "title": "Towards a transparent and reproducible AI-assisted research paper writing.",
         "authors": [
           "Park J"
@@ -324,19 +333,9 @@
         ],
         "published": "2025",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41329678/"
-      },
-      {
-        "title": "Genomic analysis and antimicrobial resistance of Vibrio cholerae isolated during Zambia's 2023 cholera epidemic.",
-        "authors": [
-          "Ng'ombe H",
-          "Luchen CC",
-          "Bote L"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41329510/"
       }
     ],
-    "timestamp": "2025-12-03T07:23:58.867895"
+    "timestamp": "2025-12-03T15:55:37.747364"
   },
   "student agency": {
     "arxiv": [
@@ -379,6 +378,16 @@
     ],
     "pubmed": [
       {
+        "title": "[Analysis of the Pertussis Status in Jeju Special Self-Governing Province in 2024].",
+        "authors": [
+          "Park DW",
+          "Kim JH",
+          "Jang SH"
+        ],
+        "published": "2025 Apr 10",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41333159/"
+      },
+      {
         "title": "Using reporting guidelines to improve the reproducibility of cooking Christmas tree meringues: the \"People tasting trees\" cluster-randomised controlled trial.",
         "authors": [
           "Vinatier C",
@@ -397,18 +406,8 @@
         ],
         "published": "2025 Dec 2",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41330984/"
-      },
-      {
-        "title": "Female, woman and/or girl Athlete Injury pRevention (FAIR) practical recommendations: International Olympic Committee (IOC) consensus meeting held in Lausanne, Switzerland, 2025.",
-        "authors": [
-          "Crossley KM",
-          "Whittaker JL",
-          "Patterson B"
-        ],
-        "published": "2025 Dec 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41330629/"
       }
     ],
-    "timestamp": "2025-12-03T07:24:01.855652"
+    "timestamp": "2025-12-03T15:55:40.745199"
   }
 }

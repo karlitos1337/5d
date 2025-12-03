@@ -1,116 +1,50 @@
-# 5D Intelligence Framework – AI Coding Agent Instructions
+# 5D Intelligence Framework – AI Agent Instructions
 
-**Version:** 3.0 (Scientific Documentation Update)  
-**Last Updated:** 2025-12-03, 03:31 CET  
-**Goal:** Help AI agents be immediately productive AND scientifically rigorous
+**Version:** 4.0 (Streamlined Architecture Guide)  
+**Last Updated:** 2025-12-03  
+**Goal:** Help AI agents be immediately productive with scientific rigor
 
 ---
 
-## 🔬 SCIENTIFIC RIGOR REQUIREMENTS (NEW)
+## 🏗️ Core Architecture
 
-**ALL** code changes, new features, or documentation must address:
+### Data Pipeline (Sequential Flow)
+```
+5d_extractor.py → 5d_research_scraper.py → 5d_github_api.py → JSON artifacts
+                                                                     ↓
+                               5d_dashboard.py (main) + pages/*.py (Streamlit multipage)
+                                              ↓
+                                     5d_discord_bot.py (optional)
+```
 
-### 1. **Scientific Basis** → Info-Box mit Zitation
+**Critical:** JSON files (`5d_solutions.json`, `5d_research_data.json`, `5d_github_data.json`) are the stable contract between pipeline stages. Never rename core JSON keys without team discussion.
+
+### Project Structure Patterns
+- **manifest/** - Human-curated knowledge base (MD files)
+- **formeln/** - Mathematical formulas (001-157)
+- **models/schemas.py** - Pydantic validation for all JSON (required!)
+- **config/default.yaml** - All configurable parameters (no hardcoding)
+- **pages/*.py** - Streamlit multipage apps (emoji prefixes for ordering)
+- **web/5d-map/** - Static Leaflet map with OWID/World Bank data integration
+
+---
+
+## 🔬 Scientific Rigor Requirements
+
+**Every code change must include:**
+
+1. **Evidence Label** - Tag claims as ✅ Fakt (peer-reviewed), ⚠️ Hypothese (testable), or �� Spekulation (exploratory)
+2. **BibTeX Citation** - Reference `07_daten_analysen/5d-relevant-sources.bib` (134+ entries)
+3. **Test Coverage** - Add test to `tests/` with scientific basis documented
+4. **FAQ Update** - If users might ask "Where does this data come from?", update `docs/FAQ.md`
+
 **Example:**
 ```python
-# In pages/1_📊_IMP_Analysis.py
-st.markdown("""
-<div class="info-box">
-  <h4>Was ist der IMP-Faktor?</h4>
-  <p>Der IMP-Faktor basiert auf <strong>Selbstbestimmungstheorie (Deci & Ryan 1985)</strong>...</p>
-  <button onclick="showSource('deci1985intrinsic')">
-
- Quellen</button>
-</div>
-""", unsafe_allow_html=True)
-```
-
-### 2. **Validation Status** → Badge: "Own Research" vs "Peer-Reviewed"
-**Example:**
-```html
-<p>
-  Autonomie fördert intrinsische Motivation 
-  <span class="evidence-badge evidence-fact">✅ Fakt</span>
-</p>
-<p>
-  IMP-Formel (multiplikativ) 
-  <span class="evidence-badge evidence-hypothesis">⚠️ Hypothese</span>
-</p>
-```
-
-### 3. **Data Source** → Link + Download-Button
-**Example:**
-```html
-<a href="https://databank.worldbank.org/source/education-statistics" target="_blank">
-  🌐 World Bank EdStats
-</a>
-<button onclick="downloadCSV('dropout_data.csv')">📍 CSV herunterladen</button>
-```
-
-### 4. **User Questions** → FAQ erweitern proaktiv
-**Before implementing** new feature, ask:
-- "Könnte User fragen: 'Woher stammen diese Daten?'"
-- "Sollte ich FAQ.md mit Antwort erweitern?"
-
-### 5. **UI Clarity** → 50-UI-Tips (UX guidelines)
-**Check:**
-- ✅ Labels IMMER sichtbar, nicht nur Placeholder
-- ✅ Validation-Feedback direkt an Eingabestelle
-- ✅ Keine komplexen Formulare in Modals
-
----
-
-## 📚 ESSENTIAL FILES (UPDATED)
-
-| File | Purpose | Status |
-|------|---------|--------|
-| **VISION.md** | Zentrale Definition 5D-Framework | ✅ Fertig (2025-12-03) |
-| **docs/FAQ.md** | 15 häufige Fragen | ✅ Fertig (2025-12-03) |
-| **docs/DATENQUELLEN.md** | Transparenz Google Drive + Externe Quellen | ✅ Fertig (2025-12-03) |
-| **docs/BEWERTUNGSMATRIX_5D.md** | Wissenschaftliches Scoring (adaptiert von NFU Rubric) | ⚠️ TODO |
-| **docs/CLAIMS_EVIDENCE_MATRIX.md** | 40 Behauptungen, Evidenzlabels | ✅ Fertig |
-| **ETHIK_MANIFEST.md** | 13 Biases, Abbruchkriterien | ✅ Fertig |
-| **LITERATUR_INDEX.md** | 91 BibTeX-Einträge | ✅ Fertig |
-| **models/schemas.py** | Pydantic validation für alle JSON | ✅ Fertig |
-| **config/default.yaml** | Alle konfigurierbaren Parameter | ✅ Fertig |
-
----
-
-## 🎯 SCORING-SYSTEM (NEW)
-
-**Projekt wird bewertet nach Nuclear NFU Policy Memo Rubric (adaptiert):**
-
-| Kategorie | Gewichtung | Aktuell | Ziel |
-|-----------|------------|---------|------|
-| Framework Position (VISION.md) | 20% | 18/20 (90%) | 18/20 (90%) ✅ |
-| Analysis (Evidenz, FAQ) | 35% | 28/35 (80%) | 30/35 (86%) |
-| Writing Quality (Doku) | 20% | 18/20 (90%) | 18/20 (90%) ✅ |
-| Sources (BibTeX) | 15% | 15/15 (100%) | 15/15 (100%) ✅ |
-| Formatting (Repo) | 10% | 10/10 (100%) | 10/10 (100%) ✅ |
-| **GESAMT** | **100%** | **89/100 (89%, B+)** | **91/100 (91%, A-)** |
-
-**Siehe:** `docs/BEWERTUNGSMATRIX_5D.md` (vollständige Matrix, TODO)
-
----
-
-## 📚 EVIDENZ-LABEL-SYSTEM (NEW)
-
-**Alle Behauptungen müssen gelabelt sein:**
-
-| Label | Bedeutung | Kriterien | Beispiel |
-|-------|-----------|-----------|----------|
-| ✅ **Fakt** | Peer-reviewed, repliziert | Mind. 3 unabhängige Studien | SDT: Autonomie → intrinsische Motivation |
-| ⚠️ **Hypothese** | Plausibel, testbar, nicht validiert | Theoretisch fundiert, falsifizierbar | IMP-Formel (multiplikativ) |
-| 🔮 **Spekulation** | Explorativ, spekulativ | Konzeptuell, keine Empirie (yet) | 5D als spatio-temporales Netzwerkmodell |
-
-**Usage:**
-```python
-# In code:
 def calculate_imp(A, IM, R, SP, Au):
     """
-    IMP = A × IM × R × SP × Au (multiplikativ)
+    IMP = A × IM × R × SP × Au (multiplicative)
     
-    Scientific Basis: 
+    Scientific Basis:
     - ✅ Autonomy → IM (Deci & Ryan 1985, 1000+ studies)
     - ⚠️ Multiplicative formula (testable Q2 2026, n>100)
     
@@ -121,184 +55,151 @@ def calculate_imp(A, IM, R, SP, Au):
 
 ---
 
-## 🚨 ABBRUCHKRITERIEN (NEW)
+## 🛠️ Developer Workflows
 
-**Framework muss angepasst werden, wenn:**
-
-| Kriterium | Schwelle | Konsequenz |
-|-----------|----------|------------|
-| IMP korreliert NICHT mit Life Satisfaction | r < 0.30 (n > 100) | Formel überarbeiten |
-| Faktorenanalyse: A, IM, R, SP, Au sind NICHT distinkt | α < 0.60, PCA < 5 | Dimensionen reduzieren |
-| Alternative Schulen haben KEINE höheren IMP-Scores | t-Test p > 0.05 (n > 30) | Hypothese falsifiziert |
-| Peer-Review: Fundamentale Kritik | 3+ Rejections | Neukonzeption |
-
-**Siehe:** `ETHIK_MANIFEST.md` (15+ Kriterien)
-
----
-
-## 🛠️ DEVELOPER WORKFLOWS (UPDATED)
-
-### Quick Start (mit wissenschaftlicher Validierung)
+### Quick Start
 ```bash
-# 1. Alles installieren
+# Install dependencies
 pip install -r requirements_extended.txt
 
-# 2. Pipeline + Tests laufen lassen
-./start.sh  # Startet Extractor, Scraper, GitHub API, Dashboard, Map
-pytest tests/ -v  # 161+ wissenschaftliche Tests (100% passing)
+# Run full pipeline + tests
+./start.sh  # Extractor → Scraper → GitHub API → Dashboard (port 8501) → Map (port 5500)
+pytest tests/ -v  # 161+ tests (100% passing)
 
-# 3. Wissenschaftliche Dokumentation prüfen
-cat VISION.md  # ✅ Fertig (2025-12-03)
-cat docs/FAQ.md  # ✅ Fertig (2025-12-03)
-cat docs/CLAIMS_EVIDENCE_MATRIX.md  # ✅ 40 Behauptungen dokumentiert
-cat docs/BEWERTUNGSMATRIX_5D.md  # ⚠️ TODO
+# Or use Make
+make start      # Same as ./start.sh
+make test       # Run pytest
+make serve-map  # Serve web/5d-map on port 5500
 ```
 
-### Neue Feature entwickeln (mit wissenschaftlicher Basis)
+### Adding a New Feature
+1. **Check BibTeX** - Is there a scientific reference in `07_daten_analysen/5d-relevant-sources.bib`?
+2. **Define Evidence Level** - ✅⚠️🔮 based on peer-review status
+3. **Update Schema** - If adding new JSON keys, update `models/schemas.py` (Pydantic validation)
+4. **Write Test** - Add to `tests/` with expected outcomes and scientific reference
+5. **Update FAQ** - Anticipate user questions about data sources or methodology
+6. **Add Info-Box** - In Streamlit UI, include citation and evidence badge
+
+### Pydantic Validation Pattern
+All JSON outputs must pass `models/schemas.py` validation:
 ```python
-# 1. BibTeX-Eintrag prüfen/erstellen
-# In 07_daten_analysen/5d-relevant-sources.bib:
-@article{deci1985intrinsic,
-  author = {Deci, Edward L and Ryan, Richard M},
-  title = {Intrinsic Motivation and Self-Determination in Human Behavior},
-  year = {1985},
-  journal = {Springer Science \& Business Media}
-}
+from models.schemas import Solutions, Project, DimensionScore
 
-# 2. Evidenzlabel definieren
-EVIDENCE_LEVEL = "FACT"  # or "HYPOTHESIS" or "SPECULATION"
-
-# 3. Info-Box im UI
-st.markdown("""
-<div class="info-box">
-  <h4>Wissenschaftliche Basis</h4>
-  <p>Basierend auf <strong>Deci & Ryan (1985)</strong>...</p>
-  <span class="evidence-badge evidence-fact">✅ Fakt</span>
-</div>
-""", unsafe_allow_html=True)
-
-# 4. Test schreiben
-def test_new_feature():
-    """
-    Test mit wissenschaftlicher Referenz.
-    
-    Scientific Basis: Deci & Ryan 1985
-    Expected: r > 0.60 (autonomy vs. IM)
-    """
-    result = calculate_something()
-    assert result > 0.60
-
-# 5. FAQ erweitern
-# In docs/FAQ.md:
-### Neue Frage: "Ist Feature X validiert?"
-**Antwort:** ✅/⚠️/🔮 + Begründung + Quellen
+# Automatic normalization + deduplication
+solutions = Solutions(
+    projects=[Project(name="Bäckerei", investment="50.000", roi="95%")],
+    dimension_scores=[DimensionScore(dimension="A", score=0.95, source="manifest.md")],
+    plan={}
+)
+# score auto-normalizes to [0,1], names deduplicate
 ```
 
 ---
 
-## 📋 TODO PRIORITY (NEW)
+## �� 5D Framework Essentials
 
-**BEFORE** any other work:
+**The 5 Dimensions (IMP Formula):**
+- **A** - Autonomie (self-determination)
+- **IM** - Intrinsische Motivation (intrinsic interest)
+- **R** - Resilienz (stress recovery capacity)
+- **SP** - Soziale Partizipation (community engagement)
+- **Au** - Authentizität (value-action alignment)
 
-1. ✅ **VISION.md erstellen** (2 Stunden) → +3 Punkte → Fertig 2025-12-03
-2. ✅ **docs/FAQ.md erstellen** (1 Stunde) → +2 Punkte → Fertig 2025-12-03
-3. ✅ **docs/DATENQUELLEN.md erstellen** (30 Min) → Transparenz → Fertig 2025-12-03
-4. ⚠️ **docs/BEWERTUNGSMATRIX_5D.md** (1 Stunde) → Scoring-System
-5. ⚠️ **docs/UI_INFO_BOXEN.html** (2 Stunden) → Evidenzlabels im UI
+**Formula:** `IMP = A × IM × R × SP × Au` (multiplicative - if any dimension = 0, system collapses)
 
-**Nach 1-5: Score = 91%+ (A-)** 🎯
+**Scientific Basis:**
+- ✅ SDT (Self-Determination Theory): Deci & Ryan 1985 (1000+ studies)
+- ✅ Polyvagal Theory: Porges 2011 (150+ studies)
+- ⚠️ Multiplicative IMP: Own research (testable Q2 2026, n>100)
 
----
-
-## 🔗 QUICK LINKS (UPDATED)
-
-- **[TODO.md](../TODO.md)** - Infrastruktur (13/15, 87%)
-- **[TODO_MULTIPAGE.md](../TODO_MULTIPAGE.md)** - Dashboard (10/10 Pages, 100%)
-- **[TODO_RESEARCH.md](../TODO_RESEARCH.md)** - Forschung (85+ Tasks)
-- **[VISION.md](../VISION.md)** - Zentrale Definition (✅ Fertig)
-- **[docs/FAQ.md](../docs/FAQ.md)** - 15 häufige Fragen (✅ Fertig)
-- **[docs/DATENQUELLEN.md](../docs/DATENQUELLEN.md)** - Transparenz (✅ Fertig)
-- **[docs/BEWERTUNGSMATRIX_5D.md](../docs/BEWERTUNGSMATRIX_5D.md)** - Scoring (⚠️ TODO)
-- **[docs/CLAIMS_EVIDENCE_MATRIX.md](../docs/CLAIMS_EVIDENCE_MATRIX.md)** - 40 Behauptungen
-- **[ETHIK_MANIFEST.md](../ETHIK_MANIFEST.md)** - Bias-Log, Abbruchkriterien
+**Complexity Levels (1D-5D):**
+- **1D** - Monocausal (X → Y)
+- **2D** - Trade-offs (X vs Y)
+- **3D** - Triangular models (SDT: Autonomy, Competence, Relatedness)
+- **4D** - Time dynamics (longitudinal processes)
+- **5D** - Network complexity (graph topology + emergence)
 
 ---
 
-## ❌ WHAT NOT TO DO (UPDATED)
+## 🗺️ Interactive Map Architecture
 
-❌ **Add claims without evidence labels** (must be ✅⚠️🔮)  
-❌ **Create features without scientific basis** (needs BibTeX + Info-Box)  
-❌ **Skip FAQ updates** (proaktiv User-Fragen antizipieren)  
-❌ **Ignore BEWERTUNGSMATRIX_5D.md** (alle Änderungen beeinflussen Score)  
-❌ **Hardcode values** that should be in `config/default.yaml`  
-❌ **Rename public JSON keys** without team discussion  
-❌ **Skip tests** when changing data schemas  
+**Location:** `web/5d-map/` (static site, Leaflet + vanilla JS)
 
----
+**Layers:**
+- **Heatmap** - Depression (OWID) + Dropout (World Bank) → Intensity = avg(depression%, dropout%)/100
+- **IMP Choropleth** - Proxy calculation using WGI (World Governance Indicators) as fallback:
+  - `A = 1 - dropout/100`
+  - `IM = 1 - depression/100`
+  - `R = normalize(WGI Rule of Law)`
+  - `SP = normalize(WGI Voice & Accountability)`
+  - `Au = normalize(WGI Government Effectiveness)`
+- **Schools** - Alternative education markers from `data/schools.json`
+- **Time Travel** - Historical slider for yearly data
 
-## 🎯 SUCCESS METRICS (NEW)
+**Caching:** LocalStorage (1h TTL), automatic fallback to baseline if APIs fail
 
-**AI Agent is successful wenn:**
-
-1. ✅ Alle Änderungen haben wissenschaftliche Basis (BibTeX-Zitate)
-2. ✅ Alle Behauptungen haben Evidenzlabels (✅⚠️🔮)
-3. ✅ UI hat Info-Boxen mit Quellen-Buttons
-4. ✅ FAQ wird proaktiv erweitert
-5. ✅ Tests decken wissenschaftliche Behauptungen ab (161+ Tests, 100% passing)
-6. ✅ Score steigt (89% → 91%+, A-)
-
-**Measure:**
+**Run locally:**
 ```bash
-# Score prüfen
-cat docs/BEWERTUNGSMATRIX_5D.md | grep "GESAMT"
-# Output: GESAMT: 89/100 (89%, B+) → Ziel: 91/100 (91%, A-)
-
-# Evidenzverteilung prüfen
-cat docs/CLAIMS_EVIDENCE_MATRIX.md | grep "Kategorie"
-# Output: ✅ Fakt: 18 (45%), ⚠️ Hypothese: 16 (40%), 🔮 Spekulation: 6 (15%)
-
-# Tests prüfen
-pytest tests/ -v | grep "passed"
-# Output: 161 passed (100%)
+cd web/5d-map && python3 -m http.server 5500
 ```
 
 ---
 
-## 📊 Big Picture Architecture
+## 📋 Key Files Reference
 
-### Core Pipeline (Sequential Data Flow)
-```
-5d_extractor.py → 5d_research_scraper.py → 5d_github_api.py → JSON artifacts
-                                                                     ↓
-                               5d_dashboard.py + specialized Streamlit apps
-                                              ↓
-                                     5d_discord_bot.py (optional)
-```
-
-**Key principle:** JSON files are the stable contract between pipeline stages. Never rename core JSON keys without team approval.
-
-### Interactive Visualization
-- **5D-Map** (`web/5d-map/`): Leaflet-based world map with live data visualization
-  - Heatmaps (depression, dropout rates via OWID/World Bank APIs)
-  - IMP-Score choropleth (multidimensional proxy calculation)
-  - Alternative schools markers
-  - Time-travel slider for historical data
-  - Client-side caching (LocalStorage, 1h TTL)
-
-### Scientific Foundations
-- **5 Dimensions:** Autonomie (A), Intrinsische Motivation (IM), Resilienz (R), Soziale Partizipation (SP), Authentizität (Au)
-- **IMP Formula:** `IMP = A × IM × R × SP × Au` (siehe `models/imp.py`)
-- **Data sources:** Manifest files (`manifest/`) contain human-curated knowledge, formulas in `formeln/` (001-157)
+| File | Purpose | Status |
+|------|---------|--------|
+| `VISION.md` | Central 5D definition, 1D-5D complexity levels | ✅ Complete |
+| `TODO.md` | Infrastructure tasks (13/15, 87%) | �� In Progress |
+| `TODO_RESEARCH.md` | Scientific validation roadmap (85+ tasks) | 🟡 In Progress |
+| `docs/EXECUTIVE_SUMMARY_2025.md` | Complete overview (92% A-, 54.2% facts) | ✅ Complete |
+| `docs/CLAIMS_EVIDENCE_MATRIX.md` | 48 claims with evidence labels | ✅ Complete |
+| `docs/BEWERTUNGSMATRIX_5D.md` | Scoring system (Nuclear NFU rubric adapted) | ✅ Complete |
+| `ETHIK_MANIFEST.md` | 13 biases, abort criteria | ✅ Complete |
+| `07_daten_analysen/LITERATUR_INDEX.md` | 134 BibTeX entries | ✅ Complete |
+| `models/schemas.py` | Pydantic validation (required) | ✅ Complete |
+| `config/default.yaml` | All configurable parameters | ✅ Complete |
 
 ---
 
-**Version:** 3.0 (Scientific Documentation Update)  
-**Last Updated:** 2025-12-03, 03:31 CET  
-**Dev Container:** Ubuntu 24.04.3 LTS, Python 3.10+  
-**Major Milestones:**
-- Phase 1: All 10 dashboard pages complete (100%) ✅
-- Phase 3: Mini-maps on all 7 geographic pages (100%) ✅
-- Phase 4: App integration 4/4 complete (100%) ✅
-- Phase 8: 161 scientific tests, 151/151 passing (100%) ✅
-- **NEW:** Scientific Documentation Upgrade (VISION, FAQ, DATENQUELLEN) ✅
-- **NEXT:** BEWERTUNGSMATRIX_5D, UI_INFO_BOXEN, Minimalexperimente ⚠️
+## ❌ Critical Don'ts
+
+- ❌ **Rename JSON keys** without team approval (breaks pipeline contract)
+- ❌ **Hardcode values** - use `config/default.yaml` instead
+- ❌ **Add claims without evidence labels** (✅⚠️🔮 required)
+- ❌ **Skip tests** when changing schemas or formulas
+- ❌ **Ignore FAQ updates** - anticipate user questions proactively
+
+---
+
+## 🎯 Success Metrics
+
+**AI Agent is successful when:**
+1. All changes have scientific references (BibTeX citations)
+2. All claims have evidence labels (✅ Fakt 54.2%, ⚠️ Hypothese 35.4%, 🔮 Spekulation 10.4%)
+3. Tests pass (161+ tests, 100% passing)
+4. FAQ is updated proactively
+5. Project score increases (current: 92% A-)
+
+**Check progress:**
+```bash
+cat docs/BEWERTUNGSMATRIX_5D.md | grep "GESAMT"  # Current: 92/100 (A-)
+pytest tests/ -v | grep "passed"  # Should show 161+ passed
+```
+
+---
+
+## 🔗 Quick Navigation
+
+- **Pipeline Start:** `./start.sh` or `make start`
+- **Tests:** `pytest tests/ -v` or `make test`
+- **Map Preview:** `make serve-map` → http://localhost:5500
+- **Dashboard:** http://localhost:8501 (auto-launched by start.sh)
+- **Scientific Docs:** `VISION.md`, `docs/EXECUTIVE_SUMMARY_2025.md`, `docs/FAQ.md`
+- **Research Roadmap:** `TODO_RESEARCH.md`, `08-experimente-validierung/experiments/research_agenda.md`
+
+---
+
+**Version:** 4.0  
+**Environment:** Ubuntu 24.04.3 LTS, Python 3.10+, Dev Container  
+**Major Milestones:** 10/10 dashboard pages ✅, 161 tests passing ✅, 92% A- score ✅

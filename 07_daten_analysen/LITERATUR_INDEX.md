@@ -16,7 +16,7 @@ Dieses Dokument ist der zentrale Einstiegspunkt für alle wissenschaftlichen Que
 
 ### 1. BibTeX-Repository (Hauptquelle)
 - **Datei:** [`5d-relevant-sources.bib`](5d-relevant-sources.bib)
-- **Einträge:** 110 peer-reviewed + externe Ressourcen (Update: 2025-12-03)
+- **Einträge:** 134 peer-reviewed + externe Ressourcen (Update: 2025-12-03)
 - **Format:** BibTeX (APA 7th Edition konform)
 - **Kategorien:**
   - Neurobiologie & Psychologie (SDT, Polyvagal, Flow, Embodied Cognition)
@@ -27,6 +27,8 @@ Dieses Dokument ist der zentrale Einstiegspunkt für alle wissenschaftlichen Que
   - Externe Ressourcen (AI Benchmarks, Physics, Free Learning)
   - **NEU Batch 10 (Sprint 2):** LabXchange, Gutenberg-DE, Life Architect, OpenStax, MIT OCW, Coursera, Academic Torrents, HackTricks, AweXplor (20 Einträge)
   - **NEU Batch 11 (Sprint 3):** Free Learning List, SD Prompts, Prompy, DIY HPL, Satellite Map Space (10 Einträge)
+  - **NEU Batch 12 (Counter-Evidence):** Lepper 1973, Iyengar 1999/2000, Schwartz 2004, Duncan 2013, Hattie 2009, Diener 1985, McClelland 1993, Edwards 2010 (14 Einträge)
+  - **NEU Batch 13 (Meta-Analysen):** Church 2013, Chirkov 2003, Oishi 2010, Ryan 2017, Lucas 1996, Aguinis 2005 (6 Einträge)
 
 ### 2. Allgemeine Quellen
 - **Datei:** [`../../SOURCES.md`](../../SOURCES.md)

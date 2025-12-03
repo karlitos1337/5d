@@ -264,68 +264,73 @@
   "trending": {
     "education": [
       {
-        "name": "MairuCLI",
+        "name": "expagog",
+        "stars": 1,
+        "url": "https://github.com/aplsimple/expagog"
+      },
+      {
+        "name": "hogwarts",
+        "stars": 6,
+        "url": "https://github.com/databayt/hogwarts"
+      },
+      {
+        "name": "armenian-javascript-community",
         "stars": 0,
-        "url": "https://github.com/anestec-rd/MairuCLI"
+        "url": "https://github.com/DopeGopal/armenian-javascript-community"
       },
       {
-        "name": "crush",
+        "name": "computer-science",
         "stars": 0,
-        "url": "https://github.com/samkiell/crush"
+        "url": "https://github.com/sumanvijay/computer-science"
       },
       {
-        "name": "feeds",
-        "stars": 2,
-        "url": "https://github.com/4thWaveAI/feeds"
-      },
-      {
-        "name": "HydroLearn",
-        "stars": 0,
-        "url": "https://github.com/licm13/HydroLearn"
-      },
-      {
-        "name": "ai-shifu",
-        "stars": 235,
-        "url": "https://github.com/ai-shifu/ai-shifu"
+        "name": "lab",
+        "stars": 1,
+        "url": "https://github.com/navchandar/lab"
       }
     ],
     "learning": [
       {
-        "name": "anamul-hoque-shourov",
-        "stars": 0,
-        "url": "https://github.com/anamul-hoque-shourov/anamul-hoque-shourov"
+        "name": "code-dot-org",
+        "stars": 875,
+        "url": "https://github.com/code-dot-org/code-dot-org"
       },
       {
-        "name": "Think-Like-a-Data-Scientist",
-        "stars": 1,
-        "url": "https://github.com/Mesho2022/Think-Like-a-Data-Scientist"
+        "name": "armenian-javascript-community",
+        "stars": 0,
+        "url": "https://github.com/DopeGopal/armenian-javascript-community"
       },
       {
-        "name": "the-watcher-ssr",
+        "name": "computer-science",
         "stars": 0,
-        "url": "https://github.com/SAQLAINComsats/the-watcher-ssr"
+        "url": "https://github.com/sumanvijay/computer-science"
       },
       {
-        "name": "the-watcher-ssr",
+        "name": "Smart-Contracts---Solidity",
         "stars": 0,
-        "url": "https://github.com/bien000/the-watcher-ssr"
+        "url": "https://github.com/MiracleGuy29/Smart-Contracts---Solidity"
       },
       {
-        "name": "Designing-Hybrid-AI-Systems",
+        "name": "projeto-coffee-shop",
         "stars": 0,
-        "url": "https://github.com/Removed-navajo219/Designing-Hybrid-AI-Systems"
+        "url": "https://github.com/flameastro/projeto-coffee-shop"
       }
     ],
     "pedagogy": [
       {
-        "name": "ph-submissions",
-        "stars": 147,
-        "url": "https://github.com/programminghistorian/ph-submissions"
+        "name": "expagog",
+        "stars": 1,
+        "url": "https://github.com/aplsimple/expagog"
       },
       {
         "name": "RAGKET",
         "stars": 3,
         "url": "https://github.com/Ayanop267/RAGKET"
+      },
+      {
+        "name": "ph-submissions",
+        "stars": 147,
+        "url": "https://github.com/programminghistorian/ph-submissions"
       },
       {
         "name": "Lucian-Academy",
@@ -336,40 +341,35 @@
         "name": "instructor-training",
         "stars": 184,
         "url": "https://github.com/carpentries/instructor-training"
-      },
-      {
-        "name": "neuraflow",
-        "stars": 5,
-        "url": "https://github.com/xFufly/neuraflow"
       }
     ],
     "edtech": [
       {
-        "name": "SportsScience",
+        "name": "ai-recruitment-assistant",
         "stars": 0,
-        "url": "https://github.com/seif4d/SportsScience"
+        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
       },
       {
-        "name": "exam-seating-arranger",
-        "stars": 0,
-        "url": "https://github.com/Bossr1387/exam-seating-arranger"
+        "name": "gptwrapper",
+        "stars": 9,
+        "url": "https://github.com/UniversityOfHelsinkiCS/gptwrapper"
       },
       {
-        "name": "classroomio",
-        "stars": 1333,
-        "url": "https://github.com/classroomio/classroomio"
-      },
-      {
-        "name": "TatvaX-AI-PROTOTYPE",
-        "stars": 0,
-        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
-      },
-      {
-        "name": "stcats-ops",
+        "name": "neuropilot",
         "stars": 1,
-        "url": "https://github.com/williamalexakis/stcats-ops"
+        "url": "https://github.com/Rwiddhi03/neuropilot"
+      },
+      {
+        "name": "kolibri",
+        "stars": 956,
+        "url": "https://github.com/learningequality/kolibri"
+      },
+      {
+        "name": "arsnova-server",
+        "stars": 60,
+        "url": "https://github.com/particify/arsnova-server"
       }
     ]
   },
-  "timestamp": "2025-12-03T07:24:01.993598"
+  "timestamp": "2025-12-03T15:55:40.897393"
 }
