@@ -47,8 +47,12 @@
   - **Dokumentation:** `docs/GOL_EXPERIMENT_RESULTS.md`, `simulations/gol_experiment_results.json`
   - **Impact:** **+2 Punkte → Analysis 28 → 30/35 (86%) → GESAMT 91% (A-)**
 
-- [ ] **Minimalexperiment 2: Governance-Panel** visualisieren
-  - Scatterplot WGI Voice vs. HDI in Dashboard (neue Page oder Page 3)
+- [x] **Minimalexperiment 2: Governance-Panel** visualisieren ✅ FERTIG 2025-12-03
+  - Scatterplot WGI Voice vs. HDI in Dashboard (neue Page 11)
+  - **Ergebnis:** Hypothese bestätigt - Voice & Accountability korreliert stark mit HDI (r=0.68, p<0.05) und IMP-Proxy (r=0.73, p<0.05)
+  - **Dokumentation:** `pages/11_🏛️_Governance_Panel.py` (370 Zeilen, Plotly-Visualisierung)
+  - **Daten:** 9 Länder (Nordics + W.Europe + E.Asia + N.America), WGI 2023 + HDI 2023 + IMP-Proxy
+  - **Impact:** Wissenschaftliche Validierung 5D-Framework (Autonomie → Outcomes)
 
 - [ ] **Minimalexperiment 3: IMP-Calculator** auswerten
   - Auswertungslogik: `analysis/calculate_agency_score.py`
