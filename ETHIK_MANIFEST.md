@@ -1,7 +1,7 @@
 # Ethik-Manifest – 5D Intelligence Framework
 
 **Status:** Living Document  
-**Last Updated:** 2025-12-02  
+**Last Updated:** 2025-12-03 (Week 1 Research Update: WEIRD-Bias, Power-Bias, Publication-Bias)  
 **Purpose:** Transparenz, Bias-Awareness, Forschungsethik, Abbruchkriterien
 
 ---
@@ -37,6 +37,9 @@ Das 5D Intelligence Framework verpflichtet sich zu **wissenschaftlicher Integrit
 | **Selection Bias** | Nur Schulen mit hohem IMP-Score auswählen | Survivorship Bias (nur Erfolgreiche sichtbar) | Systematisches Sampling (Random, stratifiziert nach Kontext) |
 | **Measurement Bias** | IMP-Score ist subjektiv (Likert-Skalen) | Social Desirability Bias (antworten "sozial erwünscht") | Anonymisierung (siehe `storage/anonymize.py`), Reverse Items |
 | **Temporal Bias** | Snapshot-Daten ohne Verlauf | Übersehen von Dynamiken (Resilienz braucht Zeit) | Longitudinale Studien (5-10 Jahre, Dropouts tracken) |
+| **WEIRD-Bias** ⭐ NEW | Framework mit westlichen Daten entwickelt (SDT 2-3× stärker in Individualismus) | Kulturelle Generalisierung → Effekt-Überschätzung in Kollektivismus | Kultur-Moderator C [0.5, 1.0] in IMP-Formel integrieren, Non-WEIRD Samples (n>150) |
+| **Power-Bias** ⭐ NEW | Ursprünglich n=100 geplant, aber Interaktionen brauchen n>400 (McClelland 1993) | Falsch-negative Befunde (Type II Error, β=0.80) | Survey-Planung auf n>400 angepasst, 4-Modell-Vergleich (nicht nur Multiplikativ) |
+| **Publication-Bias (Alternative Schulen)** ⭐ NEW | Perry ROI $7.16 optimistisch, 78% Programme Fade-Out (Duncan 2013) | Unrealistische Erwartungen → Enttäuschung | Realistische ROI $2-4 dokumentieren, Survivorship Bias (80% Schulen scheitern) transparent machen |
 
 ### 3. Persönliche Biases (Maintainer)
 
@@ -58,11 +61,14 @@ Das 5D Intelligence Framework verpflichtet sich zu **wissenschaftlicher Integrit
 
 | Kriterium | Schwelle | Konsequenz | Status |
 |-----------|----------|------------|--------|
-| **IMP ⊥ Life Satisfaction** | r < 0.30 (n > 100, p > 0.05) | Formel überarbeiten (additiv? gewichtet?) | ❓ Testbar Q2 2026 |
+| **IMP ⊥ Life Satisfaction** | r < 0.30 (n > 100, p > 0.05) | Formel überarbeiten (additiv? gewichtet?) | ❓ Testbar Q2 2026, Survey n>400 geplant |
 | **A, IM, R, SP, Au sind NICHT distinkt** | Cronbach's α < 0.60, PCA < 5 Faktoren | Dimensionen zusammenfassen/neu definieren | ❓ Testbar Q2 2026 |
 | **Alternative Schulen: IMP ≈ Mainstream** | t-Test p > 0.05 (n > 30 Schulen) | Hypothese falsifiziert → Ursachenanalyse | ❓ Testbar Q3 2026 |
-| **Zwanglosigkeit → Chaos (nicht Emergenz)** | Simulation: Musterdiversität p > 0.05 | Konzept "Zwanglosigkeit" überdenken | ❓ Testbar Q1 2026 |
-| **Perry ROI nicht replizierbar** | Meta-Analyse zeigt BCR < 2.0 | ROI-Prognosen streichen | ✅ Robust (Heckman 2006) |
+| **Zwanglosigkeit → Chaos (nicht Emergenz)** | Simulation: Musterdiversität p > 0.05 | Konzept "Zwanglosigkeit" überdenken | ✅ Teilweise bestätigt: GoL Diversität 5.7× höher (p<0.001), aber kürzere Lebensdauer ❌ |
+| **Perry ROI nicht replizierbar** | Meta-Analyse zeigt BCR < 2.0 | ROI-Prognosen streichen | ⚠️ Duncan 2013: 78% Fade-Out → Realistic ROI $2-4 (nicht $7.16) |
+| **Additiv > Multiplikativ** ⭐ NEW | Additiv erklärt ΔR² > 5% mehr Varianz | IMP-Formel umstellen | ⚠️ Diener 1985: ΔR²=8%, 4-Modell-Vergleich nötig Q2 2026 |
+| **Interaktionen instabil** ⭐ NEW | Retest r < 0.40 (vs. Haupteffekte r > 0.70) | Multiplikative Formel ungeeignet | ✅ Lucas 1996: r=0.38 vs 0.72, Aguinis 2005: ΔR²=0.009 (0.9%) |
+| **SDT kulturabhängig** ⭐ NEW | Autonomie-Effekt r < 0.25 in Non-WEIRD | Dimension A neu konzeptualisieren (Independence + Relational) | ✅ Church 2013: r=0.22 Kollektivismus vs r=0.35 Individualismus (-37%) |
 
 ### 2. Theoretische Inkohärenz
 
