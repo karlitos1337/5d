@@ -241,14 +241,21 @@ Unser **5D-Framework** ist **NICHT**:
 
 ## 📖 Weitere Ressourcen
 
+### Zentrale Dokumentation
 - **[README.md](README.md)** - Projektübersicht, Quick Start
 - **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Forschungs-Roadmap (85+ Tasks)
 - **[docs/FAQ.md](docs/FAQ.md)** - 15 häufige Fragen mit Antworten
-- **[docs/CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 40 Behauptungen, Evidenzlabels
-- **[docs/DATENQUELLEN.md](docs/DATENQUELLEN.md)** - Transparente Methodendokumentation
-- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias-Log, Forschungsethik
-- **[LITERATUR_INDEX.md](07_daten_analysen/LITERATUR_INDEX.md)** - 91 BibTeX-Einträge
-- **[06_synthesen_kompilationen/5d_landschaft.md](06_synthesen_kompilationen/5d_landschaft.md)** - Vergleich 7 5D-Modelle (TODO)
+
+### Wissenschaftliche Grundlagen
+- **[docs/HYPOTHESEN_KATALOG.md](docs/HYPOTHESEN_KATALOG.md)** - 10 testbare Hypothesen mit Operationalisierung, Methoden, Erfolgs-/Abbruchkriterien
+- **[docs/1D_5D_DEFINITIONEN.md](docs/1D_5D_DEFINITIONEN.md)** - Komplexitätsebenen für 5 Domänen (Bildung, Governance, Mental Health, Ökologie, Technologie)
+- **[docs/CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 48 Behauptungen mit Evidenzlabels (54.2% Fakten, 35.4% Hypothesen, 10.4% Spekulationen)
+- **[docs/DATENQUELLEN.md](docs/DATENQUELLEN.md)** - Transparente Methodendokumentation (IHME, World Bank, WGI)
+- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias-Log (13 Biases), Abbruchkriterien, Forschungsethik
+
+### Literatur & Vergleiche
+- **[LITERATUR_INDEX.md](07_daten_analysen/LITERATUR_INDEX.md)** - 134 BibTeX-Einträge (Week 1 Research: +6 Meta-Analysen)
+- **[06_synthesen_kompilationen/5d_landschaft.md](06_synthesen_kompilationen/5d_landschaft.md)** - Vergleich 7 alternative 5D-Modelle
 
 ---
 

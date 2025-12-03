@@ -23,6 +23,9 @@ This repository contains comprehensive documentation across multiple knowledge d
 - **[💡 Concepts & Definitions](wiki/Home)** - Detailed explanations of key terms
 - **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
 - **[🔬 Research Roadmap](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, open questions
+- **[🎯 VISION.md](VISION.md)** - Central framework definition, 1D-5D complexity levels, scientific foundation
+- **[🧪 Hypotheses Catalog](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses with operationalization & abort criteria
+- **[📐 1D-5D Definitions](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for 5 domains (Education, Governance, Mental Health, Ecology, Technology)
 
 ## 🗂️ Project Structure
 
@@ -137,7 +140,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 - **[TODO.md](TODO.md)** - Infrastructure, deployment, CI/CD tasks (13/15 complete, 87%)
 - **[TODO_MULTIPAGE.md](TODO_MULTIPAGE.md)** - Dashboard features, UI/UX, scientific validation
-- **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, theoretical coherence
+- **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, theoretical coherence (85+ tasks)
+
+### Scientific Documentation
+
+- **[CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 48 claims with evidence labels (54.2% Facts, 35.4% Hypotheses, 10.4% Speculations)
+- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias log (13 biases documented), abort criteria, research ethics
+- **[HYPOTHESEN_KATALOG.md](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses (5 high priority, 3 medium, 2 low)
+- **[1D_5D_DEFINITIONEN.md](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for Education, Governance, Mental Health, Ecology, Technology
 
 ## 🧬 Why This Matters
 
@@ -151,7 +161,8 @@ The 5D-Intelligence Framework provides a roadmap for unleashing human potential.
 
 ---
 
-**Last Updated**: November 2025  
-**Status**: Active Development
+**Last Updated**: December 3, 2025  
+**Status**: Active Development  
+**Framework Status**: 92% (A-) - 54.2% Facts, 35.4% Hypotheses, 10.4% Speculations
 
 *For detailed information, explore the [Wiki](wiki/) or visit [reflexionsfabrik.de](https://reflexionsfabrik.de)*
