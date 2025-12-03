@@ -534,14 +534,143 @@ Das New-Age-5D-Konzept entstand aus der Konvergenz von:
 
 ---
 
-## 7. Weitere 5D-Modelle (Work in Progress)
+## 7. Weitere 5D-Modelle
 
-- **5D-BIM (Building Information Modeling):** 3D + Zeit + Kosten
-- **5D-Cinema:** 3D + physische Effekte (Wind, Geruch, Bewegung)
-- **5D-Ultraschall:** 4D + Doppler-Effekt
-- **5D-Datenvisualisierung:** x, y, z, Farbe, Größe
+### Überblick
+Diese 5D-Modelle stammen aus technischen Domänen und erweitern klassische 3D/4D-Modelle um zusätzliche Parameter. Sie haben **keine konzeptuelle Überschneidung** mit 5D-Intelligence, aber die Terminologie kann zu Verwechslungen führen.
 
-**Gemeinsamer Nenner:** Erweiterung von 3D/4D um zusätzliche Parameter – **keine konzeptuelle Überschneidung mit 5D-Intelligence.**
+---
+
+### 7.1 5D-BIM (Building Information Modeling)
+
+**5 Dimensionen:**
+1. **3D:** x, y, z (geometrische Form des Gebäudes)
+2. **Zeit (4D):** Bauzeitplan, Phasen (Planung, Bau, Betrieb)
+3. **Kosten (5D):** Budget, Kostenschätzung, Finanzkontrolle
+
+**Ziel:** Integrierte Bauplanung (Architektur + Zeit + Kosten)  
+**Empirie:** Bauindustrie-Standard (Autodesk Revit, Bentley Systems)  
+**Hauptvertreter:** Eastman (2011 BIM Handbook), BuildingSMART International  
+**Quellen:** Journal of Construction Engineering and Management, Automation in Construction
+
+**Anwendung:**
+- **3D-Modell:** Gebäudegeometrie (Wände, Fenster, Dächer)
+- **4D-Simulation:** Baufortschritt visualisieren (Monat für Monat)
+- **5D-Kostenanalyse:** Automatische Kostenschätzung basierend auf 3D-Modell (z.B. 1000 m² Wand × €200/m² = €200.000)
+
+**Beispiel:** Flughafen Berlin Brandenburg (BER) – 5D-BIM hätte Kostenexplosion (€1B → €7B) früher erkennbar gemacht (Theorie)
+
+**Unterschied zu 5D-Intelligence:**
+- **Domäne:** Bauindustrie (physische Gebäude) vs. interdisziplinär (Menschen, Systeme)
+- **Dimensionen:** Geometrisch + Zeit + Kosten vs. psycho-sozial (A/IM/R/SP/Au)
+- **Ziel:** Effizienz (Baukosten senken) vs. Transformation (Zwanglosigkeit)
+
+**Relation:** ⚠️ Orthogonal (andere Domäne), keine Integration möglich
+
+---
+
+### 7.2 5D-Cinema (4DX, 5D-Kinos)
+
+**5 Dimensionen:**
+1. **2D:** Leinwand (x, y)
+2. **3D:** Stereoskopie (Tiefe, z via Brillen)
+3. **Zeit (4D):** Film-Zeitachse (Plot, Handlung)
+4. **Physische Effekte (5D):** Wind, Geruch, Nebel, Wassertropfen, Sitzbewegung
+
+**Ziel:** Immersive Unterhaltung (Kinoerlebnis intensivieren)  
+**Empirie:** Kommerzielle Technologie (CJ 4DX, MediaMation MX4D)  
+**Quellen:** Entertainment Technology, Theme Park Design  
+**Verbreitung:** 750+ 4DX-Kinos weltweit (2025)
+
+**Beispiel:** *Avengers: Endgame* (2019) in 4DX – Sitze vibrieren bei Explosionen, Wind bei Flugszenen, Wassertropfen bei Regenszenen
+
+**Kritik:**
+- ⚠️ **Ablenkung:** Effekte lenken von Filmhandlung ab
+- ⚠️ **Kosten:** Tickets 2-3× teurer ($25-35 vs. $12 Standard)
+- ⚠️ **Gesundheit:** Übelkeit bei manchen Zuschauern (Motion Sickness)
+
+**Unterschied zu 5D-Intelligence:**
+- **Domäne:** Unterhaltungsindustrie (Kino) vs. Wissenschaft (Bildung, Governance)
+- **Dimensionen:** Räumlich + sensorisch vs. psycho-sozial
+- **Ziel:** Immersion (Entertainment) vs. Transformation (Zwanglosigkeit)
+
+**Relation:** ❌ Inkompatibel (triviale Terminologie-Überschneidung, keine konzeptuelle Verbindung)
+
+---
+
+### 7.3 5D-Ultraschall (Doppler-Ultraschall)
+
+**5 Dimensionen:**
+1. **2D:** Grauwert-Bild (x, y)
+2. **3D:** Volumetrische Darstellung (x, y, z)
+3. **Zeit (4D):** Bewegung (Herzschlag, Blutfluss)
+4. **Doppler-Effekt (5D):** Geschwindigkeit + Richtung von Blutfluss (Farbe = Geschwindigkeit)
+
+**Ziel:** Medizinische Diagnostik (Herz, Blutgefäße, Fötus)  
+**Empirie:** Medizinische Bildgebung (FDA-zugelassen)  
+**Quellen:** Journal of Ultrasound in Medicine, Radiology
+
+**Anwendung:**
+- **Geburtshilfe:** 3D/4D-Ultraschall zeigt Fötus in Echtzeit
+- **Kardiologie:** Doppler-Ultraschall misst Blutfluss-Geschwindigkeit (Herzklappeninsuffizienz diagnostizieren)
+
+**Unterschied zu 5D-Intelligence:**
+- **Domäne:** Medizinische Bildgebung vs. Sozialwissenschaft
+- **Dimensionen:** Räumlich + temporal + physikalisch (Doppler) vs. psycho-sozial
+- **Ziel:** Diagnostik vs. Transformation
+
+**Relation:** ⚠️ Orthogonal (andere Domäne), keine konzeptuelle Verbindung
+
+---
+
+### 7.4 5D-Datenvisualisierung (Multi-Parameter)
+
+**5 Dimensionen:**
+1. **x-Achse:** Erste Variable (z.B. GDP)
+2. **y-Achse:** Zweite Variable (z.B. Life Expectancy)
+3. **z-Achse:** Dritte Variable (z.B. Population)
+4. **Farbe (4D):** Vierte Variable (z.B. Region)
+5. **Größe (5D):** Fünfte Variable (z.B. CO₂-Emissionen)
+
+**Ziel:** Komplexe Datensätze visualisieren (mehr als 3 Variablen gleichzeitig)  
+**Empirie:** Data Science Standard (Plotly, D3.js, Tableau)  
+**Beispiel:** Gapminder (Hans Rosling) – 5D-Visualisierung (GDP vs. Life Expectancy, Farbe = Region, Größe = Population, Animation = Zeit)
+
+**Anwendung in 5D-Intelligence:**
+- ✅ **Dashboard:** 5D-Scatter-Plot für IMP-Score (x = Autonomie, y = IM, z = Resilienz, Farbe = Land, Größe = Population)
+- ✅ **Weltkarte:** Choropleth (Farbe = IMP-Score) + Circles (Größe = Depression-Prävalenz)
+
+**Unterschied:**
+- **Domäne:** Data Science (Visualisierung) vs. interdisziplinär (Framework)
+- **Dimensionen:** Generisch (beliebige Variablen) vs. spezifisch (A/IM/R/SP/Au)
+- **Ziel:** Darstellung vs. Transformation
+
+**Relation:** ✅ **Kompatibel** (5D-Datenvisualisierung ist **Tool** für 5D-Intelligence, keine eigenständige Theorie)
+
+---
+
+### Gemeinsamer Nenner
+
+Alle technischen 5D-Modelle (BIM, Cinema, Ultraschall, Datenvisualisierung) sind **Erweiterungen von 3D/4D um zusätzliche Parameter:**
+
+| Modell | Basis | 5. Parameter | Domäne |
+|--------|-------|--------------|--------|
+| **BIM** | 3D (Geometrie) + 4D (Zeit) | Kosten | Bau |
+| **Cinema** | 3D (Stereoskopie) + 4D (Zeit) | Physische Effekte | Entertainment |
+| **Ultraschall** | 3D (Volumen) + 4D (Zeit) | Doppler (Geschwindigkeit) | Medizin |
+| **Datenvisualisierung** | x, y, z + Farbe | Größe (oder Animation) | Data Science |
+
+**Vs. 5D-Intelligence:**
+- **Nicht parametrisch:** A, IM, R, SP, Au sind keine "zusätzlichen Parameter" zu 3D/4D, sondern **eigenständige Dimensionen** eines interdisziplinären Frameworks
+- **Nicht technisch:** 5D-Intelligence ist keine Visualisierungs- oder Engineering-Methode, sondern **wissenschaftliches Modell** für menschliche Systeme
+- **Nicht räumlich:** 5D-Intelligence nutzt "Dimension" **metaphorisch** (Analysedimension), nicht physikalisch (x, y, z)
+
+**Warum diese Modelle dokumentiert sind:**
+- ⚠️ **Verwechslungsgefahr:** Google-Suche "5D framework" findet BIM, Cinema, etc.
+- ✅ **Klarheit:** Explizite Abgrenzung verhindert Missverständnisse
+- ✅ **SEO:** "5D Intelligence Framework" ist spezifischer als "5D"
+
+---
 
 ---
 

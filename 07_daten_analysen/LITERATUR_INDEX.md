@@ -16,15 +16,17 @@ Dieses Dokument ist der zentrale Einstiegspunkt für alle wissenschaftlichen Que
 
 ### 1. BibTeX-Repository (Hauptquelle)
 - **Datei:** [`5d-relevant-sources.bib`](5d-relevant-sources.bib)
-- **Einträge:** 80 peer-reviewed + externe Ressourcen (Update: 2025-12-03)
+- **Einträge:** 110 peer-reviewed + externe Ressourcen (Update: 2025-12-03)
 - **Format:** BibTeX (APA 7th Edition konform)
 - **Kategorien:**
-  - Neurobiologie & Psychologie (SDT, Polyvagal, Flow)
-  - Bildung & Alternative Schulen (Summerhill, Sudbury, Folk High Schools)
+  - Neurobiologie & Psychologie (SDT, Polyvagal, Flow, Embodied Cognition)
+  - Bildung & Alternative Schulen (Summerhill, Sudbury, Folk High Schools, OER)
   - Ökonomie & Governance (Ostrom, Acemoglu, Sen, North)
   - Evolution & Komplexität (Game of Life, Network Theory)
   - Mental Health & Globale Daten (WHO, IHME GBD, World Bank)
   - Externe Ressourcen (AI Benchmarks, Physics, Free Learning)
+  - **NEU Batch 10 (Sprint 2):** LabXchange, Gutenberg-DE, Life Architect, OpenStax, MIT OCW, Coursera, Academic Torrents, HackTricks, AweXplor (20 Einträge)
+  - **NEU Batch 11 (Sprint 3):** Free Learning List, SD Prompts, Prompy, DIY HPL, Satellite Map Space (10 Einträge)
 
 ### 2. Allgemeine Quellen
 - **Datei:** [`../../SOURCES.md`](../../SOURCES.md)
@@ -292,6 +294,64 @@ git commit -m "docs: add Pearl 2009 (Causality) to BibTeX (Kausalmodelle)"
 - `freeprogrammingbooks2025` – 8000+ Free Programming Books (243k stars)
 
 **Integration:** Siehe `99_noch_zu_bearbeiten/externe_ressourcen_analyse.md` für vollständige Analyse und Action Items.
+
+---
+
+## 🆕 Batch 10: Sprint 2 External Resources (2025-12-03)
+
+**Neue Einträge (20 Ressourcen):**
+
+### Virtual Labs & Embodied Learning
+- `labxchange2025` – Harvard Virtual Labs (50+ interactive experiments)
+- `freeman2014active` – Active Learning Meta-Analysis (225 studies, 55% lower failure rate)
+- `mikropoulos2011educational` – Virtual Labs Transfer (80% real-world skills)
+- `barsalou2008grounded` – Grounded Cognition (embodied learning foundation)
+
+### German Literature & Commons
+- `projektgutenbergde2025` – 12,262 German works (pseudo-commons, commercial rights)
+- `projectgutenberg2025` – 70,000 eBooks (true Public Domain)
+
+### AI Model Tracking
+- `lifearchitect2025` – AI Models Table (Parameter counts, context windows)
+
+### Open Educational Resources (OER)
+- `openstax2025` – 44 free textbooks (\$1.3B student savings)
+- `hilton2016open` – OER Efficacy Meta-Analysis (same outcomes as commercial)
+- `mitocw2025` – MIT OpenCourseWare (2,600 courses, 300M users)
+- `coursera2025` – Coursera (7,000 courses, freemium model)
+
+### Data & Security
+- `academictorrents2025` – Academic Torrents (P2P data sharing, TB-scale)
+- `zenodo2025` – Zenodo (centralized, 50GB limit)
+- `hacktricks2025` – HackTricks (3,000+ pentesting techniques)
+- `awexplor2025` – AweXplor (300+ Awesome Lists aggregator)
+
+**Integration:** Siehe `01_bildung_education/virtual_labs.md`, `educational_commons.md`, `05_technologie_tesla/ai_model_tracking.md`, `security_fundamentals.md`, `07_daten_analysen/academic_data_sources.md`
+
+---
+
+## 🆕 Batch 11: Sprint 3 External Resources (2025-12-03)
+
+**Neue Einträge (10 Ressourcen):**
+
+### Free Learning Metaindex
+- `freelearninglist2025` – Free Learning List (500+ curated resources)
+- `freecodecamp2025` – freeCodeCamp (50M+ users, 9,000 tutorials)
+- `khanacademy2025` – Khan Academy (100M users, K-12 curriculum)
+
+### Prompt Engineering
+- `sddynamicprompts2025` – SD Dynamic Prompts (wildcard syntax, 11k stars)
+- `prompy2025` – Prompy Marketplace (\$1-50 per prompt, commodification critique)
+
+### DIY Hardware & Biohacking
+- `diyhpl2025` – DIY HPL Wiki (CRISPR kits \$150, biosafety risks)
+
+### Satellite Imagery
+- `satellitemapspace2025` – Satellite Map Space (open data viewer)
+- `sentinel22025` – Sentinel-2 (10m resolution, EU Copernicus)
+- `landsat2025` – Landsat (30m resolution, 50+ years data)
+
+**Integration:** Siehe `01_bildung_education/free_learning_consolidated.md`, `02_neurobiologie_psychologie/prompt_engineering_tools.md`, `05_technologie_tesla/diy_hardware.md`, `07_daten_analysen/satellite_data.md`
 
 ---
 
