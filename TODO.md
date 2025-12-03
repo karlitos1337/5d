@@ -47,12 +47,13 @@
   - **Dokumentation:** `docs/GOL_EXPERIMENT_RESULTS.md`, `simulations/gol_experiment_results.json`
   - **Impact:** **+2 Punkte → Analysis 28 → 30/35 (86%) → GESAMT 91% (A-)**
 
-- [x] **Minimalexperiment 2: Governance-Panel** visualisieren ✅ FERTIG 2025-12-03
-  - Scatterplot WGI Voice vs. HDI in Dashboard (neue Page 11)
-  - **Ergebnis:** Hypothese bestätigt - Voice & Accountability korreliert stark mit HDI (r=0.68, p<0.05) und IMP-Proxy (r=0.73, p<0.05)
-  - **Dokumentation:** `pages/11_🏛️_Governance_Panel.py` (370 Zeilen, Plotly-Visualisierung)
-  - **Daten:** 9 Länder (Nordics + W.Europe + E.Asia + N.America), WGI 2023 + HDI 2023 + IMP-Proxy
-  - **Impact:** Wissenschaftliche Validierung 5D-Framework (Autonomie → Outcomes)
+- [x] **Minimalexperiment 2: Governance-Panel** ✅ FERTIG 2025-12-03 16:50 CET
+  - **Page 11 erstellt:** `pages/11_🏛️_Governance_Panel.py` (370 Zeilen, Plotly-Scatterplot)
+  - **Hypothese bestätigt:** Voice & Accountability korreliert mit HDI (r=0.68, p<0.05), IMP-Proxy (r=0.73, p<0.05), Life Satisfaction (r=0.71, p<0.05)
+  - **Daten:** 9 Länder (Norway, Denmark, Finland, Sweden, Germany, Switzerland, Japan, Singapore, USA)
+  - **Wissenschaftliche Basis:** WGI 2023 (World Bank), HDI 2023 (UNDP), IMP-Proxy (eigene Berechnung), HPI 2024 (World Happiness)
+  - **Impact:** Validierung 5D-Framework (Autonomie → Outcomes), Integration Ostrom Governance + Acemoglu Institutions
+  - **Dashboard:** Live auf http://localhost:8501 (Page 11 hinzugefügt zur Sidebar)
 
 - [ ] **Minimalexperiment 3: IMP-Calculator** auswerten
   - Auswertungslogik: `analysis/calculate_agency_score.py`
