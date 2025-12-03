@@ -1,0 +1,65 @@
+name: Validate Experiments
+
+on:
+  push:
+    branches: [ main, validation/** ]
+    paths:
+      - '08-experimente-validierung/experiments/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '08-experimente-validierung/experiments/**'
+
+jobs:
+  run-experiments:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install numpy scipy
+    
+    - name: Run Experiment 01 (if exists)
+      id: exp01
+      run: |
+        if [ -f "08-experimente-validierung/experiments/01_autonomy_entropy.py" ]; then
+          python 08-experimente-validierung/experiments/01_autonomy_entropy.py | tee exp01_output.txt
+          
+          # Check if validation passed
+          if grep -q "PASSED" exp01_output.txt; then
+            echo "✅ Experiment 01: PASSED"
+            echo "status=passed" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Experiment 01: FAILED"
+            echo "status=failed" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+        else
+          echo "⚠️  Experiment 01 not yet merged"
+          echo "status=skipped" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Upload experiment results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: experiment-results
+        path: |
+          08-experimente-validierung/results/
+          08-experimente-validierung/data/
+        retention-days: 30
+    
+    - name: 🎯 Summary
+      if: always()
+      run: |
+        echo "🔬 Experiment Validation Summary"
+        echo "Status: ${{ steps.exp01.outputs.status }}"
