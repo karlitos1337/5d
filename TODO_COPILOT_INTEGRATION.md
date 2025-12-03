@@ -4,7 +4,7 @@
 
 ### ✅ Erledigte Aufgaben
 - [x] Branch `copilot-integration` erstellt
-- [ ] `.copilot-instructions.md` erstellt
+- [x] `.copilot-instructions.md` erstellt
 - [ ] `03-philosophie/epistemologie/zwanglosigkeitsprinzip.md` erstellt
 - [ ] `05-technologie/README.md` erstellt
 - [ ] `05-technologie/examples/` mit Code-Beispielen erstellt
@@ -17,7 +17,7 @@
 
 ## Nächste Schritte
 
-1. GitHub Copilot System Instructions definieren
+1. ✅ GitHub Copilot System Instructions definieren
 2. Philosophische Grundlagen dokumentieren
 3. Technologie-Stack wissenschaftlich fundieren
 4. Validierungsframework aufbauen
