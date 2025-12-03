@@ -524,11 +524,11 @@ st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
 ---
 
 **Version:** 2.5  
-**Last Updated:** December 2, 2025 - 23:45 CET  
+**Last Updated:** December 3, 2025 - 00:15 CET  
 **Dev Container:** Ubuntu 24.04.3 LTS, Python 3.10+  
 **Major Milestones:**
 - Phase 1: All 10 dashboard pages complete (100%)
 - Phase 3: Mini-maps on all 7 geographic pages (100%)
 - Phase 4: App integration 4/4 complete (100%) ✅
 - Phase 8: 161 scientific tests, 151/151 passing (100%) ✅
-- BibTeX: 64 scientific references, all validations passing
+- BibTeX: 70 scientific references, all validations passing

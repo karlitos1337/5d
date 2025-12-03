@@ -60,7 +60,7 @@ def main():
         st.metric("📄 Pages", "10", help="Themen-Seiten im Dashboard")
     
     with col2:
-        st.metric("📚 Quellen", "64", help="Wissenschaftliche Referenzen (BibTeX)")
+        st.metric("📚 Quellen", "70", help="Wissenschaftliche Referenzen (BibTeX)")
     
     with col3:
         st.metric("🧪 Tests", "161", help="Wissenschaftliche Tests (151/151 passing)")
