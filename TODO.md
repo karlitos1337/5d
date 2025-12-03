@@ -82,7 +82,22 @@
   - **IMP Formula (3):** McClelland 1993 (Power-Problem), Diener 1985 (SWLS additiv), Edwards 2010 (Alternative Modelle)
   - **Gesamt:** 110 → 128 BibTeX-Einträge (+18)
 
-**Nach 1-6: Score = 92% (A-)** 🎯
+- [x] **BibTeX Batch 13: Meta-Analysen** (+6 Einträge) ✅ FERTIG 2025-12-03
+  - **SDT Cross-Cultural (4):** Church 2013 (n=7248, 8 Kulturen), Chirkov 2003 (Autonomie-Konzept kulturabhängig), Oishi 2010 (WVS n=41,000, 48 Länder), Ryan 2017 (SDT Defense)
+  - **IMP-Formel (2):** Lucas 1996 (Interaktionen instabil r=0.38), Aguinis 2005 (Meta k=127, ΔR²=0.009)
+  - **Gesamt:** 128 → 134 BibTeX-Einträge (+6)
+
+- [x] **Week 1 Research: SDT + IMP Meta-Analysen** ✅ FERTIG 2025-12-03
+  - **SDT_META_ANALYSIS.md:** 5 Studien, n=49,092 kombiniert, 52 Länder
+  - **IMP_FORMULA_META_ANALYSIS.md:** 5 Studien, k=127 meta-analyzed studies, n>60,000
+  - **RESEARCH_LOG_WEEK1.md:** Queries, Findings, Zeiterfassung (5h/19h = 26%)
+  - **Key Findings:**
+    - Autonomie-Effekt 37% schwächer in Kollektivismus (r=0.22 vs. 0.35, Church 2013)
+    - Interaktionen durchschnittlich nur 0.9% Varianz (Aguinis 2005 Meta k=127)
+    - Power-Problem: Interaktionen brauchen 4× größere Stichprobe (McClelland 1993)
+  - **Implikationen:** IMP-Formel braucht Kultur-Moderator + Survey n>400 (nicht n=100)
+
+**Nach 1-7: Score = 92% (A-)** 🎯
 
 ---
 
