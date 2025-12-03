@@ -60,8 +60,8 @@ Diese Matrix listet alle Kernbehauptungen des 5D-Frameworks auf und bewertet der
 |---|------------|---------|--------|-------------|--------|--------|
 | 4.1 | Conway's Game of Life ist Turing-complete | ✅ Fakt | CS | Rendell (2016), Universal Turing Machine | Mathematisch bewiesen | `rendell2016turing` |
 | 4.2 | Glider bewegt sich mit Periode 4 | ✅ Fakt | CS | Gardner (1970), Conway (1970) | Deterministisch, verifiziert | `gardner1970mathematical`, `conway1970game` |
-| 4.3 | Emergenz ohne Zwang ist stabiler als erzwungene Ordnung | ⚠️ Hypothese | Komplexität | Wolfram (2002), eigene Interpretation | Plausibel, nicht quantifiziert | `wolfram2002new` |
-| 4.4 | Nicht-koerzitive Regeln führen zu höherer Musterdiversität | 🔮 Spekulation | Komplexität | Eigene Simulation geplant | Testbar, nicht implementiert | `5d_repo` (Minimalexperiment Q1 2026) |
+| 4.3 | Nicht-koerzitive Init → höhere Diversität als koerzitive Init | ✅ Fakt | Komplexität | GoL Experiment (2025-12-03): H_random = 0.56 vs H_glider = 0.10 (p<0.001) | Empirisch validiert (100 trials) | `5d_repo` (docs/GOL_EXPERIMENT_RESULTS.md) |
+| 4.4 | Nicht-koerzitive Init → längere Lebensdauer als koerzitive Init | ❌ Falsifiziert | Komplexität | GoL Experiment (2025-12-03): Gen_random = 149 vs Gen_glider = 200 (p<0.001) | Empirisch widerlegt (100 trials) | `5d_repo` (docs/GOL_EXPERIMENT_RESULTS.md) |
 
 ### 5. Network Theory & Diffusion
 
@@ -109,15 +109,23 @@ Diese Matrix listet alle Kernbehauptungen des 5D-Frameworks auf und bewertet der
 
 | Kategorie | Anzahl | Prozent | Status |
 |-----------|--------|---------|--------|
-| ✅ **Fakt** | 18 | 45% | Peer-reviewed, repliziert |
-| ⚠️ **Hypothese** | 16 | 40% | Plausibel, testbar, nicht validiert |
-| 🔮 **Spekulation** | 6 | 15% | Explorativ, offene Fragen |
-| **GESAMT** | 40 | 100% | Stand: 2025-12-02 |
+| ✅ **Fakt** | 19 | 47.5% | Peer-reviewed + eigene Experimente |
+| ⚠️ **Hypothese** | 15 | 37.5% | Plausibel, testbar, nicht validiert |
+| 🔮 **Spekulation** | 5 | 12.5% | Explorativ, offene Fragen |
+| ❌ **Falsifiziert** | 1 | 2.5% | Empirisch widerlegt (GoL Longevity) |
+| **GESAMT** | 40 | 100% | Stand: 2025-12-03 |
 
 **Interpretation:**
-- **45% Fakten:** Solide wissenschaftliche Basis (SDT, Ostrom, ROI-Studien, Network Theory)
-- **40% Hypothesen:** Testbar, aber noch nicht validiert (IMP-Formel, Proxy-Modelle, eigene Simulationen)
-- **15% Spekulationen:** Konzeptuell, langfristige Forschungsziele (5D als Netzwerkmodell, Zukunftsprojektion)
+- **47.5% Fakten:** Solide wissenschaftliche Basis (SDT, Ostrom, ROI-Studien, Network Theory, **GoL Experiment ✅**)
+- **37.5% Hypothesen:** Testbar, aber noch nicht validiert (IMP-Formel, Proxy-Modelle, eigene Simulationen)
+- **12.5% Spekulationen:** Konzeptuell, langfristige Forschungsziele (5D als Netzwerkmodell, Zukunftsprojektion)
+- **2.5% Falsifiziert:** Empirisch widerlegt (GoL Longevity: Nicht-koerzitiv ist **nicht** länger lebendig ❌)
+
+**Update 2025-12-03:**
+- ✅ **GoL Experiment abgeschlossen:** 100 trials coercive + 100 non-coercive
+- ✅ **Hypothese 4.3 validiert:** Nicht-koerzitiv hat 5.7× höhere Diversität (H = 0.56 vs 0.10, p<0.001)
+- ❌ **Hypothese 4.4 falsifiziert:** Nicht-koerzitiv hat 25% kürzere Lebensdauer (149 vs 200 Generationen, p<0.001)
+- 📊 **Lesson:** Zwanglosigkeit ≠ automatische Resilienz → braucht **emergente Struktur** (Ostrom's 8 Principles)
 
 **Ziel Q4 2026:** ≥ 60% Fakten, ≤ 30% Hypothesen, ≤ 10% Spekulationen
 
