@@ -242,6 +242,7 @@ Unser **5D-Framework** ist **NICHT**:
 ## 📖 Weitere Ressourcen
 
 ### Zentrale Dokumentation
+- **[EXECUTIVE_SUMMARY_2025.md](docs/EXECUTIVE_SUMMARY_2025.md)** - ⭐ **NEW!** Vollständige Übersicht mit Week 1 Research (341 Zeilen, 92% A-)
 - **[README.md](README.md)** - Projektübersicht, Quick Start
 - **[TODO_RESEARCH.md](TODO_RESEARCH.md)** - Forschungs-Roadmap (85+ Tasks)
 - **[docs/FAQ.md](docs/FAQ.md)** - 15 häufige Fragen mit Antworten
@@ -251,7 +252,7 @@ Unser **5D-Framework** ist **NICHT**:
 - **[docs/1D_5D_DEFINITIONEN.md](docs/1D_5D_DEFINITIONEN.md)** - Komplexitätsebenen für 5 Domänen (Bildung, Governance, Mental Health, Ökologie, Technologie)
 - **[docs/CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 48 Behauptungen mit Evidenzlabels (54.2% Fakten, 35.4% Hypothesen, 10.4% Spekulationen)
 - **[docs/DATENQUELLEN.md](docs/DATENQUELLEN.md)** - Transparente Methodendokumentation (IHME, World Bank, WGI)
-- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias-Log (13 Biases), Abbruchkriterien, Forschungsethik
+- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias-Log (13 Biases: WEIRD, Power, Publication), Abbruchkriterien, Forschungsethik
 
 ### Literatur & Vergleiche
 - **[LITERATUR_INDEX.md](07_daten_analysen/LITERATUR_INDEX.md)** - 134 BibTeX-Einträge (Week 1 Research: +6 Meta-Analysen)

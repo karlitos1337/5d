@@ -18,14 +18,15 @@ This repository contains comprehensive documentation across multiple knowledge d
 
 ### Quick Navigation
 
-- **[📖 Wiki Home](wiki/)** - Complete 5D-Intelligence overview with detailed glossary
-- **[📊 Manifest Summary](manifest_summary.md)** - Hierarchical overview of all project documents
-- **[💡 Concepts & Definitions](wiki/Home)** - Detailed explanations of key terms
-- **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
-- **[🔬 Research Roadmap](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, open questions
+- **[⭐ Executive Summary 2025](docs/EXECUTIVE_SUMMARY_2025.md)** - **NEW!** Complete framework overview with Week 1 research findings (92% A-, 54.2% facts)
 - **[🎯 VISION.md](VISION.md)** - Central framework definition, 1D-5D complexity levels, scientific foundation
 - **[🧪 Hypotheses Catalog](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses with operationalization & abort criteria
 - **[📐 1D-5D Definitions](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for 5 domains (Education, Governance, Mental Health, Ecology, Technology)
+- **[🔬 Research Roadmap](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, open questions (85+ tasks)
+- **[📊 Manifest Summary](docs/manifest_summary.md)** - Hierarchical overview of all project documents (7578 lines, academic synthesis)
+- **[📖 Wiki Home](wiki/)** - Complete 5D-Intelligence overview with detailed glossary
+- **[💡 Concepts & Definitions](wiki/Home)** - Detailed explanations of key terms
+- **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
 
 ## 🗂️ Project Structure
 
@@ -144,10 +145,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### Scientific Documentation
 
-- **[CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 48 claims with evidence labels (54.2% Facts, 35.4% Hypotheses, 10.4% Speculations)
-- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias log (13 biases documented), abort criteria, research ethics
-- **[HYPOTHESEN_KATALOG.md](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses (5 high priority, 3 medium, 2 low)
-- **[1D_5D_DEFINITIONEN.md](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for Education, Governance, Mental Health, Ecology, Technology
+- **[EXECUTIVE_SUMMARY_2025.md](docs/EXECUTIVE_SUMMARY_2025.md)** - ⭐ **NEW!** Comprehensive overview with Week 1 research (341 lines, all findings integrated)
+- **[CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 48 claims with evidence labels (54.2% Facts, 35.4% Hypotheses, 10.4% Speculations, 1 falsified)
+- **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias log (13 biases: WEIRD, Power, Publication ⭐), abort criteria, research ethics
+- **[HYPOTHESEN_KATALOG.md](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses (H1-H10 with operationalization, methods, timeline)
+- **[1D_5D_DEFINITIONEN.md](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for 5 domains (Education, Governance, Mental Health, Ecology, Technology)
 
 ## 🧬 Why This Matters
 
