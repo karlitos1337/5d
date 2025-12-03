@@ -111,23 +111,74 @@ Das islamische 5D-Modell basiert auf klassischer islamischer Philosophie (8.-12.
 
 ---
 
-## 2. Policy-5D
+## 2. Policy-5D (Policy Analysis Framework)
 
 ### Überblick
-- **5 Dimensionen:** (Details pending – häufig Varianten von WGI)
-- **Ziel:** Policy-Evaluationsframework
-- **Empirie:** Empirisch (World Governance Indicators, Democracy Indices)
+- **5 Dimensionen:**
+  1. **Problem** (Definition, Framing, Stakeholder)
+  2. **Policy** (Instrumente, Design, Implementation)
+  3. **Politics** (Akteure, Interessen, Macht)
+  4. **Polity** (Institutionen, Strukturen, Kontext)
+  5. **Performance** (Outputs, Outcomes, Impacts)
+- **Ziel:** Systematische Policy-Evaluation (ex-ante, ex-post)
+- **Empirie:** Impact Evaluation (RCTs, Quasi-Experiments), Policy Analysis Methods
+- **Hauptvertreter:** Kingdon (1984 Multiple Streams), Sabatier & Weible (2014 Advocacy Coalition Framework), Bardach & Patashnik (2015 Policy Analysis)
+- **Quellen:** Journal of Policy Analysis and Management, Policy Studies Journal, Evaluation Review
+
+### Historische Entwicklung
+Das Policy-5D-Framework entstand aus der Policy Sciences Bewegung der 1950er-1970er Jahre (Lasswell, Dror). Frühe Ansätze waren linear (Problem → Policy → Implementation), bis Kingdon (1984) mit dem Multiple Streams Model die Komplexität von Agenda-Setting zeigte. Die 5P-Struktur wurde durch Sabatier's Advocacy Coalition Framework und Ostrom's IAD systematisiert.
+
+**Zeitraum:** 1950er (Policy Sciences) → 1970er (Rational Analysis) → 1980er (Multiple Streams) → 2000er (Evidence-Based Policy) → heute (Behavioral Insights, RCTs)
+
+### Detaillierte Beschreibung
+
+**1. Problem (Definition & Framing):**
+- Problem-Framing: Wie wird ein Problem definiert? (z.B. Klimawandel als Umwelt- vs. Sicherheitsproblem)
+- Stakeholder-Analyse: Wer ist betroffen? Wer hat Macht? (Power-Interest-Matrix)
+- Kausale Hypothese: Was verursacht das Problem? (Theory of Change)
+
+**2. Policy (Instrumente & Design):**
+- Policy-Instrumente: Regulierung (Ge-/Verbote), Anreize (Steuern, Subventionen), Information (Nudges, Kampagnen)
+- Policy-Design: Top-Down (zentralgeplant) vs. Bottom-Up (dezentral, experimentell)
+- Implementation: Street-Level Bureaucracy (Lipsky 1980)
+
+**3. Politics (Akteure & Macht):**
+- Akteure: Regierung, Opposition, Lobbys, Zivilgesellschaft, Medien
+- Interessen: Ökonomisch (Profit), Ideologisch (Werte), Institutionell (Machterhalt)
+- Macht: Veto-Player, Agenda-Setting
+
+**4. Polity (Institutionen & Kontext):**
+- Institutionen: Verfassung, Wahlsystem, Föderalismus
+- Strukturen: Checks & Balances, Judikative Unabhängigkeit
+- Kontext: Politische Kultur, Sozio-ökonomische Bedingungen
+
+**5. Performance (Outputs, Outcomes, Impacts):**
+- Outputs: Was wurde geliefert? (Gesetze verabschiedet, Budget alloziert)
+- Outcomes: Kurzfristige Effekte (z.B. CO₂-Emissionen ↓ 10% in 2 Jahren)
+- Impacts: Langfristige Effekte (z.B. Lebensqualität ↑?)
+
+### Kritische Bewertung
+**Stärken:** Systematisch, empirisch fundiert (RCTs), praktisch nutzbar, interdisziplinär  
+**Schwächen:** Komplex (5 Dimensionen schwer gleichzeitig), Datenlücken (viele Policies nicht evaluiert), Time-Lag (Impacts erst nach 10+ Jahren)
 
 ### Unterschiede zu 5D-Intelligence
-- **Domäne:** Policy-Evaluation vs. umfassende Intelligenz
-- **Dimensionen:** Policy-spezifisch vs. interdisziplinär
+- **Domäne:** Policy Analysis (Makro-Level) vs. Mikro-Meso-Makro
+- **Ziel:** Ex-post Evaluation vs. Transformation (Zwanglosigkeit)
+- **Dimensionen:** Policy-spezifisch (5P) vs. interdisziplinär (A, IM, R, SP, Au)
+- **Zeitrahmen:** Kurzfristig (1-10 Jahre) vs. langfristig (generational)
 
 ### Gemeinsamkeiten
-- Governance-Fokus (überschneidet mit Ökonomie-Dimension)
-- Empirische Basis (quantitative Indikatoren)
+- ✅ Performance-Messung: Policy-5D Performance ↔ IMP-Score
+- ✅ Systemisches Denken: Beide multi-kausal
+- ✅ Zwang als Variable: Politics (Macht) ↔ Zwanglosigkeit (5D)
+
+### Integration in 5D-Intelligence
+**Policy → Governance-Dimension:** Policy Instruments (Regulierung vs. Anreize) → Zwangsgrad (koerzitiv vs. nicht-koerzitiv), Performance (Outcomes) → IMP-Score Korrelation (testbar)
+
+**Dashboard-Integration:** Neue Page: "Policy Evaluation" (5P-Framework für alternative Bildung), Beispiel: Perry Preschool (Problem: Dropout, Policy: Early Childhood Education, Performance: ROI $7.16)
 
 ### Relation
-✅ **Kompatibel:** Policy-5D kann als Subdimension der Ökonomie/Governance-Dimension integriert werden.
+✅ **Kompatibel:** Policy-5D kann als Subdimension der Ökonomie/Governance-Dimension integriert werden. Empirische Überschneidung: Policy Performance → IMP-Score (testbar).
 
 ---
 
