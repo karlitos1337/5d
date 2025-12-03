@@ -226,6 +226,8 @@ Size: 700x350px mini-maps, 700x500px for World Map
 
 ## 📝 Phase 5: Haupttext + Formeln + Quellen
 
+**Status:** ⏳ IN PROGRESS (Template erstellt, Page-by-Page Umsetzung ausstehend)
+
 ### Template pro Page (Standardstruktur)
 
 ```python
