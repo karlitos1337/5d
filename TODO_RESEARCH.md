@@ -39,6 +39,19 @@
   - Option B: Alles über 0x-Ordner (bessere Integration)
   - Entscheidung dokumentieren in `docs/ARCHITECTURE.md`
 
+- [x] **Issue-Templates erstellen** ✅
+  - Location: `.github/ISSUE_TEMPLATE/`
+  - Templates erstellt (7 total):
+    * `research_neuro.md` – Neuroscience/Psychology research
+    * `research_education.md` – Alternative education, ROI studies
+    * `research_governance.md` – Ostrom, institutions, non-coercion
+    * `theory.md` – Theoretical refinements (IMP formula, dimensions)
+    * `ethics.md` – Bias reporting, ethical concerns
+    * `bug.md` – Bug reports (code, dashboard, tests)
+    * `feature.md` – Feature requests
+    * `config.yml` – Template configuration
+  - Integration: Alle Templates verlinken ETHIK_MANIFEST.md, CLAIMS_EVIDENCE_MATRIX.md, LITERATUR_INDEX.md
+
 ---
 
 ## 1. Klärung des 5D-Begriffs
