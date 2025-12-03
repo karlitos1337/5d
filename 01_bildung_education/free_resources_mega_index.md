@@ -13,8 +13,12 @@ Dieser Mega-Index aggregiert die umfassendsten kostenlosen Bildungsressourcen de
 - **FMHYB64**: 10.000+ kuratierte Links (Education, AI Tools, Programming, Science)
 - **Free Programming Books**: 8.000+ Bücher in 43 Sprachen (243k GitHub Stars)
 - **Awesome Cheatsheets**: 30+ Single-File Tech Cheatsheets (39.9k Stars)
+- **Feynman Lectures**: Legendäre Physik-Vorlesungen (3 Bände, 122 Audio-Files)
+- **PhET Simulations**: 100+ interaktive HTML5-Simulationen (Physik, Chemie, Biologie)
 
 **Philosophie**: [translate:Commons-based Peer Production] (Benkler 2006) - Wissen als öffentliches Gut, nicht als Ware.
+
+**BibTeX**: `fmhy2025`, `freeprogrammingbooks2025`, `awesomecheatsheets2024`, `feynman1963lectures`, `phet2025simulations`
 
 ---
 
@@ -277,13 +281,18 @@ graph TD
 - `fmhy2025` (FMHYB64)
 - `freeprogrammingbooks2025` (Free Programming Books)
 - `awesomecheatsheets2024` (Awesome Cheatsheets)
+- `feynman1963lectures` (Feynman Lectures on Physics)
+- `phet2025simulations` (PhET Interactive Simulations)
 - `ossu_curriculum` (OSSU)
 - `ostrom1990governing` (Commons Theory)
 
+**Siehe:** `07_daten_analysen/5d-relevant-sources.bib` (Batch 9: External Resources)
+
 ---
 
-**Version**: 1.0.0  
-**Sprint**: 1  
+**Version**: 1.1.0 (2025-12-03)  
+**Sprint**: 1 Complete  
+**Last Updated**: 2025-12-03, 16:50 CET  
 **Autor**: 5D Intelligence Framework (karlitos1337)  
 **Letzte Aktualisierung**: 2025-12-02  
 **License**: Entspricht 5D-Repository-Lizenz
