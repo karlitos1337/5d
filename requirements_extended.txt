@@ -43,3 +43,6 @@ python-Levenshtein>=0.21.0
 # PDF Extraction
 pypdf>=3.0.0
 # Alternative: pdfplumber>=0.10.0
+
+# External sources
+gdown>=5.2.0

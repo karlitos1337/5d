@@ -71,6 +71,25 @@ This repository contains comprehensive documentation across multiple knowledge d
 	```
 - Ergebnisse erscheinen als PR‑Check. Bei Fehlern: Logs prüfen und Keys gemäß `models/schemas.py` korrigieren.
 
+#### Google Drive als Datenquelle
+- Optionaler Import via `gdown` (siehe `scripts/import_drive.py`).
+- Schnellstart:
+	```bash
+	# einmalig
+	pip install gdown
+	# Ordner importieren
+	python scripts/import_drive.py --folder "https://drive.google.com/drive/folders/1Kzwry6SfWY_HWx9L5zh52jAR-qdeP1QT?usp=sharing"
+	```
+- Automatisch im Startskript, wenn `DRIVE_FOLDER` gesetzt ist:
+	```bash
+	DRIVE_FOLDER="https://drive.google.com/drive/folders/1Kzwry6SfWY_HWx9L5zh52jAR-qdeP1QT?usp=sharing" ./start.sh
+	```
+- Mapping:
+  - `03_philosophie_epistemologie/*.md` → `03_philosophie_epistemologie/`
+  - `06_synthesen_kompilationen/*.md` → `06_synthesen_kompilationen/`
+  - `web/5d-map/data/*.json` → `web/5d-map/data/`
+  - `07_daten_analysen/*.bib` → `07_daten_analysen/`
+
 ## 🛠 Dev Quickstart
 
 These commands help developers run the main pipeline and preview the UI locally.

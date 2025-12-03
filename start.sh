@@ -11,6 +11,10 @@ LOG_DIR="$ROOT_DIR/logs"
 mkdir -p "$LOG_DIR"
 
 echo "[start.sh] Running full pipeline (this may take a while)..."
+if [[ -n "${DRIVE_FOLDER:-}" ]]; then
+  echo "[start.sh] Importing Google Drive data from ${DRIVE_FOLDER}"
+  python3 "$ROOT_DIR/scripts/import_drive.py" --folder "${DRIVE_FOLDER}" || echo "[start.sh] Drive import failed (optional)."
+fi
 python3 "$ROOT_DIR/5d_extractor.py"
 python3 "$ROOT_DIR/5d_research_scraper.py"
 python3 "$ROOT_DIR/5d_github_api.py"
