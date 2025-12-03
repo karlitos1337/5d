@@ -59,6 +59,105 @@ IMP = A × IM × R × SP × Au
 
 ---
 
+## 📐 Was bedeutet 1D, 2D, 3D, 4D, 5D? (Framework-Definitionen)
+
+**Wichtig:** "5D" in unserem Framework bezieht sich NICHT auf räumliche Dimensionen, sondern auf **Komplexitätsebenen sozialer Systeme**.
+
+### **1D – Monokausale Erklärung (Linear)**
+**Definition:** Ein Faktor erklärt alles  
+**Formel:** `Outcome = f(X)`  
+**Beispiele:**
+- **Bildung:** "Geld löst alles" (mehr Funding → bessere Bildung)
+- **Mental Health:** "Depression = Serotonin-Mangel" (rein biochemisch)
+- **Governance:** "Demokratie = Freiheit" (ein Faktor)
+
+**Problem:** Übersimplifikation, ignoriert Kontext, Kultur, Dynamik  
+**Evidenz:** Scheitert empirisch (z.B. PISA: Finland high scores, low funding)
+
+---
+
+### **2D – Duale Faktoren (Trade-Offs)**
+**Definition:** Zwei konkurrierende Faktoren, Balance nötig  
+**Formel:** `Outcome = f(X, Y)` mit X ⊥ Y (unabhängig oder negativ korreliert)  
+**Beispiele:**
+- **Bildung:** Autonomie vs. Struktur (Sudbury vs. Mainstream)
+- **Mental Health:** Arousal vs. Valence (Stress vs. Wohlbefinden)
+- **Governance:** Freiheit vs. Sicherheit (Liberalismus vs. Autoritarismus)
+
+**Problem:** Reduziert auf Dichotomien, übersieht Synergie  
+**Evidenz:** Oft falsche Dilemmas (z.B. Autonomy + Structure = synergistisch, nicht trade-off)
+
+---
+
+### **3D – Trianguläre Modelle (Multiperspektivisch)**
+**Definition:** Drei Faktoren, oft hierarchisch oder orthogonal  
+**Formel:** `Outcome = f(X, Y, Z)`  
+**Beispiele:**
+- **Bildung:** SDT (Autonomie, Kompetenz, Verbundenheit)
+- **Mental Health:** Bio-Psycho-Social Model (Biologie, Psychologie, Sozial)
+- **Governance:** Ostrom's CPR Framework (Resource, Users, Rules)
+
+**Problem:** Statisch, keine zeitliche Dynamik, keine Emergenz  
+**Evidenz:** Stark (SDT 1000+ Studien), aber kulturabhängig (siehe Week 1 Research)
+
+---
+
+### **4D – Raum-Zeit-Dynamik (Prozesse)**
+**Definition:** 3D + Zeit, Entwicklung über Zeit  
+**Formel:** `Outcome(t) = f(X(t), Y(t), Z(t), t)`  
+**Beispiele:**
+- **Bildung:** Entwicklungspsychologie (Piaget Stages, Vygotsky ZPD)
+- **Mental Health:** Polyvagal Theory (Ventral Vagal ↔ Sympathetic ↔ Dorsal Vagal over time)
+- **Governance:** Adaptive Cycles (Holling: Growth → Conservation → Release → Reorganization)
+
+**Problem:** Linear-temporal, keine Netzwerk-Effekte, keine Feedback-Loops  
+**Evidenz:** Gut für longitudinale Studien, aber übersieht Interdependenzen
+
+---
+
+### **5D – Netzwerk-Komplexität (Emergenz)**
+**Definition:** 4D + Relationale Struktur (Wer ist mit wem verbunden?)  
+**Formel:** `Outcome = f(X, Y, Z, t, G)` wobei G = Graph (Knoten + Kanten)  
+**Konzeptuell:**
+- **Knoten:** Individuen, Schulen, Gemeinden, Neuronen
+- **Kanten:** Interaktionen, Kommunikation, Ressourcenflüsse
+- **Topologie:** Small-World, Scale-Free, Random, Hierarchisch
+- **Dynamik:** Perkolation, Diffusion, Cascade, Synchronisation
+
+**Beispiele:**
+- **Bildung:** Peer-Learning Networks (Wer lernt von wem? Granovetter Weak Ties)
+- **Mental Health:** Connectome (neuronale Netzwerke, DMN, Salience Network)
+- **Governance:** Polycentric Governance (Ostrom: Multiple Zentren, kein Single Hub)
+
+**Problem:** Hohe Komplexität, schwer zu messen, braucht n>400 (Power)  
+**Evidenz:** Emerging (Perkolation 6000+ Zit., aber auf Bewusstsein spekulativ 🔮)
+
+---
+
+### **5D-Framework Spezifisch: IMP + Netzwerk**
+
+**Unser "5D" kombiniert:**
+1. **5 Dimensionen (A, IM, R, SP, Au)** – psycho-soziale Faktoren
+2. **Netzwerk-Topologie (G)** – relationale Struktur
+3. **Zeit (t)** – longitudinale Entwicklung
+4. **Kontext (C)** – Kultur-Moderator (siehe Week 1 Research)
+
+**Formel (erweitert):**
+```
+IMP(t, C, G) = C × f(A, IM, R, SP, Au) × h(G)
+
+wobei:
+C = Kultur-Faktor [0.5, 1.0]
+f = Aggregationsfunktion (multiplikativ, additiv, geometric mean)
+h(G) = Netzwerk-Funktion (Clustering, Weak Ties, Betweenness)
+```
+
+**Testbarkeit:**
+- **4D-Test:** Longitudinale Survey (t=0, t=6 Monate, t=12 Monate)
+- **5D-Test:** Social Network Analysis (Wer ist mit wem verbunden? Diffusion?)
+
+---
+
 ## 🚫 Abgrenzung: Was 5D-Framework NICHT ist
 
 ### **7 Alternative "5D"-Modelle (Vergleichstabelle)**
