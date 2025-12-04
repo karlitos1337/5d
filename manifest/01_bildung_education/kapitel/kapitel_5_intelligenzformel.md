@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 5: DIE INTELLIGENZFORMEL
 ## Dimensionale Strukturen des Intrinsischen Motivationspotenzials
 

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # unbenannt_02
 
 ## Page 1

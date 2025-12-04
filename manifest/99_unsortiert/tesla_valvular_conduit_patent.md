@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # tesla_valvular_conduit_patent
 
 ## Page 1

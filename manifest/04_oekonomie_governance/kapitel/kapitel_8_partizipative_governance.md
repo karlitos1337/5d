@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 8: PARTIZIPATIVE GOVERNANCE
 ## Citizens Assemblies, Deliberative Demokratie und der Beweis, dass dezentralisierte Entscheidungsfindung funktioniert
 

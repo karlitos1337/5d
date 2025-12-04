@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 4: PERSÖNLICHE ARCHÄOLOGIE
 ## Von "Krankheit" zu Intelligenz: Eine autobiografische Expedition
 

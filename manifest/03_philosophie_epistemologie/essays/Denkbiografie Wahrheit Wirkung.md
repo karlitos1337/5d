@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Denkbiografie Wahrheit Wirkung
 
 ## Page 1

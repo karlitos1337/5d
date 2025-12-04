@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # APPARATUS FOR TRANSMITTING ELECTRICAL ENERGY
 
 ## Page 1

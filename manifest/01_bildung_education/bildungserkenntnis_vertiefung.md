@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # bildungserkenntnis_vertiefung
 
 ## Page 1

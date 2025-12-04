@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-INTELLIGENZ & DEZENTRALISIERTE BILDUNG
 ## EXTENDED EDITION – Mit Neurobiologie, Systemtheorie, Operationen & Internationalen Modellen
 

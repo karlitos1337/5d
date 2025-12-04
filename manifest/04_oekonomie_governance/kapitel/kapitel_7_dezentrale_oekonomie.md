@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 7: DEZENTRALE ÖKONOMIE
 ## Kooperativen, Wirtschaftsdemokratie und der Beweis, dass Dezentralisierung auch wirtschaftlich funktioniert
 

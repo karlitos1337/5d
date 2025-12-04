@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Universal System Genesis 5D - Project Prompt
 
 ## Projekt-Übersicht

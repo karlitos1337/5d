@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-INTELLIGENZ & DEZENTRALISIERTE BILDUNG
 ## Das Komplette Manifest für Globale Transformation
 ### MIT INTERNATIONALEN VERGLEICHSMODELLEN: Dänemark + Japan

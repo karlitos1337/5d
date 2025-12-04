@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 5: MEINE EIGENEN GESETZE ZUM VERSTEHEN
 ## Grundprinzipien einer integralen Ethik – Persönlich und Universal zugleich
 

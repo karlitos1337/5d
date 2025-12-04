@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 0: EINLEITUNG
 ## Warum ich spreche: Persönliche Wende und Reformauftrag
 

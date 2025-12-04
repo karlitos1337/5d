@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 6: DIE BILDUNGSKRISE
 ## Evidenz einer strukturellen Zerstörung: Warum gegenwärtige Schulen systematisch zerstörerisch sind
 

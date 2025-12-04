@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 02 NEUROBIOLOGIE PSYCHOLOGIE
 
 ## Themen

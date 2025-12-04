@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Mein_zwangloser_Weg_in_die_Zukunft_FINAL
 
 ## Page 1

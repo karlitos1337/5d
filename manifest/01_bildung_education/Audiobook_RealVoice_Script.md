@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # MEIN ZWANGLOSER WEG IN DIE ZUKUNFT
 ## Hörbuch-Manuskript für RealVoice Text-to-Speech
 ---

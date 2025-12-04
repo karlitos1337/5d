@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # ki_symbiose_prozesssteuerung
 
 ## Page 1

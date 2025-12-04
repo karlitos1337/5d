@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 04 OEKONOMIE GOVERNANCE
 
 ## Themen

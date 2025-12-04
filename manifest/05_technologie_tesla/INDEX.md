@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 05 TECHNOLOGIE TESLA
 
 ## Themen

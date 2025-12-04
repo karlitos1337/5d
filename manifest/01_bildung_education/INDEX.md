@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 01 BILDUNG EDUCATION
 
 ## Themen

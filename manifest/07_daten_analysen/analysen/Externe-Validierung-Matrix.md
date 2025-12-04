@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # EXTERNE VALIDIERUNG: QUELLEN-MATRIX
 
 ## Kernbehauptung → Externe Quelle(n) → Zitierungen

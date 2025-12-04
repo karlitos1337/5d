@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # SYSTEM OF TRANSMISSION OF ELECTRICAL ENERGY (1)
 
 ## Page 1

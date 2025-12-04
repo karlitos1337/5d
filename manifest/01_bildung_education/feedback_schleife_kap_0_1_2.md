@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # FEEDBACK-SCHLEIFE & KONSISTENZ-ANALYSE
 ## Kapitel 0, 1 und 2 - Erste Einheit des Werks
 

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 08 PERSONAL BIOGRAFIE
 
 ## Themen

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # quantencomputer_dezentralisiert
 
 ## Page 1

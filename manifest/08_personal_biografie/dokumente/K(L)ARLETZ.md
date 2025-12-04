@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # K(L)ARLETZ
 
 ## Page 1

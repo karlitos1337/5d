@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5d Mitdenk Automationsversion
 
 ## Page 1

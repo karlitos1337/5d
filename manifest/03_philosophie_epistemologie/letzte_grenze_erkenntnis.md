@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # letzte_grenze_erkenntnis
 
 ## Page 1

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # BEWUSSTSEINSSCHWELLE ALS 5D-INTELLIGENZ-PHÄNOMEN
 ## Eine Neufassung auf transdimensionaler Ebene
 

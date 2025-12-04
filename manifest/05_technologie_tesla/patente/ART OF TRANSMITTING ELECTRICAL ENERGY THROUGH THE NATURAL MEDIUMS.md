@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # ART OF TRANSMITTING ELECTRICAL ENERGY THROUGH THE NATURAL MEDIUMS
 
 ## Page 1

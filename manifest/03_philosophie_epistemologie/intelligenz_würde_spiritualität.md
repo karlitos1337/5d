@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # intelligenz_würde_spiritualität
 
 ## Page 1

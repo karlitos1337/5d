@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Die globale Manipulation-Infrastruktur: Wie die gleichen Muster überall funktionieren
 
 ## Die universale Diagnose

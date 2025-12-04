@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # analyse_referenzen_methode_schritt3
 
 ## Page 1

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
 # /write schreibe mir ein komplettes anleitungsbuch zum anwenden und ausprobieren meiner technik als wäre ich ein mediatations trainer oder sprecher von autogenen training

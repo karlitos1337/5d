@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 9: KULTUR & AUTHENTIZITÄT
 ## Von co-optierter Kultur zu authentischen Bewegungen: Wie echte Kultur in dezentralisierten Systemen entsteht
 

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5d_buch_manuskript_v2
 
 ## Page 1

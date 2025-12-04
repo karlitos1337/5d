@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # QUICK REFERENCE: TOP 25 EXTERNE QUELLEN
 
 ## Die unverzichtbarsten, hochzitiersten Referenzen für Ihr Modell

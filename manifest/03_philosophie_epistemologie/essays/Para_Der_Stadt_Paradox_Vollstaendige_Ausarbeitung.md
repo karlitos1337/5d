@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # PARA DER STADT PARADOX
 ## Umfassende Analyse: Von Quantenmechanik bis zur Dekonstruktion von Kontrollsystemen
 

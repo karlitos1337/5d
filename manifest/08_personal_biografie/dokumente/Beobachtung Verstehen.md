@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Beobachtung Verstehen
 
 ## Page 1

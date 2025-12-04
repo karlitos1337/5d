@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 07 DATEN ANALYSEN
 
 ## Themen

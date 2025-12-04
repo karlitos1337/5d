@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # wissenschaft_grenzen_holismus
 
 ## Page 1

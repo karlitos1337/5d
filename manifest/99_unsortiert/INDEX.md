@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 99 UNSORTIERT
 
 Dateien, die noch thematisch zugeordnet werden müssen. Diese enthalten oft kritische Systemanalysen, historische Recherchen und Manuskript-Versionen.

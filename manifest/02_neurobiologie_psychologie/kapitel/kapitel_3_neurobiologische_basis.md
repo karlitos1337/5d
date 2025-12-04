@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 3: NEUROBIOLOGISCHE BASIS
 ## Von Urinstinkten zu Regulation: Die biologische Fundierung von Potenzial und Trauma
 

@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # analyse_visuelle_plots_schritt2
 
 ## Page 1

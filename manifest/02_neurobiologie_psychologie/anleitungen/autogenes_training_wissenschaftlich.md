@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # AUTOGENES TRAINING FÜR TIEFE NERVENSYSTEM-REGULATION
 ## Polyvagale Grundlagen – Wissenschaftlich Fundiert
 

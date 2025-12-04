@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 03 PHILOSOPHIE EPISTEMOLOGIE
 
 ## Themen

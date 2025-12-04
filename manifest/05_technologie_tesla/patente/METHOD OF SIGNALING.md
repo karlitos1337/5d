@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # METHOD OF SIGNALING
 
 ## Page 1

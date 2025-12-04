@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Operation Paperclip: Die Kontinuität der NS-Verbrechen in der amerikanischen Nachkriegsordnung
 
 ## Die unbequeme Wahrheit

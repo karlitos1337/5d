@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # killer_ki_zu_bestem_zweck
 
 ## Page 1

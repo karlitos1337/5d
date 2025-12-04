@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-INTELLIGENZ & DEZENTRALISIERTE BILDUNG
 ## Wissenschaftliche Meisterausarbeitung – Hochstes akademisches Niveau
 **Mit vollständiger Quellenvalidierung, Empirieanbindung und Startmodul für Pilotprojekte**

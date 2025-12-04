@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-INTELLIGENZ & DEZENTRALISIERTE BILDUNG
 ## INTERKULTURELLE BEST-PRACTICE SYNTHESE
 ### Das Beste aus Dänemark, Japan, Waldorf, Sudbury, Montessori, Permakultur – OHNE die Fehler

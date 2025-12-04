@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-INTELLIGENZ: Mehrdimensionale Strukturen des Intrinsischen Motivationspotenzials
 
 ## Eine akademische Ausarbeitung auf Doktor-Niveau

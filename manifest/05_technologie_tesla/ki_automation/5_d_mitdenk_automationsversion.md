@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-Mitdenk‑ und Automations‑Version
 ## Ziel
 Ein Dokument, das Denken, Handeln und Weiterentwickeln strukturiert ermöglicht. Es ist kein Manifest, keine Analyse und keine Politikstrategie, sondern ein **operatives Meta‑Gerüst**, das Menschen befähigt, selbstständig weiterzubauen – ohne Zwang, mit klaren Werten, mit natürlichem Wachstum.

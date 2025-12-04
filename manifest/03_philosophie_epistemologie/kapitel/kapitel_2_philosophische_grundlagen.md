@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # KAPITEL 2: PHILOSOPHISCHE GRUNDLAGEN
 ## Formloser Dekonstruktivismus mit radikaler Offenheit und Empathie
 

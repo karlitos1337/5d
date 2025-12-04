@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # Von Operation Paperclip zu MK-Ultra/Projekt Monarch: Die industrielle Fabrikation von Gedankenkontrolle durch Trauma
 
 ## Der Übergang: Vom Wissen zum System

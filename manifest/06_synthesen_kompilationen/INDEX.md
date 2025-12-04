@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 06 SYNTHESEN KOMPILATIONEN
 
 ## Themen

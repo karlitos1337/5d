@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # 5D-INTELLIGENZ & DEZENTRALISIERTE BILDUNG
 ## MASTER-KOMPILATION – ALLES ZUSAMMEN
 ### Ready to Deploy: Wissenschaft + Authentizität + Operationen + ROI

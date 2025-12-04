@@ -1,3 +1,7 @@
+---
+# minimal YAML frontmatter
+# title: <auto>
+---
 # projekt_synapse_quantenbildung
 
 ## Page 1
