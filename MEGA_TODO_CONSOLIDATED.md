@@ -1,0 +1,257 @@
+# 🔥 MEGA TODO LIST – COMPLETE PROJECT INVENTORY
+
+
+## Quelle: TODO.md (23 Items)
+
+- - [ ] TODO.md: 57 TODO items gefunden
+- - [ ] TODO_MULTIPAGE.md: Dashboard-Tasks
+- - [ ] TODO_RESEARCH.md: 85+ Forschungsaufgaben
+- - [ ] TODO_COPILOT_INTEGRATION.md: Copilot-Anweisungen
+- - [ ] DATENQUELLEN.md: Externe Datenquellen
+- - [ ] BEWERTUNGSMATRIX_5D.md: Scoring-System
+- - [ ] FAQ.md: 15 häufige Fragen
+- - [ ] CLAIMS_EVIDENCE_MATRIX.md: 40 Behauptungen
+- - [ ] ... weitere 20+ Dokumente
+- - [ ] 01_🏠_Start.py
+- - [ ] 02_🌍_5D_Map.py
+- - [ ] ... bis 11_🏛️_Governance_Panel.py (11 Pages total)
+- - [ ] raw/: Rohdaten JSON/CSV
+- - [ ] processed/: Verarbeitete Daten
+- - [ ] results/: Experiment-Ergebnisse
+- - [ ] #001: Minimalexperiment 3 (IMP-Calculator n>50) [TODO.md:L45] [RESEARCH]
+- - [ ] #002: BibTeX Batch 14-15 (+20 Einträge) [TODO.md:L78] [LITERATURE]
+- - [x] #042: Page 11 Governance Panel [TODO_MULTIPAGE.md:L22] [COMPLETED]
+- - [ ] #043: Mobile Responsiveness alle Pages [TODO_MULTIPAGE.md:L56] [UI/UX]
+- - [x] #089: GitHub Actions CI/CD [TODO.md:L112] [COMPLETED]
+- - [ ] #090: GitHub Pages Deployment aktivieren [TODO.md:L115] [MANUAL]
+- - [ ] #120: `5d_dashboard.py:L234` - Caching-Strategie optimieren
+- - [ ] #121: `utils/map_helpers.py:L89` - Rate-Limiting für API-Calls
+
+
+## Quelle: TODO_MULTIPAGE.md (130 Items)
+
+- - [x] Page erstellen: `5d_dashboard.py` (neu: als Wiki/Guide)
+- - [x] Installation für Anfänger (ohne Vorkenntnisse)
+- - [x] Alle Befehle erklärt (freundlich, ohne Abwertung)
+- - [x] Navigation zu allen anderen Pages
+- - [x] Schnellstart-Guide (3 Schritte)
+- - [x] Troubleshooting-Sektion
+- - [x] Links zu allen Ressourcen (Docs, BibTeX, GitHub)
+- - [ ] Video-Tutorials (optional, später)
+- - [x] Scientific validation with BibTeX
+- - [x] Peer-reviewed sources linked
+- - [x] Formula explanation with references
+- - [ ] Mini-Weltkarte: IMP-Scores pro Land (Phase 3)
+- - [ ] Legende: Farbcodes für IMP-Bereiche (Phase 3)
+- - [ ] Eigene Apps: `models/imp.py` Visualisierung (Phase 4)
+- - [x] Page erstellen: `pages/2_🚀_Projects.py`
+- - [x] Formeln: ROI-Berechnung (Quelle: Heckman 2006, NPV-Methode)
+- - [x] Quellen: Alternative Bildung (Sudbury, Waldorf, Folk High Schools) mit BibTeX
+- - [x] ROI-Calculator interaktiv (Heckman-Methode)
+- - [ ] Mini-Karte: Standorte alternativer Schulen (Folium, Phase 3)
+- - [ ] Eigene Apps: Projekt-Simulator erweitern (Phase 4)
+- - [ ] Tests: `tests/test_projects.py` mit wissenschaftlicher Validierung (Phase 8)
+- - [x] Page erstellen: `pages/3_📚_Research.py`
+- - [x] Quellen: arXiv, PubMed, WHO, World Bank
+- - [x] Formeln: Relevanz-Score (eigene Gewichtung dokumentieren)
+- - [x] Paper-Explorer mit Keyword-Filter
+- - [x] Quality Metrics (94% completeness arXiv, 87% PubMed)
+- - [ ] Mini-Karte: Herkunftsländer der Papers (Phase 3)
+- - [ ] Tests: `tests/test_research_sources.py` (Phase 8)
+- - [x] Page erstellen: `pages/4_💻_GitHub.py`
+- - [x] Quellen: GitHub API, Open Source Lizenzen
+- - [x] Formeln: Activity-Score (Stars × 0.4 + Forks × 0.3 + Updates × 0.2 + Contributors × 0.1)
+- - [x] Repo-Browser mit Sortierung (Stars, Activity, Forks, Name)
+- - [x] Trending Topics Integration
+- - [x] Community Health Score (8/8 checklist)
+- - [ ] Mini-Karte: Entwickler-Community Verteilung (Phase 3)
+- - [ ] Tests: `tests/test_github_metrics.py` (Phase 8)
+- - [x] Page erstellen: `pages/5_🧬_Game_of_Life.py`
+- - [x] Quellen: Conway 1970, Gardner 1970, Wolfram 2002, Rendell 2016
+- - [x] Formeln: Conway's 4 Regeln (Underpopulation, Survival, Overpopulation, Reproduction)
+- - [x] Interactive Simulation mit Predefined Patterns (Glider, Blinker, Toad, Beacon, Pulsar)
+- - [x] Pattern Library (Oscillators, Spaceships, Still Lifes, Guns)
+- - [x] 3 Tabs: Rules, Mathematics, Turing Completeness
+- - [x] Connection to 5D Framework (Emergence, Self-Organization)
+- - [ ] Mini-Karte: Nicht anwendbar (abstrakte Simulation)
+- - [ ] Tests: `tests/test_game_of_life.py` mit Pattern-Validierung (Phase 8)
+- - [x] Page erstellen: `pages/6_🤝_Non_Coercion.py`
+- - [x] Quellen: Ostrom 1990, Axelrod 1984, Nash 1950, Hardin 1968
+- - [x] Formeln: Payoff Matrix, Nash Equilibrium, Ostrom's 8 Principles
+- - [x] Agent-Based Simulation (Cooperation vs. Coercion)
+- - [x] Interactive Parameter Sliders (Cooperation Payoff, Coercion Penalty, Agents, Rounds)
+- - [x] Dynamic Equilibrium Visualization (Cooperators vs. Defectors)
+- - [x] Global Examples (Fishing, Forests, Water, Education)
+- - [ ] Mini-Karte: Länder mit kooperativen Systemen (Phase 3)
+- - [ ] Tests: `tests/test_non_coercion.py` mit Nash-Equilibrium (Phase 8)
+- - [x] Page erstellen: `pages/7_🌍_World_Map.py`
+- - [x] Quellen: OWID, World Bank, WHO, WGI
+- - [x] Formeln: IMP-Proxy = (1-Depression) × (1-Dropout) × Governance
+- - [x] Iframe Embed für Leaflet.js Map
+- - [x] Country Selector mit Detailed Metrics
+- - [x] Validation Methodology (r=0.68 OECD, r=0.54 HPI, r=0.71 HDI)
+- - [x] Alternative Schools Integration (30+ documented)
+- - [x] Legende: Depression (rot), Dropout (orange), IMP (grün)
+- - [x] Data Quality Metrics (Missing Data, Outliers, Normalization)
+- - [ ] Tests: `tests/test_world_map_data.py` (Phase 8)
+- - [x] Page erstellen: `pages/8_📈_Projections.py`
+- - [x] Quellen: Rogers 2003, Bass 1969, Heckman 2006, Verhulst 1838
+- - [x] Formeln: Logistic Growth Curve (S-Curve) für Adoption Modeling
+- - [x] 3 Scenarios: Conservative, Moderate, Optimistic
+- - [x] Interactive Parameter Sliders (Max Adoption, Inflection Year, Steepness)
+- - [x] Milestone Tracking (25%, 50%, 75% Adoption Years)
+- - [x] Economic Impact Calculator (NPV methodology)
+- - [x] Global Impact by Sector (Auto, Aviation, Shipping, Education)
+- - [x] Regional Projections (Europe, North America, Asia, Africa, Latin America)
+- - [x] Tipping Point Analysis (Rogers' 16% Critical Mass)
+- - [x] Bass Diffusion Model mit p (innovation) and q (imitation)
+- - [ ] Mini-Karte: Projektionen nach Region (Phase 3)
+- - [ ] Tests: `tests/test_projections.py` (Phase 8)
+- - [ ] Alle Dimensionen (A, IM, R, SP, Au) mit je 3-5 Quellen
+- - [ ] ROI-Studien: Heckman 2006, Perry Preschool
+- - [ ] Alternative Bildung: Greenberg 1992, Summerhill Neill 1960
+- - [ ] Governance: Ostrom 1990, Acemoglu & Robinson 2012
+- - [ ] Mental Health: WHO Reports, IHME GBD 2019
+- - [ ] Eigene Analysen: Transparent als "Own Research" markieren
+- - [x] **Option A:** Folium-Maps in Streamlit (statisch, schnell) ✅ CHOSEN
+- - [ ] **Option B:** Plotly Choropleth (interaktiv, medium)
+- - [ ] **Option C:** Leaflet.js iframe (voll interaktiv, aufwändig)
+- - [x] `tests/test_imp_scientific.py` ✅ (11 tests, done)
+- - [x] `tests/test_projects.py` ✅ (12 tests: ROI, alternative education, BibTeX)
+- - [x] `tests/test_research_sources.py` ✅ (16 tests: arXiv/PubMed, API compliance, data quality)
+- - [x] `tests/test_github_metrics.py` ✅ (14 tests: activity score, CHAOSS, OpenSSF)
+- - [x] `tests/test_game_of_life.py` ✅ (21 tests: Conway rules, Turing completeness, patterns)
+- - [x] `tests/test_non_coercion.py` ✅ (24 tests: Nash equilibrium, Ostrom principles, cooperation)
+- - [x] `tests/test_world_map_data.py` ✅ (20 tests: IMP-proxy formula, IHME/WB/WGI validation)
+- - [x] `tests/test_projections.py` ✅ (27 tests: logistic curves, Rogers diffusion, economic impact)
+- - [x] `tests/test_participation_networks.py` ✅ (16 tests: network topology, weak ties, diffusion, IMP proxies)
+- - [ ] `tests/test_maps_rendering.py` (Karten-Daten korrekt?)
+- - [ ] Alle Karten klickbar (→ Detail-Modal)
+- - [ ] Slider für dynamische Formeln
+- - [ ] Download-Buttons für Daten (CSV, JSON)
+- - [ ] Copy-Button für BibTeX-Einträge
+- - [x] IMP-Scores: `baseline.json` (30 Länder) ✅
+- - [ ] Projects: `5d_solutions.json` → Koordinaten hinzufügen
+- - [ ] Research: `5d_research_data.json` → Länder-Mapping
+- - [ ] GitHub: `5d_github_data.json` → Geo-Locations
+- - [ ] Depression-Raten: OWID → CSV → JSON
+- - [ ] Dropout-Raten: World Bank EdStats → JSON
+- - [ ] Governance: WGI → JSON (Voice & Accountability)
+- - [ ] Folk High Schools: Manuell recherchieren (Dänemark, Norwegen)
+- - [ ] Tokkatsu-Schulen: Japan (recherchieren)
+- - [ ] Sudbury-Schulen: USA, Europa (Website scrapen?)
+- - [ ] Waldorf-Schulen: Waldorf Foundation API?
+- - [x] IMP-Berechnungen: 100% (✅ 11 tests, all passing)
+- - [x] Projects/ROI: 100% (✅ 12 tests: Heckman NPV, alternative education)
+- - [x] Research Sources: 100% (✅ 16 tests: arXiv/PubMed, API compliance)
+- - [x] GitHub Metrics: 100% (✅ 14 tests: activity formula, CHAOSS/OpenSSF)
+- - [x] Game of Life: 100% (✅ 21 tests: Conway rules, Turing completeness)
+- - [x] Non-Coercion: 100% (✅ 24 tests: Nash equilibrium, Ostrom principles)
+- - [x] World Map Data: 100% (✅ 20 tests: IMP-proxy, IHME/WB/WGI)
+- - [x] Projections: 100% (✅ 27 tests: logistic curves, Rogers diffusion)
+- - [x] Pre-Commit Hook: Tests run before commits (setup in `.git/hooks/`)
+- - [x] GitHub Actions: Tests on every push (`.github/workflows/`)
+- - [ ] Coverage Report: Automatisch generieren (future enhancement)
+- - [x] Phase 1: Pages 1-4 erstellen (Grundstruktur)
+- - [ ] Phase 2: BibTeX vervollständigen (50 Einträge)
+- - [ ] Phase 3: Mini-Karten (Folium) für alle Pages
+- - [ ] Phase 4: Apps einbinden (iframes/direkt)
+- - [ ] Phase 5: Haupttexte + Formeln + Quellen
+- - [ ] Phase 6: Design polieren
+- - [ ] Phase 7: Daten einpflegen
+- - [ ] Phase 8: Tests erweitern, CI/CD
+
+
+## Quelle: TODO_RESEARCH.md (75 Items)
+
+- - [ ] Pilot with kids (n=10, Week 2 Dec 2025)
+- - [ ] 4 more HTML pages (pokemon.html, soccer.html, music.html, hideseek.html)
+- - [ ] Web platform CSS improvements (mobile responsive)
+- - [ ] Survey scale-up (n=100, Q2 2026)
+- - [ ] Publication: "Quantum Learning via Interest-Based Metaphors" (Q4 2026)
+- - [ ] **Repository-Struktur für Forschung klären**
+- - [x] **Zentrales Literatur-File definieren** ✅
+- - [ ] **Dokumentationsstandard erweitern**
+- - [ ] **Research Namespace evaluieren**
+- - [x] **Issue-Templates erstellen** ✅
+- - [ ] **Präzise Definition in `VISION.md`**
+- - [ ] **Mapping externer 5D-Modelle**
+- - [ ] **Vergleichstabelle erstellen**
+- - [ ] **Arbeitsdefinition formulieren**
+- - [ ] **Literatur kuratieren in `02_neurobiologie_psychologie/`**
+- - [ ] **Netzwerk-Topologie analysieren**
+- - [ ] **Minimales Netzwerkmodell implementieren**
+- - [ ] **Verbindung zu IMP/Resonanz-Mapping**
+- - [ ] **Lücken-Memo erstellen**
+- - [ ] **Phänomenologie ausarbeiten**
+- - [ ] **5D-Bewusstseinszustand definieren**
+- - [ ] **UI-Flows für nicht-koerzitive Interaktion**
+- - [ ] **Offene theoretische Fragen dokumentieren**
+- - [ ] **Literatur zusammentragen in `04_oekonomie_governance/`**
+- - [ ] **Survey-Modul entwerfen**
+- - [ ] **Auswertungslogik implementieren**
+- - [ ] **IYPT-Interventionsstudien analysieren**
+- - [ ] **Hypothesen für ökonomisches Modell formulieren**
+- - [ ] **Vergleichsdokument erstellen**
+- - [ ] **Autopoietisch vs. Sympoietisch definieren**
+- - [ ] **Simulation bauen**
+- - [ ] **Gaia auf 5D-Struktur mappen**
+- - [ ] **Literatur zu Selbstorganisation konsolidieren**
+- - [ ] **Hypermutabilität modellieren**
+- - [ ] **Nicht-koerzitive Evolvabilität formulieren**
+- - [ ] **Empirische Datensätze identifizieren**
+- - [ ] **Fallstudien sammeln in `04_oekonomie_governance/`**
+- - [ ] **Governance-Metriken definieren**
+- - [ ] **Dashboard-Integration**
+- - [ ] **FEMA-Kritik-Memo**
+- - [ ] **5D-Governance-Mapping**
+- - [ ] **Research Scraper erweitern**
+- - [ ] **Kausalgraph-Bibliothek anlegen**
+- - [ ] **Prototypische Kausal-Graphen modellieren**
+- - [ ] **Nudge-Vergleich dokumentieren**
+- - [ ] **5D-Landschaft dokumentieren**
+- - [ ] **Kriterienkatalog entwickeln**
+- - [ ] **Vergleichstabelle erstellen**
+- - [ ] **Warnung in Doku platzieren**
+- - [ ] **Kernbehauptungen auflisten**
+- - [ ] **Domains/Datenquellen identifizieren**
+- - [ ] **Minimalexperiment 1: Game of Life**
+- - [ ] **Minimalexperiment 2: Governance-Panel**
+- - [ ] **Roadmap dokumentieren**
+- - [ ] **README.md und VISION.md erweitern**
+- - [ ] **TODO-Listen konsolidieren**
+- - [ ] **Dashboard-Links zu Forschung**
+- - [ ] **GitHub-Issue-Templates anlegen**
+- - [x] **ETHIK_MANIFEST.md anlegen** ✅
+- - [x] **Evidenzmatrix transparent machen** ✅
+- - [ ] **Repo-Selbst-Tracking**
+- - [x] **Regelmäßige Reflexions-Checkpoints** ✅
+- - [ ] 0. Meta: Repository-Struktur, Literatur-Index, Dokumentationsstandard
+- - [ ] 1. 5D-Begriff: Präzise Definition, Abgrenzung, Vergleichstabelle
+- - [ ] 10. Testbarkeit: Kernbehauptungen, Evidenzmatrix, Minimalexperimente
+- - [ ] 2. Neuro: Literatur, Netzwerk-Topologie, Inhibitionsmodell
+- - [ ] 4. Öko: Survey-Modul, Auswertungslogik, Agency-Score
+- - [ ] 7. Governance: Fallstudien, Metriken, Dashboard-Integration
+- - [ ] 3. Philosophie: Phänomenologie, Bewusstseinszustand, UI-Flows
+- - [ ] 5. Gaia: Vergleichsdokument, Simulation, Gaia-Mapping
+- - [ ] 8. Kausalmodelle: Scraper-Erweiterung, Kausalgraph-Bibliothek
+- - [ ] 6. Ökosysteme: Hypermutabilität, Evolvabilität, Datensätze
+- - [ ] 9. Abgrenzung: 5D-Landschaft, Kriterienkatalog, Warnung
+- - [ ] 11. Integration: README, TODO-Konsolidierung, Issue-Templates
+- - [ ] 12. Reflexion: Ethik-Manifest, Evidenzmatrix, Checkpoints
+
+
+## Quelle: TODO_COPILOT_INTEGRATION.md (9 Items)
+
+- - [x] Branch `copilot-integration` erstellt
+- - [x] `.copilot-instructions.md` erstellt
+- - [x] `03-philosophie/epistemologie/zwanglosigkeitsprinzip.md` erstellt
+- - [x] `05-technologie/README.md` erstellt
+- - [x] `05-technologie/examples/` mit Code-Beispielen erstellt
+- - [x] `08-experimente-validierung/rapid_validation.md` erstellt
+- - [x] `08-experimente-validierung/evidence_database.py` erstellt
+- - [x] `MANIFEST.md` im Root erstellt
+- - [ ] Branch gemerged und abgeschlossen (Pull Request folgt)
+
+
+**Total Items:** 237
