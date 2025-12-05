@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-import sys
 import os
 import re
-import json
-from typing import List, Dict, Tuple
+import sys
 
 try:
     import yaml
@@ -47,7 +45,8 @@ TARGET_DIRS = [
     "99_noch_zu_bearbeiten",
 ]
 
-def find_markdown_files() -> List[str]:
+
+def find_markdown_files() -> list[str]:
     files = []
     for td in TARGET_DIRS:
         absd = os.path.join(REPO_ROOT, td)
@@ -59,7 +58,8 @@ def find_markdown_files() -> List[str]:
                     files.append(os.path.join(root, fn))
     return files
 
-def parse_frontmatter(text: str) -> Tuple[Dict, int]:
+
+def parse_frontmatter(text: str) -> tuple[dict, int]:
     m = RE_FRONTMATTER.search(text)
     if not m:
         return {}, 0
@@ -70,7 +70,8 @@ def parse_frontmatter(text: str) -> Tuple[Dict, int]:
     except Exception as e:
         return {"_error": f"YAML parse error: {e}"}, -1
 
-def validate_frontmatter(data: Dict, path: str) -> List[str]:
+
+def validate_frontmatter(data: dict, path: str) -> list[str]:
     errors = []
     if not data:
         errors.append(f"{path}: missing YAML frontmatter block")
@@ -114,12 +115,13 @@ def validate_frontmatter(data: Dict, path: str) -> List[str]:
 
     return errors
 
+
 def main() -> int:
     files = find_markdown_files()
-    all_errors: List[str] = []
+    all_errors: list[str] = []
     for p in files:
         try:
-            with open(p, "r", encoding="utf-8") as f:
+            with open(p, encoding="utf-8") as f:
                 txt = f.read()
         except Exception as e:
             all_errors.append(f"{p}: cannot read file: {e}")
@@ -136,6 +138,7 @@ def main() -> int:
     else:
         print("Frontmatter validation: OK (no issues found)")
         return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

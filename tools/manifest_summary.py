@@ -8,10 +8,10 @@ Manifest Summary Generator
 
 from __future__ import annotations
 
-import re
 import json
+import re
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent
 MANIFEST_DIR = ROOT / "manifest"
@@ -21,11 +21,11 @@ OUT_MD = ROOT / "manifest_summary.md"
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)")
 
 
-def extract_sections(text: str) -> Dict[str, Any]:
+def extract_sections(text: str) -> dict[str, Any]:
     lines = text.splitlines()
-    sections: List[Dict[str, Any]] = []
-    current: Dict[str, Any] | None = None
-    para_acc: List[str] = []
+    sections: list[dict[str, Any]] = []
+    current: dict[str, Any] | None = None
+    para_acc: list[str] = []
     for ln in lines:
         m = HEADING_RE.match(ln.strip())
         if m:
@@ -46,7 +46,7 @@ def extract_sections(text: str) -> Dict[str, Any]:
     return {"sections": sections}
 
 
-def summarize_file(path: Path) -> Dict[str, Any]:
+def summarize_file(path: Path) -> dict[str, Any]:
     try:
         txt = path.read_text(encoding="utf-8", errors="ignore")
     except Exception:
@@ -65,19 +65,21 @@ def main() -> None:
         return
     files = list(MANIFEST_DIR.rglob("*.md"))
     files.sort()
-    all_data: List[Dict[str, Any]] = []
+    all_data: list[dict[str, Any]] = []
     for f in files:
         all_data.append(summarize_file(f))
-    OUT_JSON.write_text(json.dumps({"items": all_data}, ensure_ascii=False, indent=2), encoding="utf-8")
+    OUT_JSON.write_text(
+        json.dumps({"items": all_data}, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     # Markdown output
-    out_lines: List[str] = []
+    out_lines: list[str] = []
     out_lines.append("# Manifest-Zusammenfassung")
     out_lines.append("")
     out_lines.append("Diese Übersicht wurde automatisch aus den Markdown-Manifests generiert.")
     out_lines.append("")
     # Group by category
-    by_cat: Dict[str, List[Dict[str, Any]]] = {}
+    by_cat: dict[str, list[dict[str, Any]]] = {}
     for item in all_data:
         by_cat.setdefault(item.get("category", "root"), []).append(item)
     for cat, items in sorted(by_cat.items()):

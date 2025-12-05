@@ -2,8 +2,9 @@
 
 Reine, seiteneffektfreie Funktionen mit Type Hints. Lesbar, testbar, erweiterbar.
 """
-from typing import Iterable, Sequence
+
 import math
+from collections.abc import Sequence
 
 
 def sigmoid(x: float) -> float:
@@ -48,7 +49,7 @@ def dot(a: Sequence[float], b: Sequence[float]) -> float:
     """Skalarprodukt zweier gleich langer Sequenzen."""
     if len(a) != len(b):
         raise ValueError("Vectors must have same length")
-    return sum(x * y for x, y in zip(a, b))
+    return sum(x * y for x, y in zip(a, b, strict=True))
 
 
 def weighted_mean(values: Sequence[float], weights: Sequence[float]) -> float:
@@ -61,4 +62,4 @@ def weighted_mean(values: Sequence[float], weights: Sequence[float]) -> float:
     sw = sum(weights)
     if sw == 0:
         return 0.0
-    return sum(v * w for v, w in zip(values, weights)) / sw
+    return sum(v * w for v, w in zip(values, weights, strict=True)) / sw

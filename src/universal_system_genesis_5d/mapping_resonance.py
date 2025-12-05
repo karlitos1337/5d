@@ -3,7 +3,8 @@
 Projektionen zwischen 5D-Dimensionen oder auf niedrigere Dimensionen.
 Stubs mit klaren Interfaces zur späteren Ausarbeitung.
 """
-from typing import Mapping
+
+from collections.abc import Mapping
 
 
 def project_5d_to_3d(dim_scores: Mapping[str, float]) -> dict[str, float]:

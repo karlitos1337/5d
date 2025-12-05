@@ -1,10 +1,10 @@
 import math
 
 from src.universal_system_genesis_5d.formulas_math import (
+    dot,
+    min_max_normalize,
     sigmoid,
     softmax,
-    min_max_normalize,
-    dot,
     weighted_mean,
 )
 
@@ -28,4 +28,4 @@ def test_min_max_normalize():
 
 def test_dot_and_weighted_mean():
     assert dot([1, 2, 3], [4, 5, 6]) == 32
-    assert math.isclose(weighted_mean([1, 2, 3], [1, 1, 2]), (1*1 + 2*1 + 3*2)/4)
+    assert math.isclose(weighted_mean([1, 2, 3], [1, 1, 2]), (1 * 1 + 2 * 1 + 3 * 2) / 4)

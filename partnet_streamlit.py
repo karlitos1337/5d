@@ -8,10 +8,11 @@ Partizipations-Netzwerke – Streamlit Simulation
 
 from __future__ import annotations
 
-import streamlit as st
-import plotly.express as px
 import networkx as nx
 import numpy as np
+import plotly.express as px
+import streamlit as st
+
 from simulations.utils import write_run
 
 st.set_page_config(page_title="Partizipations-Netzwerke", page_icon="🕸️", layout="centered")
@@ -35,7 +36,7 @@ if topo == "erdos_renyi":
 elif topo == "small_world":
     G = nx.watts_strogatz_graph(n=n, k=k, p=p, seed=42)
 else:
-    G = nx.barabasi_albert_graph(n=n, m=max(1, k//2), seed=42)
+    G = nx.barabasi_albert_graph(n=n, m=max(1, k // 2), seed=42)
 
 # Initiale Aktivierung
 rs = np.random.default_rng(42)
@@ -68,7 +69,9 @@ try:
 except Exception:
     metrics["durchmesser"] = None
 try:
-    metrics["avg_path_len"] = float(nx.average_shortest_path_length(G)) if nx.is_connected(G) else None
+    metrics["avg_path_len"] = (
+        float(nx.average_shortest_path_length(G)) if nx.is_connected(G) else None
+    )
 except Exception:
     metrics["avg_path_len"] = None
 metrics["clustering"] = float(nx.average_clustering(G)) if G.number_of_nodes() > 0 else 0.0
@@ -80,29 +83,41 @@ metrics["final_frac"] = float(arr[-1])
 
 cols = st.columns(2)
 with cols[0]:
-    st.plotly_chart(px.line(hist, x="step", y="active_frac", title="Aktive Fraktion"), use_container_width=True)
+    st.plotly_chart(
+        px.line(hist, x="step", y="active_frac", title="Aktive Fraktion"), use_container_width=True
+    )
 with cols[1]:
     st.write({"Kennzahlen": metrics})
 
 # IMP-bezogene Proxy-Metriken (grobe Zuordnung)
 # SP ~ clustering & final_frac, R ~ Konnektivität (t_50 niedrig), IM ~ share_prob/threshold-Kontext
 IMP = {
-    "SP": float(min(1.0, 0.5 * metrics.get("clustering", 0.0) + 0.5 * metrics.get("final_frac", 0.0))),
-    "R": float(0.0 if metrics.get("t_50") is None else max(0.0, 1.0 - metrics["t_50"] / max(1, steps))),
-    "IM": float(max(0.0, min(1.0, share_prob * (1.0 - threshold))))
+    "SP": float(
+        min(1.0, 0.5 * metrics.get("clustering", 0.0) + 0.5 * metrics.get("final_frac", 0.0))
+    ),
+    "R": float(
+        0.0 if metrics.get("t_50") is None else max(0.0, 1.0 - metrics["t_50"] / max(1, steps))
+    ),
+    "IM": float(max(0.0, min(1.0, share_prob * (1.0 - threshold)))),
 }
-IMP["A"] = float(0.5)  # neutral
-IMP["Au"] = float(0.5) # neutral
-IMP_score = float(IMP["A"]*IMP["IM"]*IMP["R"]*IMP["SP"]*IMP["Au"]) 
+IMP["A"] = 0.5  # neutral
+IMP["Au"] = 0.5  # neutral
+IMP_score = float(IMP["A"] * IMP["IM"] * IMP["R"] * IMP["SP"] * IMP["Au"])
 
 st.subheader("IMP-Proxies (grob)")
 st.write({**IMP, "IMP": IMP_score})
 
 if st.button("Run speichern"):
     params = {
-        "n": int(n), "topologie": topo, "p_or_rewire": float(p), "k": int(k),
-        "steps": int(steps), "seed_frac": float(seed_frac), "threshold": float(threshold),
-        "share_prob": float(share_prob), "meeting_cost": float(meeting_cost)
+        "n": int(n),
+        "topologie": topo,
+        "p_or_rewire": float(p),
+        "k": int(k),
+        "steps": int(steps),
+        "seed_frac": float(seed_frac),
+        "threshold": float(threshold),
+        "share_prob": float(share_prob),
+        "meeting_cost": float(meeting_cost),
     }
     metrics_out = {**metrics, "IMP": IMP_score, "final_frac": metrics.get("final_frac")}
     path = write_run("partnet", params, metrics_out)

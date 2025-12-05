@@ -11,22 +11,34 @@ PHILOSOPHY_QUESTIONS = [
         "question": "Wie wichtig ist es Ihnen, etablierte Wahrheiten und Annahmen zu hinterfragen?",
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
-        "labels": ["Überhaupt nicht wichtig", "Wenig wichtig", "Mäßig wichtig", "Wichtig", "Sehr wichtig"],
+        "labels": [
+            "Überhaupt nicht wichtig",
+            "Wenig wichtig",
+            "Mäßig wichtig",
+            "Wichtig",
+            "Sehr wichtig",
+        ],
         "required": True,
         "reference": "Paul, R., & Elder, L. (2006). Critical thinking: The nature of critical and creative thought.",
         "bibtex_key": "paul2006critical",
-        "sub_dimension": "Critical Thinking"
+        "sub_dimension": "Critical Thinking",
     },
     {
         "id": "philo_epistemic_pluralism",
         "question": "Wie offen sind Sie gegenüber unterschiedlichen Formen von Wissen (wissenschaftlich, kulturell, intuitiv, spirituell)?",
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
-        "labels": ["Überhaupt nicht offen", "Wenig offen", "Mäßig offen", "Sehr offen", "Völlig offen"],
+        "labels": [
+            "Überhaupt nicht offen",
+            "Wenig offen",
+            "Mäßig offen",
+            "Sehr offen",
+            "Völlig offen",
+        ],
         "required": True,
         "reference": "Santos, B. d. S. (2014). Epistemologies of the South: Justice against epistemicide.",
         "bibtex_key": "santos2014epistemologies",
-        "sub_dimension": "Epistemic Pluralism"
+        "sub_dimension": "Epistemic Pluralism",
     },
     {
         "id": "philo_uncertainty_tolerance",
@@ -37,7 +49,7 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Keats, J. (1817). Negative capability concept.",
         "bibtex_key": "keats1817negative",
-        "sub_dimension": "Ambiguity Tolerance"
+        "sub_dimension": "Ambiguity Tolerance",
     },
     {
         "id": "philo_dialectical_thinking",
@@ -48,7 +60,7 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Hegel, G. W. F. (1807). Phänomenologie des Geistes.",
         "bibtex_key": "hegel1807phenomenology",
-        "sub_dimension": "Dialectical Thinking"
+        "sub_dimension": "Dialectical Thinking",
     },
     {
         "id": "philo_ethical_reflection",
@@ -59,7 +71,7 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Kohlberg, L. (1981). The philosophy of moral development.",
         "bibtex_key": "kohlberg1981moral",
-        "sub_dimension": "Ethical Reasoning"
+        "sub_dimension": "Ethical Reasoning",
     },
     {
         "id": "philo_existential_awareness",
@@ -70,7 +82,7 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Sartre, J.-P. (1943). L'Être et le néant.",
         "bibtex_key": "sartre1943being",
-        "sub_dimension": "Existential Awareness"
+        "sub_dimension": "Existential Awareness",
     },
     {
         "id": "philo_socratic_method",
@@ -81,18 +93,24 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Plato (380 BC). Apology of Socrates.",
         "bibtex_key": "plato380apology",
-        "sub_dimension": "Socratic Inquiry"
+        "sub_dimension": "Socratic Inquiry",
     },
     {
         "id": "philo_power_critique",
         "question": "Wie wichtig ist es Ihnen, Machtstrukturen und deren Einfluss auf Wissen zu analysieren?",
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
-        "labels": ["Überhaupt nicht wichtig", "Wenig wichtig", "Mäßig wichtig", "Wichtig", "Sehr wichtig"],
+        "labels": [
+            "Überhaupt nicht wichtig",
+            "Wenig wichtig",
+            "Mäßig wichtig",
+            "Wichtig",
+            "Sehr wichtig",
+        ],
         "required": True,
         "reference": "Foucault, M. (1980). Power/Knowledge.",
         "bibtex_key": "foucault1980power",
-        "sub_dimension": "Power-Knowledge Critique"
+        "sub_dimension": "Power-Knowledge Critique",
     },
     {
         "id": "philo_holistic_thinking",
@@ -103,7 +121,7 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Capra, F. (1996). The web of life.",
         "bibtex_key": "capra1996web",
-        "sub_dimension": "Systems & Holistic Thinking"
+        "sub_dimension": "Systems & Holistic Thinking",
     },
     {
         "id": "philo_paradox_embrace",
@@ -114,8 +132,8 @@ PHILOSOPHY_QUESTIONS = [
         "required": True,
         "reference": "Gödel, K. (1931). Über formal unentscheidbare Sätze.",
         "bibtex_key": "goedel1931incompleteness",
-        "sub_dimension": "Paradox & Incompleteness"
-    }
+        "sub_dimension": "Paradox & Incompleteness",
+    },
 ]
 
 SUB_DIMENSIONS = [
@@ -128,5 +146,5 @@ SUB_DIMENSIONS = [
     "Socratic Inquiry",
     "Power-Knowledge Critique",
     "Systems & Holistic Thinking",
-    "Paradox & Incompleteness"
+    "Paradox & Incompleteness",
 ]

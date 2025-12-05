@@ -2,8 +2,9 @@
 
 Kombiniert Scoring und Mapping zu einfachen Pipeline-Schritten.
 """
+
+from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Mapping
 
 from .formulas_scoring import weighted_aggregate
 from .mapping_resonance import project_5d_to_3d
@@ -12,6 +13,7 @@ from .mapping_resonance import project_5d_to_3d
 @dataclass(frozen=True)
 class FiveDProfile:
     """Repräsentiert ein normiertes 5D-Profil (Scores in [0,1])."""
+
     neurobiology: float
     psychology: float
     philosophy: float

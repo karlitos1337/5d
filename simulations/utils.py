@@ -3,14 +3,14 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTDIR = ROOT / "simulations"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 
-def write_run(kind: str, params: Dict[str, Any], metrics: Dict[str, Any]) -> Path:
+def write_run(kind: str, params: dict[str, Any], metrics: dict[str, Any]) -> Path:
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     out = {
         "art": kind,
