@@ -11,14 +11,6 @@ tiktoken_cache/
 # Simulationsergebnisse (optional auskommentieren falls Versionierung gewünscht)
 simulations/*.json
 
-# Validation study generated outputs (timestamped files)
-example_responses_*.csv
-questionnaire_*.json
-validation_report_*.json
-validation_results_*.png
-model_comparison_data.csv
-model_comparison_results.png
-
 # Node / JS
 node_modules/
 package-lock.json
