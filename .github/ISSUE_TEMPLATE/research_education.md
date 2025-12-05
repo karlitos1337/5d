@@ -1,9 +1,10 @@
 ---
-name: 🎓 Education Research
+name: "\U0001F393 Education Research"
 about: Propose or discuss alternative education research (ROI, case studies, evaluations)
 title: "[EDU] "
-labels: research, education, alternative-schools
+labels: ''
 assignees: ''
+
 ---
 
 ## 🎓 Research Question

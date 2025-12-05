@@ -1,9 +1,10 @@
 ---
-name: ⚖️ Ethics & Bias
+name: "⚖️ Ethics & Bias"
 about: Report bias, ethical concerns, or suggest improvements to research ethics
 title: "[ETHICS] "
-labels: ethics, bias, reflexion
+labels: ''
 assignees: ''
+
 ---
 
 ## ⚖️ Ethical Concern
