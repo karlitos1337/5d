@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
         .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; }
@@ -21,6 +23,12 @@
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .prose h3 { font-size: 1.25rem; font-weight: 700; color: #4F46E5; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .prose p { margin-bottom: 0.75rem; line-height: 1.6; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .prose strong { color: #1E293B; font-weight: 700; }
+        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid #4F46E5; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -45,6 +53,9 @@
     <!-- Header / Hero -->
     <header class="bg-indigo-900 text-white py-16 px-4 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiZmZmZmZmYiLz48L3N2Zz4=')] "></div>
+        <button onclick="openModal()" class="absolute top-4 right-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition flex items-center gap-2">
+            <i class="fas fa-key"></i> API Setup
+        </button>
         <div class="max-w-5xl mx-auto text-center relative z-10">
             <span class="inline-block py-1 px-3 rounded-full bg-indigo-800 text-indigo-200 text-xs font-bold tracking-widest uppercase mb-4">Forschungsbericht Analyse</span>
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Bildungswende: <span class="text-emerald-400">5D-Intelligenz</span> vs. Status Quo</h1>
@@ -102,6 +113,40 @@
                 <p class="text-sm text-slate-500 mt-4 italic text-center">
                     Datenbasis: Simulationsmodell basierend auf Bildungs-ROI, Folgekostenstudien und Dropout-Raten.
                 </p>
+            </div>
+        </section>
+
+        <!-- AI COACH SECTION -->
+        <section id="ai-coach" class="scroll-mt-20 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-600 to-purple-700 transform -skew-y-2 z-0 rounded-3xl"></div>
+            <div class="relative z-10 py-12 px-6 md:px-12 text-white">
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center justify-center p-3 bg-white/20 rounded-full mb-4 backdrop-blur-sm">
+                        <i class="fas fa-sparkles text-yellow-300 text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">Der 5D-Resonanz-Coach</h2>
+                    <p class="text-indigo-100 max-w-2xl mx-auto">Nutze die Kraft von Gemini AI, um deine Situation durch die Linse des 5D-Modells zu analysieren.</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/20 shadow-2xl max-w-4xl mx-auto">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-indigo-200 mb-2">Deine Situation / Frage</label>
+                        <textarea id="userPrompt" rows="3" class="w-full rounded-xl bg-white/90 text-slate-800 p-4 border-0 focus:ring-2 focus:ring-white placeholder-slate-400 transition" placeholder="Beispiel: Ich fühle mich in der Schule gestresst..."></textarea>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-xs text-indigo-200 flex items-center gap-2">
+                            <span id="apiKeyStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span id="apiKeyText">Kein API Key</span>
+                        </div>
+                        <button onclick="callGemini()" id="generateBtn" class="bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-2 px-6 rounded-lg transition transform hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span>Analysieren</span>
+                            <i class="fas fa-magic"></i>
+                        </button>
+                    </div>
+                    <div id="resultArea" class="hidden bg-white/95 rounded-xl p-6 text-slate-800 min-h-[100px]">
+                        <div id="loadingSpinner" class="hidden flex justify-center py-8"><div class="loader"></div></div>
+                        <div id="aiResponse" class="prose prose-sm max-w-none"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -452,6 +497,81 @@
             }
         });
 
+    </script>
+
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
+            <p class="text-sm text-slate-600 mb-4">Zum 5D-Coach brauchst du einen Google Gemini API Key.</p>
+            <input type="password" id="apiKeyInput" placeholder="API Key hier" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
+                <button onclick="saveApiKey()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
+            </div>
+            <p class="text-xs text-slate-400 mt-4 text-center">Der Key wird lokal im Browser gespeichert.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- GEMINI AI INTEGRATION ---
+        let apiKey = localStorage.getItem('geminiApiKey') || '';
+        function updateApiStatus() {
+            const statusDot = document.getElementById('apiKeyStatus');
+            const statusText = document.getElementById('apiKeyText');
+            const btn = document.getElementById('generateBtn');
+            if (apiKey && apiKey.length > 10) {
+                statusDot.classList.remove('bg-red-500');
+                statusDot.classList.add('bg-emerald-400');
+                statusText.innerText = 'Bereit';
+                btn.disabled = false;
+            } else {
+                statusDot.classList.add('bg-red-500');
+                statusDot.classList.remove('bg-emerald-400');
+                statusText.innerText = 'Key fehlt';
+                btn.disabled = true;
+            }
+        }
+        function openModal() {
+            document.getElementById('apiKeyModal').classList.remove('hidden');
+            document.getElementById('apiKeyInput').value = apiKey;
+        }
+        function closeModal() { document.getElementById('apiKeyModal').classList.add('hidden'); }
+        function saveApiKey() {
+            const input = document.getElementById('apiKeyInput').value.trim();
+            if (input) { apiKey = input; localStorage.setItem('geminiApiKey', apiKey); updateApiStatus(); closeModal(); }
+        }
+        updateApiStatus();
+
+        async function callGemini() {
+            const userPrompt = document.getElementById('userPrompt').value;
+            const resultArea = document.getElementById('resultArea');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const aiResponse = document.getElementById('aiResponse');
+            if (!userPrompt) return;
+            resultArea.classList.remove('hidden');
+            loadingSpinner.classList.remove('hidden');
+            aiResponse.innerHTML = '';
+            const systemContext = `Du bist der "5D-Resonanz-Coach". Analysiere Situationen basierend auf dem 5D-Intelligenz-Modell. Gib empathische, systemische, wissenschaftlich fundierte Ratschläge. Antworte in Markdown.`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            try {
+                const response = await fetch(url, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: systemContext + "\n\nUSER EINGABE:\n" + userPrompt }] }] })
+                });
+                const data = await response.json();
+                loadingSpinner.classList.add('hidden');
+                if (data.candidates && data.candidates[0].content) {
+                    const text = data.candidates[0].content.parts[0].text;
+                    aiResponse.innerHTML = marked.parse(text);
+                } else {
+                    aiResponse.innerHTML = '<p class="text-red-500">Fehler bei der Antwortgenerierung. Bitte prüfe deinen API Key.</p>';
+                }
+            } catch (error) {
+                loadingSpinner.classList.add('hidden');
+                aiResponse.innerHTML = `<p class="text-red-500">Netzwerkfehler: ${error.message}</p>`;
+            }
+        }
     </script>
 
     <!-- CONFIRMATION: NO external SVG/diagram frameworks like Mermaid -->
