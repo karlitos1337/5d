@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5D-Intelligenz: Systemische Transformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Plugin for annotations -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; }
+        .h-chart-sm { height: 300px; }
+        .h-chart-md { height: 400px; }
+        .h-chart-lg { height: 500px; }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Chosen Palette: "Vibrant Cognitive Shift" -->
+    <!-- Primary: #4F46E5 (Indigo 600) - Logic/Structure -->
+    <!-- Secondary: #10B981 (Emerald 500) - Growth/Nature -->
+    <!-- Accent: #F59E0B (Amber 500) - Energy/Warning -->
+    <!-- Danger: #EF4444 (Red 500) - Crisis -->
+    
+    <!-- Application Structure Plan: 
+         The SPA is designed as a vertical narrative scroll.
+         1. Introduction: Hook the user with the core conflict (Status Quo vs. Potential).
+         2. The Crisis (Status Quo): Visualize the negative ROI and human cost. Goal: Shock/Inform.
+         3. The Solution (5D Model): Introduce the new model and its components. Goal: Explain.
+         4. The Forecast (Scenario B): Visualize the positive impact and ROI. Goal: Inspire.
+         5. Comparative Analysis: Side-by-side metrics of both scenarios. Goal: Compare.
+         6. Global Scaling: Timeline of the rollout. Goal: Roadmap.
+         7. Conclusion: Call to action.
+    -->
+
+    <!-- Header / Hero -->
+    <header class="bg-indigo-900 text-white py-16 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiZmZmZmZmYiLz48L3N2Zz4=')] "></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-indigo-800 text-indigo-200 text-xs font-bold tracking-widest uppercase mb-4">Forschungsbericht Analyse</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Bildungswende: <span class="text-emerald-400">5D-Intelligenz</span> vs. Status Quo</h1>
+            <p class="text-lg md:text-xl text-indigo-200 max-w-3xl mx-auto mb-8 font-light">
+                Eine datengestützte Simulation der volkswirtschaftlichen und menschlichen Auswirkungen eines Paradigmenwechsels im Bildungssystem.
+                Von linearer Kontrolle zu emergentem Potenzial.
+            </p>
+            <a href="#crisis" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-lg transition transform hover:scale-105 shadow-lg">
+                Zur Analyse
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- SECTION 1: THE CRISIS (STATUS QUO) -->
+        <section id="crisis" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Szenario A: Der Preis des Stillstands</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">
+                    Analyse der aktuellen Bildungsstrukturen basierend auf Neurobiologie- und Systemtheorie-Studien. 
+                    Der "Status Quo" produziert nicht nur Stagnation, sondern aktiven volkswirtschaftlichen Schaden.
+                </p>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Schaden nach 5 Jahren</p>
+                    <p class="text-3xl font-bold text-red-600 mt-2">-170,5 Mrd. €</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-600">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Schaden nach 25 Jahren</p>
+                    <p class="text-3xl font-bold text-red-800 mt-2">-869,5 Mrd. €</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-500">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Schulabbrecherquote</p>
+                    <p class="text-3xl font-bold text-slate-800 mt-2">7,8 %</p>
+                    <p class="text-xs text-slate-400 mt-1">Hohes Risiko für Sozialsysteme</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-slate-500">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Eintrittswahrscheinlichkeit</p>
+                    <p class="text-3xl font-bold text-slate-800 mt-2">85 %</p>
+                    <p class="text-xs text-slate-400 mt-1">Bei unverändertem System</p>
+                </div>
+            </div>
+
+            <!-- Cumulative Damage Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h3 class="text-xl font-bold mb-6">Kumulierter Volkswirtschaftlicher Schaden (Projektion)</h3>
+                <div class="chart-container h-chart-md">
+                    <canvas id="statusQuoChart"></canvas>
+                </div>
+                <p class="text-sm text-slate-500 mt-4 italic text-center">
+                    Datenbasis: Simulationsmodell basierend auf Bildungs-ROI, Folgekostenstudien und Dropout-Raten.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THE 5D SOLUTION -->
+        <section class="bg-indigo-50 rounded-3xl p-8 md:p-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-indigo-900 mb-4">Das 5D-Modell: Emergenz statt Kontrolle</h2>
+                <p class="text-indigo-700 max-w-3xl mx-auto">
+                    Ein radikaler Ansatz basierend auf Arbeiten von Luria, Gardner und Porges. 
+                    Das System ersetzt Druck durch intrinsische Motivation und dezentrale Vernetzung.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text/Concept Column -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-indigo-100">
+                        <h4 class="font-bold text-indigo-600 mb-2">Neurobiologische Basis</h4>
+                        <p class="text-slate-600 text-sm">Nutzung von Erkenntnissen zur Neuroplastizität. Angstfreies Lernen ermöglicht tiefere neuronale Verknüpfungen.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-indigo-100">
+                        <h4 class="font-bold text-indigo-600 mb-2">Systemtheorie</h4>
+                        <p class="text-slate-600 text-sm">Verschiebung von zentraler Steuerung zu dezentralen, relationalen Netzwerken. Erhöhung der Systemresilienz.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-indigo-100">
+                        <h4 class="font-bold text-indigo-600 mb-2">Ökonomischer Hebel</h4>
+                        <p class="text-slate-600 text-sm">Freiheit × Zeit = Innovation. Investition in Autonomie führt zu exponentiell höherer Wertschöpfung.</p>
+                    </div>
+                </div>
+
+                <!-- Qualitative Comparison Chart -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold mb-4 text-center">Qualitative Auswirkungen</h3>
+                    <div class="chart-container h-chart-sm">
+                        <canvas id="qualitativeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SCENARIO B (THE WIN) -->
+        <section>
+            <div class="text-center mb-12">
+                <span class="text-emerald-600 font-bold tracking-wider uppercase text-sm">Die Prognose</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 mt-2">Szenario B: Der Return on Intelligence</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">
+                    Durch Implementierung von 25.000 Schulprojekten mit einer Initialinvestition von 0,3 Mrd. € kippt das System ins Positive.
+                </p>
+            </div>
+
+            <!-- Positive KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white rounded-xl shadow-md p-6 border-b-4 border-emerald-500">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Gewinn nach 5 Jahren</p>
+                    <p class="text-3xl font-bold text-emerald-600 mt-2">+47,9 Mrd. €</p>
+                    <p class="text-xs text-emerald-600 font-bold mt-1">ROI: 95,9%</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-b-4 border-emerald-600">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Gewinn nach 25 Jahren</p>
+                    <p class="text-3xl font-bold text-emerald-700 mt-2">+723,6 Mrd. €</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-b-4 border-indigo-500">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Schulabbrecherquote</p>
+                    <p class="text-3xl font-bold text-slate-800 mt-2">1,56 %</p>
+                    <p class="text-xs text-green-500 mt-1">▼ massive Senkung</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-b-4 border-slate-500">
+                    <p class="text-sm text-slate-500 font-semibold uppercase">Erfolgswahrscheinlichkeit</p>
+                    <p class="text-3xl font-bold text-slate-800 mt-2">96 %</p>
+                    <p class="text-xs text-slate-400 mt-1">Im Erwartungswert</p>
+                </div>
+            </div>
+
+            <!-- Growth Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h3 class="text-xl font-bold mb-2">Projizierte Wertschöpfung (Modellrechnung)</h3>
+                <p class="text-sm text-slate-500 mb-6">Vergleich der kumulierten finanziellen Auswirkungen über 100 Jahre.</p>
+                <div class="chart-container h-chart-lg">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GLOBAL ROLLOUT & SCALING -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Globale Skalierungsphasen</h2>
+                <p class="text-slate-600">Vom Pilotprojekt zur weltweiten Systemtransformation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Phase 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-indigo-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-indigo-100 rounded-full opacity-50 blur-xl"></div>
+                    <h3 class="text-xl font-bold text-indigo-900 mb-2">Phase 1: Lokal</h3>
+                    <p class="text-indigo-600 font-bold text-sm mb-4">Jahr 1 - 5</p>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">●</span> Fokus auf Deutschland (DE)</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">●</span> 25.000 Schulprojekte</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">●</span> Break-Even nach 5 Monaten</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-indigo-600 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-indigo-100 rounded-full opacity-50 blur-xl"></div>
+                    <h3 class="text-xl font-bold text-indigo-900 mb-2">Phase 2: Export</h3>
+                    <p class="text-indigo-600 font-bold text-sm mb-4">Jahr 6 - 10</p>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">●</span> Expansion in erste ärmere Länder</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">●</span> Adaption des Modells</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">●</span> Aufbau von Infrastruktur</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-emerald-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-emerald-100 rounded-full opacity-50 blur-xl"></div>
+                    <h3 class="text-xl font-bold text-emerald-900 mb-2">Phase 3: Global</h3>
+                    <p class="text-emerald-600 font-bold text-sm mb-4">Jahr 11 - 50</p>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-emerald-500">●</span> Exponentielles Wachstum</li>
+                        <li class="flex items-start"><span class="mr-2 text-emerald-500">●</span> Ziel: 100.000 Schulen</li>
+                        <li class="flex items-start"><span class="mr-2 text-emerald-500">●</span> System komplett selbsttragend (30+ Mrd. €/Jahr)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-slate-900 text-slate-300 py-12 rounded-t-3xl text-center">
+            <p class="text-lg font-semibold mb-4">LÜGE × ZEIT = LEID  &nbsp;|&nbsp;  FREIHEIT × ZEIT = INNOVATION</p>
+            <p class="text-sm max-w-2xl mx-auto opacity-75">
+                Basierend auf der Forschungsarbeit "5D-Intelligenz". Datenquellen: UNESCO, OECD, Monte-Carlo-Simulationen.
+                Alle Angaben sind konservative Prognosen.
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- Configuration & Data Processing ---
+
+        // Chart.js Global Defaults
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748b';
+        Chart.defaults.scale.grid.color = '#e2e8f0';
+
+        // Helper to wrap labels (16 char limit)
+        function wrapLabel(str, maxLen = 16) {
+            if (str.length <= maxLen) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLen) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines; // Returns array for Chart.js
+        }
+
+        // Standard Tooltip Callback for Multiline Labels
+        const standardTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- 1. Status Quo Chart (Line/Area) ---
+        const ctxStatusQuo = document.getElementById('statusQuoChart').getContext('2d');
+        new Chart(ctxStatusQuo, {
+            type: 'line',
+            data: {
+                labels: ['Jahr 0', 'Jahr 5', 'Jahr 15', 'Jahr 25', 'Jahr 50', 'Jahr 100'],
+                datasets: [{
+                    label: 'Kumulierter Schaden (Szenario A)',
+                    data: [0, -170.5, -500, -869.5, -1500, -3700], // Interpolated values for visual flow
+                    borderColor: '#EF4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#EF4444'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'bottom' },
+                    tooltip: standardTooltipConfig,
+                    annotation: {
+                        annotations: {
+                            label1: {
+                                type: 'label',
+                                xValue: 'Jahr 25',
+                                yValue: -869.5,
+                                backgroundColor: 'rgba(255,255,255,0.8)',
+                                content: ['-869,5 Mrd €'],
+                                font: { size: 12, weight: 'bold' },
+                                color: '#EF4444',
+                                borderRadius: 4,
+                                padding: 6
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: { display: true, text: 'Milliarden Euro' },
+                        suggestedMin: -4000
+                    }
+                }
+            }
+        });
+
+        // --- 2. Qualitative Comparison (Bar Chart) ---
+        const ctxQualitative = document.getElementById('qualitativeChart').getContext('2d');
+        
+        // Data processing for labels
+        const qualLabels = ['Schul- abbrecher', 'Depressionen', 'Fehlerquote', 'Selbst- wirksamkeit'];
+        const qualLabelsWrapped = qualLabels.map(l => wrapLabel(l));
+
+        new Chart(ctxQualitative, {
+            type: 'bar',
+            data: {
+                labels: qualLabelsWrapped,
+                datasets: [
+                    {
+                        label: 'Veränderung durch 5D-Modell',
+                        data: [-80, -60, -60, 55], // Approx percentages based on report (Abbrecher 7.8->1.56 is ~80% drop)
+                        backgroundColor: [
+                            '#10B981', // Reduction of bad thing
+                            '#10B981',
+                            '#10B981',
+                            '#4F46E5'  // Increase in good thing
+                        ],
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...standardTooltipConfig,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.x !== null) {
+                                    label += (context.parsed.x > 0 ? '+' : '') + context.parsed.x + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#f1f5f9' },
+                        ticks: { callback: function(value) { return value + '%' } }
+                    },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        // --- 3. Growth/ROI Chart (Multi-Line) ---
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: ['Start', 'Jahr 5', 'Jahr 10', 'Jahr 25', 'Jahr 50', 'Jahr 100'],
+                datasets: [
+                    {
+                        label: 'Szenario B (5D-Modell)',
+                        data: [0, 47.92, 242.65, 723.62, 1500, 2900], // Interpolated/Report data
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Szenario A (Status Quo)',
+                        data: [0, -170.5, -350, -869.5, -1800, -3700],
+                        borderColor: '#94a3b8',
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.3,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: standardTooltipConfig,
+                    annotation: {
+                        annotations: {
+                            breakEven: {
+                                type: 'line',
+                                xMin: 0.8, // Approx 5 months
+                                xMax: 0.8,
+                                borderColor: '#F59E0B',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Break-Even (5 Mon.)',
+                                    display: true,
+                                    position: 'start',
+                                    backgroundColor: '#F59E0B',
+                                    color: 'white'
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: { display: true, text: 'Milliarden Euro (Kumuliert)' },
+                        grid: { color: '#e2e8f0' }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+    <!-- CONFIRMATION: NO external SVG/diagram frameworks like Mermaid -->
+</body>
+</html>

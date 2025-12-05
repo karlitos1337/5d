@@ -46,3 +46,28 @@ Wenn etwas unklar ist oder Ergänzungen nötig sind, sag kurz Bescheid — ich i
 
 *** Ende Kurzfassung ***
     - ✅ Autonomy → IM (Deci & Ryan 1985, 1000+ studies)
+
+---
+
+## 🧩 Dashboard Pages (Streamlit)
+- Einstieg: `5d_dashboard.py` mit Multipage unter `pages/` (automatisch erkannt).
+- Neue Seiten hinzufügen: `pages/<order>_<emoji>_<Name>.py` + `st.set_page_config(...)` nutzen.
+- Design-Übernahme: Für vollständige UI-Templates externe HTMLs via `st.components.v1.html` einbinden.
+    - Beispiel: `pages/12_🧠_Forschungsplanung_Template.py` rendert `web/templates/5d_forschungsplanung.html` (Tailwind + Chart.js/CDN).
+    - Externes iFrame: `pages/13_🧪_NN_Playground_Demo.py` bettet `https://playground.tensorflow.org/?hl=de` ein.
+- Sidebar-Links: In `5d_dashboard.py` per `st.page_link("pages/<file>.py", label=..., icon=...)` verknüpfen.
+
+## 🔗 Datenvertrag & Seiten
+- Seiten dürfen nur aus JSON-Artefakten lesen: `5d_research_data.json`, `5d_github_data.json`, `5d_solutions.json`.
+- Keine stillen Schema-Änderungen in den Seiten; Anpassungen laufen über `models/schemas.py` + Tests.
+
+## 🧪 Schnelltest für Seiten
+- Dashboard lokal: `streamlit run 5d_dashboard.py` (oder `./start.sh`).
+- Rendering-Check: Prüfe Konsole/Netzwerk im Browser (CDN-Ladeskripte für Tailwind/Chart.js erreichbar?).
+- Kein Netz? Fallback: Charts nur mit Streamlit/Plotly bauen oder CDNs in Vendor-Assets spiegeln.
+
+## 📁 Relevante Dateien
+- `5d_dashboard.py` (Sidebar, Onboarding)
+- `pages/12_🧠_Forschungsplanung_Template.py` (HTML-Template-Einbettung)
+- `pages/13_🧪_NN_Playground_Demo.py` (Externe Referenz per iFrame)
+- `web/templates/5d_forschungsplanung.html` (Design-Quelle, 5D-Style)
