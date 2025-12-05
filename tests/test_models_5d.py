@@ -1,4 +1,8 @@
-from src.universal_system_genesis_5d.models_5d import FiveDProfile, aggregate_5d, project_profile_to_3d
+from src.universal_system_genesis_5d.models_5d import (
+    FiveDProfile,
+    aggregate_5d,
+    project_profile_to_3d,
+)
 
 
 def test_aggregate_5d_equal_weights():

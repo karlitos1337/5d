@@ -16,10 +16,10 @@ ENTRANCE_SCHEMA = {
             "Student/in",
             "Arbeitssuchend",
             "Rentner/in",
-            "Sonstiges"
+            "Sonstiges",
         ],
         "required": True,
-        "purpose": "Kontext für wirtschaftliche Perspektive"
+        "purpose": "Kontext für wirtschaftliche Perspektive",
     },
     "education_level": {
         "type": "select",
@@ -33,10 +33,10 @@ ENTRANCE_SCHEMA = {
             "Bachelor",
             "Master / Diplom",
             "Promotion",
-            "Sonstiges"
+            "Sonstiges",
         ],
         "required": True,
-        "purpose": "Bildungshintergrund für Analyse"
+        "purpose": "Bildungshintergrund für Analyse",
     },
     "postal_code": {
         "type": "number",
@@ -45,14 +45,14 @@ ENTRANCE_SCHEMA = {
         "max": 99999,
         "required": False,
         "purpose": "Anonymisierte regionale Zuordnung",
-        "privacy_note": "Wird nur für statistische Clusterung verwendet, nicht gespeichert mit anderen Daten"
+        "privacy_note": "Wird nur für statistische Clusterung verwendet, nicht gespeichert mit anderen Daten",
     },
     "federal_state": {
         "type": "text",
         "question": "Bundesland (optional):",
         "max_length": 50,
         "required": False,
-        "purpose": "Regionale Unterschiede analysieren"
+        "purpose": "Regionale Unterschiede analysieren",
     },
     "country": {
         "type": "select",
@@ -60,33 +60,52 @@ ENTRANCE_SCHEMA = {
         "source": "ISO_3166_countries",
         "default": "DE",
         "required": True,
-        "purpose": "Kultureller Kontext"
+        "purpose": "Kultureller Kontext",
     },
     "life_satisfaction": {
         "type": "likert",
         "question": "Wie bewerten Sie Ihr aktuelles Leben insgesamt?",
         "scale": [1, 2, 3, 4, 5, 6],
-        "labels": ["Sehr gut (1)", "Gut (2)", "Befriedigend (3)", "Ausreichend (4)", "Mangelhaft (5)", "Ungenügend (6)"],
+        "labels": [
+            "Sehr gut (1)",
+            "Gut (2)",
+            "Befriedigend (3)",
+            "Ausreichend (4)",
+            "Mangelhaft (5)",
+            "Ungenügend (6)",
+        ],
         "reverse_coded": True,
         "required": True,
         "purpose": "Allgemeines Wohlbefinden",
-        "reference": "Schulnotensystem DE"
+        "reference": "Schulnotensystem DE",
     },
     "future_expectation": {
         "type": "likert",
         "question": "Wie zuversichtlich blicken Sie in Ihre persönliche Zukunft?",
         "scale": [1, 2, 3, 4, 5],
-        "labels": ["Sehr pessimistisch", "Eher pessimistisch", "Neutral", "Eher optimistisch", "Sehr optimistisch"],
+        "labels": [
+            "Sehr pessimistisch",
+            "Eher pessimistisch",
+            "Neutral",
+            "Eher optimistisch",
+            "Sehr optimistisch",
+        ],
         "required": True,
-        "purpose": "Zukunftsorientierung"
+        "purpose": "Zukunftsorientierung",
     },
     "past_evaluation": {
         "type": "likert",
         "question": "Wie bewerten Sie Ihre bisherige Lebensgeschichte?",
         "scale": [1, 2, 3, 4, 5],
-        "labels": ["Sehr unzufrieden", "Eher unzufrieden", "Neutral", "Eher zufrieden", "Sehr zufrieden"],
+        "labels": [
+            "Sehr unzufrieden",
+            "Eher unzufrieden",
+            "Neutral",
+            "Eher zufrieden",
+            "Sehr zufrieden",
+        ],
         "required": True,
-        "purpose": "Vergangenheitsbewertung"
+        "purpose": "Vergangenheitsbewertung",
     },
     "financial_situation": {
         "type": "select",
@@ -96,18 +115,18 @@ ENTRANCE_SCHEMA = {
             "Gut - komme gut zurecht",
             "Befriedigend - komme einigermaßen zurecht",
             "Ausreichend - muss sehr auf Ausgaben achten",
-            "Schwierig - habe finanzielle Probleme"
+            "Schwierig - habe finanzielle Probleme",
         ],
         "coding": {
             "Sehr gut - keine finanziellen Sorgen": 5,
             "Gut - komme gut zurecht": 4,
             "Befriedigend - komme einigermaßen zurecht": 3,
             "Ausreichend - muss sehr auf Ausgaben achten": 2,
-            "Schwierig - habe finanzielle Probleme": 1
+            "Schwierig - habe finanzielle Probleme": 1,
         },
         "required": True,
-        "purpose": "Ökonomischer Kontext"
-    }
+        "purpose": "Ökonomischer Kontext",
+    },
 }
 
 # ISO 3166 Länderliste (Auswahl)
@@ -125,5 +144,5 @@ COUNTRIES = [
     {"code": "CZ", "name": "Tschechien"},
     {"code": "GB", "name": "Vereinigtes Königreich"},
     {"code": "US", "name": "Vereinigte Staaten"},
-    {"code": "OTHER", "name": "Anderes Land"}
+    {"code": "OTHER", "name": "Anderes Land"},
 ]

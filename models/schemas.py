@@ -1,14 +1,14 @@
-from __future__ import annotations
-
 """
 Validated schemas for 5D solutions output.
 - Ensures type-safety and normalization
 - Deduplicates projects
 """
 
-from pydantic import BaseModel, Field, field_validator
-from typing import List, Optional, Dict
+from __future__ import annotations
+
 from enum import Enum
+
+from pydantic import BaseModel, Field, field_validator
 
 
 class DimensionEnum(str, Enum):
@@ -21,26 +21,28 @@ class DimensionEnum(str, Enum):
 
 class DimensionScore(BaseModel):
     """Validiertes 5D-Score-Schema"""
+
     dimension: DimensionEnum = Field(..., description="Dimension: A|IM|R|SP|Au")
     score: float = Field(..., ge=0.0, le=1.0, description="0–1 normalisiert")
     source: str = Field(..., description="Manifest-Dateiname")
 
-    @field_validator('score', mode='before')
+    @field_validator("score", mode="before")
     def parse_score(cls, v):
         """Konvertiert 'HIGH', 'A,' etc. zu numerisch; normalisiert auf 0-1."""
         if isinstance(v, str):
             s = v.strip()
-            if s.upper() == 'HIGH':
+            if s.upper() == "HIGH":
                 return 0.75
             import re
-            m = re.search(r'(\d+\.\d+|\d+)', s.replace(',', '.'))
+
+            m = re.search(r"(\d+\.\d+|\d+)", s.replace(",", "."))
             score = float(m.group(1)) if m else 0.5
         else:
             try:
                 score = float(v)
             except Exception:
                 score = 0.5
-        
+
         # Normalisierung auf 0-1 Bereich (falls Werte > 1.0 z.B. aus Skalen 1-5)
         if score > 1.0:
             # Annahme: Skala 1-5 oder 0-10 → normalisiere auf 0-1
@@ -50,46 +52,52 @@ class DimensionScore(BaseModel):
                 score = score / 10.0  # 10.0 → 1.0, 7.5 → 0.75
             else:
                 score = min(score / 100.0, 1.0)  # Prozent-Werte 0-100 → 0-1
-        
+
         return min(max(score, 0.0), 1.0)  # Clamping auf [0, 1]
 
 
 class Project(BaseModel):
     """Projekt mit Investment/ROI"""
-    name: str
-    investment: Optional[float] = None
-    roi: Optional[float] = None
-    pilots: Optional[int] = None
 
-    @field_validator('name', mode='before')
+    name: str
+    investment: float | None = None
+    roi: float | None = None
+    pilots: int | None = None
+
+    @field_validator("name", mode="before")
     def normalize_name(cls, v):
         """Normalisiert Projektnamen (Umlaute/Trimmen/Kapitalisierung)."""
         s = str(v or "").strip().title()
         # Häufige Tippfehler-Korrektur
-        s = s.replace('Bäckereii', 'Bäckerei').replace('Bäckere', 'Bäckerei').replace('Bäckerei ', 'Bäckerei')
-        s = s.replace('BäckereiI', 'Bäckerei').replace('BäckereI', 'Bäckerei')
+        s = (
+            s.replace("Bäckereii", "Bäckerei")
+            .replace("Bäckere", "Bäckerei")
+            .replace("Bäckerei ", "Bäckerei")
+        )
+        s = s.replace("BäckereiI", "Bäckerei").replace("BäckereI", "Bäckerei")
         return s
 
-    @field_validator('investment', 'roi', mode='before')
+    @field_validator("investment", "roi", mode="before")
     def parse_numbers(cls, v):
         """Parst numerische Felder robust (komma → punkt, Prozent entfernen)."""
         if v is None:
             return None
         try:
             if isinstance(v, str):
-                s = v.strip().replace('%', '')
+                s = v.strip().replace("%", "")
                 # Tausenderpunkt entfernen, Dezimalkomma in Punkt wandeln
-                if ',' not in s:
-                    s = s.replace('.', '')
-                s = s.replace(',', '.')
+                if "," not in s:
+                    s = s.replace(".", "")
+                s = s.replace(",", ".")
                 import re
-                m = re.search(r'(\d+\.\d+|\d+)', s)
+
+                m = re.search(r"(\d+\.\d+|\d+)", s)
                 return float(m.group(1)) if m else None
             return float(v)
         except Exception:
             return None
 
-    @field_validator('pilots', mode='before')
+    @field_validator("pilots", mode="before")
     def parse_int(cls, v):
         """Parst Pilots als int."""
         if v is None:
@@ -97,7 +105,8 @@ class Project(BaseModel):
         try:
             if isinstance(v, str):
                 import re
-                m = re.search(r'(\d+)', v)
+
+                m = re.search(r"(\d+)", v)
                 return int(m.group(1)) if m else None
             return int(v)
         except Exception:
@@ -106,16 +115,19 @@ class Project(BaseModel):
 
 class Solutions(BaseModel):
     """Gesamtes Solutions-Schema"""
-    projects: List[Project] = []
-    dimension_scores: List[DimensionScore] = []
-    plan: Dict
 
-    @field_validator('projects')
-    def deduplicate_projects(cls, v: List[Project]):
+    projects: list[Project] = []
+    dimension_scores: list[DimensionScore] = []
+    plan: dict
+
+    @field_validator("projects")
+    def deduplicate_projects(cls, v: list[Project]):
         """Entfernt Duplikate, behält Einträge mit mehr Daten (z. B. Investment/ROI)."""
-        seen: Dict[str, Project] = {}
+        seen: dict[str, Project] = {}
+
         def richness(p: Project) -> int:
             return sum(x is not None for x in [p.investment, p.roi, p.pilots])
+
         for proj in v:
             key = proj.name.lower()
             # Versuche, nahe Duplikate (ein Zeichen Abweichung) zu mergen
@@ -134,7 +146,11 @@ class Solutions(BaseModel):
                 existing = seen[match_key]
                 # Wähle den reicheren Eintrag, aber setze einen kanonischen Namen
                 winner = proj if richness(proj) > richness(existing) else existing
-                canonical = 'bäckerei' if ('bäckerei' in key or 'bäckerei' in match_key) else (key if len(key) <= len(match_key) else match_key)
+                canonical = (
+                    "bäckerei"
+                    if ("bäckerei" in key or "bäckerei" in match_key)
+                    else (key if len(key) <= len(match_key) else match_key)
+                )
                 winner.name = canonical.title()
                 seen[match_key] = winner
         return list(seen.values())

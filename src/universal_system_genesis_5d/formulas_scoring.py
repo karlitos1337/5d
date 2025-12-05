@@ -2,7 +2,8 @@
 
 Implementiert Basisfunktionen für Skalen, Normierung (1–99) und Aggregation.
 """
-from typing import Sequence, Mapping
+
+from collections.abc import Mapping, Sequence
 
 
 def likert_to_0_1(value: int, scale: Sequence[int] = (1, 2, 3, 4, 5)) -> float:

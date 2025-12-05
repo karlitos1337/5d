@@ -15,7 +15,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Csikszentmihalyi, M. (1990). Flow: The Psychology of Optimal Experience.",
         "bibtex_key": "csikszentmihalyi1990flow",
-        "sub_dimension": "Flow & Optimal Experience"
+        "sub_dimension": "Flow & Optimal Experience",
     },
     {
         "id": "neuro_attention_span",
@@ -26,7 +26,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Posner, M. I., & Petersen, S. E. (1990). The attention system of the human brain.",
         "bibtex_key": "posner1990attention",
-        "sub_dimension": "Attention & Focus"
+        "sub_dimension": "Attention & Focus",
     },
     {
         "id": "neuro_neuroplasticity",
@@ -37,7 +37,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Kolb, B., & Whishaw, I. Q. (1998). Brain plasticity and behavior.",
         "bibtex_key": "kolb1998plasticity",
-        "sub_dimension": "Neuroplasticity & Adaptation"
+        "sub_dimension": "Neuroplasticity & Adaptation",
     },
     {
         "id": "neuro_stress_regulation",
@@ -48,7 +48,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Sapolsky, R. M. (2004). Why zebras don't get ulcers.",
         "bibtex_key": "sapolsky2004zebras",
-        "sub_dimension": "Stress Regulation"
+        "sub_dimension": "Stress Regulation",
     },
     {
         "id": "neuro_pattern_recognition",
@@ -59,7 +59,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Hawkins, J., & Blakeslee, S. (2004). On intelligence.",
         "bibtex_key": "hawkins2004intelligence",
-        "sub_dimension": "Pattern Recognition"
+        "sub_dimension": "Pattern Recognition",
     },
     {
         "id": "neuro_memory_consolidation",
@@ -70,7 +70,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Squire, L. R., & Kandel, E. R. (1999). Memory: From mind to molecules.",
         "bibtex_key": "squire1999memory",
-        "sub_dimension": "Memory Consolidation"
+        "sub_dimension": "Memory Consolidation",
     },
     {
         "id": "neuro_cognitive_flexibility",
@@ -81,7 +81,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Diamond, A. (2013). Executive functions.",
         "bibtex_key": "diamond2013executive",
-        "sub_dimension": "Cognitive Flexibility"
+        "sub_dimension": "Cognitive Flexibility",
     },
     {
         "id": "neuro_sleep_quality",
@@ -92,7 +92,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Walker, M. (2017). Why we sleep.",
         "bibtex_key": "walker2017sleep",
-        "sub_dimension": "Sleep & Recovery"
+        "sub_dimension": "Sleep & Recovery",
     },
     {
         "id": "neuro_creativity_moments",
@@ -103,7 +103,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Kounios, J., & Beeman, M. (2015). The eureka factor.",
         "bibtex_key": "kounios2015eureka",
-        "sub_dimension": "Creativity & Insight"
+        "sub_dimension": "Creativity & Insight",
     },
     {
         "id": "neuro_dopamine_response",
@@ -114,7 +114,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Schultz, W. (2015). Neuronal reward and decision signals.",
         "bibtex_key": "schultz2015reward",
-        "sub_dimension": "Reward System"
+        "sub_dimension": "Reward System",
     },
     {
         "id": "neuro_multitasking",
@@ -126,7 +126,7 @@ NEUROBIOLOGY_QUESTIONS = [
         "reference": "Monsell, S. (2003). Task switching.",
         "bibtex_key": "monsell2003taskswitching",
         "sub_dimension": "Multitasking & Task Switching",
-        "note": "Kritisch diskutiert - moderne Forschung zeigt Grenzen von Multitasking"
+        "note": "Kritisch diskutiert - moderne Forschung zeigt Grenzen von Multitasking",
     },
     {
         "id": "neuro_default_mode",
@@ -138,8 +138,8 @@ NEUROBIOLOGY_QUESTIONS = [
         "required": True,
         "reference": "Raichle, M. E., et al. (2001). A default mode of brain function.",
         "bibtex_key": "raichle2001default",
-        "sub_dimension": "Default Mode Network"
-    }
+        "sub_dimension": "Default Mode Network",
+    },
 ]
 
 # Sub-Dimensionen für Auswertung
@@ -155,5 +155,5 @@ SUB_DIMENSIONS = [
     "Creativity & Insight",
     "Reward System",
     "Multitasking & Task Switching",
-    "Default Mode Network"
+    "Default Mode Network",
 ]

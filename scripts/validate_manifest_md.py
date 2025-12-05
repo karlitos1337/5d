@@ -1,5 +1,5 @@
-import sys
 import argparse
+import sys
 from pathlib import Path
 
 FRONTMATTER = "---\n# minimal YAML frontmatter\n# title: <auto>\n---\n"
@@ -28,9 +28,13 @@ def fix_frontmatter(path: Path) -> bool:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate YAML frontmatter in manifest Markdown files")
+    parser = argparse.ArgumentParser(
+        description="Validate YAML frontmatter in manifest Markdown files"
+    )
     parser.add_argument("manifest_dir", nargs="?", default="manifest", help="Base manifest dir")
-    parser.add_argument("--fix", action="store_true", help="Automatically add minimal frontmatter where missing")
+    parser.add_argument(
+        "--fix", action="store_true", help="Automatically add minimal frontmatter where missing"
+    )
     args = parser.parse_args()
 
     base = Path(args.manifest_dir)

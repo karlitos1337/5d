@@ -32,7 +32,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent
 MAP_MD = ROOT / "mapping_resonance_imp.md"
@@ -50,7 +50,7 @@ def load_json_if_exists(path: Path, default: Any) -> Any:
     return default
 
 
-def extract_mapping_from_md(md_path: Path) -> Dict[str, Any]:
+def extract_mapping_from_md(md_path: Path) -> dict[str, Any]:
     if not md_path.exists():
         return {}
     try:
@@ -71,15 +71,17 @@ def clamp(val: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, val))
 
 
-def apply_mapping(base: Dict[str, Any], external: Dict[str, Any], mapping: Dict[str, Any]) -> Dict[str, Any]:
+def apply_mapping(
+    base: dict[str, Any], external: dict[str, Any], mapping: dict[str, Any]
+) -> dict[str, Any]:
     # Ausgangsstruktur: kopiere Basis und lege 'adjusted' ergänzend an
-    out: Dict[str, Any] = {
+    out: dict[str, Any] = {
         "base_solutions": base,
         "external": external,
         "adjusted": {
             "notes": "Non-invasive Vorschläge aus mapping_resonance_imp.md",
-            "projects": {}
-        }
+            "projects": {},
+        },
     }
 
     adjustments = mapping.get("adjustments") or []
@@ -95,12 +97,14 @@ def apply_mapping(base: Dict[str, Any], external: Dict[str, Any], mapping: Dict[
         base_projects = []
 
     # Baue Map für schnelle Suche
-    adj_by_name: Dict[str, Dict[str, float]] = {}
+    adj_by_name: dict[str, dict[str, float]] = {}
     for item in adjustments:
         name = str(item.get("project", "")).strip()
         delta = item.get("delta") or {}
         if name:
-            adj_by_name[name] = {k: float(v) for k, v in delta.items() if isinstance(v, (int, float))}
+            adj_by_name[name] = {
+                k: float(v) for k, v in delta.items() if isinstance(v, (int, float))
+            }
 
     # Vorschläge generieren
     for pj in base_projects:
@@ -112,10 +116,7 @@ def apply_mapping(base: Dict[str, Any], external: Dict[str, Any], mapping: Dict[
         scaled = {k: float(deltas[k]) * float(scales.get(k, 1.0)) for k in deltas}
         # Cappen
         scaled = {k: clamp(v, -1.0, +1.0) for k, v in scaled.items()}
-        out["adjusted"]["projects"][pj_name] = {
-            "delta": scaled,
-            "cap": {"min": cmin, "max": cmax}
-        }
+        out["adjusted"]["projects"][pj_name] = {"delta": scaled, "cap": {"min": cmin, "max": cmax}}
 
     return out
 
@@ -132,8 +133,8 @@ def main() -> None:
             "external": external,
             "adjusted": {
                 "notes": "Kein Mapping gefunden – dies ist ein Platzhalter.",
-                "projects": {}
-            }
+                "projects": {},
+            },
         }
         OUT_JSON.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
         print("[apply_resonance_mapping] Kein Mapping gefunden. Platzhalter geschrieben.")

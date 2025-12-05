@@ -8,9 +8,9 @@ Autopoietische Klasse – Streamlit Simulation (leichte ABM-Variante)
 from __future__ import annotations
 
 import numpy as np
-import streamlit as st
 import plotly.express as px
-from datetime import datetime
+import streamlit as st
+
 from simulations.utils import write_run
 
 st.set_page_config(page_title="Autopoietische Klasse", page_icon="🧪", layout="centered")
@@ -23,8 +23,12 @@ with st.sidebar:
     zwang = st.slider("Zwangsgrad", 0.0, 1.0, 0.2, step=0.05, help="Erhöht Stress, senkt IM/R")
     freiheit = st.slider("Wahlfreiheit", 0.0, 1.0, 0.7, step=0.05, help="Erhöht IM/Au")
     peers = st.slider("Peer-Interaktion", 0.0, 1.0, 0.5, step=0.05, help="Fördert SP/IM")
-    lehrer_support = st.slider("Lehrer-Support", 0.0, 1.0, 0.5, step=0.05, help="Senkt Stress, erhöht R")
-    aufgaben_vielfalt = st.slider("Aufgabenvielfalt", 0.0, 1.0, 0.6, step=0.05, help="Erhöht IM durch Passung")
+    lehrer_support = st.slider(
+        "Lehrer-Support", 0.0, 1.0, 0.5, step=0.05, help="Senkt Stress, erhöht R"
+    )
+    aufgaben_vielfalt = st.slider(
+        "Aufgabenvielfalt", 0.0, 1.0, 0.6, step=0.05, help="Erhöht IM durch Passung"
+    )
 
 # Init Agentenzustände (0..1)
 rs = np.random.default_rng(42)
@@ -49,7 +53,7 @@ for t in range(steps):
     R += 0.04 * (lehrer_support - stress)
     SP += 0.03 * (peers - 0.3)
     Au += 0.03 * (freiheit - 0.3)
-    A  += 0.02 * (freiheit - zwang)
+    A += 0.02 * (freiheit - zwang)
 
     # Dropout-Bedingung (IM oder R < Schwelle)
     active = (IM > 0.1) & (R > 0.1)
@@ -72,7 +76,9 @@ for t in range(steps):
 # Visualisierung
 cols = st.columns(2)
 with cols[0]:
-    fig = px.line(hist, x="step", y=["A","IM","R","SP","Au"], title="IMP-Dimensionen (Mittelwerte)")
+    fig = px.line(
+        hist, x="step", y=["A", "IM", "R", "SP", "Au"], title="IMP-Dimensionen (Mittelwerte)"
+    )
     st.plotly_chart(fig, use_container_width=True)
 with cols[1]:
     fig2 = px.line(hist, x="step", y="dropout", title="Dropout pro Schritt")
@@ -83,15 +89,17 @@ imp = np.array([hist["A"][-1], hist["IM"][-1], hist["R"][-1], hist["SP"][-1], hi
 imp_score = float(np.prod(imp))
 
 st.subheader("Ergebnis")
-st.write({
-    "A": hist["A"][-1],
-    "IM": hist["IM"][-1],
-    "R": hist["R"][-1],
-    "SP": hist["SP"][-1],
-    "Au": hist["Au"][-1],
-    "IMP": imp_score,
-    "Dropout_total": int(np.sum(hist["dropout"]))
-})
+st.write(
+    {
+        "A": hist["A"][-1],
+        "IM": hist["IM"][-1],
+        "R": hist["R"][-1],
+        "SP": hist["SP"][-1],
+        "Au": hist["Au"][-1],
+        "IMP": imp_score,
+        "Dropout_total": int(np.sum(hist["dropout"])),
+    }
+)
 
 # Speichern
 if st.button("Run speichern"):
