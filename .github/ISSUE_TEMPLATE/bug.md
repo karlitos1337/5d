@@ -1,9 +1,10 @@
 ---
-name: 🐛 Bug Report
+name: "\U0001F41B Bug Report"
 about: Report a bug in code, dashboard, tests, or documentation
 title: "[BUG] "
 labels: bug
 assignees: ''
+
 ---
 
 ## 🐛 Bug Description

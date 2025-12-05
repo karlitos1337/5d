@@ -1,9 +1,10 @@
 ---
-name: 🧠 Neuroscience Research
+name: "\U0001F9E0 Neuroscience Research"
 about: Propose or discuss neuroscience/psychology research related to 5D dimensions
 title: "[NEURO] "
-labels: research, neuroscience, 5D-dimensions
+labels: ''
 assignees: ''
+
 ---
 
 ## 🧠 Research Question
