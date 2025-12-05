@@ -18,7 +18,7 @@ RE_FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 
 def has_frontmatter(content: str) -> bool:
     """Check if content starts with a YAML frontmatter block."""
-    return bool(RE_FRONTMATTER.search(content))
+    return bool(RE_FRONTMATTER.match(content))
 
 
 def create_frontmatter(
@@ -116,7 +116,7 @@ def main():
             evidence=args.evidence,
             dry_run=args.dry_run,
         )
-        return 0 if added or args.dry_run else 0
+        return 0
     except FileNotFoundError:
         print(f"Error: File not found: {args.file}", file=sys.stderr)
         return 1
