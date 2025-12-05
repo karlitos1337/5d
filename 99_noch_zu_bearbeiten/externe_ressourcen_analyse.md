@@ -1,3 +1,12 @@
+---
+title: "Externe Ressourcen Analyse"
+author: "Unknown"
+date: "2025-12-05"
+domain: "99_noch_zu_bearbeiten"
+license: "CC-BY-4.0"
+evidence: "🔮"
+---
+
 # 🔗 Externe Ressourcen-Integration: 38 analysierte URLs
 
 **Datum**: 2025-12-02  

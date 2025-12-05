@@ -1,3 +1,12 @@
+---
+title: "Evolution Results"
+author: "Unknown"
+date: "2025-12-05"
+domain: "08-experimente-validierung"
+license: "CC-BY-4.0"
+evidence: "🔮"
+---
+
 # Evolution Experiment Results
 
 **Experiment:** Control vs. Non-Coercive Populations  

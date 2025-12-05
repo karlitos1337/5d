@@ -1,3 +1,12 @@
+---
+title: "GitHub Backup Anleitung"
+author: "Unknown"
+date: "2025-12-05"
+domain: "99_noch_zu_bearbeiten"
+license: "CC-BY-4.0"
+evidence: "🔮"
+---
+
 # 💾 GitHub Backup ins Google Drive - Komplette Anleitung
 
 **Datum**: 2025-12-02  
