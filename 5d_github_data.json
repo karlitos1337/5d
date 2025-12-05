@@ -264,24 +264,51 @@
   "trending": {
     "education": [
       {
-        "name": "expagog",
+        "name": "feeds",
         "stars": 1,
-        "url": "https://github.com/aplsimple/expagog"
+        "url": "https://github.com/4thWaveAI/feeds"
       },
       {
-        "name": "hogwarts",
-        "stars": 6,
-        "url": "https://github.com/databayt/hogwarts"
+        "name": "Anki-Android",
+        "stars": 10329,
+        "url": "https://github.com/ankidroid/Anki-Android"
       },
       {
-        "name": "armenian-javascript-community",
+        "name": "edumips64",
+        "stars": 171,
+        "url": "https://github.com/EduMIPS64/edumips64"
+      },
+      {
+        "name": "kana-dojo",
+        "stars": 857,
+        "url": "https://github.com/lingdojo/kana-dojo"
+      },
+      {
+        "name": "gcompris",
+        "stars": 50,
+        "url": "https://github.com/KDE/gcompris"
+      }
+    ],
+    "learning": [
+      {
+        "name": "slowmate-chess-engine",
         "stars": 0,
-        "url": "https://github.com/DopeGopal/armenian-javascript-community"
+        "url": "https://github.com/RTS-Technology-Solutions/slowmate-chess-engine"
       },
       {
-        "name": "computer-science",
+        "name": "go-learning",
         "stars": 0,
-        "url": "https://github.com/sumanvijay/computer-science"
+        "url": "https://github.com/cube-m4st3r/go-learning"
+      },
+      {
+        "name": "Anki-Android",
+        "stars": 10329,
+        "url": "https://github.com/ankidroid/Anki-Android"
+      },
+      {
+        "name": "formula-fan",
+        "stars": 9,
+        "url": "https://github.com/JoeMancera/formula-fan"
       },
       {
         "name": "lab",
@@ -289,43 +316,16 @@
         "url": "https://github.com/navchandar/lab"
       }
     ],
-    "learning": [
-      {
-        "name": "code-dot-org",
-        "stars": 875,
-        "url": "https://github.com/code-dot-org/code-dot-org"
-      },
-      {
-        "name": "armenian-javascript-community",
-        "stars": 0,
-        "url": "https://github.com/DopeGopal/armenian-javascript-community"
-      },
-      {
-        "name": "computer-science",
-        "stars": 0,
-        "url": "https://github.com/sumanvijay/computer-science"
-      },
-      {
-        "name": "Smart-Contracts---Solidity",
-        "stars": 0,
-        "url": "https://github.com/MiracleGuy29/Smart-Contracts---Solidity"
-      },
-      {
-        "name": "projeto-coffee-shop",
-        "stars": 0,
-        "url": "https://github.com/flameastro/projeto-coffee-shop"
-      }
-    ],
     "pedagogy": [
-      {
-        "name": "expagog",
-        "stars": 1,
-        "url": "https://github.com/aplsimple/expagog"
-      },
       {
         "name": "RAGKET",
         "stars": 3,
         "url": "https://github.com/Ayanop267/RAGKET"
+      },
+      {
+        "name": "expagog",
+        "stars": 1,
+        "url": "https://github.com/aplsimple/expagog"
       },
       {
         "name": "ph-submissions",
@@ -345,31 +345,31 @@
     ],
     "edtech": [
       {
-        "name": "ai-recruitment-assistant",
+        "name": "Empirical-Core",
+        "stars": 30,
+        "url": "https://github.com/empirical-org/Empirical-Core"
+      },
+      {
+        "name": "exam-seating-arranger",
         "stars": 0,
-        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
+        "url": "https://github.com/Bossr1387/exam-seating-arranger"
       },
       {
-        "name": "gptwrapper",
-        "stars": 9,
-        "url": "https://github.com/UniversityOfHelsinkiCS/gptwrapper"
-      },
-      {
-        "name": "neuropilot",
-        "stars": 1,
-        "url": "https://github.com/Rwiddhi03/neuropilot"
+        "name": "TatvaX-AI-PROTOTYPE",
+        "stars": 0,
+        "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
       },
       {
         "name": "kolibri",
-        "stars": 956,
+        "stars": 958,
         "url": "https://github.com/learningequality/kolibri"
       },
       {
-        "name": "arsnova-server",
-        "stars": 60,
-        "url": "https://github.com/particify/arsnova-server"
+        "name": "ai-recruitment-assistant",
+        "stars": 0,
+        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
       }
     ]
   },
-  "timestamp": "2025-12-03T15:55:40.897393"
+  "timestamp": "2025-12-05T18:24:45.147706"
 }

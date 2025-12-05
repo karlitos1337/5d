@@ -1,12 +1,6 @@
 {
   "projects": [
     {
-      "name": "Holz",
-      "investment": null,
-      "roi": 3.0,
-      "pilots": null
-    },
-    {
       "name": "Bäckerei",
       "investment": null,
       "roi": 3.0,
@@ -15,7 +9,7 @@
     {
       "name": "Garten",
       "investment": null,
-      "roi": null,
+      "roi": 3.0,
       "pilots": null
     },
     {
@@ -31,6 +25,12 @@
       "pilots": null
     },
     {
+      "name": "Holz",
+      "investment": null,
+      "roi": null,
+      "pilots": null
+    },
+    {
       "name": "Kräuter",
       "investment": null,
       "roi": null,
@@ -40,6 +40,21 @@
   "dimension_scores": [
     {
       "dimension": "A",
+      "score": 1.0,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 1.0,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
       "score": 0.75,
       "source": "manifest"
     },
@@ -56,6 +71,46 @@
     {
       "dimension": "A",
       "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 1.0,
       "source": "manifest"
     },
     {
@@ -65,46 +120,6 @@
     },
     {
       "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 1.0,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
       "score": 1.0,
       "source": "manifest"
     },
@@ -115,26 +130,6 @@
     },
     {
       "dimension": "A",
-      "score": 1.0,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 1.0,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
       "score": 0.5,
       "source": "manifest"
     },
@@ -151,81 +146,6 @@
     {
       "dimension": "A",
       "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "A",
-      "score": 0.75,
       "source": "manifest"
     },
     {
@@ -255,6 +175,16 @@
     },
     {
       "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
       "score": 0.5,
       "source": "manifest"
     },
@@ -275,12 +205,62 @@
     },
     {
       "dimension": "A",
-      "score": 1.0,
+      "score": 0.75,
       "source": "manifest"
     },
     {
       "dimension": "A",
-      "score": 1.0,
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
       "source": "manifest"
     },
     {
@@ -305,6 +285,26 @@
     },
     {
       "dimension": "A",
+      "score": 1.0,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
+      "score": 1.0,
+      "source": "manifest"
+    },
+    {
+      "dimension": "A",
       "score": 0.75,
       "source": "manifest"
     },
@@ -415,6 +415,11 @@
     },
     {
       "dimension": "IM",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "IM",
       "score": 0.5,
       "source": "manifest"
     },
@@ -589,21 +594,6 @@
       "source": "manifest"
     },
     {
-      "dimension": "IM",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
       "dimension": "R",
       "score": 0.75,
       "source": "manifest"
@@ -611,71 +601,6 @@
     {
       "dimension": "R",
       "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
       "source": "manifest"
     },
     {
@@ -720,6 +645,106 @@
     },
     {
       "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
       "score": 0.75,
       "source": "manifest"
     },
@@ -776,6 +801,11 @@
     {
       "dimension": "R",
       "score": 0.75,
+      "source": "manifest"
+    },
+    {
+      "dimension": "R",
+      "score": 0.5,
       "source": "manifest"
     },
     {
@@ -785,42 +815,7 @@
     },
     {
       "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
       "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.75,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
-      "source": "manifest"
-    },
-    {
-      "dimension": "R",
-      "score": 0.5,
       "source": "manifest"
     },
     {
@@ -869,7 +864,7 @@
       "source": "manifest"
     },
     {
-      "dimension": "SP",
+      "dimension": "R",
       "score": 0.75,
       "source": "manifest"
     },
@@ -976,6 +971,11 @@
     {
       "dimension": "SP",
       "score": 0.5,
+      "source": "manifest"
+    },
+    {
+      "dimension": "SP",
+      "score": 0.75,
       "source": "manifest"
     },
     {

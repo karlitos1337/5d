@@ -106,8 +106,7 @@ pip install -r requirements_extended.txt
 
 Make the starter script executable and run it (runs extractor, scrapers and UI servers):
 ```bash
-chmod +x start.sh
-./start.sh
+
 ```
 
 Alternatively use `make`:

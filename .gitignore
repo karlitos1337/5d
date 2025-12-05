@@ -38,3 +38,10 @@ external/archives/*.msi
 external/archives/*.exe
 external/archives/old_versions/
 simulations/data/cifar-10-python.tar.gz
+
+# 5D Monitoring
+config/google-credentials.json
+monitors/logs/*.log
+data/archive/
+.env
+.env.local

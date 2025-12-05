@@ -37,37 +37,36 @@
     ],
     "pubmed": [
       {
-        "title": "EXPRESS: Medical Students' Perceptions of AI-Generated Practice Questions as Learning Tools.",
+        "title": "Commercial Learning Platforms in UK Undergraduate Medical Education: A Qualitative Study of Benefits, Limitations, and Integration.",
         "authors": [
-          "Tate H",
-          "Bicknell BT",
-          "Fiore P"
+          "Phillips R",
+          "Coleman JJ"
         ],
-        "published": "2025 Dec 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41328776/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41340886/"
       },
       {
-        "title": "Effects of a \"credit bank\" intervention on the professional identity and public stigma among nursing students: A randomized controlled trial.",
+        "title": "Feasibility of a Specialized Large Language Model for Postgraduate Medical Examination Preparation: Single-Center Proof-Of-Concept Study.",
         "authors": [
-          "Qiu C",
-          "Ni X",
-          "Wang Y"
+          "Leong YH",
+          "Nambiar L",
+          "Tay VYJ"
         ],
-        "published": "2025 Nov 13",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41325672/"
+        "published": "2025 Dec 3",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41337739/"
       },
       {
-        "title": "Students' Learning Preferences in Studying Sex- and Gender-Sensitive Medicine: An Exploratory Multimethod Study.",
+        "title": "Facilitating Aboriginal Perinatal Mental Health Information Access with a Retrieval-Augmented LLM-based Chatbot.",
         "authors": [
-          "Modderkolk L",
-          "Jurrius A",
-          "Oertelt-Prigione S"
+          "Utami MSM",
+          "Kwok WH",
+          "Kotz J"
         ],
-        "published": "2025 Jan-Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41323141/"
+        "published": "2025 Jul",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41336738/"
       }
     ],
-    "timestamp": "2025-12-03T15:55:25.349399"
+    "timestamp": "2025-12-05T18:24:28.814789"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -107,36 +106,37 @@
     ],
     "pubmed": [
       {
-        "title": "A cluster randomized trial of a health coach-led patient activation program in type 2 diabetes in Singapore - a study protocol.",
+        "title": "Enhanced proactive control under stress: divergent neural dynamics of social vs. Monetary rewards in table tennis athletes.",
         "authors": [
-          "Lee JHB",
-          "Yeo LS",
-          "Soon WSW"
-        ],
-        "published": "2025 Dec 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41327015/"
-      },
-      {
-        "title": "How sports-implied packaging of protein powder products enhances the purchase intention of Generation Z: evidence from multiple experiments.",
-        "authors": [
-          "Hu C",
-          "Bin J",
-          "Zhang W"
+          "Xu L",
+          "Peng Z",
+          "Lian J"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41323995/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41346789/"
       },
       {
-        "title": "Readiness for competition across sports and genders: a study on psychological skills intervention.",
+        "title": "Motivations of wheelchair curling athletes to participate in sport: a qualitative research.",
         "authors": [
-          "Alecu S",
-          "Onea GA"
+          "Daşkesen SS",
+          "Bedir D",
+          "İlhan EL"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41323909/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41346500/"
+      },
+      {
+        "title": "The impact of servant leadership on employees taking charge behavior.",
+        "authors": [
+          "Hu M",
+          "Wang Y",
+          "Xu X"
+        ],
+        "published": "2025 Dec 4",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41345154/"
       }
     ],
-    "timestamp": "2025-12-03T15:55:28.360759"
+    "timestamp": "2025-12-05T18:24:31.845569"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,37 +172,36 @@
     ],
     "pubmed": [
       {
-        "title": "Operative Outcomes and Training Equity in Appendicectomy: Are Core Surgical Trainees Getting a Fair Chance?",
+        "title": "Trajectories of Individuating and Relating Autonomy in Adolescence: A Longitudinal Study in a Relational Cultural Context.",
         "authors": [
-          "Nayak A",
-          "Amoako-Adjei O",
-          "Arshad R"
+          "Kuo CS",
+          "Liu YL"
         ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41333234/"
+        "published": "2025 Dec 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41348374/"
       },
       {
-        "title": "Socio-ecological factors influencing dietary behaviours among adolescents and young adults in rural Eastern Uganda: A qualitative study.",
+        "title": "A framework for semantics-based situational awareness during mobile robot deployments.",
         "authors": [
-          "Buyinza T",
-          "Buzigi E",
-          "Kitimbo J"
+          "Ruan T",
+          "Ramesh A",
+          "Wang H"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41329677/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41347208/"
       },
       {
-        "title": "Unlocking the potential of augmented reality in education: Insights from a systematic review of AR-enhanced instructional approaches.",
+        "title": "From awareness to action: A nationwide survey of infectious diseases and clinical microbiology physicians' perspectives on artificial intelligence in clinical practice.",
         "authors": [
-          "Anuar WMFF",
-          "Mokmin NAM",
-          "Mohamad Asri SF"
+          "Gülten E",
+          "Derin O",
+          "Arslan E"
         ],
-        "published": "2025 Nov",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41328852/"
+        "published": "2025 Jan-Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41346940/"
       }
     ],
-    "timestamp": "2025-12-03T15:55:32.433175"
+    "timestamp": "2025-12-05T18:24:34.816502"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -270,7 +269,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-03T15:55:34.773594"
+    "timestamp": "2025-12-05T18:24:37.817311"
   },
   "democratic schools": {
     "arxiv": [
@@ -308,34 +307,36 @@
     ],
     "pubmed": [
       {
-        "title": "Early generational and partisan divides in vaccine acceptance in USA during the COVID-19 pandemic.",
+        "title": "Integrative computational approach to farnesyltransferase inhibition toward anti-liver cancer drug candidate from Syzygium cumini essential oils.",
         "authors": [
-          "Alonso G",
-          "Kiesel S"
+          "Putra WE",
+          "Hidayatullah A",
+          "Widiastuti D"
         ],
-        "published": "2025 Oct 30",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41334594/"
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41346770/"
       },
       {
-        "title": "Towards a transparent and reproducible AI-assisted research paper writing.",
+        "title": "Enhancing integrated epidemic response mechanisms in humanitarian emergencies: a scoping review and qualitative study.",
         "authors": [
-          "Park J"
+          "Esmail M",
+          "Chatterjee P",
+          "Parikh K"
         ],
-        "published": "2025 Dec 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41331701/"
+        "published": "2025 Dec 4",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41344714/"
       },
       {
-        "title": "Patient involvement in the biopsychosocial integrated primary care model: A qualitative study in three health districts of South Kivu, Democratic Republic of Congo.",
+        "title": "Growing up in a growing economy. Reassessing changes in biological living standards in Portugal during the twentieth century.",
         "authors": [
-          "Kasongo BM",
-          "Molima CEN",
-          "Mparanyi GJ"
+          "Cardoso HFV",
+          "Murray NJ"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41329678/"
+        "published": "2025 Nov 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41344297/"
       }
     ],
-    "timestamp": "2025-12-03T15:55:37.747364"
+    "timestamp": "2025-12-05T18:24:41.040929"
   },
   "student agency": {
     "arxiv": [
@@ -378,36 +379,36 @@
     ],
     "pubmed": [
       {
-        "title": "[Analysis of the Pertussis Status in Jeju Special Self-Governing Province in 2024].",
+        "title": "Psychosocial Factors Influencing the Sexual Risk Behaviour of Adolescents Living with and Affected by HIV Who Reside in HIV-Affected Homes in Uganda.",
         "authors": [
-          "Park DW",
-          "Kim JH",
-          "Jang SH"
+          "Kiirya SK",
+          "Visser M",
+          "Masenge A"
         ],
-        "published": "2025 Apr 10",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41333159/"
+        "published": "2025 Dec 4",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41345280/"
       },
       {
-        "title": "Using reporting guidelines to improve the reproducibility of cooking Christmas tree meringues: the \"People tasting trees\" cluster-randomised controlled trial.",
+        "title": "Cluster-Level Analyses to Estimate a Risk Difference in a Cluster Randomized Trial With Confounding Individual-Level Covariates: A Simulation Study.",
         "authors": [
-          "Vinatier C",
-          "Fahed E",
-          "Chollet Y"
+          "Pereira Macedo JA",
+          "Giraudeau B",
+          "ESCIENT collaborators"
         ],
-        "published": "2025 Dec 3",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41331702/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41342633/"
       },
       {
-        "title": "Morphological resemblance to injections elicits fear, disgust, and reduced conservation intent toward insects.",
+        "title": "Making strides in doctoral-level career outcomes reporting: a review of classification and visualization methodologies in graduate education.",
         "authors": [
-          "Prokop P",
-          "Todáková S",
-          "Fančovičová J"
+          "L Collins TR",
+          "Layton RL",
+          "Ramadoss D"
         ],
-        "published": "2025 Dec 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41330984/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41341269/"
       }
     ],
-    "timestamp": "2025-12-03T15:55:40.745199"
+    "timestamp": "2025-12-05T18:24:45.014626"
   }
 }
