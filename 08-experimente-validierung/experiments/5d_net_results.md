@@ -1,3 +1,12 @@
+---
+title: "5d Net Results"
+author: "Unknown"
+date: "2025-12-05"
+domain: "08-experimente-validierung"
+license: "CC-BY-4.0"
+evidence: "🔮"
+---
+
 # 5D-Net Experiment Results (Quick Test)
 
 **Date:** 2025-12-03, 07:40 CET  
