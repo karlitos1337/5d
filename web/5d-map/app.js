@@ -1,4 +1,4 @@
-import { fetchAllData } from './modules/api-fetcher.js';
+import { fetchAllData, clearCache } from './modules/api-fetcher.js';
 import { initMap, addLayer, removeLayer } from './modules/map-renderer.js';
 import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer, createValidationRingLayer, createSourcesLayer, createValidationLegendControl } from './modules/layers.js';
 
@@ -121,6 +121,7 @@ async function init() {
   updateValidationCount();
 
   document.getElementById('layer-status-quo')?.addEventListener('click', () => activateLayer('status-quo'));
+  document.getElementById('reset-cache')?.addEventListener('click', () => { clearCache(); refreshData(); });
   document.getElementById('layer-schools')?.addEventListener('click', () => activateLayer('schools'));
   document.getElementById('layer-imp')?.addEventListener('click', () => activateLayer('imp'));
   document.getElementById('layer-validation')?.addEventListener('click', () => activateLayer('validation'));
