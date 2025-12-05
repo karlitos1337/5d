@@ -1,12 +1,15 @@
 import { fetchAllData } from './modules/api-fetcher.js';
 import { initMap, addLayer, removeLayer } from './modules/map-renderer.js';
-import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer, createValidationRingLayer, createSourcesLayer } from './modules/layers.js';
+import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer, createValidationRingLayer, createSourcesLayer, createValidationLegendControl } from './modules/layers.js';
 
 let map;
 let activeLayer = null;
 let cachedData = {};
 let legendCtl = null;
 let selectedYear = null;
+let infoEl, infoTextEl;
+let validationFilter = 'all';
+let validationCountEl;
 
 function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
@@ -24,6 +27,19 @@ function activateLayer(layerName) {
   if (legendCtl) { try { map.removeControl(legendCtl); } catch {} legendCtl = null; }
   const timeCtl = document.getElementById('time-controls');
   if (timeCtl) timeCtl.style.display = layerName === 'time' ? 'block' : 'none';
+  if (infoEl && infoTextEl) {
+    const infoMap = {
+      'status-quo': 'Heatmap: Mittelwert aus Depression/Dropout (%). Daten: OWID/World Bank.',
+      'schools': 'Marker: Alternative Schulen (lokale Daten).',
+      'imp': 'IMP‑Choropleth: A×IM×R×SP×Au; WGI‑Normalisierung.',
+      'validation': 'Validierung (Ringe): extern verifizierte Länder. Daten: validation.json.',
+      'sources': 'Quellen (Marker): Anzahl/Kategorien pro Land aus validation.json.',
+      'time': 'Zeitreise: historischer Heatmap‑Modus mit Jahres‑Slider.'
+    };
+    const txt = infoMap[layerName] || '—';
+    infoTextEl.textContent = txt;
+    infoEl.style.display = 'block';
+  }
   document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
   const btn = document.getElementById(`layer-${layerName}`);
   if (btn) btn.classList.add('btn--primary');
@@ -41,7 +57,9 @@ function activateLayer(layerName) {
       legendCtl.addTo(map);
       break;
     case 'validation':
-      activeLayer = createValidationRingLayer(cachedData);
+      activeLayer = createValidationRingLayer(cachedData, validationFilter);
+      legendCtl = createValidationLegendControl();
+      legendCtl.addTo(map);
       break;
     case 'sources':
       activeLayer = createSourcesLayer(cachedData);
@@ -87,6 +105,9 @@ async function refreshData() {
 
 async function init() {
   map = initMap('map', [20, 0], 2);
+  infoEl = document.getElementById('layer-info');
+  infoTextEl = document.getElementById('layer-info-text');
+  validationCountEl = document.getElementById('validation-count');
   setLoading(true);
   try {
     cachedData = await fetchAllData();
@@ -97,11 +118,14 @@ async function init() {
   }
   updateLastUpdateTime();
   activateLayer('status-quo');
+  updateValidationCount();
 
   document.getElementById('layer-status-quo')?.addEventListener('click', () => activateLayer('status-quo'));
   document.getElementById('layer-schools')?.addEventListener('click', () => activateLayer('schools'));
   document.getElementById('layer-imp')?.addEventListener('click', () => activateLayer('imp'));
   document.getElementById('layer-validation')?.addEventListener('click', () => activateLayer('validation'));
+  document.getElementById('export-validation-csv')?.addEventListener('click', () => exportValidationCSV());
+  document.getElementById('export-validation-json')?.addEventListener('click', () => exportValidationJSON());
   document.getElementById('layer-sources')?.addEventListener('click', () => activateLayer('sources'));
   document.getElementById('layer-time')?.addEventListener('click', () => activateLayer('time'));
 
@@ -119,6 +143,72 @@ async function init() {
 
   // Auto-Refresh jede Stunde
   setInterval(refreshData, 3600000);
+
+  // Listen for validation filter changes from legend
+  window.addEventListener('validation-filter', (e) => {
+    validationFilter = e.detail?.status || 'all';
+    updateValidationCount();
+    if (document.getElementById('layer-validation')?.classList.contains('btn--primary')) {
+      if (activeLayer) removeLayer(map, activeLayer);
+      activeLayer = createValidationRingLayer(cachedData, validationFilter);
+      if (activeLayer) addLayer(map, activeLayer);
+    }
+  });
+}
+
+function updateValidationCount() {
+  if (!validationCountEl) return;
+  const items = Array.isArray(cachedData.validationItems) ? cachedData.validationItems : [];
+  const filtered = validationFilter && validationFilter !== 'all'
+    ? items.filter(it => String(it.status) === String(validationFilter))
+    : items;
+  const label = validationFilter === 'all' ? 'alle' : validationFilter;
+  validationCountEl.innerHTML = `Filter: <strong>${label}</strong> · Einträge: <strong>${filtered.length}</strong>`;
+}
+
+function exportValidationCSV() {
+  const items = Array.isArray(cachedData.validationItems) ? cachedData.validationItems : [];
+  const filtered = validationFilter && validationFilter !== 'all'
+    ? items.filter(it => String(it.status) === String(validationFilter))
+    : items.slice();
+  const headers = ['id','name','domain','status','source','iso3'];
+  const rows = [headers.join(',')];
+  for (const it of filtered) {
+    const vals = headers.map(h => {
+      const v = it?.[h] ?? '';
+      const s = String(v).replace(/"/g, '""');
+      return /[",\n]/.test(s) ? `"${s}"` : s;
+    });
+    rows.push(vals.join(','));
+  }
+  const csv = rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const suffix = validationFilter || 'all';
+  a.href = url;
+  a.download = `validation_${suffix}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function exportValidationJSON() {
+  const items = Array.isArray(cachedData.validationItems) ? cachedData.validationItems : [];
+  const filtered = validationFilter && validationFilter !== 'all'
+    ? items.filter(it => String(it.status) === String(validationFilter))
+    : items.slice();
+  const blob = new Blob([JSON.stringify(filtered, null, 2)], { type: 'application/json;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const suffix = validationFilter || 'all';
+  a.href = url;
+  a.download = `validation_${suffix}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 init();

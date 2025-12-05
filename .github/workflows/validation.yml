@@ -1,0 +1,39 @@
+name: Frontmatter & Index Validation
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run frontmatter validator
+        run: |
+          python utils/frontmatter_validate.py
+
+      - name: Ensure WISSENS_INDEX.md updated when content changes
+        run: |
+          # Simple heuristic: if markdown files changed under 01–08 or 99_*, require diff in WISSENS_INDEX.md
+          CHANGED_MD=$(git --no-pager diff --name-only origin/main...HEAD | grep -E '^(01_|02_|03_|03-|04_|05_|05-|06_|07_|08-|99_)/.+\.md$' || true)
+          if [ -n "$CHANGED_MD" ]; then
+            if ! git --no-pager diff --name-only origin/main...HEAD | grep -q '^WISSENS_INDEX.md$'; then
+              echo "WISSENS_INDEX.md must be updated when content files change." >&2
+              echo "Changed markdown files:" >&2
+              echo "$CHANGED_MD" >&2
+              exit 1
+            fi
+          fi

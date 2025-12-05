@@ -1,0 +1,36 @@
+{
+  "$schema": "https://example.org/schemas/validation.schema.json",
+  "version": "0.1",
+  "legend": {
+    "green": "Validiert durch Stanford Encyclopedia / CSRankings Top-100",
+    "yellow": "Quelle: Wikipedia / OSSU / Community",
+    "red": "Keine externe Validierung"
+  },
+  "validatedISO3": ["DEU", "USA", "JPN"],
+  "items": [
+    {
+      "id": "education.commons",
+      "name": "Educational Commons",
+      "domain": "01_bildung_education",
+      "status": "green",
+      "source": "Stanford Encyclopedia of Philosophy",
+      "iso3": "DEU"
+    },
+    {
+      "id": "probability.basics",
+      "name": "Basic Probability Guide",
+      "domain": "02_neurobiologie_psychologie",
+      "status": "yellow",
+      "source": "OSSU / Wikipedia",
+      "iso3": "USA"
+    },
+    {
+      "id": "zwanglosigkeit.158wege",
+      "name": "158 Wege der Zwanglosigkeit",
+      "domain": "03_philosophie_epistemologie",
+      "status": "red",
+      "source": "No external validation yet",
+      "iso3": "JPN"
+    }
+  ]
+}

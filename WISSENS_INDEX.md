@@ -13,8 +13,8 @@
 ## 🔗 Querverweise
 - Neuroplastizität ↔ Flow-Theorie: [`02_neurobiologie_psychologie/neuroplastizitaet.md`](02_neurobiologie_psychologie/neuroplastizitaet.md) ⟷ [`02_neurobiologie_psychologie/flow_zustaende.md`](02_neurobiologie_psychologie/flow_zustaende.md)
 - Commons basiertes Lernen (OSSU/IB) ↔ Wirtschaftskultur: [`04_oekonomie_governance/commons.md`](04_oekonomie_governance/commons.md) ⟷ [`01_bildung_education/ossu_ib_bridge.md`](01_bildung_education/ossu_ib_bridge.md)
-- Philosophie der Zwanglosigkeit: [`03_philosophie_epistemologie/wege_der_zwanglosigkeit.md`](03_philosophie_epistemologie/wege_der_zwanglosigkeit.md)
-- Probabilistische Entscheidungsmodelle: [`02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md`](02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md)
+- Philosophie der Zwanglosigkeit: [`01_bildung_education/158wegederzwanglosigkeit.md`](01_bildung_education/158wegederzwanglosigkeit.md) ↔ [`03_philosophie_epistemologie/wege_der_zwanglosigkeit.md`](03_philosophie_epistemologie/wege_der_zwanglosigkeit.md)
+- Probabilistische Entscheidungsmodelle: [`02_neurobiologie_psychologie/grundlagen/Basic-Probability-Guide.md`](02_neurobiologie_psychologie/grundlagen/Basic-Probability-Guide.md) ↔ [`02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md`](02_neurobiologie_psychologie/wahrscheinlichkeitstheorie_grundlagen.md)
 - Systemische Validierung: [`05_technologie_tesla/csrankings.md`](05_technologie_tesla/csrankings.md) ⟷ [`07_daten_analysen/5d-relevant-sources.bib`](07_daten_analysen/5d-relevant-sources.bib)
 
 ## ⚡ Meta-Komponenten
@@ -30,5 +30,5 @@
 Dieses Dokument wird automatisch durch GitHub Actions geprüft und muss bei Struktur-Änderungen aktualisiert werden.
 
 **Version**: 1.0.0
-**Letzte Aktualisierung**: 2025-12-02
+**Letzte Aktualisierung**: 2025-12-05
 **Bearbeiter**: Qwen Analysis Integration

@@ -9,6 +9,8 @@ Interaktive 5D‑Weltkarte mit Heatmap (Status Quo), IMP‑Choropleth, Legende u
 - Client‑Caching (LocalStorage, 1h TTL) mit Fallbacks
 - Zeitreise‑Layer: Jahresauswahl für historische Heatmaps (Depression/Dropout)
  - Optional: OWID Proxy (`owid_proxy.py`) für CORS‑freie CSV‑Fetches
+ - Validierung (Ringe): Länder mit externer Validierung aus `data/validation.json` (`validatedISO3`)
+ - Quellen (Marker): Anzahl/Kategorien pro Land aus `data/validation.json` (`items[].iso3`)
 
 ## Formeln (Kurz)
 - Heatmap‑Intensität: `I = clamp((avg(dep%,dropout%))/100, 0, 1)`
@@ -78,11 +80,12 @@ web/5d-map/
 ├─ README.md
 ├─ data/
 │  ├─ schools.json
-│  └─ countries.json
+│  ├─ countries.json
+│  └─ validation.json
 └─ modules/
-   ├─ api-fetcher.js   # Datenbeschaffung (OWID/WB/WGI) + Caching
+  ├─ api-fetcher.js   # Datenbeschaffung (OWID/WB/WGI/validation) + Caching
    ├─ map-renderer.js  # Leaflet Grundsetup
-   ├─ layers.js        # Heatmap, IMP‑Choropleth, Legende, Marker
+  ├─ layers.js        # Heatmap, IMP‑Choropleth, Legenden, Marker, Validierungsringe
    └─ popups.js        # Popups (Schulen, IMP)
 ```
 

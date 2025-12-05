@@ -50,6 +50,9 @@ export async function fetchAllData() {
   // Länder-Zentroiddaten (lokal)
   const countries = await fetchWithCache('countries', () => fetchJSON('./data/countries.json'))
     .catch(() => []);
+  // Validierungsdaten (lokal)
+  const validation = await fetchWithCache('validation', () => fetchJSON('./data/validation.json'))
+    .catch(() => ({ validatedISO3: [], items: [] }));
   // Baseline Snapshot (feste Ausgangswerte)
   const baseline = await fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json'))
     .catch(() => null);
@@ -205,6 +208,8 @@ export async function fetchAllData() {
 
   // Heatmap-Punkte: Mittelwert aus normierten (%) Werten, sofern vorhanden
   result.heatmapPoints = [];
+  // Stelle Länder für andere Layer bereit
+  result.countries = countries;
   for (const c of countries) {
     const iso3 = c.iso3;
     const lat = Number(c.lat), lng = Number(c.lng);
@@ -266,6 +271,27 @@ export async function fetchAllData() {
   result.seriesYears = years;
   result.depressionSeries = depressionSeries;
   result.dropoutSeries = dropoutSeries;
+  // Validierungs‑ und Quelleninfos bereitstellen
+  result.validatedISO3 = Array.isArray(validation.validatedISO3) ? validation.validatedISO3 : [];
+  result.validationItems = Array.isArray(validation.items) ? validation.items : [];
+  // einfache Quellenzählung pro ISO3 aus validation.items (optional)
+  const sourcesByISO3 = {};
+  for (const c of countries) {
+    sourcesByISO3[c.iso3] = { count: 0, categories: [] };
+  }
+  if (Array.isArray(validation.items)) {
+    for (const it of validation.items) {
+      const cat = String(it.domain || 'misc');
+      const status = String(it.status || 'red');
+      // Optionale ISO3‑Zuordnung per item.iso3
+      if (it.iso3 && sourcesByISO3[it.iso3]) {
+        sourcesByISO3[it.iso3].count += 1;
+        if (!sourcesByISO3[it.iso3].categories.includes(cat)) sourcesByISO3[it.iso3].categories.push(cat);
+        if (!sourcesByISO3[it.iso3].categories.includes(status)) sourcesByISO3[it.iso3].categories.push(status);
+      }
+    }
+  }
+  result.sourcesByISO3 = sourcesByISO3;
 
   return result;
 }

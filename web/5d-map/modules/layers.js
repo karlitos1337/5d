@@ -136,28 +136,76 @@ export function createIMPLegendControl() {
   return control;
 }
 
+export function createValidationLegendControl() {
+  const control = L.control({ position: 'bottomright' });
+  control.onAdd = function () {
+    const div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = '<strong>Validierung</strong><br>';
+    const rows = [
+      { color: '#22C55E', label: 'Grün: extern validiert', status: 'green' },
+      { color: '#E8B84A', label: 'Gelb: Community/Wikipedia', status: 'yellow' },
+      { color: '#C0152F', label: 'Rot: keine Validierung', status: 'red' },
+      { color: '#2dd4bf', label: 'Alle', status: 'all' }
+    ];
+    rows.forEach(r => {
+      const row = document.createElement('div');
+      row.innerHTML = `<i style="background:${r.color}"></i> ${r.label}`;
+      row.style.cursor = 'pointer';
+      row.title = 'Klicken zum Filtern';
+      row.addEventListener('click', () => {
+        const ev = new CustomEvent('validation-filter', { detail: { status: r.status } });
+        window.dispatchEvent(ev);
+      });
+      div.appendChild(row);
+    });
+    const note = document.createElement('div');
+    note.className = 'legend-note';
+    note.innerHTML = '<small>Daten: validation.json</small>';
+    div.appendChild(note);
+    return div;
+  };
+  return control;
+}
+
 function getIconForType(type) {
   const icons = { sudbury: '🟢', waldorf: '🔵', 'folk-high': '🟡', tokkatsu: '🟣' };
   return icons[type] || '⚪';
 }
 
 // Validierungsring: zeichnet einen dezenten Ring um Länder mit verifizierten Daten
-export function createValidationRingLayer(data) {
-  const { countries, validatedISO3 } = data || {};
+export function createValidationRingLayer(data, filterStatus) {
+  const { countries, validatedISO3, validationItems } = data || {};
   const group = L.layerGroup();
-  if (!Array.isArray(countries) || !Array.isArray(validatedISO3)) return group;
-  const set = new Set(validatedISO3);
+  if (!Array.isArray(countries)) return group;
+  let isoSet = new Set(Array.isArray(validatedISO3) ? validatedISO3 : []);
+  const metaByISO3 = {};
+  if (Array.isArray(validationItems)) {
+    for (const it of validationItems) {
+      if (it && it.iso3) {
+        metaByISO3[it.iso3] = {
+          status: String(it.status || ''),
+          source: String(it.source || '')
+        };
+      }
+    }
+  }
+  if (filterStatus && filterStatus !== 'all' && Array.isArray(validationItems)) {
+    isoSet = new Set(validationItems.filter(it => String(it.status) === String(filterStatus) && it.iso3).map(it => it.iso3));
+  }
   for (const c of countries) {
     const { iso3, lat, lng } = c || {};
     if (!iso3 || typeof lat !== 'number' || typeof lng !== 'number') continue;
-    if (!set.has(iso3)) continue;
+    if (!isoSet.has(iso3)) continue;
+    const meta = metaByISO3[iso3] || {};
+    const statusLabel = meta.status === 'green' ? 'extern' : meta.status === 'yellow' ? 'community' : meta.status === 'red' ? 'keine' : '—';
+    const src = meta.source || 'validation.json';
     const circle = L.circle([lat, lng], {
       radius: 300000, // 300 km
       color: '#2dd4bf',
       weight: 2,
       fill: false,
       opacity: 0.9
-    }).bindTooltip(`✔️ Validiert: ${c.name || iso3}`, { permanent: false });
+    }).bindTooltip(`✔️ ${c.name || iso3}<br/><small>Status: ${statusLabel}, Quelle: ${src}</small>`, { permanent: false });
     group.addLayer(circle);
   }
   return group;
@@ -173,7 +221,8 @@ export function createSourcesLayer(data) {
     if (!iso3 || typeof lat !== 'number' || typeof lng !== 'number') continue;
     const info = sourcesByISO3[iso3];
     const count = Number(info?.count || 0);
-    const categories = Array.isArray(info?.categories) ? info.categories.join(', ') : '—';
+    const categoriesArr = Array.isArray(info?.categories) ? info.categories : [];
+    const categories = categoriesArr.length ? categoriesArr.join(', ') : '—';
     const color = count >= 10 ? '#22C55E' : count >= 3 ? '#E8B84A' : '#C0152F';
     const m = L.circleMarker([lat, lng], {
       radius: Math.max(4, Math.min(12, count)),
@@ -181,7 +230,7 @@ export function createSourcesLayer(data) {
       fillColor: color,
       fillOpacity: 0.7,
       weight: 1
-    }).bindPopup(`<b>${c.name || iso3}</b><br/>Quellen: ${count}<br/><small>${categories}</small>`);
+    }).bindPopup(`<b>${c.name || iso3}</b><br/>Quellen: ${count}<br/>Kategorien: ${categoriesArr.length}<br/><small>${categories}</small>`);
     group.addLayer(m);
   }
   return group;
