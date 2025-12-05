@@ -102,9 +102,9 @@ class IMPValidationStudy:
         # Gesamtvarianz
         total_variance = np.var(items_array.sum(axis=1), ddof=1)
         
-        # Cronbach's Alpha
-        if total_variance == 0:
-             return 0.0 # Vermeide Division durch Null bei konstanter Antwort
+        # Cronbach's Alpha - Safety Checks
+        if n_items <= 1 or total_variance == 0:
+             return 0.0 # Vermeide Division durch Null bei zu wenigen Items oder konstanter Antwort
 
         alpha = (n_items / (n_items - 1)) * (1 - item_variances.sum() / total_variance)
         
@@ -286,20 +286,30 @@ def main():
     questionnaire = study.generate_questionnaire()
     print(f"    → {len(questionnaire)} Fragen erstellt")
     
-    # 2. Beispiel-Daten generieren (für Demo - später durch echte Daten ersetzen)
+    # 2. Beispiel-Daten generieren (für Demo - simuliert realistische Korrelationen)
     print("\n[2/5] Generiere Beispiel-Daten (30 Probanden)...")
     np.random.seed(42)
     example_data = {}
     
+    # Simuliere latente Variablen für jede Dimension (Mittelwert 3.5, SD 0.8)
+    # Probanden haben eine "Grundkompetenz", die die Items beeinflusst -> hohe Korrelation -> hohes Alpha
+    n_participants = 30
+
     for dimension, questions in QUESTIONS.items():
+        # Latente Fähigkeit des Probanden in dieser Dimension
+        latent_ability = np.random.normal(3.5, 0.8, n_participants)
+        latent_ability = np.clip(latent_ability, 1, 4.5) # Clip to keep within range
+
         for i, question in enumerate(questions, 1):
             col_name = f"{dimension}_{i}"
-            # Simuliere Antworten zwischen 2-5 (tendenziell positiv, Skala 0-5)
-            example_data[col_name] = np.random.randint(2, 6, size=30)
+            # Item-Antwort ist latent_ability + Rauschen
+            item_scores = latent_ability + np.random.normal(0, 0.6, n_participants)
+            item_scores = np.clip(np.round(item_scores), 0, 5).astype(int)
+            example_data[col_name] = item_scores
     
     df = pd.DataFrame(example_data)
     df.to_csv(f'example_responses_{study.timestamp}.csv', index=False)
-    print("    → Beispiel-CSV erstellt")
+    print("    → Beispiel-CSV erstellt (mit korrelierten Daten für realistisches Alpha)")
     
     # 3. Daten laden
     print("\n[3/5] Lade Daten...")

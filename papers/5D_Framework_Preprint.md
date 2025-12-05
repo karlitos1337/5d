@@ -147,7 +147,7 @@ This paper aims to:
 **Mathematical Formulation**:
 
 ```
-IMP = (C × M × S × R × E)^(1/5)
+IMP = (C × M × S × R × E)^(1/5) = ⁵√(C × M × S × R × E)
 ```
 
 Where:
