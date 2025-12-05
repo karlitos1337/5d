@@ -1,10 +1,9 @@
 ---
-name: "\U0001F52C Theoretical Development"
+name: 🔬 Theoretical Development
 about: Propose refinements to 5D theory, IMP formula, or conceptual framework
 title: "[THEORY] "
-labels: ''
+labels: theory, 5D-framework, conceptual
 assignees: ''
-
 ---
 
 ## 🔬 Theoretical Question

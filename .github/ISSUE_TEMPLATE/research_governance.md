@@ -1,10 +1,9 @@
 ---
-name: "\U0001F3DB️ Governance Research"
+name: 🏛️ Governance Research
 about: Propose or discuss governance/economics research (Ostrom, institutions, non-coercion)
 title: "[GOV] "
-labels: ''
+labels: research, governance, economics
 assignees: ''
-
 ---
 
 ## 🏛️ Research Question
