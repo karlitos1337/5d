@@ -46,3 +46,6 @@ pypdf>=3.0.0
 
 # External sources
 gdown>=5.2.0
+
+#scipy
+scipy==1.11.0

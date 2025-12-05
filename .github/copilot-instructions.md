@@ -1,73 +1,45 @@
-# 5D Intelligence Framework – AI Agent Instructions
+# 5D Intelligence Framework – Copilot Instructions (Kurzfassung)
 
-**Version:** 4.0 (Streamlined Architecture Guide)  
-**Last Updated:** 2025-12-03  
-**Goal:** Help AI agents be immediately productive with scientific rigor
+Ziel: Sofort produktiv werden mit klaren, projekt‑spezifischen Leitplanken. Fokus auf echte Workflows, stabile Datenverträge und konkrete Beispiele aus diesem Repo.
 
----
+## Big Picture
+- Pipeline: `5d_extractor.py` → `5d_research_scraper.py` → `5d_github_api.py` → JSON‑Artefakte → `5d_dashboard.py` (Streamlit, Seiten in `pages/`).
+- Artefakt‑Vertrag: `5d_solutions.json`, `5d_research_data.json`, `5d_github_data.json` sind die Schnittstelle zwischen Schritten. JSON‑Keys niemals umbenennen ohne Schema‑Update + Tests.
+- Visualisierung: `web/5d-map/` (Leaflet, statisch). Dashboard rendert ausschließlich aus JSON‑Artefakten.
 
-## 🏗️ Core Architecture
+## Schlüsselkomponenten
+- `models/schemas.py`: Pydantic‑Validierung für Artefakte. Schemaänderungen → neue Tests in `tests/`, Pipeline Writer anpassen.
+- `config/default.yaml`: Alle konfigurierbaren Werte. Keine Hardcodes in Pipeline‑Skripten.
+- `5d_dashboard.py` + `pages/`: Multipage‑App, externe Templates via `st.components.v1.html` möglich (z. B. `web/templates/5d_forschungsplanung.html`).
 
-### Data Pipeline (Sequential Flow)
-```
-# Copilot/Agent Guidance — 5d (Kurzfassung)
-
-Zweck: Kurzes, handlungsorientiertes Leitblatt für AI-Coding‑Agenten, damit Änderungen schnell korrekt, testsicher und reproducible sind.
-
-**Kernaussagen (Big Picture)**
-- Pipeline: `5d_extractor.py` → `5d_research_scraper.py` → `5d_github_api.py` → JSON artifacts → `5d_dashboard.py` (Streamlit pages in `pages/`).
-- Stabiler Vertrag: `d5_solutions.json`, `d5_research_data.json`, `d5_github_data.json` sind das Interface zwischen Schritten — niemals JSON-Schlüssel ohne Koordination umbenennen.
-
-**Wichtige Dateien & Komponenten**
-- `models/schemas.py`: zentrale Pydantic-Validierung. Änderungen hier erfordern Tests und ggf. Migrationsschritte für JSON-artifacts.
-- `config/default.yaml`: alle konfigurierbaren Werte; vermeide Hardcoding.
-- `web/5d-map/`: statische Leaflet‑Map (serve mit `python3 -m http.server 5500`).
-- `start.sh` / `Makefile`: Standardworkflow zum Starten der Pipeline/Dev‑Umgebung.
-
-**Konkrete Workflows / Kommandos**
-- Dev-Setup: `pip install -r requirements_extended.txt`.
-- Full run: `./start.sh` (Extraktion → Scraper → GitHub API → Dashboard). Alternativ: `make start`.
+## Setup & Lauf
+- Dev‑Setup: `pip install -r requirements_extended.txt`.
+- Full Run: `./start.sh` oder `make start` (führt Extraktion → Scraper → GitHub API → Dashboard).
 - Tests: `pytest tests/ -v` oder `make test`.
-- Map lokal: `cd web/5d-map && python3 -m http.server 5500` oder `make serve-map`.
-
-**Projekt-spezifische Regeln (unbedingt befolgen)**
-- Evidence Labels: Jede Änderung mit inhaltlicher Behauptung braucht ein Evidence-Label (✅ Fakt, ⚠️ Hypothese, 🔮 Spekulation) und, falls möglich, eine BibTeX‑Quelle aus `07_daten_analysen/5d-relevant-sources.bib`.
-- Schema-First: Neue JSON-Felder → zuerst `models/schemas.py` anpassen, dann Tests in `tests/` schreiben, dann Pipeline-Anpassungen.
-- FAQ: Änderungen, die Datenherkunft betreffen, erfordern ein Update von `docs/FAQ.md`.
-
-**Praktische Beispiele**
-- Neue Feld hinzufügt: edit `models/schemas.py` → add test `tests/test_schema_xyz.py` → run `pytest` → update pipeline writer (`5d_extractor.py` / `5d_github_api.py`) → bump artifact contract in PR description.
-- Map-Fehler debuggen: `cd web/5d-map && python3 -m http.server 5500` → Browser auf `http://localhost:5500` → prüfe `data/` JSONs und `config/default.yaml`.
-
-**PR / Commit Hinweise für Agenten**
-- Beschreibe im PR die veränderten JSON‑Keys, betroffene pipeline‑stufen und Tests. Beispiel-PR-Header: "schema: add `score_source` to Solutions — update extractor + tests (models/schemas.py, tests/test_solutions.py)".
-
-Wenn etwas unklar ist oder Ergänzungen nötig sind, sag kurz Bescheid — ich iteriere die Datei gezielt nach deinem Feedback.
-
-*** Ende Kurzfassung ***
-    - ✅ Autonomy → IM (Deci & Ryan 1985, 1000+ studies)
-
----
-
-## 🧩 Dashboard Pages (Streamlit)
-- Einstieg: `5d_dashboard.py` mit Multipage unter `pages/` (automatisch erkannt).
-- Neue Seiten hinzufügen: `pages/<order>_<emoji>_<Name>.py` + `st.set_page_config(...)` nutzen.
-- Design-Übernahme: Für vollständige UI-Templates externe HTMLs via `st.components.v1.html` einbinden.
-    - Beispiel: `pages/12_🧠_Forschungsplanung_Template.py` rendert `web/templates/5d_forschungsplanung.html` (Tailwind + Chart.js/CDN).
-    - Externes iFrame: `pages/13_🧪_NN_Playground_Demo.py` bettet `https://playground.tensorflow.org/?hl=de` ein.
-- Sidebar-Links: In `5d_dashboard.py` per `st.page_link("pages/<file>.py", label=..., icon=...)` verknüpfen.
-
-## 🔗 Datenvertrag & Seiten
-- Seiten dürfen nur aus JSON-Artefakten lesen: `5d_research_data.json`, `5d_github_data.json`, `5d_solutions.json`.
-- Keine stillen Schema-Änderungen in den Seiten; Anpassungen laufen über `models/schemas.py` + Tests.
-
-## 🧪 Schnelltest für Seiten
+- Map lokal: `cd web/5d-map && python3 -m http.server 5500` (oder `make serve-map`).
 - Dashboard lokal: `streamlit run 5d_dashboard.py` (oder `./start.sh`).
-- Rendering-Check: Prüfe Konsole/Netzwerk im Browser (CDN-Ladeskripte für Tailwind/Chart.js erreichbar?).
-- Kein Netz? Fallback: Charts nur mit Streamlit/Plotly bauen oder CDNs in Vendor-Assets spiegeln.
 
-## 📁 Relevante Dateien
-- `5d_dashboard.py` (Sidebar, Onboarding)
-- `pages/12_🧠_Forschungsplanung_Template.py` (HTML-Template-Einbettung)
-- `pages/13_🧪_NN_Playground_Demo.py` (Externe Referenz per iFrame)
-- `web/templates/5d_forschungsplanung.html` (Design-Quelle, 5D-Style)
+## Projektregeln (verbindlich)
+- Evidence Labels in inhaltlichen Änderungen: ✅ Fakt, ⚠️ Hypothese, 🔮 Spekulation; möglichst Quelle aus `07_daten_analysen/5d-relevant-sources.bib`.
+- Schema‑First: Neue JSON‑Felder immer zuerst in `models/schemas.py` definieren, dann Tests schreiben, dann die schreibenden Pipeline‑Schritte anpassen.
+- Datenherkunft: Änderungen mit Herkunftsimpact erfordern Update von `docs/FAQ.md`.
+
+## Arbeitsmuster (konkrete Beispiele)
+- Neues Feld: `models/schemas.py` editieren → Test z. B. `tests/test_solutions_schema.py` ergänzen → `pytest` → Writer in `5d_extractor.py`/`5d_github_api.py` anpassen → PR‑Beschreibung: betroffene JSON‑Keys + Stufen.
+- Map Debug: `cd web/5d-map && python3 -m http.server 5500` → Browser `http://localhost:5500` → prüfe `web/5d-map/data/*.json` und `config/default.yaml`.
+- Neue Seite: `pages/<order>_<emoji>_<Name>.py` erstellen, `st.set_page_config(...)` setzen, optional Template via `st.components.v1.html` laden; Link in Sidebar per `st.page_link(...)`.
+
+## Konventionen & Patterns
+- JSON nur über definierte Artefakte lesen/schreiben; keine stillen Schema‑Abweichungen in `pages/`.
+- Befehle über `Makefile`/`start.sh` bevorzugen; CI spiegelt diese Flows.
+- Python‑Stil konsistent halten; keine Lizenz‑Header hinzufügen; minimalinvasive Änderungen.
+
+## Quick‑Refs (Dateien/Dirs)
+- `5d_extractor.py`, `5d_research_scraper.py`, `5d_github_api.py` – Pipeline Writer/Fetcher.
+- `models/schemas.py` – Vertrag/Validierung.
+- `config/default.yaml` – Konfiguration.
+- `5d_dashboard.py`, `pages/` – UI.
+- `web/5d-map/`, `web/templates/` – statische Map/HTML Templates.
+- `tests/` – Schema/Workflow‑Tests.
+
+Unklarheiten oder Lücken? Kurze Rückmeldung geben – ich iteriere diese Datei gezielt und halte sie synchron mit Änderungen in Schema, Pipeline und Dashboard.
