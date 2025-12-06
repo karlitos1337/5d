@@ -37,6 +37,16 @@
     ],
     "pubmed": [
       {
+        "title": "Effective self-directed learning and performance perception: Insights from the United Kingdom National Undergraduate neuroanatomy competition.",
+        "authors": [
+          "Gardee A",
+          "Goonewardena E",
+          "Lub S"
+        ],
+        "published": "2025 Dec 4",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41349184/"
+      },
+      {
         "title": "Commercial Learning Platforms in UK Undergraduate Medical Education: A Qualitative Study of Benefits, Limitations, and Integration.",
         "authors": [
           "Phillips R",
@@ -54,19 +64,9 @@
         ],
         "published": "2025 Dec 3",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41337739/"
-      },
-      {
-        "title": "Facilitating Aboriginal Perinatal Mental Health Information Access with a Retrieval-Augmented LLM-based Chatbot.",
-        "authors": [
-          "Utami MSM",
-          "Kwok WH",
-          "Kotz J"
-        ],
-        "published": "2025 Jul",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41336738/"
       }
     ],
-    "timestamp": "2025-12-05T18:24:28.814789"
+    "timestamp": "2025-12-06T21:06:12.341735"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,6 +106,26 @@
     ],
     "pubmed": [
       {
+        "title": "Factors influencing medical students' adoption of AI educational agents: an extended UTAUT model.",
+        "authors": [
+          "Zhao X",
+          "Liu W",
+          "Yue S"
+        ],
+        "published": "2025 Dec 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41350656/"
+      },
+      {
+        "title": "Effectiveness of a Remote Intervention Program for Self-Management Behaviors in Adolescents and Young Adults With Inflammatory Bowel Disease Based on the Self-Determination Theory: Randomized Controlled Trial Across 2 Centers.",
+        "authors": [
+          "Zhu Y",
+          "Chen Y",
+          "Hu J"
+        ],
+        "published": "2025 Dec 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41349039/"
+      },
+      {
         "title": "Enhanced proactive control under stress: divergent neural dynamics of social vs. Monetary rewards in table tennis athletes.",
         "authors": [
           "Xu L",
@@ -114,29 +134,9 @@
         ],
         "published": "2025",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41346789/"
-      },
-      {
-        "title": "Motivations of wheelchair curling athletes to participate in sport: a qualitative research.",
-        "authors": [
-          "Daşkesen SS",
-          "Bedir D",
-          "İlhan EL"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41346500/"
-      },
-      {
-        "title": "The impact of servant leadership on employees taking charge behavior.",
-        "authors": [
-          "Hu M",
-          "Wang Y",
-          "Xu X"
-        ],
-        "published": "2025 Dec 4",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41345154/"
       }
     ],
-    "timestamp": "2025-12-05T18:24:31.845569"
+    "timestamp": "2025-12-06T21:06:15.330984"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,36 +172,37 @@
     ],
     "pubmed": [
       {
-        "title": "Trajectories of Individuating and Relating Autonomy in Adolescence: A Longitudinal Study in a Relational Cultural Context.",
+        "title": "Enhancing Perceived Relevance and Motivation in Microbiology: A Hands-On Workshop on Oral Nitrate-Reducing Bacteria.",
         "authors": [
-          "Kuo CS",
-          "Liu YL"
+          "Pérez-Leal M",
+          "Estornut C",
+          "Rosier BT"
         ],
         "published": "2025 Dec 5",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41348374/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41351241/"
       },
       {
-        "title": "A framework for semantics-based situational awareness during mobile robot deployments.",
+        "title": "Effectiveness of a Remote Intervention Program for Self-Management Behaviors in Adolescents and Young Adults With Inflammatory Bowel Disease Based on the Self-Determination Theory: Randomized Controlled Trial Across 2 Centers.",
         "authors": [
-          "Ruan T",
-          "Ramesh A",
-          "Wang H"
+          "Zhu Y",
+          "Chen Y",
+          "Hu J"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41347208/"
+        "published": "2025 Dec 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41349039/"
       },
       {
-        "title": "From awareness to action: A nationwide survey of infectious diseases and clinical microbiology physicians' perspectives on artificial intelligence in clinical practice.",
+        "title": "Using Generative AI to Co-Design Digital Mental Health Interventions With Adolescents in Rural South Africa: Qualitative Thematic Analysis of Participatory Workshops.",
         "authors": [
-          "Gülten E",
-          "Derin O",
-          "Arslan E"
+          "Dallison S",
+          "Moffett B",
+          "Makhubela P"
         ],
-        "published": "2025 Jan-Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41346940/"
+        "published": "2025 Dec 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41348954/"
       }
     ],
-    "timestamp": "2025-12-05T18:24:34.816502"
+    "timestamp": "2025-12-06T21:06:18.324936"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -269,7 +270,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-05T18:24:37.817311"
+    "timestamp": "2025-12-06T21:06:21.339490"
   },
   "democratic schools": {
     "arxiv": [
@@ -336,7 +337,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41344297/"
       }
     ],
-    "timestamp": "2025-12-05T18:24:41.040929"
+    "timestamp": "2025-12-06T21:06:24.323923"
   },
   "student agency": {
     "arxiv": [
@@ -379,6 +380,16 @@
     ],
     "pubmed": [
       {
+        "title": "Graduate Policy Class Has a Lasting Impact on Health Science Student Political Knowledge and Skill.",
+        "authors": [
+          "Gray LE",
+          "Phillippi RD",
+          "Hickman C"
+        ],
+        "published": "2025 Winter",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41348631/"
+      },
+      {
         "title": "Psychosocial Factors Influencing the Sexual Risk Behaviour of Adolescents Living with and Affected by HIV Who Reside in HIV-Affected Homes in Uganda.",
         "authors": [
           "Kiirya SK",
@@ -397,18 +408,8 @@
         ],
         "published": "2025 Dec",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41342633/"
-      },
-      {
-        "title": "Making strides in doctoral-level career outcomes reporting: a review of classification and visualization methodologies in graduate education.",
-        "authors": [
-          "L Collins TR",
-          "Layton RL",
-          "Ramadoss D"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41341269/"
       }
     ],
-    "timestamp": "2025-12-05T18:24:45.014626"
+    "timestamp": "2025-12-06T21:06:27.332911"
   }
 }

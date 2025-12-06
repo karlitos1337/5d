@@ -15,11 +15,11 @@
         "name": "deep_learning_topology_opt",
         "full_name": "deng-cy/deep_learning_topology_opt",
         "description": "Code for paper \"Self-Directed Online Machine Learning for Topology Optimization\"",
-        "stars": 132,
+        "stars": 133,
         "forks": 27,
         "language": "MATLAB",
         "url": "https://github.com/deng-cy/deep_learning_topology_opt",
-        "updated": "2025-11-25T02:28:18Z"
+        "updated": "2025-12-06T06:16:39Z"
       },
       {
         "name": "100-Days-of-Machine-learning",
@@ -264,56 +264,56 @@
   "trending": {
     "education": [
       {
-        "name": "feeds",
-        "stars": 1,
-        "url": "https://github.com/4thWaveAI/feeds"
+        "name": "bible-on-site",
+        "stars": 3,
+        "url": "https://github.com/bible-on-site/bible-on-site"
       },
       {
-        "name": "Anki-Android",
-        "stars": 10329,
-        "url": "https://github.com/ankidroid/Anki-Android"
+        "name": "SemiDevKit",
+        "stars": 0,
+        "url": "https://github.com/Samizo-AITL/SemiDevKit"
       },
       {
-        "name": "edumips64",
-        "stars": 171,
-        "url": "https://github.com/EduMIPS64/edumips64"
+        "name": "edu-quest",
+        "stars": 0,
+        "url": "https://github.com/tqer39/edu-quest"
       },
       {
-        "name": "kana-dojo",
-        "stars": 857,
-        "url": "https://github.com/lingdojo/kana-dojo"
+        "name": "What-s-Next",
+        "stars": 0,
+        "url": "https://github.com/akshayremeshp/What-s-Next"
       },
       {
-        "name": "gcompris",
-        "stars": 50,
-        "url": "https://github.com/KDE/gcompris"
+        "name": "cascadesteam.github.io",
+        "stars": 2,
+        "url": "https://github.com/CascadeSTEAM/cascadesteam.github.io"
       }
     ],
     "learning": [
       {
-        "name": "slowmate-chess-engine",
+        "name": "autosgm",
         "stars": 0,
-        "url": "https://github.com/RTS-Technology-Solutions/slowmate-chess-engine"
+        "url": "https://github.com/somefunAgba/autosgm"
       },
       {
-        "name": "go-learning",
-        "stars": 0,
-        "url": "https://github.com/cube-m4st3r/go-learning"
-      },
-      {
-        "name": "Anki-Android",
-        "stars": 10329,
-        "url": "https://github.com/ankidroid/Anki-Android"
-      },
-      {
-        "name": "formula-fan",
-        "stars": 9,
-        "url": "https://github.com/JoeMancera/formula-fan"
+        "name": "cascadesteam.github.io",
+        "stars": 2,
+        "url": "https://github.com/CascadeSTEAM/cascadesteam.github.io"
       },
       {
         "name": "lab",
         "stars": 1,
         "url": "https://github.com/navchandar/lab"
+      },
+      {
+        "name": "visual-guide-for-elixir-axon-ml-functions",
+        "stars": 0,
+        "url": "https://github.com/aifrak/visual-guide-for-elixir-axon-ml-functions"
+      },
+      {
+        "name": "Blockchain-Simulation-Game",
+        "stars": 0,
+        "url": "https://github.com/zakeelm6/Blockchain-Simulation-Game"
       }
     ],
     "pedagogy": [
@@ -321,6 +321,11 @@
         "name": "RAGKET",
         "stars": 3,
         "url": "https://github.com/Ayanop267/RAGKET"
+      },
+      {
+        "name": "developpement-cote-serveur-php",
+        "stars": 0,
+        "url": "https://github.com/paul-schuhm/developpement-cote-serveur-php"
       },
       {
         "name": "expagog",
@@ -336,18 +341,18 @@
         "name": "Lucian-Academy",
         "stars": 0,
         "url": "https://github.com/luciangreen/Lucian-Academy"
-      },
-      {
-        "name": "instructor-training",
-        "stars": 184,
-        "url": "https://github.com/carpentries/instructor-training"
       }
     ],
     "edtech": [
       {
-        "name": "Empirical-Core",
-        "stars": 30,
-        "url": "https://github.com/empirical-org/Empirical-Core"
+        "name": "walnutedu-student-management",
+        "stars": 0,
+        "url": "https://github.com/NotTheKing3/walnutedu-student-management"
+      },
+      {
+        "name": "report-automation-mvp",
+        "stars": 0,
+        "url": "https://github.com/NickScherbakov/report-automation-mvp"
       },
       {
         "name": "exam-seating-arranger",
@@ -355,21 +360,16 @@
         "url": "https://github.com/Bossr1387/exam-seating-arranger"
       },
       {
+        "name": "Imago-English-v2",
+        "stars": 1,
+        "url": "https://github.com/vmathm/Imago-English-v2"
+      },
+      {
         "name": "TatvaX-AI-PROTOTYPE",
         "stars": 0,
         "url": "https://github.com/Damijan123/TatvaX-AI-PROTOTYPE"
-      },
-      {
-        "name": "kolibri",
-        "stars": 958,
-        "url": "https://github.com/learningequality/kolibri"
-      },
-      {
-        "name": "ai-recruitment-assistant",
-        "stars": 0,
-        "url": "https://github.com/ValentinOliveira/ai-recruitment-assistant"
       }
     ]
   },
-  "timestamp": "2025-12-05T18:24:45.147706"
+  "timestamp": "2025-12-06T21:06:27.475764"
 }
