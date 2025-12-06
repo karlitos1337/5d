@@ -37,6 +37,12 @@ class ResearchScraper:
         self.retry_backoff = retry_backoff
         self.last_request_time = 0
 
+        # WHO API settings
+        self.who_base_url = "https://ghoapi.azureedge.net/api"
+
+        # World Bank API settings
+        self.wb_base_url = "https://api.worldbank.org/v2"
+
     def _rate_limit(self):
         """Enforce rate limiting between requests."""
         current_time = time.time()
@@ -86,7 +92,7 @@ class ResearchScraper:
             except requests.exceptions.RequestException as e:
                 if attempt < self.max_retries - 1:
                     wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                    print(f"⚠️  arXiv error (attempt {attempt+1}/{self.max_retries}): {e}")
+                    print(f"⚠️  arXiv error (attempt {attempt + 1}/{self.max_retries}): {e}")
                     print(f"   Retrying in {wait_time:.1f}s...")
                     time.sleep(wait_time)
                 else:
@@ -146,7 +152,7 @@ class ResearchScraper:
             except requests.exceptions.RequestException as e:
                 if attempt < self.max_retries - 1:
                     wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                    print(f"⚠️  PubMed error (attempt {attempt+1}/{self.max_retries}): {e}")
+                    print(f"⚠️  PubMed error (attempt {attempt + 1}/{self.max_retries}): {e}")
                     print(f"   Retrying in {wait_time:.1f}s...")
                     time.sleep(wait_time)
                 else:
@@ -158,11 +164,182 @@ class ResearchScraper:
 
         return []
 
+    def fetch_who_mental_health_data(self, countries=None):
+        """
+        Fetch mental health indicators from WHO Global Health Observatory.
+
+        Args:
+            countries: List of ISO3 country codes (default: top 20 countries)
+
+        Returns:
+            dict: Mental health data by country
+        """
+        if countries is None:
+            # Top 20 countries for baseline
+            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
+                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
+                         "NZL", "ESP", "ITA", "KOR"]
+
+        # WHO indicator codes for mental health
+        indicators = {
+            "MH_12": "Depression prevalence (%)",  # Depressive disorders
+            "MH_1": "Mental health workers (per 100,000)",
+            "MH_17": "Suicide mortality rate"
+        }
+
+        mental_health_data = {}
+
+        for indicator_code, indicator_name in indicators.items():
+            print(f"  🏥 WHO: Fetching {indicator_name}...")
+
+            for attempt in range(self.max_retries):
+                try:
+                    self._rate_limit()
+
+                    # WHO API endpoint
+                    url = f"{self.who_base_url}/{indicator_code}"
+                    params = {"$filter": "SpatialDim in ({})".format(",".join(countries))}
+
+                    response = requests.get(url, params=params, timeout=15)
+
+                    if response.status_code == 429:
+                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                        print(f"    ⏳ WHO rate limit, waiting {wait_time:.1f}s...")
+                        time.sleep(wait_time)
+                        continue
+
+                    if response.status_code == 404:
+                        print(f"    ⚠️  Indicator {indicator_code} not found")
+                        break
+
+                    response.raise_for_status()
+                    data = response.json()
+
+                    # Parse WHO response
+                    if "value" in data:
+                        for entry in data["value"]:
+                            country = entry.get("SpatialDim")
+                            value = entry.get("NumericValue")
+                            year = entry.get("TimeDim")
+
+                            if country and value is not None:
+                                if country not in mental_health_data:
+                                    mental_health_data[country] = {}
+
+                                mental_health_data[country][indicator_name] = {
+                                    "value": value,
+                                    "year": year
+                                }
+
+                    break  # Success
+
+                except requests.exceptions.RequestException as e:
+                    if attempt < self.max_retries - 1:
+                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                        print(f"    ⚠️  WHO error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                        time.sleep(wait_time)
+                    else:
+                        print(f"    ❌ WHO Error after {self.max_retries} attempts: {e}")
+                except Exception as e:
+                    print(f"    ❌ WHO Error: {e}")
+                    break
+
+        print(f"  ✅ WHO: {len(mental_health_data)} countries fetched")
+        return mental_health_data
+
+    def fetch_world_bank_education_data(self, countries=None):
+        """
+        Fetch education indicators from World Bank EdStats API.
+
+        Args:
+            countries: List of ISO3 country codes (default: top 20 countries)
+
+        Returns:
+            dict: Education data by country
+        """
+        if countries is None:
+            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
+                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
+                         "NZL", "ESP", "ITA", "KOR"]
+
+        # World Bank indicator codes for education
+        indicators = {
+            "SE.SEC.DURS": "Secondary education duration (years)",
+            "SE.PRM.CMPT.ZS": "Primary completion rate (%)",
+            "SE.XPD.TOTL.GD.ZS": "Government education expenditure (% of GDP)",
+            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)"
+        }
+
+        education_data = {}
+
+        for indicator_code, indicator_name in indicators.items():
+            print(f"  🏫 World Bank: Fetching {indicator_name}...")
+
+            for attempt in range(self.max_retries):
+                try:
+                    self._rate_limit()
+
+                    # World Bank API endpoint
+                    countries_str = ";".join(countries[:10])  # Limit to 10 per request
+                    url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                    params = {
+                        "format": "json",
+                        "date": "2020:2023",  # Recent years
+                        "per_page": 500
+                    }
+
+                    response = requests.get(url, params=params, timeout=15)
+
+                    if response.status_code == 429:
+                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                        print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
+                        time.sleep(wait_time)
+                        continue
+
+                    response.raise_for_status()
+                    data = response.json()
+
+                    # Parse World Bank response
+                    if isinstance(data, list) and len(data) > 1:
+                        for entry in data[1]:  # Data is in second element
+                            country_code = entry.get("countryiso3code")
+                            value = entry.get("value")
+                            year = entry.get("date")
+
+                            if country_code and value is not None:
+                                if country_code not in education_data:
+                                    education_data[country_code] = {}
+
+                                # Keep most recent data
+                                if indicator_name not in education_data[country_code]:
+                                    education_data[country_code][indicator_name] = {
+                                        "value": value,
+                                        "year": year
+                                    }
+
+                    break  # Success
+
+                except requests.exceptions.RequestException as e:
+                    if attempt < self.max_retries - 1:
+                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                        time.sleep(wait_time)
+                    else:
+                        print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
+                except Exception as e:
+                    print(f"    ❌ World Bank Error: {e}")
+                    break
+
+        print(f"  ✅ World Bank: {len(education_data)} countries fetched")
+        return education_data
+
     def scrape_all(self):
-        """Sammelt Papers zu allen Keywords"""
+        """Sammelt Papers zu allen Keywords + WHO/World Bank Daten"""
         all_research = {}
 
         print("🔍 Starte Research Scraping...")
+
+        # Academic papers
         for keyword in self.keywords:
             print(f"\n📚 Suche: {keyword}")
 
@@ -178,7 +355,23 @@ class ResearchScraper:
             print(f"  ✅ arXiv: {len(arxiv_papers)} papers")
             print(f"  ✅ PubMed: {len(pubmed_papers)} papers")
 
-            # No additional sleep needed - _rate_limit() handles it
+        # WHO Mental Health Data
+        print("\n🏥 Fetching WHO Mental Health Data...")
+        who_data = self.fetch_who_mental_health_data()
+        all_research["who_mental_health"] = {
+            "data": who_data,
+            "timestamp": datetime.now().isoformat(),
+            "source": "WHO Global Health Observatory"
+        }
+
+        # World Bank Education Data
+        print("\n🏫 Fetching World Bank Education Data...")
+        wb_data = self.fetch_world_bank_education_data()
+        all_research["world_bank_education"] = {
+            "data": wb_data,
+            "timestamp": datetime.now().isoformat(),
+            "source": "World Bank EdStats API"
+        }
 
         return all_research
 
