@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Sudbury Valley School",
+    "type": "sudbury",
+    "lat": 42.3601,
+    "lng": -71.0589,
+    "founded": 1968,
+    "students": 200,
+    "outcomes": { "college": 87, "satisfaction": 82 },
+    "detailsLink": "https://github.com/karlitos1337/5d"
+  },
+  {
+    "name": "Rudolf Steiner Schule Berlin",
+    "type": "waldorf",
+    "lat": 52.5200,
+    "lng": 13.4050,
+    "founded": 1928,
+    "students": 450,
+    "outcomes": { "college": 75, "satisfaction": 78 },
+    "detailsLink": "https://de.wikipedia.org/wiki/Waldorfp%C3%A4dagogik"
+  }
+]

@@ -1,0 +1,22 @@
+Entity,Code,Year,Depression_prevalence
+Germany,DEU,2018,12.3
+Germany,DEU,2019,12.5
+Germany,DEU,2020,13.1
+France,FRA,2018,11.0
+France,FRA,2019,11.4
+France,FRA,2020,11.9
+United Kingdom,GBR,2018,14.2
+United Kingdom,GBR,2019,14.5
+United Kingdom,GBR,2020,15.0
+United States,USA,2018,16.0
+United States,USA,2019,16.3
+United States,USA,2020,17.2
+Japan,JPN,2018,8.1
+Japan,JPN,2019,8.0
+Japan,JPN,2020,8.4
+India,IND,2018,9.9
+India,IND,2019,10.2
+India,IND,2020,10.8
+Brazil,BRA,2018,13.6
+Brazil,BRA,2019,13.9
+Brazil,BRA,2020,14.7

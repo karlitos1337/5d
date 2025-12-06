@@ -1,0 +1,21 @@
+[
+  { "name": "Germany", "iso3": "DEU", "lat": 51.1657, "lng": 10.4515 },
+  { "name": "France", "iso3": "FRA", "lat": 46.2276, "lng": 2.2137 },
+  { "name": "United Kingdom", "iso3": "GBR", "lat": 55.3781, "lng": -3.4360 },
+  { "name": "United States", "iso3": "USA", "lat": 39.8283, "lng": -98.5795 },
+  { "name": "Japan", "iso3": "JPN", "lat": 36.2048, "lng": 138.2529 },
+  { "name": "Denmark", "iso3": "DNK", "lat": 56.2639, "lng": 9.5018 },
+  { "name": "Poland", "iso3": "POL", "lat": 51.9194, "lng": 19.1451 },
+  { "name": "Romania", "iso3": "ROU", "lat": 45.9432, "lng": 24.9668 },
+  { "name": "Spain", "iso3": "ESP", "lat": 40.4637, "lng": -3.7492 },
+  { "name": "Italy", "iso3": "ITA", "lat": 41.8719, "lng": 12.5674 },
+  { "name": "Netherlands", "iso3": "NLD", "lat": 52.1326, "lng": 5.2913 },
+  { "name": "Sweden", "iso3": "SWE", "lat": 60.1282, "lng": 18.6435 },
+  { "name": "Norway", "iso3": "NOR", "lat": 60.4720, "lng": 8.4689 },
+  { "name": "Finland", "iso3": "FIN", "lat": 61.9241, "lng": 25.7482 },
+  { "name": "Canada", "iso3": "CAN", "lat": 56.1304, "lng": -106.3468 },
+  { "name": "Brazil", "iso3": "BRA", "lat": -14.2350, "lng": -51.9253 },
+  { "name": "India", "iso3": "IND", "lat": 20.5937, "lng": 78.9629 },
+  { "name": "China", "iso3": "CHN", "lat": 35.8617, "lng": 104.1954 },
+  { "name": "Australia", "iso3": "AUS", "lat": -25.2744, "lng": 133.7751 }
+]
