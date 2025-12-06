@@ -1,4 +1,6 @@
 name: Validate Experiments
+permissions:
+  contents: read
 
 on:
   push:
