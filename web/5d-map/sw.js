@@ -117,9 +117,18 @@ function isStaticAsset(url) {
 
 // Helper: Check if URL is an external CDN
 function isExternalCDN(url) {
-  return url.includes('unpkg.com') || 
-         url.includes('cdn.jsdelivr.net') ||
-         url.includes('cdnjs.cloudflare.com');
+  try {
+    const parsed = new URL(url, self.location.origin); // Support relative URLs
+    const hostname = parsed.hostname;
+    return (
+      hostname === 'unpkg.com' || hostname.endsWith('.unpkg.com') ||
+      hostname === 'cdn.jsdelivr.net' || hostname.endsWith('.cdn.jsdelivr.net') ||
+      hostname === 'cdnjs.cloudflare.com' || hostname.endsWith('.cdnjs.cloudflare.com')
+    );
+  } catch (e) {
+    // If url cannot be parsed, treat as not external CDN
+    return false;
+  }
 }
 
 // Strategy 1: Network-first (try network, fallback to cache)
