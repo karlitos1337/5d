@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Awesome Piracy</title>
-	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="" id="bootswatch-css">
 	<link rel="icon" href="rocket-takeoff.svg" type="image/svg+xml">
 	<style>
 		main
@@ -65,7 +65,7 @@
 			if (!allowedThemes.includes(theme)) {
 				theme = defaultTheme;
 			}
-			document.querySelector('link').href =
+			document.getElementById('bootswatch-css').href =
 				`https://cdn.jsdelivr.net/npm/bootswatch@${bootswatchVersion}/dist/${theme}/bootstrap.min.css`;
 		}
 
