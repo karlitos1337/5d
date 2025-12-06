@@ -1,4 +1,6 @@
 name: 5D Tests & Validation
+permissions:
+  contents: read
 
 on: [push, pull_request]
 
