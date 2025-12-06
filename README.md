@@ -24,6 +24,7 @@ This repository contains comprehensive documentation across multiple knowledge d
 - **[📐 1D-5D Definitions](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for 5 domains (Education, Governance, Mental Health, Ecology, Technology)
 - **[🔬 Research Roadmap](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, open questions (85+ tasks)
 - **[📊 Manifest Summary](docs/manifest_summary.md)** - Hierarchical overview of all project documents (7578 lines, academic synthesis)
+- **[🤝 Collaboration & Partnership](docs/COLLABORATION_PARTNERSHIP.md)** - **NEW!** Human-AI collaboration documentation (Patrick + Claude, 103-138h total work)
 - **[📖 Wiki Home](wiki/)** - Complete 5D-Intelligence overview with detailed glossary
 - **[💡 Concepts & Definitions](wiki/Home)** - Detailed explanations of key terms
 - **[📚 Docs Index](docs/README.md)** - Local documentation index and quickstarts
