@@ -1,4 +1,6 @@
 name: Test Code Examples
+permissions:
+  contents: read
 
 on:
   push:
