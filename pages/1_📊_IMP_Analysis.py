@@ -56,6 +56,127 @@ def load_data():
         return {"solutions": [], "metadata": {}}
 
 
+@st.cache_data(ttl=3600)
+def load_world_imp_data():
+    """Load IMP scores from baseline.json"""
+    try:
+        with open("web/5d-map/data/baseline.json", encoding="utf-8") as f:
+            data = json.load(f)
+            countries = {}
+
+            # Calculate IMP proxy for each country
+            depression = data.get("depression_latest", {})
+            dropout = data.get("dropout_latest", {})
+            wgi_rl = data.get("wgi_rl", {})
+
+            for code in depression.keys():
+                if code in dropout and code in wgi_rl:
+                    dep = depression[code]
+                    dro = dropout[code]
+                    gov = wgi_rl[code]
+
+                    # IMP Proxy: (1 - dep/100) × (1 - dro/100) × normalized_gov
+                    gov_norm = (gov + 2.5) / 5.0  # Normalize WGI (-2.5 to 2.5) to (0 to 1)
+                    imp = (1 - dep / 100) * (1 - dro / 100) * gov_norm
+
+                    countries[code] = {
+                        "imp": round(imp, 3),
+                        "depression": dep,
+                        "dropout": dro,
+                        "governance": gov
+                    }
+
+            return countries
+    except Exception as e:
+        st.warning(f"Could not load world IMP data: {e}")
+        return {}
+
+
+def create_imp_world_map(countries_data):
+    """Create Folium map with IMP scores by country"""
+    # Center map on Europe
+    m = folium.Map(location=[50, 10], zoom_start=3, tiles="CartoDB positron")
+
+    # Country code to name mapping (ISO 3166-1 alpha-3)
+    country_names = {
+        "DEU": "Germany", "FRA": "France", "GBR": "United Kingdom", "USA": "United States",
+        "JPN": "Japan", "IND": "India", "BRA": "Brazil", "CHN": "China", "RUS": "Russia",
+        "CAN": "Canada", "AUS": "Australia", "ESP": "Spain", "ITA": "Italy", "NLD": "Netherlands",
+        "SWE": "Sweden", "NOR": "Norway", "DNK": "Denmark", "FIN": "Finland", "CHE": "Switzerland",
+        "AUT": "Austria", "BEL": "Belgium", "POL": "Poland", "MEX": "Mexico", "ARG": "Argentina",
+        "ZAF": "South Africa", "TUR": "Turkey", "KOR": "South Korea", "SGP": "Singapore",
+        "NZL": "New Zealand", "IRL": "Ireland", "PRT": "Portugal"
+    }
+
+    # Approximate country centroids (for markers)
+    country_coords = {
+        "DEU": [51.1657, 10.4515], "FRA": [46.2276, 2.2137], "GBR": [55.3781, -3.4360],
+        "USA": [37.0902, -95.7129], "JPN": [36.2048, 138.2529], "IND": [20.5937, 78.9629],
+        "BRA": [-14.2350, -51.9253], "CHN": [35.8617, 104.1954], "RUS": [61.5240, 105.3188],
+        "CAN": [56.1304, -106.3468], "AUS": [-25.2744, 133.7751], "ESP": [40.4637, -3.7492],
+        "ITA": [41.8719, 12.5674], "NLD": [52.1326, 5.2913], "SWE": [60.1282, 18.6435],
+        "NOR": [60.4720, 8.4689], "DNK": [56.2639, 9.5018], "FIN": [61.9241, 25.7482],
+        "CHE": [46.8182, 8.2275], "AUT": [47.5162, 14.5501], "BEL": [50.5039, 4.4699],
+        "POL": [51.9194, 19.1451], "MEX": [23.6345, -102.5528], "ARG": [-38.4161, -63.6167],
+        "ZAF": [-30.5595, 22.9375], "TUR": [38.9637, 35.2433], "KOR": [35.9078, 127.7669],
+        "SGP": [1.3521, 103.8198], "NZL": [-40.9006, 174.8860], "IRL": [53.4129, -8.2439],
+        "PRT": [39.3999, -8.2245]
+    }
+
+    for code, data in countries_data.items():
+        if code in country_coords:
+            name = country_names.get(code, code)
+            coords = country_coords[code]
+            imp = data["imp"]
+
+            # Color based on IMP score
+            if imp >= 0.7:
+                color = "green"
+                icon = "check-circle"
+            elif imp >= 0.5:
+                color = "orange"
+                icon = "exclamation-circle"
+            else:
+                color = "red"
+                icon = "times-circle"
+
+            # Create popup
+            popup_html = f"""
+            <div style="font-family: Arial; min-width: 200px;">
+                <h4 style="margin: 0 0 10px 0;">{name}</h4>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td><b>IMP Score:</b></td>
+                        <td style="text-align: right; color: {color};">
+                            <b>{imp:.3f}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Depression:</td>
+                        <td style="text-align: right;">{data['depression']:.1f}%</td>
+                    </tr>
+                    <tr>
+                        <td>Dropout:</td>
+                        <td style="text-align: right;">{data['dropout']:.1f}%</td>
+                    </tr>
+                    <tr>
+                        <td>Governance:</td>
+                        <td style="text-align: right;">{data['governance']:.2f}</td>
+                    </tr>
+                </table>
+            </div>
+            """
+
+            folium.Marker(
+                location=coords,
+                popup=folium.Popup(popup_html, max_width=300),
+                tooltip=f"{name}: IMP {imp:.3f}",
+                icon=folium.Icon(color=color, icon=icon, prefix="fa")
+            ).add_to(m)
+
+    return m
+
+
 def main():
     st.title("📊 IMP Score Analysis")
     st.markdown("### Scientific Validation with Peer-Reviewed Sources")
@@ -305,54 +426,47 @@ A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} 
         st.divider()
 
         st.subheader("🗺️ Global IMP Distribution")
+        st.markdown("**IMP Proxy Scores by Country** (Depression, Dropout, Governance)")
 
-        # Create mini world map with IMP scores
-        m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+        # Load world IMP data
+        world_imp = load_world_imp_data()
 
-        # Sample country data (IMP proxy scores)
-        country_data = {
-            "Denmark": {"coords": [56.26, 9.50], "imp": 0.72, "color": "#00ff00"},
-            "Norway": {"coords": [60.47, 8.47], "imp": 0.75, "color": "#00ff00"},
-            "Finland": {"coords": [61.92, 25.75], "imp": 0.71, "color": "#00ff00"},
-            "Sweden": {"coords": [60.13, 18.64], "imp": 0.73, "color": "#00ff00"},
-            "Germany": {"coords": [51.17, 10.45], "imp": 0.65, "color": "#90ee90"},
-            "USA": {"coords": [37.09, -95.71], "imp": 0.58, "color": "#ffff00"},
-            "Brazil": {"coords": [-14.24, -51.93], "imp": 0.45, "color": "#ffa500"},
-            "India": {"coords": [20.59, 78.96], "imp": 0.42, "color": "#ffa500"},
-            "China": {"coords": [35.86, 104.20], "imp": 0.38, "color": "#ff0000"},
-        }
+        if world_imp:
+            # Display metrics
+            col_m1, col_m2, col_m3 = st.columns(3)
 
-        for country, data in country_data.items():
-            folium.CircleMarker(
-                location=data["coords"],
-                radius=data["imp"] * 15,
-                popup=f"<b>{country}</b><br>IMP Proxy: {data['imp']:.2f}",
-                color=data["color"],
-                fill=True,
-                fillColor=data["color"],
-                fillOpacity=0.6,
-            ).add_to(m)
+            with col_m1:
+                avg_imp = sum(d["imp"] for d in world_imp.values()) / len(world_imp)
+                st.metric("Average IMP", f"{avg_imp:.3f}", help="Global average")
 
-        # Legend
-        legend_html = """
-        <div style="position: fixed; 
-                    bottom: 50px; left: 50px; width: 200px; height: 120px; 
-                    background-color: white; z-index:9999; font-size:12px;
-                    border:2px solid grey; border-radius: 5px; padding: 10px">
-        <p style="margin:0"><b>IMP-Proxy Score</b></p>
-        <p style="margin:2px"><span style="color:#00ff00">●</span> High (>0.70)</p>
-        <p style="margin:2px"><span style="color:#ffff00">●</span> Medium (0.50-0.70)</p>
-        <p style="margin:2px"><span style="color:#ffa500">●</span> Low (0.40-0.50)</p>
-        <p style="margin:2px"><span style="color:#ff0000">●</span> Critical (<0.40)</p>
-        </div>
-        """
-        m.get_root().html.add_child(folium.Element(legend_html))
+            with col_m2:
+                max_country = max(world_imp.items(), key=lambda x: x[1]["imp"])
+                st.metric("Highest", f"{max_country[1]['imp']:.3f}",
+                          help=f"Country: {max_country[0]}")
 
-        st_folium(m, width=700, height=400)
+            with col_m3:
+                min_country = min(world_imp.items(), key=lambda x: x[1]["imp"])
+                st.metric("Lowest", f"{min_country[1]['imp']:.3f}",
+                          help=f"Country: {min_country[0]}")
 
-        st.caption(
-            "IMP-Proxy based on OWID depression data, World Bank dropout rates, WGI governance"
-        )
+            # Create interactive map
+            m = create_imp_world_map(world_imp)
+
+            st_folium(m, width=None, height=500, key="imp_world_map")
+
+            st.caption(
+                "IMP-Proxy: (1 - Depression/100) × (1 - Dropout/100) × Normalized Governance"
+            )
+
+            # Legend in markdown
+            st.markdown("""
+            **Legend:**
+            - 🟢 **High IMP** (≥0.7): Strong foundation for 5D Intelligence
+            - 🟠 **Medium IMP** (0.5-0.7): Mixed indicators, potential for growth
+            - 🔴 **Low IMP** (<0.5): Systemic challenges in dropout/depression/governance
+            """)
+        else:
+            st.warning("Could not load world IMP data. Check web/5d-map/data/baseline.json")
 
         st.divider()
 
