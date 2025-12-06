@@ -8,11 +8,15 @@ from datetime import datetime
 
 import streamlit as st
 from utils.mobile_responsive import inject_mobile_css
+from utils.caching import preload_all_critical_data, display_cache_info
 
 st.set_page_config(
     page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded"
 )
 inject_mobile_css()
+
+# Preload critical data on startup
+preload_all_critical_data()
 
 
 def main():
@@ -49,6 +53,11 @@ def main():
         st.markdown("- [Troubleshooting](#troubleshooting)")
         st.markdown("- [FAQ](#faq)")
         st.markdown("- [GitHub Issues](https://github.com/karlitos1337/5d/issues)")
+
+        st.divider()
+
+        # Cache Configuration Display
+        display_cache_info()
 
     # Main Content
     st.title("📚 5D Intelligence Framework - Wiki & Guide")

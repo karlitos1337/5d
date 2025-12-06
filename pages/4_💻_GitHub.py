@@ -28,9 +28,9 @@ st.set_page_config(
 inject_mobile_css()
 
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=1800)
 def load_github_data():
-    """Loads GitHub data with caching (TTL: 5 minutes)"""
+    """Loads GitHub data with caching (TTL: 30 minutes)"""
     try:
         with open("5d_github_data.json", encoding="utf-8") as f:
             return json.load(f)
@@ -64,7 +64,7 @@ def calculate_activity_score(repo):
     return round(normalized, 2)
 
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=3600)
 def load_github_developer_hubs():
     """
     Load geographic data for major EdTech/Open Source developer communities.

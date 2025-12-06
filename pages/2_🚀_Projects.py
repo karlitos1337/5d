@@ -22,9 +22,9 @@ st.set_page_config(page_title="Projects", page_icon="🚀", layout="wide")
 inject_mobile_css()
 
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=3600)
 def load_solutions():
-    """Load 5D solutions data"""
+    """Load 5D solutions data (TTL: 1 hour)"""
     try:
         with open("5d_solutions.json", encoding="utf-8") as f:
             return json.load(f)
@@ -32,7 +32,7 @@ def load_solutions():
         return {"solutions": [], "metadata": {}}
 
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=3600)
 def load_alternative_schools_data():
     """
     Load data for alternative education institutions worldwide.

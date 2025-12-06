@@ -56,7 +56,7 @@ def calculate_economic_impact(adoption_rate, avg_roi, num_projects):
     }
 
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=3600)
 def load_regional_adoption_projections():
     """
     Load projected adoption rates for 5D Framework by region (2030 forecast).

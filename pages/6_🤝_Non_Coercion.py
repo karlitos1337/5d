@@ -25,7 +25,7 @@ st.set_page_config(
 inject_mobile_css()
 
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=3600)
 def load_cooperative_systems_data():
     """
     Load geographic data for successful cooperative governance systems worldwide.

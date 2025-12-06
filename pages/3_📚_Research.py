@@ -28,9 +28,9 @@ st.set_page_config(
 inject_mobile_css()
 
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=1800)
 def load_research_data():
-    """Loads research data with caching (TTL: 5 minutes)"""
+    """Loads research data with caching (TTL: 30 minutes)"""
     try:
         with open("5d_research_data.json", encoding="utf-8") as f:
             return json.load(f)
@@ -44,9 +44,9 @@ def load_research_data():
         return {}
 
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=3600)
 def load_bibtex_sources():
-    """Loads BibTeX references from central repository"""
+    """Loads BibTeX references from central repository (TTL: 1 hour)"""
     bibtex_path = Path("07_daten_analysen/5d-relevant-sources.bib")
     if not bibtex_path.exists():
         return {}
@@ -77,7 +77,7 @@ def load_bibtex_sources():
     return sources
 
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=3600)
 def load_research_institutions_data():
     """
     Load geographic data for leading research institutions in 5D-relevant fields.
