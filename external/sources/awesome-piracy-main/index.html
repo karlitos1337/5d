@@ -61,8 +61,12 @@
 		// Change the theme
 		function changeCSS( theme )
 		{
-			document.querySelector( 'link' ).href
-					= `https://cdn.jsdelivr.net/npm/bootswatch@${bootswatchVersion}/dist/${theme}/bootstrap.min.css`;
+			const allowedThemes = ['darkly', 'united', 'flatly', 'quartz'];
+			if (!allowedThemes.includes(theme)) {
+				theme = defaultTheme;
+			}
+			document.querySelector('link').href =
+				`https://cdn.jsdelivr.net/npm/bootswatch@${bootswatchVersion}/dist/${theme}/bootstrap.min.css`;
 		}
 
 		// Set the default theme
