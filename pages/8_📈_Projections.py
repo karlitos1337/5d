@@ -4,16 +4,25 @@
 Adoption Curves, Economic Impact, Scenario Modeling
 """
 
+import sys
 from datetime import datetime
+from pathlib import Path
 
 import folium
 import numpy as np
 import streamlit as st
 from streamlit_folium import st_folium
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from utils.mobile_responsive import inject_mobile_css
+
 st.set_page_config(
     page_title="5D Projections", page_icon="📈", layout="wide", initial_sidebar_state="expanded"
 )
+
+# Inject mobile-responsive CSS
+inject_mobile_css()
 
 
 def logistic_curve(x, L, k, x0):

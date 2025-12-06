@@ -5,6 +5,7 @@ Academic papers from arXiv, PubMed, WHO, World Bank
 """
 
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -12,12 +13,19 @@ import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from utils.mobile_responsive import inject_mobile_css
+
 st.set_page_config(
     page_title="5D Research & Papers",
     page_icon="📚",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# Inject mobile-responsive CSS
+inject_mobile_css()
 
 
 @st.cache_data(ttl=300)

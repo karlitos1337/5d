@@ -14,7 +14,12 @@ from streamlit_folium import st_folium
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from utils.mobile_responsive import inject_mobile_css
+
 st.set_page_config(page_title="Projects", page_icon="🚀", layout="wide")
+
+# Inject mobile-responsive CSS
+inject_mobile_css()
 
 
 @st.cache_data(ttl=300)
