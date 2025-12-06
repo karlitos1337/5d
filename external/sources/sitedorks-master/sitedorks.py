@@ -144,10 +144,10 @@ if aArguments.ubb:
                     parsed_url = urllib.parse.urlparse(sInScopeValue)
                     sHost = parsed_url.hostname if parsed_url.hostname else sInScopeValue
                     if (
-                        sHost.endswith("amazonaws.com")
-                        or sHost.endswith("cloudfront.net")
-                        or sHost.endswith("azurefd.net")
-                        or sHost.endswith("azurewebsites.net")
+                        (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "amazonaws.com"
+                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "cloudfront.net"
+                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurefd.net"
+                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurewebsites.net"
                     ):
                         sDomain = sHost
                     else:
@@ -172,10 +172,10 @@ if aArguments.ubb:
                 lOutScopeValues = sOutScope["value"].lower().split(",")
                 for sOutScopeValue in lOutScopeValues:
                     if (
-                        sHost.endswith("amazonaws.com")
-                        or sHost.endswith("cloudfront.net")
-                        or sHost.endswith("azurefd.net")
-                        or sHost.endswith("azurewebsites.net")
+                        (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "amazonaws.com"
+                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "cloudfront.net"
+                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurefd.net"
+                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurewebsites.net"
                     ):
                         sDomain = sHost
                     else:
