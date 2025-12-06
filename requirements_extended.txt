@@ -47,5 +47,5 @@ pypdf>=3.0.0
 # External sources
 gdown>=5.2.0
 
-#scipy
-scipy==1.11.0
+# Scientific Computing (Python 3.12 compatible)
+scipy>=1.11.4
