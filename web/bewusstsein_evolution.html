@@ -995,14 +995,35 @@
             labels.forEach((label, idx) => {
                 const sliderDiv = document.createElement('div');
                 sliderDiv.className = 'slider-control';
-                sliderDiv.innerHTML = `
-                    <label>
-                        ${label}
-                        <span class="slider-value" id="value_${selectedDim}_${idx}">${data[idx]}</span>
-                    </label>
-                    <input type="range" min="1" max="99" value="${data[idx]}" 
-                           oninput="updateMetric('${selectedDim}', ${idx}, this.value)">
-                `;
+                
+                // Create label
+                const labelEl = document.createElement('label');
+                
+                // Label text
+                labelEl.appendChild(document.createTextNode(label));
+                
+                // Value span
+                const spanEl = document.createElement('span');
+                spanEl.className = 'slider-value';
+                spanEl.id = `value_${selectedDim}_${idx}`;
+                spanEl.textContent = data[idx];
+                labelEl.appendChild(document.createTextNode(' ')); // spacing
+                labelEl.appendChild(spanEl);
+                
+                // Input
+                const inputEl = document.createElement('input');
+                inputEl.type = 'range';
+                inputEl.min = '1';
+                inputEl.max = '99';
+                inputEl.value = data[idx];
+                inputEl.oninput = function() {
+                    updateMetric(selectedDim, idx, this.value);
+                };
+                
+                // Append elements
+                sliderDiv.appendChild(labelEl);
+                sliderDiv.appendChild(inputEl);
+                
                 container.appendChild(sliderDiv);
             });
         }
