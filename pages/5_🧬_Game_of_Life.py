@@ -8,10 +8,12 @@ from datetime import datetime
 
 import numpy as np
 import streamlit as st
+from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(
     page_title="5D Game of Life", page_icon="🧬", layout="wide", initial_sidebar_state="expanded"
 )
+inject_mobile_css()
 
 # Predefined patterns
 PATTERNS = {

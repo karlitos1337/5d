@@ -10,10 +10,12 @@ from datetime import datetime
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
+from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(
     page_title="5D World Map", page_icon="🌍", layout="wide", initial_sidebar_state="expanded"
 )
+inject_mobile_css()
 
 
 @st.cache_data(ttl=3600)

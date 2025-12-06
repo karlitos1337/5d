@@ -7,10 +7,12 @@ Erste Anlaufstelle mit Installation, Navigation und Erklärungen für Einsteiger
 from datetime import datetime
 
 import streamlit as st
+from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(
     page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded"
 )
+inject_mobile_css()
 
 
 def main():
