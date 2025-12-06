@@ -140,15 +140,18 @@ if aArguments.ubb:
             if sInScope["type"] == "web":
                 lInScopeValues = sInScope["value"].lower().split(",")
                 for sInScopeValue in lInScopeValues:
+                    # Parse the value to extract the hostname if needed
+                    parsed_url = urllib.parse.urlparse(sInScopeValue)
+                    sHost = parsed_url.hostname if parsed_url.hostname else sInScopeValue
                     if (
-                        sInScopeValue.endswith("amazonaws.com")
-                        or sInScopeValue.endswith("cloudfront.net")
-                        or sInScopeValue.endswith("azurefd.net")
-                        or sInScopeValue.endswith("azurewebsites.net")
+                        sHost.endswith("amazonaws.com")
+                        or sHost.endswith("cloudfront.net")
+                        or sHost.endswith("azurefd.net")
+                        or sHost.endswith("azurewebsites.net")
                     ):
-                        sDomain = sInScopeValue
+                        sDomain = sHost
                     else:
-                        dl3, dl2, dl1 = extract(sInScopeValue)
+                        dl3, dl2, dl1 = extract(sHost)
                         sDomain = dl2 + "." + dl1
 
                     if (
@@ -162,18 +165,21 @@ if aArguments.ubb:
                         dDomainsInScope[sDomain] = sLine["slug"]
 
         for sOutScope in sLine["out_scope"]:
+                    # Parse the value to extract the hostname if needed
+                    parsed_url = urllib.parse.urlparse(sOutScopeValue)
+                    sHost = parsed_url.hostname if parsed_url.hostname else sOutScopeValue
             if sOutScope["type"] == "web":
                 lOutScopeValues = sOutScope["value"].lower().split(",")
                 for sOutScopeValue in lOutScopeValues:
                     if (
-                        sOutScopeValue.endswith("amazonaws.com")
-                        or sOutScopeValue.endswith("cloudfront.net")
-                        or sOutScopeValue.endswith("azurefd.net")
-                        or sOutScopeValue.endswith("azurewebsites.net")
+                        sHost.endswith("amazonaws.com")
+                        or sHost.endswith("cloudfront.net")
+                        or sHost.endswith("azurefd.net")
+                        or sHost.endswith("azurewebsites.net")
                     ):
-                        sDomain = sOutScopeValue
+                        sDomain = sHost
                     else:
-                        dl3, dl2, dl1 = extract(sOutScopeValue)
+                        dl3, dl2, dl1 = extract(sHost)
                         sDomain = f"{dl2}.{dl1}"
 
                     if (
