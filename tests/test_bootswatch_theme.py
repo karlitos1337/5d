@@ -17,8 +17,8 @@ def test_link_id_present():
 
 def test_whitelist_present():
     html = read_html()
-    # ensure the allowedThemes identifier exists and at least the expected theme names are present
-    assert 'allowedThemes' in html or "new Set(['darkly'" in html or 'new Set([' in html, 'allowedThemes Set not found in index.html'
+    # ensure the allowedThemes identifier exists
+    assert 'allowedThemes' in html, 'allowedThemes identifier not found in index.html'
     # check for explicit names to make sure whitelist contains at least these
     for theme in ('darkly', 'united', 'flatly', 'quartz'):
         assert theme in html, f"expected theme '{theme}' to be present in whitelist in index.html"
