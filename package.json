@@ -11,7 +11,13 @@
     "test": "pytest tests/",
     "test:ci": "python test_5d_map_ci.py"
   },
-  "keywords": ["5D", "intelligence", "map", "systems", "visualization"],
+  "keywords": [
+    "5D",
+    "intelligence",
+    "map",
+    "systems",
+    "visualization"
+  ],
   "author": "Copilot CI Automation",
   "license": "MIT",
   "dependencies": {
@@ -19,7 +25,8 @@
     "chart.js": "^4.4.0",
     "d3": "^7.8.5",
     "leaflet": "^1.9.4",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "crypto-js": "^4.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
