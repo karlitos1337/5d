@@ -96,6 +96,10 @@
 		function changeCSS( theme, isFallback = false ) {
 			const url = buildThemeUrl( theme );
 			const linkElement = document.getElementById('bootswatch-css');
+			if (!linkElement) {
+				console.error('bootswatch-css element not found');
+				return;
+			}
 			
 			// Create a temporary link to load the new theme; only update the main link if loading succeeds
 			const testLink = document.createElement('link');
