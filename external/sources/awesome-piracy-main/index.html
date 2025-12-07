@@ -110,10 +110,10 @@
 			};
 			
 			testLink.onload = function() {
-				// Successfully loaded, apply the theme
+				// Successfully loaded, remove test link before applying the theme
+				cleanup();
 				linkElement.href = url;
 				console.log(`Theme "${theme}" loaded successfully`);
-				cleanup();
 			};
 			
 			testLink.onerror = function() {
