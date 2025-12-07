@@ -91,8 +91,9 @@
 		/**
 		 * Changes the active theme with error handling and fallback
 		 * @param {string} theme - Theme name to apply
+		 * @param {boolean} isFallback - Internal flag to prevent infinite recursion
 		 */
-		function changeCSS( theme ) {
+		function changeCSS( theme, isFallback = false ) {
 			const url = buildThemeUrl( theme );
 			const linkElement = document.getElementById('bootswatch-css');
 			
@@ -101,19 +102,31 @@
 			testLink.rel = 'stylesheet';
 			testLink.href = url;
 			
+			const cleanup = function() {
+				// Remove the test link to prevent memory leaks
+				if (testLink.parentNode) {
+					testLink.parentNode.removeChild(testLink);
+				}
+			};
+			
 			testLink.onload = function() {
 				// Successfully loaded, apply the theme
 				linkElement.href = url;
 				console.log(`Theme "${theme}" loaded successfully`);
+				cleanup();
 			};
 			
 			testLink.onerror = function() {
 				// Failed to load, keep current theme
 				console.error(`Failed to load theme "${theme}" from ${url}`);
-				// If this was not already the default theme, try loading that as fallback
-				if (theme !== THEME_CONFIG.defaultTheme) {
+				cleanup();
+				// If this was not already the default theme and not already a fallback attempt,
+				// try loading the default theme as fallback (only once to prevent infinite recursion)
+				if (theme !== THEME_CONFIG.defaultTheme && !isFallback) {
 					console.log(`Attempting to load fallback theme: ${THEME_CONFIG.defaultTheme}`);
-					changeCSS(THEME_CONFIG.defaultTheme);
+					changeCSS(THEME_CONFIG.defaultTheme, true);
+				} else if (isFallback) {
+					console.error('Fallback theme also failed to load. No theme will be applied.');
 				}
 			};
 			
