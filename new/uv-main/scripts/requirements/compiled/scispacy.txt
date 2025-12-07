@@ -10,7 +10,7 @@ catalogue==2.0.10
     #   spacy
     #   srsly
     #   thinc
-certifi==2024.7.4
+certifi==2025.11.12
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -25,7 +25,7 @@ confection==0.1.4
 conllu==4.5.3
 coverage==7.4.0
     # via pytest-cov
-cryptography==44.0.1
+cryptography==46.0.3
     # via secretstorage
 cymem==2.0.8
     # via
@@ -37,7 +37,7 @@ docutils==0.20.1
 exceptiongroup==1.2.0
     # via pytest
 flake8==7.0.0
-idna==3.7
+idna==3.11
     # via requests
 importlib-metadata==7.0.1
     # via
@@ -137,7 +137,7 @@ pytz==2023.3.post1
     # via pandas
 readme-renderer==42.0
     # via twine
-requests==2.32.4
+requests==2.32.5
     # via
     #   requests-toolbelt
     #   spacy

@@ -13,7 +13,7 @@ attrs==23.2.0
 autoflake==2.2.1
 cachetools==5.3.2
     # via google-auth
-certifi==2024.7.4
+certifi==2025.11.12
     # via requests
 cfgv==3.4.0
     # via pre-commit
@@ -66,7 +66,7 @@ googleapis-common-protos==1.62.0
     # via
     #   google-api-core
     #   grpcio-status
-grpcio==1.60.0
+grpcio==1.76.0
     # via
     #   grpcio-status
     #   tensorboard
@@ -77,7 +77,7 @@ h5py==3.10.0
 hypothesis==6.92.5
 identify==2.5.33
     # via pre-commit
-idna==3.7
+idna==3.11
     # via requests
 iniconfig==2.0.0
     # via pytest
@@ -141,7 +141,7 @@ prompt-toolkit==3.0.43
     # via ipython
 proto-plus==1.23.0
     # via google-cloud-bigquery-storage
-protobuf==4.25.8
+protobuf==6.33.2
     # via
     #   google-api-core
     #   google-cloud-bigquery-storage
@@ -174,7 +174,7 @@ python-dateutil==2.8.2
     # via google-cloud-bigquery
 pyyaml==6.0.1
     # via pre-commit
-requests==2.32.4
+requests==2.32.5
     # via
     #   google-api-core
     #   google-cloud-bigquery
@@ -242,7 +242,7 @@ urllib3==2.6.0
     # via
     #   requests
     #   types-requests
-virtualenv==20.26.6
+virtualenv==20.35.4
     # via pre-commit
 wcwidth==0.2.13
     # via prompt-toolkit
