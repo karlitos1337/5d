@@ -29,3 +29,44 @@ def test_bootswatch_variables_present():
     # simple presence checks for the variables used by the changeCSS implementation
     assert 'bootswatchVersion' in html, 'bootswatchVersion reference not found in index.html'
     assert 'defaultTheme' in html, 'defaultTheme reference not found in index.html'
+
+
+def test_theme_config_centralized():
+    """Test that theme configuration is centralized in THEME_CONFIG object"""
+    html = read_html()
+    assert 'THEME_CONFIG' in html, 'THEME_CONFIG object not found - configuration should be centralized'
+    # Verify the config object contains expected properties
+    assert 'THEME_CONFIG.bootswatchVersion' in html or 'bootswatchVersion:' in html, \
+        'bootswatchVersion not in THEME_CONFIG'
+    assert 'THEME_CONFIG.defaultTheme' in html or 'defaultTheme:' in html, \
+        'defaultTheme not in THEME_CONFIG'
+    assert 'THEME_CONFIG.allowedThemes' in html or 'allowedThemes:' in html, \
+        'allowedThemes not in THEME_CONFIG'
+
+
+def test_url_building_function_exists():
+    """Test that there's a dedicated URL building function for safety"""
+    html = read_html()
+    assert 'buildThemeUrl' in html, 'buildThemeUrl function not found - URL construction should be centralized'
+    assert 'function buildThemeUrl' in html, 'buildThemeUrl should be a function'
+
+
+def test_sanitization_present():
+    """Test that theme name sanitization is implemented"""
+    html = read_html()
+    # Look for sanitization logic - checking for patterns that indicate input validation
+    assert 'replace' in html and ('[^a-z0-9\\-]' in html or '[^a-z0-9-]' in html), \
+        'Theme name sanitization (alphanumeric + hyphen filter) not found'
+
+
+def test_encoding_present():
+    """Test that URI encoding is used for safety"""
+    html = read_html()
+    assert 'encodeURIComponent' in html, 'encodeURIComponent not found - URL components should be encoded'
+
+
+def test_error_handling_present():
+    """Test that error handling for CSS loading failures is implemented"""
+    html = read_html()
+    assert 'onerror' in html, 'onerror handler not found - should handle CSS load failures'
+    assert 'onload' in html, 'onload handler not found - should verify successful CSS loading'
