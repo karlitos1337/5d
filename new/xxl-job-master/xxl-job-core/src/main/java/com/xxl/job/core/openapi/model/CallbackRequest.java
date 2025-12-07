@@ -1,11 +1,13 @@
 package com.xxl.job.core.openapi.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Created by xuxueli on 17/3/2.
  */
 public class CallbackRequest implements Serializable {
+    @Serial
     private static final long serialVersionUID = 42L;
 
     private long logId;

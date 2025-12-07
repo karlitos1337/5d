@@ -157,7 +157,7 @@ public class JobUserController {
             return Response.ofFail(I18nUtil.getString("user_update_loginuser_limit"));
         }
 
-        xxlJobUserMapper.delete(ids.get(0));
+        xxlJobUserMapper.delete(ids.getFirst());
         return Response.ofSuccess();
     }
 

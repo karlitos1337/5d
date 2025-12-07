@@ -170,7 +170,7 @@ public class JobTrigger {
                 if (index < group.getRegistryList().size()) {
                     address = group.getRegistryList().get(index);
                 } else {
-                    address = group.getRegistryList().get(0);
+                    address = group.getRegistryList().getFirst();
                 }
             } else {
                 routeAddressResult = executorRouteStrategyEnum.getRouter().route(triggerParam, group.getRegistryList());

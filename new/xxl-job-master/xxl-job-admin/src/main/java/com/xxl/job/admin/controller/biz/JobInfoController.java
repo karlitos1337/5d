@@ -127,7 +127,7 @@ public class JobInfoController {
 
 		// invoke
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
-		return xxlJobService.remove(ids.get(0), loginInfoResponse.getData());
+		return xxlJobService.remove(ids.getFirst(), loginInfoResponse.getData());
 	}
 	
 	@RequestMapping("/stop")
@@ -141,7 +141,7 @@ public class JobInfoController {
 
 		// invoke
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
-		return xxlJobService.stop(ids.get(0), loginInfoResponse.getData());
+		return xxlJobService.stop(ids.getFirst(), loginInfoResponse.getData());
 	}
 	
 	@RequestMapping("/start")
@@ -155,7 +155,7 @@ public class JobInfoController {
 
 		// invoke
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
-		return xxlJobService.start(ids.get(0), loginInfoResponse.getData());
+		return xxlJobService.start(ids.getFirst(), loginInfoResponse.getData());
 	}
 	
 	@RequestMapping("/trigger")

@@ -63,7 +63,7 @@ public class ExecutorRouteLFU extends ExecutorRouter {
         List<Map.Entry<String, Integer>> lfuItemList = new ArrayList<>(lfuItemMap.entrySet());
         lfuItemList.sort(Map.Entry.comparingByValue());     // 默认升序, 获取 Value 最小值
 
-        Map.Entry<String, Integer> addressItem = lfuItemList.get(0);
+        Map.Entry<String, Integer> addressItem = lfuItemList.getFirst();
         addressItem.setValue(addressItem.getValue() + 1);
 
         return addressItem.getKey();

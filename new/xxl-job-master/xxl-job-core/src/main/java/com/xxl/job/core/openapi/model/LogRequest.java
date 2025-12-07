@@ -1,11 +1,13 @@
 package com.xxl.job.core.openapi.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * @author xuxueli 2020-04-11 22:27
  */
 public class LogRequest implements Serializable {
+    @Serial
     private static final long serialVersionUID = 42L;
 
     public LogRequest() {

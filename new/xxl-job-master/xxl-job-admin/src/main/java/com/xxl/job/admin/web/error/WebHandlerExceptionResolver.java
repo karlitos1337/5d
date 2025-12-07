@@ -33,8 +33,7 @@ public class WebHandlerExceptionResolver implements HandlerExceptionResolver {
 
 		// parse isJson
 		boolean isJson = false;
-		if (handler instanceof HandlerMethod) {
-			HandlerMethod method = (HandlerMethod)handler;
+		if (handler instanceof HandlerMethod method) {
 			isJson = method.getMethodAnnotation(ResponseBody.class)!=null;
 		}
 

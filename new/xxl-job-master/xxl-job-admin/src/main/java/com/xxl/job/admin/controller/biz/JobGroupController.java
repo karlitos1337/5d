@@ -187,7 +187,7 @@ public class JobGroupController {
 		if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
 			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
 		}
-		int id = ids.get(0);
+		int id = ids.getFirst();
 
 		// valid
 		int count = xxlJobInfoMapper.pageListCount(0, 10, id, -1,  null, null, null);
