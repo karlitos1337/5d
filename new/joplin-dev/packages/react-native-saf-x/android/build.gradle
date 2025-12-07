@@ -7,7 +7,24 @@ buildscript {
 
     dependencies {
       classpath("com.android.tools.build:gradle:7.2.1")
-      classpath("com.facebook.react:react-native-gradle-plugin")
+
+      // Prefer a built local react-native-gradle-plugin jar (present in some package/node_modules layouts)
+      def pluginJarCandidates = [
+        "$rootDir/../node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build/libs/react-native-gradle-plugin.jar",
+        "$rootDir/../../node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build/libs/react-native-gradle-plugin.jar",
+        "$rootDir/../../packages/app-mobile/node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build/libs/react-native-gradle-plugin.jar",
+        "$rootDir/../node_modules/react-native-gradle-plugin/build/libs/react-native-gradle-plugin.jar",
+        // absolute fallback (local dev machine)
+        "C:/Users/1/Documents/ki/resonance-formula-5d-intelligence/5d/new/joplin-dev/packages/app-mobile/node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build/libs/react-native-gradle-plugin.jar",
+      ]
+      def localJar = pluginJarCandidates.collect { file(it) }.find { it.exists() }
+      if (localJar) {
+        classpath files(localJar)
+      } else {
+        // fallback to coordinate; resolution from installed node_modules or remote repositories
+        classpath("com.facebook.react:react-native-gradle-plugin")
+      }
+
       classpath("de.undercouch:gradle-download-task:5.0.1")
     }
   }
@@ -38,8 +55,9 @@ android {
     disable 'GradleCompatible'
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    // Upgrade compatibility to Java 17 to match migration target
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 }
 
@@ -47,7 +65,10 @@ repositories {
   mavenLocal()
   maven {
     // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+    // try module-local react-native first (package-level node_modules)
     url("$rootDir/../node_modules/react-native/android")
+    // if the project uses a mono-repo or hoisted node_modules, also check the repository root
+    url("$rootDir/../../node_modules/react-native/android")
   }
   google()
   mavenCentral()
