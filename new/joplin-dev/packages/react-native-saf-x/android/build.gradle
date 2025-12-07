@@ -38,8 +38,9 @@ android {
     disable 'GradleCompatible'
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    // Upgrade compatibility to Java 17 to match migration target
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 }
 
