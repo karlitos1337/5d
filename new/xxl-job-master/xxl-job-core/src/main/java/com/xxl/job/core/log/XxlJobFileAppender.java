@@ -3,92 +3,54 @@ package com.xxl.job.core.log;
 import com.xxl.job.core.openapi.model.LogResult;
 import com.xxl.tool.core.DateTool;
 import com.xxl.tool.core.StringTool;
-import com.xxl.tool.io.FileTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * store trigger log in each log-file
+ * store trigger log to console
  *
  * @author xuxueli 2016-3-12 19:25:12
  */
 public class XxlJobFileAppender {
 	private static final Logger logger = LoggerFactory.getLogger(XxlJobFileAppender.class);
 
-	/**
-	 * log base path
-	 *
-	 * strut like:
-	 * 	---/
-	 * 	---/gluesource/10_1514171108000.js
-	 * 	---/callbacklogs/xxl-job-callback-1761412677119.log
-	 * 	---/2017-12-25/639.log
-	 * 	---/2017-12-25/821.log
-	 *
-	 */
-	private static String logBasePath = "/data/applogs/xxl-job/jobhandler";
-	private static String glueSrcPath = logBasePath.concat(File.separator).concat("gluesource");
-	private static String callbackLogPath = logBasePath.concat(File.separator).concat("callbacklogs");
-	public static void initLogPath(String logPath) throws IOException {
-		// init
-		if (StringTool.isNotBlank(logPath)) {
-			logBasePath = logPath.trim();
-		}
-		// mk base dir
-		File logPathDir = new File(logBasePath);
-        FileTool.createDirectories(logPathDir);
-		logBasePath = logPathDir.getPath();
+	private static final ConcurrentHashMap<String, ConcurrentLinkedQueue<String>> logCache = new ConcurrentHashMap<>();
 
-		// mk glue dir
-		File glueBaseDir = new File(logPathDir, "gluesource");
-        FileTool.createDirectories(glueBaseDir);
-		glueSrcPath = glueBaseDir.getPath();
+	public static void initLogPath(String logPath) {
+		logger.info("Console logging mode: log path parameter ignored");
 	}
+
 	public static String getLogPath() {
-		return logBasePath;
+		return "console";
 	}
+
 	public static String getGlueSrcPath() {
-		return glueSrcPath;
+		return "console/gluesource";
 	}
+
 	public static String getCallbackLogPath() {
-		return callbackLogPath;
+		return "console/callbacklogs";
 	}
 
 	/**
-	 * log filename, like "logPath/yyyy-MM-dd/9999.log"
+	 * log identifier
 	 *
 	 * @param logId log id
-	 * @return      log file name
+	 * @return log identifier
 	 */
 	public static String makeLogFileName(Date triggerDate, long logId) {
-
-		// "filePath/yyyy-MM-dd"
-		File logFilePath = new File(getLogPath(), DateTool.formatDate(triggerDate));
-        try {
-            FileTool.createDirectories(logFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException("XxlJobFileAppender makeLogFileName error, logFilePath:"+ logFilePath.getPath(), e);
-        }
-
-        // filePath/yyyy-MM-dd/9999.log
-        return logFilePath.getPath()
-                .concat(File.separator)
-                .concat(String.valueOf(logId))
-                .concat(".log");
+		return DateTool.formatDate(triggerDate) + "/" + logId;
 	}
 
 	/**
-	 * append log
+	 * append log to console
 	 *
-	 * @param logFileName	log file name
-	 * @param appendLog		append log
+	 * @param logFileName log identifier
+	 * @param appendLog   append log
 	 */
 	public static void appendLog(String logFileName, String appendLog) {
 
@@ -97,67 +59,50 @@ public class XxlJobFileAppender {
 			return;
 		}
 
-		// append log
-        try {
-            FileTool.writeLines(logFileName, List.of(appendLog), true);
-        } catch (IOException e) {
-            throw new RuntimeException("XxlJobFileAppender appendLog error, logFileName:"+ logFileName, e);
-        }
+		// log to console
+		logger.info("[{}] {}", logFileName, appendLog);
+
+		// cache for readLog
+		logCache.computeIfAbsent(logFileName, k -> new ConcurrentLinkedQueue<>()).add(appendLog);
 	}
 
 	/**
-	 * support read log-file
+	 * support read log from cache
 	 *
-	 * @param logFileName	log file name
-	 * @param fromLineNum	from line num
+	 * @param logFileName log identifier
+	 * @param fromLineNum from line num
 	 * @return log content
 	 */
-	public static LogResult readLog(String logFileName, final int fromLineNum){
+	public static LogResult readLog(String logFileName, final int fromLineNum) {
 
 		// valid
 		if (StringTool.isBlank(logFileName)) {
-            return new LogResult(fromLineNum, 0, "readLog fail, logFile not found", true);
+			return new LogResult(fromLineNum, 0, "readLog fail, log identifier not found", true);
 		}
-		if (!FileTool.exists(logFileName)) {
-            return new LogResult(fromLineNum, 0, "readLog fail, logFile not exists", true);
+
+		ConcurrentLinkedQueue<String> lines = logCache.get(logFileName);
+		if (lines == null || lines.isEmpty()) {
+			return new LogResult(fromLineNum, 0, "readLog fail, log not exists in cache", true);
 		}
 
 		// read data
-        StringBuilder logContentBuilder = new StringBuilder();
-        // num: [from, to], start as 1
-        AtomicInteger toLineNum = new AtomicInteger(0);
-        AtomicInteger currentLineNum = new AtomicInteger(0);
-        /*int readLineCount = 0;*/
+		StringBuilder logContentBuilder = new StringBuilder();
+		int currentLineNum = 0;
+		int toLineNum = 0;
 
-        // do read
-        try {
-            FileTool.readLines(logFileName, new Consumer<String>() {
-                @Override
-                public void accept(String line) {
-                    // refresh line num
-                    currentLineNum.incrementAndGet();
+		for (String line : lines) {
+			currentLineNum++;
 
-                    // valid
-                    if (currentLineNum.get() < fromLineNum) {
-                        return;
-                    }
+			if (currentLineNum < fromLineNum) {
+				continue;
+			}
 
-                    // Limit return less than 1000 rows per query request	// todo
-                    /*if(++readLineCount >= 1000) {
-                        break;
-                    }*/
+			toLineNum = currentLineNum;
+			logContentBuilder.append(line).append(System.lineSeparator());
+		}
 
-                    // collect line data
-                    toLineNum.set(currentLineNum.get());
-                    logContentBuilder.append(line).append(System.lineSeparator());      // [from, to], start as 1
-                }
-            });
-        } catch (IOException e) {
-            logger.error("XxlJobFileAppender readLog error, logFileName:{}, fromLineNum:{}", logFileName, fromLineNum, e);
-        }
-
-        // result
-        return new LogResult(fromLineNum, toLineNum.get(), logContentBuilder.toString(), false);
+		// result
+		return new LogResult(fromLineNum, toLineNum, logContentBuilder.toString(), false);
 	}
 
 }
