@@ -61,12 +61,44 @@
 		// Change the theme
 		function changeCSS( theme )
 		{
-			const allowedThemes = ['darkly', 'united', 'flatly', 'quartz'];
-			if (!allowedThemes.includes(theme)) {
-				theme = defaultTheme;
+			// Allowed themes - expanded list for validation (not all are in the dropdown for simplicity)
+			// The select dropdown shows only the most common themes, but validation accepts more for future extensibility
+			const allowedThemes = new Set(['darkly','united','flatly','quartz','cerulean','cosmo','cyborg','litera','lux','morph','pulse','solar','simplex','sketchy','slate','spacelab','superhero','vapor','yeti']);
+			const fallbackTheme = 'darkly';
+
+			// Validate bootswatchVersion (simple semver-like check). Adjust the fallback version to one you prefer.
+			const versionSafe = (/^[0-9]+\.[0-9]+\.[0-9]+(?:[-+].+)?$/).test(bootswatchVersion)
+				? bootswatchVersion
+				: '5.3.7';
+
+			const themeSafe = allowedThemes.has(theme) ? theme : fallbackTheme;
+
+			const href = `https://cdn.jsdelivr.net/npm/bootswatch@${encodeURIComponent(versionSafe)}/dist/${encodeURIComponent(themeSafe)}/bootstrap.min.css`;
+
+			const cssLink = document.getElementById('bootswatch-css');
+			if (cssLink) {
+				// Use preload -> stylesheet swap to reduce FOUC
+				cssLink.rel = 'preload';
+				cssLink.as = 'style';
+				cssLink.crossOrigin = 'anonymous';
+				cssLink.href = href;
+
+				cssLink.onload = function () {
+					// When preload finishes, switch to stylesheet so it applies
+					try { cssLink.rel = 'stylesheet'; } catch (e) { /* ignore */ }
+				};
+
+				cssLink.onerror = function () {
+					console.error('Failed to load BootsWatch theme:', href);
+					// fallback to default theme if the requested one failed
+					if (themeSafe !== fallbackTheme) {
+						const fallbackHref = `https://cdn.jsdelivr.net/npm/bootswatch@${encodeURIComponent(versionSafe)}/dist/${encodeURIComponent(fallbackTheme)}/bootstrap.min.css`;
+						// attempt to load fallback as stylesheet
+						cssLink.rel = 'stylesheet';
+						cssLink.href = fallbackHref;
+					}
+				};
 			}
-			document.getElementById('bootswatch-css').href =
-				`https://cdn.jsdelivr.net/npm/bootswatch@${bootswatchVersion}/dist/${theme}/bootstrap.min.css`;
 		}
 
 		// Set the default theme
