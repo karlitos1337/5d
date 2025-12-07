@@ -1,0 +1,4 @@
+*.bundle.js
+
+# Copied from the lib package
+clipperUtils.js

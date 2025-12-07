@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+		"module": "commonjs",
+		"target": "es2017",
+		"esModuleInterop": false,
+		//"lib": ["es2015", "es2020.string", "dom", "dom.iterable"],
+		"alwaysStrict": true,
+		"forceConsistentCasingInFileNames": true,
+		"listEmittedFiles": false,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"sourceMap": true,
+		"jsx": "react",
+		"skipLibCheck": true,
+		"allowUmdGlobalAccess": true,
+	},
+	"exclude": [
+		"**/node_modules",
+		"packages/app-desktop/dist/**/*",
+		"packages/app-cli/tests/support/**/*",
+		"packages/app-cli/tests-build/**/*",
+		"packages/app-cli/build/**/*",
+		"Modules/**/*",
+		"packages/server/dist",
+	],
+
+	"ts-node": {
+		"preferTsExts": true
+	}
+}
