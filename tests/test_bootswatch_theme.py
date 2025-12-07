@@ -52,11 +52,20 @@ def test_url_building_function_exists():
 
 
 def test_sanitization_present():
-    """Test that theme name sanitization is implemented"""
+    """Test that theme name sanitization is implemented with correct pattern and flags"""
     html = read_html()
-    # Look for sanitization logic - checking for patterns that indicate input validation
-    assert 'replace' in html and ('[^a-z0-9\\-]' in html or '[^a-z0-9-]' in html), \
-        'Theme name sanitization (alphanumeric + hyphen filter) not found'
+    # Look for sanitization logic - checking for the complete implementation
+    assert 'replace' in html, 'replace method not found for sanitization'
+    # Check for the regex pattern with proper character class
+    assert '[^a-z0-9\\-]' in html or '[^a-z0-9-]' in html, \
+        'Theme name sanitization regex pattern not found'
+    # Verify the pattern has global and case-insensitive flags
+    # Pattern should be: /[^a-z0-9\-]/gi with the flags immediately after the closing /
+    assert '/gi,' in html or '/gi;' in html or '/gi ' in html, \
+        'Sanitization regex must have "gi" flags for global case-insensitive matching'
+    # Verify sanitization is applied before URL construction (sanitizedTheme variable)
+    assert 'sanitizedTheme' in html, \
+        'sanitizedTheme variable not found - sanitization must be applied before URL construction'
 
 
 def test_encoding_present():
@@ -70,3 +79,30 @@ def test_error_handling_present():
     html = read_html()
     assert 'onerror' in html, 'onerror handler not found - should handle CSS load failures'
     assert 'onload' in html, 'onload handler not found - should verify successful CSS loading'
+
+
+def test_version_validation():
+    """Test that bootswatchVersion is validated with semver pattern"""
+    html = read_html()
+    assert 'safeVersion' in html, 'safeVersion function not found - version validation required'
+    assert 'safeFallbackVersion' in html, 'safeFallbackVersion not in config - need pinned safe version'
+    # Check for semver-like regex pattern
+    assert 'semverPattern' in html or 'semver' in html.lower(), \
+        'semver validation pattern not found'
+
+
+def test_preload_pattern():
+    """Test that preload -> stylesheet swap pattern is used to reduce FOUC"""
+    html = read_html()
+    assert "rel = 'preload'" in html or 'rel = "preload"' in html, \
+        'preload pattern not found - should use preload for FOUC reduction'
+    assert "as = 'style'" in html or 'as = "style"' in html, \
+        'as="style" attribute not found - required for preload pattern'
+
+
+def test_crossorigin_attribute():
+    """Test that crossOrigin attribute is set for future SRI support"""
+    html = read_html()
+    assert 'crossOrigin' in html, 'crossOrigin attribute not found - needed for future SRI support'
+    assert "'anonymous'" in html or '"anonymous"' in html, \
+        'crossOrigin="anonymous" value not found'

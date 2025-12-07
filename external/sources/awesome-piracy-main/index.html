@@ -49,8 +49,24 @@
 			                             // Update when https://www.jsdelivr.com/package/npm/bootswatch is updated
 			defaultTheme: 'darkly',
 			allowedThemes: ['darkly', 'united', 'flatly', 'quartz'],
-			cdnBaseUrl: 'https://cdn.jsdelivr.net/npm/bootswatch'
+			cdnBaseUrl: 'https://cdn.jsdelivr.net/npm/bootswatch',
+			safeFallbackVersion: '5.3.0' // Pinned safe version as fallback
 		};
+
+		/**
+		 * Validates and sanitizes the version string using semver-like pattern
+		 * @param {string} version - Version string to validate
+		 * @returns {string} Valid version string or safe fallback
+		 */
+		function safeVersion( version ) {
+			// Semver-like pattern: major.minor.patch with optional pre-release
+			const semverPattern = /^(\d+)\.(\d+)\.(\d+)(-[\w.]+)?$/;
+			if (semverPattern.test(version)) {
+				return version;
+			}
+			console.warn(`Invalid version "${version}", using fallback: ${THEME_CONFIG.safeFallbackVersion}`);
+			return THEME_CONFIG.safeFallbackVersion;
+		}
 
 		// Configure marked.js to use Github heading ID's to allow the Contents list to function
 		marked.use( markedGfmHeadingId.gfmHeadingId() );
@@ -82,14 +98,18 @@
 				console.warn(`Theme name contained invalid characters, sanitized to: ${sanitizedTheme}`);
 			}
 			
+			// Validate and sanitize version
+			const validVersion = safeVersion(THEME_CONFIG.bootswatchVersion);
+			
 			// Construct URL with validated components (encodeURIComponent for extra safety)
-			const version = encodeURIComponent(THEME_CONFIG.bootswatchVersion);
+			const version = encodeURIComponent(validVersion);
 			const themeName = encodeURIComponent(sanitizedTheme);
 			return `${THEME_CONFIG.cdnBaseUrl}@${version}/dist/${themeName}/bootstrap.min.css`;
 		}
 
 		/**
 		 * Changes the active theme with error handling and fallback
+		 * Uses preload -> stylesheet swap pattern to reduce FOUC
 		 * @param {string} theme - Theme name to apply
 		 * @param {boolean} isFallback - Internal flag to prevent infinite recursion
 		 */
@@ -101,10 +121,13 @@
 				return;
 			}
 			
-			// Create a temporary link to load the new theme; only update the main link if loading succeeds
+			// Use preload -> stylesheet swap to reduce Flash of Unstyled Content (FOUC)
+			// Set crossOrigin='anonymous' to prepare for future SRI support
 			const testLink = document.createElement('link');
-			testLink.rel = 'stylesheet';
+			testLink.rel = 'preload';
+			testLink.as = 'style';
 			testLink.href = url;
+			testLink.crossOrigin = 'anonymous';
 			
 			const cleanup = function() {
 				// Remove the test link to prevent memory leaks
@@ -114,10 +137,12 @@
 			};
 			
 			testLink.onload = function() {
-				// Successfully loaded, remove test link before applying the theme
-				cleanup();
+				// Successfully preloaded, now convert to stylesheet and apply
+				testLink.rel = 'stylesheet';
 				linkElement.href = url;
+				linkElement.crossOrigin = 'anonymous';
 				console.log(`Theme "${theme}" loaded successfully`);
+				cleanup();
 			};
 			
 			testLink.onerror = function() {
@@ -134,7 +159,7 @@
 				}
 			};
 			
-			// Start the test load
+			// Start the preload
 			document.head.appendChild(testLink);
 		}
 
