@@ -97,7 +97,7 @@
 			const url = buildThemeUrl( theme );
 			const linkElement = document.getElementById('bootswatch-css');
 			
-			// Create a temporary link to test loading before committing
+			// Create a temporary link to load the new theme; only update the main link if loading succeeds
 			const testLink = document.createElement('link');
 			testLink.rel = 'stylesheet';
 			testLink.href = url;
