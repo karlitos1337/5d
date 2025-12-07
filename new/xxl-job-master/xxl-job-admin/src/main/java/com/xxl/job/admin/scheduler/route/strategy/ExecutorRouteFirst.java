@@ -13,7 +13,7 @@ public class ExecutorRouteFirst extends ExecutorRouter {
 
     @Override
     public Response<String> route(TriggerRequest triggerParam, List<String> addressList){
-        return Response.ofSuccess(addressList.get(0));
+        return Response.ofSuccess(addressList.getFirst());
     }
 
 }

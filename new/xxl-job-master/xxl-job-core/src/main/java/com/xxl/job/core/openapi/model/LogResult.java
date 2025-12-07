@@ -1,11 +1,13 @@
 package com.xxl.job.core.openapi.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Created by xuxueli on 17/3/23.
  */
 public class LogResult implements Serializable {
+    @Serial
     private static final long serialVersionUID = 42L;
 
     public LogResult() {

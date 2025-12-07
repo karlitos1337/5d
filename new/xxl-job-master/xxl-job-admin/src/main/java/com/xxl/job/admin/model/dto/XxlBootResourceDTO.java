@@ -1,5 +1,6 @@
 package com.xxl.job.admin.model.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  *  Created by xuxueli on 2024-08-04
  */
 public class XxlBootResourceDTO implements Serializable {
+    @Serial
     private static final long serialVersionUID = 42L;
 
     /**

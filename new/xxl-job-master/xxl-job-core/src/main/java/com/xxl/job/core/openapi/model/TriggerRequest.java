@@ -1,11 +1,13 @@
 package com.xxl.job.core.openapi.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Created by xuxueli on 16/7/22.
  */
 public class TriggerRequest implements Serializable{
+    @Serial
     private static final long serialVersionUID = 42L;
 
     // job base info

@@ -85,12 +85,12 @@ public class JobLogController {
 			Integer finalJobGroup = jobGroup;
 			if (CollectionTool.isEmpty(jobGroupListTotal.stream().filter(item -> item.getId() == finalJobGroup).toList())) {
 				// jobGroup not exist, use first
-				jobGroup = jobGroupList.get(0).getId();
+				jobGroup = jobGroupList.getFirst().getId();
 			}
 			jobId = 0;
 		} else {
 			// default first valid jobGroup
-			jobGroup = jobGroupList.get(0).getId();
+			jobGroup = jobGroupList.getFirst().getId();
 			jobId = 0;
 		}
 
@@ -106,7 +106,7 @@ public class JobLogController {
 		} else {
 			if (!jobInfoList.stream().map(XxlJobInfo::getId).toList().contains(jobId)) {
 				// jobId not exist, use first
-				jobId = jobInfoList.get(0).getId();
+				jobId = jobInfoList.getFirst().getId();
 			}
 		}
 
