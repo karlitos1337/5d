@@ -110,10 +110,53 @@
 
 ## 🚀 Action Items
 
-- [x] Free Learning List dokumentiert
-- [ ] BibTeX Batch 11 (freelearninglist2025, freecodecamp2025, khanacademy2025) - Q1 2026
-- [ ] Metaindex erstellen (alle Free Learning Resources konsolidiert) - Q2 2026
-- [ ] Dashboard-Widget: Top 100 Free Resources (sortierbar nach Category/Score) - Q2 2026
+
+---
+
+## 🧠 OSSU Data Science Curriculum – Relevante Quellen (Konsolidiert)
+
+**Hochwertige, kostenlose Data Science Quellen aus OSSU und 5D-Framework:**
+
+### Data Science Grundlagen & Tools
+- [What is Data Science (Coursera)](https://www.coursera.org/learn/what-is-datascience)
+- [Tools for Data Science (Coursera)](https://www.coursera.org/learn/open-source-tools-for-data-science)
+- [Data Science Methodology (Coursera)](https://www.coursera.org/learn/data-science-methodology)
+- [Data Science: Wrangling (edX)](https://www.edx.org/course/data-science-wrangling)
+
+### Programmierung & Algorithmen
+- [Introduction to Computer Science and Programming Using Python (MIT)](https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/)
+- [Java Programming (MOOC)](https://java-programming.mooc.fi/)
+- [Algorithms I-IV (Georgia Tech, edX)](https://www.edx.org/learn/data-structures)
+
+### Datenbanken & Business Intelligence
+- [Database Management Essentials (Coursera)](https://www.coursera.org/learn/database-management)
+- [MongoDB for Developers Learning Path](https://learn.mongodb.com/pages/mongodb-developer-learning-paths)
+- [Business Intelligence Concepts, Tools, and Applications (Coursera)](https://www.coursera.org/learn/business-intelligence-tools)
+
+### Mathematik & Statistik
+- [Essence of Linear Algebra (YouTube)](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
+- [Linear Algebra (MIT OCW)](https://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/)
+- [Introduction to Probability (Harvard)](https://projects.iq.harvard.edu/stat110/home)
+- [Statistical Learning with Python (Stanford/edX)](https://www.edx.org/learn/python/stanford-university-statistical-learning-with-python)
+
+### Machine Learning & Big Data
+- [Supervised Machine Learning: Regression and Classification (Coursera)](https://www.coursera.org/learn/machine-learning)
+- [Advanced Learning Algorithms (Coursera)](https://www.coursera.org/learn/advanced-learning-algorithms)
+- [Mining Massive Datasets (edX)](https://www.edx.org/course/mining-massive-datasets)
+- [Data Science and Engineering with Apache Spark (edX)](https://www.edx.org/xseries/data-science-engineering-apache-spark)
+
+### Weitere relevante Quellen aus 5D-Framework
+- `01_bildung_education/free_resources_mega_index.md` (Mega-Index mit freien Lernressourcen)
+- `01_bildung_education/physics_simulations_resources.md` (Physik-Simulationen)
+- `01_bildung_education/german_literature.md` (Literaturquellen)
+- `free_resources_mega_index.md` (Kuratierte Linksammlung)
+
+---
+
+**Empfehlung für 5D-Framework:**
+- Obige Links als Block in Mega-Index-Dateien übernehmen
+- OSSU-Struktur als Vorlage für eigene 5D Data Science Roadmap nutzen
+- Quellen für "Bildung", "Technologie", "Datenanalyse" und "Synthesen" im 5D-Kontext priorisieren
 
 ---
 
