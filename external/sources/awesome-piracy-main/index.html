@@ -41,10 +41,32 @@
 	<script src="https://cdn.jsdelivr.net/npm/marked-gfm-heading-id/lib/index.umd.js"></script>
 
 	<script>
-		// Basic Settings
-		const defaultTheme = 'darkly';
-		const bootswatchVersion = '5.3.7'; // Last updated: 5 July, 2025
-		// Update last one only when https://www.jsdelivr.com/package/npm/bootswatch is updated.
+		// ============================================================================
+		// Theme Configuration - Centralized settings for BootsWatch theme management
+		// ============================================================================
+		const THEME_CONFIG = {
+			bootswatchVersion: '5.3.7', // Last updated: 5 July, 2025
+			                             // Update when https://www.jsdelivr.com/package/npm/bootswatch is updated
+			defaultTheme: 'darkly',
+			allowedThemes: ['darkly', 'united', 'flatly', 'quartz'],
+			cdnBaseUrl: 'https://cdn.jsdelivr.net/npm/bootswatch',
+			safeFallbackVersion: '5.3.0' // Pinned safe version as fallback
+		};
+
+		/**
+		 * Validates and sanitizes the version string using semver-like pattern
+		 * @param {string} version - Version string to validate
+		 * @returns {string} Valid version string or safe fallback
+		 */
+		function safeVersion( version ) {
+			// Semver-like pattern: major.minor.patch with optional pre-release
+			const semverPattern = /^(\d+)\.(\d+)\.(\d+)(-[\w.]+)?$/;
+			if (semverPattern.test(version)) {
+				return version;
+			}
+			console.warn(`Invalid version "${version}", using fallback: ${THEME_CONFIG.safeFallbackVersion}`);
+			return THEME_CONFIG.safeFallbackVersion;
+		}
 
 		// Configure marked.js to use Github heading ID's to allow the Contents list to function
 		marked.use( markedGfmHeadingId.gfmHeadingId() );
@@ -58,51 +80,91 @@
 			})
 			.catch( error => console.error( 'Error:', error ) );
 
-		// Change the theme
-		function changeCSS( theme )
-		{
-			// Allowed themes - expanded list for validation (not all are in the dropdown for simplicity)
-			// The select dropdown shows only the most common themes, but validation accepts more for future extensibility
-			const allowedThemes = new Set(['darkly','united','flatly','quartz','cerulean','cosmo','cyborg','litera','lux','morph','pulse','solar','simplex','sketchy','slate','spacelab','superhero','vapor','yeti']);
-			const fallbackTheme = 'darkly';
-
-			// Validate bootswatchVersion (simple semver-like check). Adjust the fallback version to one you prefer.
-			const versionSafe = (/^[0-9]+\.[0-9]+\.[0-9]+(?:[-+].+)?$/).test(bootswatchVersion)
-				? bootswatchVersion
-				: '5.3.7';
-
-			const themeSafe = allowedThemes.has(theme) ? theme : fallbackTheme;
-
-			const href = `https://cdn.jsdelivr.net/npm/bootswatch@${encodeURIComponent(versionSafe)}/dist/${encodeURIComponent(themeSafe)}/bootstrap.min.css`;
-
-			const cssLink = document.getElementById('bootswatch-css');
-			if (cssLink) {
-				// Use preload -> stylesheet swap to reduce FOUC
-				cssLink.rel = 'preload';
-				cssLink.as = 'style';
-				cssLink.crossOrigin = 'anonymous';
-				cssLink.href = href;
-
-				cssLink.onload = function () {
-					// When preload finishes, switch to stylesheet so it applies
-					try { cssLink.rel = 'stylesheet'; } catch (e) { /* ignore */ }
-				};
-
-				cssLink.onerror = function () {
-					console.error('Failed to load BootsWatch theme:', href);
-					// fallback to default theme if the requested one failed
-					if (themeSafe !== fallbackTheme) {
-						const fallbackHref = `https://cdn.jsdelivr.net/npm/bootswatch@${encodeURIComponent(versionSafe)}/dist/${encodeURIComponent(fallbackTheme)}/bootstrap.min.css`;
-						// attempt to load fallback as stylesheet
-						cssLink.rel = 'stylesheet';
-						cssLink.href = fallbackHref;
-					}
-				};
+		/**
+		 * Safely constructs a BootsWatch CDN URL with validation and encoding
+		 * @param {string} theme - Theme name to load
+		 * @returns {string} Validated and encoded CDN URL
+		 */
+		function buildThemeUrl( theme ) {
+			// Validate theme against allowlist
+			if (!THEME_CONFIG.allowedThemes.includes(theme)) {
+				console.warn(`Theme "${theme}" not in allowlist, falling back to default`);
+				theme = THEME_CONFIG.defaultTheme;
 			}
+			
+			// Sanitize theme name - only allow alphanumeric and hyphens
+			const sanitizedTheme = theme.replace(/[^a-z0-9\-]/gi, '');
+			if (sanitizedTheme !== theme) {
+				console.warn(`Theme name contained invalid characters, sanitized to: ${sanitizedTheme}`);
+			}
+			
+			// Validate and sanitize version
+			const validVersion = safeVersion(THEME_CONFIG.bootswatchVersion);
+			
+			// Construct URL with validated components (encodeURIComponent for extra safety)
+			const version = encodeURIComponent(validVersion);
+			const themeName = encodeURIComponent(sanitizedTheme);
+			return `${THEME_CONFIG.cdnBaseUrl}@${version}/dist/${themeName}/bootstrap.min.css`;
 		}
 
-		// Set the default theme
-		changeCSS( defaultTheme );
+		/**
+		 * Changes the active theme with error handling and fallback
+		 * Uses preload -> stylesheet swap pattern to reduce FOUC
+		 * @param {string} theme - Theme name to apply
+		 * @param {boolean} isFallback - Internal flag to prevent infinite recursion
+		 */
+		function changeCSS( theme, isFallback = false ) {
+			const url = buildThemeUrl( theme );
+			const linkElement = document.getElementById('bootswatch-css');
+			if (!linkElement) {
+				console.error('bootswatch-css element not found');
+				return;
+			}
+			
+			// Use preload -> stylesheet swap to reduce Flash of Unstyled Content (FOUC)
+			// Set crossOrigin='anonymous' to prepare for future SRI support
+			const testLink = document.createElement('link');
+			testLink.rel = 'preload';
+			testLink.as = 'style';
+			testLink.href = url;
+			testLink.crossOrigin = 'anonymous';
+			
+			const cleanup = function() {
+				// Remove the test link to prevent memory leaks
+				if (testLink.parentNode) {
+					testLink.parentNode.removeChild(testLink);
+				}
+			};
+			
+			testLink.onload = function() {
+				// Successfully preloaded, now convert to stylesheet and apply
+				testLink.rel = 'stylesheet';
+				linkElement.href = url;
+				linkElement.crossOrigin = 'anonymous';
+				console.log(`Theme "${theme}" loaded successfully`);
+				cleanup();
+			};
+			
+			testLink.onerror = function() {
+				// Failed to load, keep current theme
+				console.error(`Failed to load theme "${theme}" from ${url}`);
+				cleanup();
+				// If this was not already the default theme and not already a fallback attempt,
+				// try loading the default theme as fallback (only once to prevent infinite recursion)
+				if (theme !== THEME_CONFIG.defaultTheme && !isFallback) {
+					console.log(`Attempting to load fallback theme: ${THEME_CONFIG.defaultTheme}`);
+					changeCSS(THEME_CONFIG.defaultTheme, true);
+				} else if (isFallback) {
+					console.error('Fallback theme also failed to load. No theme will be applied.');
+				}
+			};
+			
+			// Start the preload
+			document.head.appendChild(testLink);
+		}
+
+		// Set the default theme on page load
+		changeCSS( THEME_CONFIG.defaultTheme );
 	</script>
 </body>
 </html>

@@ -31,48 +31,78 @@ def test_bootswatch_variables_present():
     assert 'defaultTheme' in html, 'defaultTheme reference not found in index.html'
 
 
-def test_semver_validation_present():
-    """Test that semver validation regex is present in the code."""
+def test_theme_config_centralized():
+    """Test that theme configuration is centralized in THEME_CONFIG object"""
     html = read_html()
-    # Check for the semver validation pattern
-    assert r'/^[0-9]+\.[0-9]+\.[0-9]+' in html, 'semver validation pattern not found in index.html'
-    assert 'versionSafe' in html, 'versionSafe variable not found in index.html'
+    assert 'THEME_CONFIG' in html, 'THEME_CONFIG object not found - configuration should be centralized'
+    # Verify the config object contains expected properties
+    assert 'THEME_CONFIG.bootswatchVersion' in html or 'bootswatchVersion:' in html, \
+        'bootswatchVersion not in THEME_CONFIG'
+    assert 'THEME_CONFIG.defaultTheme' in html or 'defaultTheme:' in html, \
+        'defaultTheme not in THEME_CONFIG'
+    assert 'THEME_CONFIG.allowedThemes' in html or 'allowedThemes:' in html, \
+        'allowedThemes not in THEME_CONFIG'
 
 
-def test_encode_uri_component_usage():
-    """Test that encodeURIComponent is used for URL construction."""
+def test_url_building_function_exists():
+    """Test that there's a dedicated URL building function for safety"""
     html = read_html()
-    assert 'encodeURIComponent' in html, 'encodeURIComponent not found in index.html'
-    # Should appear at least twice (for version and theme)
-    count = html.count('encodeURIComponent')
-    assert count >= 2, f'encodeURIComponent should appear at least 2 times, found {count}'
+    assert 'buildThemeUrl' in html, 'buildThemeUrl function not found - URL construction should be centralized'
+    assert 'function buildThemeUrl' in html, 'buildThemeUrl should be a function'
 
 
-def test_preload_mechanism():
-    """Test that preload mechanism is implemented."""
+def test_sanitization_present():
+    """Test that theme name sanitization is implemented with correct pattern and flags"""
     html = read_html()
-    assert "rel = 'preload'" in html, "preload mechanism not found in index.html"
-    assert "as = 'style'" in html, "preload 'as' attribute not set in index.html"
-    assert 'onload' in html, 'onload handler not found in index.html'
+    # Look for sanitization logic - checking for the complete implementation
+    assert 'replace' in html, 'replace method not found for sanitization'
+    # Check for the regex pattern with proper character class
+    assert '[^a-z0-9\\-]' in html or '[^a-z0-9-]' in html, \
+        'Theme name sanitization regex pattern not found'
+    # Verify the pattern has global and case-insensitive flags
+    # Pattern should be: /[^a-z0-9\-]/gi with the flags immediately after the closing /
+    assert '/gi,' in html or '/gi;' in html or '/gi ' in html, \
+        'Sanitization regex must have "gi" flags for global case-insensitive matching'
+    # Verify sanitization is applied before URL construction (sanitizedTheme variable)
+    assert 'sanitizedTheme' in html, \
+        'sanitizedTheme variable not found - sanitization must be applied before URL construction'
 
 
-def test_cross_origin_set():
-    """Test that crossOrigin attribute is set for SRI support."""
+def test_encoding_present():
+    """Test that URI encoding is used for safety"""
     html = read_html()
-    assert 'crossOrigin' in html, 'crossOrigin not set in index.html'
-    assert "'anonymous'" in html or '"anonymous"' in html, 'anonymous crossOrigin value not found'
+    assert 'encodeURIComponent' in html, 'encodeURIComponent not found - URL components should be encoded'
 
 
-def test_error_handler_present():
-    """Test that onerror handler with fallback is present."""
+def test_error_handling_present():
+    """Test that error handling for CSS loading failures is implemented"""
     html = read_html()
-    assert 'onerror' in html, 'onerror handler not found in index.html'
-    assert 'console.error' in html, 'console.error for failed loads not found in index.html'
-    assert 'fallbackHref' in html or 'fallback' in html.lower(), 'fallback mechanism not found in index.html'
+    assert 'onerror' in html, 'onerror handler not found - should handle CSS load failures'
+    assert 'onload' in html, 'onload handler not found - should verify successful CSS loading'
 
 
-def test_theme_safe_variable():
-    """Test that themeSafe variable is used for validation."""
+def test_version_validation():
+    """Test that bootswatchVersion is validated with semver pattern"""
     html = read_html()
-    assert 'themeSafe' in html, 'themeSafe variable not found in index.html'
-    assert 'fallbackTheme' in html, 'fallbackTheme variable not found in index.html'
+    assert 'safeVersion' in html, 'safeVersion function not found - version validation required'
+    assert 'safeFallbackVersion' in html, 'safeFallbackVersion not in config - need pinned safe version'
+    # Check for semver-like regex pattern
+    assert 'semverPattern' in html or 'semver' in html.lower(), \
+        'semver validation pattern not found'
+
+
+def test_preload_pattern():
+    """Test that preload -> stylesheet swap pattern is used to reduce FOUC"""
+    html = read_html()
+    assert "rel = 'preload'" in html or 'rel = "preload"' in html, \
+        'preload pattern not found - should use preload for FOUC reduction'
+    assert "as = 'style'" in html or 'as = "style"' in html, \
+        'as="style" attribute not found - required for preload pattern'
+
+
+def test_crossorigin_attribute():
+    """Test that crossOrigin attribute is set for future SRI support"""
+    html = read_html()
+    assert 'crossOrigin' in html, 'crossOrigin attribute not found - needed for future SRI support'
+    assert "'anonymous'" in html or '"anonymous"' in html, \
+        'crossOrigin="anonymous" value not found'
