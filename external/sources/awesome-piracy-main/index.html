@@ -61,7 +61,8 @@
 		// Change the theme
 		function changeCSS( theme )
 		{
-			// Allowed themes - keep this list in sync with the select/options elsewhere in the file
+			// Allowed themes - expanded list for validation (not all are in the dropdown for simplicity)
+			// The select dropdown shows only the most common themes, but validation accepts more for future extensibility
 			const allowedThemes = new Set(['darkly','united','flatly','quartz','cerulean','cosmo','cyborg','litera','lux','morph','pulse','solar','simplex','sketchy','slate','spacelab','superhero','vapor','yeti']);
 			const fallbackTheme = 'darkly';
 
