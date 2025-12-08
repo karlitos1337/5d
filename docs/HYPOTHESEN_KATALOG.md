@@ -1,7 +1,7 @@
 # Hypothesen-Katalog – 5D Intelligence Framework
 
 **Status:** Living Document  
-**Last Updated:** 2025-12-03  
+**Last Updated:** 2025-12-08  
 **Purpose:** Testbare Hypothesen mit Operationalisierung, Methoden, Abbruchkriterien
 
 ---
@@ -211,6 +211,44 @@ Dieser Katalog listet **alle testbaren Hypothesen** des 5D-Frameworks auf. Jede 
 
 ---
 
+## 🌐 Gesellschafts-Hypothesen (High Priority)
+
+### **H18: IMP_Gini korreliert negativ mit durchschnittlichem IMP**
+**Status:** ⚠️ Hypothese (Test Q1 2027)
+
+**Behauptung:** Länder mit niedrigerem IMP_Gini haben höheres durchschnittliches IMP (positive Summe)
+
+**Operationalisierung:**
+- **IV (Independent Variable):** IMP_Gini (geschätzt aus WGI Voice & Accountability, Bildungs-Gini, Wealth-Gini)
+- **DV (Dependent Variable):** IMP_durchschnitt (geschätzt aus HDI, Life Satisfaction, Mental Health)
+- **Messung:** Cross-Country-Regression (n > 50 Länder)
+
+**Methode:**
+- Design: Observational, cross-sectional
+- Analyse: Linear Regression, Pearson r, 95% CI
+- Kontrollen: GDP/Capita, Gini-Koeffizient (Wealth), Kultur (Hofstede Dimensions)
+
+**Erfolgs-Kriterium:**
+- r < -0.50 (stark negativ), p < 0.001 → Hypothese bestätigt ✅
+- -0.50 < r < -0.30 (mittel negativ), p < 0.05 → Teilweise bestätigt ⚠️
+- r > -0.30 oder p > 0.05 → Hypothese falsifiziert ❌
+
+**Abbruchkriterium:**
+- Falls r > 0 (positive Korrelation) → Fundamental falsch (Ungleichheit führt zu höherem Durchschnitt?)
+- Falls Wealth-Gini dominiert (β_wealth > 2 × β_IMP) → IMP_Gini nicht relevant
+
+**Timeline:** Q1 2027 (nach H1-H17 validiert)  
+**Ressourcen:** World Bank, UNDP, OECD, WGI Daten (öffentlich zugänglich)
+
+**Kontext:** Siehe [TRANSITION_1_3_vs_2_3.md](TRANSITION_1_3_vs_2_3.md) für vollständige Analyse (Nullsumme vs. Positive Summe)
+
+**Interpretation (falls bestätigt):**
+- Weniger IMP-Ungleichheit → höheres durchschnittliches Wohlbefinden
+- Positive Summe bestätigt (alle gewinnen, nicht nur 1/3)
+- Policy-Implikation: Fokus auf IMP-Reduktion, nicht nur Wealth-Redistribution
+
+---
+
 ## 🧠 Neurobiologie-Hypothesen (Low Priority, Spekulativ)
 
 ### **H9: Perkolationstheorie erklärt Bewusstsein**
@@ -262,6 +300,7 @@ Dieser Katalog listet **alle testbaren Hypothesen** des 5D-Frameworks auf. Jede 
 | **H8 (Interaktionen instabil)** | Mittel | N/A | ✅ Bestätigt | Done |
 | **H9 (Perkolation → Bewusstsein)** | Niedrig | Niedrig | 🔮 | Q4 2026+ |
 | **H10 (DMN → Authentizität)** | Niedrig | Niedrig | 🔮 | Q4 2026+ |
+| **H18 (IMP_Gini → IMP_avg)** | Hoch | Mittel | ⭐⭐⭐ | Q1 2027 |
 
 ---
 
@@ -273,7 +312,8 @@ Dieser Katalog listet **alle testbaren Hypothesen** des 5D-Frameworks auf. Jede 
 2. **H2 falsifiziert:** Nur 3 Faktoren (nicht 5) → Auf 3D-Modell reduzieren
 3. **H3 falsifiziert:** Alternative Schulen NICHT höher IMP → Hypothese gescheitert
 4. **H4 falsifiziert:** Additiv signifikant besser (ΔR² > 5%) → Formel umstellen
-5. **3+ Kern-Hypothesen falsifiziert** → Neukonzeption Q2 2026
+5. **H18 falsifiziert:** IMP_Gini irrelevant (r > -0.30) → Positive Summe-These widerlegt
+6. **3+ Kern-Hypothesen falsifiziert** → Neukonzeption Q2 2026
 
 **Transparenz:** Alle Abbruchkriterien sind **vor** Datensammlung definiert (kein p-Hacking).
 
@@ -281,13 +321,14 @@ Dieser Katalog listet **alle testbaren Hypothesen** des 5D-Frameworks auf. Jede 
 
 ## 📚 Siehe auch
 
-- **[CLAIMS_EVIDENCE_MATRIX.md](CLAIMS_EVIDENCE_MATRIX.md)** – 40 Behauptungen mit Evidenzlabels
+- **[TRANSITION_1_3_vs_2_3.md](TRANSITION_1_3_vs_2_3.md)** – **NEU!** 1/3 vs 2/3 gesellschaftliche Transition, IMP_Gini-Konzept
+- **[CLAIMS_EVIDENCE_MATRIX.md](CLAIMS_EVIDENCE_MATRIX.md)** – 48 Behauptungen mit Evidenzlabels
 - **[ETHIK_MANIFEST.md](../ETHIK_MANIFEST.md)** – Bias-Log, Forschungsethik
 - **[TODO_RESEARCH.md](../TODO_RESEARCH.md)** – Forschungs-Roadmap (85+ Tasks)
 - **[VISION.md](../VISION.md)** – Zentrale Definition, 1D-5D Definitionen
 
 ---
 
-**Last Updated:** 2025-12-03  
+**Last Updated:** 2025-12-08  
 **Maintainer:** Siehe [CONTRIBUTING.md](../CONTRIBUTING.md)  
 **License:** CC BY 4.0
