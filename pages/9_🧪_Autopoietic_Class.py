@@ -284,7 +284,7 @@ fig.update_layout(
     height=500,
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 # === INDIVIDUAL TRAJECTORIES ===
 if show_individual and len(individual_history) > 0:
@@ -312,7 +312,7 @@ if show_individual and len(individual_history) > 0:
         height=400,
     )
 
-    st.plotly_chart(fig_ind, use_container_width=True)
+    st.plotly_chart(fig_ind, width="stretch")
 
 # === DROPOUT EVENTS ===
 if show_dropouts and history["dropout_events"]:
@@ -340,7 +340,7 @@ if show_dropouts and history["dropout_events"]:
         height=300,
     )
 
-    st.plotly_chart(fig_dropout, use_container_width=True)
+    st.plotly_chart(fig_dropout, width="stretch")
 
 # === ACTIVE STUDENTS ===
 col1, col2 = st.columns(2)
@@ -353,7 +353,7 @@ with col1:
         labels={"x": "Step", "y": "Active Students"},
     )
     fig_active.add_hline(y=n_agents, line_dash="dash", line_color="gray", annotation_text="Initial")
-    st.plotly_chart(fig_active, use_container_width=True)
+    st.plotly_chart(fig_active, width="stretch")
 
 with col2:
     # Final distribution
@@ -377,7 +377,7 @@ with col2:
         color_discrete_map=colors,
     )
     fig_final.update_yaxes(range=[0, 1])
-    st.plotly_chart(fig_final, use_container_width=True)
+    st.plotly_chart(fig_final, width="stretch")
 
 # === INTERPRETATION ===
 st.divider()

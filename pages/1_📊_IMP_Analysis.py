@@ -411,7 +411,7 @@ A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} 
                 title="5D Intelligence Profile",
             )
 
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
         except ImportError:
             st.warning("Plotly not installed. Install with: `pip install plotly`")

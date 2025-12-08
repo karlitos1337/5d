@@ -414,7 +414,7 @@ fig_diffusion.add_hline(
     annotation_position="right",
 )
 fig_diffusion.update_layout(height=400)
-st.plotly_chart(fig_diffusion, use_container_width=True)
+st.plotly_chart(fig_diffusion, width="stretch")
 
 # Side-by-side visualizations
 viz_col1, viz_col2 = st.columns(2)
@@ -435,7 +435,7 @@ with viz_col1:
         )
         fig_degree.update_traces(marker_color="#FF6B6B")
         fig_degree.update_layout(height=350, showlegend=False)
-        st.plotly_chart(fig_degree, use_container_width=True)
+        st.plotly_chart(fig_degree, width="stretch")
 
         st.caption(f"Ø Grad: {metrics['avg_degree']:.1f}, Max: {metrics['max_degree']}")
 
@@ -504,7 +504,7 @@ with viz_col2:
             height=350,
         )
 
-        st.plotly_chart(fig_network, use_container_width=True)
+        st.plotly_chart(fig_network, width="stretch")
     elif show_network_viz:
         st.info("Netzwerk-Visualisierung deaktiviert für >150 Knoten (Performance)")
 

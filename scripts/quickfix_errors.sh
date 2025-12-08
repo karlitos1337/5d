@@ -1,9 +1,15 @@
 #!/bin/bash
+<<<<<<< HEAD
 # Quick Fix Script for 5d Repository Errors
 # Fixes: WHO API errors, KeyError in scraper, pytest cache issues
 
 set -e
 
+=======
+# Quick Fix Script
+
+set -e
+>>>>>>> e3c6597 (Fix all critical bugs - Streamlit working)
 echo "🔧 Starting Quick Fix..."
 
 # 1. Clean pytest cache
@@ -13,6 +19,7 @@ find . -type f -name "*.pyc" -delete 2>/dev/null || true
 rm -rf .pytest_cache 2>/dev/null || true
 echo "✅ Pytest cache cleaned"
 
+<<<<<<< HEAD
 # 2. Fix KeyError in 5d_research_scraper.py
 echo "🔧 Fixing KeyError in 5d_research_scraper.py..."
 if [ -f "5d_research_scraper.py" ]; then
@@ -24,10 +31,20 @@ if [ -f "5d_research_scraper.py" ]; then
     sed -i 's/len(data\["pubmed"\])/len(data.get("pubmed", []))/g' 5d_research_scraper.py
     
     echo "✅ KeyError fixed (backup: 5d_research_scraper.py.backup)"
+=======
+# 2. Fix KeyError
+echo "🔧 Fixing KeyError in 5d_research_scraper.py..."
+if [ -f "5d_research_scraper.py" ]; then
+    cp 5d_research_scraper.py 5d_research_scraper.py.backup
+    sed -i 's/len(data\["arxiv"\])/len(data.get("arxiv", []))/g' 5d_research_scraper.py
+    sed -i 's/len(data\["pubmed"\])/len(data.get("pubmed", []))/g' 5d_research_scraper.py
+    echo "✅ KeyError fixed"
+>>>>>>> e3c6597 (Fix all critical bugs - Streamlit working)
 else
     echo "⚠️  5d_research_scraper.py not found"
 fi
 
+<<<<<<< HEAD
 # 3. Create WHO API skip patch
 echo "🔧 Creating WHO API skip patch..."
 cat > scripts/patch_who_api.py << 'EOF'
@@ -68,3 +85,8 @@ echo "Next steps:"
 echo "  1. Run: make start"
 echo "  2. Run: make test"
 echo "  3. Fix WHO API properly later"
+=======
+echo ""
+echo "✅ Quick Fix Complete!"
+echo "Run: make start"
+>>>>>>> e3c6597 (Fix all critical bugs - Streamlit working)

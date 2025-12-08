@@ -583,39 +583,6 @@ def main():
 
         st.subheader("🗺️ Regional Projections for 2040")
 
-        from utils.map_helpers import create_regional_adoption_map, render_minimap
-
-        m = create_regional_adoption_map()
-        render_minimap(m, "Projected 5D Intelligence adoption rates by region (2040 estimates)")
-
-        st.divider()
-
-        st.markdown(
-            """
-        **Detailed Breakdown:**
-        
-        🇪🇺 **Europe:** 40-60%
-        - Nordics führend (70%+)
-        - Policy Support
-        
-        🇺🇸 **North America:** 30-50%
-        - USA: 35%
-        - Canada: 45%
-        
-        🌏 **Asia:** 20-40%
-        - Japan: 50%
-        - China: 25%
-        - Indien: 15%
-        
-        🌍 **Africa:** 10-25%
-        - Starke Varianz
-        - Urban > Rural
-        
-        🌎 **Latin America:** 15-35%
-        - Brasilien: 30%
-        - Chile: 40%
-        """
-        )
 
         st.divider()
 
