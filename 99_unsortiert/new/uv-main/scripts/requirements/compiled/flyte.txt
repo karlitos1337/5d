@@ -238,7 +238,7 @@ typing-extensions==4.9.0
     #   mypy
     #   tensorflow
     #   torch
-urllib3==2.6.0
+urllib3==2.6.1
     # via
     #   requests
     #   types-requests
