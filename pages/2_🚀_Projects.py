@@ -507,13 +507,6 @@ def main():
         # Mini world map
         st.subheader("🗺️ Global Distribution of Alternative Schools")
 
-        from utils.map_helpers import create_alternative_schools_map, render_minimap
-
-        m = create_alternative_schools_map()
-        render_minimap(
-            m,
-            "Sample of documented alternative schools worldwide (Sudbury, Democratic, Folk High Schools)",
-        )
 
         # Placeholder: Show countries
         if solutions:

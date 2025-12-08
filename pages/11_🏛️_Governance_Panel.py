@@ -161,7 +161,7 @@ if show_regression:
 fig1.update_traces(textposition="top center")
 fig1.update_layout(showlegend=True)
 
-st.plotly_chart(fig1, use_container_width=True)
+st.plotly_chart(fig1, width="stretch")
 
 # Correlation metrics
 if show_correlation:
@@ -232,7 +232,7 @@ if show_regression:
 fig2.update_traces(textposition="top center")
 fig2.update_layout(showlegend=True)
 
-st.plotly_chart(fig2, use_container_width=True)
+st.plotly_chart(fig2, width="stretch")
 
 # Interpretation
 st.markdown("---")
@@ -286,7 +286,7 @@ df_display["Dropout"] = df_display["Dropout"].apply(lambda x: f"{x:.1%}")
 
 st.dataframe(
     df_display,
-    use_container_width=True,
+    width="stretch",
     column_config={
         "Country": st.column_config.TextColumn("Land", width="medium"),
         "WGI_Voice": st.column_config.NumberColumn("WGI Voice", format="%.2f"),

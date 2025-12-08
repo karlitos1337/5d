@@ -388,5 +388,5 @@ if __name__ == "__main__":
     scraper.save_results(research_data)
 
     # Statistik
-    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values())
+    total_papers = sum(len(data["arxiv"]) + len(data["pubmed"]) for data in research_data.values())
     print(f"\n📊 Total: {total_papers} Papers gefunden")

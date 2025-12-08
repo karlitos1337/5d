@@ -95,7 +95,7 @@ def main():
             xaxis_title="X1",
             yaxis_title="X2",
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
 
 if __name__ == "__main__":
