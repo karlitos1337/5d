@@ -20,7 +20,8 @@ This repository contains comprehensive documentation across multiple knowledge d
 
 - **[⭐ Executive Summary 2025](docs/EXECUTIVE_SUMMARY_2025.md)** - **NEW!** Complete framework overview with Week 1 research findings (92% A-, 54.2% facts)
 - **[🎯 VISION.md](VISION.md)** - Central framework definition, 1D-5D complexity levels, scientific foundation
-- **[🧪 Hypotheses Catalog](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses with operationalization & abort criteria
+- **[🧪 Hypotheses Catalog](docs/HYPOTHESEN_KATALOG.md)** - 18 testable hypotheses with operationalization & abort criteria (H1-H18)
+- **[⚖️ TRANSITION_1_3_vs_2_3.md](docs/TRANSITION_1_3_vs_2_3.md)** - **NEW!** Gesellschaftliche Transition: Nullsumme → Positive Summe, IMP_Gini-Metrik (H18)
 - **[📐 1D-5D Definitions](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for 5 domains (Education, Governance, Mental Health, Ecology, Technology)
 - **[🔬 Research Roadmap](TODO_RESEARCH.md)** - Scientific foundations, empirical testability, open questions (85+ tasks)
 - **[📊 Manifest Summary](docs/manifest_summary.md)** - Hierarchical overview of all project documents (7578 lines, academic synthesis)
@@ -147,14 +148,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ### Scientific Documentation
 
 - **[EXECUTIVE_SUMMARY_2025.md](docs/EXECUTIVE_SUMMARY_2025.md)** - ⭐ **NEW!** Comprehensive overview with Week 1 research (341 lines, all findings integrated)
+- **[TRANSITION_1_3_vs_2_3.md](docs/TRANSITION_1_3_vs_2_3.md)** - ⭐ **NEW!** Gesellschaftliche Transition: Nullsumme (Status Quo) vs. Positive Summe (IMP-Framework), IMP_Gini-Metrik, Hypothese H18
 - **[CLAIMS_EVIDENCE_MATRIX.md](docs/CLAIMS_EVIDENCE_MATRIX.md)** - 48 claims with evidence labels (54.2% Facts, 35.4% Hypotheses, 10.4% Speculations, 1 falsified)
 - **[ETHIK_MANIFEST.md](ETHIK_MANIFEST.md)** - Bias log (13 biases: WEIRD, Power, Publication ⭐), abort criteria, research ethics
-- **[HYPOTHESEN_KATALOG.md](docs/HYPOTHESEN_KATALOG.md)** - 10 testable hypotheses (H1-H10 with operationalization, methods, timeline)
+- **[HYPOTHESEN_KATALOG.md](docs/HYPOTHESEN_KATALOG.md)** - 18 testable hypotheses (H1-H18 with operationalization, methods, timeline)
 - **[1D_5D_DEFINITIONEN.md](docs/1D_5D_DEFINITIONEN.md)** - Complexity levels for 5 domains (Education, Governance, Mental Health, Ecology, Technology)
 
 ## 🧬 Why This Matters
 
-Intelligence isn't fixed. It's not measured by a single number. It's:
+Intelligence isn’t fixed. It’s not measured by a single number. It’s:
 - **Dynamic** - constantly evolving through experience
 - **Multidimensional** - cognitive, emotional, social, embodied
 - **Contextual** - situated in specific environments and cultures
@@ -164,7 +166,7 @@ The 5D-Intelligence Framework provides a roadmap for unleashing human potential.
 
 ---
 
-**Last Updated**: December 3, 2025  
+**Last Updated**: December 8, 2025  
 **Status**: Active Development  
 **Framework Status**: 92% (A-) - 54.2% Facts, 35.4% Hypotheses, 10.4% Speculations
 
