@@ -27,5 +27,5 @@ requests==2.32.5
 sat-stac==0.4.1
 six==1.16.0
     # via python-dateutil
-urllib3==2.6.0
+urllib3==2.6.1
     # via requests
