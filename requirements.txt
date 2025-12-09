@@ -60,3 +60,4 @@ gdown>=5.2.0
 
 # Scientific Computing (Python 3.12 compatible)
 scipy>=1.11.4
+streamlit>=1.28.0
