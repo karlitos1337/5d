@@ -1,64 +1,21 @@
-FastAPI==0.104.1
-uvicorn==0.24.0
-pandas==2.1.1
-numpy==1.26.0
-scipy==1.11.3
-geopy==2.3.0
-pytest==7.4.2
-pytest-cov==4.1.0
-python-dotenv==1.0.0
-requests==2.32.4
-aiofiles==23.2.1
-# 5D Extended Toolkit Requirements
-
-# Core
-requests~=2.32.4
-beautifulsoup4>=4.12.0
-lxml>=4.9.0
-
-# Discord Bot
-discord.py>=2.3.0
-
-# Dashboard
-streamlit>=1.29.0
-plotly>=5.18.0
-pandas>=2.1.0
-networkx>=3.2.0
-streamlit-folium>=0.25.0
-folium>=0.20.0
-
-# Optional: Telegram Bot
-# python-telegram-bot>=20.7
-
-# Dev
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
-
-# Visualization (Game of Life)
-matplotlib>=3.7.0
-Pillow>=10.0.0
-
-# Optional: Export (GIF/MP4)
-imageio>=2.31.0
-imageio-ffmpeg>=0.4.9
-
-# Validation & Config
-pydantic>=2.5.0
-pyyaml>=6.0.1
-
-# Fuzzy Matching
-fuzzywuzzy>=0.18.0
-python-Levenshtein>=0.21.0
-
-# PDF Extraction
-pypdf>=3.0.0
-# Alternative: pdfplumber>=0.10.0
-
-# External sources
-gdown>=5.2.0
-
-# Scientific Computing (Python 3.12 compatible)
+# Core Framework
+streamlit>=1.28.0
+pandas>=2.1.4
+numpy>=1.24.0,<2.0.0
 scipy>=1.11.4
-streamlit>=1.28.0
-streamlit>=1.28.0
+
+# Visualization
+plotly>=5.17.0
+folium>=0.14.0
+streamlit-folium>=0.15.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Data & APIs
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.3
+
+# Optional (remove if not used)
+# FastAPI==0.104.1
+# uvicorn==0.24.0
