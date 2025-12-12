@@ -358,12 +358,13 @@ class ResearchScraper:
             print(f"  ✅ PubMed: {len(pubmed_papers)} papers")
 
         # WHO Mental Health Data
-        print("\n🏥 Fetching WHO Mental Health Data...")
-        who_data = self.fetch_who_mental_health_data()
+        # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
+        print("\n🏥 Fetching WHO Mental Health Data (SKIPPED - TODO: Fix API)...")
+        # who_data = self.fetch_who_mental_health_data()
         all_research["who_mental_health"] = {
-            "data": who_data,
+            "data": {},
             "timestamp": datetime.now().isoformat(),
-            "source": "WHO Global Health Observatory"
+            "source": "WHO Global Health Observatory (Disabled)"
         }
 
         # World Bank Education Data
