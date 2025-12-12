@@ -6,13 +6,20 @@ Provides:
 - Preload critical data function
 - Cache invalidation helpers
 - Memory usage monitoring
+- Redis backend for persistent caching
 """
 
+import os
 import json
+import logging
 import streamlit as st
+import redis
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # ============================================================================
 # Cache TTL Configuration
@@ -156,6 +163,12 @@ def invalidate_cache(cache_key: str = None):
         st.cache_data.clear()
         st.success("✅ All caches cleared")
 
+    # Also invalidate Redis cache if enabled
+    if 'redis_cache' in globals() and redis_cache._enabled:
+        redis_cache.invalidate(cache_key)
+        if not cache_key:
+             logger.info("Redis cache cleared")
+
 
 def force_refresh_on_schema_update():
     """
@@ -187,28 +200,196 @@ def force_refresh_on_schema_update():
 
 
 # ============================================================================
+# Redis Integration
+# ============================================================================
+
+class RedisCache:
+    """
+    Redis backend for persistent caching across sessions.
+    Handles connection pooling, serialization, and namespacing.
+    """
+
+    def __init__(self,
+                 host: str = None,
+                 port: int = None,
+                 db: int = 0,
+                 password: str = None,
+                 socket_connect_timeout: int = 5):
+        """
+        Initialize Redis connection with pooling.
+
+        Args:
+            host: Redis host (default: env REDIS_HOST or 'localhost')
+            port: Redis port (default: env REDIS_PORT or 6379)
+            db: Redis DB index (default: env REDIS_DB or 0)
+            password: Redis password (default: env REDIS_PASSWORD or None)
+        """
+        self.host = host or os.getenv("REDIS_HOST", "localhost")
+        self.port = port or int(os.getenv("REDIS_PORT", 6379))
+        self.db = db or int(os.getenv("REDIS_DB", 0))
+        self.password = password or os.getenv("REDIS_PASSWORD", None)
+
+        self.pool = redis.ConnectionPool(
+            host=self.host,
+            port=self.port,
+            db=self.db,
+            password=self.password,
+            decode_responses=True,
+            socket_connect_timeout=socket_connect_timeout
+        )
+        self.client = redis.Redis(connection_pool=self.pool)
+        self.namespace = "5d"
+        self._enabled = True
+
+        # Test connection
+        try:
+            self.client.ping()
+            logger.info("✅ Redis connected successfully")
+        except redis.ConnectionError:
+            self._enabled = False
+            logger.warning("⚠️ Redis connection failed. Caching disabled.")
+
+    def _get_key(self, key: str) -> str:
+        """Format key with namespace."""
+        return f"{self.namespace}:{key}"
+
+    def get(self, key: str) -> Any:
+        """
+        Retrieve value from cache.
+
+        Args:
+            key: Cache key (without namespace)
+
+        Returns:
+            Deserialized value or None if missing/error
+        """
+        if not self._enabled:
+            return None
+
+        try:
+            value = self.client.get(self._get_key(key))
+            return json.loads(value) if value else None
+        except (redis.RedisError, json.JSONDecodeError) as e:
+            logger.error(f"Redis get error: {e}")
+            return None
+
+    def set(self, key: str, value: Any, ttl: int = CacheTTL.STATIC) -> bool:
+        """
+        Set value in cache with TTL.
+
+        Args:
+            key: Cache key (without namespace)
+            value: Data to cache (must be JSON serializable)
+            ttl: Time to live in seconds
+
+        Returns:
+            bool: True if successful
+        """
+        if not self._enabled:
+            return False
+
+        try:
+            serialized = json.dumps(value)
+            return self.client.setex(
+                self._get_key(key),
+                ttl,
+                serialized
+            )
+        except (redis.RedisError, TypeError) as e:
+            logger.error(f"Redis set error: {e}")
+            return False
+
+    def invalidate(self, key: str = None):
+        """
+        Invalidate cache keys.
+
+        Args:
+            key: Specific key to delete. If None, clears entire namespace.
+        """
+        if not self._enabled:
+            return
+
+        try:
+            if key:
+                self.client.delete(self._get_key(key))
+            else:
+                # Pattern match for namespace
+                keys = self.client.keys(f"{self.namespace}:*")
+                if keys:
+                    self.client.delete(*keys)
+        except redis.RedisError as e:
+            logger.error(f"Redis invalidate error: {e}")
+
+    def warm_up(self):
+        """
+        Warm up cache with critical data.
+        """
+        if not self._enabled:
+            return
+
+        logger.info("Starting Redis cache warm-up...")
+
+        # Load data using existing preload functions
+        solutions = preload_solutions_data()
+        if solutions:
+            self.set("solutions", solutions, CacheTTL.STATIC)
+
+        research = preload_research_data()
+        if research:
+            self.set("research", research, CacheTTL.DYNAMIC)
+
+        github = preload_github_data()
+        if github:
+            self.set("github", github, CacheTTL.DYNAMIC)
+
+        map_data = preload_map_baseline()
+        if map_data:
+            self.set("map_baseline", map_data, CacheTTL.BASELINE)
+
+        logger.info("Redis cache warm-up complete.")
+
+# Global instance
+redis_cache = RedisCache()
+
+
+# ============================================================================
 # Memory Monitoring
 # ============================================================================
 
 def get_cache_stats() -> Dict[str, Any]:
     """
-    Get cache statistics (placeholder for future implementation).
+    Get cache statistics.
 
     Returns:
         dict: Cache stats (hit rate, memory usage, etc.)
     """
-    # Streamlit doesn't expose cache stats directly
-    # This is a placeholder for future custom caching (Redis)
-    return {
+    stats = {
         "cache_backend": "streamlit",
         "ttl_config": {
             "static": CacheTTL.STATIC,
             "dynamic": CacheTTL.DYNAMIC,
             "baseline": CacheTTL.BASELINE,
             "realtime": CacheTTL.REALTIME,
-        },
-        "note": "For detailed stats, consider Redis backend"
+        }
     }
+
+    if redis_cache._enabled:
+        try:
+            info = redis_cache.client.info()
+            # Extract some useful info
+            redis_stats = {
+                "connected": True,
+                "used_memory_human": info.get("used_memory_human"),
+                "total_connections_received": info.get("total_connections_received"),
+                "total_commands_processed": info.get("total_commands_processed"),
+                "keys": info.get("db0", {}).get("keys", 0) if "db0" in info else 0
+            }
+            stats["redis"] = redis_stats
+            stats["cache_backend"] = "streamlit + redis"
+        except Exception as e:
+            stats["redis"] = {"connected": False, "error": str(e)}
+
+    return stats
 
 
 def display_cache_info():
@@ -232,39 +413,3 @@ def display_cache_info():
 
         stats = get_cache_stats()
         st.json(stats)
-
-
-# ============================================================================
-# Redis Integration (Future)
-# ============================================================================
-
-# TODO: Redis backend for persistent caching across sessions
-# - Connection pool configuration
-# - Serialization (JSON/Pickle)
-# - Key namespacing (5d:solutions:*, 5d:research:*, etc.)
-# - TTL synchronization with CacheTTL class
-# - Cache warming on deployment
-#
-# Example implementation:
-#
-# import redis
-#
-# class RedisCache:
-#     def __init__(self):
-#         self.client = redis.Redis(
-#             host='localhost',
-#             port=6379,
-#             db=0,
-#             decode_responses=True
-#         )
-#
-#     def get(self, key: str) -> Any:
-#         value = self.client.get(f"5d:{key}")
-#         return json.loads(value) if value else None
-#
-#     def set(self, key: str, value: Any, ttl: int = CacheTTL.STATIC):
-#         self.client.setex(
-#             f"5d:{key}",
-#             ttl,
-#             json.dumps(value)
-#         )
