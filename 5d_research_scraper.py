@@ -198,7 +198,9 @@ class ResearchScraper:
 
                     # WHO API endpoint
                     url = f"{self.who_base_url}/{indicator_code}"
-                    params = {"$filter": "SpatialDim in ({})".format(",".join(countries))}
+                    # OData requires string values to be single-quoted
+                    quoted_countries = [f"'{c}'" for c in countries]
+                    params = {"$filter": "SpatialDim in ({})".format(",".join(quoted_countries))}
 
                     response = requests.get(url, params=params, timeout=15)
 
