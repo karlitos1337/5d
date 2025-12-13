@@ -1,0 +1,202 @@
+[
+  {
+    "id": "Q01",
+    "dimension": "Autonomy",
+    "construct": "Psychometric Item",
+    "question": "I feel free to express my ideas and opinions.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q02",
+    "dimension": "Autonomy",
+    "construct": "Psychometric Item",
+    "question": "I have opportunities to make decisions about my work/learning.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q03",
+    "dimension": "Autonomy",
+    "construct": "Psychometric Item",
+    "question": "I feel my choices express who I really am.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q04",
+    "dimension": "Autonomy",
+    "construct": "Psychometric Item",
+    "question": "I have control over how I do my work.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q05",
+    "dimension": "Autonomy",
+    "construct": "Psychometric Item",
+    "question": "I engage in activities because I choose to, not because I have to.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q06",
+    "dimension": "Intrinsic_Motivation",
+    "construct": "Psychometric Item",
+    "question": "I enjoy the challenges I face in my tasks.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q07",
+    "dimension": "Intrinsic_Motivation",
+    "construct": "Psychometric Item",
+    "question": "I work on tasks because they are interesting to me.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q08",
+    "dimension": "Intrinsic_Motivation",
+    "construct": "Psychometric Item",
+    "question": "I feel a sense of satisfaction when I improve my skills.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q09",
+    "dimension": "Intrinsic_Motivation",
+    "construct": "Psychometric Item",
+    "question": "Curiosity drives my learning/work.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q10",
+    "dimension": "Intrinsic_Motivation",
+    "construct": "Psychometric Item",
+    "question": "I would work on these tasks even without external rewards.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q11",
+    "dimension": "Resilience",
+    "construct": "Psychometric Item",
+    "question": "I can bounce back quickly after a setback.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q12",
+    "dimension": "Resilience",
+    "construct": "Psychometric Item",
+    "question": "I tend to see difficult situations as challenges rather than threats.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q13",
+    "dimension": "Resilience",
+    "construct": "Psychometric Item",
+    "question": "I can handle unpleasant feelings appropriately.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q14",
+    "dimension": "Resilience",
+    "construct": "Psychometric Item",
+    "question": "I stay focused under pressure.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q15",
+    "dimension": "Resilience",
+    "construct": "Psychometric Item",
+    "question": "I adapt easily to change.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q16",
+    "dimension": "Social_Participation",
+    "construct": "Psychometric Item",
+    "question": "I feel part of a community in my work/learning environment.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q17",
+    "dimension": "Social_Participation",
+    "construct": "Psychometric Item",
+    "question": "I actively contribute to group goals.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q18",
+    "dimension": "Social_Participation",
+    "construct": "Psychometric Item",
+    "question": "I support others when they need help.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q19",
+    "dimension": "Social_Participation",
+    "construct": "Psychometric Item",
+    "question": "I feel connected to the people I work/learn with.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q20",
+    "dimension": "Social_Participation",
+    "construct": "Psychometric Item",
+    "question": "My input is valued by others.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q21",
+    "dimension": "Authenticity",
+    "construct": "Psychometric Item",
+    "question": "I am true to myself in most situations.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q22",
+    "dimension": "Authenticity",
+    "construct": "Psychometric Item",
+    "question": "I live in accordance with my values and beliefs.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q23",
+    "dimension": "Authenticity",
+    "construct": "Psychometric Item",
+    "question": "I express my true feelings rather than hiding them.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q24",
+    "dimension": "Authenticity",
+    "construct": "Psychometric Item",
+    "question": "I feel I can be myself around others.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  },
+  {
+    "id": "Q25",
+    "dimension": "Authenticity",
+    "construct": "Psychometric Item",
+    "question": "My actions reflect my true personality.",
+    "scale": "Likert 1-5 (1=Strongly Disagree, 5=Strongly Agree)",
+    "source_theory": "SDT/Positive Psychology"
+  }
+]

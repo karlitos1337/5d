@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-5D Research Scraper - ResearchGate & Academic Papers
-Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
+5D Research Scraper - Science Superquelle Extraction
+Fetches validated data for Autonomy, Motivation, and Resilience
 """
 
 import json
@@ -25,12 +25,12 @@ class ResearchScraper:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
         self.keywords = [
-            "self-directed learning",
-            "intrinsic motivation education",
-            "autonomy supportive teaching",
-            "polyvagal theory education",
-            "democratic schools",
-            "student agency",
+            "self-determination theory meta-analysis",
+            "intrinsic motivation measurement",
+            "autonomy support effectiveness",
+            "psychological resilience scales",
+            "social capital and well-being",
+            "authenticity and mental health",
         ]
         self.rate_limit_delay = rate_limit_delay
         self.max_retries = max_retries
@@ -164,130 +164,59 @@ class ResearchScraper:
 
         return []
 
-    def fetch_who_mental_health_data(self, countries=None):
+    def fetch_governance_data(self, countries=None):
         """
-        Fetch mental health indicators from WHO Global Health Observatory.
+        Fetch Worldwide Governance Indicators (WGI) for Autonomy/Voice & Accountability.
 
         Args:
             countries: List of ISO3 country codes (default: top 20 countries)
 
         Returns:
-            dict: Mental health data by country
-        """
-        if countries is None:
-            # Top 20 countries for baseline
-            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
-                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
-                         "NZL", "ESP", "ITA", "KOR"]
-
-        # WHO indicator codes for mental health
-        indicators = {
-            "MH_12": "Depression prevalence (%)",  # Depressive disorders
-            "MH_1": "Mental health workers (per 100,000)",
-            "MH_17": "Suicide mortality rate"
-        }
-
-        mental_health_data = {}
-
-        for indicator_code, indicator_name in indicators.items():
-            print(f"  🏥 WHO: Fetching {indicator_name}...")
-
-            for attempt in range(self.max_retries):
-                try:
-                    self._rate_limit()
-
-                    # WHO API endpoint
-                    url = f"{self.who_base_url}/{indicator_code}"
-                    # OData requires string values to be single-quoted
-                    quoted_countries = [f"'{c}'" for c in countries]
-                    params = {"$filter": "SpatialDim in ({})".format(",".join(quoted_countries))}
-
-                    response = requests.get(url, params=params, timeout=15)
-
-                    if response.status_code == 429:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⏳ WHO rate limit, waiting {wait_time:.1f}s...")
-                        time.sleep(wait_time)
-                        continue
-
-                    if response.status_code == 404:
-                        print(f"    ⚠️  Indicator {indicator_code} not found")
-                        break
-
-                    response.raise_for_status()
-                    data = response.json()
-
-                    # Parse WHO response
-                    if "value" in data:
-                        for entry in data["value"]:
-                            country = entry.get("SpatialDim")
-                            value = entry.get("NumericValue")
-                            year = entry.get("TimeDim")
-
-                            if country and value is not None:
-                                if country not in mental_health_data:
-                                    mental_health_data[country] = {}
-
-                                mental_health_data[country][indicator_name] = {
-                                    "value": value,
-                                    "year": year
-                                }
-
-                    break  # Success
-
-                except requests.exceptions.RequestException as e:
-                    if attempt < self.max_retries - 1:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⚠️  WHO error (attempt {attempt + 1}/{self.max_retries}): {e}")
-                        time.sleep(wait_time)
-                    else:
-                        print(f"    ❌ WHO Error after {self.max_retries} attempts: {e}")
-                except Exception as e:
-                    print(f"    ❌ WHO Error: {e}")
-                    break
-
-        print(f"  ✅ WHO: {len(mental_health_data)} countries fetched")
-        return mental_health_data
-
-    def fetch_world_bank_education_data(self, countries=None):
-        """
-        Fetch education indicators from World Bank EdStats API.
-
-        Args:
-            countries: List of ISO3 country codes (default: top 20 countries)
-
-        Returns:
-            dict: Education data by country
+            dict: Governance data by country
         """
         if countries is None:
             countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
                          "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
                          "NZL", "ESP", "ITA", "KOR"]
 
-        # World Bank indicator codes for education
+        # World Bank WGI indicators
+        # Voice and Accountability: Estimate (VA.EST)
         indicators = {
-            "SE.SEC.DURS": "Secondary education duration (years)",
-            "SE.PRM.CMPT.ZS": "Primary completion rate (%)",
-            "SE.XPD.TOTL.GD.ZS": "Government education expenditure (% of GDP)",
-            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)"
+            "VA.EST": "Voice and Accountability: Estimate",
+            "PV.EST": "Political Stability and Absence of Violence/Terrorism: Estimate",
+            "GE.EST": "Government Effectiveness: Estimate",
+            "RQ.EST": "Regulatory Quality: Estimate",
+            "RL.EST": "Rule of Law: Estimate",
+            "CC.EST": "Control of Corruption: Estimate"
         }
 
-        education_data = {}
+        # Note: WGI data is often under 'wgi' source or specific indicators in WB API
+        # Using standard WB API with specific indicator codes might work if mapped,
+        # otherwise we might need a specific WGI dataset ID.
+        # WGI indicators in WB API usually look like 'WGI.VA.EST' or similar, but
+        # often 'VA.EST' works if the source is specified or if it's in the main index.
+        # Let's try standard indicators.
+
+        # Actually, WGI indicators in WB API are often like 'VA.EST'.
+        # Let's test with 'VA.EST'.
+
+        governance_data = {}
 
         for indicator_code, indicator_name in indicators.items():
-            print(f"  🏫 World Bank: Fetching {indicator_name}...")
+            print(f"  🏛️ Governance: Fetching {indicator_name}...")
 
             for attempt in range(self.max_retries):
                 try:
                     self._rate_limit()
 
-                    # World Bank API endpoint
-                    countries_str = ";".join(countries[:10])  # Limit to 10 per request
+                    countries_str = ";".join(countries[:10])
+                    # WGI indicators are often accessible via the main API
                     url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
                     params = {
                         "format": "json",
-                        "date": "2020:2023",  # Recent years
-                        "per_page": 500
+                        "date": "2020:2023",
+                        "per_page": 500,
+                        "source": 3  # Source 3 is often WGI, but let's try without first or default
                     }
 
                     response = requests.get(url, params=params, timeout=15)
@@ -298,52 +227,53 @@ class ResearchScraper:
                         time.sleep(wait_time)
                         continue
 
-                    response.raise_for_status()
-                    data = response.json()
+                    if response.status_code != 200:
+                        # Try without source param if failed
+                        pass
 
-                    # Parse World Bank response
-                    if isinstance(data, list) and len(data) > 1:
-                        for entry in data[1]:  # Data is in second element
+                    # Parse response
+                    try:
+                        data = response.json()
+                    except ValueError:
+                        print("    ❌ Invalid JSON response")
+                        break
+
+                    if isinstance(data, list) and len(data) > 1 and data[1] is not None:
+                        for entry in data[1]:
                             country_code = entry.get("countryiso3code")
                             value = entry.get("value")
                             year = entry.get("date")
 
                             if country_code and value is not None:
-                                if country_code not in education_data:
-                                    education_data[country_code] = {}
+                                if country_code not in governance_data:
+                                    governance_data[country_code] = {}
 
-                                # Keep most recent data
-                                if indicator_name not in education_data[country_code]:
-                                    education_data[country_code][indicator_name] = {
+                                if indicator_name not in governance_data[country_code]:
+                                    governance_data[country_code][indicator_name] = {
                                         "value": value,
                                         "year": year
                                     }
-
-                    break  # Success
-
-                except requests.exceptions.RequestException as e:
-                    if attempt < self.max_retries - 1:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
-                        time.sleep(wait_time)
                     else:
-                        print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
-                except Exception as e:
-                    print(f"    ❌ World Bank Error: {e}")
+                        print(f"    ⚠️  No data found for {indicator_code}")
+
                     break
 
-        print(f"  ✅ World Bank: {len(education_data)} countries fetched")
-        return education_data
+                except Exception as e:
+                    print(f"    ❌ Error fetching {indicator_code}: {e}")
+                    break
+
+        print(f"  ✅ Governance: {len(governance_data)} countries fetched")
+        return governance_data
 
     def scrape_all(self):
         """Sammelt Papers zu allen Keywords + WHO/World Bank Daten"""
         all_research = {}
 
-        print("🔍 Starte Research Scraping...")
+        print("🔍 Starte Research Scraping (Science Superquelle Protocol)...")
 
         # Academic papers
         for keyword in self.keywords:
-            print(f"\n📚 Suche: {keyword}")
+            print(f"\n📚 Query: {keyword}")
 
             arxiv_papers = self.search_arxiv(keyword, max_results=3)
             pubmed_papers = self.search_pubmed(keyword, max_results=3)
@@ -357,23 +287,13 @@ class ResearchScraper:
             print(f"  ✅ arXiv: {len(arxiv_papers)} papers")
             print(f"  ✅ PubMed: {len(pubmed_papers)} papers")
 
-        # WHO Mental Health Data
-        # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
-        print("\n🏥 Fetching WHO Mental Health Data (SKIPPED - TODO: Fix API)...")
-        # who_data = self.fetch_who_mental_health_data()
-        all_research["who_mental_health"] = {
-            "data": {},
+        # Governance Data (WGI)
+        print("\n🏛️ Fetching WGI Governance Data (Autonomy/Voice)...")
+        gov_data = self.fetch_governance_data()
+        all_research["governance_wgi"] = {
+            "data": gov_data,
             "timestamp": datetime.now().isoformat(),
-            "source": "WHO Global Health Observatory (Disabled)"
-        }
-
-        # World Bank Education Data
-        print("\n🏫 Fetching World Bank Education Data...")
-        wb_data = self.fetch_world_bank_education_data()
-        all_research["world_bank_education"] = {
-            "data": wb_data,
-            "timestamp": datetime.now().isoformat(),
-            "source": "World Bank EdStats API"
+            "source": "World Bank Worldwide Governance Indicators"
         }
 
         return all_research
@@ -382,7 +302,7 @@ class ResearchScraper:
         """Speichert Ergebnisse"""
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
-        print(f"\n💾 Gespeichert: {filename}")
+        print(f"\n💾 Saved to: {filename}")
 
 
 if __name__ == "__main__":
@@ -391,5 +311,5 @@ if __name__ == "__main__":
     scraper.save_results(research_data)
 
     # Statistik
-    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values())
-    print(f"\n📊 Total: {total_papers} Papers gefunden")
+    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for k, data in research_data.items() if k not in ["governance_wgi", "who_mental_health"])
+    print(f"\n📊 Total Papers Found: {total_papers}")

@@ -1,163 +1,145 @@
 {
-  "self-directed learning": {
+  "self-determination theory meta-analysis": {
     "arxiv": [
       {
-        "title": "Active learning for data streams: a survey",
+        "title": "Designing for Sustained Motivation: A Review of Self-Determination Theory in Behaviour Change Technologies",
         "authors": [
-          "\nDavide Cacciarelli\n",
-          "\nMurat Kulahci\n"
+          "\nLize Alberts\n",
+          "\nUlrik Lyngs\n",
+          "\nKai Lukoff\n"
         ],
-        "summary": "Online active learning is a paradigm in machine learning that aims to select the most informative data points to label from a data stream. The problem of minimizing the cost associated with collecting",
-        "published": "2023-02-17T14:24:13Z",
-        "link": "http://arxiv.org/abs/2302.08893v4"
+        "summary": "Recent years have seen a surge in applications and technologies aimed at motivating users to achieve personal goals and improve their wellbeing. However, these often fail to promote long-term behaviou",
+        "published": "2024-01-31T19:00:08Z",
+        "link": "http://arxiv.org/abs/2402.00121v1"
       },
       {
-        "title": "On the Similarities of Embeddings in Contrastive Learning",
+        "title": "Using Self Determination Theory to Design to Support Young Peoples Online Help-Seeking",
         "authors": [
-          "\nChungpa Lee\n",
-          "\nSehee Lim\n",
-          "\nKibok Lee\n",
-          "\nJy-yong Sohn\n"
+          "\nClaudette Pretorius\n",
+          "\nDavid Coyle\n"
         ],
-        "summary": "Contrastive learning operates on a simple yet effective principle: Embeddings of positive pairs are pulled together, while those of negative pairs are pushed apart. In this paper, we propose a unified",
-        "published": "2025-06-11T14:21:05Z",
-        "link": "http://arxiv.org/abs/2506.09781v2"
+        "summary": "The application of Self-Determination Theory to understand online help-seeking and the design of online help-seeking technologies presents an interesting avenue for investigation. Improving motivation",
+        "published": "2022-07-03T11:58:29Z",
+        "link": "http://arxiv.org/abs/2207.02299v1"
       },
       {
-        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
+        "title": "Variational Approach to Quantum Field Theory: Gaussian Approximation and the Perturbative Expansion around It",
         "authors": [
-          "\nHarkirat Singh Behl\n",
-          "\nAtılım Güneş Baydin\n",
-          "\nPhilip H. S. Torr\n"
+          "\nJae Hyung Yee\nYonsei Univ.\n"
         ],
-        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
-        "published": "2019-05-17T18:45:25Z",
-        "link": "http://arxiv.org/abs/1905.07435v1"
+        "summary": "The functional Schrodinger picture formulation of quantum field theory and the variational Gaussian approximation method based on the formulation are briefly reviewed. After presenting recent attempts",
+        "published": "1997-07-29T07:42:59Z",
+        "link": "http://arxiv.org/abs/hep-th/9707234v2"
       }
     ],
     "pubmed": [
       {
-        "title": "A comprehensive perspective of the innovation and reflection on virtual reality in the teaching and learning of anesthesiology.",
+        "title": "Unraveling the Impact of Blended Learning vs. Online Learning on Learners' Performance: Perspective of Self-Determination Theory.",
         "authors": [
-          "Zhang J",
-          "Lin T",
-          "Shi Y"
+          "Yu Q",
+          "Yu K",
+          "Wang J"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41384126/"
+        "published": "2025 Sep 16",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41009293/"
       },
       {
-        "title": "3D holographic reconstruction and intraoperative navigation combined with CBL teaching in laparoscopic partial nephrectomy training for urology residents.",
+        "title": "Digital Tools Used to Enhance the Quality of Life and Well-Being of Adolescent and Young Adult Cancer Survivors: A Systematic Review of the Literature.",
         "authors": [
-          "Li C",
-          "Yang X",
-          "Qi W"
+          "Bertrand A",
+          "Escot N",
+          "Girodet M"
         ],
-        "published": "2025 Dec 11",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41381993/"
+        "published": "2025 Sep 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40938393/"
       },
       {
-        "title": "Evaluation of medical education mobile apps with MARS and MARuL in a TPACK informed model.",
+        "title": "The Reciprocal Relationship between School Connectedness and Adolescent Depressive Symptoms: A Meta-analytic Cross-lagged Panel Analysis.",
         "authors": [
-          "Rezaei M",
-          "Owrangi S",
-          "Jafari S"
+          "Meng X",
+          "Chen Y",
+          "Rudasill KM"
         ],
-        "published": "2025 Dec 11",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41381857/"
+        "published": "2025 Oct",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40576902/"
       }
     ],
-    "timestamp": "2025-12-12T12:52:40.342947"
+    "timestamp": "2025-12-13T11:36:18.439247"
   },
-  "intrinsic motivation education": {
+  "intrinsic motivation measurement": {
     "arxiv": [
       {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "title": "Optical Flow Method for Measuring Deformation of Soil Specimen Subjected to Torsional Shearing",
         "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
+          "\nPiotr E. Srokosz\n",
+          "\nMarcin Bujko\n",
+          "\nMarta Bocheńska\n",
+          "\nRafał Ossowski\n"
         ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
+        "summary": "In this study optical flow method was used for soil small deformation measurement in laboratory tests. The main objective was to observe how the deformation distributes along the whole height of cylin",
+        "published": "2021-01-18T11:12:46Z",
+        "link": "http://arxiv.org/abs/2101.07005v2"
       },
       {
-        "title": "Cinema, Fermi Problems, & General Education",
+        "title": "Identification of Error Sources in High Precision Weight Measurements of Gyroscopes",
         "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
+          "\nI. Lőrincz\n",
+          "\nM. Tajmar\n"
         ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
+        "summary": "A number of weight anomalies have been reported in the past with respect to gyroscopes. Much attention was gained from a paper in Physical Review Letters, when Japanese scientists announced that a gyr",
+        "published": "2015-06-02T10:02:04Z",
+        "link": "http://arxiv.org/abs/1506.02689v1"
       },
       {
-        "title": "Creating Experience value to build student satisfaction in higher education",
+        "title": "Illumination-insensitive Binary Descriptor for Visual Measurement Based on Local Inter-patch Invariance",
         "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
+          "\nXinyu Lin\n",
+          "\nYingjie Zhou\n",
+          "\nXun Zhang\n",
+          "\nYipeng Liu\n",
+          "\nCe Zhu\n"
         ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
+        "summary": "Binary feature descriptors have been widely used in various visual measurement tasks, particularly those with limited computing resources and storage capacities. Existing binary descriptors may not pe",
+        "published": "2023-05-13T15:15:18Z",
+        "link": "http://arxiv.org/abs/2305.07943v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Assessing the Feasibility and Acceptability of a Colorectal Cancer Risk Prediction Tool in Primary Care to Increase Screening Uptake in Singapore: A Multi-Methods Pilot Study.",
+        "title": "Development and Evaluation of a Monocular Camera-Based Mobile Exergame for at-Home Intervention in Individuals at High Risk of Type 2 Diabetes: Randomized Controlled Trial.",
         "authors": [
-          "Fok RW",
-          "Lim SW",
-          "Letchimy D"
+          "Zhao J",
+          "Zhu D",
+          "Wang Y"
         ],
-        "published": "2025 Jan-Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41382976/"
+        "published": "2025 Dec 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41384807/"
       },
       {
-        "title": "Effective psychological and behavioural interventions in obesity management.",
+        "title": "Can Motivation and Self-Efficacy Predict a Law Enforcement Officer's General and Job-Specific Fitness?",
         "authors": [
-          "Bantjes J",
-          "Arendse C",
-          "Conradie-Smit M"
-        ],
-        "published": "2025 Nov 4",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41378656/"
-      },
-      {
-        "title": "A psychological investigation of prospective teachers' attitudes and motivations towards distance learning.",
-        "authors": [
-          "Karakuş İ"
+          "Lockie RG",
+          "Beitzel MM",
+          "Campana T"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41377087/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41377867/"
+      },
+      {
+        "title": "Who Thrives in Medical School? Intrinsic Motivation, Resilience, and Satisfaction Among Medical Students.",
+        "authors": [
+          "Terech J",
+          "Sarnowska P",
+          "Bikowska K"
+        ],
+        "published": "2025 Nov 25",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41373265/"
       }
     ],
-    "timestamp": "2025-12-12T12:52:43.333177"
+    "timestamp": "2025-12-13T11:36:21.438761"
   },
-  "autonomy supportive teaching": {
+  "autonomy support effectiveness": {
     "arxiv": [
-      {
-        "title": "Closing the Gap between Teaching and Assessment",
-        "authors": [
-          "\nChandralekha Singh\n"
-        ],
-        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
-        "published": "2017-01-09T21:29:02Z",
-        "link": "http://arxiv.org/abs/1701.02356v1"
-      },
-      {
-        "title": "Distribution Matching for Machine Teaching",
-        "authors": [
-          "\nXiaofeng Cao\n",
-          "\nIvor W. Tsang\n"
-        ],
-        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
-        "published": "2021-05-06T09:32:57Z",
-        "link": "http://arxiv.org/abs/2105.13809v1"
-      },
       {
         "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
         "authors": [
@@ -167,27 +149,47 @@
         "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
         "published": "2023-05-16T18:24:12Z",
         "link": "http://arxiv.org/abs/2305.11902v1"
+      },
+      {
+        "title": "A Mini-Review on Mobile Manipulators with Variable Autonomy",
+        "authors": [
+          "\nCesar Alan Contreras\n",
+          "\nAlireza Rastegarpanah\n",
+          "\nRustam Stolkin\n",
+          "\nManolis Chiou\n"
+        ],
+        "summary": "This paper presents a mini-review of the current state of research in mobile manipulators with variable levels of autonomy, emphasizing their associated challenges and application environments. The ne",
+        "published": "2024-08-20T14:18:35Z",
+        "link": "http://arxiv.org/abs/2408.10887v1"
+      },
+      {
+        "title": "Learning and Autonomy for Extraterrestrial Terrain Sampling: An Experience Report from OWLAT Deployment",
+        "authors": [
+          "\nPranay Thangeda\n",
+          "\nAshish Goel\n",
+          "\nErica Tevere\n",
+          "\nYifan Zhu\n",
+          "\nErik Kramer\n",
+          "\nAdriana Daca\n",
+          "\nHari Nayar\n",
+          "\nKris Hauser\n",
+          "\nMelkior Ornik\n"
+        ],
+        "summary": "Extraterrestrial autonomous lander missions increasingly demand adaptive capabilities to handle the unpredictable and diverse nature of the terrain. This paper discusses the deployment of a Deep Meta-",
+        "published": "2023-11-29T07:16:34Z",
+        "link": "http://arxiv.org/abs/2311.17405v2"
       }
     ],
     "pubmed": [
       {
-        "title": "Perceived parenting style and grit as predictors of self-concept of adolescents aged 10-20 in Slovakia.",
+        "title": "Botanical drug preparations for alleviating hair loss in menopausal women: a global ethnopharmacological mini-review.",
         "authors": [
-          "Čerešník M",
-          "Boleková V"
+          "Huang Z",
+          "Zhao WJ",
+          "Gao YJ"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41384003/"
-      },
-      {
-        "title": "Exploring perspectives of Scottish medical students on the proposed 'Assisted Dying for Terminally Ill Adults (Scotland)' Bill.",
-        "authors": [
-          "Geddes D",
-          "Knox J",
-          "Obree D"
-        ],
-        "published": "2025 Dec 11",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41382154/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41383467/"
       },
       {
         "title": "Perceived organizational support and job burnout among government-funded preservice teachers: Basic psychological needs and educational policy satisfaction.",
@@ -198,341 +200,411 @@
         ],
         "published": "2025 Dec 10",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41380640/"
+      },
+      {
+        "title": "A Qualitative Study of Senior Residents' Strategies to Prepare for Unsupervised Practice.",
+        "authors": [
+          "Griffith M",
+          "Garrett A",
+          "Watsjold BK"
+        ],
+        "published": "2025 Nov 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41380045/"
       }
     ],
-    "timestamp": "2025-12-12T12:52:46.837361"
+    "timestamp": "2025-12-13T11:36:24.570070"
   },
-  "polyvagal theory education": {
+  "psychological resilience scales": {
     "arxiv": [
       {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "title": "A Review of Urban Resilience Frameworks: Transferring Knowledge to Enhance Pandemic Resilience",
         "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
+          "\nYue Sun\n",
+          "\nRyan Weightman\n",
+          "\nTimur Dogan\n",
+          "\nSamitha Samaranayake\n"
         ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
+        "summary": "Urbanization is rapidly increasing, with urban populations expected to grow significantly by 2050, particularly in developing regions. This expansion brings challenges related to chronic stresses and ",
+        "published": "2025-03-11T21:59:42Z",
+        "link": "http://arxiv.org/abs/2503.17371v1"
       },
       {
-        "title": "Cinema, Fermi Problems, & General Education",
+        "title": "Comparative Resilience Notions and Vertex Attack Tolerance of Scale-Free Networks",
         "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
+          "\nJohn Matta\n",
+          "\nJeffrey Borwey\n",
+          "\nGunes Ercal\n"
         ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
+        "summary": "We are concerned with an appropriate mathematical measure of resilience in the face of targeted node attacks for arbitrary degree networks, and subsequently comparing the resilience of different scale",
+        "published": "2014-04-01T01:55:33Z",
+        "link": "http://arxiv.org/abs/1404.0103v1"
       },
       {
-        "title": "Creating Experience value to build student satisfaction in higher education",
+        "title": "Chaos Engineering for Enhanced Resilience of Cyber-Physical Systems",
         "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
+          "\nCharalambos Konstantinou\n",
+          "\nGeorge Stergiopoulos\n",
+          "\nMasood Parvania\n",
+          "\nPaulo Esteves-Verissimo\n"
         ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
+        "summary": "Cyber-physical systems (CPS) incorporate the complex and large-scale engineered systems behind critical infrastructure operations, such as water distribution networks, energy delivery systems, healthc",
+        "published": "2021-06-28T20:02:10Z",
+        "link": "http://arxiv.org/abs/2106.14962v2"
       }
     ],
     "pubmed": [
       {
-        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
+        "title": "Psychological resilience as a mediator between depression and health-related quality of life in relapsing-remitting multiple sclerosis patients.",
         "authors": [
-          "Porges SW"
+          "Broche-Pérez Y",
+          "Jiménez-Morales RM"
         ],
-        "published": "2025 Jun",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+        "published": "2025 Dec 7",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41385982/"
       },
       {
-        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
+        "title": "Resilience and loneliness among older adults: an analysis using decision tree techniques.",
         "authors": [
-          "Goffi F",
-          "Maggioni E",
-          "Bianchi AM"
+          "Khatib A",
+          "Gazerani A",
+          "Fereidouni Sarijeh P"
         ],
-        "published": "2025 Jul 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
+        "published": "2025 Dec 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41385011/"
       },
       {
-        "title": "Neuroception of psychological safety scale (NPSS): validation with a UK based adult community sample.",
+        "title": "Primitive reflexes as behavioral biomarkers of cognitive aging: associations with physical activity and resilience-a pilot study.",
         "authors": [
-          "Cogan N",
-          "Morton L",
-          "Campbell J"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
-      }
-    ],
-    "timestamp": "2025-12-12T12:52:49.340723"
-  },
-  "democratic schools": {
-    "arxiv": [
-      {
-        "title": "Democratic Policy Development using Collective Dialogues and AI",
-        "authors": [
-          "\nAndrew Konya\n",
-          "\nLisa Schirch\n",
-          "\nColin Irwin\n",
-          "\nAviv Ovadya\n"
-        ],
-        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
-        "published": "2023-11-03T21:12:57Z",
-        "link": "http://arxiv.org/abs/2311.02242v1"
-      },
-      {
-        "title": "The robustness of democratic consensus",
-        "authors": [
-          "\nFabio Fagnani\n",
-          "\nJean-Charles Delvenne\n"
-        ],
-        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
-        "published": "2015-02-15T01:02:01Z",
-        "link": "http://arxiv.org/abs/1502.04264v1"
-      },
-      {
-        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
-        "authors": [
-          "\nCliver Oliver Turpo Benique\n"
-        ],
-        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
-        "published": "2025-07-14T02:32:04Z",
-        "link": "http://arxiv.org/abs/2507.14191v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Inspecting the factors of individualizing and binding moral value orientation in the Moral Foundations Questionnaire-2 for validation-a re-analysis of data from pre-service teachers in Ghana.",
-        "authors": [
-          "Wild S",
-          "Fobi D",
-          "Möhring M"
+          "Horváth-Pápai A",
+          "Tóth EE",
+          "Barthalos I"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41383431/"
-      },
-      {
-        "title": "Graph-augmented transformer ensemble framework for robust and scalable fake news detection in social media ecosystems.",
-        "authors": [
-          "Kumar C",
-          "Bansal M",
-          "Khan MA"
-        ],
-        "published": "2025 Dec 11",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41381643/"
-      },
-      {
-        "title": "Risk factors and control of Opisthorchis viverrini in the Lower Mekong Basin: A systematic review.",
-        "authors": [
-          "O'Connor SY",
-          "Mationg ML",
-          "Kelly MJ"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41379847/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41383816/"
       }
     ],
-    "timestamp": "2025-12-12T12:52:52.376253"
+    "timestamp": "2025-12-13T11:36:27.440123"
   },
-  "student agency": {
+  "social capital and well-being": {
     "arxiv": [
       {
-        "title": "Active Inference as a Model of Agency",
+        "title": "A Micro-foundation of Social Capital in Evolving Social Networks",
         "authors": [
-          "\nLancelot Da Costa\n",
-          "\nSamuel Tenka\n",
-          "\nDominic Zhao\n",
-          "\nNoor Sajid\n"
+          "\nAhmed M. Alaa\n",
+          "\nKartik Ahuja\n",
+          "\nMihaela van der Schaar\n"
         ],
-        "summary": "Is there a canonical way to think of agency beyond reward maximisation? In this paper, we show that any type of behaviour complying with physically sound assumptions about how macroscopic biological a",
-        "published": "2024-01-23T17:09:25Z",
-        "link": "http://arxiv.org/abs/2401.12917v1"
+        "summary": "A social network confers benefits and advantages on individuals (and on groups), the literature refers to these advantages as social capital. This paper presents a micro-founded mathematical model of ",
+        "published": "2015-11-08T02:49:22Z",
+        "link": "http://arxiv.org/abs/1511.02429v1"
       },
       {
-        "title": "Sense of agency, gender, and students' perception in open-ended physics labs",
+        "title": "Social Live-Streaming Use & Well-being: Examining Participation, Financial Commitment, Social Capital, and Psychological Well-being on Twitch.tv",
         "authors": [
-          "\nZ. Yasemin Kalender\n",
-          "\nMartin Stein\n",
-          "\nN. G. Holmes\n"
+          "\nGrace H. Wolff\n",
+          "\nCuihua Shen\n"
         ],
-        "summary": "Instructional physics labs are critical junctures for many STEM majors to develop an understanding of experimentation in the sciences. Students can acquire useful experimental skills and grow their id",
-        "published": "2020-07-15T01:47:21Z",
-        "link": "http://arxiv.org/abs/2007.07427v1"
+        "summary": "This study examines how active participation, financial commitment, and passive participation in the leading social live-streaming service, Twitch.tv, relate to individuals' psychological well-being. ",
+        "published": "2022-07-27T06:10:09Z",
+        "link": "http://arxiv.org/abs/2207.13313v1"
       },
       {
-        "title": "A Theoretical Framework of Student Agency in AI- Assisted Learning: A Grounded Theory Approach",
+        "title": "A Measurement of Social Capital in an Open Source Software Project",
         "authors": [
-          "\nYun Dai\n",
-          "\nSichen Lai\n"
+          "\nSaad Alqithami\n",
+          "\nMusaad Alzahrani\n",
+          "\nFahad Alghamdi\n",
+          "\nRahmat Budiarto\n",
+          "\nHenry Hexmoor\n"
         ],
-        "summary": "Generative AI(GenAI) is a kind of AI model capable of producing human-like content in various modalities, including text, image, audio, video, and computer programming. Although GenAI offers great pot",
-        "published": "2025-12-08T03:51:24Z",
-        "link": "http://arxiv.org/abs/2512.07143v1"
+        "summary": "The paper provides an understanding of social capital in organizations that are open membership multi-agent systems with an emphasis in our formulation on the dynamic network of social interaction tha",
+        "published": "2019-11-22T23:57:46Z",
+        "link": "http://arxiv.org/abs/1911.10283v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Resilience displays similar associative patterns with academic achievement regardless of the personality and mental health profile of future teachers.",
+        "title": "Effects of Resisted-Sprint Training on Sprint Performance and Mechanics: A Systematic Review and Meta-Analysis Focusing on Load Magnitude.",
         "authors": [
-          "Kvintová J",
-          "Lacková L",
-          "Liu H"
+          "Xu K",
+          "Jukic I",
+          "Cross MR"
         ],
-        "published": "2025 Dec 11",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41382303/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41384676/"
       },
       {
-        "title": "Multiseasonal modeling of pesticide resistance in Maize Stalk Borer.",
+        "title": "Coupling coordination evaluation and influencing factors analysis of older adult care service resource supply and demand in China.",
         "authors": [
-          "Tchienkou-Tchiengang BS",
-          "Tankam-Chedjou I",
-          "Yatat-Djeumen IV"
+          "Guo L",
+          "Wei H",
+          "Tao Q"
         ],
-        "published": "2025 Dec 9",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41380992/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41383297/"
       },
       {
-        "title": "Language Differences by Race in the Narrative Section of the Emergency Medicine Standardized Letter of Evaluation.",
+        "title": "Promoting physical activity at Danish schools targeting youth who are not in employment, education or training (NEET): a qualitative study.",
         "authors": [
-          "Fletcher S",
-          "Carter K",
-          "Ahn J"
+          "Lorenzen JT",
+          "Carlsen SR",
+          "Klinker CD"
         ],
-        "published": "2025 Nov 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41380062/"
+        "published": "2025 Dec 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41382061/"
       }
     ],
-    "timestamp": "2025-12-12T12:52:55.332564"
+    "timestamp": "2025-12-13T11:36:30.453585"
   },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2025-12-12T12:52:55.332597",
-    "source": "WHO Global Health Observatory (Disabled)"
+  "authenticity and mental health": {
+    "arxiv": [
+      {
+        "title": "Technology in Association With Mental Health: Meta-ethnography",
+        "authors": [
+          "\nHamza Mohammed\n"
+        ],
+        "summary": "This research paper presents a meta-analysis of the multifaceted role of technology in mental health. The pervasive influence of technology on daily lives necessitates a deep understanding of its impa",
+        "published": "2023-07-20T01:25:08Z",
+        "link": "http://arxiv.org/abs/2307.10513v2"
+      },
+      {
+        "title": "Usable Security for ML Systems in Mental Health: A Framework",
+        "authors": [
+          "\nHelen Jiang\n",
+          "\nErwen Senge\n"
+        ],
+        "summary": "While the applications and demands of Machine learning (ML) systems in mental health are growing, there is little discussion nor consensus regarding a uniquely challenging aspect: building security me",
+        "published": "2020-08-18T04:44:47Z",
+        "link": "http://arxiv.org/abs/2008.07738v1"
+      },
+      {
+        "title": "Robotics Technology in Mental Health Care",
+        "authors": [
+          "\nLaurel D. Riek\n"
+        ],
+        "summary": "This chapter discusses the existing and future use of robotics and intelligent sensing technology in mental health care. While the use of this technology is nascent in mental health care, it represent",
+        "published": "2015-11-07T01:58:51Z",
+        "link": "http://arxiv.org/abs/1511.02281v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Strategy of Delayed Midurethral Sling Surgery for Pelvic Organ Prolapse with Stress Urinary Incontinence after Laparoscopic Lateral Abdominal Wall Suspension.",
+        "authors": [
+          "Yu J",
+          "Wang X",
+          "Wu H"
+        ],
+        "published": "2025 Dec 11",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41379165/"
+      },
+      {
+        "title": "Associations Between Negative Social Experiences and Depressive Symptoms in Autistic Sexual and Gender Minority Youth.",
+        "authors": [
+          "Libster N",
+          "Adams RE",
+          "Bishop S"
+        ],
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41367993/"
+      },
+      {
+        "title": "Effects of a Personalized Fitness Program Provided by Undergraduate Exercise Science Students on Attitudes Toward Exercise, Mental Health, and Quality of Life.",
+        "authors": [
+          "Cleveland K",
+          "Fike J",
+          "Peterson S"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41367507/"
+      }
+    ],
+    "timestamp": "2025-12-13T11:36:33.470334"
   },
-  "world_bank_education": {
+  "governance_wgi": {
     "data": {
       "AUS": {
-        "Secondary education duration (years)": {
-          "value": 6,
+        "Voice and Accountability: Estimate": {
+          "value": 1.50660192966461,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.05916023254395,
-          "year": "2022"
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.91705721616745,
+          "year": "2023"
+        },
+        "Government Effectiveness: Estimate": {
+          "value": 1.58987963199615,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.94220554828644,
+          "year": "2023"
         }
       },
       "BRA": {
-        "Secondary education duration (years)": {
-          "value": 7,
+        "Voice and Accountability: Estimate": {
+          "value": 0.382853865623474,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.61922979354858,
-          "year": "2022"
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": -0.408567786216736,
+          "year": "2023"
+        },
+        "Government Effectiveness: Estimate": {
+          "value": -0.546764314174652,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": -0.29647821187973,
+          "year": "2023"
         }
       },
       "CAN": {
-        "Secondary education duration (years)": {
-          "value": 6,
+        "Voice and Accountability: Estimate": {
+          "value": 1.4796462059021,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.88021993637085,
-          "year": "2022"
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.822420537471771,
+          "year": "2023"
+        },
+        "Government Effectiveness: Estimate": {
+          "value": 1.51680326461792,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.64471042156219,
+          "year": "2023"
         }
       },
       "CHN": {
-        "Secondary education duration (years)": {
-          "value": 6,
+        "Voice and Accountability: Estimate": {
+          "value": -1.50455415248871,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.00127983093262,
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": -0.513097047805786,
+          "year": "2023"
+        },
+        "Government Effectiveness: Estimate": {
+          "value": 0.679014027118683,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": -0.356507807970047,
           "year": "2023"
         }
       },
       "DEU": {
-        "Secondary education duration (years)": {
-          "value": 9,
+        "Voice and Accountability: Estimate": {
+          "value": 1.46138572692871,
           "year": "2023"
         },
-        "Primary completion rate (%)": {
-          "value": 99.2837371826172,
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.586989283561707,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.23916006088257,
-          "year": "2022"
+        "Government Effectiveness: Estimate": {
+          "value": 1.18541669845581,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.45697498321533,
+          "year": "2023"
         }
       },
       "FRA": {
-        "Secondary education duration (years)": {
-          "value": 7,
+        "Voice and Accountability: Estimate": {
+          "value": 1.15460133552551,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.32435989379883,
-          "year": "2022"
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.343697965145111,
+          "year": "2023"
+        },
+        "Government Effectiveness: Estimate": {
+          "value": 1.14462625980377,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.15350544452667,
+          "year": "2023"
         }
       },
       "GBR": {
-        "Secondary education duration (years)": {
-          "value": 7,
+        "Voice and Accountability: Estimate": {
+          "value": 1.26162397861481,
           "year": "2023"
         },
-        "Primary completion rate (%)": {
-          "value": 101.423362731934,
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.514935672283173,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.90682983398438,
-          "year": "2021"
+        "Government Effectiveness: Estimate": {
+          "value": 1.16114270687103,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.53656673431396,
+          "year": "2023"
         }
       },
       "IND": {
-        "Secondary education duration (years)": {
-          "value": 7,
+        "Voice and Accountability: Estimate": {
+          "value": 0.0944044888019562,
           "year": "2023"
         },
-        "Primary completion rate (%)": {
-          "value": 93.8187311671038,
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": -0.635076940059662,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.09865814174589,
-          "year": "2022"
+        "Government Effectiveness: Estimate": {
+          "value": 0.47511014342308,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": -0.136969581246376,
+          "year": "2023"
         }
       },
       "JPN": {
-        "Secondary education duration (years)": {
-          "value": 6,
+        "Voice and Accountability: Estimate": {
+          "value": 1.10550534725189,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 3.33563995361328,
-          "year": "2021"
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.951136231422424,
+          "year": "2023"
+        },
+        "Government Effectiveness: Estimate": {
+          "value": 1.63126504421234,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.46932590007782,
+          "year": "2023"
         }
       },
       "USA": {
-        "Secondary education duration (years)": {
-          "value": 6,
+        "Voice and Accountability: Estimate": {
+          "value": 0.877519071102142,
           "year": "2023"
         },
-        "Primary completion rate (%)": {
-          "value": 95.743522644043,
-          "year": "2022"
+        "Political Stability and Absence of Violence/Terrorism: Estimate": {
+          "value": 0.029424749314785,
+          "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.42038011550903,
-          "year": "2021"
+        "Government Effectiveness: Estimate": {
+          "value": 1.21720099449158,
+          "year": "2023"
+        },
+        "Regulatory Quality: Estimate": {
+          "value": 1.39373278617859,
+          "year": "2023"
         }
       }
     },
-    "timestamp": "2025-12-12T12:52:59.357011",
-    "source": "World Bank EdStats API"
+    "timestamp": "2025-12-13T11:37:28.529088",
+    "source": "World Bank Worldwide Governance Indicators"
   }
 }
