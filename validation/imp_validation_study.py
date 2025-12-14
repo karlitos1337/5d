@@ -185,6 +185,20 @@ class IMPValidationStudy:
 
         return {"dimensions": scores, "IMP_geometric": imp_geometric, "IMP_additive": imp_additive}
 
+    def calculate_imp_scores_vectorized(self):
+        """Berechnet IMP-Scores vektorisiert für alle Probanden (Performance optimiert)"""
+        dimensions = list(QUESTIONS.keys())
+        dim_means = pd.DataFrame(index=self.data.index)
+
+        for dim in dimensions:
+            dim_cols = [col for col in self.data.columns if col.startswith(dim)]
+            dim_means[dim] = self.data[dim_cols].mean(axis=1)
+
+        # Geometrisches Mittel vektorisiert berechnen
+        imp_geometric = gmean(dim_means, axis=1)
+
+        return imp_geometric
+
     def correlation_analysis(self):
         """Korrelationsanalyse zwischen Dimensionen"""
         dimensions = list(QUESTIONS.keys())
@@ -227,10 +241,8 @@ class IMPValidationStudy:
         axes[1, 0].set_title("Korrelationen zwischen Dimensionen")
 
         # 4. IMP-Score Verteilung
-        imp_scores = []
-        for idx in range(len(self.data)):
-            imp_score = self.calculate_imp_score(self.data.iloc[idx])
-            imp_scores.append(imp_score["IMP_geometric"])
+        # Vektorisierte Berechnung statt Loop
+        imp_scores = self.calculate_imp_scores_vectorized()
 
         axes[1, 1].hist(imp_scores, bins=10, color="purple", alpha=0.7, edgecolor="black")
         axes[1, 1].set_xlabel("IMP-Score (0-5)")
