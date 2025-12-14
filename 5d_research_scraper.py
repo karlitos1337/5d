@@ -335,6 +335,100 @@ class ResearchScraper:
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
 
+    def fetch_wgi_data(self, countries=None):
+        """
+        Fetch World Governance Indicators (WGI) from World Bank.
+
+        Args:
+            countries: List of ISO3 country codes (default: top 20 countries)
+
+        Returns:
+            dict: Governance data by country
+        """
+        if countries is None:
+            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
+                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
+                         "NZL", "ESP", "ITA", "KOR"]
+
+        # WGI Indicators
+        indicators = {
+            "VA.EST": "Voice and Accountability: Estimate",
+            "PV.EST": "Political Stability and Absence of Violence/Terrorism: Estimate",
+            "GE.EST": "Government Effectiveness: Estimate",
+            "RQ.EST": "Regulatory Quality: Estimate",
+            "RL.EST": "Rule of Law: Estimate",
+            "CC.EST": "Control of Corruption: Estimate"
+        }
+
+        wgi_data = {}
+        chunk_size = 10
+
+        for indicator_code, indicator_name in indicators.items():
+            print(f"  🏛️  WGI: Fetching {indicator_name}...")
+
+            # Process countries in chunks
+            for i in range(0, len(countries), chunk_size):
+                chunk = countries[i:i + chunk_size]
+
+                for attempt in range(self.max_retries):
+                    try:
+                        self._rate_limit()
+
+                        # World Bank API endpoint
+                        countries_str = ";".join(chunk)
+                        url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                        params = {
+                            "format": "json",
+                            "date": "2020:2023",  # Recent years
+                            "per_page": 500,
+                            "source": 3  # WGI is often under source 3 (Worldwide Governance Indicators) or generic
+                        }
+
+                        response = requests.get(url, params=params, timeout=15)
+
+                        if response.status_code == 429:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⏳ WGI rate limit, waiting {wait_time:.1f}s...")
+                            time.sleep(wait_time)
+                            continue
+
+                        response.raise_for_status()
+                        data = response.json()
+
+                        # Parse World Bank response
+                        if isinstance(data, list) and len(data) > 1:
+                            for entry in data[1]:  # Data is in second element
+                                country_code = entry.get("countryiso3code")
+                                value = entry.get("value")
+                                year = entry.get("date")
+
+                                if country_code and value is not None:
+                                    if country_code not in wgi_data:
+                                        wgi_data[country_code] = {}
+
+                                    # Keep most recent data
+                                    if indicator_name not in wgi_data[country_code]:
+                                        wgi_data[country_code][indicator_name] = {
+                                            "value": value,
+                                            "year": year
+                                        }
+
+                        break  # Success
+
+                    except requests.exceptions.RequestException as e:
+                        if attempt < self.max_retries - 1:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⚠️  WGI error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                            time.sleep(wait_time)
+                        else:
+                            print(f"    ❌ WGI Error after {self.max_retries} attempts: {e}")
+                    except Exception as e:
+                        print(f"    ❌ WGI Error: {e}")
+                        break
+
+        print(f"  ✅ WGI: {len(wgi_data)} countries fetched")
+        return wgi_data
+
     def scrape_all(self):
         """Sammelt Papers zu allen Keywords + WHO/World Bank Daten"""
         all_research = {}
@@ -358,14 +452,22 @@ class ResearchScraper:
             print(f"  ✅ PubMed: {len(pubmed_papers)} papers")
 
         # WHO Mental Health Data
-        # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
-        print("\n🏥 Fetching WHO Mental Health Data (SKIPPED - TODO: Fix API)...")
-        # who_data = self.fetch_who_mental_health_data()
-        all_research["who_mental_health"] = {
-            "data": {},
-            "timestamp": datetime.now().isoformat(),
-            "source": "WHO Global Health Observatory (Disabled)"
-        }
+        print("\n🏥 Fetching WHO Mental Health Data...")
+        try:
+            who_data = self.fetch_who_mental_health_data()
+            all_research["who_mental_health"] = {
+                "data": who_data,
+                "timestamp": datetime.now().isoformat(),
+                "source": "WHO Global Health Observatory"
+            }
+        except Exception as e:
+            print(f"❌ WHO Data Fetch Failed: {e}")
+            all_research["who_mental_health"] = {
+                "data": {},
+                "timestamp": datetime.now().isoformat(),
+                "source": "WHO Global Health Observatory (Failed)",
+                "error": str(e)
+            }
 
         # World Bank Education Data
         print("\n🏫 Fetching World Bank Education Data...")
@@ -374,6 +476,15 @@ class ResearchScraper:
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
             "source": "World Bank EdStats API"
+        }
+
+        # World Bank Governance Indicators (WGI)
+        print("\n🏛️  Fetching World Bank Governance Indicators...")
+        wgi_data = self.fetch_wgi_data()
+        all_research["world_bank_governance"] = {
+            "data": wgi_data,
+            "timestamp": datetime.now().isoformat(),
+            "source": "World Bank WGI"
         }
 
         return all_research
