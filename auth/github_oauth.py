@@ -7,6 +7,7 @@ KRITISCH: KEINE Speicherung personenbezogener Daten!
 import os
 import secrets
 from datetime import datetime, timedelta
+from urllib.parse import urlencode
 
 import requests
 
@@ -35,7 +36,7 @@ class GitHubAuth:
         }
 
         url = "https://github.com/login/oauth/authorize"
-        query_string = "&".join([f"{k}={v}" for k, v in params.items()])
+        query_string = urlencode(params)
 
         return f"{url}?{query_string}"
 
@@ -56,7 +57,8 @@ class GitHubAuth:
 
         headers = {"Accept": "application/json"}
 
-        response = requests.post(url, json=payload, headers=headers)
+        # Added timeout to prevent hanging requests (DoS risk)
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
 
         if response.status_code == 200:
             data = response.json()
@@ -72,7 +74,8 @@ class GitHubAuth:
         url = "https://api.github.com/user"
         headers = {"Authorization": f"token {access_token}", "Accept": "application/json"}
 
-        response = requests.get(url, headers=headers)
+        # Added timeout to prevent hanging requests (DoS risk)
+        response = requests.get(url, headers=headers, timeout=10)
 
         return response.status_code == 200
 
