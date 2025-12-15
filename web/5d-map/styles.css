@@ -18,6 +18,25 @@ body {
   background: var(--color-bg);
 }
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 10001;
+  transition: top 0.2s;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom-right-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--color-warning);
+}
+
 .app-header {
   display: flex;
   align-items: center;
@@ -41,6 +60,11 @@ body {
 .btn:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transform: translateY(-1px);
+}
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(33, 128, 141, 0.2);
 }
 .btn--primary {
   background: var(--color-primary);
@@ -88,6 +112,10 @@ main { height: calc(100vh - 132px); }
 
 /* Zeitreise Controls */
 #time-controls input[type=range] { accent-color: var(--color-primary); }
+#time-controls input[type=range]:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
 #time-controls { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
 /* Loading Overlay */
