@@ -6,6 +6,7 @@ Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
 
 import json
 import time
+import re
 from datetime import datetime
 
 import requests
@@ -42,6 +43,12 @@ class ResearchScraper:
 
         # World Bank API settings
         self.wb_base_url = "https://api.worldbank.org/v2"
+
+    def _validate_country_code(self, code):
+        """Validates that the country code is a 3-letter uppercase ISO3 string."""
+        if not isinstance(code, str):
+            return False
+        return bool(re.match(r"^[A-Z]{3}$", code))
 
     def _rate_limit(self):
         """Enforce rate limiting between requests."""
@@ -180,6 +187,16 @@ class ResearchScraper:
                          "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
                          "NZL", "ESP", "ITA", "KOR"]
 
+        # Filter out invalid country codes
+        valid_countries = [c for c in countries if self._validate_country_code(c)]
+        if len(valid_countries) < len(countries):
+            print(f"⚠️  Filtered out {len(countries) - len(valid_countries)} invalid country codes")
+        countries = valid_countries
+
+        if not countries:
+            print("❌ No valid countries provided for WHO data fetch")
+            return {}
+
         # WHO indicator codes for mental health
         indicators = {
             "MH_12": "Depression prevalence (%)",  # Depressive disorders
@@ -263,6 +280,16 @@ class ResearchScraper:
             countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
                          "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
                          "NZL", "ESP", "ITA", "KOR"]
+
+        # Filter out invalid country codes
+        valid_countries = [c for c in countries if self._validate_country_code(c)]
+        if len(valid_countries) < len(countries):
+            print(f"⚠️  Filtered out {len(countries) - len(valid_countries)} invalid country codes")
+        countries = valid_countries
+
+        if not countries:
+            print("❌ No valid countries provided for World Bank data fetch")
+            return {}
 
         # World Bank indicator codes for education
         indicators = {
