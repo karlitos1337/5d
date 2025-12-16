@@ -18,6 +18,35 @@ body {
   background: var(--color-bg);
 }
 
+/* Accessibility: Skip Link */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: white;
+  padding: 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 10000;
+  text-decoration: none;
+  font-weight: bold;
+  opacity: 0;
+  transition: top 0.3s ease, opacity 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  opacity: 1;
+  outline: 3px solid var(--color-warning);
+}
+
+/* Accessibility: Focus Indicators */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .app-header {
   display: flex;
   align-items: center;
