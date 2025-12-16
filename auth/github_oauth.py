@@ -56,7 +56,10 @@ class GitHubAuth:
 
         headers = {"Accept": "application/json"}
 
-        response = requests.post(url, json=payload, headers=headers)
+        try:
+            response = requests.post(url, json=payload, headers=headers, timeout=10)
+        except requests.Timeout:
+            return None
 
         if response.status_code == 200:
             data = response.json()
@@ -72,7 +75,10 @@ class GitHubAuth:
         url = "https://api.github.com/user"
         headers = {"Authorization": f"token {access_token}", "Accept": "application/json"}
 
-        response = requests.get(url, headers=headers)
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+        except requests.Timeout:
+            return False
 
         return response.status_code == 200
 
@@ -83,12 +89,33 @@ class GitHubAuth:
         """
         return secrets.token_urlsafe(32)
 
-    def authenticate(self, code: str) -> dict | None:
+    def verify_state(self, received_state: str, expected_state: str) -> bool:
+        """Verifiziert den State-Parameter (CSRF-Schutz).
+
+        Verwendet konstante Zeitvergleiche um Timing-Attacken zu verhindern.
+        """
+        if not received_state or not expected_state:
+            return False
+        return secrets.compare_digest(received_state, expected_state)
+
+    def authenticate(
+        self, code: str, received_state: str = None, expected_state: str = None
+    ) -> dict | None:
         """Vollständiger OAuth-Flow.
+
+        Args:
+            code: Der Authorization Code von GitHub
+            received_state: Der 'state' Parameter aus dem Callback (optional aber empfohlen)
+            expected_state: Der ursprünglich generierte 'state' (optional aber empfohlen)
 
         Returns:
             Session-Token (anonym) oder None bei Fehler
         """
+        # 0. State verifizieren (falls angegeben)
+        if received_state and expected_state:
+            if not self.verify_state(received_state, expected_state):
+                return None
+
         # 1. Code gegen Token tauschen
         access_token = self.exchange_code_for_token(code)
         if not access_token:
