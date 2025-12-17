@@ -185,6 +185,34 @@ class IMPValidationStudy:
 
         return {"dimensions": scores, "IMP_geometric": imp_geometric, "IMP_additive": imp_additive}
 
+    def calculate_imp_scores_vectorized(self, df):
+        """
+        Vektorisierte Berechnung der IMP-Scores für den gesamten DataFrame.
+        Ersetzt die langsame zeilenweise Berechnung.
+        """
+        dimensions = list(QUESTIONS.keys())
+        dim_scores = pd.DataFrame(index=df.index)
+
+        # Berechne Mittelwert für jede Dimension (vektorisiert)
+        for dim in dimensions:
+            dim_cols = [col for col in df.columns if col.startswith(dim)]
+            if not dim_cols:
+                continue
+            dim_scores[dim] = df[dim_cols].mean(axis=1)
+
+        # Geometrisches Mittel (axis=1 für zeilenweise Berechnung)
+        # gmean erfordert positive Werte; bei 0 ist das Ergebnis 0
+        imp_geometric = gmean(dim_scores.values, axis=1)
+
+        # Arithmetisches Mittel
+        imp_additive = dim_scores.mean(axis=1)
+
+        return {
+            "dimensions": dim_scores,  # DataFrame mit Scores pro Dimension
+            "IMP_geometric": imp_geometric,  # Array
+            "IMP_additive": imp_additive,  # Series
+        }
+
     def correlation_analysis(self):
         """Korrelationsanalyse zwischen Dimensionen"""
         dimensions = list(QUESTIONS.keys())
@@ -227,10 +255,9 @@ class IMPValidationStudy:
         axes[1, 0].set_title("Korrelationen zwischen Dimensionen")
 
         # 4. IMP-Score Verteilung
-        imp_scores = []
-        for idx in range(len(self.data)):
-            imp_score = self.calculate_imp_score(self.data.iloc[idx])
-            imp_scores.append(imp_score["IMP_geometric"])
+        # Verwende vektorisierte Berechnung statt Schleife
+        imp_results = self.calculate_imp_scores_vectorized(self.data)
+        imp_scores = imp_results["IMP_geometric"]
 
         axes[1, 1].hist(imp_scores, bins=10, color="purple", alpha=0.7, edgecolor="black")
         axes[1, 1].set_xlabel("IMP-Score (0-5)")
