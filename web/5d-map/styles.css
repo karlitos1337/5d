@@ -196,3 +196,25 @@ body.loading .loading-overlay {
     font-size: 18px;
   }
 }
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 0;
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 1rem;
+  z-index: 10000;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--color-warning);
+  outline-offset: -3px;
+}
