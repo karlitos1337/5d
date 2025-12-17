@@ -56,7 +56,8 @@ class GitHubAuth:
 
         headers = {"Accept": "application/json"}
 
-        response = requests.post(url, json=payload, headers=headers)
+        # Timeout set to 10s to prevent hanging connections (DoS protection)
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
 
         if response.status_code == 200:
             data = response.json()
@@ -72,7 +73,8 @@ class GitHubAuth:
         url = "https://api.github.com/user"
         headers = {"Authorization": f"token {access_token}", "Accept": "application/json"}
 
-        response = requests.get(url, headers=headers)
+        # Timeout set to 10s to prevent hanging connections (DoS protection)
+        response = requests.get(url, headers=headers, timeout=10)
 
         return response.status_code == 200
 
