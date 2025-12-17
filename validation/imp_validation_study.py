@@ -10,6 +10,7 @@ Ziel: Empirische Validierung der 5 Dimensionen (Pilotstudie, N=30)
 """
 
 import json
+import os
 from datetime import datetime
 
 import matplotlib.pyplot as plt
@@ -61,10 +62,14 @@ QUESTIONS = {
 class IMPValidationStudy:
     """Haupt-Klasse für die IMP-Validierungsstudie"""
 
-    def __init__(self):
+    def __init__(self, output_dir=None):
         self.data = None
         self.results = {}
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.output_dir = output_dir if output_dir else "."
+
+        if self.output_dir != "." and not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
 
     def generate_questionnaire(self, output_format="json"):
         """Generiert den Fragebogen"""
@@ -84,7 +89,7 @@ class IMPValidationStudy:
                 q_id += 1
 
         if output_format == "json":
-            filename = f"questionnaire_{self.timestamp}.json"
+            filename = os.path.join(self.output_dir, f"questionnaire_{self.timestamp}.json")
             with open(filename, "w", encoding="utf-8") as f:
                 json.dump(questionnaire, f, ensure_ascii=False, indent=2)
             print(f"✅ Fragebogen gespeichert: {filename}")
@@ -245,7 +250,7 @@ class IMPValidationStudy:
         axes[1, 1].legend()
 
         plt.tight_layout()
-        filename = f"validation_results_{self.timestamp}.png"
+        filename = os.path.join(self.output_dir, f"validation_results_{self.timestamp}.png")
         plt.savefig(filename, dpi=300)
         print(f"\n✅ Visualisierung gespeichert: {filename}")
         plt.close()  # Close plot to prevent it from showing in non-interactive environments if configured
@@ -260,12 +265,40 @@ class IMPValidationStudy:
             "recommendation": self._generate_recommendation(),
         }
 
-        filename = f"validation_report_{self.timestamp}.json"
+        filename = os.path.join(self.output_dir, f"validation_report_{self.timestamp}.json")
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
 
         print(f"\n✅ Bericht gespeichert: {filename}")
         return report
+
+    def run_simulation(self, n_participants=30):
+        """Führt eine komplette Simulation durch (Daten generieren, analysieren, berichten)"""
+        print(f"\n[Simulation] Generiere Beispiel-Daten ({n_participants} Probanden)...")
+        np.random.seed(42)
+        example_data = {}
+
+        # Simuliere latente Variablen für jede Dimension (Mittelwert 3.5, SD 0.8)
+        for dimension, questions in QUESTIONS.items():
+            latent_ability = np.random.normal(3.5, 0.8, n_participants)
+            latent_ability = np.clip(latent_ability, 1, 4.5)
+
+            for i, _ in enumerate(questions, 1):
+                col_name = f"{dimension}_{i}"
+                item_scores = latent_ability + np.random.normal(0, 0.6, n_participants)
+                item_scores = np.clip(np.round(item_scores), 0, 5).astype(int)
+                example_data[col_name] = item_scores
+
+        df = pd.DataFrame(example_data)
+        csv_filename = os.path.join(self.output_dir, f"example_responses_{self.timestamp}.csv")
+        df.to_csv(csv_filename, index=False)
+        print(f"    → Beispiel-CSV erstellt: {csv_filename}")
+
+        # Daten laden und analysieren
+        self.load_responses(csv_filename)
+        self.analyze_dimensions()
+        self.visualize_results()
+        return self.generate_report()
 
     def _generate_recommendation(self):
         """Generiert Empfehlungen basierend auf Ergebnissen"""
@@ -291,44 +324,9 @@ def main():
     questionnaire = study.generate_questionnaire()
     print(f"    → {len(questionnaire)} Fragen erstellt")
 
-    # 2. Beispiel-Daten generieren (für Demo - simuliert realistische Korrelationen)
-    print("\n[2/5] Generiere Beispiel-Daten (30 Probanden)...")
-    np.random.seed(42)
-    example_data = {}
-
-    # Simuliere latente Variablen für jede Dimension (Mittelwert 3.5, SD 0.8)
-    # Probanden haben eine "Grundkompetenz", die die Items beeinflusst -> hohe Korrelation -> hohes Alpha
-    n_participants = 30
-
-    for dimension, questions in QUESTIONS.items():
-        # Latente Fähigkeit des Probanden in dieser Dimension
-        latent_ability = np.random.normal(3.5, 0.8, n_participants)
-        latent_ability = np.clip(latent_ability, 1, 4.5)  # Clip to keep within range
-
-        for i, _question in enumerate(questions, 1):
-            col_name = f"{dimension}_{i}"
-            # Item-Antwort ist latent_ability + Rauschen
-            item_scores = latent_ability + np.random.normal(0, 0.6, n_participants)
-            item_scores = np.clip(np.round(item_scores), 0, 5).astype(int)
-            example_data[col_name] = item_scores
-
-    df = pd.DataFrame(example_data)
-    df.to_csv(f"example_responses_{study.timestamp}.csv", index=False)
-    print("    → Beispiel-CSV erstellt (mit korrelierten Daten für realistisches Alpha)")
-
-    # 3. Daten laden
-    print("\n[3/5] Lade Daten...")
-    study.load_responses(f"example_responses_{study.timestamp}.csv")
-
-    # 4. Analyse durchführen
-    print("\n[4/5] Führe Dimensionsanalyse durch...")
-    print("=" * 50)
-    study.analyze_dimensions()
-
-    # 5. Visualisierungen und Bericht
-    print("\n[5/5] Erstelle Visualisierungen und Bericht...")
-    study.visualize_results()
-    report = study.generate_report()
+    # 2. Simulation durchführen (ersetzt die Schritte 2-5 im manuellen Ablauf)
+    print("\n[2/5] Starte Simulation...")
+    report = study.run_simulation(n_participants=30)
 
     print("\n" + "=" * 50)
     print("✅ VALIDIERUNGSSTUDIE ABGESCHLOSSEN!")

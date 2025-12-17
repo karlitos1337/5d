@@ -407,6 +407,12 @@ class ResearchScraper:
 
     def save_results(self, data, filename="5d_research_data.json"):
         """Speichert Ergebnisse"""
+        # Ensure directory exists if path contains directory
+        import os
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
+
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         print(f"\n💾 Gespeichert: {filename}")
