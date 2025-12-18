@@ -7,7 +7,7 @@ weighted additive variant, with safe normalization and clear provenance.
 
 from __future__ import annotations
 
-import numpy as np
+import math
 
 
 def calculate_imp_verified(dimensions: dict[str, float]) -> dict[str, float | str]:
@@ -33,7 +33,7 @@ def calculate_imp_verified(dimensions: dict[str, float]) -> dict[str, float | st
     keys = ["A", "IM", "R", "SP", "Au"]
     vals = [float(dimensions.get(k, 0.0)) for k in keys]
 
-    raw = float(np.prod(vals))
+    raw = float(math.prod(vals))
 
     # Optionale Gewichtung (dokumentieren und konsistent halten)
     weights = {"A": 1.1, "IM": 1.05, "R": 1.0, "SP": 0.95, "Au": 1.0}
