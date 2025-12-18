@@ -10,6 +10,7 @@ Ziel: Empirische Validierung der 5 Dimensionen (Pilotstudie, N=30)
 """
 
 import json
+import os
 from datetime import datetime
 
 import matplotlib.pyplot as plt
@@ -61,10 +62,14 @@ QUESTIONS = {
 class IMPValidationStudy:
     """Haupt-Klasse für die IMP-Validierungsstudie"""
 
-    def __init__(self):
+    def __init__(self, output_dir=None):
         self.data = None
         self.results = {}
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.output_dir = output_dir if output_dir else "."
+
+        if self.output_dir != ".":
+            os.makedirs(self.output_dir, exist_ok=True)
 
     def generate_questionnaire(self, output_format="json"):
         """Generiert den Fragebogen"""
@@ -84,7 +89,7 @@ class IMPValidationStudy:
                 q_id += 1
 
         if output_format == "json":
-            filename = f"questionnaire_{self.timestamp}.json"
+            filename = os.path.join(self.output_dir, f"questionnaire_{self.timestamp}.json")
             with open(filename, "w", encoding="utf-8") as f:
                 json.dump(questionnaire, f, ensure_ascii=False, indent=2)
             print(f"✅ Fragebogen gespeichert: {filename}")
@@ -245,7 +250,7 @@ class IMPValidationStudy:
         axes[1, 1].legend()
 
         plt.tight_layout()
-        filename = f"validation_results_{self.timestamp}.png"
+        filename = os.path.join(self.output_dir, f"validation_results_{self.timestamp}.png")
         plt.savefig(filename, dpi=300)
         print(f"\n✅ Visualisierung gespeichert: {filename}")
         plt.close()  # Close plot to prevent it from showing in non-interactive environments if configured
@@ -260,7 +265,7 @@ class IMPValidationStudy:
             "recommendation": self._generate_recommendation(),
         }
 
-        filename = f"validation_report_{self.timestamp}.json"
+        filename = os.path.join(self.output_dir, f"validation_report_{self.timestamp}.json")
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
 
@@ -313,12 +318,13 @@ def main():
             example_data[col_name] = item_scores
 
     df = pd.DataFrame(example_data)
-    df.to_csv(f"example_responses_{study.timestamp}.csv", index=False)
+    example_csv_path = os.path.join(study.output_dir, f"example_responses_{study.timestamp}.csv")
+    df.to_csv(example_csv_path, index=False)
     print("    → Beispiel-CSV erstellt (mit korrelierten Daten für realistisches Alpha)")
 
     # 3. Daten laden
     print("\n[3/5] Lade Daten...")
-    study.load_responses(f"example_responses_{study.timestamp}.csv")
+    study.load_responses(example_csv_path)
 
     # 4. Analyse durchführen
     print("\n[4/5] Führe Dimensionsanalyse durch...")
