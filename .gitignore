@@ -45,3 +45,10 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Generated Artifacts
+outputs/
+*.png
+questionnaire_*.json
+example_responses_*.csv
+validation_report_*.json

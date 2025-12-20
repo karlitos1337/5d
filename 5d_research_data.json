@@ -37,6 +37,16 @@
     ],
     "pubmed": [
       {
+        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
+        "authors": [
+          "Gutiérrez Hernández A",
+          "Pompa Mansilla M",
+          "Vadillo Bueno G"
+        ],
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41415999/"
+      },
+      {
         "title": "Challenges in anatomy education among Sudanese medical students during the 2023 armed conflict: a cross-sectional survey.",
         "authors": [
           "Eltieb QDA",
@@ -54,19 +64,9 @@
         ],
         "published": "2025 Dec 15",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41397874/"
-      },
-      {
-        "title": "Gamified Simulation for Onboarding Health Care Teams in Emergency Care: Development and Preliminary Feasibility Study.",
-        "authors": [
-          "Gobron S",
-          "Lestrade A",
-          "Sadiku A"
-        ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41397150/"
       }
     ],
-    "timestamp": "2025-12-19T11:40:54.836074"
+    "timestamp": "2025-12-20T11:36:50.064041"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,6 +106,26 @@
     ],
     "pubmed": [
       {
+        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "authors": [
+          "Gao X",
+          "Li Z",
+          "Song Y"
+        ],
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+      },
+      {
+        "title": "Implementing Operational Skills in the Education of Combat Medics at the Belgian Defense: An Integrative Model.",
+        "authors": [
+          "Waroquier F",
+          "Jansen J",
+          "Deschuyteneer N"
+        ],
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41416981/"
+      },
+      {
         "title": "Defect Engineering for Stabilizing Magnetic and Topological Properties in Mn(Bi(1-x)Sb(x))(2)Te(4).",
         "authors": [
           "Chen H",
@@ -114,29 +134,9 @@
         ],
         "published": "2025 Dec 18",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41413327/"
-      },
-      {
-        "title": "Perceived Barriers and Facilitators to Healthy Eating in Pregnant People With or at Risk for Hypertensive Disorders of Pregnancy.",
-        "authors": [
-          "Shankara SB",
-          "Nagarkar A",
-          "Sibai D"
-        ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41411477/"
-      },
-      {
-        "title": "Career Path Decisions and Influencing Factors Among Medical Students in Tanzania.",
-        "authors": [
-          "Mugeta PJ",
-          "Edward M",
-          "Pemba SK"
-        ],
-        "published": "2025 Jan-Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41409442/"
       }
     ],
-    "timestamp": "2025-12-19T11:40:57.823643"
+    "timestamp": "2025-12-20T11:36:53.041394"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,34 +172,37 @@
     ],
     "pubmed": [
       {
-        "title": "Artificial intelligence (AI) for social innovation in health education: promoting health literacy through personalized ai-driven learning tools - a systematic review.",
+        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
         "authors": [
-          "Tbaishat DM",
-          "Elfadel MW"
+          "Gao X",
+          "Li Z",
+          "Song Y"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413522/"
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
       },
       {
-        "title": "South Korea's 2024 medical school expansion: From healthcare reform to constitutional crisis.",
+        "title": "Development of Digital Literacy: Application of Artificial Intelligence in Education and Clinical Practice of Oncology Nurses.",
         "authors": [
-          "Kang D"
-        ],
-        "published": "2025 Dec 17",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41411918/"
-      },
-      {
-        "title": "A Generative AI Virtual Teaching Assistant for Graduate Nursing Informatics Education: Design, Implementation, and Preliminary Outcomes.",
-        "authors": [
-          "Stephens C",
-          "Fisher CA",
-          "Seckman C"
+          "Šimunić N",
+          "Višnjić Junaković N",
+          "Skelin M"
         ],
         "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41410568/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41419399/"
+      },
+      {
+        "title": "Opportunities to flip the narrative from burden to action for young women joining the National Cervical Screening Programme in Aotearoa New Zealand: a Kaupapa Māori qualitative exploration of experiences and knowledge of cervical screening for 18-30 year olds.",
+        "authors": [
+          "Slater T",
+          "Stevenson K",
+          "Adcock A"
+        ],
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41414979/"
       }
     ],
-    "timestamp": "2025-12-19T11:41:00.817173"
+    "timestamp": "2025-12-20T11:36:56.041890"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -267,7 +270,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-19T11:41:03.879952"
+    "timestamp": "2025-12-20T11:36:59.042891"
   },
   "democratic schools": {
     "arxiv": [
@@ -305,36 +308,37 @@
     ],
     "pubmed": [
       {
-        "title": "Aging Alone in the City: Systemic Exclusion, Social Isolation, and Loneliness among Older Refugees in Nairobi, Kenya.",
+        "title": "Towards an understanding of community-engaged efforts in addressing the youth substance use in the Democratic Republic of the Congo.",
         "authors": [
-          "Tippens JA",
-          "Palmer-Wackerly AL",
-          "Njiru L"
+          "Deng M",
+          "Li F",
+          "Adeoye-Olatunde OA"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413685/"
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41419817/"
       },
       {
-        "title": "Automating Life Cycle Assessments through Artificial Intelligence Agents and Integrated Assessment Models.",
+        "title": "Single-step versus conventional injectable artesunate for severe malaria in children: an open label, non-inferiority randomized clinical trial, Democratic Republic of the Congo and United Republic of Tanzania.",
         "authors": [
-          "Preuss N",
-          "You F"
+          "Gesase S",
+          "Onyamboko M",
+          "Fanello C"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41412961/"
+        "published": "2026 Jan 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41415126/"
       },
       {
-        "title": "Evaluating the role of the 'Accessible Novel Solutions for Widespread Emergency Reconstructive Surgery' (ANSWERS) 3D-printed perineal training model for conflict-related sexual violence injuries.",
+        "title": "Community transmission of mpox clade Ib not driven through sexual exposures, Uvira, eastern Democratic Republic of the Congo, June to October 2024.",
         "authors": [
-          "Ali SR",
-          "HRH The Duchess of Edinburgh",
-          "Byabene G"
+          "Bugeme PM",
+          "Bugale PK",
+          "Mukika TF"
         ],
-        "published": "2025 Nov 25",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41407573/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41414936/"
       }
     ],
-    "timestamp": "2025-12-19T11:41:06.828287"
+    "timestamp": "2025-12-20T11:37:02.038964"
   },
   "student agency": {
     "arxiv": [
@@ -374,6 +378,26 @@
     ],
     "pubmed": [
       {
+        "title": "Aligning expectations and experiences: Medical student perspectives on progress testing for National Licensing Examination preparation.",
+        "authors": [
+          "Doherty SE",
+          "Cullen KM",
+          "Cole AJ"
+        ],
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41416766/"
+      },
+      {
+        "title": "Factors associated with unintended pregnancies among unmarried adolescents in Eastern Uganda: a cross-sectional study.",
+        "authors": [
+          "Komasawa M",
+          "Sato M",
+          "Saito K"
+        ],
+        "published": "2025 Dec 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41413894/"
+      },
+      {
         "title": "From passive to participatory: exploring pharmacy students' experiences and perceptions with active learning.",
         "authors": [
           "Sletvold H",
@@ -382,31 +406,13 @@
         ],
         "published": "2025 Dec 19",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41413556/"
-      },
-      {
-        "title": "Measuring screen time among adolescents: test-retest reliability of HBSC questionnaire items across two countries.",
-        "authors": [
-          "Matusova M",
-          "Maracek M",
-          "Pavelka J"
-        ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413499/"
-      },
-      {
-        "title": "Global burden of lower respiratory infections and aetiologies, 1990-2023: a systematic analysis for the Global Burden of Disease Study 2023.",
-        "authors": [
-          "GBD 2023 Lower Respiratory Infections and Antimicrobial Resistance Collaborators"
-        ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41412141/"
       }
     ],
-    "timestamp": "2025-12-19T11:41:09.836191"
+    "timestamp": "2025-12-20T11:37:05.042574"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2025-12-19T11:41:09.836228",
+    "timestamp": "2025-12-20T11:37:05.042606",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -528,7 +534,7 @@
         }
       }
     },
-    "timestamp": "2025-12-19T11:41:13.819423",
+    "timestamp": "2025-12-20T11:37:09.033269",
     "source": "World Bank EdStats API"
   }
 }
