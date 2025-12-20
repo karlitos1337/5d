@@ -186,30 +186,56 @@ class IMPValidationStudy:
         return {"dimensions": scores, "IMP_geometric": imp_geometric, "IMP_additive": imp_additive}
 
     def calculate_imp_scores_vectorized(self, df):
-        """Berechnet IMP-Scores für einen DataFrame (vektorisiert)"""
+        """
+        Berechnet IMP-Scores für einen DataFrame (vektorisiert)
+        Optimized by Bolt: Uses direct NumPy slicing instead of repeated DataFrame subsets
+        """
         dimensions = list(QUESTIONS.keys())
-        dim_scores = pd.DataFrame(index=df.index)
+        n_rows = len(df)
+        n_dims = len(dimensions)
 
-        # Berechne Mittelwerte pro Dimension
+        # Pre-allocate numpy array for results
+        dim_scores_arr = np.zeros((n_rows, n_dims))
+
+        # 1. Collect all relevant columns in order
+        all_relevant_cols = []
+        dim_col_counts = []  # Track how many columns per dimension
+
         for dim in dimensions:
             dim_cols = [col for col in df.columns if col.startswith(dim)]
-            if dim_cols:
-                dim_scores[dim] = df[dim_cols].mean(axis=1)
-            else:
-                dim_scores[dim] = 0.0
+            all_relevant_cols.extend(dim_cols)
+            dim_col_counts.append(len(dim_cols))
+
+        # 2. Extract values as numpy array (avoids repeated DataFrame sub-setting)
+        if all_relevant_cols:
+            subset_values = df[all_relevant_cols].values
+
+            # 3. Calculate means using slices
+            current_idx = 0
+            for i, count in enumerate(dim_col_counts):
+                if count > 0:
+                    dim_slice = subset_values[:, current_idx : current_idx + count]
+                    dim_scores_arr[:, i] = np.nanmean(dim_slice, axis=1)
+                    current_idx += count
+                else:
+                    dim_scores_arr[:, i] = 0.0
+
+        # Convert back to DataFrame
+        dim_scores = pd.DataFrame(dim_scores_arr, index=df.index, columns=dimensions)
 
         # Geometrisches Mittel über die Dimensionen
         # gmean benötigt positive Werte. Wir nehmen an, dass Scores >= 0 sind.
         # axis=1 berechnet gmean für jede Zeile
-        imp_geometric = gmean(dim_scores.values, axis=1)
+        imp_geometric = gmean(dim_scores_arr, axis=1)
 
         # Additives Modell
-        imp_additive = dim_scores.mean(axis=1)
+        # We return a Series to maintain compatibility with original API which returned dim_scores.mean(axis=1)
+        imp_additive = pd.Series(np.nanmean(dim_scores_arr, axis=1), index=df.index)
 
         return {
             "dimensions": dim_scores,
             "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
+            "IMP_additive": imp_additive,
         }
 
     def correlation_analysis(self):
