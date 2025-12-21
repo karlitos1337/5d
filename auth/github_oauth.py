@@ -7,12 +7,21 @@ KRITISCH: KEINE Speicherung personenbezogener Daten!
 import os
 import secrets
 from datetime import datetime, timedelta
+from urllib.parse import urlencode
 
 import requests
 
 
 class GitHubAuth:
-    """GitHub OAuth nur zur Authentifizierung, nicht zur Identifikation."""
+    """GitHub OAuth nur zur Authentifizierung, nicht zur Identifikation.
+
+    Usage Pattern:
+    1. Call `get_authorization_url()` to get the URL and a `state` token.
+    2. Store the `state` token in the user's session (e.g., HTTP-only cookie).
+    3. Redirect the user to the returned URL.
+    4. In the callback handler, retrieve the `state` from the query params and the stored `state`.
+    5. Call `authenticate(code, received_state, stored_state)` to complete the login.
+    """
 
     def __init__(self):
         self.client_id = os.getenv("GITHUB_CLIENT_ID")
@@ -22,8 +31,13 @@ class GitHubAuth:
         if not self.client_id or not self.client_secret:
             raise ValueError("GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET must be set")
 
-    def get_authorization_url(self, state: str | None = None) -> str:
-        """Generiert OAuth Authorization URL."""
+    def get_authorization_url(self, state: str | None = None) -> tuple[str, str]:
+        """Generiert OAuth Authorization URL.
+
+        Returns:
+            Tuple[str, str]: (Authorization URL, state token)
+            The caller MUST store the state token and pass it back to `authenticate`.
+        """
         if state is None:
             state = secrets.token_urlsafe(32)
 
@@ -34,10 +48,10 @@ class GitHubAuth:
             "state": state,
         }
 
-        url = "https://github.com/login/oauth/authorize"
-        query_string = "&".join([f"{k}={v}" for k, v in params.items()])
+        base_url = "https://github.com/login/oauth/authorize"
+        query_string = urlencode(params)
 
-        return f"{url}?{query_string}"
+        return f"{base_url}?{query_string}", state
 
     def exchange_code_for_token(self, code: str) -> str | None:
         """Tauscht Authorization Code gegen Access Token.
@@ -56,6 +70,7 @@ class GitHubAuth:
 
         headers = {"Accept": "application/json"}
 
+        # Sentinel: Added timeout=10 to prevent hanging
         response = requests.post(url, json=payload, headers=headers, timeout=10)
 
         if response.status_code == 200:
@@ -72,6 +87,7 @@ class GitHubAuth:
         url = "https://api.github.com/user"
         headers = {"Authorization": f"token {access_token}", "Accept": "application/json"}
 
+        # Sentinel: Added timeout=10 to prevent hanging
         response = requests.get(url, headers=headers, timeout=10)
 
         return response.status_code == 200
@@ -83,12 +99,26 @@ class GitHubAuth:
         """
         return secrets.token_urlsafe(32)
 
-    def authenticate(self, code: str) -> dict | None:
-        """Vollständiger OAuth-Flow.
+    def authenticate(self, code: str, received_state: str, expected_state: str) -> dict | None:
+        """Vollständiger OAuth-Flow mit CSRF-Protection.
+
+        Args:
+            code: Authorization Code von GitHub
+            received_state: State Parameter von GitHub Callback
+            expected_state: Ursprünglich generierter State (aus Session)
 
         Returns:
             Session-Token (anonym) oder None bei Fehler
         """
+        # 0. CSRF Check
+        if not received_state or not expected_state:
+            return None
+
+        # Constant time comparison to prevent timing attacks
+        if not secrets.compare_digest(received_state, expected_state):
+            print("❌ CSRF Attack detected! State mismatch.")
+            return None
+
         # 1. Code gegen Token tauschen
         access_token = self.exchange_code_for_token(code)
         if not access_token:
