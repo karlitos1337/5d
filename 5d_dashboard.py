@@ -32,6 +32,8 @@ def main():
         st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
         st.page_link("pages/12_🧠_Forschungsplanung_Template.py", label="🧠 Forschungsplanung (Template)", icon="🧠")
         st.page_link("pages/13_🧪_NN_Playground_Demo.py", label="🧪 NN Playground (Demo)", icon="🧪")
+        st.markdown("### 🆕 Neues Dashboard")
+        st.info("Ein neues React-basiertes Dashboard ist verfügbar unter `web/validation_dashboard`. Bauen Sie es mit `cd web/validation_dashboard && npm run build`.")
         st.markdown("- 📚 Research (coming soon)")
         st.markdown("- 💻 GitHub (coming soon)")
         st.markdown("- 🧬 Game of Life (coming soon)")
