@@ -220,21 +220,46 @@ with st.spinner("Running simulation..."):
         n_agents, steps, zwang, freiheit, peers, lehrer_support, aufgaben_vielfalt
     )
 
+# Toast notification for successful run
+if "last_run" not in st.session_state or st.session_state.last_run != final_metrics["IMP"]:
+    st.toast("Simulation completed successfully!", icon="✅")
+    st.session_state.last_run = final_metrics["IMP"]
+
 # === RESULTS ===
 st.header("📊 Simulation Results")
 
 # Key metrics
 col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
-    st.metric("Final IMP", f"{final_metrics['IMP']:.3f}")
+    st.metric(
+        "Final IMP",
+        f"{final_metrics['IMP']:.3f}",
+        help="Individual Potential (Geometric Mean of 5 dimensions). >0.2 is sustainable.",
+    )
 with col2:
-    st.metric("Retention Rate", f"{final_metrics['retention_rate']:.1%}")
+    st.metric(
+        "Retention Rate",
+        f"{final_metrics['retention_rate']:.1%}",
+        help="Percentage of students who remained active until the end.",
+    )
 with col3:
-    st.metric("Total Dropouts", final_metrics["total_dropouts"])
+    st.metric(
+        "Total Dropouts",
+        final_metrics["total_dropouts"],
+        help="Students who left due to low Motivation or Resilience (<0.15).",
+    )
 with col4:
-    st.metric("Final Autonomy", f"{final_metrics['A']:.2f}")
+    st.metric(
+        "Final Autonomy",
+        f"{final_metrics['A']:.2f}",
+        help="Self-determination capability at the end of simulation.",
+    )
 with col5:
-    st.metric("Final IM", f"{final_metrics['IM']:.2f}")
+    st.metric(
+        "Final IM",
+        f"{final_metrics['IM']:.2f}",
+        help="Intrinsic Motivation level at the end of simulation.",
+    )
 
 st.divider()
 
