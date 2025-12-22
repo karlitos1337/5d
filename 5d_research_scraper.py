@@ -8,6 +8,8 @@ import json
 import time
 import re
 from datetime import datetime
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 
 import requests
 from bs4 import BeautifulSoup
@@ -36,7 +38,9 @@ class ResearchScraper:
         self.rate_limit_delay = rate_limit_delay
         self.max_retries = max_retries
         self.retry_backoff = retry_backoff
-        self.last_request_time = 0
+
+        # Domain-specific rate limiting
+        self.last_request_times = defaultdict(float)
 
         # WHO API settings
         self.who_base_url = "https://ghoapi.azureedge.net/api"
@@ -50,14 +54,15 @@ class ResearchScraper:
             return False
         return bool(re.match(r"^[A-Z]{3}$", code))
 
-    def _rate_limit(self):
-        """Enforce rate limiting between requests."""
+    def _rate_limit(self, domain="default"):
+        """Enforce rate limiting between requests per domain."""
         current_time = time.time()
-        elapsed = current_time - self.last_request_time
+        last_time = self.last_request_times[domain]
+        elapsed = current_time - last_time
         if elapsed < self.rate_limit_delay:
             sleep_time = self.rate_limit_delay - elapsed
             time.sleep(sleep_time)
-        self.last_request_time = time.time()
+        self.last_request_times[domain] = time.time()
 
     def search_arxiv(self, query, max_results=5):
         """Sucht wissenschaftliche Papers auf arXiv mit Rate-Limiting und Retries"""
@@ -72,12 +77,12 @@ class ResearchScraper:
 
         for attempt in range(self.max_retries):
             try:
-                self._rate_limit()  # Apply rate limiting
+                self._rate_limit("arxiv")  # Apply rate limiting for arXiv
                 response = requests.get(base_url, params=params, timeout=10)
 
                 if response.status_code == 429:  # Too Many Requests
                     wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                    print(f"⏳ Rate limit hit, waiting {wait_time:.1f}s...")
+                    print(f"⏳ Rate limit hit (arXiv), waiting {wait_time:.1f}s...")
                     time.sleep(wait_time)
                     continue
 
@@ -119,7 +124,7 @@ class ResearchScraper:
         for attempt in range(self.max_retries):
             try:
                 # Search with rate limiting
-                self._rate_limit()
+                self._rate_limit("pubmed")
                 response = requests.get(base_url, params=params, timeout=10)
 
                 if response.status_code == 429:
@@ -136,7 +141,7 @@ class ResearchScraper:
                     return []
 
                 # Fetch details with rate limiting
-                self._rate_limit()
+                self._rate_limit("pubmed")
                 fetch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
                 fetch_params = {"db": "pubmed", "id": ",".join(ids), "retmode": "json"}
 
@@ -174,12 +179,6 @@ class ResearchScraper:
     def fetch_who_mental_health_data(self, countries=None):
         """
         Fetch mental health indicators from WHO Global Health Observatory.
-
-        Args:
-            countries: List of ISO3 country codes (default: top 20 countries)
-
-        Returns:
-            dict: Mental health data by country
         """
         if countries is None:
             # Top 20 countries for baseline
@@ -211,13 +210,13 @@ class ResearchScraper:
 
             for attempt in range(self.max_retries):
                 try:
-                    self._rate_limit()
+                    self._rate_limit("who")
 
                     # WHO API endpoint
                     url = f"{self.who_base_url}/{indicator_code}"
                     # OData requires string values to be single-quoted
                     quoted_countries = [f"'{c}'" for c in countries]
-                    params = {"$filter": "SpatialDim in ({})".format(",".join(quoted_countries))}
+                    params = {"": "SpatialDim in ({})".format(",".join(quoted_countries))}
 
                     response = requests.get(url, params=params, timeout=15)
 
@@ -269,12 +268,6 @@ class ResearchScraper:
     def fetch_world_bank_education_data(self, countries=None):
         """
         Fetch education indicators from World Bank EdStats API.
-
-        Args:
-            countries: List of ISO3 country codes (default: top 20 countries)
-
-        Returns:
-            dict: Education data by country
         """
         if countries is None:
             countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
@@ -306,10 +299,11 @@ class ResearchScraper:
 
             for attempt in range(self.max_retries):
                 try:
-                    self._rate_limit()
+                    self._rate_limit("worldbank")
 
                     # World Bank API endpoint
-                    countries_str = ";".join(countries[:10])  # Limit to 10 per request
+                    # Optimization: Fetch all countries in one request (up to 260 supported, we have 20)
+                    countries_str = ";".join(countries)
                     url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
                     params = {
                         "format": "json",
@@ -362,41 +356,65 @@ class ResearchScraper:
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
 
-    def scrape_all(self):
-        """Sammelt Papers zu allen Keywords + WHO/World Bank Daten"""
-        all_research = {}
-
-        print("🔍 Starte Research Scraping...")
-
-        # Academic papers
+    def _fetch_all_arxiv(self):
+        """Helper to fetch arXiv results for all keywords."""
+        results = {}
         for keyword in self.keywords:
-            print(f"\n📚 Suche: {keyword}")
+            print(f"📚 arXiv Suche: {keyword}")
+            results[keyword] = self.search_arxiv(keyword, max_results=3)
+            print(f"  ✅ arXiv ({keyword}): {len(results[keyword])} papers")
+        return results
 
-            arxiv_papers = self.search_arxiv(keyword, max_results=3)
-            pubmed_papers = self.search_pubmed(keyword, max_results=3)
+    def _fetch_all_pubmed(self):
+        """Helper to fetch PubMed results for all keywords."""
+        results = {}
+        for keyword in self.keywords:
+            print(f"📚 PubMed Suche: {keyword}")
+            results[keyword] = self.search_pubmed(keyword, max_results=3)
+            print(f"  ✅ PubMed ({keyword}): {len(results[keyword])} papers")
+        return results
 
+    def scrape_all(self):
+        """Sammelt Papers zu allen Keywords + WHO/World Bank Daten (Parallelized)"""
+        all_research = {}
+        print("🔍 Starte Research Scraping (Parallelized)...")
+
+        # Use ThreadPoolExecutor to run independent scraping tasks in parallel
+        # Tasks:
+        # 1. arXiv (iterate over keywords)
+        # 2. PubMed (iterate over keywords)
+        # 3. WHO Data
+        # 4. World Bank Data
+
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            future_arxiv = executor.submit(self._fetch_all_arxiv)
+            future_pubmed = executor.submit(self._fetch_all_pubmed)
+            # future_who = executor.submit(self.fetch_who_mental_health_data) # Skipped in original
+            future_wb = executor.submit(self.fetch_world_bank_education_data)
+
+            # Retrieve results
+            arxiv_results = future_arxiv.result()
+            pubmed_results = future_pubmed.result()
+            wb_data = future_wb.result()
+            # who_data = future_who.result()
+
+        # Merge results into the expected structure
+        for keyword in self.keywords:
             all_research[keyword] = {
-                "arxiv": arxiv_papers,
-                "pubmed": pubmed_papers,
+                "arxiv": arxiv_results.get(keyword, []),
+                "pubmed": pubmed_results.get(keyword, []),
                 "timestamp": datetime.now().isoformat(),
             }
 
-            print(f"  ✅ arXiv: {len(arxiv_papers)} papers")
-            print(f"  ✅ PubMed: {len(pubmed_papers)} papers")
-
-        # WHO Mental Health Data
-        # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
+        # Add WHO Data (Skipped/Mocked)
         print("\n🏥 Fetching WHO Mental Health Data (SKIPPED - TODO: Fix API)...")
-        # who_data = self.fetch_who_mental_health_data()
         all_research["who_mental_health"] = {
-            "data": {},
+            "data": {}, # who_data if enabled
             "timestamp": datetime.now().isoformat(),
             "source": "WHO Global Health Observatory (Disabled)"
         }
 
-        # World Bank Education Data
-        print("\n🏫 Fetching World Bank Education Data...")
-        wb_data = self.fetch_world_bank_education_data()
+        # Add World Bank Data
         all_research["world_bank_education"] = {
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
@@ -418,5 +436,5 @@ if __name__ == "__main__":
     scraper.save_results(research_data)
 
     # Statistik
-    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values())
+    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values() if isinstance(data, dict) and "arxiv" in data)
     print(f"\n📊 Total: {total_papers} Papers gefunden")
