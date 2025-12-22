@@ -51,9 +51,26 @@ const App = () => {
         lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
       });
 
-      btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
-      btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      // Accessibility enhancements
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('tabindex', '0');
+      btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
+
+      const setHoverStyle = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
+      const setNormalStyle = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
+
+      btn.onmouseenter = setHoverStyle;
+      btn.onmouseleave = setNormalStyle;
+      btn.onfocus = setHoverStyle;
+      btn.onblur = setNormalStyle;
+
+      const openLink = (e) => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      btn.onclick = openLink;
+      btn.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          openLink(e);
+        }
+      };
 
       el.appendChild(btn);
 
@@ -181,7 +198,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main id="main-content" className="pt-16">
+      <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
