@@ -139,7 +139,7 @@ mistune==3.0.2
     # via nbconvert
 nbclient==0.9.0
     # via nbconvert
-nbconvert==7.14.2
+nbconvert==7.16.6
     # via
     #   jupyter
     #   jupyter-server
