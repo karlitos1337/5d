@@ -42,6 +42,20 @@ const App = () => {
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
 
+      // Enhance accessibility for citation buttons
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('tabIndex', '0');
+      btn.setAttribute('aria-label', `Citation ${indexNum}: Open source in new tab`);
+
+      // Add keyboard support
+      btn.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(url, '_blank');
+        }
+      };
+
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
         backgroundColor: '#0284c7', borderRadius: '50%', transition: 'all .2s',
