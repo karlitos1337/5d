@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { Sun, Moon, Menu, X, ArrowUp } from 'lucide-react';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -70,9 +71,16 @@ const App = () => {
     setMobileMenuOpen(false);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+      const scrollY = window.scrollY;
+      setShowScrollTop(scrollY > 400);
+
+      const scrollPosition = scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
@@ -579,6 +587,26 @@ const App = () => {
           </p>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            className={`fixed bottom-8 right-8 p-3 rounded-full shadow-lg z-50 transition-colors duration-200 ${
+              darkMode
+                ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-black/30'
+                : 'bg-white hover:bg-gray-100 text-blue-600 shadow-gray-200/50 ring-1 ring-gray-200'
+            }`}
+          >
+            <ArrowUp size={24} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
