@@ -1,4 +1,69 @@
 {
+  "autonomy supportive teaching": {
+    "arxiv": [
+      {
+        "title": "Closing the Gap between Teaching and Assessment",
+        "authors": [
+          "\nChandralekha Singh\n"
+        ],
+        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
+        "published": "2017-01-09T21:29:02Z",
+        "link": "http://arxiv.org/abs/1701.02356v1"
+      },
+      {
+        "title": "Distribution Matching for Machine Teaching",
+        "authors": [
+          "\nXiaofeng Cao\n",
+          "\nIvor W. Tsang\n"
+        ],
+        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
+        "published": "2021-05-06T09:32:57Z",
+        "link": "http://arxiv.org/abs/2105.13809v1"
+      },
+      {
+        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
+        "authors": [
+          "\nMartin S. Feather\n",
+          "\nAlessandro Pinto\n"
+        ],
+        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
+        "published": "2023-05-16T18:24:12Z",
+        "link": "http://arxiv.org/abs/2305.11902v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Effects of knowledge and importance on responsibility in human-AI decision making.",
+        "authors": [
+          "Tsumura T",
+          "Yamada S"
+        ],
+        "published": "2025 Dec 23",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41436588/"
+      },
+      {
+        "title": "Understanding women's care experiences in public health facilities in a conflict-affected area of Nigeria.",
+        "authors": [
+          "Elnakib S",
+          "Kazeem Olalekan A",
+          "Maina C"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41433253/"
+      },
+      {
+        "title": "Followership among jordanian nurses: A cross-sectional online study.",
+        "authors": [
+          "ALQadrie WT",
+          "Saleh AM",
+          "Al-Rawashdeh S"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41433246/"
+      }
+    ],
+    "timestamp": "2025-12-24T11:35:48.386580"
+  },
   "self-directed learning": {
     "arxiv": [
       {
@@ -37,36 +102,37 @@
     ],
     "pubmed": [
       {
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
+        "title": "Assessing and optimizing Team-Based Learning in undergraduate cosmetic dermatology education: an empirical study using interpretable machine learning.",
         "authors": [
-          "Gutiérrez Hernández A",
-          "Pompa Mansilla M",
-          "Vadillo Bueno G"
+          "Ouyang P",
+          "Zhou L",
+          "Gao L"
+        ],
+        "published": "2025 Dec 23",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41437036/"
+      },
+      {
+        "title": "We're talking about practice: examining the shifting role of FLS in surgical education.",
+        "authors": [
+          "Falco G",
+          "Dunaway A",
+          "Ranney S"
+        ],
+        "published": "2025 Dec 23",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41436613/"
+      },
+      {
+        "title": "Public Health.",
+        "authors": [
+          "Amos JG",
+          "Zheng L",
+          "Andrews S"
         ],
         "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41415999/"
-      },
-      {
-        "title": "Challenges in anatomy education among Sudanese medical students during the 2023 armed conflict: a cross-sectional survey.",
-        "authors": [
-          "Eltieb QDA",
-          "Muhammed A",
-          "Ahmed LNM"
-        ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41398249/"
-      },
-      {
-        "title": "Reimagining Graduate Study With Generative Artificial Intelligence-Supported Study Strategies: A Doctor of Nursing Practice Student's Perspective.",
-        "authors": [
-          "Silva KA",
-          "Sheets DM"
-        ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41397874/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41435300/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:05.150148"
+    "timestamp": "2025-12-24T11:35:49.380863"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,103 +172,103 @@
     ],
     "pubmed": [
       {
-        "title": "Eurogame escape room of physics in veterinary education: a pilot study.",
+        "title": "Public Health.",
         "authors": [
-          "Bräuninger SA",
-          "Motz DA",
-          "Lüpke M"
+          "Ekediegwu E",
+          "Mayo N"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421988/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41434439/"
       },
       {
-        "title": "The impact of AI tools enabled student engagement on academic performance, employability, and empowerment in Ha'il Region, Saudi Arabia.",
+        "title": "Intrinsic Motivation Inventory for Heart-Healthy Lifestyle (IMI-HeartLife) in Cardiovascular Disease Prevention: A Validation Study.",
         "authors": [
-          "Singh A",
-          "Singh HP",
-          "Alam MF"
+          "Choo J",
+          "Noh S",
+          "Shin Y"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421110/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41432302/"
       },
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "Real-time feedback enhances motor learning and motivation in youth team sports through augmented reality tools.",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "He X",
+          "Wei L"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41426421/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:08.080663"
+    "timestamp": "2025-12-24T11:35:50.386580"
   },
-  "autonomy supportive teaching": {
+  "democratic schools": {
     "arxiv": [
       {
-        "title": "Closing the Gap between Teaching and Assessment",
+        "title": "Democratic Policy Development using Collective Dialogues and AI",
         "authors": [
-          "\nChandralekha Singh\n"
+          "\nAndrew Konya\n",
+          "\nLisa Schirch\n",
+          "\nColin Irwin\n",
+          "\nAviv Ovadya\n"
         ],
-        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
-        "published": "2017-01-09T21:29:02Z",
-        "link": "http://arxiv.org/abs/1701.02356v1"
+        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
+        "published": "2023-11-03T21:12:57Z",
+        "link": "http://arxiv.org/abs/2311.02242v1"
       },
       {
-        "title": "Distribution Matching for Machine Teaching",
+        "title": "The robustness of democratic consensus",
         "authors": [
-          "\nXiaofeng Cao\n",
-          "\nIvor W. Tsang\n"
+          "\nFabio Fagnani\n",
+          "\nJean-Charles Delvenne\n"
         ],
-        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
-        "published": "2021-05-06T09:32:57Z",
-        "link": "http://arxiv.org/abs/2105.13809v1"
+        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
+        "published": "2015-02-15T01:02:01Z",
+        "link": "http://arxiv.org/abs/1502.04264v1"
       },
       {
-        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
+        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
         "authors": [
-          "\nMartin S. Feather\n",
-          "\nAlessandro Pinto\n"
+          "\nCliver Oliver Turpo Benique\n"
         ],
-        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
-        "published": "2023-05-16T18:24:12Z",
-        "link": "http://arxiv.org/abs/2305.11902v1"
+        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
+        "published": "2025-07-14T02:32:04Z",
+        "link": "http://arxiv.org/abs/2507.14191v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "Public Health.",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "Curran JM",
+          "Shah J",
+          "Smith CI"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41435226/"
       },
       {
-        "title": "Development of Digital Literacy: Application of Artificial Intelligence in Education and Clinical Practice of Oncology Nurses.",
+        "title": "Public Health.",
         "authors": [
-          "Šimunić N",
-          "Višnjić Junaković N",
-          "Skelin M"
+          "Akinyemi RO",
+          "Kunkle BW",
+          "Akinyemi JO"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419399/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41434757/"
       },
       {
-        "title": "Opportunities to flip the narrative from burden to action for young women joining the National Cervical Screening Programme in Aotearoa New Zealand: a Kaupapa Māori qualitative exploration of experiences and knowledge of cervical screening for 18-30 year olds.",
+        "title": "Public Health.",
         "authors": [
-          "Slater T",
-          "Stevenson K",
-          "Adcock A"
+          "Akinyemi JO",
+          "Scaramutti C",
+          "Cai D"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41414979/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41433941/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:11.084001"
+    "timestamp": "2025-12-24T11:35:51.401858"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -270,73 +336,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:14.101425"
-  },
-  "democratic schools": {
-    "arxiv": [
-      {
-        "title": "Democratic Policy Development using Collective Dialogues and AI",
-        "authors": [
-          "\nAndrew Konya\n",
-          "\nLisa Schirch\n",
-          "\nColin Irwin\n",
-          "\nAviv Ovadya\n"
-        ],
-        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
-        "published": "2023-11-03T21:12:57Z",
-        "link": "http://arxiv.org/abs/2311.02242v1"
-      },
-      {
-        "title": "The robustness of democratic consensus",
-        "authors": [
-          "\nFabio Fagnani\n",
-          "\nJean-Charles Delvenne\n"
-        ],
-        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
-        "published": "2015-02-15T01:02:01Z",
-        "link": "http://arxiv.org/abs/1502.04264v1"
-      },
-      {
-        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
-        "authors": [
-          "\nCliver Oliver Turpo Benique\n"
-        ],
-        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
-        "published": "2025-07-14T02:32:04Z",
-        "link": "http://arxiv.org/abs/2507.14191v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Factors associated with unsuppressed HIV viral load among children under 15 years in sub-Saharan africa: a systematic review.",
-        "authors": [
-          "Balowe JK",
-          "Alain NM",
-          "Mampasi AL"
-        ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41422218/"
-      },
-      {
-        "title": "Cross-cultural differences of leadership style and emotional intelligence level in physical education teacher's success of China and Ukraine.",
-        "authors": [
-          "Zhang L"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421108/"
-      },
-      {
-        "title": "Transformative Potential of Outsider Art for Neurodivergent Artists.",
-        "authors": [
-          "Sochor P",
-          "Sochorova D",
-          "Kubiatko M"
-        ],
-        "published": "2025 Dec 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420883/"
-      }
-    ],
-    "timestamp": "2025-12-21T11:33:17.080561"
+    "timestamp": "2025-12-24T11:35:52.444185"
   },
   "student agency": {
     "arxiv": [
@@ -376,6 +376,26 @@
     ],
     "pubmed": [
       {
+        "title": "Guided by Enzymes: Targeted Photodynamic Therapy as a Strategy for Precision Medicine.",
+        "authors": [
+          "Wild LS",
+          "Whitcher J",
+          "Rossel T"
+        ],
+        "published": "2025 Dec 17",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41432262/"
+      },
+      {
+        "title": "Research as identity: Exposure, confidence, perceptions, and motivators among pharmacy students in a practice-based research network.",
+        "authors": [
+          "Rotzenberg K",
+          "Lor KB",
+          "Ray SC"
+        ],
+        "published": "2025 Dec 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41422683/"
+      },
+      {
         "title": "Beliefs, practices, and awareness of written corrective feedback among EFL teachers: a mixed-methods study.",
         "authors": [
           "Mostafavi M",
@@ -384,33 +404,13 @@
         ],
         "published": "2025 Dec 19",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41420260/"
-      },
-      {
-        "title": "Aligning expectations and experiences: Medical student perspectives on progress testing for National Licensing Examination preparation.",
-        "authors": [
-          "Doherty SE",
-          "Cullen KM",
-          "Cole AJ"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41416766/"
-      },
-      {
-        "title": "Factors associated with unintended pregnancies among unmarried adolescents in Eastern Uganda: a cross-sectional study.",
-        "authors": [
-          "Komasawa M",
-          "Sato M",
-          "Saito K"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413894/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:20.380653"
+    "timestamp": "2025-12-24T11:35:54.386945"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2025-12-21T11:33:20.380723",
+    "timestamp": "2025-12-24T11:35:54.388584",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -532,7 +532,7 @@
         }
       }
     },
-    "timestamp": "2025-12-21T11:33:40.499254",
+    "timestamp": "2025-12-24T11:35:57.554684",
     "source": "World Bank EdStats API"
   }
 }
