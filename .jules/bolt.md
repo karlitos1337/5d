@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-05-24 - Thread-Safe Rate Limiting
+**Learning:** When parallelizing scrapers across multiple domains, a single shared `last_request_time` blocks all threads unnecessarily and causes race conditions.
+**Action:** Implement per-domain rate limiting with `defaultdict` and `Lock`s to maximize concurrency while respecting individual API constraints.
