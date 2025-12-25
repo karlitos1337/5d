@@ -42,18 +42,37 @@ const App = () => {
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
 
+      // Accessibility improvements
+      btn.tabIndex = 0;
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('aria-label', `Citation ${indexNum}: Open source in new tab`);
+
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
         backgroundColor: '#0284c7', borderRadius: '50%', transition: 'all .2s',
         userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '2px',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
-        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
+        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px',
+        outline: 'none' // We'll handle focus ring manually or rely on :focus-visible if needed, but let's add visual feedback
       });
+
+      // Focus styles for accessibility
+      btn.onfocus = () => Object.assign(btn.style, { outline: '2px solid #0284c7', outlineOffset: '2px', transform: 'scale(1.15)' });
+      btn.onblur = () => Object.assign(btn.style, { outline: 'none', transform: 'scale(1)' });
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+
+      const openCitation = () => window.open(url, '_blank');
+      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); openCitation(); };
+      btn.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          openCitation();
+        }
+      };
 
       el.appendChild(btn);
 
