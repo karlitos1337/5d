@@ -69,7 +69,7 @@ class ResearchScraper:
 
     def search_arxiv(self, query, max_results=5):
         """Sucht wissenschaftliche Papers auf arXiv mit Rate-Limiting und Retries"""
-        base_url = "http://export.arxiv.org/api/query"
+        base_url = "https://export.arxiv.org/api/query"
         params = {
             "search_query": f"all:{query}",
             "start": 0,
