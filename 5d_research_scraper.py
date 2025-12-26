@@ -7,7 +7,10 @@ Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
 import json
 import time
 import re
+import threading
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from collections import defaultdict
 
 import requests
 from bs4 import BeautifulSoup
@@ -36,7 +39,10 @@ class ResearchScraper:
         self.rate_limit_delay = rate_limit_delay
         self.max_retries = max_retries
         self.retry_backoff = retry_backoff
-        self.last_request_time = 0
+
+        # Domain-specific rate limiting
+        self.last_request_times = defaultdict(float)
+        self.locks = defaultdict(threading.Lock)
 
         # WHO API settings
         self.who_base_url = "https://ghoapi.azureedge.net/api"
@@ -50,14 +56,16 @@ class ResearchScraper:
             return False
         return bool(re.match(r"^[A-Z]{3}$", code))
 
-    def _rate_limit(self):
-        """Enforce rate limiting between requests."""
-        current_time = time.time()
-        elapsed = current_time - self.last_request_time
-        if elapsed < self.rate_limit_delay:
-            sleep_time = self.rate_limit_delay - elapsed
-            time.sleep(sleep_time)
-        self.last_request_time = time.time()
+    def _rate_limit(self, domain="default"):
+        """Enforce rate limiting between requests for a specific domain."""
+        with self.locks[domain]:
+            current_time = time.time()
+            last_time = self.last_request_times[domain]
+            elapsed = current_time - last_time
+            if elapsed < self.rate_limit_delay:
+                sleep_time = self.rate_limit_delay - elapsed
+                time.sleep(sleep_time)
+            self.last_request_times[domain] = time.time()
 
     def search_arxiv(self, query, max_results=5):
         """Sucht wissenschaftliche Papers auf arXiv mit Rate-Limiting und Retries"""
@@ -72,12 +80,12 @@ class ResearchScraper:
 
         for attempt in range(self.max_retries):
             try:
-                self._rate_limit()  # Apply rate limiting
+                self._rate_limit("arxiv")  # Apply rate limiting for ArXiv
                 response = requests.get(base_url, params=params, timeout=10)
 
                 if response.status_code == 429:  # Too Many Requests
                     wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                    print(f"⏳ Rate limit hit, waiting {wait_time:.1f}s...")
+                    print(f"⏳ Rate limit hit (ArXiv), waiting {wait_time:.1f}s...")
                     time.sleep(wait_time)
                     continue
 
@@ -119,7 +127,7 @@ class ResearchScraper:
         for attempt in range(self.max_retries):
             try:
                 # Search with rate limiting
-                self._rate_limit()
+                self._rate_limit("pubmed")
                 response = requests.get(base_url, params=params, timeout=10)
 
                 if response.status_code == 429:
@@ -136,7 +144,7 @@ class ResearchScraper:
                     return []
 
                 # Fetch details with rate limiting
-                self._rate_limit()
+                self._rate_limit("pubmed")
                 fetch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
                 fetch_params = {"db": "pubmed", "id": ",".join(ids), "retmode": "json"}
 
@@ -211,7 +219,7 @@ class ResearchScraper:
 
             for attempt in range(self.max_retries):
                 try:
-                    self._rate_limit()
+                    self._rate_limit("who")
 
                     # WHO API endpoint
                     url = f"{self.who_base_url}/{indicator_code}"
@@ -306,7 +314,7 @@ class ResearchScraper:
 
             for attempt in range(self.max_retries):
                 try:
-                    self._rate_limit()
+                    self._rate_limit("worldbank")
 
                     # World Bank API endpoint
                     countries_str = ";".join(countries[:10])  # Limit to 10 per request
@@ -362,27 +370,37 @@ class ResearchScraper:
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
 
+    def _scrape_single_keyword(self, keyword):
+        """Helper to scrape a single keyword (runs in thread)."""
+        print(f"\n📚 Suche: {keyword}")
+
+        # Requests are synchronous here, but run in parallel threads
+        arxiv_papers = self.search_arxiv(keyword, max_results=3)
+        pubmed_papers = self.search_pubmed(keyword, max_results=3)
+
+        return keyword, {
+            "arxiv": arxiv_papers,
+            "pubmed": pubmed_papers,
+            "timestamp": datetime.now().isoformat(),
+        }
+
     def scrape_all(self):
         """Sammelt Papers zu allen Keywords + WHO/World Bank Daten"""
         all_research = {}
 
         print("🔍 Starte Research Scraping...")
 
-        # Academic papers
-        for keyword in self.keywords:
-            print(f"\n📚 Suche: {keyword}")
-
-            arxiv_papers = self.search_arxiv(keyword, max_results=3)
-            pubmed_papers = self.search_pubmed(keyword, max_results=3)
-
-            all_research[keyword] = {
-                "arxiv": arxiv_papers,
-                "pubmed": pubmed_papers,
-                "timestamp": datetime.now().isoformat(),
+        # Academic papers - Parallel execution
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            future_to_keyword = {
+                executor.submit(self._scrape_single_keyword, keyword): keyword
+                for keyword in self.keywords
             }
 
-            print(f"  ✅ arXiv: {len(arxiv_papers)} papers")
-            print(f"  ✅ PubMed: {len(pubmed_papers)} papers")
+            for future in as_completed(future_to_keyword):
+                keyword, result = future.result()
+                all_research[keyword] = result
+                print(f"  ✅ {keyword}: {len(result['arxiv'])} arXiv, {len(result['pubmed'])} PubMed")
 
         # WHO Mental Health Data
         # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
@@ -418,5 +436,5 @@ if __name__ == "__main__":
     scraper.save_results(research_data)
 
     # Statistik
-    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values())
+    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values() if "arxiv" in data)
     print(f"\n📊 Total: {total_papers} Papers gefunden")
