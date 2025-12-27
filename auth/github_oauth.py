@@ -148,11 +148,38 @@ class GitHubAuth:
 class SessionManager:
     """Verwaltet anonyme Sessions."""
 
+    MAX_SESSIONS = 1000  # Protection against memory exhaustion (DoS)
+
     def __init__(self):
         self.sessions = {}  # In Produktion: Redis oder Datenbank
 
+    def _cleanup_expired_sessions(self) -> None:
+        """Entfernt abgelaufene Sessions (DoS Protection)."""
+        now = datetime.now()
+        # Create list to avoid runtime error during iteration
+        to_remove = [
+            token
+            for token, data in self.sessions.items()
+            if datetime.fromisoformat(data["expires_at"]) < now
+        ]
+        for token in to_remove:
+            del self.sessions[token]
+
     def create_session(self, session_token: str, expires_at: str) -> None:
         """Erstellt neue Session."""
+        # Sentinel: Prevent memory exhaustion
+        if len(self.sessions) >= self.MAX_SESSIONS:
+            self._cleanup_expired_sessions()
+
+            # If still full, remove oldest session (hard limit enforcement)
+            if len(self.sessions) >= self.MAX_SESSIONS:
+                # Sort by creation time
+                oldest_token = min(
+                    self.sessions.keys(),
+                    key=lambda k: self.sessions[k]["created_at"]
+                )
+                del self.sessions[oldest_token]
+
         self.sessions[session_token] = {
             "expires_at": expires_at,
             "created_at": datetime.now().isoformat(),
