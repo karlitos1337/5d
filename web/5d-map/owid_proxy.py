@@ -7,6 +7,9 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+# Maximum response size (10 MB) to prevent memory exhaustion
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -23,7 +26,13 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Sentinel: Added size limit to prevent DoS
+                    data = resp.read(MAX_RESPONSE_SIZE)
+                    if len(data) == MAX_RESPONSE_SIZE:
+                        # Check if there is more data (indicates truncation)
+                        if resp.read(1):
+                            print(f"Warning: Response truncated at {MAX_RESPONSE_SIZE} bytes")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
@@ -57,8 +66,10 @@ def main():
             port = int(sys.argv[1])
         except ValueError:
             pass
-    server = HTTPServer(("0.0.0.0", port), ProxyHandler)
-    print(f"OWID proxy listening on http://localhost:{port}/proxy/<file>")
+
+    # Sentinel: Changed bind address to localhost (127.0.0.1) to prevent external access
+    server = HTTPServer(("127.0.0.1", port), ProxyHandler)
+    print(f"OWID proxy listening on http://127.0.0.1:{port}/proxy/<file>")
     print("Supported keys:", ", ".join(OWID_URLS.keys()))
     try:
         server.serve_forever()
