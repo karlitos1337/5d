@@ -23,7 +23,18 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Security: Check Content-Length if available
+                    length_header = resp.getheader("Content-Length")
+                    if length_header and int(length_header) > 10 * 1024 * 1024:
+                        self.send_error(413, "Response too large")
+                        return
+
+                    # Security: Read with limit (10MB)
+                    data = resp.read(10 * 1024 * 1024 + 1)
+                    if len(data) > 10 * 1024 * 1024:
+                        self.send_error(413, "Response too large")
+                        return
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
@@ -57,8 +68,9 @@ def main():
             port = int(sys.argv[1])
         except ValueError:
             pass
-    server = HTTPServer(("0.0.0.0", port), ProxyHandler)
-    print(f"OWID proxy listening on http://localhost:{port}/proxy/<file>")
+    # Security: Bind to localhost only
+    server = HTTPServer(("127.0.0.1", port), ProxyHandler)
+    print(f"OWID proxy listening on http://127.0.0.1:{port}/proxy/<file>")
     print("Supported keys:", ", ".join(OWID_URLS.keys()))
     try:
         server.serve_forever()
