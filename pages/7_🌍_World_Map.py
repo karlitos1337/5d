@@ -6,11 +6,18 @@ IMP Proxy, Depression, Dropout Rates, Alternative Schools
 
 import json
 from datetime import datetime
+from pathlib import Path
+import sys
 
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
 from utils.mobile_responsive import inject_mobile_css
+
+# Add parent dir to path for shared utils
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from utils.country_coordinates import COUNTRY_COORDS, COUNTRY_NAMES
 
 st.set_page_config(
     page_title="5D World Map", page_icon="🌍", layout="wide", initial_sidebar_state="expanded"
@@ -120,7 +127,24 @@ def main():
     baseline = load_baseline_data()
     schools = load_schools_data()
 
-    countries = baseline.get("countries", {})
+    # Reconstruct countries dictionary from baseline parts if "countries" key is missing
+    if "countries" in baseline:
+        countries = baseline.get("countries", {})
+    else:
+        # Reconstruct from separate dictionaries (depression, dropout, wgi)
+        countries = {}
+        depression = baseline.get("depression_latest", {})
+        dropout = baseline.get("dropout_latest", {})
+        wgi_rl = baseline.get("wgi_rl", {})
+
+        for code in depression.keys():
+            countries[code] = {
+                "depression": depression.get(code, 0),
+                "dropout": dropout.get(code, 0),
+                "governance": wgi_rl.get(code, 0),
+                # If we have name mapping, use it, otherwise use code
+                "name": COUNTRY_NAMES.get(code, code)
+            }
 
     # Metrics
     col1, col2, col3, col4 = st.columns(4)
@@ -193,23 +217,28 @@ def main():
 
         # Add countries with IMP proxy scores
         if countries:
-            for country_name, data in list(countries.items())[:20]:  # Limit to 20 for performance
-                coords = {
-                    "Denmark": [56.26, 9.50],
-                    "Norway": [60.47, 8.47],
-                    "Finland": [61.92, 25.75],
-                    "Sweden": [60.13, 18.64],
-                    "Germany": [51.17, 10.45],
-                    "USA": [37.09, -95.71],
-                    "Brazil": [-14.24, -51.93],
-                    "India": [20.59, 78.96],
-                    "China": [35.86, 104.20],
-                    "UK": [55.38, -3.44],
-                    "France": [46.23, 2.21],
-                    "Japan": [36.20, 138.25],
-                }.get(country_name)
+            # ⚡ Bolt Optimization: Use centralized coordinates and remove limit
+            # Removed [:20] limit as we now handle data efficiently
+            for country_key, data in countries.items():
+                # Check if key is code (3 letters) or name
+                code = country_key if len(country_key) == 3 else None
+
+                # Try to find coords by code first, then name
+                coords = COUNTRY_COORDS.get(code)
+
+                # If we don't have coords yet and key is a name, try to look it up
+                if not coords and not code:
+                     # Reverse lookup name to code (slow but only if needed)
+                     for c_code, c_name in COUNTRY_NAMES.items():
+                         if c_name == country_key:
+                             coords = COUNTRY_COORDS.get(c_code)
+                             code = c_code
+                             break
 
                 if coords:
+                    # Get display name
+                    display_name = COUNTRY_NAMES.get(code, country_key)
+
                     imp = calculate_imp_proxy(
                         data.get("depression", 0), data.get("dropout", 0), data.get("governance", 0)
                     )
@@ -223,7 +252,7 @@ def main():
                     folium.CircleMarker(
                         location=coords,
                         radius=imp * 20,
-                        popup=f"<b>{country_name}</b><br>IMP: {imp:.2f}<br>Depression: {data.get('depression', 0):.1f}%<br>Dropout: {data.get('dropout', 0):.1f}%",
+                        popup=f"<b>{display_name}</b><br>IMP: {imp:.2f}<br>Depression: {data.get('depression', 0):.1f}%<br>Dropout: {data.get('dropout', 0):.1f}%",
                         color=color,
                         fill=True,
                         fillOpacity=0.6,
