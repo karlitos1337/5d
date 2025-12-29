@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "dimension": "Autonomy",
+    "question": "I feel free to make my own choices in my daily work.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 2,
+    "dimension": "Autonomy",
+    "question": "I have a sense of control over my actions and decisions.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 3,
+    "dimension": "Autonomy",
+    "question": "My decisions reflect my true interests and values.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 4,
+    "dimension": "Autonomy",
+    "question": "I can openly express my opinions without fear of retribution.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 5,
+    "dimension": "Autonomy",
+    "question": "I feel my voice is heard and counts in my environment.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 6,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I engage in activities because I find them interesting and enjoyable.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 7,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I am driven by personal growth rather than external rewards.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 8,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I lose track of time when I am working on my projects.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 9,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I seek out challenges that help me learn new things.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 10,
+    "dimension": "Intrinsic_Motivation",
+    "question": "The satisfaction of doing good work is my primary reward.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 11,
+    "dimension": "Resilience",
+    "question": "I recover quickly from setbacks and difficulties.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 12,
+    "dimension": "Resilience",
+    "question": "I can manage my stress levels effectively under pressure.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 13,
+    "dimension": "Resilience",
+    "question": "Failures are learning opportunities for me, not roadblocks.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 14,
+    "dimension": "Resilience",
+    "question": "I maintain a positive outlook even when things go wrong.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 15,
+    "dimension": "Resilience",
+    "question": "I adapt easily to changing circumstances and unexpected events.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 16,
+    "dimension": "Social_Participation",
+    "question": "I feel connected to the people I work and interact with.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 17,
+    "dimension": "Social_Participation",
+    "question": "I actively contribute to the goals of my community or team.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 18,
+    "dimension": "Social_Participation",
+    "question": "I have a strong support network I can rely on.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 19,
+    "dimension": "Social_Participation",
+    "question": "Collaborating with others enhances my own performance.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 20,
+    "dimension": "Social_Participation",
+    "question": "I feel a sense of belonging in my social and professional circles.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 21,
+    "dimension": "Authenticity",
+    "question": "I act in a way that is consistent with my core values.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 22,
+    "dimension": "Authenticity",
+    "question": "I feel I can be my true self in my professional environment.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 23,
+    "dimension": "Authenticity",
+    "question": "I do not feel the need to hide parts of my personality.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 24,
+    "dimension": "Authenticity",
+    "question": "My external actions match my internal feelings.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  },
+  {
+    "id": 25,
+    "dimension": "Authenticity",
+    "question": "I am honest with myself and others about my strengths and weaknesses.",
+    "scale": "0 (strongly disagree) - 5 (strongly agree)"
+  }
+]
