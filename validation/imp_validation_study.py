@@ -20,7 +20,7 @@ from scipy.stats import gmean
 
 # Fragebogen-Definitionen (abgestimmt auf Preprint v1.1)
 QUESTIONS = {
-    "Cognitive_Efficiency": [
+    "Autonomy": [
         "Ich kann komplexe Probleme in kleinere, lösbare Teile zerlegen.",
         "Neue Konzepte verstehe ich schnell und gründlich.",
         "Ich erkenne Muster und Zusammenhänge in unterschiedlichen Kontexten.",
@@ -48,7 +48,7 @@ QUESTIONS = {
         "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
         "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
     ],
-    "Environment_Optimization": [
+    "Authenticity": [
         "Ich gestalte meine Arbeitsumgebung gezielt für optimale Konzentration.",
         "Ich erkenne, wann meine Umgebung meine Leistung beeinträchtigt.",
         "Ich weiß, welche Bedingungen ich für Flow-Zustände brauche.",

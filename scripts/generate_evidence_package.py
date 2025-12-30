@@ -85,6 +85,10 @@ def main():
         else:
             print("⚠️  5d_research_data.json not found.")
 
+        # Copy Scraper Script
+        shutil.copy("5d_research_scraper.py", package_dir / "5d_research_scraper.py")
+        print(f"  -> Copied Scraper Script: 5d_research_scraper.py")
+
     except subprocess.CalledProcessError as e:
         print("❌ Error during Research Scraper:")
         print(e.stderr)
@@ -118,7 +122,7 @@ Based on the zero-impact principle, any dimension < 0.7 requires immediate inter
 Refer to `validation_results_*.png` for visual distribution.
 
 [PUSH TO DOWNLOAD]
-- Analysis Script: validation/imp_validation_study.py
+- Analysis Script: imp_validation_study.py
 - Metric Mapping: METRIC_MAPPING.md
 - Visualization: validation_results_*.png
     """
@@ -137,7 +141,7 @@ Generated: {timestamp}
 - **Documentation**: Interpretation and Metric Mapping
 
 ## Protocol
-- **Validation Script**: `validation/imp_validation_study.py`
+- **Validation Script**: `imp_validation_study.py`
 - **Scraper**: `5d_research_scraper.py`
     """
     with open(package_dir / "MANIFEST.md", "w") as f:

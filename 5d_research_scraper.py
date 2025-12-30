@@ -50,6 +50,8 @@ class ResearchScraper:
         # World Bank API settings
         self.wb_base_url = "https://api.worldbank.org/v2"
 
+    # Ensure this file is tracked by git
+
     def _validate_country_code(self, code):
         """Validates that the country code is a 3-letter uppercase ISO3 string."""
         if not isinstance(code, str):
