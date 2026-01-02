@@ -11,6 +11,19 @@ let infoEl, infoTextEl;
 let validationFilter = 'all';
 let validationCountEl;
 
+// Utility: Debounce function to limit high-frequency events
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
   const msgEl = document.querySelector('.loading-spinner p');
@@ -131,16 +144,25 @@ async function init() {
   document.getElementById('layer-time')?.addEventListener('click', () => activateLayer('time'));
 
   const yearSlider = document.getElementById('year-slider');
-  yearSlider?.addEventListener('input', (e) => {
-    selectedYear = Number(e.target.value);
-    const label = document.getElementById('year-label');
-    if (label) label.textContent = String(selectedYear);
-    if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
-      if (activeLayer) removeLayer(map, activeLayer);
-      activeLayer = createTimeHeatmapLayer(cachedData, selectedYear);
-      if (activeLayer) addLayer(map, activeLayer);
-    }
-  });
+  if (yearSlider) {
+    // Optimization: Debounce the expensive map layer update
+    // Update label immediately for responsiveness, delay map render
+    const debouncedMapUpdate = debounce((year) => {
+      if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
+        if (activeLayer) removeLayer(map, activeLayer);
+        activeLayer = createTimeHeatmapLayer(cachedData, year);
+        if (activeLayer) addLayer(map, activeLayer);
+      }
+    }, 150); // 150ms debounce
+
+    yearSlider.addEventListener('input', (e) => {
+      selectedYear = Number(e.target.value);
+      const label = document.getElementById('year-label');
+      if (label) label.textContent = String(selectedYear);
+
+      debouncedMapUpdate(selectedYear);
+    });
+  }
 
   // Auto-Refresh jede Stunde
   setInterval(refreshData, 3600000);
