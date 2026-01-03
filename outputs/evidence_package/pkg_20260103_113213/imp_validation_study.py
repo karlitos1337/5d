@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-5D-Intelligence Framework - IMP Validation Study
+5D-Competence Framework - IMP Validation Study
 ==============================================
-Academic Validation Study for the 5D-Intelligence Framework
-Based on the Analysis from 04.12.2025
+Akademische Validierungsstudie für das 5D-Framework
+Basierend auf der Analyse vom 04.12.2025
 
-Autor: Professor Dr. A. I. Nexus
+Autor: karlitos1337
 Ziel: Empirische Validierung der 5 Dimensionen (Pilotstudie, N=30)
 """
 
@@ -20,12 +20,12 @@ from scipy.stats import gmean
 
 # Fragebogen-Definitionen (abgestimmt auf Preprint v1.1)
 QUESTIONS = {
-    "Autonomy": [
-        "Ich fühle mich frei in meinen Entscheidungen.",
-        "Ich kann meine Aufgaben selbstbestimmt organisieren.",
-        "Meine Meinung wird gehört und respektiert.",
-        "Ich habe Kontrolle über meine Arbeitsweise.",
-        "Ich handle in Übereinstimmung mit meinen eigenen Werten.",
+    "Cognitive_Efficiency": [
+        "Ich kann komplexe Probleme in kleinere, lösbare Teile zerlegen.",
+        "Neue Konzepte verstehe ich schnell und gründlich.",
+        "Ich erkenne Muster und Zusammenhänge in unterschiedlichen Kontexten.",
+        "Abstrakte Ideen kann ich gut erfassen und anwenden.",
+        "Ich finde kreative Lösungen für unbekannte Probleme.",
     ],
     "Intrinsic_Motivation": [
         "Ich arbeite an Aufgaben, weil sie mich wirklich interessieren.",
@@ -34,13 +34,6 @@ QUESTIONS = {
         "Auch bei Schwierigkeiten bleibe ich bei meinen Projekten.",
         "Lernen und Weiterentwicklung sind mir wichtiger als Noten oder Anerkennung.",
     ],
-    "Resilience": [
-        "Nach Rückschlägen finde ich schnell zu meiner Leistungsfähigkeit zurück.",
-        "Ich kann meine Emotionen auch in schwierigen Situationen regulieren.",
-        "Stress beeinflusst meine Leistung nur vorübergehend.",
-        "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
-        "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
-    ],
     "Social_Participation": [
         "In Gruppenprojekten trage ich aktiv zur Lösung bei.",
         "Ich kann meine Ideen klar und überzeugend kommunizieren.",
@@ -48,12 +41,19 @@ QUESTIONS = {
         "Zusammenarbeit mit anderen bereichert meine Arbeit.",
         "Ich kann mich gut in die Perspektiven anderer hineinversetzen.",
     ],
-    "Authenticity": [
-        "Ich zeige mein wahres Ich, auch wenn es schwierig ist.",
-        "Mein Handeln stimmt mit meinen Gefühlen überein.",
-        "Ich verstelle mich nicht, um anderen zu gefallen.",
-        "Ich bin ehrlich zu mir selbst und anderen.",
-        "Ich akzeptiere meine Stärken und Schwächen.",
+    "Resilience": [
+        "Nach Rückschlägen finde ich schnell zu meiner Leistungsfähigkeit zurück.",
+        "Ich kann meine Emotionen auch in schwierigen Situationen regulieren.",
+        "Stress beeinflusst meine Leistung nur vorübergehend.",
+        "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
+        "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
+    ],
+    "Environment_Optimization": [
+        "Ich gestalte meine Arbeitsumgebung gezielt für optimale Konzentration.",
+        "Ich erkenne, wann meine Umgebung meine Leistung beeinträchtigt.",
+        "Ich weiß, welche Bedingungen ich für Flow-Zustände brauche.",
+        "Ich passe meine Arbeitsweise flexibel an unterschiedliche Kontexte an.",
+        "Ich suche aktiv nach Umgebungen, die meine Stärken fördern.",
     ],
 }
 
@@ -176,7 +176,7 @@ class IMPValidationStudy:
 
         score_values = list(scores.values())
 
-        # Geometrisches Mittel Modell: IMP = (A * I * R * S * Au)^(1/5)
+        # Geometrisches Mittel Modell: IMP = (C * M * S * R * E)^(1/5)
         # Wir verwenden gmean aus scipy
         imp_geometric = gmean(score_values)
 
@@ -307,7 +307,7 @@ class IMPValidationStudy:
 
 # MAIN EXECUTION
 def main():
-    print("⚡ 5D-INTELLIGENCE VALIDIERUNGSSTUDIE (PILOT) GESTARTET \u26a1")
+    print("⚡ 5D-COMPETENCE VALIDIERUNGSSTUDIE (PILOT) GESTARTET \u26a1")
     print("=" * 50)
 
     study = IMPValidationStudy()
