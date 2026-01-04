@@ -176,7 +176,7 @@ class IMPValidationStudy:
 
         score_values = list(scores.values())
 
-        # Geometrisches Mittel Modell: IMP = (A * I * R * S * A)^(1/5)
+        # Geometrisches Mittel Modell: IMP = (C * M * S * R * E)^(1/5)
         # Wir verwenden gmean aus scipy
         imp_geometric = gmean(score_values)
 
