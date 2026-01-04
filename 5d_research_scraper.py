@@ -214,8 +214,9 @@ class ResearchScraper:
 
         mental_health_data = {}
 
-        for indicator_code, indicator_name in indicators.items():
+        def fetch_who_indicator(indicator_code, indicator_name):
             print(f"  🏥 WHO: Fetching {indicator_name}...")
+            results = []
 
             for attempt in range(self.max_retries):
                 try:
@@ -250,15 +251,9 @@ class ResearchScraper:
                             year = entry.get("TimeDim")
 
                             if country and value is not None:
-                                if country not in mental_health_data:
-                                    mental_health_data[country] = {}
+                                results.append((country, indicator_name, value, year))
 
-                                mental_health_data[country][indicator_name] = {
-                                    "value": value,
-                                    "year": year
-                                }
-
-                    break  # Success
+                    return results  # Success
 
                 except requests.exceptions.RequestException as e:
                     if attempt < self.max_retries - 1:
@@ -270,6 +265,25 @@ class ResearchScraper:
                 except Exception as e:
                     print(f"    ❌ WHO Error: {e}")
                     break
+            return []
+
+        # Parallelize fetching of indicators
+        with ThreadPoolExecutor(max_workers=len(indicators)) as executor:
+            future_to_indicator = {
+                executor.submit(fetch_who_indicator, code, name): name
+                for code, name in indicators.items()
+            }
+
+            for future in as_completed(future_to_indicator):
+                results = future.result()
+                for country, indicator_name, value, year in results:
+                    if country not in mental_health_data:
+                        mental_health_data[country] = {}
+
+                    mental_health_data[country][indicator_name] = {
+                        "value": value,
+                        "year": year
+                    }
 
         print(f"  ✅ WHO: {len(mental_health_data)} countries fetched")
         return mental_health_data
@@ -309,8 +323,9 @@ class ResearchScraper:
 
         education_data = {}
 
-        for indicator_code, indicator_name in indicators.items():
+        def fetch_indicator(indicator_code, indicator_name):
             print(f"  🏫 World Bank: Fetching {indicator_name}...")
+            results = []
 
             for attempt in range(self.max_retries):
                 try:
@@ -344,17 +359,9 @@ class ResearchScraper:
                             year = entry.get("date")
 
                             if country_code and value is not None:
-                                if country_code not in education_data:
-                                    education_data[country_code] = {}
+                                results.append((country_code, indicator_name, value, year))
 
-                                # Keep most recent data
-                                if indicator_name not in education_data[country_code]:
-                                    education_data[country_code][indicator_name] = {
-                                        "value": value,
-                                        "year": year
-                                    }
-
-                    break  # Success
+                    return results  # Success
 
                 except requests.exceptions.RequestException as e:
                     if attempt < self.max_retries - 1:
@@ -366,6 +373,27 @@ class ResearchScraper:
                 except Exception as e:
                     print(f"    ❌ World Bank Error: {e}")
                     break
+            return []
+
+        # Parallelize fetching of indicators
+        with ThreadPoolExecutor(max_workers=len(indicators)) as executor:
+            future_to_indicator = {
+                executor.submit(fetch_indicator, code, name): name
+                for code, name in indicators.items()
+            }
+
+            for future in as_completed(future_to_indicator):
+                results = future.result()
+                for country_code, indicator_name, value, year in results:
+                    if country_code not in education_data:
+                        education_data[country_code] = {}
+
+                    # Keep most recent data (first one encountered from API usually)
+                    if indicator_name not in education_data[country_code]:
+                        education_data[country_code][indicator_name] = {
+                            "value": value,
+                            "year": year
+                        }
 
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
