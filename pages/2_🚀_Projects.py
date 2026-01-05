@@ -426,7 +426,7 @@ def main():
 
                     with col_b:
                         imp = solution.get("imp_score", 0)
-                        st.metric("IMP Score", f"{imp:.3f}")
+                        st.metric("IMP Score", f"{imp:.3f}", help="Based on 5 dimensions (A, IM, R, SP, Au)")
 
                         # Source
                         source_file = solution.get("source_file", "")

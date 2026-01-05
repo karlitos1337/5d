@@ -262,7 +262,7 @@ def main():
                 col_a, col_b = st.columns([1, 2])
 
                 with col_a:
-                    st.metric("Score", f"{dim_data['value']:.2f}")
+                    st.metric("Score", f"{dim_data['value']:.2f}", help=dim_data["description"])
                     st.progress(dim_data["value"])
 
                 with col_b:
