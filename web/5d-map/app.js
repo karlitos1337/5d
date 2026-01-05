@@ -1,6 +1,7 @@
 import { fetchAllData, clearCache } from './modules/api-fetcher.js';
 import { initMap, addLayer, removeLayer } from './modules/map-renderer.js';
 import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer, createValidationRingLayer, createSourcesLayer, createValidationLegendControl } from './modules/layers.js';
+import { debounce } from './modules/utils.js';
 
 let map;
 let activeLayer = null;
@@ -131,15 +132,20 @@ async function init() {
   document.getElementById('layer-time')?.addEventListener('click', () => activateLayer('time'));
 
   const yearSlider = document.getElementById('year-slider');
+
+  const updateMapDebounced = debounce((year) => {
+    if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
+      if (activeLayer) removeLayer(map, activeLayer);
+      activeLayer = createTimeHeatmapLayer(cachedData, year);
+      if (activeLayer) addLayer(map, activeLayer);
+    }
+  }, 150);
+
   yearSlider?.addEventListener('input', (e) => {
     selectedYear = Number(e.target.value);
     const label = document.getElementById('year-label');
     if (label) label.textContent = String(selectedYear);
-    if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
-      if (activeLayer) removeLayer(map, activeLayer);
-      activeLayer = createTimeHeatmapLayer(cachedData, selectedYear);
-      if (activeLayer) addLayer(map, activeLayer);
-    }
+    updateMapDebounced(selectedYear);
   });
 
   // Auto-Refresh jede Stunde
