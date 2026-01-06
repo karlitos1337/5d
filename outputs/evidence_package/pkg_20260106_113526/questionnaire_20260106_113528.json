@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "dimension": "Autonomy",
+    "question": "Ich treffe wichtige Entscheidungen in meinem Leben selbstbestimmt.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 2,
+    "dimension": "Autonomy",
+    "question": "Ich fühle mich frei, meine Meinung zu äußern, auch wenn sie von der Mehrheit abweicht.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 3,
+    "dimension": "Autonomy",
+    "question": "Ich habe Kontrolle über die wichtigsten Aspekte meines Alltags.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 4,
+    "dimension": "Autonomy",
+    "question": "Ich handele in Übereinstimmung mit meinen eigenen Werten und Überzeugungen.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 5,
+    "dimension": "Autonomy",
+    "question": "Ich lasse mich nicht von externem Druck zu Dingen zwingen, die ich nicht will.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 6,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Ich arbeite an Aufgaben, weil sie mich wirklich interessieren.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 7,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Herausforderungen motivieren mich, auch ohne äußere Belohnung.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 8,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Ich setze mir eigenständig anspruchsvolle Ziele.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 9,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Auch bei Schwierigkeiten bleibe ich bei meinen Projekten.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 10,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Lernen und Weiterentwicklung sind mir wichtiger als Noten oder Anerkennung.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 11,
+    "dimension": "Resilience",
+    "question": "Nach Rückschlägen finde ich schnell zu meiner Leistungsfähigkeit zurück.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 12,
+    "dimension": "Resilience",
+    "question": "Ich kann meine Emotionen auch in schwierigen Situationen regulieren.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 13,
+    "dimension": "Resilience",
+    "question": "Stress beeinflusst meine Leistung nur vorübergehend.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 14,
+    "dimension": "Resilience",
+    "question": "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 15,
+    "dimension": "Resilience",
+    "question": "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 16,
+    "dimension": "Social_Participation",
+    "question": "In Gruppenprojekten trage ich aktiv zur Lösung bei.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 17,
+    "dimension": "Social_Participation",
+    "question": "Ich kann meine Ideen klar und überzeugend kommunizieren.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 18,
+    "dimension": "Social_Participation",
+    "question": "Ich höre anderen aufmerksam zu und baue auf ihren Ideen auf.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 19,
+    "dimension": "Social_Participation",
+    "question": "Zusammenarbeit mit anderen bereichert meine Arbeit.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 20,
+    "dimension": "Social_Participation",
+    "question": "Ich kann mich gut in die Perspektiven anderer hineinversetzen.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 21,
+    "dimension": "Authenticity",
+    "question": "Ich zeige mich anderen gegenüber so, wie ich wirklich bin.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 22,
+    "dimension": "Authenticity",
+    "question": "Ich verstelle mich nicht, um anderen zu gefallen.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 23,
+    "dimension": "Authenticity",
+    "question": "Mein äußeres Verhalten stimmt mit meinen inneren Gefühlen überein.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 24,
+    "dimension": "Authenticity",
+    "question": "Ich stehe zu meinen Stärken und Schwächen.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 25,
+    "dimension": "Authenticity",
+    "question": "Ich fühle mich wohl in meiner Haut und akzeptiere mich selbst.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  }
+]
