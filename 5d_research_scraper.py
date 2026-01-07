@@ -274,9 +274,62 @@ class ResearchScraper:
         print(f"  ✅ WHO: {len(mental_health_data)} countries fetched")
         return mental_health_data
 
+    def _fetch_wb_indicator(self, indicator_code, indicator_name, countries):
+        """Helper to fetch a single World Bank indicator with batching and retries."""
+        results = []
+        # World Bank API often limits URL length/countries per request. Batching by 10 is safe.
+        batch_size = 10
+
+        print(f"  🏫 World Bank: Fetching {indicator_name}...")
+
+        for i in range(0, len(countries), batch_size):
+            batch = countries[i:i + batch_size]
+            countries_str = ";".join(batch)
+            url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+            params = {
+                "format": "json",
+                "date": "2020:2023",  # Recent years
+                "per_page": 500
+            }
+
+            for attempt in range(self.max_retries):
+                try:
+                    self._rate_limit("worldbank")
+                    response = requests.get(url, params=params, timeout=15)
+
+                    if response.status_code == 429:
+                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                        if attempt > 0:
+                            print(f"    ⏳ World Bank rate limit ({indicator_name}), waiting {wait_time:.1f}s...")
+                        time.sleep(wait_time)
+                        continue
+
+                    response.raise_for_status()
+                    data = response.json()
+
+                    if isinstance(data, list) and len(data) > 1:
+                        for entry in data[1]:
+                            if entry:
+                                country_code = entry.get("countryiso3code")
+                                value = entry.get("value")
+                                year = entry.get("date")
+                                if country_code and value is not None:
+                                    results.append((country_code, value, year))
+                    break  # Success for this batch
+
+                except Exception as e:
+                    if attempt == self.max_retries - 1:
+                        print(f"    ❌ World Bank Error ({indicator_name}): {e}")
+                    else:
+                        # Simple backoff for errors
+                        time.sleep(self.rate_limit_delay)
+
+        return indicator_name, results
+
     def fetch_world_bank_education_data(self, countries=None):
         """
         Fetch education indicators from World Bank EdStats API.
+        Uses parallel execution for indicators to improve performance.
 
         Args:
             countries: List of ISO3 country codes (default: top 20 countries)
@@ -309,63 +362,22 @@ class ResearchScraper:
 
         education_data = {}
 
-        for indicator_code, indicator_name in indicators.items():
-            print(f"  🏫 World Bank: Fetching {indicator_name}...")
+        # Parallel execution: 1 thread per indicator
+        # This reduces total time from (N_indicators * Latency) to (Max_Latency)
+        with ThreadPoolExecutor(max_workers=len(indicators)) as executor:
+            future_to_ind = {
+                executor.submit(self._fetch_wb_indicator, code, name, countries): name
+                for code, name in indicators.items()
+            }
 
-            for attempt in range(self.max_retries):
-                try:
-                    self._rate_limit("worldbank")
-
-                    # World Bank API endpoint
-                    countries_str = ";".join(countries[:10])  # Limit to 10 per request
-                    url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
-                    params = {
-                        "format": "json",
-                        "date": "2020:2023",  # Recent years
-                        "per_page": 500
-                    }
-
-                    response = requests.get(url, params=params, timeout=15)
-
-                    if response.status_code == 429:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
-                        time.sleep(wait_time)
-                        continue
-
-                    response.raise_for_status()
-                    data = response.json()
-
-                    # Parse World Bank response
-                    if isinstance(data, list) and len(data) > 1:
-                        for entry in data[1]:  # Data is in second element
-                            country_code = entry.get("countryiso3code")
-                            value = entry.get("value")
-                            year = entry.get("date")
-
-                            if country_code and value is not None:
-                                if country_code not in education_data:
-                                    education_data[country_code] = {}
-
-                                # Keep most recent data
-                                if indicator_name not in education_data[country_code]:
-                                    education_data[country_code][indicator_name] = {
-                                        "value": value,
-                                        "year": year
-                                    }
-
-                    break  # Success
-
-                except requests.exceptions.RequestException as e:
-                    if attempt < self.max_retries - 1:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
-                        time.sleep(wait_time)
-                    else:
-                        print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
-                except Exception as e:
-                    print(f"    ❌ World Bank Error: {e}")
-                    break
+            for future in as_completed(future_to_ind):
+                ind_name, results = future.result()
+                for country, value, year in results:
+                    if country not in education_data:
+                        education_data[country] = {}
+                    # Thread-safe merge (main thread)
+                    if ind_name not in education_data[country]:
+                        education_data[country][ind_name] = {"value": value, "year": year}
 
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
