@@ -39,16 +39,18 @@ const App = () => {
 
       if (!el.textContent?.trim()) return;
 
-      const btn = document.createElement('sup');
+      const btn = document.createElement('button');
       btn.textContent = String(indexNum);
+      btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
+      btn.setAttribute('title', `Quelle ${indexNum} öffnen: ${url}`);
 
       Object.assign(btn.style, {
-        fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
+        fontSize: '9px', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
         backgroundColor: '#0284c7', borderRadius: '50%', transition: 'all .2s',
         userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '2px',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
-        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
+        lineHeight: '1', verticalAlign: 'super', padding: '0', border: 'none'
       });
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
@@ -125,6 +127,7 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -134,6 +137,7 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
