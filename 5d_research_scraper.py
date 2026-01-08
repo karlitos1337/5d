@@ -309,14 +309,17 @@ class ResearchScraper:
 
         education_data = {}
 
-        for indicator_code, indicator_name in indicators.items():
+        def fetch_single_indicator(indicator_code, indicator_name):
+            """Helper to fetch a single indicator."""
             print(f"  🏫 World Bank: Fetching {indicator_name}...")
+            results = []
 
             for attempt in range(self.max_retries):
                 try:
                     self._rate_limit("worldbank")
 
                     # World Bank API endpoint
+                    # TODO: Batch this properly if len(countries) > 10
                     countries_str = ";".join(countries[:10])  # Limit to 10 per request
                     url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
                     params = {
@@ -344,17 +347,9 @@ class ResearchScraper:
                             year = entry.get("date")
 
                             if country_code and value is not None:
-                                if country_code not in education_data:
-                                    education_data[country_code] = {}
+                                results.append((country_code, indicator_name, value, year))
 
-                                # Keep most recent data
-                                if indicator_name not in education_data[country_code]:
-                                    education_data[country_code][indicator_name] = {
-                                        "value": value,
-                                        "year": year
-                                    }
-
-                    break  # Success
+                    return results
 
                 except requests.exceptions.RequestException as e:
                     if attempt < self.max_retries - 1:
@@ -366,6 +361,27 @@ class ResearchScraper:
                 except Exception as e:
                     print(f"    ❌ World Bank Error: {e}")
                     break
+            return results
+
+        # Parallelize fetching indicators
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            future_to_indicator = {
+                executor.submit(fetch_single_indicator, code, name): name
+                for code, name in indicators.items()
+            }
+
+            for future in as_completed(future_to_indicator):
+                results = future.result()
+                for country_code, indicator_name, value, year in results:
+                    if country_code not in education_data:
+                        education_data[country_code] = {}
+
+                    # Keep most recent data (or last fetched if multiple years returned, though API sort order matters)
+                    if indicator_name not in education_data[country_code]:
+                         education_data[country_code][indicator_name] = {
+                            "value": value,
+                            "year": year
+                        }
 
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
