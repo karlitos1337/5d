@@ -148,11 +148,26 @@ class GitHubAuth:
 class SessionManager:
     """Verwaltet anonyme Sessions."""
 
+    MAX_SESSIONS = 1000  # Sentinel: DoS Protection
+
     def __init__(self):
         self.sessions = {}  # In Produktion: Redis oder Datenbank
 
     def create_session(self, session_token: str, expires_at: str) -> None:
         """Erstellt neue Session."""
+        # Sentinel: Prevent memory exhaustion (DoS)
+        if len(self.sessions) >= self.MAX_SESSIONS:
+            # Evict oldest session
+            # Note: For larger scale, use Redis with TTL or LRU cache
+            try:
+                oldest_token = min(
+                    self.sessions.keys(),
+                    key=lambda k: self.sessions[k]["created_at"]
+                )
+                del self.sessions[oldest_token]
+            except ValueError:
+                pass  # Should not happen if len > 0
+
         self.sessions[session_token] = {
             "expires_at": expires_at,
             "created_at": datetime.now().isoformat(),
