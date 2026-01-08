@@ -39,17 +39,30 @@ const App = () => {
 
       if (!el.textContent?.trim()) return;
 
-      const btn = document.createElement('sup');
+      // 🎨 Palette: Accessibility improvement - Use <button> instead of <sup> for keyboard access
+      const btn = document.createElement('button');
       btn.textContent = String(indexNum);
+      btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
+      btn.setAttribute('type', 'button');
 
       Object.assign(btn.style, {
-        fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
+        fontSize: '10px', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
         backgroundColor: '#0284c7', borderRadius: '50%', transition: 'all .2s',
-        userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '2px',
+        userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '3px',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
-        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
+        lineHeight: '1', verticalAlign: 'super', padding: '0',
+        border: 'none', appearance: 'none', textDecoration: 'none'
       });
+
+      // 🎨 Palette: Add focus styles for keyboard navigation
+      btn.onfocus = () => {
+        btn.style.outline = '2px solid #38bdf8';
+        btn.style.outlineOffset = '2px';
+      };
+      btn.onblur = () => {
+        btn.style.outline = 'none';
+      };
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
@@ -89,6 +102,14 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      {/* 🎨 Palette: Skip to content link for accessibility */}
+      <a
+        href="#einleitung"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg focus:font-medium focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Zum Hauptinhalt springen
+      </a>
+
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
