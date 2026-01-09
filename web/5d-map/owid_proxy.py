@@ -7,6 +7,10 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+# Sentinel: Enforce maximum response size to prevent memory exhaustion (DoS)
+# 10MB limit
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -23,7 +27,22 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Check Content-Length if available
+                    content_length = resp.getheader("Content-Length")
+                    if content_length and int(content_length) > MAX_RESPONSE_SIZE:
+                         raise ValueError(f"Response too large ({content_length} bytes)")
+
+                    # Read in chunks to enforce limit
+                    data = b""
+                    chunk_size = 8192
+                    while True:
+                        chunk = resp.read(chunk_size)
+                        if not chunk:
+                            break
+                        data += chunk
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response limit exceeded")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
