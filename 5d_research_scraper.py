@@ -374,9 +374,17 @@ class ResearchScraper:
         """Helper to scrape a single keyword (runs in thread)."""
         print(f"\n📚 Suche: {keyword}")
 
-        # Requests are synchronous here, but run in parallel threads
-        arxiv_papers = self.search_arxiv(keyword, max_results=3)
-        pubmed_papers = self.search_pubmed(keyword, max_results=3)
+        # Bolt Optimization: Parallelize ArXiv and PubMed searches
+        # Since these are independent I/O bound operations, running them in parallel
+        # significantly reduces the total latency for each keyword.
+        # We use a small local executor to run these two tasks concurrently.
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            future_arxiv = executor.submit(self.search_arxiv, keyword, max_results=3)
+            future_pubmed = executor.submit(self.search_pubmed, keyword, max_results=3)
+
+            # Wait for both to complete
+            arxiv_papers = future_arxiv.result()
+            pubmed_papers = future_pubmed.result()
 
         return keyword, {
             "arxiv": arxiv_papers,
