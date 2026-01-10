@@ -7,6 +7,9 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+# Sentinel: Enforce max response size to prevent DoS
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -23,7 +26,21 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Check content length if available
+                    content_length = resp.getheader("Content-Length")
+                    if content_length and int(content_length) > MAX_RESPONSE_SIZE:
+                        raise ValueError(f"Content-Length exceeds {MAX_RESPONSE_SIZE} bytes")
+
+                    # Read in chunks
+                    data = b""
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        data += chunk
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError(f"Response size exceeds {MAX_RESPONSE_SIZE} bytes limit")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
@@ -32,7 +49,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Log to console for debugging
+                print(f"Proxy error: {e}")
+                msg = f"Fetch error: {str(e)}".encode()
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
