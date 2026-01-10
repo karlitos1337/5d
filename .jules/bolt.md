@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-05-23 - React Scroll Performance
+**Learning:** Attaching `scroll` event listeners to `window` that query DOM layout properties (like `offsetTop`) inside a loop causes synchronous layout thrashing and high main-thread usage.
+**Action:** Replace scroll listeners for visibility detection with `IntersectionObserver`. It offloads the work to the browser engine and avoids synchronous layout re-calculations on every frame.
