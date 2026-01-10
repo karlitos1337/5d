@@ -318,22 +318,34 @@ def main():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric("Total Projects", len(solutions))
+        st.metric(
+            "Total Projects",
+            len(solutions),
+            help="Number of documented alternative education projects",
+        )
 
     with col2:
         # Calculate average IMP
         if solutions:
             avg_imp = sum(s.get("imp_score", 0) for s in solutions) / len(solutions)
-            st.metric("Avg IMP Score", f"{avg_imp:.3f}")
+            st.metric(
+                "Avg IMP Score",
+                f"{avg_imp:.3f}",
+                help="Average Intrinsic Motivation Potential Score (0-1)",
+            )
         else:
-            st.metric("Avg IMP Score", "N/A")
+            st.metric(
+                "Avg IMP Score",
+                "N/A",
+                help="Average Intrinsic Motivation Potential Score (0-1)",
+            )
 
     with col3:
         # Count countries
         countries = set(
             s.get("location", "").split(",")[-1].strip() for s in solutions if s.get("location")
         )
-        st.metric("Countries", len(countries))
+        st.metric("Countries", len(countries), help="Number of represented countries")
 
     with col4:
         st.metric("Data Quality", "High", help="Peer-reviewed sources")
