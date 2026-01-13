@@ -308,6 +308,7 @@ def main():
                 "BibTeX References",
                 "# Add to 5d-relevant-sources.bib",
                 file_name="projects_sources.bib",
+                help="Download citation data for these studies",
             )
 
     # Load data
@@ -318,22 +319,22 @@ def main():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric("Total Projects", len(solutions))
+        st.metric("Total Projects", len(solutions), help="Number of alternative education initiatives in the database")
 
     with col2:
         # Calculate average IMP
         if solutions:
             avg_imp = sum(s.get("imp_score", 0) for s in solutions) / len(solutions)
-            st.metric("Avg IMP Score", f"{avg_imp:.3f}")
+            st.metric("Avg IMP Score", f"{avg_imp:.3f}", help="Average Intrinsic Motivation Potential (0-1) across all projects")
         else:
-            st.metric("Avg IMP Score", "N/A")
+            st.metric("Avg IMP Score", "N/A", help="Average Intrinsic Motivation Potential (0-1) across all projects")
 
     with col3:
         # Count countries
         countries = set(
             s.get("location", "").split(",")[-1].strip() for s in solutions if s.get("location")
         )
-        st.metric("Countries", len(countries))
+        st.metric("Countries", len(countries), help="Number of distinct countries represented")
 
     with col4:
         st.metric("Data Quality", "High", help="Peer-reviewed sources")
@@ -494,9 +495,9 @@ def main():
 
         col_a, col_b = st.columns(2)
         with col_a:
-            st.metric("Present Value", f"${pv:,.0f}")
+            st.metric("Present Value", f"${pv:,.0f}", help="Total discounted value of future benefits in today's dollars")
         with col_b:
-            st.metric("ROI", f"{roi:.1f}%")
+            st.metric("ROI", f"{roi:.1f}%", help="Return on Investment: Percentage return on original cost")
 
         st.info(
             f"💡 Based on Heckman (2006): {benefit_multiplier}× multiplier for quality education"
