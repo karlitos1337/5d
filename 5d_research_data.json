@@ -1,209 +1,4 @@
 {
-  "self-directed learning": {
-    "arxiv": [
-      {
-        "title": "Active learning for data streams: a survey",
-        "authors": [
-          "\nDavide Cacciarelli\n",
-          "\nMurat Kulahci\n"
-        ],
-        "summary": "Online active learning is a paradigm in machine learning that aims to select the most informative data points to label from a data stream. The problem of minimizing the cost associated with collecting",
-        "published": "2023-02-17T14:24:13Z",
-        "link": "http://arxiv.org/abs/2302.08893v4"
-      },
-      {
-        "title": "On the Similarities of Embeddings in Contrastive Learning",
-        "authors": [
-          "\nChungpa Lee\n",
-          "\nSehee Lim\n",
-          "\nKibok Lee\n",
-          "\nJy-yong Sohn\n"
-        ],
-        "summary": "Contrastive learning operates on a simple yet effective principle: Embeddings of positive pairs are pulled together, while those of negative pairs are pushed apart. In this paper, we propose a unified",
-        "published": "2025-06-11T14:21:05Z",
-        "link": "http://arxiv.org/abs/2506.09781v2"
-      },
-      {
-        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
-        "authors": [
-          "\nHarkirat Singh Behl\n",
-          "\nAtılım Güneş Baydin\n",
-          "\nPhilip H. S. Torr\n"
-        ],
-        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
-        "published": "2019-05-17T18:45:25Z",
-        "link": "http://arxiv.org/abs/1905.07435v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
-        "authors": [
-          "Gutiérrez Hernández A",
-          "Pompa Mansilla M",
-          "Vadillo Bueno G"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41415999/"
-      },
-      {
-        "title": "Challenges in anatomy education among Sudanese medical students during the 2023 armed conflict: a cross-sectional survey.",
-        "authors": [
-          "Eltieb QDA",
-          "Muhammed A",
-          "Ahmed LNM"
-        ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41398249/"
-      },
-      {
-        "title": "Reimagining Graduate Study With Generative Artificial Intelligence-Supported Study Strategies: A Doctor of Nursing Practice Student's Perspective.",
-        "authors": [
-          "Silva KA",
-          "Sheets DM"
-        ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41397874/"
-      }
-    ],
-    "timestamp": "2025-12-21T11:33:05.150148"
-  },
-  "intrinsic motivation education": {
-    "arxiv": [
-      {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
-        "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
-        ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
-      },
-      {
-        "title": "Cinema, Fermi Problems, & General Education",
-        "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
-        ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
-      },
-      {
-        "title": "Creating Experience value to build student satisfaction in higher education",
-        "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
-        ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Eurogame escape room of physics in veterinary education: a pilot study.",
-        "authors": [
-          "Bräuninger SA",
-          "Motz DA",
-          "Lüpke M"
-        ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421988/"
-      },
-      {
-        "title": "The impact of AI tools enabled student engagement on academic performance, employability, and empowerment in Ha'il Region, Saudi Arabia.",
-        "authors": [
-          "Singh A",
-          "Singh HP",
-          "Alam MF"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421110/"
-      },
-      {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
-        "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
-      }
-    ],
-    "timestamp": "2025-12-21T11:33:08.080663"
-  },
-  "autonomy supportive teaching": {
-    "arxiv": [
-      {
-        "title": "Closing the Gap between Teaching and Assessment",
-        "authors": [
-          "\nChandralekha Singh\n"
-        ],
-        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
-        "published": "2017-01-09T21:29:02Z",
-        "link": "http://arxiv.org/abs/1701.02356v1"
-      },
-      {
-        "title": "Distribution Matching for Machine Teaching",
-        "authors": [
-          "\nXiaofeng Cao\n",
-          "\nIvor W. Tsang\n"
-        ],
-        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
-        "published": "2021-05-06T09:32:57Z",
-        "link": "http://arxiv.org/abs/2105.13809v1"
-      },
-      {
-        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
-        "authors": [
-          "\nMartin S. Feather\n",
-          "\nAlessandro Pinto\n"
-        ],
-        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
-        "published": "2023-05-16T18:24:12Z",
-        "link": "http://arxiv.org/abs/2305.11902v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
-        "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
-      },
-      {
-        "title": "Development of Digital Literacy: Application of Artificial Intelligence in Education and Clinical Practice of Oncology Nurses.",
-        "authors": [
-          "Šimunić N",
-          "Višnjić Junaković N",
-          "Skelin M"
-        ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419399/"
-      },
-      {
-        "title": "Opportunities to flip the narrative from burden to action for young women joining the National Cervical Screening Programme in Aotearoa New Zealand: a Kaupapa Māori qualitative exploration of experiences and knowledge of cervical screening for 18-30 year olds.",
-        "authors": [
-          "Slater T",
-          "Stevenson K",
-          "Adcock A"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41414979/"
-      }
-    ],
-    "timestamp": "2025-12-21T11:33:11.084001"
-  },
   "polyvagal theory education": {
     "arxiv": [
       {
@@ -270,7 +65,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:14.101425"
+    "timestamp": "2026-01-13T11:39:27.762877"
   },
   "democratic schools": {
     "arxiv": [
@@ -297,46 +92,264 @@
         "link": "http://arxiv.org/abs/1502.04264v1"
       },
       {
-        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
+        "title": "Can AI mediation improve democratic deliberation?",
         "authors": [
-          "\nCliver Oliver Turpo Benique\n"
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
         ],
-        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
-        "published": "2025-07-14T02:32:04Z",
-        "link": "http://arxiv.org/abs/2507.14191v1"
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Factors associated with unsuppressed HIV viral load among children under 15 years in sub-Saharan africa: a systematic review.",
+        "title": "Understanding perceptions towards COVID-19 vaccination and strategies to increase vaccine uptake among Ebola- affected communities in North Kivu, Democratic Republic of the Congo: a qualitative study.",
         "authors": [
-          "Balowe JK",
-          "Alain NM",
-          "Mampasi AL"
+          "Mbong EN",
+          "Perera SM",
+          "Garbern SC"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41422218/"
+        "published": "2026 Jan 13",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41526916/"
       },
       {
-        "title": "Cross-cultural differences of leadership style and emotional intelligence level in physical education teacher's success of China and Ukraine.",
+        "title": "Non-study post-partum antibiotics use and risk of maternal and neonatal infection: A secondary analysis of the A-PLUS randomized controlled trial.",
         "authors": [
-          "Zhang L"
+          "McClure EM",
+          "Tita ATN",
+          "Carlo WA"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421108/"
+        "published": "2026 Jan 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41524099/"
       },
       {
-        "title": "Transformative Potential of Outsider Art for Neurodivergent Artists.",
+        "title": "Understanding the Interplay of Maternal Mental Health, Social Support, and Sociodemographic Factors in Promoting Exclusive Breastfeeding in Kinshasa.",
         "authors": [
-          "Sochor P",
-          "Sochorova D",
-          "Kubiatko M"
+          "Bukasa GB",
+          "Kabasubabo FK",
+          "Bondo BM"
         ],
-        "published": "2025 Dec 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420883/"
+        "published": "2025 Dec 25",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41515183/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:17.080561"
+    "timestamp": "2026-01-13T11:39:28.734072"
+  },
+  "intrinsic motivation education": {
+    "arxiv": [
+      {
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "authors": [
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
+        ],
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
+      },
+      {
+        "title": "Cinema, Fermi Problems, & General Education",
+        "authors": [
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
+        ],
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
+      },
+      {
+        "title": "Creating Experience value to build student satisfaction in higher education",
+        "authors": [
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
+        ],
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Depression and self-esteem as key factors related to academic motivation in university students.",
+        "authors": [
+          "Majauskiene D",
+          "Istomina N",
+          "Valanciene D"
+        ],
+        "published": "2026 Jan 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41521328/"
+      },
+      {
+        "title": "Facilitators and Barriers to Prenatal Exercise from the Biopsychosocial Perspective of Pregnant Individuals: \"If You Keep Moving, Then You Won't Stop\".",
+        "authors": [
+          "Hicks LE",
+          "Williams E",
+          "Bates-Fraser L"
+        ],
+        "published": "2026 Jan 8",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41508373/"
+      },
+      {
+        "title": "Analysis of Training Behavior in Users of a Fitness App: Cross-Sectional Study.",
+        "authors": [
+          "Fuente-Vidal A",
+          "Prat R",
+          "Arribas-Marin JM"
+        ],
+        "published": "2026 Jan 8",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41505740/"
+      }
+    ],
+    "timestamp": "2026-01-13T11:39:29.801628"
+  },
+  "autonomy supportive teaching": {
+    "arxiv": [
+      {
+        "title": "Closing the Gap between Teaching and Assessment",
+        "authors": [
+          "\nChandralekha Singh\n"
+        ],
+        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
+        "published": "2017-01-09T21:29:02Z",
+        "link": "http://arxiv.org/abs/1701.02356v1"
+      },
+      {
+        "title": "Distribution Matching for Machine Teaching",
+        "authors": [
+          "\nXiaofeng Cao\n",
+          "\nIvor W. Tsang\n"
+        ],
+        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
+        "published": "2021-05-06T09:32:57Z",
+        "link": "http://arxiv.org/abs/2105.13809v1"
+      },
+      {
+        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
+        "authors": [
+          "\nMartin S. Feather\n",
+          "\nAlessandro Pinto\n"
+        ],
+        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
+        "published": "2023-05-16T18:24:12Z",
+        "link": "http://arxiv.org/abs/2305.11902v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Perception of Ethics in Dental Treatments of People with Disabilities : A Comprehensive Mixed Method Approach from Ecuador.",
+        "authors": [
+          "Zambrano TBS",
+          "Palma SCZ",
+          "Madrid ABB"
+        ],
+        "published": "2026 Jan 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41525041/"
+      },
+      {
+        "title": "Midwifery-led continuity-of-care education affects health literacy, empowerment and childbirth fear: a quasi-experimental study.",
+        "authors": [
+          "Oğlak SC",
+          "Koç Ö",
+          "Sönmez T"
+        ],
+        "published": "2026 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41524508/"
+      },
+      {
+        "title": "Assessment of health-related quality of life in adolescents in the conditions of war in Ukraine.",
+        "authors": [
+          "Holovanova I",
+          "Podvin A",
+          "Sharbenko T"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41518178/"
+      }
+    ],
+    "timestamp": "2026-01-13T11:39:31.752014"
+  },
+  "self-directed learning": {
+    "arxiv": [
+      {
+        "title": "Active learning for data streams: a survey",
+        "authors": [
+          "\nDavide Cacciarelli\n",
+          "\nMurat Kulahci\n"
+        ],
+        "summary": "Online active learning is a paradigm in machine learning that aims to select the most informative data points to label from a data stream. The problem of minimizing the cost associated with collecting",
+        "published": "2023-02-17T14:24:13Z",
+        "link": "http://arxiv.org/abs/2302.08893v4"
+      },
+      {
+        "title": "On the Similarities of Embeddings in Contrastive Learning",
+        "authors": [
+          "\nChungpa Lee\n",
+          "\nSehee Lim\n",
+          "\nKibok Lee\n",
+          "\nJy-yong Sohn\n"
+        ],
+        "summary": "Contrastive learning operates on a simple yet effective principle: Embeddings of positive pairs are pulled together, while those of negative pairs are pushed apart. In this paper, we propose a unified",
+        "published": "2025-06-11T14:21:05Z",
+        "link": "http://arxiv.org/abs/2506.09781v2"
+      },
+      {
+        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
+        "authors": [
+          "\nHarkirat Singh Behl\n",
+          "\nAtılım Güneş Baydin\n",
+          "\nPhilip H. S. Torr\n"
+        ],
+        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
+        "published": "2019-05-17T18:45:25Z",
+        "link": "http://arxiv.org/abs/1905.07435v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Facilitating a complex behaviour-change intervention: healthcare professionals' accounts of their journeys to competence and confidence.",
+        "authors": [
+          "Hart RI",
+          "Sheehan C",
+          "Brewin D"
+        ],
+        "published": "2026 Jan 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41526884/"
+      },
+      {
+        "title": "Impact of self-directed learning ability on undergraduate nursing students' learning engagement: the chain-mediating role of academic buoyancy and academic burnout in a cross-sectional study.",
+        "authors": [
+          "Liu Y",
+          "Sun J",
+          "Yang B"
+        ],
+        "published": "2026 Jan 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41526026/"
+      },
+      {
+        "title": "Evaluating the Effectiveness and Perception of QR Codes as Teaching-Learning Tools in the Department of Medicine for Phase 3 MBBS Students at a Medical College in Central India.",
+        "authors": [
+          "Jain AK",
+          "Dangi JS",
+          "Pandey M"
+        ],
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41523008/"
+      }
+    ],
+    "timestamp": "2026-01-13T11:39:32.730092"
   },
   "student agency": {
     "arxiv": [
@@ -376,41 +389,41 @@
     ],
     "pubmed": [
       {
-        "title": "Beliefs, practices, and awareness of written corrective feedback among EFL teachers: a mixed-methods study.",
+        "title": "Advancing Nutrition Education: Harvard Medical Student Reflections on a Scalable Online Course.",
         "authors": [
-          "Mostafavi M",
-          "Shokrpour N",
-          "Afraz S"
+          "Devries S",
+          "Kinderknecht KL",
+          "Ginnings D"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420260/"
+        "published": "2026 Jan 10",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41525971/"
       },
       {
-        "title": "Aligning expectations and experiences: Medical student perspectives on progress testing for National Licensing Examination preparation.",
+        "title": "Knowledge mobilization and assessment of implementation of an updated national antimicrobial prescribing and stewardship competency framework.",
         "authors": [
-          "Doherty SE",
-          "Cullen KM",
-          "Cole AJ"
+          "Berry R",
+          "Miah T",
+          "Nasim M"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41416766/"
+        "published": "2026 Feb",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41522718/"
       },
       {
-        "title": "Factors associated with unintended pregnancies among unmarried adolescents in Eastern Uganda: a cross-sectional study.",
+        "title": "Identifying and Conceptualizing Quality Indicators Influencing Prehospital Disaster Exercises Across Structure, Conduct, and Outcome: A Comprehensive Systematic Review.",
         "authors": [
-          "Komasawa M",
-          "Sato M",
-          "Saito K"
+          "Aminafshar A",
+          "Nekoie-Moghadam M",
+          "Amiresmaili MR"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413894/"
+        "published": "2026 Jan 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41521628/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:20.380653"
+    "timestamp": "2026-01-13T11:39:33.730051"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2025-12-21T11:33:20.380723",
+    "timestamp": "2026-01-13T11:39:33.731500",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -532,7 +545,7 @@
         }
       }
     },
-    "timestamp": "2025-12-21T11:33:40.499254",
+    "timestamp": "2026-01-13T11:39:33.731511",
     "source": "World Bank EdStats API"
   }
 }
