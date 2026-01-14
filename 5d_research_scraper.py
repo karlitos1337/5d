@@ -374,9 +374,14 @@ class ResearchScraper:
         """Helper to scrape a single keyword (runs in thread)."""
         print(f"\n📚 Suche: {keyword}")
 
-        # Requests are synchronous here, but run in parallel threads
-        arxiv_papers = self.search_arxiv(keyword, max_results=3)
-        pubmed_papers = self.search_pubmed(keyword, max_results=3)
+        # Parallelize ArXiv and PubMed searches
+        # This reduces per-keyword latency from sum(latencies) to max(latencies)
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            future_arxiv = executor.submit(self.search_arxiv, keyword, max_results=3)
+            future_pubmed = executor.submit(self.search_pubmed, keyword, max_results=3)
+
+            arxiv_papers = future_arxiv.result()
+            pubmed_papers = future_pubmed.result()
 
         return keyword, {
             "arxiv": arxiv_papers,
@@ -390,17 +395,33 @@ class ResearchScraper:
 
         print("🔍 Starte Research Scraping...")
 
-        # Academic papers - Parallel execution
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        # Run everything in parallel
+        # We have 6 keywords + 1 WB task + 1 WHO task (if enabled)
+        # increasing workers to cover all tasks
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            # Submit keyword tasks
             future_to_keyword = {
                 executor.submit(self._scrape_single_keyword, keyword): keyword
                 for keyword in self.keywords
             }
 
+            # Submit World Bank task
+            print("\n🏫 Fetching World Bank Education Data (Parallel)...")
+            future_wb = executor.submit(self.fetch_world_bank_education_data)
+
+            # Process keyword results as they complete
             for future in as_completed(future_to_keyword):
                 keyword, result = future.result()
                 all_research[keyword] = result
                 print(f"  ✅ {keyword}: {len(result['arxiv'])} arXiv, {len(result['pubmed'])} PubMed")
+
+            # Get World Bank result
+            wb_data = future_wb.result()
+            all_research["world_bank_education"] = {
+                "data": wb_data,
+                "timestamp": datetime.now().isoformat(),
+                "source": "World Bank EdStats API"
+            }
 
         # WHO Mental Health Data
         # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
@@ -410,15 +431,6 @@ class ResearchScraper:
             "data": {},
             "timestamp": datetime.now().isoformat(),
             "source": "WHO Global Health Observatory (Disabled)"
-        }
-
-        # World Bank Education Data
-        print("\n🏫 Fetching World Bank Education Data...")
-        wb_data = self.fetch_world_bank_education_data()
-        all_research["world_bank_education"] = {
-            "data": wb_data,
-            "timestamp": datetime.now().isoformat(),
-            "source": "World Bank EdStats API"
         }
 
         return all_research
