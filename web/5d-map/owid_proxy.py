@@ -23,7 +23,17 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Security: Limit response size to 10MB to prevent DoS
+                    MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+                    data = bytearray()
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        data.extend(chunk)
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError(f"Response too large (exceeded {MAX_RESPONSE_SIZE} bytes)")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
