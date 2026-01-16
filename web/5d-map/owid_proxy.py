@@ -22,8 +22,24 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
+                # Security: Limit response size to 10MB to prevent DoS via memory exhaustion
+                MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    content_length = resp.getheader("Content-Length")
+                    if content_length and int(content_length) > MAX_RESPONSE_SIZE:
+                        raise ValueError("Response too large (header)")
+
+                    data = b""
+                    chunk_size = 8192
+                    while True:
+                        chunk = resp.read(chunk_size)
+                        if not chunk:
+                            break
+                        data += chunk
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large (body)")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
