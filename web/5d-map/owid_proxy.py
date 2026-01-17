@@ -7,6 +7,8 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10MB limit
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -23,7 +25,18 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    chunks = []
+                    total_size = 0
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        chunks.append(chunk)
+                        total_size += len(chunk)
+                        if total_size > MAX_RESPONSE_SIZE:
+                            raise ValueError(f"Response too large (> {MAX_RESPONSE_SIZE} bytes)")
+
+                    data = b"".join(chunks)
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
