@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
+
+const navItems = [
+  { id: 'overview', label: 'Übersicht' },
+  { id: 'methodology', label: 'Methodik' },
+  { id: 'findings', label: 'Ergebnisse' },
+  { id: 'improvements', label: 'Verbesserungen' },
+  { id: 'architecture', label: 'Architektur' },
+  { id: 'conclusion', label: 'Fazit' }
+];
 
 const RepositoryAnalysis = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [expandedSections, setExpandedSections] = useState({});
   
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -56,36 +64,27 @@ const RepositoryAnalysis = () => {
     setDarkMode(!darkMode);
   };
 
-  const toggleSection = (sectionId) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [sectionId]: !prev[sectionId]
-    }));
-  };
-
-  const navItems = [
-    { id: 'overview', label: 'Übersicht' },
-    { id: 'methodology', label: 'Methodik' },
-    { id: 'findings', label: 'Ergebnisse' },
-    { id: 'improvements', label: 'Verbesserungen' },
-    { id: 'architecture', label: 'Architektur' },
-    { id: 'conclusion', label: 'Fazit' }
-  ];
-
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = navItems.map(item => document.getElementById(item.id));
+          const scrollPosition = window.scrollY + 100;
 
-      for (const section of sections) {
-        if (section) {
-          const offsetTop = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-            setActiveSection(section.id);
-            break;
+          for (const section of sections) {
+            if (section) {
+              const offsetTop = section.offsetTop;
+              const height = section.offsetHeight;
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+                setActiveSection(section.id);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
