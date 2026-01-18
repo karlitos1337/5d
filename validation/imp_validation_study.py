@@ -20,12 +20,12 @@ from scipy.stats import gmean
 
 # Fragebogen-Definitionen (abgestimmt auf Preprint v1.1)
 QUESTIONS = {
-    "Cognitive_Efficiency": [
-        "Ich kann komplexe Probleme in kleinere, lösbare Teile zerlegen.",
-        "Neue Konzepte verstehe ich schnell und gründlich.",
-        "Ich erkenne Muster und Zusammenhänge in unterschiedlichen Kontexten.",
-        "Abstrakte Ideen kann ich gut erfassen und anwenden.",
-        "Ich finde kreative Lösungen für unbekannte Probleme.",
+    "Autonomy": [
+        "Ich fühle mich frei, meine Aufgaben auf meine eigene Art zu erledigen.",
+        "Ich habe das Gefühl, dass meine Entscheidungen meine eigenen sind.",
+        "Ich kann bei meiner Arbeit/meinem Studium mitbestimmen.",
+        "Ich fühle mich nicht unter Druck gesetzt, Dinge zu tun, die ich nicht will.",
+        "Ich kann mich mit meinen Aufgaben identifizieren.",
     ],
     "Intrinsic_Motivation": [
         "Ich arbeite an Aufgaben, weil sie mich wirklich interessieren.",
@@ -48,12 +48,12 @@ QUESTIONS = {
         "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
         "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
     ],
-    "Environment_Optimization": [
-        "Ich gestalte meine Arbeitsumgebung gezielt für optimale Konzentration.",
-        "Ich erkenne, wann meine Umgebung meine Leistung beeinträchtigt.",
-        "Ich weiß, welche Bedingungen ich für Flow-Zustände brauche.",
-        "Ich passe meine Arbeitsweise flexibel an unterschiedliche Kontexte an.",
-        "Ich suche aktiv nach Umgebungen, die meine Stärken fördern.",
+    "Authenticity": [
+        "Ich verhalte mich so, wie ich wirklich bin.",
+        "Ich stehe zu meinen Überzeugungen, auch wenn andere anderer Meinung sind.",
+        "Ich muss mich nicht verstellen, um akzeptiert zu werden.",
+        "Meine Handlungen stimmen mit meinen Werten überein.",
+        "Ich fühle mich authentisch in meinem täglichen Leben.",
     ],
 }
 
@@ -176,7 +176,7 @@ class IMPValidationStudy:
 
         score_values = list(scores.values())
 
-        # Geometrisches Mittel Modell: IMP = (C * M * S * R * E)^(1/5)
+        # Geometrisches Mittel Modell: IMP = (A * I * S * R * A)^(1/5)
         # Wir verwenden gmean aus scipy
         imp_geometric = gmean(score_values)
 
@@ -227,6 +227,19 @@ class IMPValidationStudy:
         print("\n=== KORRELATIONSMATRIX ===")
         print(correlation_matrix.round(3))
 
+        # Check Discriminant Validity (Nexus Protocol)
+        print("\n--- Discriminant Validity Check (r < 0.85) ---")
+        high_corr_found = False
+        for i in range(len(dimensions)):
+            for j in range(i + 1, len(dimensions)):
+                val = correlation_matrix.iloc[i, j]
+                if abs(val) >= 0.85:
+                    print(f"⚠️  WARNUNG: Hohe Korrelation zwischen {dimensions[i]} und {dimensions[j]} (r={val:.3f})")
+                    high_corr_found = True
+
+        if not high_corr_found:
+             print("✅ Discriminant Validity bestätigt (alle r < 0.85)")
+
         return correlation_matrix
 
     def visualize_results(self):
@@ -236,7 +249,8 @@ class IMPValidationStudy:
         # 1. Cronbach's Alpha Balkendiagramm
         alphas = [self.results[dim]["cronbach_alpha"] for dim in QUESTIONS.keys()]
         axes[0, 0].barh(list(QUESTIONS.keys()), alphas, color="skyblue")
-        axes[0, 0].axvline(x=0.7, color="red", linestyle="--", label="Akzeptabel-Schwelle")
+        axes[0, 0].axvline(x=0.7, color="orange", linestyle="--", label="Akzeptabel (0.7)")
+        axes[0, 0].axvline(x=0.8, color="green", linestyle="--", label="Gut (0.8)")
         axes[0, 0].set_xlabel("Cronbach's Alpha")
         axes[0, 0].set_title("Reliabilität der Dimensionen")
         axes[0, 0].legend()
@@ -284,6 +298,7 @@ class IMPValidationStudy:
             "dimensions": self.results,
             "overall_reliability": np.mean([r["cronbach_alpha"] for r in self.results.values()]),
             "recommendation": self._generate_recommendation(),
+            "discriminant_validity": self._check_discriminant_validity_report()
         }
 
         filename = f"validation_report_{self.timestamp}.json"
@@ -293,6 +308,22 @@ class IMPValidationStudy:
         print(f"\n✅ Bericht gespeichert: {filename}")
         return report
 
+    def _check_discriminant_validity_report(self):
+        """Helper for reporting discriminant validity"""
+        corr_matrix = self.correlation_analysis()
+        dimensions = list(QUESTIONS.keys())
+        high_corrs = []
+        for i in range(len(dimensions)):
+            for j in range(i + 1, len(dimensions)):
+                val = corr_matrix.iloc[i, j]
+                if abs(val) >= 0.85:
+                    high_corrs.append(f"{dimensions[i]} <-> {dimensions[j]}: {val:.3f}")
+
+        return {
+            "passed": len(high_corrs) == 0,
+            "high_correlations": high_corrs
+        }
+
     def _generate_recommendation(self):
         """Generiert Empfehlungen basierend auf Ergebnissen"""
         avg_alpha = np.mean([r["cronbach_alpha"] for r in self.results.values()])
@@ -300,9 +331,9 @@ class IMPValidationStudy:
         if avg_alpha >= 0.8:
             return "Das 5D-Framework zeigt gute bis exzellente Reliabilität. Bereit für Preprint-Publikation (Pilotstudie)."
         elif avg_alpha >= 0.7:
-            return "Das Framework ist akzeptabel, aber Verbesserung einzelner Items empfohlen."
+             return "Das Framework ist akzeptabel, aber Verbesserung einzelner Items empfohlen (Cronbach's Alpha < 0.8)."
         else:
-            return "Reliabilität unter Schwelle. Items müssen überarbeitet werden."
+            return "Reliabilität unter Schwelle (< 0.7). Items müssen überarbeitet werden (Self-Optimizing Feedback Loop)."
 
 
 # MAIN EXECUTION
@@ -360,6 +391,14 @@ def main():
     print("✅ VALIDIERUNGSSTUDIE ABGESCHLOSSEN!")
     print(f"\nEMPFEHLUNG: {report['recommendation']}")
     print(f"Durchschnittliche Reliabilität (α): {report['overall_reliability']:.3f}")
+
+    if report["discriminant_validity"]["passed"]:
+        print("Discriminant Validity: ✅ PASSED")
+    else:
+        print("Discriminant Validity: ⚠️  ISSUES FOUND")
+        for issue in report["discriminant_validity"]["high_correlations"]:
+            print(f"  - {issue}")
+
     print("\nNÄCHSTE SCHRITTE:")
     print("  1. Echte Probanden rekrutieren (Ziel: 30+)")
     print("  2. Fragebogen online stellen")

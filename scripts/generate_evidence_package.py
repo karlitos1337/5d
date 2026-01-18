@@ -118,9 +118,10 @@ Based on the zero-impact principle, any dimension < 0.7 requires immediate inter
 Refer to `validation_results_*.png` for visual distribution.
 
 [PUSH TO DOWNLOAD]
-- Analysis Script: validation/imp_validation_study.py
-- Metric Mapping: METRIC_MAPPING.md
-- Visualization: validation_results_*.png
+- Analysis Script (Python)
+- Metric Mapping Table
+- Visualization Template
+- Literature-Backed Interpretation
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)
