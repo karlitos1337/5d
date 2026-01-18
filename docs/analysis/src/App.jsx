@@ -2,6 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
+const sections = [
+  { id: 'einleitung', label: 'Einleitung' },
+  { id: 'framework', label: '5D-Intelligence Framework' },
+  { id: 'methodologie', label: 'Methodik' },
+  { id: 'ergebnisse', label: 'Ergebnisse' },
+  { id: 'validierung', label: 'Validierung' },
+  { id: 'implikationen', label: 'Implikationen' },
+  { id: 'zukunft', label: 'Zukunftsperspektiven' },
+  { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
+];
+
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,17 +23,6 @@ const App = () => {
     damping: 30,
     restDelta: 0.001
   });
-
-  const sections = [
-    { id: 'einleitung', label: 'Einleitung' },
-    { id: 'framework', label: '5D-Intelligence Framework' },
-    { id: 'methodologie', label: 'Methodik' },
-    { id: 'ergebnisse', label: 'Ergebnisse' },
-    { id: 'validierung', label: 'Validierung' },
-    { id: 'implikationen', label: 'Implikationen' },
-    { id: 'zukunft', label: 'Zukunftsperspektiven' },
-    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-  ];
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -71,15 +71,27 @@ const App = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+    let ticking = false;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
+    // Optimized scroll handler using requestAnimationFrame to throttle updates
+    // and prevent blocking the main thread during rapid scrolling.
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 200;
+
+          // Performance: Reverse loop to find the last (bottom-most) active section
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sections[i].id);
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
 
