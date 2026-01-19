@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "dimension": "Autonomy",
+    "question": "I feel I have choices in how I do my work.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 2,
+    "dimension": "Autonomy",
+    "question": "I feel my decisions reflect my true self.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 3,
+    "dimension": "Autonomy",
+    "question": "I can openly express my opinions without fear.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 4,
+    "dimension": "Autonomy",
+    "question": "I have control over the resources I need.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 5,
+    "dimension": "Autonomy",
+    "question": "I act based on my own values, not external pressure.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 6,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I engage in my tasks because they are interesting.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 7,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I enjoy finding new solutions to problems.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 8,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I would work on these projects even without a deadline.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 9,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Learning new things is its own reward for me.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 10,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I feel a sense of flow when working.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 11,
+    "dimension": "Social_Participation",
+    "question": "I feel connected to the people I interact with.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 12,
+    "dimension": "Social_Participation",
+    "question": "My contributions are valued by my community.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 13,
+    "dimension": "Social_Participation",
+    "question": "I actively support others in their goals.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 14,
+    "dimension": "Social_Participation",
+    "question": "I feel part of a collective effort.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 15,
+    "dimension": "Social_Participation",
+    "question": "I can rely on others when I face challenges.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 16,
+    "dimension": "Resilience",
+    "question": "I recover quickly from setbacks.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 17,
+    "dimension": "Resilience",
+    "question": "Stressful situations do not paralyze me.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 18,
+    "dimension": "Resilience",
+    "question": "I view failures as learning opportunities.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 19,
+    "dimension": "Resilience",
+    "question": "I maintain my focus even under pressure.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 20,
+    "dimension": "Resilience",
+    "question": "I can regulate my emotions effectively.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 21,
+    "dimension": "Authenticity",
+    "question": "I act in a way that is consistent with my values.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 22,
+    "dimension": "Authenticity",
+    "question": "I do not feel the need to wear a mask.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 23,
+    "dimension": "Authenticity",
+    "question": "My external actions match my internal feelings.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 24,
+    "dimension": "Authenticity",
+    "question": "I feel I am being true to myself.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  },
+  {
+    "id": 25,
+    "dimension": "Authenticity",
+    "question": "I am honest about my limitations.",
+    "scale": "0 (Strongly Disagree) - 5 (Strongly Agree)"
+  }
+]

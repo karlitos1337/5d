@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "protocol": "Professor Dr. A. I. Nexus",
+    "timestamp": "20260119_114751",
+    "n_samples": 50
+  },
+  "reliability": {
+    "average_alpha": 0.8775621116271214,
+    "status": "PASS",
+    "details": {
+      "Autonomy": {
+        "cronbach_alpha": 0.8651502145922746,
+        "mean": 3.4200000000000004,
+        "std": 0.8527916733180607,
+        "interpretation": "Good"
+      },
+      "Intrinsic_Motivation": {
+        "cronbach_alpha": 0.8610256583617861,
+        "mean": 3.348,
+        "std": 0.8648165786887041,
+        "interpretation": "Good"
+      },
+      "Social_Participation": {
+        "cronbach_alpha": 0.8799841772151897,
+        "mean": 3.44,
+        "std": 0.871570222631657,
+        "interpretation": "Good"
+      },
+      "Resilience": {
+        "cronbach_alpha": 0.9176342441308025,
+        "mean": 3.404,
+        "std": 0.9667117071263315,
+        "interpretation": "Excellent"
+      },
+      "Authenticity": {
+        "cronbach_alpha": 0.8640162638355546,
+        "mean": 3.476,
+        "std": 0.8832475234401178,
+        "interpretation": "Good"
+      }
+    }
+  },
+  "discriminant_validity": {
+    "status": "PASS",
+    "high_correlations": []
+  }
+}
