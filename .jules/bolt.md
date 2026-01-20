@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-05-24 - Rate-Limited Domain Parallelization
+**Learning:** Parallelizing requests to the same rate-limited domain (e.g., ArXiv) provides minimal gain due to thread locks enforcing serialization.
+**Action:** Focus parallelization efforts on distinct domains (e.g., World Bank vs. Keywords) that can run concurrently without blocking on the same rate-limit lock.
