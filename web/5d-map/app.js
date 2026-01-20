@@ -40,9 +40,19 @@ function activateLayer(layerName) {
     infoTextEl.textContent = txt;
     infoEl.style.display = 'block';
   }
-  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.classList.remove('btn--primary');
+    if (btn.hasAttribute('aria-pressed')) {
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  });
   const btn = document.getElementById(`layer-${layerName}`);
-  if (btn) btn.classList.add('btn--primary');
+  if (btn) {
+    btn.classList.add('btn--primary');
+    if (btn.hasAttribute('aria-pressed')) {
+      btn.setAttribute('aria-pressed', 'true');
+    }
+  }
 
   switch (layerName) {
     case 'status-quo':
