@@ -5,7 +5,7 @@ def verify_app(page):
     # Ensure verification directory exists
     os.makedirs("verification", exist_ok=True)
 
-    page.goto("http://localhost:5173/5d/docs/analysis/")
+    page.goto("http://localhost:3000/5d/docs/analysis/")
 
     # Check for main title - using heading role to be specific
     expect(page.get_by_role("heading", name="Validierung des 5D-Intelligence Frameworks")).to_be_visible()
