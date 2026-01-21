@@ -7,6 +7,7 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -23,19 +24,38 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Check Content-Length if available
+                    content_length = resp.headers.get("Content-Length")
+                    if content_length and int(content_length) > MAX_RESPONSE_SIZE:
+                        raise ValueError(f"Response too large ({content_length} bytes)")
+
+                    # Read in chunks to prevent unbounded memory usage
+                    data = b""
+                    while True:
+                        chunk = resp.read(8192)  # Read 8KB at a time
+                        if not chunk:
+                            break
+                        data += chunk
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large (exceeded limit during read)")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
+                    # Security Headers
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
                 msg = f"Fetch error: {e}".encode()
+                # If error is about size, maybe return 502 (Bad Gateway) or 413 (Payload Too Large)
+                # But keeping it simple with 502 as it's an upstream issue/proxy restriction
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
