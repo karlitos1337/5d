@@ -7,6 +7,8 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB limit
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -18,30 +20,51 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    content_length = resp.getheader("Content-Length")
+                    if content_length and int(content_length) > MAX_RESPONSE_SIZE:
+                        raise ValueError("Response too large")
+
+                    data = b""
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        data += chunk
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Log the actual error but return a generic message to the client
+                print(f"Fetch error: {e}")
+                msg = b"Proxy error: Failed to fetch resource (check logs for details)"
+                if "Response too large" in str(e):
+                    msg = b"Proxy error: Response too large"
+
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("X-Content-Type-Options", "nosniff")
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")
 
