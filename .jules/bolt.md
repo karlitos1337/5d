@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-05-23 - Synchronous Map Updates on Slider Input
+**Learning:** The time-series slider in `web/5d-map` was updating the entire Leaflet map layer synchronously on every `input` event (mouse move), causing potential UI freezing.
+**Action:** Always decouple immediate UI feedback (label update) from expensive visualization updates using `debounce` or `requestAnimationFrame`.
