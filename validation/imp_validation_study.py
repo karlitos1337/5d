@@ -229,6 +229,33 @@ class IMPValidationStudy:
 
         return correlation_matrix
 
+    def check_discriminant_validity(self, correlation_matrix):
+        """
+        Prüft auf Diskriminante Validität.
+        Kriterium: Korrelation zwischen Dimensionen sollte < 0.85 sein.
+        """
+        high_correlations = []
+        dimensions = correlation_matrix.columns
+
+        # Iteriere über die obere Dreiecksmatrix (ohne Diagonale)
+        for i in range(len(dimensions)):
+            for j in range(i + 1, len(dimensions)):
+                dim1 = dimensions[i]
+                dim2 = dimensions[j]
+                corr = correlation_matrix.iloc[i, j]
+
+                if abs(corr) >= 0.85:
+                    high_correlations.append({
+                        "pair": [dim1, dim2],
+                        "correlation": float(corr)
+                    })
+
+        passed = len(high_correlations) == 0
+        return {
+            "passed": passed,
+            "high_correlations": high_correlations
+        }
+
     def visualize_results(self):
         """Erstellt Visualisierungen"""
         fig, axes = plt.subplots(2, 2, figsize=(15, 12))
@@ -278,12 +305,17 @@ class IMPValidationStudy:
 
     def generate_report(self):
         """Generiert Abschlussbericht"""
+        # Diskriminante Validität prüfen
+        corr_matrix = self.correlation_analysis()
+        disc_validity = self.check_discriminant_validity(corr_matrix)
+
         report = {
             "timestamp": self.timestamp,
             "n_participants": len(self.data) if self.data is not None else 0,
             "dimensions": self.results,
             "overall_reliability": np.mean([r["cronbach_alpha"] for r in self.results.values()]),
-            "recommendation": self._generate_recommendation(),
+            "discriminant_validity": disc_validity,
+            "recommendation": self._generate_recommendation(disc_validity["passed"]),
         }
 
         filename = f"validation_report_{self.timestamp}.json"
@@ -293,16 +325,22 @@ class IMPValidationStudy:
         print(f"\n✅ Bericht gespeichert: {filename}")
         return report
 
-    def _generate_recommendation(self):
+    def _generate_recommendation(self, disc_validity_passed):
         """Generiert Empfehlungen basierend auf Ergebnissen"""
         avg_alpha = np.mean([r["cronbach_alpha"] for r in self.results.values()])
+        recommendation = ""
 
         if avg_alpha >= 0.8:
-            return "Das 5D-Framework zeigt gute bis exzellente Reliabilität. Bereit für Preprint-Publikation (Pilotstudie)."
+            recommendation = "Reliabilität: Gut bis Exzellent (Pilotstudie bereit)."
         elif avg_alpha >= 0.7:
-            return "Das Framework ist akzeptabel, aber Verbesserung einzelner Items empfohlen."
+            recommendation = "Reliabilität: Akzeptabel. Item-Verbesserung empfohlen."
         else:
-            return "Reliabilität unter Schwelle. Items müssen überarbeitet werden."
+            recommendation = "Reliabilität: UNTER SCHWELLE (< 0.7). Dringende Überarbeitung nötig."
+
+        if not disc_validity_passed:
+            recommendation += " ACHTUNG: Diskriminante Validität verletzt (Korrelation >= 0.85). Dimensionen überlappen zu stark."
+
+        return recommendation
 
 
 # MAIN EXECUTION

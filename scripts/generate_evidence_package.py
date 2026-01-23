@@ -93,7 +93,7 @@ def main():
     mapping_content = """
 | Dimension | Metric | Source | Range | Reliability (α) |
 |-----------|--------|--------|-------|-----------------|
-| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 |
+| Autonomy | Voice & Accountability | World Bank WGI (Auto-Fetched) | -2.5 to 2.5 | > 0.8 |
 | Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
 | Resilience | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
 | Social Participation | Network Density | Graph Analysis | 0-1 | N/A |
@@ -109,18 +109,20 @@ def main():
 **Date:** {datetime.datetime.now().isoformat()}
 
 ## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
-- **External Data:** World Bank Education data fetched.
+- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha & Discriminant Validity analyzed.
+- **External Data:** World Bank Education & WGI (Voice & Accountability) data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
 ## Hypothesis & Next Steps
 Based on the zero-impact principle, any dimension < 0.7 requires immediate intervention.
+Discriminant Validity check (< 0.85 correlation) ensures dimensions are distinct.
 Refer to `validation_results_*.png` for visual distribution.
 
 [PUSH TO DOWNLOAD]
-- Analysis Script: validation/imp_validation_study.py
-- Metric Mapping: METRIC_MAPPING.md
-- Visualization: validation_results_*.png
+Analysis Script (Python)
+Metric Mapping Table
+Visualization Template
+Literature-Backed Interpretation
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)
