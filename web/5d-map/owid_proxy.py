@@ -7,43 +7,70 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path.lstrip("/")
         if path.startswith("proxy/"):
-            key = path.split("/", 1)[1]
-            url = OWID_URLS.get(key)
-            if not url:
-                self.send_response(404)
-                self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(b"Unknown proxy key")
-                return
             try:
+                parts = path.split("/", 1)
+                if len(parts) < 2:
+                    raise ValueError("Invalid path")
+                key = parts[1]
+                url = OWID_URLS.get(key)
+
+                if not url:
+                    self.send_response(404)
+                    self.send_header("Content-Type", "text/plain; charset=utf-8")
+                    self._send_security_headers()
+                    self.end_headers()
+                    self.wfile.write(b"Unknown proxy key")
+                    return
+
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    data = bytearray()
+                    while True:
+                        chunk = resp.read(8192)  # 8KB chunks
+                        if not chunk:
+                            break
+                        data.extend(chunk)
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
-                    # CORS
-                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self._send_security_headers()
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Log to stderr, don't send to client
+                print(f"Proxy Error: {e}", file=sys.stderr)
+
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("Access-Control-Allow-Origin", "*")
+                self._send_security_headers()
                 self.end_headers()
+
+                # Sanitize error message
+                if "Response too large" in str(e):
+                    msg = b"Error: Response too large"
+                else:
+                    msg = b"Upstream Fetch Error"
                 self.wfile.write(msg)
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
-            self.send_header("Access-Control-Allow-Origin", "*")
+            self._send_security_headers()
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")
+
+    def _send_security_headers(self):
+        """Helper to send common security and CORS headers."""
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("X-Content-Type-Options", "nosniff")
 
     def log_message(self, fmt, *args):
         # Quiet log
