@@ -1,24 +1,31 @@
 const CACHE_KEY = '5d-map-cache-v1';
 const CACHE_TTL = 60 * 60 * 1000; // 1h
 
-function loadCache() {
+// Module-level cache variable to avoid repeated JSON parsing and race conditions
+let memoryCache = null;
+
+function getCache() {
+  if (memoryCache) return memoryCache;
   try {
     const raw = localStorage.getItem(CACHE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    memoryCache = raw ? JSON.parse(raw) : {};
   } catch {
-    return {};
+    memoryCache = {};
   }
+  return memoryCache;
 }
 
-function saveCache(cache) {
+function saveCache() {
+  if (!memoryCache) return;
   try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    localStorage.setItem(CACHE_KEY, JSON.stringify(memoryCache));
   } catch {
     // ignore
   }
 }
 
 export function clearCache() {
+  memoryCache = {};
   try {
     localStorage.removeItem(CACHE_KEY);
   } catch {
@@ -33,7 +40,7 @@ async function fetchJSON(url) {
 }
 
 async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
+  const cache = getCache();
   const now = Date.now();
   const entry = cache[key];
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
@@ -41,8 +48,9 @@ async function fetchWithCache(key, fetcher) {
   }
   try {
     const data = await fetcher();
+    // Update memoryCache directly. Since JS is single-threaded, this is safe from race conditions.
     cache[key] = { data, timestamp: now };
-    saveCache(cache);
+    saveCache();
     return data;
   } catch (e) {
     if (entry) return entry.data; // Fallback auf alten Cache
@@ -52,21 +60,21 @@ async function fetchWithCache(key, fetcher) {
 
 export async function fetchAllData() {
   const result = {};
-  // Schulen (statisch, lokal)
-  result.schools = await fetchWithCache('schools', () => fetchJSON('./data/schools.json'))
+
+  // Define all fetch operations
+  const fetchSchools = () => fetchWithCache('schools', () => fetchJSON('./data/schools.json'))
     .catch(() => []);
-  // Länder-Zentroiddaten (lokal)
-  const countries = await fetchWithCache('countries', () => fetchJSON('./data/countries.json'))
+
+  const fetchCountries = () => fetchWithCache('countries', () => fetchJSON('./data/countries.json'))
     .catch(() => []);
-  // Validierungsdaten (lokal)
-  const validation = await fetchWithCache('validation', () => fetchJSON('./data/validation.json'))
+
+  const fetchValidation = () => fetchWithCache('validation', () => fetchJSON('./data/validation.json'))
     .catch(() => ({ validatedISO3: [], items: [] }));
-  // Baseline Snapshot (feste Ausgangswerte)
-  const baseline = await fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json'))
+
+  const fetchBaseline = () => fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json'))
     .catch(() => null);
 
-  // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
-  const depressionMap = await fetchWithCache('owid_depression', async () => {
+  const fetchDepressionMap = () => fetchWithCache('owid_depression', async () => {
     const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
     const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
     try {
@@ -89,8 +97,7 @@ export async function fetchAllData() {
     }
   }).catch(() => ({}));
 
-  // Depression Jahres‑Serien (iso3 -> {year: value})
-  const depressionSeries = await fetchWithCache('owid_depression_series', async () => {
+  const fetchDepressionSeries = () => fetchWithCache('owid_depression_series', async () => {
     const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
     const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
     const buildSeries = (rows) => {
@@ -122,8 +129,7 @@ export async function fetchAllData() {
     }
   }).catch(() => ({}));
 
-  // Dropout: World Bank JSON (alle Länder, neuerster Wert)
-  const dropoutMap = await fetchWithCache('wb_dropout', async () => {
+  const fetchDropoutMap = () => fetchWithCache('wb_dropout', async () => {
     const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
     const data = await fetchJSON(url);
     // data = [meta, rows]
@@ -141,8 +147,7 @@ export async function fetchAllData() {
     return map;
   }).catch(() => ({}));
 
-  // Dropout Jahres‑Serien
-  const dropoutSeries = await fetchWithCache('wb_dropout_series', async () => {
+  const fetchDropoutSeries = () => fetchWithCache('wb_dropout_series', async () => {
     try {
       const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
       const data = await fetchJSON(url);
@@ -158,9 +163,6 @@ export async function fetchAllData() {
     } catch { return {}; }
   }).catch(() => ({}));
 
-  // WGI‑Proxies (World Bank Governance Indicators), Werte in [-2.5, 2.5]
-  // RL.EST (Rule of Law) -> R, VA.EST (Voice & Accountability) -> SP, GE.EST (Gov. Effectiveness) -> Au
-  // Normalisierung: (x + 2.5) / 5  -> [0,1]
   const wgiFetch = async (code) => {
     const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&per_page=20000`;
     const data = await fetchJSON(url);
@@ -178,9 +180,50 @@ export async function fetchAllData() {
     return map;
   };
 
-  const wgi_rl_raw = await fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({}));
-  const wgi_va_raw = await fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({}));
-  const wgi_ge_raw = await fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}));
+  const fetchWgiRl = () => fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({}));
+  const fetchWgiVa = () => fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({}));
+  const fetchWgiGe = () => fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}));
+
+  const fetchWorldGeoJSON = () => fetchWithCache('world_geojson', async () => {
+    const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
+    return fetchJSON(url);
+  }).catch(() => null);
+
+  // Execute all fetches in parallel
+  const [
+    schools,
+    countries,
+    validation,
+    baseline,
+    depressionMap,
+    depressionSeries,
+    dropoutMap,
+    dropoutSeries,
+    wgi_rl_raw,
+    wgi_va_raw,
+    wgi_ge_raw,
+    worldGeoJSON
+  ] = await Promise.all([
+    fetchSchools(),
+    fetchCountries(),
+    fetchValidation(),
+    fetchBaseline(),
+    fetchDepressionMap(),
+    fetchDepressionSeries(),
+    fetchDropoutMap(),
+    fetchDropoutSeries(),
+    fetchWgiRl(),
+    fetchWgiVa(),
+    fetchWgiGe(),
+    fetchWorldGeoJSON()
+  ]);
+
+  // Assign results to result object
+  result.schools = schools;
+  result.countries = countries;
+  // worldGeoJSON is used below, not stored in result directly initially but processed later?
+  // Original code: result.worldGeoJSON = await ...
+  result.worldGeoJSON = worldGeoJSON;
 
   const normalizeWGI = (m) => {
     const out = {};
@@ -217,7 +260,7 @@ export async function fetchAllData() {
   // Heatmap-Punkte: Mittelwert aus normierten (%) Werten, sofern vorhanden
   result.heatmapPoints = [];
   // Stelle Länder für andere Layer bereit
-  result.countries = countries;
+  // result.countries was already assigned above
   for (const c of countries) {
     const iso3 = c.iso3;
     const lat = Number(c.lat), lng = Number(c.lng);
@@ -232,12 +275,6 @@ export async function fetchAllData() {
     const intensity = Math.max(0, Math.min(1, (vals.reduce((a,b)=>a+b,0)/vals.length) / 100));
     result.heatmapPoints.push([lat, lng, intensity]);
   }
-
-  // Welt-GeoJSON laden (für Choropleth); CORS-freundliche Quelle
-  result.worldGeoJSON = await fetchWithCache('world_geojson', async () => {
-    const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
-    return fetchJSON(url);
-  }).catch(() => null);
 
   // IMP-Berechnung (Proxy-basiert) pro ISO3, nutzt Depression & Dropout
   // Dimensionen in [0,1]:
