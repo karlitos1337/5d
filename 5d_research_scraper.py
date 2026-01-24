@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
 5D Research Scraper - ResearchGate & Academic Papers
+PROTOCOL: PROFESSOR DR. A. I. NEXUS
+
+Identity: Professor Dr. A. I. Nexus, Chair of Computational Human Flourishing
+Objective: Accelerate truth-aligned progress via Science Superquelle.
 Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
 """
 
