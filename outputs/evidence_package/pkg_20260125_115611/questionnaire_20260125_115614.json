@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "dimension": "Autonomy",
+    "question": "I feel free to express my ideas and opinions.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 2,
+    "dimension": "Autonomy",
+    "question": "I feel like I am the author of my own life.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 3,
+    "dimension": "Autonomy",
+    "question": "I have the freedom to make my own choices.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 4,
+    "dimension": "Autonomy",
+    "question": "I pursue goals that are meaningful to me.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 5,
+    "dimension": "Autonomy",
+    "question": "I feel my decisions reflect my own values.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 6,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I work on tasks because they truly interest me.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 7,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I enjoy challenges without needing external rewards.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 8,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I set ambitious goals for myself.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 9,
+    "dimension": "Intrinsic_Motivation",
+    "question": "I persist with projects even when they are difficult.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 10,
+    "dimension": "Intrinsic_Motivation",
+    "question": "Learning and growth are more important to me than grades or praise.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 11,
+    "dimension": "Social_Participation",
+    "question": "I actively contribute to group projects.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 12,
+    "dimension": "Social_Participation",
+    "question": "I can communicate my ideas clearly and persuasively.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 13,
+    "dimension": "Social_Participation",
+    "question": "I listen attentively to others and build on their ideas.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 14,
+    "dimension": "Social_Participation",
+    "question": "Collaboration with others enriches my work.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 15,
+    "dimension": "Social_Participation",
+    "question": "I can empathize well with others' perspectives.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 16,
+    "dimension": "Resilience",
+    "question": "I quickly recover my performance after setbacks.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 17,
+    "dimension": "Resilience",
+    "question": "I can regulate my emotions even in difficult situations.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 18,
+    "dimension": "Resilience",
+    "question": "Stress affects my performance only temporarily.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 19,
+    "dimension": "Resilience",
+    "question": "I learn constructively from mistakes for the future.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 20,
+    "dimension": "Resilience",
+    "question": "I remain focused and capable of acting even under pressure.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 21,
+    "dimension": "Authenticity",
+    "question": "I am true to myself in most situations.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 22,
+    "dimension": "Authenticity",
+    "question": "I act in a way that is consistent with my values.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 23,
+    "dimension": "Authenticity",
+    "question": "I feel comfortable showing my true self.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 24,
+    "dimension": "Authenticity",
+    "question": "My actions align with my inner beliefs.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  },
+  {
+    "id": 25,
+    "dimension": "Authenticity",
+    "question": "I express my true feelings.",
+    "scale": "0 (stimme gar nicht zu) - 5 (stimme voll zu)"
+  }
+]

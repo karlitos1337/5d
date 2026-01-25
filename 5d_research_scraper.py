@@ -5,12 +5,12 @@ Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
 """
 
 import json
-import time
 import re
 import threading
-from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
@@ -370,6 +370,84 @@ class ResearchScraper:
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
 
+    def fetch_world_bank_wgi_data(self, countries=None):
+        """
+        Fetch Worldwide Governance Indicators (WGI) - specifically Voice & Accountability.
+
+        Args:
+            countries: List of ISO3 country codes (default: top 20 countries)
+
+        Returns:
+            dict: WGI data by country
+        """
+        if countries is None:
+            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
+                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
+                         "NZL", "ESP", "ITA", "KOR"]
+
+        # Filter out invalid country codes
+        valid_countries = [c for c in countries if self._validate_country_code(c)]
+        countries = valid_countries
+
+        if not countries:
+            print("❌ No valid countries provided for WGI data fetch")
+            return {}
+
+        # WGI Indicator for Voice and Accountability: VA.EST
+        indicator_code = "VA.EST"
+        indicator_name = "Voice and Accountability (Estimate)"
+
+        wgi_data = {}
+
+        print(f"  🏛️ World Bank WGI: Fetching {indicator_name}...")
+
+        for attempt in range(self.max_retries):
+            try:
+                self._rate_limit("worldbank")
+
+                # Fetching for specific countries
+                countries_str = ";".join(countries[:15])  # Limit per request
+                url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                params = {
+                    "format": "json",
+                    "date": "2020:2023",
+                    "per_page": 500
+                }
+
+                response = requests.get(url, params=params, timeout=15)
+
+                if response.status_code == 429:
+                    wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                    time.sleep(wait_time)
+                    continue
+
+                response.raise_for_status()
+                data = response.json()
+
+                if isinstance(data, list) and len(data) > 1:
+                    for entry in data[1]:
+                        country_code = entry.get("countryiso3code")
+                        value = entry.get("value")
+                        year = entry.get("date")
+
+                        if country_code and value is not None:
+                            if country_code not in wgi_data:
+                                wgi_data[country_code] = {}
+
+                            # Store if not present (assuming first one is recent due to date param?
+                            # Actually API returns list. We just take the first one found or overwrite.
+                            if indicator_name not in wgi_data[country_code]:
+                                wgi_data[country_code][indicator_name] = {
+                                    "value": value,
+                                    "year": year
+                                }
+                break
+            except Exception as e:
+                print(f"    ⚠️  WGI Error (attempt {attempt + 1}): {e}")
+
+        print(f"  ✅ WGI: {len(wgi_data)} countries fetched")
+        return wgi_data
+
     def _scrape_single_keyword(self, keyword):
         """Helper to scrape a single keyword (runs in thread)."""
         print(f"\n📚 Suche: {keyword}")
@@ -419,6 +497,15 @@ class ResearchScraper:
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
             "source": "World Bank EdStats API"
+        }
+
+        # World Bank WGI Data
+        print("\n🏛️ Fetching World Bank WGI Data (Voice & Accountability)...")
+        wgi_data = self.fetch_world_bank_wgi_data()
+        all_research["world_bank_wgi"] = {
+            "data": wgi_data,
+            "timestamp": datetime.now().isoformat(),
+            "source": "World Bank WGI (VA.EST)"
         }
 
         return all_research
