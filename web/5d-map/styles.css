@@ -62,6 +62,10 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transform: translateY(-1px);
 }
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
 .btn--primary {
   background: var(--color-primary);
   color: #fff;
@@ -83,6 +87,7 @@ main { height: calc(100vh - 132px); }
 }
 .app-footer nav a { color: var(--color-text); text-decoration: none; margin-right: .5rem; }
 .app-footer nav a:hover { text-decoration: underline; }
+.app-footer nav a:focus-visible { outline: 2px solid var(--color-primary); border-radius: 2px; }
 
 /* Marker Icons per Typ (für divIcon) */
 .school-marker { font-size: 20px; line-height: 20px; }
@@ -103,6 +108,12 @@ main { height: calc(100vh - 132px); }
   margin-right: 6px;
   vertical-align: -2px;
   border-radius: 3px;
+}
+.legend div[role="button"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.05);
 }
 .legend-note { margin-top: .25rem; color: var(--color-text-secondary); }
 

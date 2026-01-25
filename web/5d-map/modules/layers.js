@@ -152,9 +152,21 @@ export function createValidationLegendControl() {
       row.innerHTML = `<i style="background:${r.color}"></i> ${r.label}`;
       row.style.cursor = 'pointer';
       row.title = 'Klicken zum Filtern';
-      row.addEventListener('click', () => {
+      row.setAttribute('tabindex', '0');
+      row.setAttribute('role', 'button');
+      row.setAttribute('aria-label', r.label);
+
+      const trigger = () => {
         const ev = new CustomEvent('validation-filter', { detail: { status: r.status } });
         window.dispatchEvent(ev);
+      };
+
+      row.addEventListener('click', trigger);
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          trigger();
+        }
       });
       div.appendChild(row);
     });
