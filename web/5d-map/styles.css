@@ -18,6 +18,12 @@ body {
   background: var(--color-bg);
 }
 
+/* Accessibility: Global Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* Skip Link für Barrierefreiheit */
 .skip-link {
   position: absolute;
@@ -61,6 +67,15 @@ body {
 .btn:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(33, 128, 141, 0.2);
 }
 .btn--primary {
   background: var(--color-primary);

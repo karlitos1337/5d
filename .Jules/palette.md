@@ -1,3 +1,5 @@
-## 2024-05-23 - Micro-UX in Streamlit
-**Learning:** Streamlit metrics lack built-in explanations by default, making dashboards confusing for new users. Adding `help` tooltips to `st.metric` is a high-impact, low-effort micro-UX win.
-**Action:** When working on Streamlit dashboards, always check if metrics are self-explanatory. If not, add context via the `help` parameter. Also, `st.toast` is great for feedback on long-running processes.
+# Palette's Journal - Critical UX/A11y Learnings
+
+## 2025-02-24 - Focus States and Tactile Feedback
+**Learning:** The application lacked visible focus states for keyboard navigation, making it inaccessible for keyboard users. Buttons also lacked "active" (pressed) states, making interaction feel flat.
+**Action:** Implemented global `:focus-visible` styles using the primary color and added `.btn:active` for tactile feedback. Always check `styles.css` for basic interactive states before assuming they exist.
