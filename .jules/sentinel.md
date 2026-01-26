@@ -6,3 +6,7 @@
 **Vulnerability:** The `5d_research_scraper.py` script used an insecure HTTP URL (`http://export.arxiv.org`) for the arXiv API. This could allow Man-in-the-Middle (MitM) attacks to intercept or modify research data.
 **Learning:** Always verify if external APIs support HTTPS and enforce it. Even for public data, integrity is crucial.
 **Prevention:** Changed the URL to `https://export.arxiv.org`. Added a test case to verify HTTPS usage for API endpoints.
+## 2026-01-26 - [DoS Risk in Proxy Server]
+**Vulnerability:** The `owid_proxy.py` read the entire upstream response into memory using `resp.read()`. This could allow a malicious or compromised upstream server (or a very large valid file) to crash the proxy via memory exhaustion.
+**Learning:** Proxy servers must never trust upstream content size. Streaming with limits is mandatory.
+**Prevention:** Implemented chunked reading with a strict `MAX_RESPONSE_SIZE` (10MB) limit. Added `X-Content-Type-Options: nosniff` and generic error messages to prevent info leaks. Verified with `tests/test_owid_proxy_security.py`.
