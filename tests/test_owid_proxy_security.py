@@ -1,9 +1,8 @@
-import unittest
-import sys
-import os
-import io
 import importlib.util
-from unittest.mock import MagicMock, patch
+import io
+import os
+import unittest
+from unittest.mock import patch
 
 # Load owid_proxy dynamically
 PROXY_PATH = os.path.join(os.getcwd(), 'web/5d-map/owid_proxy.py')
