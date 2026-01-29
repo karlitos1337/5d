@@ -34,9 +34,7 @@ def warn_config_settings(config_settings: "Mapping[Any, Any] | None" = None) -> 
         print("Warning: Config settings are not supported", file=sys.stderr)
 
 
-def call(
-    args: "Sequence[str]", config_settings: "Mapping[Any, Any] | None" = None
-) -> str:
+def call(args: "Sequence[str]", config_settings: "Mapping[Any, Any] | None" = None) -> str:
     """Invoke a uv subprocess and return the filename from stdout."""
     import shutil
     import subprocess
@@ -51,9 +49,7 @@ def call(
         raise RuntimeError(f"{uv_bin_name} was not properly installed")
     build_backend_args = ["build-backend"] if USE_UV_EXECUTABLE else []
     # Forward stderr, capture stdout for the filename
-    result = subprocess.run(
-        [uv_bin, *build_backend_args, *args], stdout=subprocess.PIPE
-    )
+    result = subprocess.run([uv_bin, *build_backend_args, *args], stdout=subprocess.PIPE)
     if result.returncode != 0:
         sys.exit(result.returncode)
     # If there was extra stdout, forward it (there should not be extra stdout)
@@ -69,9 +65,7 @@ def call(
     return stdout[-1].strip()
 
 
-def build_sdist(
-    sdist_directory: str, config_settings: "Mapping[Any, Any] | None" = None
-) -> str:
+def build_sdist(sdist_directory: str, config_settings: "Mapping[Any, Any] | None" = None) -> str:
     """PEP 517 hook `build_sdist`."""
     args = ["build-sdist", sdist_directory]
     return call(args, config_settings)

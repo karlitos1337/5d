@@ -29,15 +29,9 @@ class LLMLogger:
             prompts = prompts.text
         elif isinstance(prompts, dict):
             # Convert prompts to a dictionary if they are not in the expected format
-            prompts = {
-                f"prompt_{i+1}": prompt.content
-                for i, prompt in enumerate(prompts.messages)
-            }
+            prompts = {f"prompt_{i+1}": prompt.content for i, prompt in enumerate(prompts.messages)}
         else:
-            prompts = {
-                f"prompt_{i+1}": prompt.content
-                for i, prompt in enumerate(prompts.messages)
-            }
+            prompts = {f"prompt_{i+1}": prompt.content for i, prompt in enumerate(prompts.messages)}
 
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -92,15 +86,21 @@ class LoggerChatModel:
                 return reply
             except (openai.RateLimitError, HTTPStatusError) as err:
                 if isinstance(err, HTTPStatusError) and err.response.status_code == 429:
-                    logger.warning(f"HTTP 429 Too Many Requests: Waiting for {retry_delay} seconds before retrying (Attempt {attempt + 1}/{max_retries})...")
+                    logger.warning(
+                        f"HTTP 429 Too Many Requests: Waiting for {retry_delay} seconds before retrying (Attempt {attempt + 1}/{max_retries})..."
+                    )
                     time.sleep(retry_delay)
                     retry_delay *= 2
                 else:
                     wait_time = self.parse_wait_time_from_error_message(str(err))
-                    logger.warning(f"Rate limit exceeded or API error. Waiting for {wait_time} seconds before retrying (Attempt {attempt + 1}/{max_retries})...")
+                    logger.warning(
+                        f"Rate limit exceeded or API error. Waiting for {wait_time} seconds before retrying (Attempt {attempt + 1}/{max_retries})..."
+                    )
                     time.sleep(wait_time)
             except Exception as e:
-                logger.error(f"Unexpected error occurred: {str(e)}, retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                logger.error(
+                    f"Unexpected error occurred: {str(e)}, retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})"
+                )
                 time.sleep(retry_delay)
                 retry_delay *= 2
 
