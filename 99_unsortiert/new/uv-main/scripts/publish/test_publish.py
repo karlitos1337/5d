@@ -293,8 +293,7 @@ def check_index_for_provenance(
     for file in data["files"]:
         if str(version) in file["filename"] and not file.get("provenance"):
             raise RuntimeError(
-                f"Missing provenance for {project_name} {version} "
-                f"file {file['filename']}"
+                f"Missing provenance for {project_name} {version} " f"file {file['filename']}"
             )
 
 
@@ -343,8 +342,7 @@ def build_project_at_version(
         init_py = (
             project_root.joinpath("src")
             # dist info naming
-            .joinpath(project_name.replace("-", "_"))
-            .joinpath("__init__.py")
+            .joinpath(project_name.replace("-", "_")).joinpath("__init__.py")
         )
         init_py.write_text("x = 1")
 
@@ -402,10 +400,7 @@ def wait_for_index(
             sleep(2)
             continue
 
-        if (
-            f"{project_name}=={version}" in result.stdout
-            and result.stdout.count("--hash") == 2
-        ):
+        if f"{project_name}=={version}" in result.stdout and result.stdout.count("--hash") == 2:
             break
 
         print(
@@ -454,9 +449,7 @@ def publish_project(target: str, uv: Path, client: httpx.Client):
         index_url = all_targets[target].index_url
         env, extra_args = target_configuration(target)
         env = {**os.environ, **env}
-        expected_filenames = [
-            path.name for path in project_dir.joinpath("dist").iterdir()
-        ]
+        expected_filenames = [path.name for path in project_dir.joinpath("dist").iterdir()]
         # Ignore the gitignore file in dist
         expected_filenames.remove(".gitignore")
         # Ignore our test file
@@ -474,9 +467,7 @@ def publish_project(target: str, uv: Path, client: httpx.Client):
 
             with context.signer(identity_token=identity_token) as signer:
                 for dist_name in expected_filenames:
-                    if not (
-                        dist_name.endswith(".tar.gz") or dist_name.endswith(".whl")
-                    ):
+                    if not (dist_name.endswith(".tar.gz") or dist_name.endswith(".whl")):
                         continue
 
                     dist_path = project_dir / "dist" / dist_name
@@ -523,9 +514,7 @@ def publish_project(target: str, uv: Path, client: httpx.Client):
         )
         wait_for_index(index_url, project_name, version, uv, env)
         args = [uv, "publish", "--publish-url", publish_url, *extra_args]
-        output = run(
-            args, cwd=project_dir, env=env, text=True, check=True, stderr=PIPE
-        ).stderr
+        output = run(args, cwd=project_dir, env=env, text=True, check=True, stderr=PIPE).stderr
         if (
             output.count("Uploading") != len(expected_filenames)
             or output.count("already exists") != 0
@@ -562,13 +551,9 @@ def publish_project(target: str, uv: Path, client: httpx.Client):
             index_url,
             *extra_args,
         ]
-    output = run(
-        args, cwd=project_dir, env=env, text=True, check=True, stderr=PIPE
-    ).stderr
+    output = run(args, cwd=project_dir, env=env, text=True, check=True, stderr=PIPE).stderr
 
-    if output.count("Uploading") != 0 or output.count("already exists") != len(
-        expected_filenames
-    ):
+    if output.count("Uploading") != 0 or output.count("already exists") != len(expected_filenames):
         raise RuntimeError(
             f"Re-upload with check URL failed: "
             f"{output.count('Uploading')} != 0, "
@@ -597,10 +582,7 @@ def publish_project(target: str, uv: Path, client: httpx.Client):
     ]
     result = run(args, cwd=modified_project_dir, env=env, text=True, stderr=PIPE)
 
-    if (
-        result.returncode == 0
-        or "Local file and index file do not match for" not in result.stderr
-    ):
+    if result.returncode == 0 or "Local file and index file do not match for" not in result.stderr:
         raise RuntimeError(
             f"Re-upload with mismatching files should not have been started: "
             f"Exit code {result.returncode}\n"

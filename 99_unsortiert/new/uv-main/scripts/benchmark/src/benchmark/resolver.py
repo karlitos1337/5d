@@ -122,9 +122,7 @@ class Suite(abc.ABC):
         """
 
     @abc.abstractmethod
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None:
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None:
         """Resolve a modified lockfile using pip-tools, from a warm cache.
 
         The resolution is performed with an existing lockfile, and the cache directory
@@ -198,9 +196,7 @@ class PipCompile(Suite):
             ],
         )
 
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None:
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None:
         cache_dir = os.path.join(cwd, ".cache")
         baseline = os.path.join(cwd, "baseline.txt")
 
@@ -292,9 +288,7 @@ class PipSync(Suite):
 
     def resolve_warm(self, requirements_file: str, *, cwd: str) -> Command | None: ...
 
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None: ...
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None: ...
 
     def resolve_noop(self, requirements_file: str, *, cwd: str) -> Command | None: ...
 
@@ -434,18 +428,14 @@ class Poetry(Suite):
             ],
         )
 
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None:
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None:
         import tomli
         import tomli_w
 
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(poetry_lock), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         # TODO(charlie): Make this a `setup`.
@@ -499,9 +489,7 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(poetry_lock), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         # TODO(charlie): Make this a `setup`.
@@ -536,9 +524,7 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(poetry_lock), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         # TODO(charlie): Make this a `setup`.
@@ -581,9 +567,7 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(poetry_lock), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         subprocess.check_call(
@@ -650,9 +634,7 @@ class Pdm(Suite):
             pyproject = tomli.load(fp)
 
         # Add the dependencies to the pyproject.toml.
-        pyproject["project"]["dependencies"] = [
-            str(requirement) for requirement in requirements
-        ]
+        pyproject["project"]["dependencies"] = [str(requirement) for requirement in requirements]
 
         with open(os.path.join(cwd, "pyproject.toml"), "wb") as fp:
             tomli_w.dump(pyproject, fp)
@@ -691,9 +673,7 @@ class Pdm(Suite):
             ],
         )
 
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None:
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None:
         import tomli
         import tomli_w
 
@@ -849,9 +829,7 @@ class UvPip(Suite):
         self.path = path or os.path.join(
             os.path.dirname(
                 os.path.dirname(
-                    os.path.dirname(
-                        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                    )
+                    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
                 )
             ),
             "target",
@@ -897,9 +875,7 @@ class UvPip(Suite):
             ],
         )
 
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None:
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None:
         cache_dir = os.path.join(cwd, ".cache")
         baseline = os.path.join(cwd, "baseline.txt")
 
@@ -1010,9 +986,7 @@ class UvProject(Suite):
         self.path = path or os.path.join(
             os.path.dirname(
                 os.path.dirname(
-                    os.path.dirname(
-                        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                    )
+                    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
                 )
             ),
             "target",
@@ -1047,9 +1021,7 @@ class UvProject(Suite):
             pyproject = tomli.load(fp)
 
         # Add the dependencies to the pyproject.toml.
-        pyproject["project"]["dependencies"] += [
-            str(requirement) for requirement in requirements
-        ]
+        pyproject["project"]["dependencies"] += [str(requirement) for requirement in requirements]
 
         with open(os.path.join(cwd, "pyproject.toml"), "wb") as fp:
             tomli_w.dump(pyproject, fp)
@@ -1096,9 +1068,7 @@ class UvProject(Suite):
             ],
         )
 
-    def resolve_incremental(
-        self, requirements_file: str, *, cwd: str
-    ) -> Command | None:
+    def resolve_incremental(self, requirements_file: str, *, cwd: str) -> Command | None:
         import tomli
         import tomli_w
 
@@ -1258,9 +1228,7 @@ class UvProject(Suite):
 
 def main():
     """Run the benchmark."""
-    parser = argparse.ArgumentParser(
-        description="Benchmark uv against other packaging tools."
-    )
+    parser = argparse.ArgumentParser(description="Benchmark uv against other packaging tools.")
     parser.add_argument(
         "file",
         type=str,
@@ -1269,9 +1237,7 @@ def main():
             "(for resolution) or `requirements.txt` (for installation))."
         ),
     )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true", help="Print verbose output."
-    )
+    parser.add_argument("--verbose", "-v", action="store_true", help="Print verbose output.")
     parser.add_argument("--json", action="store_true", help="Export results to JSON.")
     parser.add_argument(
         "--python",
@@ -1432,11 +1398,15 @@ def main():
     benchmarks = (
         [Benchmark(benchmark) for benchmark in args.benchmark]
         if args.benchmark is not None
-        else [Benchmark.RESOLVE_COLD, Benchmark.RESOLVE_WARM]
-        if requirements_file.endswith(".in")
-        else [Benchmark.INSTALL_COLD, Benchmark.INSTALL_WARM]
-        if requirements_file.endswith(".txt")
-        else list(Benchmark)
+        else (
+            [Benchmark.RESOLVE_COLD, Benchmark.RESOLVE_WARM]
+            if requirements_file.endswith(".in")
+            else (
+                [Benchmark.INSTALL_COLD, Benchmark.INSTALL_WARM]
+                if requirements_file.endswith(".txt")
+                else list(Benchmark)
+            )
+        )
     )
 
     logging.info(f"Reading requirements from: {requirements_file}")
