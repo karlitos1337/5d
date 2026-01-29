@@ -37,4 +37,5 @@ jobs:
 
       - name: Run tests (only repo tests)
         run: |
+          export PYTHONPATH=$PYTHONPATH:.
           pytest tests -q
