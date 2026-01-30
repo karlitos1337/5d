@@ -1,4 +1,3 @@
-
 from typing import Any
 
 import networkx as nx
@@ -6,10 +5,10 @@ import networkx as nx
 
 class CognitiveGraph:
     """5D Core: Semantic Knowledge Graph (Hypothesis H1)"""
-    
+
     def __init__(self):
         self.graph = nx.DiGraph()
-        
+
     def add_concept(self, concept_id: str, metadata: dict[str, Any]) -> None:
         self.graph.add_node(concept_id, **metadata)
 
@@ -29,6 +28,7 @@ class CognitiveGraph:
             return []
         return list(self.graph.neighbors(concept_id))[:limit]
 
+
 def main():
     print("Initializing 5D Cognitive Graph...")
     kg = CognitiveGraph()
@@ -37,6 +37,7 @@ def main():
     kg.link_concepts("Quantum", "Consciousness", weight=0.8)
     score = kg.calculate_serendipity_score(["Quantum", "Consciousness"])
     print(f"Serendipity Score: {score}")
+
 
 if __name__ == "__main__":
     main()
