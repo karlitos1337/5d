@@ -45,3 +45,6 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Secrets
+**/secrets.yaml
