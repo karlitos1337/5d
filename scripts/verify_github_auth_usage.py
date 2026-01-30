@@ -1,6 +1,7 @@
 import ast
 import os
 
+
 def check_github_auth_usage(directory):
     usage_found = False
     for root, _dirs, files in os.walk(directory):
