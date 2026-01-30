@@ -3,17 +3,19 @@ import os
 
 def check_github_auth_usage(directory):
     usage_found = False
-    for root, dirs, files in os.walk(directory):
-        if "99_unsortiert" in root: # Skip the unsorted/backup directory
+    for root, _dirs, files in os.walk(directory):
+        if "99_unsortiert" in root:  # Skip the unsorted/backup directory
             continue
         for file in files:
             if file.endswith(".py"):
                 filepath = os.path.join(root, file)
-                if filepath.endswith("auth/github_oauth.py") or filepath.endswith("tests/test_github_oauth_security.py"):
+                if filepath.endswith("auth/github_oauth.py") or filepath.endswith(
+                    "tests/test_github_oauth_security.py"
+                ):
                     continue
 
                 try:
-                    with open(filepath, "r", encoding="utf-8") as f:
+                    with open(filepath, encoding="utf-8") as f:
                         tree = ast.parse(f.read(), filename=filepath)
 
                     for node in ast.walk(tree):

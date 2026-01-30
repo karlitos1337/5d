@@ -15,7 +15,7 @@ import logging
 import streamlit as st
 import redis
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -46,7 +46,7 @@ class CacheTTL:
 # ============================================================================
 
 @st.cache_data(ttl=CacheTTL.STATIC)
-def preload_solutions_data() -> Dict[str, Any]:
+def preload_solutions_data() -> dict[str, Any]:
     """
     Preload 5d_solutions.json on app startup.
 
@@ -64,7 +64,7 @@ def preload_solutions_data() -> Dict[str, Any]:
 
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
-def preload_research_data() -> Dict[str, Any]:
+def preload_research_data() -> dict[str, Any]:
     """
     Preload 5d_research_data.json on app startup.
 
@@ -82,7 +82,7 @@ def preload_research_data() -> Dict[str, Any]:
 
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
-def preload_github_data() -> Dict[str, Any]:
+def preload_github_data() -> dict[str, Any]:
     """
     Preload 5d_github_data.json on app startup.
 
@@ -100,7 +100,7 @@ def preload_github_data() -> Dict[str, Any]:
 
 
 @st.cache_data(ttl=CacheTTL.BASELINE)
-def preload_map_baseline() -> Dict[str, Any]:
+def preload_map_baseline() -> dict[str, Any]:
     """
     Preload web/5d-map/data/baseline.json for World Map.
 
@@ -158,7 +158,7 @@ def invalidate_cache(cache_key: str = None):
     if cache_key:
         # Streamlit doesn't support selective invalidation in @st.cache_data
         # Use st.cache_data.clear() for all or rely on TTL
-        st.warning(f"⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
+        st.warning("⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
     else:
         st.cache_data.clear()
         st.success("✅ All caches cleared")
@@ -356,7 +356,7 @@ redis_cache = RedisCache()
 # Memory Monitoring
 # ============================================================================
 
-def get_cache_stats() -> Dict[str, Any]:
+def get_cache_stats() -> dict[str, Any]:
     """
     Get cache statistics.
 
