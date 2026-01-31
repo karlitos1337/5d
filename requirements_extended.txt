@@ -22,3 +22,5 @@ pyyaml
 fuzzywuzzy
 python-Levenshtein
 PyPDF2
+pytest-asyncio
+discord.py
