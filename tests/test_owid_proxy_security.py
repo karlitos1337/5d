@@ -1,13 +1,14 @@
-import sys
 import os
+import sys
 import unittest
-from unittest.mock import MagicMock, patch
 from io import BytesIO
+from unittest.mock import MagicMock, patch
 
 # Add web/5d-map to path to import owid_proxy
 sys.path.append(os.path.join(os.getcwd(), 'web/5d-map'))
 
 from owid_proxy import ProxyHandler
+
 
 class TestProxySecurity(unittest.TestCase):
     def setUp(self):
@@ -52,7 +53,6 @@ class TestProxySecurity(unittest.TestCase):
 
         # Simulate 11MB response
         # We need to mock read(chunk_size) to return chunks
-        chunk_size = 8192
         total_size = 11 * 1024 * 1024
 
         # Generator for chunks
