@@ -1,9 +1,8 @@
 
-import pytest
-import streamlit as st
-from unittest.mock import MagicMock, patch
-import sys
 import os
+import sys
+from unittest.mock import MagicMock
+import streamlit as st
 
 # Ensure the pages directory is in the path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -51,5 +50,5 @@ def test_autopoietic_simulation_metrics():
 
 def test_syntax():
     """Simple syntax check for the file."""
-    with open('pages/9_🧪_Autopoietic_Class.py', 'r') as f:
+    with open('pages/9_🧪_Autopoietic_Class.py') as f:
         compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
