@@ -23,3 +23,7 @@
 ## 2024-05-24 - Missing dependencies
 **Learning:** CI failures can occur due to missing dependencies in test environments (e.g., `networkx`, `pytest` itself) and strict linting rules (e.g., unused imports, deprecated type hints) in legacy or generated code.
 **Action:** Ensure all test dependencies are explicitly listed in `requirements_extended.txt` or installed in the CI workflow. Exclude legacy/backup directories (like `99_unsortiert`) from linting/testing configurations if they are not meant to be maintained.
+
+## 2024-05-24 - Malformed requirements.txt
+**Learning:** Accidental string concatenation in bash commands (like echo "networkx" >> requirements_extended.txt without a newline) can merge requirement names, causing pip install failures.
+**Action:** Always verify file content after appending text, or use editors/commands that handle newlines correctly.
