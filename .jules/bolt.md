@@ -19,3 +19,7 @@
 ## 2024-05-24 - CI Dependency and Linting
 **Learning:** CI failures can occur due to missing dependencies in test environments (e.g., `networkx`, `pytest` itself) and strict linting rules (e.g., unused imports, deprecated type hints) in legacy or generated code.
 **Action:** Ensure all test dependencies are explicitly listed in `requirements_extended.txt` or installed in the CI workflow. Exclude legacy/backup directories (like `99_unsortiert`) from linting/testing configurations if they are not meant to be maintained.
+
+## 2024-05-24 - Missing dependencies
+**Learning:** CI failures can occur due to missing dependencies in test environments (e.g., `networkx`, `pytest` itself) and strict linting rules (e.g., unused imports, deprecated type hints) in legacy or generated code.
+**Action:** Ensure all test dependencies are explicitly listed in `requirements_extended.txt` or installed in the CI workflow. Exclude legacy/backup directories (like `99_unsortiert`) from linting/testing configurations if they are not meant to be maintained.
