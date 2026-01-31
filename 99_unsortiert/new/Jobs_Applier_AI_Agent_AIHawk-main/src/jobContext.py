@@ -4,6 +4,7 @@ from src.job_application import JobApplication
 
 from dataclasses import dataclass
 
+
 @dataclass
 class JobContext:
     job: Job = None
