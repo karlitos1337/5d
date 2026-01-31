@@ -36,9 +36,7 @@ PREFIXES = [
 ]
 
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -143,15 +141,11 @@ async def download_file(
 ):
     """Download a file and verify its SHA-256 checksum if provided."""
     if dest.exists() and expected_sha256 and sha256_checksum(dest) == expected_sha256:
-        logger.debug(
-            f"File {dest} already exists and SHA-256 matches. Skipping download."
-        )
+        logger.debug(f"File {dest} already exists and SHA-256 matches. Skipping download.")
         progress_bar.update(1)
         return True  # Success, even though skipped
     elif dest.exists() and expected_sha256 is None:
-        logger.debug(
-            f"File {dest} already exists no SHA-256 provided. Skipping download."
-        )
+        logger.debug(f"File {dest} already exists no SHA-256 provided. Skipping download.")
         progress_bar.update(1)
         return True  # Success, even though skipped
 
@@ -191,9 +185,7 @@ async def download_file(
     return True
 
 
-async def download_files(
-    urls: Set[Tuple[str, Optional[str]]], target: Path, max_concurrent: int
-):
+async def download_files(urls: Set[Tuple[str, Optional[str]]], target: Path, max_concurrent: int):
     """Download files with a limit on concurrent downloads using httpx."""
     async with httpx.AsyncClient(follow_redirects=True) as client:
         progress_bar = tqdm(total=len(urls), desc="Downloading", unit="file")
@@ -228,9 +220,7 @@ def parse_arguments():
     parser.add_argument("--name", help="Filter by name (e.g., 'cpython').")
     parser.add_argument("--arch", help="Filter by architecture (e.g., 'aarch64').")
     parser.add_argument("--os", help="Filter by operating system (e.g., 'darwin').")
-    parser.add_argument(
-        "--version", help="Filter version by regex (e.g., '3.13.\\d+$')."
-    )
+    parser.add_argument("--version", help="Filter version by regex (e.g., '3.13.\\d+$').")
     parser.add_argument(
         "--max-concurrent",
         type=int,
@@ -261,9 +251,7 @@ def main():
             metadata = list(json.load(f).values())
 
     version = re.compile(args.version) if args.version else None
-    filtered_metadata = filter_metadata(
-        metadata, args.name, args.arch, args.os, version
-    )
+    filtered_metadata = filter_metadata(metadata, args.name, args.arch, args.os, version)
     urls = {(entry["url"], entry["sha256"]) for entry in filtered_metadata}
 
     if not urls:
@@ -273,9 +261,7 @@ def main():
     target = Path(args.target)
     logger.info(f"Downloading {len(urls)} files to {target}...")
     try:
-        success_count, errors = asyncio.run(
-            download_files(urls, target, args.max_concurrent)
-        )
+        success_count, errors = asyncio.run(download_files(urls, target, args.max_concurrent))
         print(f"Successfully downloaded: {success_count} files.")
         if errors:
             print("Failed downloads:")

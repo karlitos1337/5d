@@ -1,13 +1,20 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+extend-exclude = '''
+/(
+  | private-gpt-main
+  | 99_unsortiert
+  | external
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/", "99_unsortiert/", "external/"]
+extend-exclude = ["private-gpt-main", "99_unsortiert", "external"]
 
 [tool.ruff.format]
 quote-style = "double"
