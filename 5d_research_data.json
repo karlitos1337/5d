@@ -24,49 +24,48 @@
         "link": "http://arxiv.org/abs/2506.09781v2"
       },
       {
-        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
+        "title": "The Dimension of Self-Directed Learning",
         "authors": [
-          "\nHarkirat Singh Behl\n",
-          "\nAtılım Güneş Baydin\n",
-          "\nPhilip H. S. Torr\n"
+          "\nPramith Devulapalli\n",
+          "\nSteve Hanneke\n"
         ],
-        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
-        "published": "2019-05-17T18:45:25Z",
-        "link": "http://arxiv.org/abs/1905.07435v1"
+        "summary": "Understanding the self-directed learning complexity has been an important problem that has captured the attention of the online learning theory community since the early 1990s. Within this framework, ",
+        "published": "2024-02-20T21:59:41Z",
+        "link": "http://arxiv.org/abs/2402.13400v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
+        "title": "Enhancing Trainee Knowledge and Competence in Addiction Medicine: Outcomes of an Interprofessional Addiction Consult Service Rotation.",
         "authors": [
-          "Gutiérrez Hernández A",
-          "Pompa Mansilla M",
-          "Vadillo Bueno G"
+          "Goldman SA",
+          "Wurzburger R",
+          "Sokolski E"
         ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41415999/"
+        "published": "2026 Jan 30",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41615525/"
       },
       {
-        "title": "Challenges in anatomy education among Sudanese medical students during the 2023 armed conflict: a cross-sectional survey.",
+        "title": "The effect of collaborative learning approach on nursing students' knowledge and skill learning for enteral nutrition: a randomized controlled study.",
         "authors": [
-          "Eltieb QDA",
-          "Muhammed A",
-          "Ahmed LNM"
+          "Acun A",
+          "Aksoy Bulgurcu R"
         ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41398249/"
+        "published": "2026 Jan 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41612365/"
       },
       {
-        "title": "Reimagining Graduate Study With Generative Artificial Intelligence-Supported Study Strategies: A Doctor of Nursing Practice Student's Perspective.",
+        "title": "Spontaneous behavior is a succession of self-directed tasks.",
         "authors": [
-          "Silva KA",
-          "Sheets DM"
+          "Weinreb C",
+          "Kannan LT",
+          "Newman-Boulle A"
         ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41397874/"
+        "published": "2026 Jan 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41610841/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:05.150148"
+    "timestamp": "2026-01-31T11:40:15.289996"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,37 +105,37 @@
     ],
     "pubmed": [
       {
-        "title": "Eurogame escape room of physics in veterinary education: a pilot study.",
+        "title": "Staged-release problem-based learning revitalizes medical students' intrinsic motivation and clinical reasoning.",
         "authors": [
-          "Bräuninger SA",
-          "Motz DA",
-          "Lüpke M"
+          "Elhassan YH",
+          "Sieben JM",
+          "Köhler SE"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421988/"
+        "published": "2026 Jan 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41612652/"
       },
       {
-        "title": "The impact of AI tools enabled student engagement on academic performance, employability, and empowerment in Ha'il Region, Saudi Arabia.",
+        "title": "Factors impacting the delivery of contextualized care in serious illness: a focus group study with healthcare professionals.",
         "authors": [
-          "Singh A",
-          "Singh HP",
-          "Alam MF"
+          "Modderkolk L",
+          "Schoon Y",
+          "Touw H"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421110/"
+        "published": "2026 Jan 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41612327/"
       },
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "Providing choice boosts immediate force production in adolescents with ADHD.",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "Gregorio MV",
+          "Abdollahipour R",
+          "Valtr L"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2026 Jan 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41610829/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:08.080663"
+    "timestamp": "2026-01-31T11:40:18.279094"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,37 +171,37 @@
     ],
     "pubmed": [
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "Mental health help-seeking among individuals with breast cancer: A qualitative exploration of women's and healthcare practitioners' perspectives.",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "Mohammad Hussin N",
+          "Nik Jaafar NR",
+          "Idris IB"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41616011/"
       },
       {
-        "title": "Development of Digital Literacy: Application of Artificial Intelligence in Education and Clinical Practice of Oncology Nurses.",
+        "title": "Why Not Rock the Boat? Deprescribing Anticholinergic Medications That Are No Longer Needed in Persons With Schizophrenia.",
         "authors": [
-          "Šimunić N",
-          "Višnjić Junaković N",
-          "Skelin M"
+          "Gannon JM",
+          "Chengappa KNR",
+          "Lupu AM"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419399/"
+        "published": "2025 Oct",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41613749/"
       },
       {
-        "title": "Opportunities to flip the narrative from burden to action for young women joining the National Cervical Screening Programme in Aotearoa New Zealand: a Kaupapa Māori qualitative exploration of experiences and knowledge of cervical screening for 18-30 year olds.",
+        "title": "The Reproductive Autonomy Scale: German validation and application in an Austrian student population.",
         "authors": [
-          "Slater T",
-          "Stevenson K",
-          "Adcock A"
+          "Böttcher B",
+          "Flatscher-Thoeni M",
+          "Reiser E"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41414979/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41613074/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:11.084001"
+    "timestamp": "2026-01-31T11:40:20.377768"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -242,6 +241,14 @@
     ],
     "pubmed": [
       {
+        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
+        "authors": [
+          "Liu Y"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+      },
+      {
         "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
         "authors": [
           "Porges SW"
@@ -258,19 +265,9 @@
         ],
         "published": "2025 Jul 1",
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
-      },
-      {
-        "title": "Neuroception of psychological safety scale (NPSS): validation with a UK based adult community sample.",
-        "authors": [
-          "Cogan N",
-          "Morton L",
-          "Campbell J"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:14.101425"
+    "timestamp": "2026-01-31T11:40:22.296328"
   },
   "democratic schools": {
     "arxiv": [
@@ -297,46 +294,57 @@
         "link": "http://arxiv.org/abs/1502.04264v1"
       },
       {
-        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
+        "title": "Can AI mediation improve democratic deliberation?",
         "authors": [
-          "\nCliver Oliver Turpo Benique\n"
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
         ],
-        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
-        "published": "2025-07-14T02:32:04Z",
-        "link": "http://arxiv.org/abs/2507.14191v1"
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Factors associated with unsuppressed HIV viral load among children under 15 years in sub-Saharan africa: a systematic review.",
+        "title": "Enantioselective C-H functionalization: logic and applications in the total synthesis of natural products.",
         "authors": [
-          "Balowe JK",
-          "Alain NM",
-          "Mampasi AL"
+          "Qian PF",
+          "Shi BF"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41422218/"
+        "published": "2026 Jan 16",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41613967/"
       },
       {
-        "title": "Cross-cultural differences of leadership style and emotional intelligence level in physical education teacher's success of China and Ukraine.",
+        "title": "Denis Mukwege: Advocacy Within and Beyond the Operating Room.",
         "authors": [
-          "Zhang L"
+          "Ojinnaka AA",
+          "Odaka F",
+          "Kashyap R"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421108/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41613734/"
       },
       {
-        "title": "Transformative Potential of Outsider Art for Neurodivergent Artists.",
+        "title": "Prevalence and determinants of unmet need for family planning among married women on Idjwi Island, Democratic Republic of the congo.",
         "authors": [
-          "Sochor P",
-          "Sochorova D",
-          "Kubiatko M"
+          "Masoda MN",
+          "Mukuku O",
+          "Mishika PL"
         ],
-        "published": "2025 Dec 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420883/"
+        "published": "2026 Jan 29",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41612465/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:17.080561"
+    "timestamp": "2026-01-31T11:40:24.297038"
   },
   "student agency": {
     "arxiv": [
@@ -376,41 +384,40 @@
     ],
     "pubmed": [
       {
-        "title": "Beliefs, practices, and awareness of written corrective feedback among EFL teachers: a mixed-methods study.",
+        "title": "Perspectives of Undergraduate Nursing Students Taking Combined and Separate Maternity and Pediatric Courses.",
         "authors": [
-          "Mostafavi M",
-          "Shokrpour N",
-          "Afraz S"
+          "Welsh AM",
+          "Brown-O'Hara P"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420260/"
+        "published": "2026 Jan 27",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41617177/"
       },
       {
-        "title": "Aligning expectations and experiences: Medical student perspectives on progress testing for National Licensing Examination preparation.",
+        "title": "Three pain points of medical schools - time for change.",
         "authors": [
-          "Doherty SE",
-          "Cullen KM",
-          "Cole AJ"
+          "Pospíšilová K",
+          "Vošmik J",
+          "Volejníčková RM"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41416766/"
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41615793/"
       },
       {
-        "title": "Factors associated with unintended pregnancies among unmarried adolescents in Eastern Uganda: a cross-sectional study.",
+        "title": "A qualitative exploration of first-in-family medical students' decisions to partake in noncurricular activities.",
         "authors": [
-          "Komasawa M",
-          "Sato M",
-          "Saito K"
+          "Garrett A",
+          "Griffith M",
+          "Amssalu M"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413894/"
+        "published": "2026 Jan 30",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41614429/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:20.380653"
+    "timestamp": "2026-01-31T11:40:25.283040"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2025-12-21T11:33:20.380723",
+    "timestamp": "2026-01-31T11:40:25.284849",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -532,7 +539,73 @@
         }
       }
     },
-    "timestamp": "2025-12-21T11:33:40.499254",
+    "timestamp": "2026-01-31T11:40:31.647078",
     "source": "World Bank EdStats API"
+  },
+  "world_bank_wgi": {
+    "data": {
+      "AUS": {
+        "Voice & Accountability": {
+          "value": 1.50660192966461,
+          "year": "2023"
+        }
+      },
+      "BRA": {
+        "Voice & Accountability": {
+          "value": 0.382853865623474,
+          "year": "2023"
+        }
+      },
+      "CAN": {
+        "Voice & Accountability": {
+          "value": 1.4796462059021,
+          "year": "2023"
+        }
+      },
+      "CHN": {
+        "Voice & Accountability": {
+          "value": -1.50455415248871,
+          "year": "2023"
+        }
+      },
+      "DEU": {
+        "Voice & Accountability": {
+          "value": 1.46138572692871,
+          "year": "2023"
+        }
+      },
+      "FRA": {
+        "Voice & Accountability": {
+          "value": 1.15460133552551,
+          "year": "2023"
+        }
+      },
+      "GBR": {
+        "Voice & Accountability": {
+          "value": 1.26162397861481,
+          "year": "2023"
+        }
+      },
+      "IND": {
+        "Voice & Accountability": {
+          "value": 0.0944044888019562,
+          "year": "2023"
+        }
+      },
+      "JPN": {
+        "Voice & Accountability": {
+          "value": 1.10550534725189,
+          "year": "2023"
+        }
+      },
+      "USA": {
+        "Voice & Accountability": {
+          "value": 0.877519071102142,
+          "year": "2023"
+        }
+      }
+    },
+    "timestamp": "2026-01-31T11:40:33.479921",
+    "source": "World Bank WGI"
   }
 }
