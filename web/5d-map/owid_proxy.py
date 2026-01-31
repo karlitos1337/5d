@@ -22,20 +22,40 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
+                MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10MB
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    chunks = []
+                    total_size = 0
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        chunks.append(chunk)
+                        total_size += len(chunk)
+                        if total_size > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large")
+                    data = b"".join(chunks)
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Sentinel: Prevent info leak. Only allow safe messages.
+                err_str = str(e)
+                if err_str == "Response too large":
+                    msg = b"Response too large"
+                else:
+                    msg = b"Fetch error"
+
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
