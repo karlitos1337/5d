@@ -1,12 +1,12 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
-exclude = '''
-/(
-    private-gpt-main/
-  | 99_unsortiert/
-  | external/
-)/
+extend-exclude = '''
+(
+  ^/private-gpt-main/
+  | ^/99_unsortiert/
+  | ^/external/
+)
 '''
 
 [tool.ruff]
