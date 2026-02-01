@@ -7,6 +7,9 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
+CHUNK_SIZE = 8192
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -18,30 +21,54 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
+                # Sentinel: Added timeout=15 to prevent hanging
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    chunks = []
+                    total_size = 0
+                    while True:
+                        chunk = resp.read(CHUNK_SIZE)
+                        if not chunk:
+                            break
+                        total_size += len(chunk)
+                        if total_size > MAX_RESPONSE_SIZE:
+                            self.send_response(502)
+                            self.send_header("Content-Type", "text/plain; charset=utf-8")
+                            self.send_header("Access-Control-Allow-Origin", "*")
+                            self.send_header("X-Content-Type-Options", "nosniff")
+                            self.end_headers()
+                            self.wfile.write(b"Response too large")
+                            return
+                        chunks.append(chunk)
+
+                    data = b"".join(chunks)
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
-                    # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Sentinel: Secure error handling - don't leak details
+                # Log to stderr if needed, but don't send to client
+                self.log_error("Proxy error: %s", e)
+                msg = b"Fetch error"
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("X-Content-Type-Options", "nosniff")
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")
 
