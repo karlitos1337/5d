@@ -1,8 +1,8 @@
-import unittest
-from unittest.mock import MagicMock, patch, Mock
-import sys
-import os
 import importlib.util
+import os
+import sys
+import unittest
+from unittest.mock import MagicMock, Mock, patch
 
 # Load the module dynamically
 file_path = os.path.join(os.getcwd(), 'web/5d-map/owid_proxy.py')
@@ -11,7 +11,8 @@ owid_proxy = importlib.util.module_from_spec(spec)
 sys.modules["owid_proxy"] = owid_proxy
 spec.loader.exec_module(owid_proxy)
 
-from owid_proxy import ProxyHandler
+from owid_proxy import ProxyHandler  # noqa: E402
+
 
 class TestOWIDProxySecurity(unittest.TestCase):
     def setUp(self):
