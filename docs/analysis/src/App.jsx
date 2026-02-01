@@ -388,7 +388,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach's Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
