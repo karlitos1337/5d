@@ -12,20 +12,20 @@ import streamlit as st
 
 
 def get_device_type():
-    """
+    # """
     Detect device type based on viewport width.
 
     Returns:
         str: 'mobile', 'tablet', or 'desktop'
-    """
+    # """
     # Inject JavaScript to detect screen width
-    js_code = """
-    <script>
-        const width = window.innerWidth;
+    # js_code = """
+    # <script>
+    #     const width = window.innerWidth;
         const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
         window.parent.postMessage({type: 'streamlit:setComponentValue', value: deviceType}, '*');
-    </script>
-    """
+    # </script>
+    # """
 
     # Use st.components for device detection (simplified)
     # In practice, we use CSS media queries instead
@@ -33,7 +33,7 @@ def get_device_type():
 
 
 def responsive_columns(num_cols, mobile_cols=1):
-    """
+    # """
     Create responsive column layout.
 
     Args:
@@ -47,14 +47,14 @@ def responsive_columns(num_cols, mobile_cols=1):
         cols = responsive_columns(4, mobile_cols=2)
         with cols[0]:
             st.metric("Metric 1", "100")
-    """
+    # """
     # Streamlit doesn't support dynamic columns based on screen size
     # We return desktop layout and rely on CSS for mobile stacking
     return st.columns(num_cols)
 
 
 def get_map_height(default=400, mobile=300):
-    """
+    # """
     Get responsive map height based on device.
 
     Args:
@@ -63,14 +63,14 @@ def get_map_height(default=400, mobile=300):
 
     Returns:
         int: Map height in pixels
-    """
+    # """
     # In production, detect via JavaScript
     # For now, use default (CSS handles mobile via viewport)
     return default
 
 
 def inject_mobile_css():
-    """
+    # """
     Inject mobile-responsive CSS into Streamlit app.
 
     Handles:
@@ -78,7 +78,7 @@ def inject_mobile_css():
     - Font size adjustments
     - Button touch targets (min 44x44px)
     - Map height responsiveness
-    """
+    # """
     mobile_css = """
     <style>
         /* Mobile-first responsive design */
@@ -196,18 +196,18 @@ def inject_mobile_css():
             }
         }
     </style>
-    """
+    # """
 
     st.markdown(mobile_css, unsafe_allow_html=True)
 
 
 def mobile_friendly_chart_config():
-    """
+    # """
     Return Plotly chart config optimized for mobile.
 
     Returns:
         dict: Plotly config with mobile optimizations
-    """
+    # """
     return {
         'displayModeBar': True,
         'displaylogo': False,
@@ -224,24 +224,24 @@ def mobile_friendly_chart_config():
 
 
 def mobile_info_box(title, content, icon="ℹ️"):
-    """
+    # """
     Display mobile-optimized info box.
 
     Args:
         title: Box title
         content: Box content (markdown)
         icon: Emoji icon (default: ℹ️)
-    """
+    # """
     with st.expander(f"{icon} {title}", expanded=False):
         st.markdown(content)
 
 
 def get_responsive_map_width():
-    """
+    # """
     Get responsive map width.
 
     Returns:
         int or None: Width in pixels, or None for full width
-    """
+    # """
     # Always use full width, CSS handles responsiveness
     return None
