@@ -4,15 +4,15 @@ This creates the cover letter (in html, utils will then convert in PDF) matching
 # app/libs/resume_and_cover_builder/llm_generate_cover_letter_from_job.py
 import os
 import textwrap
-from ..utils import LoggerChatModel
+from pathlib import Path
+
+from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from pathlib import Path
-from dotenv import load_dotenv
-from requests.exceptions import HTTPError as HTTPStatusError
-from pathlib import Path
 from loguru import logger
+
+from ..utils import LoggerChatModel
 
 # Load environment variables from .env file
 load_dotenv()

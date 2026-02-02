@@ -1,8 +1,8 @@
-from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional, Union
-import yaml
-from pydantic import BaseModel, EmailStr, HttpUrl, Field
+from dataclasses import dataclass
+from typing import Any, Optional, Union
 
+import yaml
+from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
 
 class PersonalInformation(BaseModel):
@@ -27,7 +27,7 @@ class EducationDetails(BaseModel):
     final_evaluation_grade: Optional[str]
     start_date: Optional[str]
     year_of_completion: Optional[int]
-    exam: Optional[Union[List[Dict[str, str]], Dict[str, str]]] = None
+    exam: Optional[Union[list[dict[str, str]], dict[str, str]]] = None
 
 
 class ExperienceDetails(BaseModel):
@@ -36,8 +36,8 @@ class ExperienceDetails(BaseModel):
     employment_period: Optional[str]
     location: Optional[str]
     industry: Optional[str]
-    key_responsibilities: Optional[List[Dict[str, str]]] = None
-    skills_acquired: Optional[List[str]] = None
+    key_responsibilities: Optional[list[dict[str, str]]] = None
+    skills_acquired: Optional[list[str]] = None
 
 
 class Project(BaseModel):
@@ -90,13 +90,13 @@ class LegalAuthorization(BaseModel):
 
 class Resume(BaseModel):
     personal_information: Optional[PersonalInformation]
-    education_details: Optional[List[EducationDetails]] = None
-    experience_details: Optional[List[ExperienceDetails]] = None
-    projects: Optional[List[Project]] = None
-    achievements: Optional[List[Achievement]] = None
-    certifications: Optional[List[Certifications]] = None
-    languages: Optional[List[Language]] = None
-    interests: Optional[List[str]] = None
+    education_details: Optional[list[EducationDetails]] = None
+    experience_details: Optional[list[ExperienceDetails]] = None
+    projects: Optional[list[Project]] = None
+    achievements: Optional[list[Achievement]] = None
+    certifications: Optional[list[Certifications]] = None
+    languages: Optional[list[Language]] = None
+    interests: Optional[list[str]] = None
 
     @staticmethod
     def normalize_exam_format(exam):
@@ -122,7 +122,7 @@ class Resume(BaseModel):
             raise Exception(f"Unexpected error while parsing YAML: {e}") from e
 
 
-    def _process_personal_information(self, data: Dict[str, Any]) -> PersonalInformation:
+    def _process_personal_information(self, data: dict[str, Any]) -> PersonalInformation:
         try:
             return PersonalInformation(**data)
         except TypeError as e:
@@ -132,7 +132,7 @@ class Resume(BaseModel):
         except Exception as e:
             raise Exception(f"Unexpected error in PersonalInformation processing: {e}") from e
 
-    def _process_education_details(self, data: List[Dict[str, Any]]) -> List[EducationDetails]:
+    def _process_education_details(self, data: list[dict[str, Any]]) -> list[EducationDetails]:
         education_list = []
         for edu in data:
             try:
@@ -157,7 +157,7 @@ class Resume(BaseModel):
                 raise Exception(f"Unexpected error in Education processing: {e}") from e
         return education_list
 
-    def _process_experience_details(self, data: List[Dict[str, Any]]) -> List[ExperienceDetails]:
+    def _process_experience_details(self, data: list[dict[str, Any]]) -> list[ExperienceDetails]:
         experience_list = []
         for exp in data:
             try:

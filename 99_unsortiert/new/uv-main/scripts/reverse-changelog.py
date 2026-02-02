@@ -39,7 +39,7 @@ def main():
 
     # Read the input file
     name = sys.argv[1]
-    with open(name, "r") as file:
+    with open(name) as file:
         content = file.read()
 
     # Reverse the changelog

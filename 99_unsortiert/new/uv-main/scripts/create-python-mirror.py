@@ -20,7 +20,7 @@ import json
 import logging
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Optional
 from urllib.parse import unquote
 
 import httpx
@@ -62,7 +62,7 @@ def sha256_checksum(file_path: Path) -> str:
     return hasher.hexdigest()
 
 
-def collect_metadata_from_git_history() -> List[Dict]:
+def collect_metadata_from_git_history() -> list[dict]:
     """Collect all metadata entries from the history of the VERSIONS_FILE."""
     metadata = []
     try:
@@ -108,12 +108,12 @@ def match_version(entry, pattern):
 
 
 def filter_metadata(
-    metadata: List[Dict],
+    metadata: list[dict],
     name: Optional[str],
     arch: Optional[str],
     os: Optional[str],
     version: Optional[re.Pattern],
-) -> List[Dict]:
+) -> list[dict]:
     """Filter the metadata based on name, architecture, and OS, ensuring unique URLs."""
     filtered = [
         entry
@@ -192,13 +192,13 @@ async def download_file(
 
 
 async def download_files(
-    urls: Set[Tuple[str, Optional[str]]], target: Path, max_concurrent: int
+    urls: set[tuple[str, Optional[str]]], target: Path, max_concurrent: int
 ):
     """Download files with a limit on concurrent downloads using httpx."""
     async with httpx.AsyncClient(follow_redirects=True) as client:
         progress_bar = tqdm(total=len(urls), desc="Downloading", unit="file")
         sem = asyncio.Semaphore(max_concurrent)
-        errors: List[Tuple[str, str]] = []  # To collect errors
+        errors: list[tuple[str, str]] = []  # To collect errors
         success_count = 0  # Track number of successful downloads
 
         async def sem_download(url, sha256):

@@ -50,10 +50,11 @@ import json
 import logging
 import os
 import re
+from collections.abc import Generator, Iterable
 from dataclasses import asdict, dataclass, field
 from enum import StrEnum
 from pathlib import Path
-from typing import Any, Generator, Iterable, NamedTuple, Self
+from typing import Any, NamedTuple, Self
 
 import httpx
 

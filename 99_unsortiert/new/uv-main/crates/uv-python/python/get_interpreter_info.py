@@ -4,18 +4,17 @@ Queries information about the current Python interpreter and prints it as JSON.
 The script will exit with status 0 on known error that are turned into rust errors.
 """
 
-import site
-import sys
-
 import json
 import os
 import platform
+import site
 import struct
+import sys
 import sysconfig
 
 
 def format_full_version(info):
-    version = "{0.major}.{0.minor}.{0.micro}".format(info)
+    version = f"{info.major}.{info.minor}.{info.micro}"
     kind = info.releaselevel
     if kind != "final":
         version += kind[0] + str(info.serial)

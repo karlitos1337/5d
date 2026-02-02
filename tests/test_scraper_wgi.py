@@ -1,8 +1,8 @@
+import importlib.util
+import os
+import sys
 import unittest
 from unittest.mock import MagicMock, patch
-import sys
-import os
-import importlib.util
 
 # Add root directory to path to import 5d_research_scraper
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))

@@ -1,7 +1,6 @@
-import os
-from pathlib import Path
-from typing import Dict, List, Tuple, Optional
 import logging
+from pathlib import Path
+from typing import Optional
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -17,7 +16,7 @@ class StyleManager:
         logging.debug(f"Project root determined as: {project_root}")
         logging.debug(f"Styles directory set to: {self.styles_directory}")
 
-    def get_styles(self) -> Dict[str, Tuple[str, str]]:
+    def get_styles(self) -> dict[str, tuple[str, str]]:
         """
         Retrieve the available styles from the styles directory.
         Returns:
@@ -52,7 +51,7 @@ class StyleManager:
             logging.error(f"Unexpected error while reading styles: {e}")
         return styles_to_files
 
-    def format_choices(self, styles_to_files: Dict[str, Tuple[str, str]]) -> List[str]:
+    def format_choices(self, styles_to_files: dict[str, tuple[str, str]]) -> list[str]:
         """
         Format the style choices for user presentation.
         Args:

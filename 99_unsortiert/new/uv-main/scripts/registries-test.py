@@ -40,7 +40,6 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Dict
 
 import colorama
 from colorama import Fore
@@ -66,7 +65,7 @@ KNOWN_REGISTRIES = [
 ]
 
 
-def fetch_op_items(vault_name: str, env: Dict[str, str]) -> Dict[str, str]:
+def fetch_op_items(vault_name: str, env: dict[str, str]) -> dict[str, str]:
     """Fetch items from the specified 1Password vault and add them to the environment.
 
     For each item named UV_TEST_XXX in the vault:
@@ -135,9 +134,9 @@ def fetch_op_items(vault_name: str, env: Dict[str, str]) -> Dict[str, str]:
     return updated_env
 
 
-def get_registries(env: Dict[str, str]) -> Dict[str, str]:
+def get_registries(env: dict[str, str]) -> dict[str, str]:
     pattern = re.compile(r"^UV_TEST_(.+)_URL$")
-    registries: Dict[str, str] = {}
+    registries: dict[str, str] = {}
 
     for env_var, value in env.items():
         match = pattern.match(env_var)
