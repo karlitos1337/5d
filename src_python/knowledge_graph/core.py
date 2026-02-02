@@ -1,11 +1,17 @@
 
-import networkx as nx
+try:
+    import networkx as nx
+except ImportError:
+    nx = None
+
 from typing import List, Dict, Any
 
 class CognitiveGraph:
     """5D Core: Semantic Knowledge Graph (Hypothesis H1)"""
     
     def __init__(self):
+        if nx is None:
+            raise ImportError("networkx is required for CognitiveGraph")
         self.graph = nx.DiGraph()
         
     def add_concept(self, concept_id: str, metadata: Dict[str, Any]) -> None:

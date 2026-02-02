@@ -14,13 +14,18 @@ References:
 
 from pathlib import Path
 
-import networkx as nx
-import numpy as np
 import pytest
+try:
+    import networkx as nx
+    import numpy as np
+except ImportError:
+    nx = None
+    np = None
 
 # ==================== Network Topology Tests ====================
 
 
+@pytest.mark.skipif(nx is None or np is None, reason="networkx or numpy not installed")
 class TestNetworkTopologies:
     """Test properties of the three main network models."""
 
@@ -112,6 +117,7 @@ class TestNetworkTopologies:
 # ==================== Weak Ties Theory Tests ====================
 
 
+@pytest.mark.skipif(nx is None or np is None, reason="networkx or numpy not installed")
 class TestWeakTiesTheory:
     """Test Granovetter's (1973) weak ties principles."""
 
@@ -167,6 +173,7 @@ class TestWeakTiesTheory:
 # ==================== Diffusion Dynamics Tests ====================
 
 
+@pytest.mark.skipif(nx is None or np is None, reason="networkx or numpy not installed")
 class TestDiffusionDynamics:
     """Test knowledge diffusion and threshold models."""
 
