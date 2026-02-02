@@ -181,9 +181,7 @@ def get_virtualenv():
 
         # Set any prefixes to empty, which makes the resulting paths relative.
         prefixes = prefix, exec_prefix, base_prefix, base_exec_prefix
-        sysconfig_vars.update(
-            {k: "" if v in prefixes else v for k, v in sysconfig_vars.items()}
-        )
+        sysconfig_vars.update({k: "" if v in prefixes else v for k, v in sysconfig_vars.items()})
 
         def expand_path(path: str) -> str:
             return path.format(**sysconfig_vars).replace("/", os.sep).lstrip(os.sep)
@@ -191,9 +189,7 @@ def get_virtualenv():
         return {
             "purelib": expand_path(sysconfig_paths["purelib"]),
             "platlib": expand_path(sysconfig_paths["platlib"]),
-            "include": os.path.join(
-                "include", "site", f"python{get_major_minor_version()}"
-            ),
+            "include": os.path.join("include", "site", f"python{get_major_minor_version()}"),
             "scripts": expand_path(sysconfig_paths["scripts"]),
             "data": expand_path(sysconfig_paths["data"]),
         }
@@ -232,16 +228,13 @@ def get_virtualenv():
         i.prefix = os.sep
         i.finalize_options()
         distutils_paths = {
-            key: (getattr(i, f"install_{key}")[1:]).lstrip(os.sep)
-            for key in SCHEME_KEYS
+            key: (getattr(i, f"install_{key}")[1:]).lstrip(os.sep) for key in SCHEME_KEYS
         }
 
         return {
             "purelib": distutils_paths["purelib"],
             "platlib": distutils_paths["platlib"],
-            "include": os.path.join(
-                "include", "site", f"python{get_major_minor_version()}"
-            ),
+            "include": os.path.join("include", "site", f"python{get_major_minor_version()}"),
             "scripts": distutils_paths["scripts"],
             "data": distutils_paths["data"],
         }

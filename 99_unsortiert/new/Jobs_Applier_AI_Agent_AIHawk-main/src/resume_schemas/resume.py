@@ -4,7 +4,6 @@ import yaml
 from pydantic import BaseModel, EmailStr, HttpUrl, Field
 
 
-
 class PersonalInformation(BaseModel):
     name: Optional[str]
     surname: Optional[str]
@@ -109,10 +108,10 @@ class Resume(BaseModel):
             # Parse the YAML string
             data = yaml.safe_load(yaml_str)
 
-            if 'education_details' in data:
-                for ed in data['education_details']:
-                    if 'exam' in ed:
-                        ed['exam'] = self.normalize_exam_format(ed['exam'])
+            if "education_details" in data:
+                for ed in data["education_details"]:
+                    if "exam" in ed:
+                        ed["exam"] = self.normalize_exam_format(ed["exam"])
 
             # Create an instance of Resume from the parsed data
             super().__init__(**data)
@@ -120,7 +119,6 @@ class Resume(BaseModel):
             raise ValueError("Error parsing YAML file.") from e
         except Exception as e:
             raise Exception(f"Unexpected error while parsing YAML: {e}") from e
-
 
     def _process_personal_information(self, data: Dict[str, Any]) -> PersonalInformation:
         try:
@@ -136,15 +134,15 @@ class Resume(BaseModel):
         education_list = []
         for edu in data:
             try:
-                exams = [Exam(name=k, grade=v) for k, v in edu.get('exam', {}).items()]
+                exams = [Exam(name=k, grade=v) for k, v in edu.get("exam", {}).items()]
                 education = EducationDetails(
-                    education_level=edu.get('education_level'),
-                    institution=edu.get('institution'),
-                    field_of_study=edu.get('field_of_study'),
-                    final_evaluation_grade=edu.get('final_evaluation_grade'),
-                    start_date=edu.get('start_date'),
-                    year_of_completion=edu.get('year_of_completion'),
-                    exam=exams
+                    education_level=edu.get("education_level"),
+                    institution=edu.get("institution"),
+                    field_of_study=edu.get("field_of_study"),
+                    final_evaluation_grade=edu.get("final_evaluation_grade"),
+                    start_date=edu.get("start_date"),
+                    year_of_completion=edu.get("year_of_completion"),
+                    exam=exams,
                 )
                 education_list.append(education)
             except KeyError as e:
@@ -163,17 +161,17 @@ class Resume(BaseModel):
             try:
                 key_responsibilities = [
                     Responsibility(description=list(resp.values())[0])
-                    for resp in exp.get('key_responsibilities', [])
+                    for resp in exp.get("key_responsibilities", [])
                 ]
-                skills_acquired = [str(skill) for skill in exp.get('skills_acquired', [])]
+                skills_acquired = [str(skill) for skill in exp.get("skills_acquired", [])]
                 experience = ExperienceDetails(
-                    position=exp['position'],
-                    company=exp['company'],
-                    employment_period=exp['employment_period'],
-                    location=exp['location'],
-                    industry=exp['industry'],
+                    position=exp["position"],
+                    company=exp["company"],
+                    employment_period=exp["employment_period"],
+                    location=exp["location"],
+                    industry=exp["industry"],
                     key_responsibilities=key_responsibilities,
-                    skills_acquired=skills_acquired
+                    skills_acquired=skills_acquired,
                 )
                 experience_list.append(experience)
             except KeyError as e:
@@ -191,6 +189,7 @@ class Resume(BaseModel):
 class Exam:
     name: str
     grade: str
+
 
 @dataclass
 class Responsibility:

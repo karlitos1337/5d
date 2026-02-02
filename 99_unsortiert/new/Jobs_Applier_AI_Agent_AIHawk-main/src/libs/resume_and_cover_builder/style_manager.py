@@ -12,7 +12,9 @@ class StyleManager:
         self.selected_style: Optional[str] = None
         current_file = Path(__file__).resolve()
         project_root = current_file.parent.parent.parent.parent
-        self.styles_directory = project_root / "src" / "libs" / "resume_and_cover_builder" / "resume_style"
+        self.styles_directory = (
+            project_root / "src" / "libs" / "resume_and_cover_builder" / "resume_style"
+        )
 
         logging.debug(f"Project root determined as: {project_root}")
         logging.debug(f"Styles directory set to: {self.styles_directory}")
@@ -60,7 +62,10 @@ class StyleManager:
         Returns:
             List[str]: A list of formatted style choices.
         """
-        return [f"{style_name} (style author -> {author_link})" for style_name, (file_name, author_link) in styles_to_files.items()]
+        return [
+            f"{style_name} (style author -> {author_link})"
+            for style_name, (file_name, author_link) in styles_to_files.items()
+        ]
 
     def set_selected_style(self, selected_style: str):
         """
