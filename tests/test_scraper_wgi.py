@@ -5,20 +5,23 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 # Add root directory to path to import 5d_research_scraper
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(root_dir)
 
 # Import module starting with a number
-spec = importlib.util.spec_from_file_location("module_5d", os.path.join(root_dir, "5d_research_scraper.py"))
+spec = importlib.util.spec_from_file_location(
+    "module_5d", os.path.join(root_dir, "5d_research_scraper.py")
+)
 module_5d = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module_5d)
 ResearchScraper = module_5d.ResearchScraper
+
 
 class TestScraperWGI(unittest.TestCase):
     def setUp(self):
         self.scraper = ResearchScraper()
 
-    @patch('requests.get')
+    @patch("requests.get")
     def test_fetch_world_bank_wgi_data(self, mock_get):
         # Mock response data for WGI (VA.EST)
         # Structure based on WB API: [metadata, data_list]
@@ -31,15 +34,15 @@ class TestScraperWGI(unittest.TestCase):
                     "countryiso3code": "USA",
                     "date": "2022",
                     "value": 1.5,
-                    "indicator": {"id": "VA.EST", "value": "Voice and Accountability: Estimate"}
+                    "indicator": {"id": "VA.EST", "value": "Voice and Accountability: Estimate"},
                 },
                 {
                     "countryiso3code": "DEU",
                     "date": "2022",
                     "value": 1.8,
-                    "indicator": {"id": "VA.EST", "value": "Voice and Accountability: Estimate"}
-                }
-            ]
+                    "indicator": {"id": "VA.EST", "value": "Voice and Accountability: Estimate"},
+                },
+            ],
         ]
         mock_get.return_value = mock_response
 
@@ -53,5 +56,6 @@ class TestScraperWGI(unittest.TestCase):
         self.assertEqual(result["USA"]["Voice & Accountability"]["value"], 1.5)
         self.assertEqual(result["DEU"]["Voice & Accountability"]["value"], 1.8)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

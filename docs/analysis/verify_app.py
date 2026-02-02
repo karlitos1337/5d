@@ -6,6 +6,7 @@ def verify_app(page):
     # For now, it's a placeholder to satisfy the import requirement
     pass
 
+
 if __name__ == "__main__":
     with sync_playwright() as p:
         browser = p.chromium.launch()
