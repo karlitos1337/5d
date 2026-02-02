@@ -1,13 +1,14 @@
-import sys
 import os
+import sys
 import unittest
-from unittest.mock import MagicMock, patch
 from io import BytesIO
+from unittest.mock import MagicMock, patch
 
 # Add web/5d-map to path so we can import owid_proxy
 sys.path.append(os.path.join(os.path.dirname(__file__), "../web/5d-map"))
 
 import owid_proxy  # type: ignore
+
 
 class TestOWIDProxySecurity(unittest.TestCase):
     def setUp(self):

@@ -15,6 +15,7 @@ References:
 from pathlib import Path
 
 import pytest
+
 try:
     import networkx as nx
     import numpy as np

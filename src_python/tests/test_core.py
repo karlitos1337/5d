@@ -1,4 +1,5 @@
 import pytest
+
 try:
     from src_python.knowledge_graph.core import CognitiveGraph
 except ImportError:
