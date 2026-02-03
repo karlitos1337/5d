@@ -85,6 +85,11 @@ def main():
         else:
             print("⚠️  5d_research_data.json not found.")
 
+        # Copy Scraper Script
+        if os.path.exists("5d_research_scraper.py"):
+            shutil.copy("5d_research_scraper.py", package_dir / "5d_research_scraper.py")
+            print(f"  -> Copied Scraper Script: 5d_research_scraper.py")
+
     except subprocess.CalledProcessError as e:
         print("❌ Error during Research Scraper:")
         print(e.stderr)
