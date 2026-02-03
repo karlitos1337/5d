@@ -461,9 +461,9 @@ with st.expander("🎯 Interpreting Results"):
     st.markdown(
         f"""
     **Your Simulation Results:**
-    - Final IMP: **{final_metrics['IMP']:.3f}**
-    - Retention: **{final_metrics['retention_rate']:.1%}**
-    - Dropouts: **{final_metrics['total_dropouts']}** students
+    - Final IMP: **{final_metrics["IMP"]:.3f}**
+    - Retention: **{final_metrics["retention_rate"]:.1%}**
+    - Dropouts: **{final_metrics["total_dropouts"]}** students
     
     **Interpretation Ranges:**
     - **IMP > 0.20:** Healthy learning environment (sustainable)
@@ -473,7 +473,7 @@ with st.expander("🎯 Interpreting Results"):
     **Retention Benchmarks:**
     - Traditional schools: 70-85% (OECD average)
     - Alternative models: 85-95% (Sudbury, Folk High Schools)
-    - Your simulation: **{final_metrics['retention_rate']:.1%}**
+    - Your simulation: **{final_metrics["retention_rate"]:.1%}**
     
     **Key Insights:**
     - Coercion = {zwang:.2f}: {"⚠️ High stress environment" if zwang > 0.5 else "✅ Moderate stress"}

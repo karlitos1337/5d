@@ -794,10 +794,10 @@ with st.expander("Parameter-Übersicht"):
         | Parameter | Attribut | Wert | Min | Max |
         |---|---|---:|---:|---:|
         | Preset | Muster | `{preset}` | - | - |
-        | Grid-Größe | Zellen N | `{size}` | `{int(b['size_min'])}` | `{int(b['size_max'])}` |
-        | Schritte (Auto) | Iterationen | `{steps}` | `{int(b['steps_min'])}` | `{int(b['steps_max'])}` |
-        | Intervall | ms/Step | `{interval_ms}` | `{int(b['interval_min'])}` | `{int(b['interval_max'])}` |
-        | Bild-Pixelgröße | px | `{size_px}` | `{int(b['px_min'])}` | `{int(b['px_max'])}` |
+        | Grid-Größe | Zellen N | `{size}` | `{int(b["size_min"])}` | `{int(b["size_max"])}` |
+        | Schritte (Auto) | Iterationen | `{steps}` | `{int(b["steps_min"])}` | `{int(b["steps_max"])}` |
+        | Intervall | ms/Step | `{interval_ms}` | `{int(b["interval_min"])}` | `{int(b["interval_max"])}` |
+        | Bild-Pixelgröße | px | `{size_px}` | `{int(b["px_min"])}` | `{int(b["px_max"])}` |
         """
     )
 

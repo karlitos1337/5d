@@ -5,7 +5,6 @@ WGI Voice & Accountability vs. HDI/IMP-Proxy Scatterplot
 Scientific Validation: Autonomy → Better Outcomes (r ≈ 0.68)
 """
 
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go

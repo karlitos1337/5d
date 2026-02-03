@@ -38,4 +38,4 @@ if __name__ == "__main__":
     print("-" * 50)
     for i, obs in enumerate(observations):
         error = agent.observe(obs)
-        print(f"{i+1:9} | {obs:11.2f} | {agent.prediction:10.2f} | {error:5.2f}")
+        print(f"{i + 1:9} | {obs:11.2f} | {agent.prediction:10.2f} | {error:5.2f}")

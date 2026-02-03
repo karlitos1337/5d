@@ -234,14 +234,14 @@ class SoccerWaveVisualizer:
             self.ax1.text(
                 5,
                 9.5,
-                f"Frame {frame+1}/{num_frames}: Welle breitet aus!",
+                f"Frame {frame + 1}/{num_frames}: Welle breitet aus!",
                 ha="center",
                 fontsize=12,
                 fontweight="bold",
                 bbox=dict(boxstyle="round", facecolor="yellow", alpha=0.7),
             )
 
-            print(f"  Frame {frame+1}: Wave width σ = {self.ball.sigma_x:.2f} m")
+            print(f"  Frame {frame + 1}: Wave width σ = {self.ball.sigma_x:.2f} m")
 
             # Evolve
             self.ball.evolve(dt=0.3)
@@ -342,7 +342,7 @@ class SoccerWaveVisualizer:
         print("=" * 60)
         print(f"Number of measurements: {len(self.ball.measurements)}")
         for i, m in enumerate(self.ball.measurements):
-            print(f"  Measurement {i+1}:")
+            print(f"  Measurement {i + 1}:")
             print(f"    Goalkeeper: {m['goalkeeper_pos']}")
             print(f"    Ball measured at: ({m['measured_pos'][0]:.2f}, {m['measured_pos'][1]:.2f})")
             print(f"    Probability: {m['probability']:.4f}")

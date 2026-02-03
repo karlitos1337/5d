@@ -10,6 +10,7 @@ from datetime import datetime
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
+
 from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(
@@ -217,7 +218,11 @@ def main():
                     color = (
                         "#00ff00"
                         if imp > 0.7
-                        else "#ffff00" if imp > 0.5 else "#ffa500" if imp > 0.4 else "#ff0000"
+                        else "#ffff00"
+                        if imp > 0.5
+                        else "#ffa500"
+                        if imp > 0.4
+                        else "#ff0000"
                     )
 
                     folium.CircleMarker(

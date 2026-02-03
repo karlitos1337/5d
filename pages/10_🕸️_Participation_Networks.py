@@ -549,17 +549,17 @@ st.header("💡 Interpretation")
 with st.expander("🔬 Netzwerk-Metriken erklärt", expanded=False):
     st.markdown(
         f"""
-**Clustering-Koeffizient:** {metrics['clustering']:.3f}
+**Clustering-Koeffizient:** {metrics["clustering"]:.3f}
 - **Bedeutung:** Wie stark sind Nachbarn untereinander vernetzt?
 - **Range:** 0.0 (keine lokalen Cluster) bis 1.0 (perfekt geclustert)
 - **Realwelt:** Soziale Netzwerke typisch 0.3-0.6, Zufallsgraphen ~0.01
 
-**Durchschnittliche Pfadlänge:** {metrics['avg_path_length'] if metrics['avg_path_length'] else 'N/A'}
+**Durchschnittliche Pfadlänge:** {metrics["avg_path_length"] if metrics["avg_path_length"] else "N/A"}
 - **Bedeutung:** Durchschnittliche Distanz zwischen zwei Knoten
 - **Small-World:** Niedrig (~3-6 bei 100 Knoten), trotz hohem Clustering
 - **Bedeutung für Diffusion:** Kurze Pfade = schnelle Verbreitung
 
-**Zeit bis 50% (t_50):** {metrics['t_50'] if metrics['t_50'] else 'Nicht erreicht'}
+**Zeit bis 50% (t_50):** {metrics["t_50"] if metrics["t_50"] else "Nicht erreicht"}
 - **Bedeutung:** Wie schnell erreicht Innovation kritische Masse?
 - **Rogers (2003):** 16% Early Adopters → Tipping Point bei ~50%
 - **Hier:** Schritte bis zur Hälfte der Knoten aktiviert
@@ -623,7 +623,9 @@ export_data = {
         k: (
             int(v)
             if isinstance(v, (np.integer, int))
-            else float(v) if isinstance(v, (np.floating, float)) else v
+            else float(v)
+            if isinstance(v, (np.floating, float))
+            else v
         )
         for k, v in metrics.items()
     },

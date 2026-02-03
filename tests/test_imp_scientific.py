@@ -256,9 +256,9 @@ class TestScientificReferences:
     def test_bibtex_file_exists(self):
         """BibTeX file must exist for reference validation."""
         bibtex_path = Path("07_daten_analysen/5d-relevant-sources.bib")
-        assert (
-            bibtex_path.exists()
-        ), "BibTeX file missing: 07_daten_analysen/5d-relevant-sources.bib"
+        assert bibtex_path.exists(), (
+            "BibTeX file missing: 07_daten_analysen/5d-relevant-sources.bib"
+        )
 
     def test_key_references_in_bibtex(self):
         """

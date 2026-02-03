@@ -46,7 +46,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.92,
             "governance_quality": 1.78,  # WGI 2023
             "key_features": ["Referendums", "Cantonal autonomy", "Consensus decision-making"],
-            "source": "Ostrom (2000), WGI (2023)"
+            "source": "Ostrom (2000), WGI (2023)",
         },
         # Spain - Mondragon Cooperatives
         {
@@ -58,7 +58,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.88,
             "workers": 81000,
             "key_features": ["Worker ownership", "Democratic management", "Profit sharing"],
-            "source": "Cheney (1999)"
+            "source": "Cheney (1999)",
         },
         # USA - Amish Communities
         {
@@ -70,7 +70,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.90,
             "community_size": 35000,
             "key_features": ["Mutual aid", "Barn raising", "Resource sharing"],
-            "source": "Ostrom (1990)"
+            "source": "Ostrom (1990)",
         },
         # Japan - Iriaichi Commons
         {
@@ -81,8 +81,12 @@ def load_cooperative_systems_data():
             "type": "Forest Commons",
             "cooperation_score": 0.89,
             "years_active": 400,
-            "key_features": ["Community forest management", "Self-regulation", "No tragedy of commons"],
-            "source": "Ostrom (1990), McKean (1992)"
+            "key_features": [
+                "Community forest management",
+                "Self-regulation",
+                "No tragedy of commons",
+            ],
+            "source": "Ostrom (1990), McKean (1992)",
         },
         # Philippines - Zanjera Irrigation
         {
@@ -94,7 +98,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.86,
             "years_active": 200,
             "key_features": ["Water sharing", "Community maintenance", "Dispute resolution"],
-            "source": "Ostrom (1990), Siy (1982)"
+            "source": "Ostrom (1990), Siy (1982)",
         },
         # Turkey - Alanya Fisheries
         {
@@ -106,7 +110,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.87,
             "fishermen": 100,
             "key_features": ["Rotating fishing spots", "Self-monitoring", "Local enforcement"],
-            "source": "Ostrom (1990), Berkes (1986)"
+            "source": "Ostrom (1990), Berkes (1986)",
         },
         # Nepal - Forest User Groups
         {
@@ -118,7 +122,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.85,
             "user_groups": 22000,
             "key_features": ["Community management", "Benefit sharing", "Sustainable harvesting"],
-            "source": "Ostrom (2000), Chhatre & Agrawal (2009)"
+            "source": "Ostrom (2000), Chhatre & Agrawal (2009)",
         },
         # India - Gram Panchayat
         {
@@ -130,7 +134,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.84,
             "villages": 941,
             "key_features": ["Participatory budgeting", "Local autonomy", "Social programs"],
-            "source": "Putnam (1993), Isaac & Franke (2002)"
+            "source": "Putnam (1993), Isaac & Franke (2002)",
         },
         # Denmark - Folk High Schools Network
         {
@@ -142,7 +146,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.91,
             "schools": 70,
             "key_features": ["Student governance", "Democratic learning", "Community integration"],
-            "source": "Korsgaard (2012), Gundemose (2021)"
+            "source": "Korsgaard (2012), Gundemose (2021)",
         },
         # Bolivia - Indigenous Commons
         {
@@ -154,8 +158,8 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.83,
             "community_size": 50000,
             "key_features": ["Ayllu system", "Reciprocity (Ayni)", "Collective land management"],
-            "source": "Ostrom (1990), Van den Berg & Mamani (2019)"
-        }
+            "source": "Ostrom (1990), Van den Berg & Mamani (2019)",
+        },
     ]
     return systems
 
@@ -171,25 +175,19 @@ def create_cooperative_systems_map(systems_data):
         folium.Map: Interactive map with cooperative system markers
     """
     # Create base map centered on Europe
-    m = folium.Map(
-        location=[30, 10],
-        zoom_start=2,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[30, 10], zoom_start=2, tiles="OpenStreetMap", width="100%", height=400)
 
     # Color mapping by system type
     type_colors = {
-        "Direct Democracy": "#2ECC40",        # Green
-        "Worker Cooperative": "#FF851B",      # Orange
-        "Traditional Commons": "#0074D9",     # Blue
-        "Forest Commons": "#3D9970",          # Teal
-        "Water Commons": "#39CCCC",           # Cyan
-        "Fishery Commons": "#01FF70",         # Lime
-        "Local Governance": "#B10DC9",        # Purple
+        "Direct Democracy": "#2ECC40",  # Green
+        "Worker Cooperative": "#FF851B",  # Orange
+        "Traditional Commons": "#0074D9",  # Blue
+        "Forest Commons": "#3D9970",  # Teal
+        "Water Commons": "#39CCCC",  # Cyan
+        "Fishery Commons": "#01FF70",  # Lime
+        "Local Governance": "#B10DC9",  # Purple
         "Educational Cooperative": "#F012BE",  # Magenta
-        "Indigenous Commons": "#85144b"       # Maroon
+        "Indigenous Commons": "#85144b",  # Maroon
     }
 
     for system in systems_data:
@@ -212,12 +210,12 @@ def create_cooperative_systems_map(systems_data):
 
         popup_html = f"""
         <div style="font-family: Arial; width: 220px;">
-            <h4 style="margin: 0 0 8px 0; color: {circle_color};">{system['name']}</h4>
+            <h4 style="margin: 0 0 8px 0; color: {circle_color};">{system["name"]}</h4>
             <p style="margin: 4px 0;"><strong>Type:</strong> {system_type}</p>
             <p style="margin: 4px 0;"><strong>Cooperation Score:</strong> {cooperation_score:.2f}</p>
             <p style="margin: 8px 0 4px 0;"><strong>Key Features:</strong></p>
             <div style="font-size: 11px; margin-left: 10px;">{features_html}</div>
-            <p style="margin: 8px 0 0 0; font-size: 10px; color: grey;">{system['source']}</p>
+            <p style="margin: 8px 0 0 0; font-size: 10px; color: grey;">{system["source"]}</p>
         </div>
         """
 
@@ -230,7 +228,7 @@ def create_cooperative_systems_map(systems_data):
             fill=True,
             fillColor=circle_color,
             fillOpacity=0.6,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -238,7 +236,7 @@ def create_cooperative_systems_map(systems_data):
             location=[system["lat"], system["lon"]],
             popup=folium.Popup(popup_html, max_width=280),
             icon=folium.Icon(color=icon_color, icon="handshake-o", prefix="fa"),
-            tooltip=f"{system['name']} ({system_type})"
+            tooltip=f"{system['name']} ({system_type})",
         ).add_to(m)
 
     # Add legend

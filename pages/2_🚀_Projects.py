@@ -53,7 +53,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.92,
             "year_founded": 1968,
             "students": 200,
-            "source": "Greenberg & Sadofsky (1992)"
+            "source": "Greenberg & Sadofsky (1992)",
         },
         {
             "name": "Summerhill School",
@@ -64,7 +64,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.90,
             "year_founded": 1921,
             "students": 70,
-            "source": "Neill (1960)"
+            "source": "Neill (1960)",
         },
         # Waldorf/Steiner Schools (Holistic development)
         {
@@ -76,7 +76,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.85,
             "year_founded": 1919,
             "students": 650,
-            "source": "Steiner (1996)"
+            "source": "Steiner (1996)",
         },
         {
             "name": "Rudolf Steiner School London",
@@ -87,7 +87,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.84,
             "year_founded": 1934,
             "students": 450,
-            "source": "Waldorf Foundation (2023)"
+            "source": "Waldorf Foundation (2023)",
         },
         # Folk High Schools (Adult education, democratic governance)
         {
@@ -99,7 +99,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.88,
             "year_founded": 1970,
             "students": 300,
-            "source": "Korsgaard (2012)"
+            "source": "Korsgaard (2012)",
         },
         {
             "name": "Krogerup Folk High School",
@@ -110,7 +110,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.86,
             "year_founded": 1946,
             "students": 180,
-            "source": "Gundemose (2021)"
+            "source": "Gundemose (2021)",
         },
         # Montessori Schools (Child-centered learning)
         {
@@ -122,7 +122,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.87,
             "year_founded": 1907,
             "students": 50,
-            "source": "Montessori (1912)"
+            "source": "Montessori (1912)",
         },
         {
             "name": "Montessori School Amsterdam",
@@ -133,7 +133,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.89,
             "year_founded": 1926,
             "students": 380,
-            "source": "AMI (2023)"
+            "source": "AMI (2023)",
         },
         # Japanese Cooperative Learning (Tokkatsu)
         {
@@ -145,7 +145,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.91,
             "year_founded": 1949,
             "students": 1200,
-            "source": "Tokuhama-Espinosa (2019)"
+            "source": "Tokuhama-Espinosa (2019)",
         },
         # South American Democratic Schools
         {
@@ -157,7 +157,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.88,
             "year_founded": 1976,
             "students": 230,
-            "source": "Alves (2001)"
+            "source": "Alves (2001)",
         },
         # Nordic Innovation (Finland)
         {
@@ -169,7 +169,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.93,
             "year_founded": 2012,
             "students": 750,
-            "source": "Sahlberg (2015)"
+            "source": "Sahlberg (2015)",
         },
         # Indigenous Education (New Zealand)
         {
@@ -181,8 +181,8 @@ def load_alternative_schools_data():
             "imp_proxy": 0.85,
             "year_founded": 1985,
             "students": 140,
-            "source": "Smith (1999)"
-        }
+            "source": "Smith (1999)",
+        },
     ]
     return schools
 
@@ -198,24 +198,18 @@ def create_alternative_schools_map(schools_data):
         folium.Map: Interactive map with school markers
     """
     # Create base map centered on Europe
-    m = folium.Map(
-        location=[50, 10],
-        zoom_start=3,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[50, 10], zoom_start=3, tiles="OpenStreetMap", width="100%", height=400)
 
     # Color mapping by school type
     type_colors = {
-        "Sudbury": "#2ECC40",        # Green
-        "Democratic": "#0074D9",     # Blue
-        "Waldorf": "#FF851B",        # Orange
+        "Sudbury": "#2ECC40",  # Green
+        "Democratic": "#0074D9",  # Blue
+        "Waldorf": "#FF851B",  # Orange
         "Folk High School": "#B10DC9",  # Purple
-        "Montessori": "#FF4136",     # Red
-        "Tokkatsu": "#39CCCC",       # Teal
-        "Open Concept": "#01FF70",   # Lime
-        "Indigenous": "#85144b"      # Maroon
+        "Montessori": "#FF4136",  # Red
+        "Tokkatsu": "#39CCCC",  # Teal
+        "Open Concept": "#01FF70",  # Lime
+        "Indigenous": "#85144b",  # Maroon
     }
 
     for school in schools_data:
@@ -235,12 +229,12 @@ def create_alternative_schools_map(schools_data):
         # Create popup content
         popup_html = f"""
         <div style="font-family: Arial; width: 200px;">
-            <h4 style="margin: 0 0 8px 0; color: {circle_color};">{school['name']}</h4>
+            <h4 style="margin: 0 0 8px 0; color: {circle_color};">{school["name"]}</h4>
             <p style="margin: 4px 0;"><strong>Type:</strong> {school_type}</p>
             <p style="margin: 4px 0;"><strong>IMP Proxy:</strong> {imp:.2f}</p>
-            <p style="margin: 4px 0;"><strong>Founded:</strong> {school['year_founded']}</p>
-            <p style="margin: 4px 0;"><strong>Students:</strong> {school['students']}</p>
-            <p style="margin: 4px 0; font-size: 11px;"><em>{school['source']}</em></p>
+            <p style="margin: 4px 0;"><strong>Founded:</strong> {school["year_founded"]}</p>
+            <p style="margin: 4px 0;"><strong>Students:</strong> {school["students"]}</p>
+            <p style="margin: 4px 0; font-size: 11px;"><em>{school["source"]}</em></p>
         </div>
         """
 
@@ -253,7 +247,7 @@ def create_alternative_schools_map(schools_data):
             fill=True,
             fillColor=circle_color,
             fillOpacity=0.6,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -261,7 +255,7 @@ def create_alternative_schools_map(schools_data):
             location=[school["lat"], school["lon"]],
             popup=folium.Popup(popup_html, max_width=250),
             icon=folium.Icon(color=icon_color, icon="graduation-cap", prefix="fa"),
-            tooltip=f"{school['name']} ({school_type})"
+            tooltip=f"{school['name']} ({school_type})",
         ).add_to(m)
 
     # Add legend
@@ -506,7 +500,6 @@ def main():
 
         # Mini world map
         st.subheader("🗺️ Global Distribution of Alternative Schools")
-
 
         # Placeholder: Show countries
         if solutions:

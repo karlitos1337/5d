@@ -35,9 +35,9 @@ class TestResearchDataSources:
                 if papers:
                     sample = papers[0]
                     assert "title" in sample, "arXiv papers need title"
-                    assert (
-                        "abstract" in sample or "summary" in sample
-                    ), "Papers need abstract/summary"
+                    assert "abstract" in sample or "summary" in sample, (
+                        "Papers need abstract/summary"
+                    )
 
         except FileNotFoundError:
             pytest.skip("5d_research_data.json not found (run 5d_research_scraper.py)")

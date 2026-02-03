@@ -221,7 +221,7 @@ def run_experiment(config: dict) -> dict:
     print("=" * 80)
 
     for epoch in range(config["epochs"]):
-        print(f"\nEpoch {epoch+1}/{config['epochs']}")
+        print(f"\nEpoch {epoch + 1}/{config['epochs']}")
 
         # Train 5D-Net
         loss_5d = train_epoch(five_d, train_loader, optimizer_5d, criterion, device)
@@ -257,7 +257,7 @@ def run_experiment(config: dict) -> dict:
     noise_results_baseline = {}
 
     for noise_level in config["noise_levels"]:
-        print(f"\nNoise level: {noise_level*100:.0f}%")
+        print(f"\nNoise level: {noise_level * 100:.0f}%")
 
         # Test 5D-Net
         acc_5d, _ = evaluate(five_d, test_loader, device, noise_level=noise_level)
@@ -270,8 +270,8 @@ def run_experiment(config: dict) -> dict:
         print(f"5D-Net:   {acc_5d:.2f}% (drop: {drop_5d:.2f}%)")
         print(f"Baseline: {acc_baseline:.2f}% (drop: {drop_baseline:.2f}%)")
 
-        noise_results_5d[f"noise_{int(noise_level*100)}"] = {"accuracy": acc_5d, "drop": drop_5d}
-        noise_results_baseline[f"noise_{int(noise_level*100)}"] = {
+        noise_results_5d[f"noise_{int(noise_level * 100)}"] = {"accuracy": acc_5d, "drop": drop_5d}
+        noise_results_baseline[f"noise_{int(noise_level * 100)}"] = {
             "accuracy": acc_baseline,
             "drop": drop_baseline,
         }
@@ -399,7 +399,7 @@ def main():
     elapsed_time = time.time() - start_time
 
     results["elapsed_time_seconds"] = elapsed_time
-    results["elapsed_time_human"] = f"{elapsed_time//60:.0f}m {elapsed_time%60:.0f}s"
+    results["elapsed_time_human"] = f"{elapsed_time // 60:.0f}m {elapsed_time % 60:.0f}s"
 
     # Save results
     results_dir = Path(CONFIG["results_dir"])
