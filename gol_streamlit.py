@@ -789,8 +789,7 @@ with st.expander("Editor-Modus (Zellen anklicken/setzen)"):
 
 # Parameter-Übersicht
 with st.expander("Parameter-Übersicht"):
-    st.markdown(
-        f"""
+    st.markdown(f"""
         | Parameter | Attribut | Wert | Min | Max |
         |---|---|---:|---:|---:|
         | Preset | Muster | `{preset}` | - | - |
@@ -798,13 +797,11 @@ with st.expander("Parameter-Übersicht"):
         | Schritte (Auto) | Iterationen | `{steps}` | `{int(b['steps_min'])}` | `{int(b['steps_max'])}` |
         | Intervall | ms/Step | `{interval_ms}` | `{int(b['interval_min'])}` | `{int(b['interval_max'])}` |
         | Bild-Pixelgröße | px | `{size_px}` | `{int(b['px_min'])}` | `{int(b['px_max'])}` |
-        """
-    )
+        """)
 
 # Umso mehr / desto … – Kontext-Hinweise
 with st.expander("Umso mehr … desto … / Umso weniger … dann …"):
-    st.markdown(
-        """
+    st.markdown("""
         - Grid-Größe: Je mehr Zellen, desto detailreicher und langlebiger die Dynamik; je weniger, desto schneller, aber randempfindlicher.
         - Schritte (Auto-Run): Je mehr, desto größer der zeitliche Vorsprung pro Start; je weniger, desto feinere Beobachtung.
         - Intervall (ms): Je höher, desto gemächlicher die Aktualisierung; je niedriger, desto flüssiger, aber CPU-intensiver.
@@ -815,5 +812,4 @@ with st.expander("Umso mehr … desto … / Umso weniger … dann …"):
         - Export-Schritte: Je mehr, desto längere Clips und größere Dateien; je weniger, desto kompakt.
         - Frame-Dauer (ms): Je höher, desto längere Gesamtspielzeit bei gleicher Schrittzahl; je niedriger, desto schnellere Wiedergabe.
         - Preset: Einfache Oszillatoren (Blinker/Toad) sind stabil; komplexe Muster (Gosper) erzeugen wandernde Glider und Interferenzen.
-        """
-    )
+        """)

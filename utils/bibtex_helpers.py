@@ -110,13 +110,11 @@ def display_reference_section(
     st.divider()
     st.header(title)
 
-    st.markdown(
-        """
+    st.markdown("""
     **Alle Referenzen verfügbar in:** `07_daten_analysen/5d-relevant-sources.bib`
     
     Klicken Sie auf eine Referenz, um die vollständige BibTeX-Citation anzuzeigen.
-    """
-    )
+    """)
 
     for ref in references:
         display_bibtex_reference(
