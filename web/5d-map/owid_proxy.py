@@ -10,6 +10,8 @@ OWID_URLS = {
 
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
+
         path = self.path.lstrip("/")
         if path.startswith("proxy/"):
             key = path.split("/", 1)[1]
@@ -18,24 +20,41 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Read with size limit to prevent DoS
+                    content_parts = []
+                    total_size = 0
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        total_size += len(chunk)
+                        if total_size > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large")
+                        content_parts.append(chunk)
+
+                    data = b"".join(content_parts)
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
                     self.wfile.write(data)
-            except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+            except Exception:
+                # Sanitize error message to prevent leakage
+                msg = b"Fetch error"
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
