@@ -1,7 +1,6 @@
-import unittest
 import importlib.util
+import unittest
 from unittest.mock import MagicMock, patch
-import sys
 
 # Load the module dynamically
 spec = importlib.util.spec_from_file_location("owid_proxy", "web/5d-map/owid_proxy.py")
