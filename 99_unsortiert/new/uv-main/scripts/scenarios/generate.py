@@ -208,9 +208,7 @@ def main(
         ref = "HEAD" if packse_version == "0.0.0" else packse_version
 
         # Add generated metadata
-        data["generated_from"] = (
-            f"https://github.com/astral-sh/packse/tree/{ref}/scenarios"
-        )
+        data["generated_from"] = f"https://github.com/astral-sh/packse/tree/{ref}/scenarios"
         data["generated_with"] = "./scripts/sync_scenarios.sh"
         data["vendor_links"] = (
             f"https://raw.githubusercontent.com/astral-sh/packse/{ref}/vendor/links.html"
@@ -302,12 +300,10 @@ def update_common_mod_rs(packse_version: str):
         logging.info(f"Up-to-date: {TESTS_COMMON_MOD_RS}")
     else:
         logging.info(f"Updating: {TESTS_COMMON_MOD_RS}")
-        url_matcher = re.compile(
-            re.escape(before_version) + '[^"]+' + re.escape(after_version)
-        )
-        assert len(url_matcher.findall(test_common)) == 1, (
-            f"PACKSE_VERSION not found in {TESTS_COMMON_MOD_RS}"
-        )
+        url_matcher = re.compile(re.escape(before_version) + '[^"]+' + re.escape(after_version))
+        assert (
+            len(url_matcher.findall(test_common)) == 1
+        ), f"PACKSE_VERSION not found in {TESTS_COMMON_MOD_RS}"
         test_common = url_matcher.sub(build_vendor_links_url, test_common)
         TESTS_COMMON_MOD_RS.write_text(test_common)
 
