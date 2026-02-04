@@ -7,7 +7,7 @@ line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = ["private-gpt-main/", "99_unsortiert/"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +21,9 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = ["private-gpt-main/", "99_unsortiert/"]
+
+[tool.pytest.ini_options]
+addopts = "--ignore=99_unsortiert"
+testpaths = ["tests", "src_python/tests"]
+python_files = ["test_*.py"]
