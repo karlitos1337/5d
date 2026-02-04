@@ -8,6 +8,10 @@ OWID_URLS = {
 }
 
 
+# 10 MB limit
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+
+
 class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path.lstrip("/")
@@ -18,30 +22,50 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                    # Check Content-Length if available
+                    cl = resp.getheader("Content-Length")
+                    if cl and int(cl) > MAX_RESPONSE_SIZE:
+                        raise ValueError("Response too large")
+
+                    data_chunks = []
+                    total_size = 0
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        total_size += len(chunk)
+                        if total_size > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large")
+                        data_chunks.append(chunk)
+
+                    data = b"".join(data_chunks)
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
                     self.wfile.write(data)
-            except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+            except Exception:
+                msg = b"Fetch error"
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("X-Content-Type-Options", "nosniff")
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")
 
