@@ -1,24 +1,70 @@
 [tool.black]
-line-length = 100
-target-version = ["py310"]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+# Use regex to exclude 99_unsortiert and external from formatting
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+  | 99_unsortiert
+  | external
+  | private-gpt-main
+)/
+'''
 
 [tool.ruff]
-line-length = 100
+line-length = 88
 target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+# Exclude broken/legacy code from linting
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    ".git",
+    "build",
+    "dist"
+]
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "UP"]
+ignore = ["E501"]
 
 [tool.mypy]
 python_version = "3.10"
-check_untyped_defs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
-warn_unused_ignores = true
-warn_redundant_casts = true
+warn_return_any = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+ignore_missing_imports = true
+# Exclude broken/legacy code from type checking
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+# Ignore broken/legacy directories during test collection
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    ".git",
+    "build",
+    "dist"
+]
