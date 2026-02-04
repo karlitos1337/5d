@@ -59,7 +59,7 @@ def add_frontmatter_to_file(
 
     Returns True if frontmatter was added, False if already present.
     """
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8") as f:
         content = f.read()
 
     if has_frontmatter(content):
@@ -106,7 +106,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        added = add_frontmatter_to_file(
+        if add_frontmatter_to_file(
             filepath=args.file,
             title=args.title,
             domain=args.domain,
@@ -115,7 +115,8 @@ def main():
             license_type=args.license,
             evidence=args.evidence,
             dry_run=args.dry_run,
-        )
+        ):
+            pass
         return 0
     except FileNotFoundError:
         print(f"Error: File not found: {args.file}", file=sys.stderr)
