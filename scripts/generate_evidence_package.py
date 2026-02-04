@@ -121,6 +121,7 @@ Refer to `validation_results_*.png` for visual distribution.
 - Analysis Script: validation/imp_validation_study.py
 - Metric Mapping: METRIC_MAPPING.md
 - Visualization: validation_results_*.png
+- Literature-Backed Interpretation: INTERPRETATION.md
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)
