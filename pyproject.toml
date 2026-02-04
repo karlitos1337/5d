@@ -25,3 +25,5 @@ exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "docs
 
 [tool.pytest.ini_options]
 norecursedirs = ["99_unsortiert", "external", "private-gpt-main", "node_modules", ".git"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
