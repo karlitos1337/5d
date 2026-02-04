@@ -126,7 +126,9 @@ class IMPModelComparison:
         self.results["IMP_Geometric"].hist(
             bins=30, alpha=0.7, color="blue", label="Geometrisch", ax=ax1
         )
-        self.results["IMP_Additive"].hist(bins=30, alpha=0.7, color="red", label="Additiv", ax=ax1)
+        self.results["IMP_Additive"].hist(
+            bins=30, alpha=0.7, color="red", label="Additiv", ax=ax1
+        )
         ax1.set_xlabel("IMP-Score (0-5)")
         ax1.set_ylabel("Häufigkeit")
         ax1.set_title("Verteilungsvergleich")
@@ -134,7 +136,9 @@ class IMPModelComparison:
 
         # 2. Scatter-Plot
         ax2 = plt.subplot(2, 3, 2)
-        ax2.scatter(self.results["IMP_Additive"], self.results["IMP_Geometric"], alpha=0.3)
+        ax2.scatter(
+            self.results["IMP_Additive"], self.results["IMP_Geometric"], alpha=0.3
+        )
         ax2.set_xlabel("IMP Additiv")
         ax2.set_ylabel("IMP Geometrisch")
         ax2.set_title("Modellkorrelation")

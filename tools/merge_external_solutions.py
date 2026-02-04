@@ -30,7 +30,13 @@ PROJECT_PATTERN = re.compile(r"(Bäckerei|Garten|Imkerei|Holz|Kräuter)", re.I)
 ROI_PATTERN = re.compile(r"ROI\s*:?\s*(\d+[.,]?\d*)", re.I)
 PILOT_PATTERN = re.compile(r"Pilot\s*:?\s*(\d+)", re.I)
 RESONANCE_TERMS = ["Resonanz", "Schwingung", "Frequenz", "Amplitude", "Kohärenz"]
-GENESIS_TERMS = ["Genesis", "Emergenz", "Autopoiesis", "Selbstorganisation", "Komplexität"]
+GENESIS_TERMS = [
+    "Genesis",
+    "Emergenz",
+    "Autopoiesis",
+    "Selbstorganisation",
+    "Komplexität",
+]
 
 
 def scan_external() -> dict:

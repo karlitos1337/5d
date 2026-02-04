@@ -97,7 +97,12 @@ class EntangledPokemon:
         """Separate Pokémon → no more instant correlation!"""
         self.entangled = False
         self.measurements.append(
-            {"action": "separate", "hp_a": self.hp_a, "hp_b": self.hp_b, "entangled": False}
+            {
+                "action": "separate",
+                "hp_a": self.hp_a,
+                "hp_b": self.hp_b,
+                "entangled": False,
+            }
         )
 
     def reset(self):
@@ -116,7 +121,9 @@ class EntanglementVisualizer:
 
     def setup_plot(self):
         """Setup matplotlib figure"""
-        self.fig.suptitle("Quantum Entanglement via POKEMON! 🐾⚡", fontsize=16, fontweight="bold")
+        self.fig.suptitle(
+            "Quantum Entanglement via POKEMON! 🐾⚡", fontsize=16, fontweight="bold"
+        )
 
         # Left: Pokémon status
         self.ax1.set_title("Pokémon Health Status", fontsize=12)
@@ -169,7 +176,9 @@ class EntanglementVisualizer:
         for i, (_bar, hp) in enumerate(
             zip(bars, [self.pokemon.hp_a, self.pokemon.hp_b], strict=False)
         ):
-            self.ax1.text(i, hp + 3, f"{int(hp)} HP", ha="center", fontsize=12, fontweight="bold")
+            self.ax1.text(
+                i, hp + 3, f"{int(hp)} HP", ha="center", fontsize=12, fontweight="bold"
+            )
 
         # Add entanglement indicator
         if self.pokemon.entangled:
@@ -228,7 +237,9 @@ class EntanglementVisualizer:
             # Highlight entanglement breaks
             for i, entangled in enumerate(self.history["entangled"]):
                 if not entangled and i > 0:
-                    self.ax2.axvline(i, color="red", linestyle="--", alpha=0.5, linewidth=2)
+                    self.ax2.axvline(
+                        i, color="red", linestyle="--", alpha=0.5, linewidth=2
+                    )
                     self.ax2.text(i, 105, "💔", ha="center", fontsize=14)
 
         # Add action text
@@ -366,7 +377,9 @@ class EntanglementVisualizer:
         print(f"\n💾 Results saved: {json_path}")
 
         plt.savefig(
-            f"{output_dir}/pokemon_entanglement_{timestamp}.png", dpi=300, bbox_inches="tight"
+            f"{output_dir}/pokemon_entanglement_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
         )
         print(f"📊 Plot saved: pokemon_entanglement_{timestamp}.png")
 

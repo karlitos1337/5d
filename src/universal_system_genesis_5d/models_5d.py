@@ -30,7 +30,9 @@ class FiveDProfile:
         }
 
 
-def aggregate_5d(profile: FiveDProfile, weights: Mapping[str, float] | None = None) -> float:
+def aggregate_5d(
+    profile: FiveDProfile, weights: Mapping[str, float] | None = None
+) -> float:
     """Aggregiert 5D-Profil zu einem Gesamtwert (0–1)."""
     scores = profile.to_dict()
     if weights is None:

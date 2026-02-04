@@ -38,7 +38,9 @@ except Exception:
 
 
 class FiveDExtractor:
-    def __init__(self, manifest_dir="manifest", extra_dirs=None, config_path: str | None = None):
+    def __init__(
+        self, manifest_dir="manifest", extra_dirs=None, config_path: str | None = None
+    ):
         """Extractor für Kern-Manifest + optionale zusätzliche Pfade.
 
         extra_dirs: Liste zusätzlicher Verzeichnisse (z.B. ["external/system-genesis", "external/resonance-formulas"]).
@@ -63,9 +65,9 @@ class FiveDExtractor:
             }
         }
         # Stelle sicher, dass der übergebene manifest_dir Vorrang hat
-        self.config["extractor"]["manifest_dir"] = manifest_dir or self.config["extractor"].get(
-            "manifest_dir", "manifest"
-        )
+        self.config["extractor"]["manifest_dir"] = manifest_dir or self.config[
+            "extractor"
+        ].get("manifest_dir", "manifest")
         self.manifest_dir = Path(self.config["extractor"]["manifest_dir"])
         self.extra_dirs = [Path(p) for p in (extra_dirs or [])]
         self.imp_keywords = {
@@ -104,7 +106,9 @@ class FiveDExtractor:
                 with file.open("rb") as f:
                     reader = PdfReader(f)
                     max_pages = int(
-                        self.config["extractor"].get("pdf_extraction", {}).get("max_pages", 50)
+                        self.config["extractor"]
+                        .get("pdf_extraction", {})
+                        .get("max_pages", 50)
                     )
                     pages = reader.pages[:max_pages]
                     return "\n".join((p.extract_text() or "") for p in pages)
@@ -182,7 +186,10 @@ class FiveDExtractor:
         candidates = self._extract_projects_regex(text)
         unique = []
         for name in candidates:
-            if not any(fuzz.ratio(str(name).lower(), str(u).lower()) > threshold for u in unique):
+            if not any(
+                fuzz.ratio(str(name).lower(), str(u).lower()) > threshold
+                for u in unique
+            ):
                 unique.append(name)
         return unique
 
@@ -194,11 +201,15 @@ class FiveDExtractor:
             "investment", r"Investment.?([\d.,]+)"
         )
         roi_pat = (self.config.get("patterns", {}) or {}).get("roi", r"ROI.?([\d]+)")
-        pilots_pat = (self.config.get("patterns", {}) or {}).get("pilots", r"Pilot.?([\d]+)")
+        pilots_pat = (self.config.get("patterns", {}) or {}).get(
+            "pilots", r"Pilot.?([\d]+)"
+        )
 
         for _filename, text in texts.items():
             # Projekte
-            proj_names = self._extract_projects_fuzzy(text) or self._extract_projects_regex(text)
+            proj_names = self._extract_projects_fuzzy(
+                text
+            ) or self._extract_projects_regex(text)
             solutions["Projekte"].extend([str(p) for p in proj_names])
 
             # Investment/ROI/Pilots
@@ -250,8 +261,12 @@ class FiveDExtractor:
         dim_scores = []
         for dim in ["A", "IM", "R", "SP", "Au"]:
             for raw in solutions.get(f"{dim}-Score", []) or []:
-                dim_scores.append(DimensionScore(dimension=dim, score=raw, source="manifest"))
-        validated = Solutions(projects=projects_list, dimension_scores=dim_scores, plan=plan)
+                dim_scores.append(
+                    DimensionScore(dimension=dim, score=raw, source="manifest")
+                )
+        validated = Solutions(
+            projects=projects_list, dimension_scores=dim_scores, plan=plan
+        )
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(validated.model_dump(), f, indent=2, ensure_ascii=False)
         print(f"\n💾 {filename} gespeichert (Pydantic-validiert)")

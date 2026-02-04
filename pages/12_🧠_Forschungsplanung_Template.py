@@ -3,6 +3,7 @@
 Streamlit-Seite: Forschungsplanung (Template) im 5D-Style
 - Betten das bereitgestellte Homepage-Design inkl. Charts via st.components.html ein
 """
+
 import json
 from pathlib import Path
 
@@ -54,7 +55,11 @@ def main():
         with open("5d_solutions.json", encoding="utf-8") as f:
             sols = json.load(f)
             total_projects = len(sols.get("projects", []))
-            dims = [d.get("score") for d in sols.get("dimension_scores", []) if isinstance(d.get("score"), (int, float))]
+            dims = [
+                d.get("score")
+                for d in sols.get("dimension_scores", [])
+                if isinstance(d.get("score"), (int, float))
+            ]
             if dims:
                 avg_dimension = round(sum(dims) / len(dims), 2)
     except Exception:
@@ -69,7 +74,10 @@ def main():
     with c3:
         st.metric("🧩 Projekte (solutions)", value=total_projects)
     with c4:
-        st.metric("∅ Dimensions-Score", value=avg_dimension if avg_dimension is not None else "–")
+        st.metric(
+            "∅ Dimensions-Score",
+            value=avg_dimension if avg_dimension is not None else "–",
+        )
 
     if not TEMPLATE_PATH.exists():
         st.error(f"Template nicht gefunden: {TEMPLATE_PATH}")
@@ -77,9 +85,13 @@ def main():
 
     html = TEMPLATE_PATH.read_text(encoding="utf-8")
     # Höhe großzügig wählen (kann per Slider angepasst werden)
-    height = st.slider("Höhe (px)", min_value=1000, max_value=4000, value=2200, step=100)
+    height = st.slider(
+        "Höhe (px)", min_value=1000, max_value=4000, value=2200, step=100
+    )
     st.components.v1.html(html, height=height, scrolling=True)
-    st.caption("Evidence-Label: ⚠️ Hypothese – KPI-Zahlen im Template sind Platzhalter und nicht an Artefakte gebunden. Live-KPIs siehe oben.")
+    st.caption(
+        "Evidence-Label: ⚠️ Hypothese – KPI-Zahlen im Template sind Platzhalter und nicht an Artefakte gebunden. Live-KPIs siehe oben."
+    )
 
 
 if __name__ == "__main__":

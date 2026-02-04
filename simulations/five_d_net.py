@@ -263,7 +263,9 @@ class FiveDNet(nn.Module):
     - Authenticity: Alignment between layers
     """
 
-    def __init__(self, input_size: int = 784, num_classes: int = 10, hidden_size: int = 128):
+    def __init__(
+        self, input_size: int = 784, num_classes: int = 10, hidden_size: int = 128
+    ):
         super().__init__()
 
         # D1: Instinct (Polyvagal)
@@ -273,7 +275,9 @@ class FiveDNet(nn.Module):
         self.d2_autonomy = AutonomyGate(hidden_size, hidden_size)
 
         # D3: System Intelligence (Theory of Mind)
-        self.d3_system = MultiPerspectiveAttention(hidden_size, hidden_size, num_perspectives=4)
+        self.d3_system = MultiPerspectiveAttention(
+            hidden_size, hidden_size, num_perspectives=4
+        )
 
         # D4: Collaborative Intelligence (Emergence)
         self.d4_collab = EmergentNetwork(hidden_size, hidden_size)
@@ -345,7 +349,11 @@ class FiveDNet(nn.Module):
 
             # Multiplicative (weak-link logic)
             stability = (
-                autonomy * intrinsic_motivation * resilience * social_participation * authenticity
+                autonomy
+                * intrinsic_motivation
+                * resilience
+                * social_participation
+                * authenticity
             )
 
             return stability
@@ -364,7 +372,9 @@ class BaselineNet(nn.Module):
     No special 5D mechanisms, just standard layers
     """
 
-    def __init__(self, input_size: int = 784, num_classes: int = 10, hidden_size: int = 128):
+    def __init__(
+        self, input_size: int = 784, num_classes: int = 10, hidden_size: int = 128
+    ):
         super().__init__()
 
         # Standard layers

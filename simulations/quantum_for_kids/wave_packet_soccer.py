@@ -134,11 +134,15 @@ class SoccerWaveVisualizer:
 
     def setup_plot(self):
         """Setup matplotlib figure"""
-        self.fig.suptitle("Quantum Wave Packets via FUSSBALL! ⚽🌊", fontsize=16, fontweight="bold")
+        self.fig.suptitle(
+            "Quantum Wave Packets via FUSSBALL! ⚽🌊", fontsize=16, fontweight="bold"
+        )
 
         # Left: Before measurement (wave packet)
         self.ax1.set_title(
-            "BEFORE: Ball als Welle (überall gleichzeitig!)", fontsize=12, fontweight="bold"
+            "BEFORE: Ball als Welle (überall gleichzeitig!)",
+            fontsize=12,
+            fontweight="bold",
         )
         self.ax1.set_xlim(0, 10)
         self.ax1.set_ylim(0, 10)
@@ -162,7 +166,13 @@ class SoccerWaveVisualizer:
         """Draw soccer field"""
         # Field outline
         rect = patches.Rectangle(
-            (0, 0), 10, 10, linewidth=2, edgecolor="green", facecolor="lightgreen", alpha=0.2
+            (0, 0),
+            10,
+            10,
+            linewidth=2,
+            edgecolor="green",
+            facecolor="lightgreen",
+            alpha=0.2,
         )
         ax.add_patch(rect)
 
@@ -196,7 +206,12 @@ class SoccerWaveVisualizer:
 
             # Plot wave packet (probability cloud)
             im = self.ax1.contourf(
-                self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="YlOrRd", alpha=0.7
+                self.ball.X,
+                self.ball.Y,
+                self.ball.wave_packet,
+                levels=20,
+                cmap="YlOrRd",
+                alpha=0.7,
             )
 
             # Add colorbar
@@ -204,7 +219,9 @@ class SoccerWaveVisualizer:
                 plt.colorbar(im, ax=self.ax1, label="Probability Density")
 
             # Add ball emoji at peak
-            max_idx = np.unravel_index(self.ball.wave_packet.argmax(), self.ball.wave_packet.shape)
+            max_idx = np.unravel_index(
+                self.ball.wave_packet.argmax(), self.ball.wave_packet.shape
+            )
             peak_x = self.ball.x[max_idx[1]]
             peak_y = self.ball.y[max_idx[0]]
             self.ax1.plot(
@@ -228,7 +245,9 @@ class SoccerWaveVisualizer:
                 markeredgecolor="black",
                 markeredgewidth=2,
             )
-            self.ax1.text(goalkeeper_x, goalkeeper_y, "🧤", ha="center", va="center", fontsize=20)
+            self.ax1.text(
+                goalkeeper_x, goalkeeper_y, "🧤", ha="center", va="center", fontsize=20
+            )
 
             # Annotations
             self.ax1.text(
@@ -271,7 +290,12 @@ class SoccerWaveVisualizer:
 
         # Plot collapsed state
         im2 = self.ax2.contourf(
-            self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="Blues", alpha=0.7
+            self.ball.X,
+            self.ball.Y,
+            self.ball.wave_packet,
+            levels=20,
+            cmap="Blues",
+            alpha=0.7,
         )
         plt.colorbar(im2, ax=self.ax2, label="Collapsed State")
 
@@ -285,7 +309,14 @@ class SoccerWaveVisualizer:
             markeredgecolor="black",
             markeredgewidth=3,
         )
-        self.ax2.text(measured_pos[0], measured_pos[1], "⚽", ha="center", va="center", fontsize=25)
+        self.ax2.text(
+            measured_pos[0],
+            measured_pos[1],
+            "⚽",
+            ha="center",
+            va="center",
+            fontsize=25,
+        )
 
         # Goalkeeper
         self.ax2.plot(
@@ -297,7 +328,9 @@ class SoccerWaveVisualizer:
             markeredgecolor="black",
             markeredgewidth=2,
         )
-        self.ax2.text(goalkeeper_x, goalkeeper_y, "🧤", ha="center", va="center", fontsize=20)
+        self.ax2.text(
+            goalkeeper_x, goalkeeper_y, "🧤", ha="center", va="center", fontsize=20
+        )
 
         # Arrow showing collapse
         self.ax2.annotate(
@@ -344,7 +377,9 @@ class SoccerWaveVisualizer:
         for i, m in enumerate(self.ball.measurements):
             print(f"  Measurement {i+1}:")
             print(f"    Goalkeeper: {m['goalkeeper_pos']}")
-            print(f"    Ball measured at: ({m['measured_pos'][0]:.2f}, {m['measured_pos'][1]:.2f})")
+            print(
+                f"    Ball measured at: ({m['measured_pos'][0]:.2f}, {m['measured_pos'][1]:.2f})"
+            )
             print(f"    Probability: {m['probability']:.4f}")
 
         # Quantum explanation
@@ -391,7 +426,10 @@ class SoccerWaveVisualizer:
             "timestamp": datetime.now().isoformat(),
             "experiment": "wave_packet_soccer",
             "measurements": self.ball.measurements,
-            "final_state": {"measured": self.ball.measured, "position": self.ball.measured_pos},
+            "final_state": {
+                "measured": self.ball.measured,
+                "position": self.ball.measured_pos,
+            },
         }
 
         json_path = f"{output_dir}/soccer_wavepacket_{timestamp}.json"
@@ -400,7 +438,11 @@ class SoccerWaveVisualizer:
 
         print(f"\n💾 Results saved: {json_path}")
 
-        plt.savefig(f"{output_dir}/soccer_wavepacket_{timestamp}.png", dpi=300, bbox_inches="tight")
+        plt.savefig(
+            f"{output_dir}/soccer_wavepacket_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
+        )
         print(f"📊 Plot saved: soccer_wavepacket_{timestamp}.png")
 
         return results

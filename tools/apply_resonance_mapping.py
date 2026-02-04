@@ -116,7 +116,10 @@ def apply_mapping(
         scaled = {k: float(deltas[k]) * float(scales.get(k, 1.0)) for k in deltas}
         # Cappen
         scaled = {k: clamp(v, -1.0, +1.0) for k, v in scaled.items()}
-        out["adjusted"]["projects"][pj_name] = {"delta": scaled, "cap": {"min": cmin, "max": cmax}}
+        out["adjusted"]["projects"][pj_name] = {
+            "delta": scaled,
+            "cap": {"min": cmin, "max": cmax},
+        }
 
     return out
 
@@ -136,8 +139,12 @@ def main() -> None:
                 "projects": {},
             },
         }
-        OUT_JSON.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("[apply_resonance_mapping] Kein Mapping gefunden. Platzhalter geschrieben.")
+        OUT_JSON.write_text(
+            json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        print(
+            "[apply_resonance_mapping] Kein Mapping gefunden. Platzhalter geschrieben."
+        )
         return
 
     out = apply_mapping(base, external, mapping)

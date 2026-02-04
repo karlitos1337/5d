@@ -13,16 +13,22 @@ import streamlit as st
 
 from simulations.utils import write_run
 
-st.set_page_config(page_title="Autopoietische Klasse", page_icon="🧪", layout="centered")
+st.set_page_config(
+    page_title="Autopoietische Klasse", page_icon="🧪", layout="centered"
+)
 st.title("🧪 Autopoietische Klasse – Simulation")
 
 with st.sidebar:
     st.header("Parameter")
     n_agents = st.slider("Anzahl Lernende", 5, 500, 80, step=5)
     steps = st.slider("Schritte", 10, 1000, 200, step=10)
-    zwang = st.slider("Zwangsgrad", 0.0, 1.0, 0.2, step=0.05, help="Erhöht Stress, senkt IM/R")
+    zwang = st.slider(
+        "Zwangsgrad", 0.0, 1.0, 0.2, step=0.05, help="Erhöht Stress, senkt IM/R"
+    )
     freiheit = st.slider("Wahlfreiheit", 0.0, 1.0, 0.7, step=0.05, help="Erhöht IM/Au")
-    peers = st.slider("Peer-Interaktion", 0.0, 1.0, 0.5, step=0.05, help="Fördert SP/IM")
+    peers = st.slider(
+        "Peer-Interaktion", 0.0, 1.0, 0.5, step=0.05, help="Fördert SP/IM"
+    )
     lehrer_support = st.slider(
         "Lehrer-Support", 0.0, 1.0, 0.5, step=0.05, help="Senkt Stress, erhöht R"
     )
@@ -46,7 +52,9 @@ for t in range(steps):
     # Stress/Entlastung
     stress = zwang * (1.0 - lehrer_support)
     # Aufgabenzuordnung: Passung ~ Aufgabenvielfalt und Wahlfreiheit
-    passung = freiheit * aufgaben_vielfalt * (1.0 - np.abs(interest - rs.random(n_agents)))
+    passung = (
+        freiheit * aufgaben_vielfalt * (1.0 - np.abs(interest - rs.random(n_agents)))
+    )
 
     # Updates (kleine Lernrate)
     IM += 0.05 * (passung - stress)
@@ -77,7 +85,10 @@ for t in range(steps):
 cols = st.columns(2)
 with cols[0]:
     fig = px.line(
-        hist, x="step", y=["A", "IM", "R", "SP", "Au"], title="IMP-Dimensionen (Mittelwerte)"
+        hist,
+        x="step",
+        y=["A", "IM", "R", "SP", "Au"],
+        title="IMP-Dimensionen (Mittelwerte)",
     )
     st.plotly_chart(fig, use_container_width=True)
 with cols[1]:
@@ -85,7 +96,9 @@ with cols[1]:
     st.plotly_chart(fig2, use_container_width=True)
 
 # Metriken aggregiert
-imp = np.array([hist["A"][-1], hist["IM"][-1], hist["R"][-1], hist["SP"][-1], hist["Au"][-1]])
+imp = np.array(
+    [hist["A"][-1], hist["IM"][-1], hist["R"][-1], hist["SP"][-1], hist["Au"][-1]]
+)
 imp_score = float(np.prod(imp))
 
 st.subheader("Ergebnis")

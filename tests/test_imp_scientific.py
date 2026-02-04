@@ -80,7 +80,13 @@ class TestIMPCalculation:
 
         Expected: 1.0 × 0.0 × 1.0 × 1.0 × 1.0 = 0.0
         """
-        dimensions = {"A": 1.0, "IM": 0.0, "R": 1.0, "SP": 1.0, "Au": 1.0}  # Zero motivation
+        dimensions = {
+            "A": 1.0,
+            "IM": 0.0,
+            "R": 1.0,
+            "SP": 1.0,
+            "Au": 1.0,
+        }  # Zero motivation
 
         result = calculate_imp_verified(dimensions)
 
@@ -171,13 +177,22 @@ class TestIMPCalculation:
         balanced = {"A": 0.75, "IM": 0.75, "R": 0.75, "SP": 0.75, "Au": 0.75}
 
         # Person B: One dimension missing
-        unbalanced = {"A": 1.0, "IM": 0.0, "R": 1.0, "SP": 1.0, "Au": 1.0}  # No motivation
+        unbalanced = {
+            "A": 1.0,
+            "IM": 0.0,
+            "R": 1.0,
+            "SP": 1.0,
+            "Au": 1.0,
+        }  # No motivation
 
         result_balanced = calculate_imp_verified(balanced)
         result_unbalanced = calculate_imp_verified(unbalanced)
 
         # Multiplicative: balanced should score higher
-        assert result_balanced["raw_multiplicative"] > result_unbalanced["raw_multiplicative"]
+        assert (
+            result_balanced["raw_multiplicative"]
+            > result_unbalanced["raw_multiplicative"]
+        )
 
         # Check additive (for comparison, not used in model)
         additive_balanced = sum(balanced.values()) / len(balanced)
@@ -204,7 +219,9 @@ class TestIMPCalculation:
         """
         # Test negative value
         try:
-            result = calculate_imp_verified({"A": -0.1, "IM": 0.5, "R": 0.5, "SP": 0.5, "Au": 0.5})
+            result = calculate_imp_verified(
+                {"A": -0.1, "IM": 0.5, "R": 0.5, "SP": 0.5, "Au": 0.5}
+            )
             # If no validation, check result is still computable
             assert isinstance(result, dict)
         except (ValueError, AssertionError):
@@ -212,7 +229,9 @@ class TestIMPCalculation:
 
         # Test value > 1.0
         try:
-            result = calculate_imp_verified({"A": 1.5, "IM": 0.5, "R": 0.5, "SP": 0.5, "Au": 0.5})
+            result = calculate_imp_verified(
+                {"A": 1.5, "IM": 0.5, "R": 0.5, "SP": 0.5, "Au": 0.5}
+            )
             assert isinstance(result, dict)
         except (ValueError, AssertionError):
             pass  # Validation working correctly

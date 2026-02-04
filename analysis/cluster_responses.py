@@ -68,11 +68,21 @@ def kmeans_clustering(profiles: list[dict], n_clusters: int = 5) -> dict:
         "cluster_labels": cluster_labels.tolist(),
         "cluster_centers": kmeans.cluster_centers_.tolist(),
         "inertia": float(kmeans.inertia_),
-        "feature_names": ["neuro", "psych", "philo", "econ", "tech", "life_sat", "fin_sit"],
+        "feature_names": [
+            "neuro",
+            "psych",
+            "philo",
+            "econ",
+            "tech",
+            "life_sat",
+            "fin_sit",
+        ],
     }
 
 
-def dbscan_clustering(profiles: list[dict], eps: float = 0.5, min_samples: int = 5) -> dict:
+def dbscan_clustering(
+    profiles: list[dict], eps: float = 0.5, min_samples: int = 5
+) -> dict:
     """DBSCAN Clustering (Density-based).
 
     Gut für:

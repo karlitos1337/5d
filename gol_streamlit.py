@@ -140,13 +140,17 @@ def place_tub(grid: np.ndarray, top: int, left: int) -> None:
 
 
 def place_beacon(grid: np.ndarray, top: int, left: int) -> None:
-    beacon = np.array([[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 1, 1], [0, 0, 1, 1]], dtype=int)
+    beacon = np.array(
+        [[1, 1, 0, 0], [1, 1, 0, 0], [0, 0, 1, 1], [0, 0, 1, 1]], dtype=int
+    )
     h, w = beacon.shape
     grid[top : top + h, left : left + w] = beacon
 
 
 def place_lwss(grid: np.ndarray, top: int, left: int) -> None:
-    lwss = np.array([[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [1, 0, 0, 1, 0]], dtype=int)
+    lwss = np.array(
+        [[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [1, 0, 0, 1, 0]], dtype=int
+    )
     h, w = lwss.shape
     grid[top : top + h, left : left + w] = lwss
 
@@ -253,14 +257,26 @@ with st.sidebar:
                 "Steps min", min_value=1, max_value=100000, value=b["steps_min"], step=1
             )
             b["interval_min"] = st.number_input(
-                "Intervall min (ms)", min_value=1, max_value=10000, value=b["interval_min"], step=1
+                "Intervall min (ms)",
+                min_value=1,
+                max_value=10000,
+                value=b["interval_min"],
+                step=1,
             )
             b["px_min"] = st.number_input(
-                "Bild min (px)", min_value=10, max_value=10000, value=b["px_min"], step=10
+                "Bild min (px)",
+                min_value=10,
+                max_value=10000,
+                value=b["px_min"],
+                step=10,
             )
         with c2:
             b["size_max"] = st.number_input(
-                "Grid max", min_value=b["size_min"], max_value=2000, value=b["size_max"], step=1
+                "Grid max",
+                min_value=b["size_min"],
+                max_value=2000,
+                value=b["size_max"],
+                step=1,
             )
             b["steps_max"] = st.number_input(
                 "Steps max",
@@ -277,7 +293,11 @@ with st.sidebar:
                 step=10,
             )
             b["px_max"] = st.number_input(
-                "Bild max (px)", min_value=b["px_min"], max_value=20000, value=b["px_max"], step=50
+                "Bild max (px)",
+                min_value=b["px_min"],
+                max_value=20000,
+                value=b["px_max"],
+                step=50,
             )
 
     preset = st.selectbox(
@@ -350,14 +370,21 @@ with st.sidebar:
         index=0,
         help="Schritte pro Tick im Auto-Run; höher = schnelleres Vorspulen.",
     )
-    start_btn = st.button("Start", help="Auto-Run starten (nutzt Batch-Steps pro Tick).")
+    start_btn = st.button(
+        "Start", help="Auto-Run starten (nutzt Batch-Steps pro Tick)."
+    )
     pause_btn = st.button("Pause", help="Auto-Run pausieren; Zustand bleibt erhalten.")
-    stop_btn = st.button("Stop", help="Auto-Run stoppen und Pausen-Status zurücksetzen.")
-    reset_btn = st.button("Reset Grid", help="Grid neu initialisieren mit aktuellem Preset/Größe.")
+    stop_btn = st.button(
+        "Stop", help="Auto-Run stoppen und Pausen-Status zurücksetzen."
+    )
+    reset_btn = st.button(
+        "Reset Grid", help="Grid neu initialisieren mit aktuellem Preset/Größe."
+    )
 
     st.subheader("Speichern")
     save_snapshot_btn = st.button(
-        "Snapshot speichern (Grid + PNG)", help="Speichert aktuelles Grid als .npy und PNG."
+        "Snapshot speichern (Grid + PNG)",
+        help="Speichert aktuelles Grid als .npy und PNG.",
     )
     save_history_btn = st.button(
         "Verlauf speichern (CSV)", help="Speichert (step, live_cells) als CSV."
@@ -398,7 +425,9 @@ with st.sidebar:
         accept_multiple_files=False,
         help="Graustufen-PNG wird skaliert und binarisiert (>=128 → 1).",
     )
-    load_npy_btn = st.button("NPY laden", help="Übernimmt hochgeladenes .npy in das Grid.")
+    load_npy_btn = st.button(
+        "NPY laden", help="Übernimmt hochgeladenes .npy in das Grid."
+    )
     load_png_btn = st.button(
         "PNG laden", help="Übernimmt skaliertes/binarisiertes PNG in das Grid."
     )
@@ -456,7 +485,9 @@ chart_area = st.empty()
 def render(grid: np.ndarray, size_px: int = 400):
     # Erzeuge ein 2D-Grayscale-Bild aus dem Grid und skaliere auf size_px x size_px
     img = (grid * 255).astype(np.uint8)
-    pil = Image.fromarray(img, mode="L").resize((size_px, size_px), resample=Image.NEAREST)
+    pil = Image.fromarray(img, mode="L").resize(
+        (size_px, size_px), resample=Image.NEAREST
+    )
     plot_area.image(pil, caption=None, width=size_px, clamp=True)
 
 
@@ -477,7 +508,9 @@ def simulate_frames(grid: np.ndarray, steps: int, engine_mode: str, size_px: int
     for _ in range(int(steps)):
         # Render current frame
         img_arr = (g * 255).astype(np.uint8)
-        pil = Image.fromarray(img_arr, mode="L").resize((size_px, size_px), resample=Image.NEAREST)
+        pil = Image.fromarray(img_arr, mode="L").resize(
+            (size_px, size_px), resample=Image.NEAREST
+        )
         frames.append(pil)
         local_step += 1
         history.append((local_step, int(np.sum(g))))
@@ -537,7 +570,9 @@ with col2:
             for _ in range(10):
                 g = game_of_life_step(g)
                 st.session_state.step_idx += 1
-                st.session_state.history.append((st.session_state.step_idx, int(np.sum(g))))
+                st.session_state.history.append(
+                    (st.session_state.step_idx, int(np.sum(g)))
+                )
         else:
             lst = g.astype(int).tolist()
             lst = game_of_life_py(lst, steps=10)
@@ -634,9 +669,9 @@ if save_snapshot_btn:
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     np.save(f"gol_grid_{ts}.npy", st.session_state.grid)
     img = (st.session_state.grid * 255).astype(np.uint8)
-    Image.fromarray(img, mode="L").resize((size_px, size_px), resample=Image.NEAREST).save(
-        f"gol_grid_{ts}.png"
-    )
+    Image.fromarray(img, mode="L").resize(
+        (size_px, size_px), resample=Image.NEAREST
+    ).save(f"gol_grid_{ts}.png")
     st.success(f"Snapshot gespeichert: gol_grid_{ts}.npy / gol_grid_{ts}.png")
 if save_history_btn:
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -645,14 +680,19 @@ if save_history_btn:
         if st.session_state.get("history")
         else np.zeros((0, 2), dtype=int)
     )
-    np.savetxt(f"gol_history_{ts}.csv", hist, delimiter=",", header="step,live_cells", fmt="%d")
+    np.savetxt(
+        f"gol_history_{ts}.csv", hist, delimiter=",", header="step,live_cells", fmt="%d"
+    )
     st.success(f"Verlauf gespeichert: gol_history_{ts}.csv")
 
 # Export actions
 if export_gif_btn:
     try:
         frames, h = simulate_frames(
-            st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px
+            st.session_state.grid,
+            steps=export_steps,
+            engine_mode=engine,
+            size_px=size_px,
         )
         buf = io.BytesIO()
         frames[0].save(
@@ -682,7 +722,10 @@ if export_mp4_btn:
     else:
         try:
             frames, h = simulate_frames(
-                st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px
+                st.session_state.grid,
+                steps=export_steps,
+                engine_mode=engine,
+                size_px=size_px,
             )
             buf = io.BytesIO()
             # imageio benötigt raw arrays (H,W,3) oder (H,W) – konvertieren zu RGB
@@ -789,8 +832,7 @@ with st.expander("Editor-Modus (Zellen anklicken/setzen)"):
 
 # Parameter-Übersicht
 with st.expander("Parameter-Übersicht"):
-    st.markdown(
-        f"""
+    st.markdown(f"""
         | Parameter | Attribut | Wert | Min | Max |
         |---|---|---:|---:|---:|
         | Preset | Muster | `{preset}` | - | - |
@@ -798,13 +840,11 @@ with st.expander("Parameter-Übersicht"):
         | Schritte (Auto) | Iterationen | `{steps}` | `{int(b['steps_min'])}` | `{int(b['steps_max'])}` |
         | Intervall | ms/Step | `{interval_ms}` | `{int(b['interval_min'])}` | `{int(b['interval_max'])}` |
         | Bild-Pixelgröße | px | `{size_px}` | `{int(b['px_min'])}` | `{int(b['px_max'])}` |
-        """
-    )
+        """)
 
 # Umso mehr / desto … – Kontext-Hinweise
 with st.expander("Umso mehr … desto … / Umso weniger … dann …"):
-    st.markdown(
-        """
+    st.markdown("""
         - Grid-Größe: Je mehr Zellen, desto detailreicher und langlebiger die Dynamik; je weniger, desto schneller, aber randempfindlicher.
         - Schritte (Auto-Run): Je mehr, desto größer der zeitliche Vorsprung pro Start; je weniger, desto feinere Beobachtung.
         - Intervall (ms): Je höher, desto gemächlicher die Aktualisierung; je niedriger, desto flüssiger, aber CPU-intensiver.
@@ -815,5 +855,4 @@ with st.expander("Umso mehr … desto … / Umso weniger … dann …"):
         - Export-Schritte: Je mehr, desto längere Clips und größere Dateien; je weniger, desto kompakt.
         - Frame-Dauer (ms): Je höher, desto längere Gesamtspielzeit bei gleicher Schrittzahl; je niedriger, desto schnellere Wiedergabe.
         - Preset: Einfache Oszillatoren (Blinker/Toad) sind stabil; komplexe Muster (Gosper) erzeugen wandernde Glider und Interferenzen.
-        """
-    )
+        """)

@@ -80,7 +80,9 @@ def display_bibtex_reference(key: str, title: str, description: str = None):
         st.code(entries[key], language="bibtex")
 
         # Copy button (using Streamlit's native functionality)
-        st.caption("💡 Click the copy icon in the code block above to copy BibTeX entry")
+        st.caption(
+            "💡 Click the copy icon in the code block above to copy BibTeX entry"
+        )
 
 
 def display_reference_section(
@@ -110,13 +112,11 @@ def display_reference_section(
     st.divider()
     st.header(title)
 
-    st.markdown(
-        """
+    st.markdown("""
     **Alle Referenzen verfügbar in:** `07_daten_analysen/5d-relevant-sources.bib`
     
     Klicken Sie auf eine Referenz, um die vollständige BibTeX-Citation anzuzeigen.
-    """
-    )
+    """)
 
     for ref in references:
         display_bibtex_reference(
@@ -148,7 +148,9 @@ def search_references(query: str):
     entries = load_bibtex_entries()
     query_lower = query.lower()
 
-    return {key: entry for key, entry in entries.items() if query_lower in entry.lower()}
+    return {
+        key: entry for key, entry in entries.items() if query_lower in entry.lower()
+    }
 
 
 # Example usage (can be imported in dashboard pages)

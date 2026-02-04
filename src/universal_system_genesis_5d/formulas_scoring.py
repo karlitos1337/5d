@@ -26,7 +26,9 @@ def normalize_to_1_99(x: float) -> int:
     return max(1, min(99, int(round(1 + x * 98))))
 
 
-def weighted_aggregate(scores: Mapping[str, float], weights: Mapping[str, float]) -> float:
+def weighted_aggregate(
+    scores: Mapping[str, float], weights: Mapping[str, float]
+) -> float:
     """Aggregiert benannte Scores mit passenden Gewichten (Scores in [0,1])."""
     keys = set(scores.keys()) & set(weights.keys())
     if not keys:

@@ -58,7 +58,10 @@ def add_noise(images: torch.Tensor, noise_level: float) -> torch.Tensor:
 
 
 def train_quick(
-    model: nn.Module, loader: DataLoader, optimizer: optim.Optimizer, config: QuickConfig
+    model: nn.Module,
+    loader: DataLoader,
+    optimizer: optim.Optimizer,
+    config: QuickConfig,
 ) -> dict[str, float]:
     """Quick training for one epoch."""
     model.train()
@@ -149,7 +152,9 @@ def main():
         [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
     )
 
-    train_dataset = datasets.MNIST("data", train=True, download=True, transform=transform)
+    train_dataset = datasets.MNIST(
+        "data", train=True, download=True, transform=transform
+    )
     test_dataset = datasets.MNIST("data", train=False, transform=transform)
 
     # Create subsets
@@ -173,20 +178,22 @@ def main():
 
         # Initialize model
         if model_name == "5D-Net":
-            model = FiveDNet(input_size=784, hidden_size=config.hidden_dim, num_classes=10).to(
-                config.device
-            )
+            model = FiveDNet(
+                input_size=784, hidden_size=config.hidden_dim, num_classes=10
+            ).to(config.device)
         else:
-            model = BaselineNet(input_size=784, hidden_size=config.hidden_dim, num_classes=10).to(
-                config.device
-            )
+            model = BaselineNet(
+                input_size=784, hidden_size=config.hidden_dim, num_classes=10
+            ).to(config.device)
 
         # Count parameters
         n_params = sum(p.numel() for p in model.parameters())
         print(f"Parameters: {n_params:,}")
 
         optimizer = optim.Adam(
-            model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
+            model.parameters(),
+            lr=config.learning_rate,
+            weight_decay=config.weight_decay,
         )
 
         # Training

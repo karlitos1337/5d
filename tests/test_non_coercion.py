@@ -51,7 +51,9 @@ class TestPayoffMatrix:
         payoff_def_def = (1, 1)
         payoff_coop_coop = (3, 3)
 
-        assert payoff_def_def[0] < payoff_coop_coop[0], "Mutual defection worse than cooperation"
+        assert (
+            payoff_def_def[0] < payoff_coop_coop[0]
+        ), "Mutual defection worse than cooperation"
         assert payoff_def_def[0] > 0, "Still positive (not collapse)"
 
     def test_temptation_order(self):
@@ -310,7 +312,9 @@ class TestCoercionAlternatives:
         self_created_legitimacy = 0.90
         imposed_legitimacy = 0.50
 
-        assert self_created_legitimacy > imposed_legitimacy, "Self-created rules more legitimate"
+        assert (
+            self_created_legitimacy > imposed_legitimacy
+        ), "Self-created rules more legitimate"
 
 
 class TestBibTeXValidation:

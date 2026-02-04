@@ -4,6 +4,7 @@ Streamlit-Seite: NN Playground (externes iFrame)
 - Integriert den TensorFlow Playground als Referenz/Ideengeber für Interaktiv-Grafiken
 - Verweist klar auf die Quelle (Google/TensorFlow)
 """
+
 import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
@@ -22,11 +23,20 @@ def main():
         st.markdown("Interaktive Demo via externes iFrame.")
         st.markdown("Quelle: TensorFlow Playground")
         st.divider()
-        st.caption("Nützlich als Design-/Interaktions-Referenz für eigene 5D-Visualisierungen.")
+        st.caption(
+            "Nützlich als Design-/Interaktions-Referenz für eigene 5D-Visualisierungen."
+        )
 
     st.title("🧪 Neural Network Playground – Referenz")
-    mode = st.radio("Betriebsart", ["Extern (TensorFlow)", "Offline (vereinfachte Demo)"], index=0, horizontal=True)
-    st.caption("Quelle extern: https://playground.tensorflow.org – Offline: Plotly Demo")
+    mode = st.radio(
+        "Betriebsart",
+        ["Extern (TensorFlow)", "Offline (vereinfachte Demo)"],
+        index=0,
+        horizontal=True,
+    )
+    st.caption(
+        "Quelle extern: https://playground.tensorflow.org – Offline: Plotly Demo"
+    )
 
     if mode == "Extern (TensorFlow)":
         iframe_html = (

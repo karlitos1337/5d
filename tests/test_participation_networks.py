@@ -79,7 +79,9 @@ class TestNetworkTopologies:
         # Expected: hubs exist (max degree >> average degree)
         max_degree = max(degrees)
         avg_degree = np.mean(degrees)
-        assert max_degree > 3 * avg_degree, f"No clear hubs: max {max_degree}, avg {avg_degree}"
+        assert (
+            max_degree > 3 * avg_degree
+        ), f"No clear hubs: max {max_degree}, avg {avg_degree}"
 
         # Expected: minimum degree is m (by construction)
         min_degree = min(degrees)
@@ -205,7 +207,9 @@ class TestDiffusionDynamics:
 
         # Regular lattice (p=0)
         G_lattice = nx.watts_strogatz_graph(n=n, k=k, p=0.0, seed=42)
-        t_50_lattice = self._simulate_diffusion(G_lattice, seed_frac, threshold, max_steps)
+        t_50_lattice = self._simulate_diffusion(
+            G_lattice, seed_frac, threshold, max_steps
+        )
 
         # Small-world (p=0.1)
         G_sw = nx.watts_strogatz_graph(n=n, k=k, p=0.1, seed=42)

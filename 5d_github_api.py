@@ -34,11 +34,15 @@ class GitHubExplorer:
     def _update_rate_limits(self, response):
         """Update rate limit information from response headers."""
         if response.headers:
-            self.rate_limit_remaining = int(response.headers.get("X-RateLimit-Remaining", -1))
+            self.rate_limit_remaining = int(
+                response.headers.get("X-RateLimit-Remaining", -1)
+            )
             self.rate_limit_reset = int(response.headers.get("X-RateLimit-Reset", 0))
 
             if self.rate_limit_remaining is not None and self.rate_limit_remaining < 10:
-                print(f"⚠️  Rate limit low: {self.rate_limit_remaining} requests remaining")
+                print(
+                    f"⚠️  Rate limit low: {self.rate_limit_remaining} requests remaining"
+                )
                 if self.rate_limit_reset:
                     from datetime import datetime
 
@@ -92,7 +96,9 @@ class GitHubExplorer:
         params = {"q": query, "sort": "stars", "order": "desc", "per_page": max_results}
 
         try:
-            response = requests.get(url, headers=self.headers, params=params, timeout=10)
+            response = requests.get(
+                url, headers=self.headers, params=params, timeout=10
+            )
 
             # Update rate limits
             self._update_rate_limits(response)
@@ -146,10 +152,17 @@ class GitHubExplorer:
             self._check_and_refresh_token()
 
             url = f"{self.base_url}/search/repositories"
-            params = {"q": f"topic:{topic}", "sort": "updated", "order": "desc", "per_page": 5}
+            params = {
+                "q": f"topic:{topic}",
+                "sort": "updated",
+                "order": "desc",
+                "per_page": 5,
+            }
 
             try:
-                response = requests.get(url, headers=self.headers, params=params, timeout=10)
+                response = requests.get(
+                    url, headers=self.headers, params=params, timeout=10
+                )
 
                 # Update rate limits
                 self._update_rate_limits(response)
@@ -177,7 +190,11 @@ class GitHubExplorer:
 
     def explore_all(self):
         """Sammelt alle GitHub Daten"""
-        all_data = {"repositories": {}, "trending": {}, "timestamp": datetime.now().isoformat()}
+        all_data = {
+            "repositories": {},
+            "trending": {},
+            "timestamp": datetime.now().isoformat(),
+        }
 
         print("🔍 GitHub API Exploration...")
 

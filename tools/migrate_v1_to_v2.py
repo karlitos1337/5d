@@ -37,7 +37,9 @@ def migrate_v1_to_v2(old_file="5d_solutions.json", new_file="5d_solutions.json")
     for dim in ["A", "IM", "R", "SP", "Au"]:
         scores = old_data.get("solutions", {}).get(f"{dim}-Score", [])
         for _i, score in enumerate(scores):
-            dimension_scores.append(DimensionScore(dimension=dim, score=score, source="legacy"))
+            dimension_scores.append(
+                DimensionScore(dimension=dim, score=score, source="legacy")
+            )
 
     # Plan übernehmen
     plan = old_data.get("plan", {})

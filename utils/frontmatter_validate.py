@@ -6,7 +6,9 @@ import sys
 try:
     import yaml
 except Exception:
-    print("Missing dependency: pyyaml. Install via 'pip install pyyaml'", file=sys.stderr)
+    print(
+        "Missing dependency: pyyaml. Install via 'pip install pyyaml'", file=sys.stderr
+    )
     sys.exit(2)
 
 RE_FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)

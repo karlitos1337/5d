@@ -26,7 +26,9 @@ class GitHubAuth:
     def __init__(self):
         self.client_id = os.getenv("GITHUB_CLIENT_ID")
         self.client_secret = os.getenv("GITHUB_CLIENT_SECRET")
-        self.redirect_uri = os.getenv("GITHUB_REDIRECT_URI", "http://localhost:8000/callback")
+        self.redirect_uri = os.getenv(
+            "GITHUB_REDIRECT_URI", "http://localhost:8000/callback"
+        )
 
         if not self.client_id or not self.client_secret:
             raise ValueError("GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET must be set")
@@ -85,7 +87,10 @@ class GitHubAuth:
         KEINE Speicherung von User-Daten!
         """
         url = "https://api.github.com/user"
-        headers = {"Authorization": f"token {access_token}", "Accept": "application/json"}
+        headers = {
+            "Authorization": f"token {access_token}",
+            "Accept": "application/json",
+        }
 
         # Sentinel: Added timeout=10 to prevent hanging
         response = requests.get(url, headers=headers, timeout=10)
@@ -99,7 +104,9 @@ class GitHubAuth:
         """
         return secrets.token_urlsafe(32)
 
-    def authenticate(self, code: str, received_state: str, expected_state: str) -> dict | None:
+    def authenticate(
+        self, code: str, received_state: str, expected_state: str
+    ) -> dict | None:
         """Vollständiger OAuth-Flow mit CSRF-Protection.
 
         Args:

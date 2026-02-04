@@ -31,9 +31,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Validate YAML frontmatter in manifest Markdown files"
     )
-    parser.add_argument("manifest_dir", nargs="?", default="manifest", help="Base manifest dir")
     parser.add_argument(
-        "--fix", action="store_true", help="Automatically add minimal frontmatter where missing"
+        "manifest_dir", nargs="?", default="manifest", help="Base manifest dir"
+    )
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Automatically add minimal frontmatter where missing",
     )
     args = parser.parse_args()
 

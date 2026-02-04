@@ -82,15 +82,21 @@ z_types, z_will, z_pay = st.session_state[state_key]
 col1, col2, col3, col4 = st.columns(4)
 with col1:
     if st.button("Step"):
-        z_types, z_will, z_pay = interaction_step(z_types, z_will, z_pay, thr=consent_thr)
+        z_types, z_will, z_pay = interaction_step(
+            z_types, z_will, z_pay, thr=consent_thr
+        )
 with col2:
     if st.button("10 Steps"):
         for _ in range(10):
-            z_types, z_will, z_pay = interaction_step(z_types, z_will, z_pay, thr=consent_thr)
+            z_types, z_will, z_pay = interaction_step(
+                z_types, z_will, z_pay, thr=consent_thr
+            )
 with col3:
     if st.button("Auto-Run"):
         for _ in range(steps):
-            z_types, z_will, z_pay = interaction_step(z_types, z_will, z_pay, thr=consent_thr)
+            z_types, z_will, z_pay = interaction_step(
+                z_types, z_will, z_pay, thr=consent_thr
+            )
             time.sleep(max(0.005, interval_ms / 1000.0))
 with col4:
     if st.button("Reset"):
@@ -114,5 +120,6 @@ else:
     scale = "Gray"
 
 st.plotly_chart(
-    px.imshow(mat, color_continuous_scale=scale, origin="upper"), use_container_width=True
+    px.imshow(mat, color_continuous_scale=scale, origin="upper"),
+    use_container_width=True,
 )

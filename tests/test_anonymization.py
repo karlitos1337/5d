@@ -26,7 +26,9 @@ def test_generate_anonymous_id():
 
 def test_anonymize_response_basic():
     """Test Basis-Anonymisierung."""
-    response = {"responses": {"neuro_flow_frequency": 4, "psych_intrinsic_motivation": 5}}
+    response = {
+        "responses": {"neuro_flow_frequency": 4, "psych_intrinsic_motivation": 5}
+    }
 
     anonymized = anonymize_response(response)
 

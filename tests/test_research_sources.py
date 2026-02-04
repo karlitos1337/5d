@@ -25,7 +25,9 @@ class TestResearchDataSources:
             # Check for main sections (data organized by keywords)
             # Each keyword has arxiv/pubmed subsections
             has_content = len(data) > 0 and any(
-                "arxiv" in v or "pubmed" in v for v in data.values() if isinstance(v, dict)
+                "arxiv" in v or "pubmed" in v
+                for v in data.values()
+                if isinstance(v, dict)
             )
             assert has_content, "Missing research data"
 

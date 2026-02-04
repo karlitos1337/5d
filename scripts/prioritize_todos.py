@@ -56,7 +56,9 @@ def main() -> int:
     for src, cnt in sorted(sources.items()):
         out.append(f"- {src}: {cnt} Items")
 
-    Path("MEGA_TODO_CONSOLIDATED_PRIORITIZED.md").write_text("\n".join(out), encoding="utf-8")
+    Path("MEGA_TODO_CONSOLIDATED_PRIORITIZED.md").write_text(
+        "\n".join(out), encoding="utf-8"
+    )
     print(f"Wrote MEGA_TODO_CONSOLIDATED_PRIORITIZED.md with {total} items")
     return 0
 

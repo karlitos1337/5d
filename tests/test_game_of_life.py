@@ -208,7 +208,9 @@ class TestComplexityMetrics:
         }
 
         assert len(still_lifes) >= 4, "At least 4 documented still lifes"
-        assert all(cells > 0 for cells in still_lifes.values()), "All still lifes have cells"
+        assert all(
+            cells > 0 for cells in still_lifes.values()
+        ), "All still lifes have cells"
 
 
 class TestEducationalValue:

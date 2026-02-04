@@ -133,7 +133,9 @@ class Population:
         }
 
 
-def run_multi_crisis_experiment(pop_size=1000, num_crises=10, crisis_types=None, severity=0.5):
+def run_multi_crisis_experiment(
+    pop_size=1000, num_crises=10, crisis_types=None, severity=0.5
+):
     """
     Run evolution simulation with multiple crises.
 
@@ -207,7 +209,9 @@ def run_multi_crisis_experiment(pop_size=1000, num_crises=10, crisis_types=None,
     print(f"{'='*60}")
     print("📊 FINAL RESULTS")
     print(f"{'='*60}")
-    print(f"Free: {pop_free.alive.sum()} survivors ({pop_free.alive.sum()/pop_size*100:.1f}%)")
+    print(
+        f"Free: {pop_free.alive.sum()} survivors ({pop_free.alive.sum()/pop_size*100:.1f}%)"
+    )
     print(
         f"Controlled: {pop_controlled.alive.sum()} survivors ({pop_controlled.alive.sum()/pop_size*100:.1f}%)"
     )
@@ -235,7 +239,9 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     # 1. Survival Rate Over Time
     ax = axes[0, 0]
     free_survival = [c["survival_rate"] * 100 for c in results["free"]["crises"]]
-    controlled_survival = [c["survival_rate"] * 100 for c in results["controlled"]["crises"]]
+    controlled_survival = [
+        c["survival_rate"] * 100 for c in results["controlled"]["crises"]
+    ]
 
     ax.plot(
         crisis_range,
@@ -267,7 +273,13 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     controlled_diversity = [c["diversity"] for c in results["controlled"]["crises"]]
 
     ax.plot(
-        crisis_range, free_diversity, "o-", label="Free", linewidth=2, markersize=8, color="#10b981"
+        crisis_range,
+        free_diversity,
+        "o-",
+        label="Free",
+        linewidth=2,
+        markersize=8,
+        color="#10b981",
     )
     ax.plot(
         crisis_range,
@@ -294,7 +306,9 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     width = 0.35
 
     ax.bar(x - width / 2, free_cumulative, width, label="Free", color="#10b981")
-    ax.bar(x + width / 2, controlled_cumulative, width, label="Controlled", color="#ef4444")
+    ax.bar(
+        x + width / 2, controlled_cumulative, width, label="Controlled", color="#ef4444"
+    )
     ax.set_ylabel("Survival Rate (%)", fontsize=12)
     ax.set_title("Cumulative Survival", fontsize=14, fontweight="bold")
     ax.set_xticks(x)
@@ -309,14 +323,18 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     ax.set_xlabel("Trait Value", fontsize=12)
     ax.set_ylabel("Count", fontsize=12)
     ax.set_title(
-        f"Free Population Traits (n={len(alive_traits_free)})", fontsize=14, fontweight="bold"
+        f"Free Population Traits (n={len(alive_traits_free)})",
+        fontsize=14,
+        fontweight="bold",
     )
     ax.grid(True, alpha=0.3, axis="y")
 
     # 5. Trait Distribution (Controlled)
     ax = axes[1, 1]
     alive_traits_controlled = pop_controlled.traits[pop_controlled.alive]
-    ax.hist(alive_traits_controlled, bins=20, color="#ef4444", alpha=0.7, edgecolor="black")
+    ax.hist(
+        alive_traits_controlled, bins=20, color="#ef4444", alpha=0.7, edgecolor="black"
+    )
     ax.set_xlabel("Trait Value", fontsize=12)
     ax.set_ylabel("Count", fontsize=12)
     ax.set_title(
@@ -331,7 +349,12 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     crisis_types = results["crisis_types"]
     crisis_counts = {ct: crisis_types.count(ct) for ct in set(crisis_types)}
 
-    colors = {"low": "#3b82f6", "high": "#f59e0b", "mid": "#8b5cf6", "extreme": "#ef4444"}
+    colors = {
+        "low": "#3b82f6",
+        "high": "#f59e0b",
+        "mid": "#8b5cf6",
+        "extreme": "#ef4444",
+    }
     ax.bar(
         crisis_counts.keys(),
         crisis_counts.values(),
@@ -379,12 +402,17 @@ if __name__ == "__main__":
 
     print("\n✅ Multi-crisis experiment complete!")
     print("📊 Hypothesis Test: Does diversity help over multiple crises?")
-    print(f"   Free final survival: {results['free']['final']['survival_rate']*100:.1f}%")
+    print(
+        f"   Free final survival: {results['free']['final']['survival_rate']*100:.1f}%"
+    )
     print(
         f"   Controlled final survival: {results['controlled']['final']['survival_rate']*100:.1f}%"
     )
 
-    if results["free"]["final"]["survival_rate"] > results["controlled"]["final"]["survival_rate"]:
+    if (
+        results["free"]["final"]["survival_rate"]
+        > results["controlled"]["final"]["survival_rate"]
+    ):
         print("   ✅ HYPOTHESIS CONFIRMED: Diversity wins over multiple crises!")
     else:
         print("   ❌ HYPOTHESIS REJECTED: Controlled population still wins")

@@ -208,7 +208,11 @@ class ManifestOrganizer:
             if not category_dir.is_dir() or category_dir.name not in subcategory_rules:
                 continue
 
-            files = [f for f in category_dir.iterdir() if f.is_file() and f.name != "INDEX.md"]
+            files = [
+                f
+                for f in category_dir.iterdir()
+                if f.is_file() and f.name != "INDEX.md"
+            ]
             rules = subcategory_rules[category_dir.name]
 
             for file in files:
@@ -277,7 +281,9 @@ class ManifestOrganizer:
                     print(f"   ✅ {file.name} → {category}/")
 
         print(f"\n{'='*60}")
-        print(f"Gesamt: {sum(len(f) for f in categorization.values())} Dateien kategorisiert")
+        print(
+            f"Gesamt: {sum(len(f) for f in categorization.values())} Dateien kategorisiert"
+        )
 
         if dry_run:
             print("\n⚠️  DRY RUN - Keine Dateien verschoben")
@@ -303,7 +309,9 @@ class ManifestOrganizer:
                 if file.name != "INDEX.md":
                     size = file.stat().st_size
                     size_str = (
-                        f"{size/1024:.1f}KB" if size < 1024 * 1024 else f"{size/(1024*1024):.1f}MB"
+                        f"{size/1024:.1f}KB"
+                        if size < 1024 * 1024
+                        else f"{size/(1024*1024):.1f}MB"
                     )
                     index_content += f"- [{file.name}](./{file.name}) ({size_str})\n"
 

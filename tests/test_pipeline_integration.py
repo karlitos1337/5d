@@ -23,14 +23,20 @@ def test_solutions_json_exists_and_valid(pipeline_output_files):
     """Test that 5d_solutions.json exists and is valid JSON."""
     filepath = pipeline_output_files["solutions"]
 
-    assert Path(filepath).exists(), f"{filepath} sollte existieren (run: python 5d_extractor.py)"
+    assert Path(
+        filepath
+    ).exists(), f"{filepath} sollte existieren (run: python 5d_extractor.py)"
 
     with open(filepath, encoding="utf-8") as f:
         data = json.load(f)
 
     # Validate structure
-    assert "solutions" in data or "projects" in data, "solutions oder projects key fehlt"
-    assert "plan" in data or "dimension_scores" in data, "plan oder dimension_scores fehlt"
+    assert (
+        "solutions" in data or "projects" in data
+    ), "solutions oder projects key fehlt"
+    assert (
+        "plan" in data or "dimension_scores" in data
+    ), "plan oder dimension_scores fehlt"
 
 
 def test_research_json_exists_and_valid(pipeline_output_files):
@@ -62,7 +68,9 @@ def test_github_json_exists_and_valid(pipeline_output_files):
         data = json.load(f)
 
     # Validate structure
-    assert "repositories" in data or "trending" in data, "repositories oder trending fehlt"
+    assert (
+        "repositories" in data or "trending" in data
+    ), "repositories oder trending fehlt"
     assert "timestamp" in data, "timestamp fehlt"
 
 

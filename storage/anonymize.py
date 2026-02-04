@@ -79,7 +79,10 @@ def anonymize_response(response_data: dict[str, Any]) -> dict[str, Any]:
         "responses": response_data.get("responses", {}),
         "timestamp": datetime.now().isoformat(),
         "version": "1.0.0",
-        "metadata": {"anonymized": True, "anonymization_timestamp": datetime.now().isoformat()},
+        "metadata": {
+            "anonymized": True,
+            "anonymization_timestamp": datetime.now().isoformat(),
+        },
     }
 
     # Doppelte Prüfung
@@ -141,7 +144,9 @@ def verify_anonymity(response: dict[str, Any]) -> bool:
     return True
 
 
-def export_anonymized_dataset(responses: list[dict], output_format: str = "json") -> str:
+def export_anonymized_dataset(
+    responses: list[dict], output_format: str = "json"
+) -> str:
     """Exportiert anonymisierte Daten.
 
     Args:
@@ -175,7 +180,9 @@ def export_anonymized_dataset(responses: list[dict], output_format: str = "json"
 
 if __name__ == "__main__":
     # Test
-    test_response = {"responses": {"neuro_flow_frequency": 4, "psych_intrinsic_motivation": 5}}
+    test_response = {
+        "responses": {"neuro_flow_frequency": 4, "psych_intrinsic_motivation": 5}
+    }
 
     anonymized = anonymize_response(test_response)
     print("Anonymized Response:")
@@ -188,7 +195,10 @@ if __name__ == "__main__":
 
     # Test mit verbotendem Feld
     try:
-        bad_response = {"responses": {"test": 1}, "email": "test@example.com"}  # Verboten!
+        bad_response = {
+            "responses": {"test": 1},
+            "email": "test@example.com",
+        }  # Verboten!
         anonymize_response(bad_response)
     except ValueError as e:
         print(f"\nExpected error caught: {e}")

@@ -157,7 +157,8 @@ def _prepare_for_json(data: dict[str, Any]) -> dict[str, Any]:
             result[key] = _prepare_for_json(value)
         elif isinstance(value, (list, tuple)):
             result[key] = [
-                _prepare_for_json(item) if isinstance(item, dict) else item for item in value
+                _prepare_for_json(item) if isinstance(item, dict) else item
+                for item in value
             ]
         else:
             result[key] = value
@@ -235,12 +236,10 @@ def display_export_section(
         st.markdown("**Save locally:**")
         create_save_button(data, filename_base)
 
-    st.caption(
-        """
+    st.caption("""
     💡 **Tip:** JSON files include complete simulation state and can be re-loaded.
     CSV files are best for analysis in Excel/Python/R.
-    """
-    )
+    """)
 
 
 # Example usage
@@ -253,7 +252,14 @@ if __name__ == "__main__":
         "timestamp": datetime.now().isoformat(),
         "parameters": {"n_agents": 100, "threshold": 0.2, "steps": 50},
         "metrics": {"final_activation": 0.856, "t_50": 23, "clustering": 0.412},
-        "IMP_proxies": {"A": 0.5, "IM": 0.72, "R": 0.54, "SP": 0.63, "Au": 0.5, "IMP": 0.061},
+        "IMP_proxies": {
+            "A": 0.5,
+            "IM": 0.72,
+            "R": 0.54,
+            "SP": 0.63,
+            "Au": 0.5,
+            "IMP": 0.061,
+        },
         "history": pd.DataFrame(
             {
                 "step": list(range(10)),

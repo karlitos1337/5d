@@ -109,7 +109,9 @@ class TestGitHubAPIIntegration:
             ):
                 repo = data["repositories"][0]
                 assert "name" in repo, "Repos need name"
-                assert "stars" in repo or "stargazers_count" in repo, "Repos need star count"
+                assert (
+                    "stars" in repo or "stargazers_count" in repo
+                ), "Repos need star count"
 
         except FileNotFoundError:
             pytest.skip("5d_github_data.json not found (run 5d_github_api.py)")
@@ -162,7 +164,9 @@ class TestQualityMetrics:
             "CODE_OF_CONDUCT": False,  # Nice to have
         }
 
-        required = sum(1 for v in [docs["README"], docs["LICENSE"], docs["CONTRIBUTING"]] if v)
+        required = sum(
+            1 for v in [docs["README"], docs["LICENSE"], docs["CONTRIBUTING"]] if v
+        )
         assert required >= 2, "At least README + LICENSE required"
 
 
@@ -193,7 +197,9 @@ class TestDeveloperCommunityData:
         # Top 3 cities should have <70% of activity
         top_3_share = 0.65  # 65%
 
-        assert top_3_share < 0.70, "Top 3 cities <70% of activity (healthy distribution)"
+        assert (
+            top_3_share < 0.70
+        ), "Top 3 cities <70% of activity (healthy distribution)"
 
 
 class TestBibTeXValidation:

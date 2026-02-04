@@ -108,7 +108,11 @@ class QuantumMinecraftVisualizer:
         # LEFT: Superposition heatmap
         superposition_map = self.world.get_superposition_map()
         _im1 = self.ax1.imshow(
-            superposition_map, cmap="YlOrRd", vmin=0, vmax=1, origin="upper"  # noqa: F841
+            superposition_map,
+            cmap="YlOrRd",
+            vmin=0,
+            vmax=1,
+            origin="upper",  # noqa: F841
         )
 
         # Add text annotations
@@ -159,7 +163,13 @@ class QuantumMinecraftVisualizer:
                         text = "🪨"
                         color = "gray"
                     self.ax2.text(
-                        j, i, text, ha="center", va="center", fontsize=14, fontweight="bold"
+                        j,
+                        i,
+                        text,
+                        ha="center",
+                        va="center",
+                        fontsize=14,
+                        fontweight="bold",
                     )
 
         # Highlight measured block
@@ -171,7 +181,12 @@ class QuantumMinecraftVisualizer:
             result_color = "red"
 
         rect2 = patches.Rectangle(
-            (y - 0.5, x - 0.5), 1, 1, linewidth=3, edgecolor=result_color, facecolor="none"
+            (y - 0.5, x - 0.5),
+            1,
+            1,
+            linewidth=3,
+            edgecolor=result_color,
+            facecolor="none",
         )
         self.ax2.add_patch(rect2)
 
@@ -284,7 +299,11 @@ class QuantumMinecraftVisualizer:
 
         print(f"\n💾 Results saved: {json_path}")
 
-        plt.savefig(f"{output_dir}/minecraft_quantum_{timestamp}.png", dpi=300, bbox_inches="tight")
+        plt.savefig(
+            f"{output_dir}/minecraft_quantum_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
+        )
         print(f"📊 Plot saved: minecraft_quantum_{timestamp}.png")
 
         return results

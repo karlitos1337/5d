@@ -53,7 +53,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.92,
             "year_founded": 1968,
             "students": 200,
-            "source": "Greenberg & Sadofsky (1992)"
+            "source": "Greenberg & Sadofsky (1992)",
         },
         {
             "name": "Summerhill School",
@@ -64,7 +64,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.90,
             "year_founded": 1921,
             "students": 70,
-            "source": "Neill (1960)"
+            "source": "Neill (1960)",
         },
         # Waldorf/Steiner Schools (Holistic development)
         {
@@ -76,7 +76,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.85,
             "year_founded": 1919,
             "students": 650,
-            "source": "Steiner (1996)"
+            "source": "Steiner (1996)",
         },
         {
             "name": "Rudolf Steiner School London",
@@ -87,7 +87,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.84,
             "year_founded": 1934,
             "students": 450,
-            "source": "Waldorf Foundation (2023)"
+            "source": "Waldorf Foundation (2023)",
         },
         # Folk High Schools (Adult education, democratic governance)
         {
@@ -99,7 +99,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.88,
             "year_founded": 1970,
             "students": 300,
-            "source": "Korsgaard (2012)"
+            "source": "Korsgaard (2012)",
         },
         {
             "name": "Krogerup Folk High School",
@@ -110,7 +110,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.86,
             "year_founded": 1946,
             "students": 180,
-            "source": "Gundemose (2021)"
+            "source": "Gundemose (2021)",
         },
         # Montessori Schools (Child-centered learning)
         {
@@ -122,7 +122,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.87,
             "year_founded": 1907,
             "students": 50,
-            "source": "Montessori (1912)"
+            "source": "Montessori (1912)",
         },
         {
             "name": "Montessori School Amsterdam",
@@ -133,7 +133,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.89,
             "year_founded": 1926,
             "students": 380,
-            "source": "AMI (2023)"
+            "source": "AMI (2023)",
         },
         # Japanese Cooperative Learning (Tokkatsu)
         {
@@ -145,7 +145,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.91,
             "year_founded": 1949,
             "students": 1200,
-            "source": "Tokuhama-Espinosa (2019)"
+            "source": "Tokuhama-Espinosa (2019)",
         },
         # South American Democratic Schools
         {
@@ -157,7 +157,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.88,
             "year_founded": 1976,
             "students": 230,
-            "source": "Alves (2001)"
+            "source": "Alves (2001)",
         },
         # Nordic Innovation (Finland)
         {
@@ -169,7 +169,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.93,
             "year_founded": 2012,
             "students": 750,
-            "source": "Sahlberg (2015)"
+            "source": "Sahlberg (2015)",
         },
         # Indigenous Education (New Zealand)
         {
@@ -181,8 +181,8 @@ def load_alternative_schools_data():
             "imp_proxy": 0.85,
             "year_founded": 1985,
             "students": 140,
-            "source": "Smith (1999)"
-        }
+            "source": "Smith (1999)",
+        },
     ]
     return schools
 
@@ -199,23 +199,19 @@ def create_alternative_schools_map(schools_data):
     """
     # Create base map centered on Europe
     m = folium.Map(
-        location=[50, 10],
-        zoom_start=3,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
+        location=[50, 10], zoom_start=3, tiles="OpenStreetMap", width="100%", height=400
     )
 
     # Color mapping by school type
     type_colors = {
-        "Sudbury": "#2ECC40",        # Green
-        "Democratic": "#0074D9",     # Blue
-        "Waldorf": "#FF851B",        # Orange
+        "Sudbury": "#2ECC40",  # Green
+        "Democratic": "#0074D9",  # Blue
+        "Waldorf": "#FF851B",  # Orange
         "Folk High School": "#B10DC9",  # Purple
-        "Montessori": "#FF4136",     # Red
-        "Tokkatsu": "#39CCCC",       # Teal
-        "Open Concept": "#01FF70",   # Lime
-        "Indigenous": "#85144b"      # Maroon
+        "Montessori": "#FF4136",  # Red
+        "Tokkatsu": "#39CCCC",  # Teal
+        "Open Concept": "#01FF70",  # Lime
+        "Indigenous": "#85144b",  # Maroon
     }
 
     for school in schools_data:
@@ -253,7 +249,7 @@ def create_alternative_schools_map(schools_data):
             fill=True,
             fillColor=circle_color,
             fillOpacity=0.6,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -261,7 +257,7 @@ def create_alternative_schools_map(schools_data):
             location=[school["lat"], school["lon"]],
             popup=folium.Popup(popup_html, max_width=250),
             icon=folium.Icon(color=icon_color, icon="graduation-cap", prefix="fa"),
-            tooltip=f"{school['name']} ({school_type})"
+            tooltip=f"{school['name']} ({school_type})",
         ).add_to(m)
 
     # Add legend
@@ -292,16 +288,14 @@ def main():
     # Sidebar: Scientific sources
     with st.sidebar:
         st.header("Scientific Basis")
-        st.markdown(
-            """
+        st.markdown("""
         **Key Research:**
         - ✅ Heckman (2006) - ROI of Early Education
         - ✅ Greenberg (1992) - Sudbury Valley School
         - ✅ Neill (1960) - Summerhill School
         - ✅ Nielsen (1989) - Folk High Schools
         - ✅ Lewis (1995) - Tokkatsu (Japan)
-        """
-        )
+        """)
 
         with st.expander("📚 Download Sources"):
             st.download_button(
@@ -331,7 +325,9 @@ def main():
     with col3:
         # Count countries
         countries = set(
-            s.get("location", "").split(",")[-1].strip() for s in solutions if s.get("location")
+            s.get("location", "").split(",")[-1].strip()
+            for s in solutions
+            if s.get("location")
         )
         st.metric("Countries", len(countries))
 
@@ -342,15 +338,13 @@ def main():
 
     # World Map: Alternative Education Institutions
     st.header("🗺️ Alternative Education Worldwide")
-    st.markdown(
-        """
+    st.markdown("""
         Interactive map showing pioneering alternative education institutions globally. 
         **IMP Proxy** measures intrinsic motivation potential based on autonomy, authenticity, 
         and social participation dimensions.
         
         📊 **Legend:** Green markers = High IMP (≥0.85), Orange = Medium (0.75-0.84), Red = Lower (<0.75)
-        """
-    )
+        """)
 
     schools_data = load_alternative_schools_data()
     schools_map = create_alternative_schools_map(schools_data)
@@ -369,8 +363,7 @@ def main():
     with col_left:
         st.header("Alternative Education Models")
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Scientific Foundation
         
         Alternative education systems demonstrate **significantly higher** intrinsic motivation 
@@ -395,8 +388,7 @@ def main():
            - Authenticity: 0.90 (self-governance)
            - Life satisfaction: Significantly above national mean
            - Source: Neill (1960), Stronach & Piper (2008)
-        """
-        )
+        """)
 
         st.divider()
 
@@ -446,8 +438,7 @@ def main():
     with col_right:
         st.header("ROI Analysis")
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Return on Investment
         
         **Heckman Equation (2006):**
@@ -456,15 +447,13 @@ def main():
         - **$7-10** in economic benefits
         - Reduced crime, welfare dependency
         - Increased earnings, health outcomes
-        """
-        )
+        """)
 
         st.latex(
             r"ROI = \frac{\sum_{t=0}^{T} Benefits_t \cdot (1+r)^{-t}}{\sum_{t=0}^{T} Costs_t \cdot (1+r)^{-t}}"
         )
 
-        st.markdown(
-            """
+        st.markdown("""
         **Components:**
         - Benefits: Earnings, tax revenue, reduced social costs
         - Costs: Program expenses, opportunity costs
@@ -472,8 +461,7 @@ def main():
         - T: Time horizon (lifetime)
         
         **Source:** Heckman, J. J. (2006). *Skill Formation and the Economics of Investing in Disadvantaged Children*
-        """
-        )
+        """)
 
         st.divider()
 
@@ -507,7 +495,6 @@ def main():
         # Mini world map
         st.subheader("🗺️ Global Distribution of Alternative Schools")
 
-
         # Placeholder: Show countries
         if solutions:
             countries_list = {}
@@ -532,17 +519,14 @@ def main():
     tab1, tab2, tab3 = st.tabs(["IMP Score", "ROI", "Success Metrics"])
 
     with tab1:
-        st.markdown(
-            """
+        st.markdown("""
         ### IMP Score Calculation
         
         **Formula:**
-        """
-        )
+        """)
         st.latex(r"IMP = A \times IM \times R \times SP \times Au")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Where:**
         - A = Autonomy (0-1): Self-determination, free choice
         - IM = Intrinsic Motivation (0-1): Flow states, curiosity
@@ -560,28 +544,22 @@ def main():
         **Why Multiplicative?**
         All dimensions are necessary - single low dimension yields low IMP.
         This prevents "gaming" the system by maxing one dimension while neglecting others.
-        """
-        )
+        """)
 
     with tab2:
-        st.markdown(
-            """
+        st.markdown("""
         ### ROI Calculation (Heckman Method)
         
         **Net Present Value (NPV):**
-        """
-        )
+        """)
         st.latex(r"NPV = \sum_{t=0}^{T} \frac{B_t - C_t}{(1+r)^t}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Return on Investment:**
-        """
-        )
+        """)
         st.latex(r"ROI = \frac{NPV}{C_0} \times 100\%")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Variables:**
         - B_t: Benefits at time t (earnings, reduced costs)
         - C_t: Costs at time t (program expenses)
@@ -598,37 +576,31 @@ def main():
         - Perry Preschool: $7.16 return per dollar (Schweinhart et al., 2005)
         - Abecedarian Project: $4-10 return per dollar (Barnett & Masse, 2007)
         - Chicago Child-Parent Centers: $7.10 return per dollar (Reynolds et al., 2002)
-        """
-        )
+        """)
 
     with tab3:
-        st.markdown(
-            """
+        st.markdown("""
         ### Success Metrics
         
         **Academic Success:**
-        """
+        """)
+        st.latex(
+            r"S_{academic} = \frac{\sum_{i=1}^{n} (GPA_i + Test_i + Completion_i)}{3n}"
         )
-        st.latex(r"S_{academic} = \frac{\sum_{i=1}^{n} (GPA_i + Test_i + Completion_i)}{3n}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Life Satisfaction:**
-        """
-        )
+        """)
         st.latex(
             r"S_{life} = \frac{\sum_{i=1}^{n} (Career_i + Relationships_i + Health_i + Civic_i)}{4n}"
         )
 
-        st.markdown(
-            """
+        st.markdown("""
         **Overall Success:**
-        """
-        )
+        """)
         st.latex(r"Success = w_1 \cdot S_{academic} + w_2 \cdot S_{life}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Default Weights:**
         - w_1 = 0.4 (Academic)
         - w_2 = 0.6 (Life Satisfaction)
@@ -636,16 +608,14 @@ def main():
         **Rationale:** Long-term life satisfaction more important than short-term academic metrics
         
         **Source:** Adapted from Seligman (2011) - Flourish: A New Understanding of Happiness
-        """
-        )
+        """)
 
     st.divider()
 
     # Scientific references
     st.header("📚 Wissenschaftliche Quellen")
 
-    st.markdown(
-        """
+    st.markdown("""
     ### Peer-Reviewed Research
     
     1. **Heckman, J. J. (2006).** *Skill formation and the economics of investing in disadvantaged children.* 
@@ -693,8 +663,7 @@ def main():
     - `5d_solutions.json` - Extracted from manifest
     - `manifest/01_bildung_education/` - Curated knowledge base
     - Scientific papers via arXiv/PubMed APIs
-    """
-    )
+    """)
 
 
 if __name__ == "__main__":

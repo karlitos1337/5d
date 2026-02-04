@@ -255,7 +255,9 @@ class TestRegionalAdoption:
         }
 
         values = list(projections.values())
-        assert values == sorted(values, reverse=True), "Regions ordered by adoption rate"
+        assert values == sorted(
+            values, reverse=True
+        ), "Regions ordered by adoption rate"
 
 
 class TestTimelineProjections:
@@ -322,10 +324,14 @@ class TestSensitivityAnalysis:
         years = 10
 
         # Low discount rate (3%)
-        npv_low = -initial_cost + sum(annual_benefit / ((1.03) ** t) for t in range(1, years + 1))
+        npv_low = -initial_cost + sum(
+            annual_benefit / ((1.03) ** t) for t in range(1, years + 1)
+        )
 
         # High discount rate (7%)
-        npv_high = -initial_cost + sum(annual_benefit / ((1.07) ** t) for t in range(1, years + 1))
+        npv_high = -initial_cost + sum(
+            annual_benefit / ((1.07) ** t) for t in range(1, years + 1)
+        )
 
         assert npv_low > npv_high, "Higher discount rate → lower NPV"
         assert npv_low > 0 and npv_high > 0, "Both scenarios profitable"

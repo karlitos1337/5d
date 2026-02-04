@@ -60,7 +60,9 @@ async def info_5d(ctx):
         color=discord.Color.blue(),
     )
     embed.add_field(name="IMP-Score", value="0.77 (25% > Dänemark)", inline=False)
-    embed.add_field(name="Projekte", value="Bäckerei, Garten, Imkerei, Holz", inline=False)
+    embed.add_field(
+        name="Projekte", value="Bäckerei, Garten, Imkerei, Holz", inline=False
+    )
     embed.add_field(name="ROI", value="95% - 485%", inline=True)
     embed.set_footer(text=f"5D Framework • {datetime.now().strftime('%Y-%m-%d')}")
 
@@ -88,7 +90,9 @@ async def imp_score(ctx):
     for dim, score in dims.items():
         embed.add_field(name=dim, value=score, inline=True)
 
-    embed.add_field(name="🎯 Gesamt-IMP", value="**0.77** (Top 1% weltweit)", inline=False)
+    embed.add_field(
+        name="🎯 Gesamt-IMP", value="**0.77** (Top 1% weltweit)", inline=False
+    )
 
     await ctx.send(embed=embed)
 
@@ -116,13 +120,17 @@ async def research_updates(ctx, keyword="self-directed learning"):
     # arXiv Papers
     arxiv = research_data.get("arxiv", [])[:3]
     if arxiv:
-        papers_text = "\n".join([f"• [{p['title'][:50]}...]({p['link']})" for p in arxiv])
+        papers_text = "\n".join(
+            [f"• [{p['title'][:50]}...]({p['link']})" for p in arxiv]
+        )
         embed.add_field(name="arXiv Papers", value=papers_text, inline=False)
 
     # PubMed Papers
     pubmed = research_data.get("pubmed", [])[:3]
     if pubmed:
-        papers_text = "\n".join([f"• [{p['title'][:50]}...]({p['link']})" for p in pubmed])
+        papers_text = "\n".join(
+            [f"• [{p['title'][:50]}...]({p['link']})" for p in pubmed]
+        )
         embed.add_field(name="PubMed Papers", value=papers_text, inline=False)
 
     if not arxiv and not pubmed:

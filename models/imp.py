@@ -44,7 +44,9 @@ def calculate_imp_verified(dimensions: dict[str, float]) -> dict[str, float | st
     # Normalisierung: Clamp auf [0,1] (kein echtes Min-Max ohne Referenzwerte)
     normalized = max(0.0, min(1.0, raw))
 
-    formula_used = "A × IM × R × SP × Au" if abs(raw - weighted) < 1e-12 else "Gewichtet"
+    formula_used = (
+        "A × IM × R × SP × Au" if abs(raw - weighted) < 1e-12 else "Gewichtet"
+    )
 
     return {
         "raw_multiplicative": raw,

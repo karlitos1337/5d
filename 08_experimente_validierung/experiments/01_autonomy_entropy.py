@@ -80,7 +80,10 @@ def calculate_shannon_entropy(choices: list[int], n_options: int) -> float:
 def cohens_d(group1: np.ndarray, group2: np.ndarray) -> float:
     """Calculate Cohen's d effect size."""
     pooled_std = np.sqrt(
-        ((len(group1) - 1) * np.var(group1, ddof=1) + (len(group2) - 1) * np.var(group2, ddof=1))
+        (
+            (len(group1) - 1) * np.var(group1, ddof=1)
+            + (len(group2) - 1) * np.var(group2, ddof=1)
+        )
         / (len(group1) + len(group2) - 2)
     )
     return (np.mean(group1) - np.mean(group2)) / pooled_std

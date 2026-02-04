@@ -58,11 +58,19 @@ def get_mnist_loaders(batch_size: int = 128) -> tuple[DataLoader, DataLoader]:
         [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
     )
 
-    train_dataset = datasets.MNIST(root="./data", train=True, download=True, transform=transform)
-    test_dataset = datasets.MNIST(root="./data", train=False, download=True, transform=transform)
+    train_dataset = datasets.MNIST(
+        root="./data", train=True, download=True, transform=transform
+    )
+    test_dataset = datasets.MNIST(
+        root="./data", train=False, download=True, transform=transform
+    )
 
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
+    train_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=True, num_workers=2
+    )
+    test_loader = DataLoader(
+        test_dataset, batch_size=batch_size, shuffle=False, num_workers=2
+    )
 
     return train_loader, test_loader
 
@@ -78,9 +86,13 @@ def get_cifar10_loader(batch_size: int = 128) -> DataLoader:
         ]
     )
 
-    test_dataset = datasets.CIFAR10(root="./data", train=False, download=True, transform=transform)
+    test_dataset = datasets.CIFAR10(
+        root="./data", train=False, download=True, transform=transform
+    )
 
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
+    test_loader = DataLoader(
+        test_dataset, batch_size=batch_size, shuffle=False, num_workers=2
+    )
 
     return test_loader
 
@@ -195,11 +207,13 @@ def run_experiment(config: dict) -> dict:
 
     # Create models
     print("\nInitializing models...")
-    five_d = FiveDNet(input_size=784, num_classes=10, hidden_size=config["hidden_size"]).to(device)
+    five_d = FiveDNet(
+        input_size=784, num_classes=10, hidden_size=config["hidden_size"]
+    ).to(device)
 
-    baseline = BaselineNet(input_size=784, num_classes=10, hidden_size=config["hidden_size"]).to(
-        device
-    )
+    baseline = BaselineNet(
+        input_size=784, num_classes=10, hidden_size=config["hidden_size"]
+    ).to(device)
 
     print(f"5D-Net parameters: {count_parameters(five_d):,}")
     print(f"Baseline parameters: {count_parameters(baseline):,}")
@@ -228,7 +242,9 @@ def run_experiment(config: dict) -> dict:
         acc_5d, _ = evaluate(five_d, test_loader, device)
 
         # Train Baseline
-        loss_baseline = train_epoch(baseline, train_loader, optimizer_baseline, criterion, device)
+        loss_baseline = train_epoch(
+            baseline, train_loader, optimizer_baseline, criterion, device
+        )
         acc_baseline, _ = evaluate(baseline, test_loader, device)
 
         print(f"5D-Net    - Loss: {loss_5d:.4f}, Accuracy: {acc_5d:.2f}%")
@@ -264,13 +280,18 @@ def run_experiment(config: dict) -> dict:
         drop_5d = clean_acc_5d - acc_5d
 
         # Test Baseline
-        acc_baseline, _ = evaluate(baseline, test_loader, device, noise_level=noise_level)
+        acc_baseline, _ = evaluate(
+            baseline, test_loader, device, noise_level=noise_level
+        )
         drop_baseline = clean_acc_baseline - acc_baseline
 
         print(f"5D-Net:   {acc_5d:.2f}% (drop: {drop_5d:.2f}%)")
         print(f"Baseline: {acc_baseline:.2f}% (drop: {drop_baseline:.2f}%)")
 
-        noise_results_5d[f"noise_{int(noise_level*100)}"] = {"accuracy": acc_5d, "drop": drop_5d}
+        noise_results_5d[f"noise_{int(noise_level*100)}"] = {
+            "accuracy": acc_5d,
+            "drop": drop_5d,
+        }
         noise_results_baseline[f"noise_{int(noise_level*100)}"] = {
             "accuracy": acc_baseline,
             "drop": drop_baseline,
@@ -310,7 +331,9 @@ def run_experiment(config: dict) -> dict:
 
     results["5d_net"]["transfer_accuracy"] = transfer_acc_5d
     results["baseline"]["transfer_accuracy"] = transfer_acc_baseline
-    results["comparison"]["transfer_advantage"] = transfer_acc_5d - transfer_acc_baseline
+    results["comparison"]["transfer_advantage"] = (
+        transfer_acc_5d - transfer_acc_baseline
+    )
 
     # ========================================================================
     # TASK 4: ADVERSARIAL TEST (FGSM)

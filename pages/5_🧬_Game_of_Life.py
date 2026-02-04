@@ -12,7 +12,10 @@ import streamlit as st
 from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(
-    page_title="5D Game of Life", page_icon="🧬", layout="wide", initial_sidebar_state="expanded"
+    page_title="5D Game of Life",
+    page_icon="🧬",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 inject_mobile_css()
 
@@ -103,8 +106,7 @@ def main():
         st.divider()
 
         st.markdown("### 🔬 Scientific Basis")
-        st.markdown(
-            """
+        st.markdown("""
         **Cellular Automaton:**
         
         Conway, J. (1970)
@@ -116,19 +118,16 @@ def main():
         4. **Reproduction:** Tot + 3 Nachbarn → lebt
         
         **Status:** ✅ Peer-Reviewed
-        """
-        )
+        """)
 
         st.divider()
 
         st.markdown("### 📖 Resources")
-        st.markdown(
-            """
+        st.markdown("""
         - [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
         - [LifeWiki](https://conwaylife.com)
         - Gardner, M. (1970). Scientific American
-        """
-        )
+        """)
 
     # Main Content
     st.title("🧬 Conway's Game of Life")
@@ -161,7 +160,9 @@ def main():
         grid_size = st.slider("Grid Size", 10, 50, 30)
 
         # Pattern Selection
-        pattern_name = st.selectbox("Wähle ein Pattern", ["Random"] + list(PATTERNS.keys()))
+        pattern_name = st.selectbox(
+            "Wähle ein Pattern", ["Random"] + list(PATTERNS.keys())
+        )
 
         # Initialize Grid
         if "grid" not in st.session_state or st.button("🔄 Reset Grid"):
@@ -207,7 +208,9 @@ def main():
         # Create ASCII representation for display
         grid_display = ""
         for row in st.session_state.grid:
-            grid_display += "".join(["⬛" if cell == 1 else "⬜" for cell in row]) + "\n"
+            grid_display += (
+                "".join(["⬛" if cell == 1 else "⬜" for cell in row]) + "\n"
+            )
 
         st.text(grid_display)
 
@@ -229,8 +232,7 @@ def main():
     with col_right:
         st.header("📖 Pattern Library")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Klassen:**
         
         🔄 **Oscillators:**
@@ -250,15 +252,13 @@ def main():
         
         🌀 **Guns:**
         - Gosper Glider Gun (Period 30)
-        """
-        )
+        """)
 
         st.divider()
 
         st.subheader("🗺️ Related to 5D")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Emergence & Self-Organization:**
         
         Game of Life zeigt:
@@ -272,15 +272,13 @@ def main():
         - Emergente Ordnung ohne zentrale Planung
         - Lokale Regeln → globale Muster
         - Self-organizing communities
-        """
-        )
+        """)
 
         st.divider()
 
         st.subheader("🧮 Implementation")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Tech Stack:**
         - NumPy (Grid)
         - Streamlit (UI)
@@ -290,8 +288,7 @@ def main():
         - Grid: 30×30 = 900 cells
         - Update: O(n²) per generation
         - Real-time: <100ms
-        """
-        )
+        """)
 
     st.divider()
 
@@ -303,8 +300,7 @@ def main():
     with tab1:
         st.subheader("Conway's 4 Regeln")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Für jede Zelle in jeder Generation:**
         
         1️⃣ **Underpopulation (Tod durch Einsamkeit):**
@@ -332,25 +328,21 @@ def main():
         ```
         
         **Notation:** B3/S23 (Born with 3, Survives with 2-3)
-        """
-        )
+        """)
 
         st.latex(r"C_{t+1}(i,j) = f(C_t(i,j), N_t(i,j))")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Wo:**
         - C_t(i,j): Zustand der Zelle (i,j) zur Zeit t
         - N_t(i,j): Anzahl lebende Nachbarn zur Zeit t
         - f(): Conway's Update-Funktion
-        """
-        )
+        """)
 
     with tab2:
         st.subheader("Mathematische Eigenschaften")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Formale Definition:**
         
         Game of Life ist ein **2D Cellular Automaton** mit:
@@ -361,15 +353,13 @@ def main():
         - **Determinismus:** Nächster Zustand eindeutig
         
         **Update-Funktion:**
-        """
-        )
+        """)
 
         st.latex(
             r"f(c, n) = \begin{cases} 1 & \text{if } n = 3 \text{ or } (c = 1 \land n = 2) \\ 0 & \text{sonst} \end{cases}"
         )
 
-        st.markdown(
-            """
+        st.markdown("""
         **Eigenschaften:**
         - **Turing-vollständig** (Conway 1970, bewiesen durch Gosper)
         - **Unentscheidbar:** Halte-Problem nicht lösbar
@@ -377,14 +367,12 @@ def main():
         - **Reversibel:** Mit zusätzlicher Information
         
         **Entropie:** Tendiert zu stabilen Strukturen oder zyklischem Verhalten
-        """
-        )
+        """)
 
     with tab3:
         st.subheader("Turing-Vollständigkeit")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Beweis-Konstruktion:**
         
         Game of Life kann **jeden Computer simulieren**:
@@ -414,8 +402,7 @@ def main():
         - Komplexität aus Einfachheit
         - Emergence: Mehr als die Summe der Teile
         - Relevanz für selbstorganisierende Systeme
-        """
-        )
+        """)
 
     st.divider()
 
@@ -423,8 +410,7 @@ def main():
     st.header("📚 Wissenschaftliche Quellen")
 
     with st.expander("🔬 References (expandable)"):
-        st.markdown(
-            """
+        st.markdown("""
         ### Primärquellen
         
         **1. Conway, J. H. (1970)**
@@ -470,8 +456,7 @@ def main():
         - Community-gepflegt seit 2006
         
         **Code:** Siehe `gol_streamlit.py` für standalone App
-        """
-        )
+        """)
 
     # Footer
     st.divider()
@@ -485,7 +470,9 @@ def main():
         st.markdown(f"**Page Updated:** {datetime.now().strftime('%Y-%m-%d')}")
 
     with col_c:
-        st.markdown("[gol_streamlit.py](gol_streamlit.py) | [LifeWiki](https://conwaylife.com)")
+        st.markdown(
+            "[gol_streamlit.py](gol_streamlit.py) | [LifeWiki](https://conwaylife.com)"
+        )
 
 
 if __name__ == "__main__":

@@ -15,13 +15,17 @@ import streamlit as st
 
 from simulations.utils import write_run
 
-st.set_page_config(page_title="Partizipations-Netzwerke", page_icon="🕸️", layout="centered")
+st.set_page_config(
+    page_title="Partizipations-Netzwerke", page_icon="🕸️", layout="centered"
+)
 st.title("🕸️ Partizipations-Netzwerke – Simulation")
 
 with st.sidebar:
     st.header("Parameter")
     n = st.slider("Knoten", 10, 1000, 120, step=10)
-    topo = st.selectbox("Topologie", ["erdos_renyi", "small_world", "scale_free"], index=1)
+    topo = st.selectbox(
+        "Topologie", ["erdos_renyi", "small_world", "scale_free"], index=1
+    )
     p = st.slider("Kantenwahrscheinlichkeit p / Rewire", 0.001, 0.5, 0.05, step=0.001)
     k = st.slider("Nachbarn k (Small-World)", 2, 20, 6)
     steps = st.slider("Schritte", 5, 500, 100)
@@ -74,7 +78,9 @@ try:
     )
 except Exception:
     metrics["avg_path_len"] = None
-metrics["clustering"] = float(nx.average_clustering(G)) if G.number_of_nodes() > 0 else 0.0
+metrics["clustering"] = (
+    float(nx.average_clustering(G)) if G.number_of_nodes() > 0 else 0.0
+)
 
 # Diffusions-Kennzahlen
 arr = np.array(hist["active_frac"]) if hist["active_frac"] else np.array([0.0])
@@ -84,7 +90,8 @@ metrics["final_frac"] = float(arr[-1])
 cols = st.columns(2)
 with cols[0]:
     st.plotly_chart(
-        px.line(hist, x="step", y="active_frac", title="Aktive Fraktion"), use_container_width=True
+        px.line(hist, x="step", y="active_frac", title="Aktive Fraktion"),
+        use_container_width=True,
     )
 with cols[1]:
     st.write({"Kennzahlen": metrics})
@@ -93,10 +100,15 @@ with cols[1]:
 # SP ~ clustering & final_frac, R ~ Konnektivität (t_50 niedrig), IM ~ share_prob/threshold-Kontext
 IMP = {
     "SP": float(
-        min(1.0, 0.5 * metrics.get("clustering", 0.0) + 0.5 * metrics.get("final_frac", 0.0))
+        min(
+            1.0,
+            0.5 * metrics.get("clustering", 0.0) + 0.5 * metrics.get("final_frac", 0.0),
+        )
     ),
     "R": float(
-        0.0 if metrics.get("t_50") is None else max(0.0, 1.0 - metrics["t_50"] / max(1, steps))
+        0.0
+        if metrics.get("t_50") is None
+        else max(0.0, 1.0 - metrics["t_50"] / max(1, steps))
     ),
     "IM": float(max(0.0, min(1.0, share_prob * (1.0 - threshold)))),
 }

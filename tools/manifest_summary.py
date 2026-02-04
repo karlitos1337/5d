@@ -31,7 +31,9 @@ def extract_sections(text: str) -> dict[str, Any]:
         if m:
             # flush previous
             if current is not None:
-                current["summary"] = " ".join(p.strip() for p in para_acc if p.strip())[:800]
+                current["summary"] = " ".join(p.strip() for p in para_acc if p.strip())[
+                    :800
+                ]
                 sections.append(current)
             level = len(m.group(1))
             title = m.group(2).strip()
@@ -76,7 +78,9 @@ def main() -> None:
     out_lines: list[str] = []
     out_lines.append("# Manifest-Zusammenfassung")
     out_lines.append("")
-    out_lines.append("Diese Übersicht wurde automatisch aus den Markdown-Manifests generiert.")
+    out_lines.append(
+        "Diese Übersicht wurde automatisch aus den Markdown-Manifests generiert."
+    )
     out_lines.append("")
     # Group by category
     by_cat: dict[str, list[dict[str, Any]]] = {}

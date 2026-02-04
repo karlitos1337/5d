@@ -9,11 +9,14 @@ from auth.github_oauth import GitHubAuth
 class TestGitHubOAuthSecurity(unittest.TestCase):
     def setUp(self):
         # Setup environment variables
-        self.env_patcher = patch.dict(os.environ, {
-            "GITHUB_CLIENT_ID": "test_client_id",
-            "GITHUB_CLIENT_SECRET": "test_client_secret",
-            "GITHUB_REDIRECT_URI": "http://localhost:8000/callback"
-        })
+        self.env_patcher = patch.dict(
+            os.environ,
+            {
+                "GITHUB_CLIENT_ID": "test_client_id",
+                "GITHUB_CLIENT_SECRET": "test_client_secret",
+                "GITHUB_REDIRECT_URI": "http://localhost:8000/callback",
+            },
+        )
         self.env_patcher.start()
         self.auth = GitHubAuth()
 
@@ -37,7 +40,9 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         self.assertEqual(params["state"][0], state)
 
         # Verify state is strong random
-        self.assertEqual(len(state), 43)  # 32 bytes base64url encoded is approx 43 chars
+        self.assertEqual(
+            len(state), 43
+        )  # 32 bytes base64url encoded is approx 43 chars
 
     def test_get_authorization_url_custom_state(self):
         """Test with custom state."""
@@ -60,7 +65,9 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         state = "valid_state"
         code = "valid_code"
 
-        result = self.auth.authenticate(code, received_state=state, expected_state=state)
+        result = self.auth.authenticate(
+            code, received_state=state, expected_state=state
+        )
 
         self.assertIsNotNone(result)
         self.assertIn("session_token", result)
@@ -75,21 +82,28 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
                 "redirect_uri": "http://localhost:8000/callback",
             },
             headers={"Accept": "application/json"},
-            timeout=10  # Security check: timeout must be present
+            timeout=10,  # Security check: timeout must be present
         )
 
     def test_authenticate_csrf_mismatch(self):
         """Test that authentication fails when states do not match."""
-        result = self.auth.authenticate("code", received_state="bad_state", expected_state="good_state")
+        result = self.auth.authenticate(
+            "code", received_state="bad_state", expected_state="good_state"
+        )
         self.assertIsNone(result)
 
     def test_authenticate_missing_state(self):
         """Test that authentication fails when state is missing."""
-        result = self.auth.authenticate("code", received_state="", expected_state="good_state")
+        result = self.auth.authenticate(
+            "code", received_state="", expected_state="good_state"
+        )
         self.assertIsNone(result)
 
-        result = self.auth.authenticate("code", received_state="good_state", expected_state=None)
+        result = self.auth.authenticate(
+            "code", received_state="good_state", expected_state=None
+        )
         self.assertIsNone(result)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -31,7 +31,9 @@ class TestROICalculation:
         discount_rate = 0.03
 
         npv = (
-            sum(annual_benefit / ((1 + discount_rate) ** t) for t in range(1, years + 1))
+            sum(
+                annual_benefit / ((1 + discount_rate) ** t) for t in range(1, years + 1)
+            )
             - initial_cost
         )
 
@@ -55,7 +57,9 @@ class TestROICalculation:
         }
 
         for program, multiplier in multipliers.items():
-            assert 3 <= multiplier <= 10, f"{program}: multiplier {multiplier} in valid range"
+            assert (
+                3 <= multiplier <= 10
+            ), f"{program}: multiplier {multiplier} in valid range"
 
     def test_alternative_education_roi_realistic(self):
         """
@@ -70,7 +74,9 @@ class TestROICalculation:
         avg_roi = 485
 
         # Should be between Perry Preschool (700%) and Abecedarian (300%)
-        assert 300 <= avg_roi <= 700, f"Alternative education ROI {avg_roi}% in validated range"
+        assert (
+            300 <= avg_roi <= 700
+        ), f"Alternative education ROI {avg_roi}% in validated range"
 
     def test_discount_rate_sensitivity(self):
         """Test NPV sensitivity to discount rate changes"""
@@ -80,7 +86,10 @@ class TestROICalculation:
 
         results = {}
         for rate in [0.03, 0.05, 0.07]:
-            npv = sum(annual_benefit / ((1 + rate) ** t) for t in range(1, years + 1)) - cost
+            npv = (
+                sum(annual_benefit / ((1 + rate) ** t) for t in range(1, years + 1))
+                - cost
+            )
             results[rate] = npv
 
         # NPV should decrease as discount rate increases
@@ -104,7 +113,9 @@ class TestAlternativeEducationModels:
             "self_directed": True,
         }
 
-        assert characteristics["autonomy"] > 0.90, "Sudbury autonomy score should be very high"
+        assert (
+            characteristics["autonomy"] > 0.90
+        ), "Sudbury autonomy score should be very high"
         assert all(
             [
                 characteristics["age_mixing"],
@@ -185,7 +196,9 @@ class TestDataQuality:
                 data = json.load(f)
 
             # Actual structure has 'projects' list not 'solutions' dict
-            assert "projects" in data or "solutions" in data, "Missing projects/solutions key"
+            assert (
+                "projects" in data or "solutions" in data
+            ), "Missing projects/solutions key"
 
             # If using projects list format
             if "projects" in data:

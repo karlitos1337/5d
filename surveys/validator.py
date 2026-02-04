@@ -70,5 +70,6 @@ def validate_completeness(responses: dict, required_questions: list[str]) -> dic
     return {
         "complete": len(missing) == 0,
         "missing": missing,
-        "completeness_rate": (len(required_questions) - len(missing)) / len(required_questions),
+        "completeness_rate": (len(required_questions) - len(missing))
+        / len(required_questions),
     }

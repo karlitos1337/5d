@@ -91,7 +91,9 @@ class InterferenceVisualizer:
 
     def setup_plot(self):
         """Setup matplotlib figure"""
-        self.fig.suptitle("Wave Interference via MUSIK! 🎵🌊", fontsize=16, fontweight="bold")
+        self.fig.suptitle(
+            "Wave Interference via MUSIK! 🎵🌊", fontsize=16, fontweight="bold"
+        )
 
         # Top-left: Wave 1
         self.ax1.set_title("Wave 1: Erste Ton 🎵", fontsize=12)
@@ -108,7 +110,9 @@ class InterferenceVisualizer:
         self.ax2.set_ylim(-2.5, 2.5)
 
         # Bottom-left: Superposition
-        self.ax3.set_title("TOTAL: Wave 1 + Wave 2 (Interferenz!)", fontsize=12, fontweight="bold")
+        self.ax3.set_title(
+            "TOTAL: Wave 1 + Wave 2 (Interferenz!)", fontsize=12, fontweight="bold"
+        )
         self.ax3.set_xlabel("Zeit (s)")
         self.ax3.set_ylabel("Amplitude")
         self.ax3.grid(True, alpha=0.3)
@@ -140,8 +144,12 @@ class InterferenceVisualizer:
         self.ax2.fill_between(waves.t, 0, waves.wave2, alpha=0.2, color="red")
 
         # Plot Total (with individual waves as dashed)
-        self.ax3.plot(waves.t, waves.wave1, "b--", linewidth=1, alpha=0.5, label="Wave 1")
-        self.ax3.plot(waves.t, waves.wave2, "r--", linewidth=1, alpha=0.5, label="Wave 2")
+        self.ax3.plot(
+            waves.t, waves.wave1, "b--", linewidth=1, alpha=0.5, label="Wave 1"
+        )
+        self.ax3.plot(
+            waves.t, waves.wave2, "r--", linewidth=1, alpha=0.5, label="Wave 2"
+        )
         self.ax3.plot(waves.t, waves.wave_total, "g-", linewidth=3, label="TOTAL")
         self.ax3.axhline(0, color="k", linestyle="--", alpha=0.3)
         self.ax3.fill_between(waves.t, 0, waves.wave_total, alpha=0.3, color="green")
@@ -200,7 +208,11 @@ class InterferenceVisualizer:
                 transform=self.ax4.transAxes,
             )
             self.ax4.text(
-                0.1, 0.30, "   → Musik 2x lauter! 🎵🎵", fontsize=10, transform=self.ax4.transAxes
+                0.1,
+                0.30,
+                "   → Musik 2x lauter! 🎵🎵",
+                fontsize=10,
+                transform=self.ax4.transAxes,
             )
 
         elif int_type == "destructive":
@@ -266,7 +278,11 @@ class InterferenceVisualizer:
                 transform=self.ax4.transAxes,
             )
             self.ax4.text(
-                0.1, 0.65, "⚠️ Wellen teilweise in Phase", fontsize=11, transform=self.ax4.transAxes
+                0.1,
+                0.65,
+                "⚠️ Wellen teilweise in Phase",
+                fontsize=11,
+                transform=self.ax4.transAxes,
             )
             self.ax4.text(
                 0.1,
@@ -381,7 +397,9 @@ class InterferenceVisualizer:
         print("📊 EXPERIMENT RESULTS")
         print("=" * 60)
         for case in results["cases"]:
-            print(f"{case['name']:15s}: {case['type']:15s} | Amp = {case['amplitude_ratio']:.2f}x")
+            print(
+                f"{case['name']:15s}: {case['type']:15s} | Amp = {case['amplitude_ratio']:.2f}x"
+            )
 
         # Quantum explanation
         print("\n" + "=" * 60)
@@ -432,7 +450,9 @@ class InterferenceVisualizer:
         print(f"\n💾 Results saved: {json_path}")
 
         plt.savefig(
-            f"{output_dir}/music_interference_{timestamp}.png", dpi=300, bbox_inches="tight"
+            f"{output_dir}/music_interference_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
         )
         print(f"📊 Plot saved: music_interference_{timestamp}.png")
 

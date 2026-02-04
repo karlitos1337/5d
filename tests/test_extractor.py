@@ -15,7 +15,9 @@ from models.schemas import DimensionScore, Project, Solutions  # noqa: E402
 
 # Lade den Extraktor direkt aus dem Projektwurzelpfad
 _path = os.path.join(ROOT, "5d_extractor.py")
-_spec = importlib.util.spec_from_loader("mod", importlib.machinery.SourceFileLoader("mod", _path))
+_spec = importlib.util.spec_from_loader(
+    "mod", importlib.machinery.SourceFileLoader("mod", _path)
+)
 _mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_mod)
 FiveDExtractor = _mod.FiveDExtractor

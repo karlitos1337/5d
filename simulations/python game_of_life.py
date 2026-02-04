@@ -108,7 +108,9 @@ def place_gosper_glider_gun(grid: np.ndarray, top: int = 1, left: int = 1) -> No
 def place_lwss(grid: np.ndarray, top: int, left: int) -> None:
     """Lightweight Spaceship (Periodisch, bewegt sich)."""
     # Form (5x4)
-    lwss = np.array([[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [1, 0, 0, 1, 0]], dtype=int)
+    lwss = np.array(
+        [[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [1, 0, 0, 1, 0]], dtype=int
+    )
     h, w = lwss.shape
     grid[top : top + h, left : left + w] = lwss
 
@@ -214,7 +216,9 @@ def animate(
         grid = game_of_life_step(grid)
         return (im,)
 
-    ani = animation.FuncAnimation(fig, update, frames=steps, interval=interval_ms, blit=True)
+    ani = animation.FuncAnimation(
+        fig, update, frames=steps, interval=interval_ms, blit=True
+    )
 
     # Optional: GIF speichern (Pillow-Writer)
     if save_gif:
@@ -237,7 +241,11 @@ def animate(
     if save_csv and stats:
         csv = np.array(stats, dtype=int)
         np.savetxt(
-            "gol_glider_evolution.csv", csv, delimiter=",", header="step,live_cells", fmt="%d"
+            "gol_glider_evolution.csv",
+            csv,
+            delimiter=",",
+            header="step,live_cells",
+            fmt="%d",
         )
         print("✅ CSV 'gol_glider_evolution.csv' gespeichert:")
         print(csv)
@@ -248,7 +256,10 @@ def main():
     parser.add_argument("--size", type=int, default=10, help="Gittergröße NxN (>= 5)")
     parser.add_argument("--steps", type=int, default=50, help="Anzahl der Schritte")
     parser.add_argument(
-        "--animate", dest="animate", action="store_true", help="Animation mit Matplotlib anzeigen"
+        "--animate",
+        dest="animate",
+        action="store_true",
+        help="Animation mit Matplotlib anzeigen",
     )
     parser.add_argument(
         "--no-animate",
@@ -256,7 +267,9 @@ def main():
         action="store_false",
         help="Nur textuelle Ausgabe (kein Plot)",
     )
-    parser.add_argument("--interval", type=int, default=150, help="Frame-Intervall in ms")
+    parser.add_argument(
+        "--interval", type=int, default=150, help="Frame-Intervall in ms"
+    )
     parser.add_argument(
         "--preset",
         type=str,
@@ -265,7 +278,10 @@ def main():
         help="Startmuster",
     )
     parser.add_argument(
-        "--save-gif", type=str, default=None, help="GIF-Datei speichern (erfordert Pillow)"
+        "--save-gif",
+        type=str,
+        default=None,
+        help="GIF-Datei speichern (erfordert Pillow)",
     )
     parser.add_argument(
         "--save-mp4", type=str, default=None, help="MP4 speichern (erfordert ffmpeg)"
@@ -307,7 +323,9 @@ def main():
 
     if args.animate:
         if not HAS_MPL:
-            print("⚠️  Matplotlib fehlt – starte Textmodus. Installiere mit: pip install matplotlib")
+            print(
+                "⚠️  Matplotlib fehlt – starte Textmodus. Installiere mit: pip install matplotlib"
+            )
             _, stats = simulate(grid, steps=min(args.steps, 20))
         else:
             animate(
@@ -322,7 +340,11 @@ def main():
         _, stats = simulate(grid, steps=args.steps)
         if args.save_csv:
             np.savetxt(
-                "gol_glider_evolution.csv", stats, delimiter=",", header="step,live_cells", fmt="%d"
+                "gol_glider_evolution.csv",
+                stats,
+                delimiter=",",
+                header="step,live_cells",
+                fmt="%d",
             )
             print("✅ CSV 'gol_glider_evolution.csv' gespeichert")
 

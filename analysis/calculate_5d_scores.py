@@ -133,7 +133,9 @@ def extract_entrance_data(responses: dict[str, Any]) -> dict:
                 value = coding.get(value, value)
 
             # Reverse-Codierung für life_satisfaction (Schulnoten)
-            if key == "life_satisfaction" and ENTRANCE_SCHEMA[key].get("reverse_coded", False):
+            if key == "life_satisfaction" and ENTRANCE_SCHEMA[key].get(
+                "reverse_coded", False
+            ):
                 value = 7 - value  # 1->6, 6->1
 
             entrance[key] = value
@@ -165,7 +167,9 @@ def calculate_5d_intelligence_profile(all_responses: dict[str, Any]) -> dict:
         profile["dimension_scores"][dim] = calculate_dimension_score(all_responses, dim)
 
     # Aggregierter Score (gleichgewichtet)
-    normalized_scores = [s["normalized_score"] for s in profile["dimension_scores"].values()]
+    normalized_scores = [
+        s["normalized_score"] for s in profile["dimension_scores"].values()
+    ]
     aggregate = sum(normalized_scores) / len(normalized_scores)
     profile["aggregate_score"] = round(aggregate, 3)
 
@@ -174,7 +178,9 @@ def calculate_5d_intelligence_profile(all_responses: dict[str, Any]) -> dict:
         try:
             from models.imp import calculate_imp_verified
 
-            profile["imp_score"] = calculate_imp_verified(all_responses["imp_components"])
+            profile["imp_score"] = calculate_imp_verified(
+                all_responses["imp_components"]
+            )
         except ImportError:
             pass  # IMP-Modell nicht verfügbar
 

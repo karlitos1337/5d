@@ -31,7 +31,9 @@ def create_placeholder_icon(size: int, output_dir: Path):
     # Try to use a nice font, fallback to default
     try:
         font_size = int(size * 0.4)
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+        font = ImageFont.truetype(
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size
+        )
     except Exception:
         font = ImageFont.load_default()
 

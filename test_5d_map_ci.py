@@ -31,7 +31,9 @@ class DataValidationTests(unittest.TestCase):
     def test_baseline_json_exists(self):
         """Validate baseline.json file exists"""
         if not os.path.exists(self.baseline_file):
-            self.skipTest(f"baseline.json not found at {self.baseline_file} (optional for CI)")
+            self.skipTest(
+                f"baseline.json not found at {self.baseline_file} (optional for CI)"
+            )
         logger.info("✓ baseline.json exists")
 
     def test_baseline_json_valid_structure(self):
@@ -44,7 +46,9 @@ class DataValidationTests(unittest.TestCase):
 
             # Check for required keys (flexible structure)
             if "metadata" not in data and "countries" not in data:
-                logger.warning("⚠ baseline.json has unexpected structure, skipping validation")
+                logger.warning(
+                    "⚠ baseline.json has unexpected structure, skipping validation"
+                )
                 self.skipTest("baseline.json structure differs from expected")
 
             logger.info("✓ baseline.json structure is valid")
@@ -63,7 +67,9 @@ class DataValidationTests(unittest.TestCase):
 
         for country_code, country_data in countries.items():
             for field in required_fields:
-                self.assertIn(field, country_data, f"Country {country_code} missing {field}")
+                self.assertIn(
+                    field, country_data, f"Country {country_code} missing {field}"
+                )
 
         logger.info(f"✓ All {len(countries)} countries have required fields")
 
@@ -98,9 +104,15 @@ class FormulaCalculationTests(unittest.TestCase):
         else:
             self.data = {}
 
-    def calculate_gov_index(self, rule_of_law, voice_accountability, govt_effectiveness):
+    def calculate_gov_index(
+        self, rule_of_law, voice_accountability, govt_effectiveness
+    ):
         """Calculate Governance Index: (RL×0.333) + (VA×0.333) + (GE×0.333)"""
-        return (rule_of_law * 0.333) + (voice_accountability * 0.333) + (govt_effectiveness * 0.333)
+        return (
+            (rule_of_law * 0.333)
+            + (voice_accountability * 0.333)
+            + (govt_effectiveness * 0.333)
+        )
 
     def test_gov_index_formula(self):
         """Test GOV_INDEX calculation"""
@@ -123,9 +135,17 @@ class FormulaCalculationTests(unittest.TestCase):
         self.assertAlmostEqual(result, expected, places=2)
         logger.info(f"✓ Depression Future formula test passed: {result}")
 
-    def calculate_imp_score(self, gov_score, depression_rate, dropout_rate, school_bonus=10):
+    def calculate_imp_score(
+        self, gov_score, depression_rate, dropout_rate, school_bonus=10
+    ):
         """Calculate IMP_SCORE: 50 + (gov×15) - (depression×8) - (dropout×5) + school_bonus"""
-        return 50 + (gov_score * 15) - (depression_rate * 8) - (dropout_rate * 5) + school_bonus
+        return (
+            50
+            + (gov_score * 15)
+            - (depression_rate * 8)
+            - (dropout_rate * 5)
+            + school_bonus
+        )
 
     def test_imp_score_formula(self):
         """Test IMP_SCORE calculation"""
@@ -174,7 +194,12 @@ class APIEndpointTests(unittest.TestCase):
     def test_api_response_format(self):
         """Test API response has required format"""
         # Expected response format
-        expected_structure = {"status": "success", "data": {}, "timestamp": "", "version": "1.0"}
+        expected_structure = {
+            "status": "success",
+            "data": {},
+            "timestamp": "",
+            "version": "1.0",
+        }
 
         self.assertIn("status", expected_structure)
         self.assertIn("data", expected_structure)
@@ -203,7 +228,9 @@ class DataSourceIntegrityTests(unittest.TestCase):
         metadata = data.get("metadata", {})
         # Check for either data_sources or confidence_levels
         has_confidence = "data_sources" in metadata or "confidence_levels" in metadata
-        self.assertTrue(has_confidence, "Metadata should include data_sources or confidence_levels")
+        self.assertTrue(
+            has_confidence, "Metadata should include data_sources or confidence_levels"
+        )
         logger.info("✓ Data includes confidence level metadata")
 
 
@@ -224,7 +251,9 @@ class PerformanceBenchmarkTests(unittest.TestCase):
         load_time = time.time() - start_time
 
         # Should load in less than 1 second
-        self.assertLess(load_time, 1.0, f"Data loading took {load_time}s (should be < 1s)")
+        self.assertLess(
+            load_time, 1.0, f"Data loading took {load_time}s (should be < 1s)"
+        )
         logger.info(f"✓ Data loading performance: {load_time:.3f}s")
 
     def test_formula_calculation_performance(self):
@@ -268,7 +297,9 @@ def run_test_suite():
     logger.info("=" * 60)
     logger.info("Test Execution Summary:")
     logger.info(f"Tests Run: {result.testsRun}")
-    logger.info(f"Successes: {result.testsRun - len(result.failures) - len(result.errors)}")
+    logger.info(
+        f"Successes: {result.testsRun - len(result.failures) - len(result.errors)}"
+    )
     logger.info(f"Failures: {len(result.failures)}")
     logger.info(f"Errors: {len(result.errors)}")
     logger.info("=" * 60)

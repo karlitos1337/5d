@@ -24,6 +24,7 @@ def run_step(command, description):
         print(e.stderr)
         return False
 
+
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     package_dir = Path(f"outputs/evidence_package/pkg_{timestamp}")
@@ -44,17 +45,25 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
         # Copy Analysis Script
-        shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
+        shutil.copy(
+            "validation/imp_validation_study.py",
+            package_dir / "imp_validation_study.py",
+        )
         print("  -> Copied Analysis Script: validation/imp_validation_study.py")
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
                 print(f"  -> Moved {f}")
@@ -75,7 +84,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -147,6 +156,7 @@ Generated: {timestamp}
     print(f"\n✅ Evidence Package Generated: {package_dir}")
     # Print the command to list files, but don't execute it, leave it to the user or agent to verify
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()

@@ -137,7 +137,9 @@ class Solutions(BaseModel):
                     match_key = k
                     break
                 # einfache Heuristik: Prefix/Suffix-Unterschied von 1 Zeichen
-                if abs(len(key) - len(k)) <= 1 and (key.startswith(k) or k.startswith(key)):
+                if abs(len(key) - len(k)) <= 1 and (
+                    key.startswith(k) or k.startswith(key)
+                ):
                     match_key = k
                     break
             if match_key is None:
