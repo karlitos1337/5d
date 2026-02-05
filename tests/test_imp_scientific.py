@@ -26,9 +26,9 @@ class TestIMPCalculation:
     - Self-Determination Theory (Deci & Ryan, 1985): deci1985intrinsic
     - Flow Theory (Csíkszentmihályi, 1990): csikszentmihalyi1990flow
     - Polyvagal Theory (Porges, 2011): porges2011polyvagal
+    """
 
-    References:
-    @book{deci1985intrinsic,
+    citation_text = r"""@book{deci1985intrinsic,
       title={Intrinsic motivation and self-determination in human behavior},
       author={Deci, Edward L and Ryan, Richard M},
       year={1985},
