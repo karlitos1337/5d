@@ -34,12 +34,7 @@ class Evidence:
 
     def is_valid(self) -> bool:
         """Check if evidence meets acceptance criteria."""
-        return (
-            self.effect_size > 0.5
-            and self.p_value < 0.05
-            and self.n_samples >= 20
-            and len(self.replications) >= 1
-        )
+        return self.effect_size > 0.5 and self.p_value < 0.05 and self.n_samples >= 20 and len(self.replications) >= 1
 
 
 class EvidenceDatabase:

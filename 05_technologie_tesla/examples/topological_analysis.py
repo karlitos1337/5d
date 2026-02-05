@@ -108,17 +108,11 @@ class SimpleTDA:
 
             died_component, death_time = union(i, j, dist)
             if died_component is not None:
-                intervals.append(
-                    PersistenceInterval(
-                        birth=birth_time[died_component], death=death_time, dimension=0
-                    )
-                )
+                intervals.append(PersistenceInterval(birth=birth_time[died_component], death=death_time, dimension=0))
 
         # Add infinite interval for final component
         final_root = find(0)
-        intervals.append(
-            PersistenceInterval(birth=birth_time[final_root], death=np.inf, dimension=0)
-        )
+        intervals.append(PersistenceInterval(birth=birth_time[final_root], death=np.inf, dimension=0))
 
         return intervals
 

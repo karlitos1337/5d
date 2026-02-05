@@ -71,9 +71,7 @@ def clamp(val: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, val))
 
 
-def apply_mapping(
-    base: dict[str, Any], external: dict[str, Any], mapping: dict[str, Any]
-) -> dict[str, Any]:
+def apply_mapping(base: dict[str, Any], external: dict[str, Any], mapping: dict[str, Any]) -> dict[str, Any]:
     # Ausgangsstruktur: kopiere Basis und lege 'adjusted' ergänzend an
     out: dict[str, Any] = {
         "base_solutions": base,
@@ -102,9 +100,7 @@ def apply_mapping(
         name = str(item.get("project", "")).strip()
         delta = item.get("delta") or {}
         if name:
-            adj_by_name[name] = {
-                k: float(v) for k, v in delta.items() if isinstance(v, (int, float))
-            }
+            adj_by_name[name] = {k: float(v) for k, v in delta.items() if isinstance(v, (int, float))}
 
     # Vorschläge generieren
     for pj in base_projects:

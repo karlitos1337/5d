@@ -13,9 +13,7 @@ import sys
 import unittest
 
 # Setup logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -129,9 +127,7 @@ class FormulaCalculationTests(unittest.TestCase):
 
     def test_imp_score_formula(self):
         """Test IMP_SCORE calculation"""
-        result = self.calculate_imp_score(
-            gov_score=60, depression_rate=15, dropout_rate=10, school_bonus=10
-        )
+        result = self.calculate_imp_score(gov_score=60, depression_rate=15, dropout_rate=10, school_bonus=10)
         expected = 50 + (60 * 15) - (15 * 8) - (10 * 5) + 10
         self.assertAlmostEqual(result, expected, places=1)
         logger.info(f"✓ IMP_SCORE formula test passed: {result}")
@@ -237,9 +233,7 @@ class PerformanceBenchmarkTests(unittest.TestCase):
         calc_time = time.time() - start_time
 
         # 1000 calculations should complete in less than 0.1 seconds
-        self.assertLess(
-            calc_time, 0.1, f"Formula calculations took {calc_time}s (should be < 0.1s)"
-        )
+        self.assertLess(calc_time, 0.1, f"Formula calculations took {calc_time}s (should be < 0.1s)")
         logger.info(f"✓ Formula calculation performance: {calc_time:.3f}s for 1000 ops")
 
 

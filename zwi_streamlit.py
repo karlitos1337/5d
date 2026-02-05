@@ -99,7 +99,7 @@ with col4:
 st.session_state[state_key] = (z_types, z_will, z_pay)
 
 st.write(
-    f"Ø Bereitschaft: {float(np.mean(z_will)):.2f} | Ø Payoff: {float(np.mean(z_pay)):.2f} | Zwinger %: {float(np.mean(z_types==1)*100):.1f}%"
+    f"Ø Bereitschaft: {float(np.mean(z_will)):.2f} | Ø Payoff: {float(np.mean(z_pay)):.2f} | Zwinger %: {float(np.mean(z_types == 1) * 100):.1f}%"
 )
 
 mode = st.selectbox("Visualisierung", ["Willingness", "Payoff", "Type"], index=0)
@@ -113,6 +113,4 @@ else:
     mat = z_types
     scale = "Gray"
 
-st.plotly_chart(
-    px.imshow(mat, color_continuous_scale=scale, origin="upper"), use_container_width=True
-)
+st.plotly_chart(px.imshow(mat, color_continuous_scale=scale, origin="upper"), use_container_width=True)

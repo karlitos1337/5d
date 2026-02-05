@@ -28,9 +28,7 @@ class IMPModelComparison:
         Skala 0-5, Normalverteilung
         """
         scores = np.random.normal(mean, std, (self.n_simulations, 5))
-        scores = np.clip(
-            scores, 0.1, 5
-        )  # Begrenze auf 0.1-5 (vermeide absolute 0 für Simulation der Skalierung)
+        scores = np.clip(scores, 0.1, 5)  # Begrenze auf 0.1-5 (vermeide absolute 0 für Simulation der Skalierung)
         return scores
 
     def calculate_imp_geometric(self, dimensions):
@@ -123,9 +121,7 @@ class IMPModelComparison:
 
         # 1. Verteilungsvergleich
         ax1 = plt.subplot(2, 3, 1)
-        self.results["IMP_Geometric"].hist(
-            bins=30, alpha=0.7, color="blue", label="Geometrisch", ax=ax1
-        )
+        self.results["IMP_Geometric"].hist(bins=30, alpha=0.7, color="blue", label="Geometrisch", ax=ax1)
         self.results["IMP_Additive"].hist(bins=30, alpha=0.7, color="red", label="Additiv", ax=ax1)
         ax1.set_xlabel("IMP-Score (0-5)")
         ax1.set_ylabel("Häufigkeit")
@@ -144,9 +140,7 @@ class IMPModelComparison:
 
         # 3. Sensitivitätsanalyse: Effekt von niedrigen Werten
         ax3 = plt.subplot(2, 3, 3)
-        min_dims = self.results[
-            ["Cognitive", "Motivation", "Social", "Resilience", "Environment"]
-        ].min(axis=1)
+        min_dims = self.results[["Cognitive", "Motivation", "Social", "Resilience", "Environment"]].min(axis=1)
         ax3.scatter(min_dims, self.results["IMP_Geometric"], alpha=0.3, color="purple")
         ax3.set_xlabel("Minimale Dimension")
         ax3.set_ylabel("IMP Geometrisch")
@@ -214,7 +208,7 @@ class IMPModelComparison:
             print(f"  Geometrisch: {geo:.2f}")
             print(f"  Additiv:     {add:.2f}")
             if add > 0:
-                print(f"  Verhältnis:  {geo/add:.2f} (Geo/Add)")
+                print(f"  Verhältnis:  {geo / add:.2f} (Geo/Add)")
 
 
 def main():

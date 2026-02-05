@@ -10,11 +10,10 @@ from datetime import datetime
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
+
 from utils.mobile_responsive import inject_mobile_css
 
-st.set_page_config(
-    page_title="5D World Map", page_icon="🌍", layout="wide", initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="5D World Map", page_icon="🌍", layout="wide", initial_sidebar_state="expanded")
 inject_mobile_css()
 
 
@@ -132,19 +131,11 @@ def main():
         st.metric("Alt. Schools", len(schools), help="Dokumentiert")
 
     with col3:
-        avg_depression = (
-            sum(c.get("depression", 0) for c in countries.values()) / len(countries)
-            if countries
-            else 0
-        )
+        avg_depression = sum(c.get("depression", 0) for c in countries.values()) / len(countries) if countries else 0
         st.metric("Avg Depression", f"{avg_depression:.1f}%", help="Durchschnitt")
 
     with col4:
-        avg_dropout = (
-            sum(c.get("dropout", 0) for c in countries.values()) / len(countries)
-            if countries
-            else 0
-        )
+        avg_dropout = sum(c.get("dropout", 0) for c in countries.values()) / len(countries) if countries else 0
         st.metric("Avg Dropout", f"{avg_dropout:.1f}%", help="Durchschnitt")
 
     st.divider()
@@ -215,9 +206,7 @@ def main():
                     )
 
                     color = (
-                        "#00ff00"
-                        if imp > 0.7
-                        else "#ffff00" if imp > 0.5 else "#ffa500" if imp > 0.4 else "#ff0000"
+                        "#00ff00" if imp > 0.7 else "#ffff00" if imp > 0.5 else "#ffa500" if imp > 0.4 else "#ff0000"
                     )
 
                     folium.CircleMarker(
@@ -283,9 +272,7 @@ def main():
                 if imp_proxy > 0.7:
                     st.success(f"✅ **{selected_country}:** Hohe IMP-Proxy (Optimal)")
                 elif imp_proxy > 0.4:
-                    st.warning(
-                        f"⚠️ **{selected_country}:** Mittlere IMP-Proxy (Verbesserungspotenzial)"
-                    )
+                    st.warning(f"⚠️ **{selected_country}:** Mittlere IMP-Proxy (Verbesserungspotenzial)")
                 else:
                     st.error(f"❌ **{selected_country}:** Niedrige IMP-Proxy (Kritisch)")
         else:

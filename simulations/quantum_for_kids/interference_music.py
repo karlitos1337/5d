@@ -84,9 +84,7 @@ class InterferenceVisualizer:
     """Interactive visualization"""
 
     def __init__(self):
-        self.fig, ((self.ax1, self.ax2), (self.ax3, self.ax4)) = plt.subplots(
-            2, 2, figsize=(16, 10)
-        )
+        self.fig, ((self.ax1, self.ax2), (self.ax3, self.ax4)) = plt.subplots(2, 2, figsize=(16, 10))
         self.setup_plot()
 
     def setup_plot(self):
@@ -199,9 +197,7 @@ class InterferenceVisualizer:
                 fontsize=10,
                 transform=self.ax4.transAxes,
             )
-            self.ax4.text(
-                0.1, 0.30, "   → Musik 2x lauter! 🎵🎵", fontsize=10, transform=self.ax4.transAxes
-            )
+            self.ax4.text(0.1, 0.30, "   → Musik 2x lauter! 🎵🎵", fontsize=10, transform=self.ax4.transAxes)
 
         elif int_type == "destructive":
             self.ax4.text(
@@ -265,9 +261,7 @@ class InterferenceVisualizer:
                 color="orange",
                 transform=self.ax4.transAxes,
             )
-            self.ax4.text(
-                0.1, 0.65, "⚠️ Wellen teilweise in Phase", fontsize=11, transform=self.ax4.transAxes
-            )
+            self.ax4.text(0.1, 0.65, "⚠️ Wellen teilweise in Phase", fontsize=11, transform=self.ax4.transAxes)
             self.ax4.text(
                 0.1,
                 0.57,
@@ -431,9 +425,7 @@ class InterferenceVisualizer:
 
         print(f"\n💾 Results saved: {json_path}")
 
-        plt.savefig(
-            f"{output_dir}/music_interference_{timestamp}.png", dpi=300, bbox_inches="tight"
-        )
+        plt.savefig(f"{output_dir}/music_interference_{timestamp}.png", dpi=300, bbox_inches="tight")
         print(f"📊 Plot saved: music_interference_{timestamp}.png")
 
         return results

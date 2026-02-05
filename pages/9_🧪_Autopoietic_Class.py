@@ -295,11 +295,7 @@ for dim in ["A", "IM", "R", "SP", "Au"]:
     )
 
     # Add mean line
-    fig.add_trace(
-        go.Scatter(
-            x=steps_list, y=mean, mode="lines", name=dim, line=dict(color=colors[dim], width=2)
-        )
-    )
+    fig.add_trace(go.Scatter(x=steps_list, y=mean, mode="lines", name=dim, line=dict(color=colors[dim], width=2)))
 
 fig.update_layout(
     title="5D Dimensions: Mean ± Standard Deviation",
@@ -320,15 +316,10 @@ if show_individual and len(individual_history) > 0:
     for idx, traj in individual_history.items():
         # Calculate individual IMP over time
         imp_traj = [
-            traj["A"][t] * traj["IM"][t] * traj["R"][t] * traj["SP"][t] * traj["Au"][t]
-            for t in range(len(traj["A"]))
+            traj["A"][t] * traj["IM"][t] * traj["R"][t] * traj["SP"][t] * traj["Au"][t] for t in range(len(traj["A"]))
         ]
 
-        fig_ind.add_trace(
-            go.Scatter(
-                x=history["step"], y=imp_traj, mode="lines", name=f"Student {idx}", opacity=0.7
-            )
-        )
+        fig_ind.add_trace(go.Scatter(x=history["step"], y=imp_traj, mode="lines", name=f"Student {idx}", opacity=0.7))
 
     fig_ind.update_layout(
         title="Individual IMP Scores Over Time",
@@ -461,9 +452,9 @@ with st.expander("🎯 Interpreting Results"):
     st.markdown(
         f"""
     **Your Simulation Results:**
-    - Final IMP: **{final_metrics['IMP']:.3f}**
-    - Retention: **{final_metrics['retention_rate']:.1%}**
-    - Dropouts: **{final_metrics['total_dropouts']}** students
+    - Final IMP: **{final_metrics["IMP"]:.3f}**
+    - Retention: **{final_metrics["retention_rate"]:.1%}**
+    - Dropouts: **{final_metrics["total_dropouts"]}** students
     
     **Interpretation Ranges:**
     - **IMP > 0.20:** Healthy learning environment (sustainable)
@@ -473,7 +464,7 @@ with st.expander("🎯 Interpreting Results"):
     **Retention Benchmarks:**
     - Traditional schools: 70-85% (OECD average)
     - Alternative models: 85-95% (Sudbury, Folk High Schools)
-    - Your simulation: **{final_metrics['retention_rate']:.1%}**
+    - Your simulation: **{final_metrics["retention_rate"]:.1%}**
     
     **Key Insights:**
     - Coercion = {zwang:.2f}: {"⚠️ High stress environment" if zwang > 0.5 else "✅ Moderate stress"}

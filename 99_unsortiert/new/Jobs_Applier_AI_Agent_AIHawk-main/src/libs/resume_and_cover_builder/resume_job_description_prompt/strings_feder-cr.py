@@ -1,6 +1,15 @@
-from src.libs.resume_and_cover_builder.template_base import prompt_header_template, prompt_education_template, prompt_working_experience_template, prompt_projects_template, prompt_additional_skills_template, prompt_certifications_template, prompt_achievements_template
+from src.libs.resume_and_cover_builder.template_base import (
+    prompt_achievements_template,
+    prompt_additional_skills_template,
+    prompt_certifications_template,
+    prompt_education_template,
+    prompt_header_template,
+    prompt_projects_template,
+    prompt_working_experience_template,
+)
 
-prompt_header = """
+prompt_header = (
+    """
 Act as an HR expert and resume writer specializing in ATS-friendly resumes. Your task is to create a professional and polished header for the resume. The header should:
 
 1. **Contact Information**: Include your full name, city and country, phone number, email address, LinkedIn profile, and GitHub profile.
@@ -11,9 +20,12 @@ To implement this:
 
 - **My information:**  
   {personal_information}
-""" + prompt_header_template
+"""
+    + prompt_header_template
+)
 
-prompt_education = """
+prompt_education = (
+    """
 Act as an HR expert and resume writer with a specialization in creating ATS-friendly resumes. Your task is to articulate the educational background for a resume, ensuring it aligns with the provided job description. For each educational entry, ensure you include:
 
 1. **Institution Name and Location**: Specify the university or educational institution’s name and location.
@@ -31,10 +43,13 @@ To implement this, follow these steps:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_education_template
+"""
+    + prompt_education_template
+)
 
 
-prompt_working_experience = """
+prompt_working_experience = (
+    """
 Act as an HR expert and resume writer with a specialization in creating ATS-friendly resumes. Your task is to detail the work experience for a resume, ensuring it aligns with the provided job description. For each job entry, ensure you include:
 
 1. **Company Name and Location**: Provide the name of the company and its location.
@@ -53,10 +68,13 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_working_experience_template
+"""
+    + prompt_working_experience_template
+)
 
 
-prompt_projects = """
+prompt_projects = (
+    """
 Act as an HR expert and resume writer with a specialization in creating ATS-friendly resumes. Your task is to highlight notable side projects based on the provided job description. For each project, ensure you include:
 
 1. **Project Name and Link**: Provide the name of the project and include a link to the GitHub repository or project page.
@@ -74,10 +92,13 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_projects_template
+"""
+    + prompt_projects_template
+)
 
 
-prompt_achievements = """
+prompt_achievements = (
+    """
 Act as an HR expert and resume writer with a specialization in creating ATS-friendly resumes. Your task is to list significant achievements based on the provided job description. For each achievement, ensure you include:
 
 1. **Award or Recognition**: Clearly state the name of the award, recognition, scholarship, or honor.
@@ -94,10 +115,13 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_achievements_template
+"""
+    + prompt_achievements_template
+)
 
 
-prompt_certifications = """
+prompt_certifications = (
+    """
 Act as an HR expert and resume writer with a specialization in creating ATS-friendly resumes. Your task is to list significant certifications based on the provided details. For each certification, ensure you include:
 
 1. **Certification Name**: Clearly state the name of the certification.
@@ -114,10 +138,13 @@ If any of the certification details (e.g., descriptions) are not provided (i.e.,
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_certifications_template
+"""
+    + prompt_certifications_template
+)
 
 
-prompt_additional_skills = """
+prompt_additional_skills = (
+    """
 Act as an HR expert and resume writer with a specialization in creating ATS-friendly resumes. Your task is to list additional skills relevant to the job. For each skill, ensure you include:
 Do not add any information beyond what is listed in the provided data fields. Only use the information provided in the 'languages', 'interests', and 'skills' fields to formulate your responses. Avoid extrapolating or incorporating details from the job description or other external sources.
 
@@ -138,7 +165,9 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_additional_skills_template
+"""
+    + prompt_additional_skills_template
+)
 
 summarize_prompt_template = """
 As a seasoned HR expert, your task is to identify and outline the key skills and requirements necessary for the position of this job. Use the provided job description as input to extract all relevant information. This will involve conducting a thorough analysis of the job's responsibilities and the industry standards. You should consider both the technical and soft skills needed to excel in this role. Additionally, specify any educational qualifications, certifications, or experiences that are essential. Your analysis should also reflect on the evolving nature of this role, considering future trends and how they might affect the required competencies.

@@ -103,9 +103,7 @@ class FiveDExtractor:
             try:
                 with file.open("rb") as f:
                     reader = PdfReader(f)
-                    max_pages = int(
-                        self.config["extractor"].get("pdf_extraction", {}).get("max_pages", 50)
-                    )
+                    max_pages = int(self.config["extractor"].get("pdf_extraction", {}).get("max_pages", 50))
                     pages = reader.pages[:max_pages]
                     return "\n".join((p.extract_text() or "") for p in pages)
             except Exception as e:
@@ -158,7 +156,7 @@ class FiveDExtractor:
 
             for ext in file_types:
                 try:
-                    for file in (extra.rglob(ext) if recursive else extra.glob(ext)):
+                    for file in extra.rglob(ext) if recursive else extra.glob(ext):
                         key = f"{extra.name}:{file.relative_to(extra)}"
                         text = self.extract_text(file)
                         if text:
@@ -190,9 +188,7 @@ class FiveDExtractor:
         """Extrahiert konkrete Lösungen nach 5D (Regex + optional Fuzzy)."""
         solutions = defaultdict(list)
 
-        inv_pat = (self.config.get("patterns", {}) or {}).get(
-            "investment", r"Investment.?([\d.,]+)"
-        )
+        inv_pat = (self.config.get("patterns", {}) or {}).get("investment", r"Investment.?([\d.,]+)")
         roi_pat = (self.config.get("patterns", {}) or {}).get("roi", r"ROI.?([\d]+)")
         pilots_pat = (self.config.get("patterns", {}) or {}).get("pilots", r"Pilot.?([\d]+)")
 
@@ -213,15 +209,11 @@ class FiveDExtractor:
             for dim, keywords in self.imp_keywords.items():
                 if any(kw.lower() in text.lower() for kw in keywords):
                     score_match = re.search(rf"{dim}\s*[:\-]?\s*([\d.,]+)", text)
-                    solutions[f"{dim}-Score"].append(
-                        score_match.group(1) if score_match else "HIGH"
-                    )
+                    solutions[f"{dim}-Score"].append(score_match.group(1) if score_match else "HIGH")
 
         return solutions
 
-    def save_solutions_validated(
-        self, raw_output: dict, filename: str = "5d_solutions.json"
-    ) -> None:
+    def save_solutions_validated(self, raw_output: dict, filename: str = "5d_solutions.json") -> None:
         """Validiert & speichert via Pydantic; fällt zurück auf Raw-JSON bei Fehlern."""
         if not HAS_PYDANTIC:
             with open(filename, "w", encoding="utf-8") as f:

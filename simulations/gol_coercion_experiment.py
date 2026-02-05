@@ -163,9 +163,7 @@ def simulate_coercive(size: int, steps: int, pattern: str = "glider") -> dict:
     }
 
 
-def simulate_non_coercive(
-    size: int, steps: int, density: float = 0.3, seed: int | None = None
-) -> dict:
+def simulate_non_coercive(size: int, steps: int, density: float = 0.3, seed: int | None = None) -> dict:
     """
     Non-coercive variant: Random initialization.
 
@@ -329,9 +327,7 @@ def run_experiment(
     print(
         f"     Non-Coercive: {statistics['diversity']['non_coercive_mean']:.4f} ± {statistics['diversity']['non_coercive_std']:.4f}"
     )
-    print(
-        f"     t = {statistics['diversity']['t_statistic']:.4f}, p = {statistics['diversity']['p_value']:.4e}"
-    )
+    print(f"     t = {statistics['diversity']['t_statistic']:.4f}, p = {statistics['diversity']['p_value']:.4e}")
     print(f"     Significant: {statistics['diversity']['significant']}")
     print("\n   Longevity (Generations):")
     print(
@@ -340,9 +336,7 @@ def run_experiment(
     print(
         f"     Non-Coercive: {statistics['longevity']['non_coercive_mean']:.2f} ± {statistics['longevity']['non_coercive_std']:.2f}"
     )
-    print(
-        f"     t = {statistics['longevity']['t_statistic']:.4f}, p = {statistics['longevity']['p_value']:.4e}"
-    )
+    print(f"     t = {statistics['longevity']['t_statistic']:.4f}, p = {statistics['longevity']['p_value']:.4e}")
     print(f"     Significant: {statistics['longevity']['significant']}")
     print(f"\n   Hypothesis: {statistics['hypothesis'].upper()}")
     print("   Expected: non-coercive > coercive (diversity H > 0.8, longer longevity)")
@@ -355,12 +349,8 @@ def main():
     parser.add_argument("--trials", type=int, default=100, help="Number of trials per variant")
     parser.add_argument("--size", type=int, default=20, help="Grid size NxN")
     parser.add_argument("--steps", type=int, default=200, help="Max generations per trial")
-    parser.add_argument(
-        "--density", type=float, default=0.3, help="Initial density for non-coercive (0-1)"
-    )
-    parser.add_argument(
-        "--output", type=str, default="gol_experiment_results.json", help="Output JSON file"
-    )
+    parser.add_argument("--density", type=float, default=0.3, help="Initial density for non-coercive (0-1)")
+    parser.add_argument("--output", type=str, default="gol_experiment_results.json", help="Output JSON file")
     args = parser.parse_args()
 
     results = run_experiment(

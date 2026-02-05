@@ -7,12 +7,11 @@ Erste Anlaufstelle mit Installation, Navigation und Erklärungen für Einsteiger
 from datetime import datetime
 
 import streamlit as st
-from utils.mobile_responsive import inject_mobile_css
-from utils.caching import preload_all_critical_data, display_cache_info
 
-st.set_page_config(
-    page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded"
-)
+from utils.caching import display_cache_info, preload_all_critical_data
+from utils.mobile_responsive import inject_mobile_css
+
+st.set_page_config(page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded")
 inject_mobile_css()
 
 # Preload critical data on startup
@@ -30,10 +29,16 @@ def main():
         st.markdown("### 🧭 Navigation")
         st.page_link("pages/1_📊_IMP_Analysis.py", label="📊 IMP-Analyse", icon="📊")
         st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
-        st.page_link("pages/12_🧠_Forschungsplanung_Template.py", label="🧠 Forschungsplanung (Template)", icon="🧠")
+        st.page_link(
+            "pages/12_🧠_Forschungsplanung_Template.py",
+            label="🧠 Forschungsplanung (Template)",
+            icon="🧠",
+        )
         st.page_link("pages/13_🧪_NN_Playground_Demo.py", label="🧪 NN Playground (Demo)", icon="🧪")
         st.markdown("### 🆕 Neues Dashboard")
-        st.info("Ein neues React-basiertes Dashboard ist verfügbar unter `web/validation_dashboard`. Bauen Sie es mit `cd web/validation_dashboard && npm run build`.")
+        st.info(
+            "Ein neues React-basiertes Dashboard ist verfügbar unter `web/validation_dashboard`. Bauen Sie es mit `cd web/validation_dashboard && npm run build`."
+        )
         st.markdown("- 📚 Research (coming soon)")
         st.markdown("- 💻 GitHub (coming soon)")
         st.markdown("- 🧬 Game of Life (coming soon)")
@@ -768,9 +773,7 @@ docker run -p 8501:8501 5d-dashboard
         st.markdown(f"**Letzte Aktualisierung:** {datetime.now().strftime('%Y-%m-%d')}")
 
     with col_c:
-        st.markdown(
-            "[GitHub](https://github.com/karlitos1337/5d) | [Website](https://reflexionsfabrik.de)"
-        )
+        st.markdown("[GitHub](https://github.com/karlitos1337/5d) | [Website](https://reflexionsfabrik.de)")
 
 
 if __name__ == "__main__":

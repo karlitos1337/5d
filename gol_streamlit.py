@@ -246,18 +246,12 @@ with st.sidebar:
     with st.expander("Skalierung (Min/Max)"):
         c1, c2 = st.columns(2)
         with c1:
-            b["size_min"] = st.number_input(
-                "Grid min", min_value=1, max_value=1000, value=b["size_min"], step=1
-            )
-            b["steps_min"] = st.number_input(
-                "Steps min", min_value=1, max_value=100000, value=b["steps_min"], step=1
-            )
+            b["size_min"] = st.number_input("Grid min", min_value=1, max_value=1000, value=b["size_min"], step=1)
+            b["steps_min"] = st.number_input("Steps min", min_value=1, max_value=100000, value=b["steps_min"], step=1)
             b["interval_min"] = st.number_input(
                 "Intervall min (ms)", min_value=1, max_value=10000, value=b["interval_min"], step=1
             )
-            b["px_min"] = st.number_input(
-                "Bild min (px)", min_value=10, max_value=10000, value=b["px_min"], step=10
-            )
+            b["px_min"] = st.number_input("Bild min (px)", min_value=10, max_value=10000, value=b["px_min"], step=10)
         with c2:
             b["size_max"] = st.number_input(
                 "Grid max", min_value=b["size_min"], max_value=2000, value=b["size_max"], step=1
@@ -356,12 +350,8 @@ with st.sidebar:
     reset_btn = st.button("Reset Grid", help="Grid neu initialisieren mit aktuellem Preset/Größe.")
 
     st.subheader("Speichern")
-    save_snapshot_btn = st.button(
-        "Snapshot speichern (Grid + PNG)", help="Speichert aktuelles Grid als .npy und PNG."
-    )
-    save_history_btn = st.button(
-        "Verlauf speichern (CSV)", help="Speichert (step, live_cells) als CSV."
-    )
+    save_snapshot_btn = st.button("Snapshot speichern (Grid + PNG)", help="Speichert aktuelles Grid als .npy und PNG.")
+    save_history_btn = st.button("Verlauf speichern (CSV)", help="Speichert (step, live_cells) als CSV.")
 
     st.subheader("Export")
     export_steps = st.number_input(
@@ -381,9 +371,7 @@ with st.sidebar:
         help="Frame-Dauer: kleiner = höhere Abspielgeschwindigkeit.",
     )
     export_gif_btn = st.button("GIF exportieren", help="Exportiert Sequenz als GIF.")
-    export_mp4_btn = st.button(
-        "MP4 exportieren (ffmpeg)", help="Exportiert MP4 (ffmpeg erforderlich)."
-    )
+    export_mp4_btn = st.button("MP4 exportieren (ffmpeg)", help="Exportiert MP4 (ffmpeg erforderlich).")
 
     st.subheader("Laden")
     up_npy = st.file_uploader(
@@ -399,9 +387,7 @@ with st.sidebar:
         help="Graustufen-PNG wird skaliert und binarisiert (>=128 → 1).",
     )
     load_npy_btn = st.button("NPY laden", help="Übernimmt hochgeladenes .npy in das Grid.")
-    load_png_btn = st.button(
-        "PNG laden", help="Übernimmt skaliertes/binarisiertes PNG in das Grid."
-    )
+    load_png_btn = st.button("PNG laden", help="Übernimmt skaliertes/binarisiertes PNG in das Grid.")
 
 # Session State init
 if "grid" not in st.session_state or reset_btn:
@@ -504,12 +490,7 @@ def game_of_life_py(grid_list, steps=1):
                         if (x, y) != (i, j):
                             neighbors += grid_list[x][y]
                 new_grid[i][j] = (
-                    1
-                    if (
-                        (grid_list[i][j] and neighbors in (2, 3))
-                        or (not grid_list[i][j] and neighbors == 3)
-                    )
-                    else 0
+                    1 if ((grid_list[i][j] and neighbors in (2, 3)) or (not grid_list[i][j] and neighbors == 3)) else 0
                 )
         grid_list[:] = [row[:] for row in new_grid]
     return grid_list
@@ -526,9 +507,7 @@ with col1:
             lst = game_of_life_py(lst, steps=1)
             st.session_state.grid = np.array(lst, dtype=int)
         st.session_state.step_idx += 1
-        st.session_state.history.append(
-            (st.session_state.step_idx, int(np.sum(st.session_state.grid)))
-        )
+        st.session_state.history.append((st.session_state.step_idx, int(np.sum(st.session_state.grid))))
         render(st.session_state.grid, size_px=size_px)
 with col2:
     if st.button("10 Steps"):
@@ -634,9 +613,7 @@ if save_snapshot_btn:
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     np.save(f"gol_grid_{ts}.npy", st.session_state.grid)
     img = (st.session_state.grid * 255).astype(np.uint8)
-    Image.fromarray(img, mode="L").resize((size_px, size_px), resample=Image.NEAREST).save(
-        f"gol_grid_{ts}.png"
-    )
+    Image.fromarray(img, mode="L").resize((size_px, size_px), resample=Image.NEAREST).save(f"gol_grid_{ts}.png")
     st.success(f"Snapshot gespeichert: gol_grid_{ts}.npy / gol_grid_{ts}.png")
 if save_history_btn:
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -651,9 +628,7 @@ if save_history_btn:
 # Export actions
 if export_gif_btn:
     try:
-        frames, h = simulate_frames(
-            st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px
-        )
+        frames, h = simulate_frames(st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px)
         buf = io.BytesIO()
         frames[0].save(
             buf,
@@ -681,9 +656,7 @@ if export_mp4_btn:
         )
     else:
         try:
-            frames, h = simulate_frames(
-                st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px
-            )
+            frames, h = simulate_frames(st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px)
             buf = io.BytesIO()
             # imageio benötigt raw arrays (H,W,3) oder (H,W) – konvertieren zu RGB
             fps = max(1, int(1000 / max(1, export_ms)))
@@ -693,9 +666,7 @@ if export_mp4_btn:
                 for pil in frames:
                     writer.append_data(np.array(pil.convert("RGB")))
             with open(out_name, "rb") as f:
-                st.download_button(
-                    "MP4 herunterladen", f.read(), file_name=out_name, mime="video/mp4"
-                )
+                st.download_button("MP4 herunterladen", f.read(), file_name=out_name, mime="video/mp4")
             st.info("MP4 wurde erzeugt (ffmpeg erforderlich).")
         except Exception as e:
             st.error(f"MP4 Export fehlgeschlagen: {e}")
@@ -769,9 +740,7 @@ with st.expander("Editor-Modus (Zellen anklicken/setzen)"):
     if enable_editor:
         n = st.session_state.grid.shape[0]
         if n > 50:
-            st.warning(
-                "Grid > 50 kann langsam sein im Editor. Reduziere 'Grid-Größe' für flüssige Bearbeitung."
-            )
+            st.warning("Grid > 50 kann langsam sein im Editor. Reduziere 'Grid-Größe' für flüssige Bearbeitung.")
         df_grid = pd.DataFrame(st.session_state.grid)
         edited = st.data_editor(df_grid, use_container_width=True, num_rows="fixed")
         if st.button("Übernehmen"):
@@ -794,10 +763,10 @@ with st.expander("Parameter-Übersicht"):
         | Parameter | Attribut | Wert | Min | Max |
         |---|---|---:|---:|---:|
         | Preset | Muster | `{preset}` | - | - |
-        | Grid-Größe | Zellen N | `{size}` | `{int(b['size_min'])}` | `{int(b['size_max'])}` |
-        | Schritte (Auto) | Iterationen | `{steps}` | `{int(b['steps_min'])}` | `{int(b['steps_max'])}` |
-        | Intervall | ms/Step | `{interval_ms}` | `{int(b['interval_min'])}` | `{int(b['interval_max'])}` |
-        | Bild-Pixelgröße | px | `{size_px}` | `{int(b['px_min'])}` | `{int(b['px_max'])}` |
+        | Grid-Größe | Zellen N | `{size}` | `{int(b["size_min"])}` | `{int(b["size_max"])}` |
+        | Schritte (Auto) | Iterationen | `{steps}` | `{int(b["steps_min"])}` | `{int(b["steps_max"])}` |
+        | Intervall | ms/Step | `{interval_ms}` | `{int(b["interval_min"])}` | `{int(b["interval_max"])}` |
+        | Bild-Pixelgröße | px | `{size_px}` | `{int(b["px_min"])}` | `{int(b["px_max"])}` |
         """
     )
 

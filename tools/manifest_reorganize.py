@@ -259,9 +259,9 @@ class ManifestOrganizer:
         print("📂 5D MANIFEST ORGANISATION\n")
         for category in sorted(categorization.keys()):
             files = categorization[category]
-            print(f"\n{'='*60}")
+            print(f"\n{'=' * 60}")
             print(f"📁 {category.replace('_', ' ').upper()}")
-            print(f"{'='*60}")
+            print(f"{'=' * 60}")
             print(f"   {len(files)} Dateien\n")
 
             for file in sorted(files):
@@ -276,7 +276,7 @@ class ManifestOrganizer:
                     shutil.move(str(file), str(target))
                     print(f"   ✅ {file.name} → {category}/")
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"Gesamt: {sum(len(f) for f in categorization.values())} Dateien kategorisiert")
 
         if dry_run:
@@ -302,9 +302,7 @@ class ManifestOrganizer:
             for file in files:
                 if file.name != "INDEX.md":
                     size = file.stat().st_size
-                    size_str = (
-                        f"{size/1024:.1f}KB" if size < 1024 * 1024 else f"{size/(1024*1024):.1f}MB"
-                    )
+                    size_str = f"{size / 1024:.1f}KB" if size < 1024 * 1024 else f"{size / (1024 * 1024):.1f}MB"
                     index_content += f"- [{file.name}](./{file.name}) ({size_str})\n"
 
             (cat_dir / "INDEX.md").write_text(index_content, encoding="utf-8")

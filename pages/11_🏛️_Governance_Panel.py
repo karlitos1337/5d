@@ -5,15 +5,12 @@ WGI Voice & Accountability vs. HDI/IMP-Proxy Scatterplot
 Scientific Validation: Autonomy → Better Outcomes (r ≈ 0.68)
 """
 
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-st.set_page_config(
-    page_title="5D Governance Panel", page_icon="🏛️", layout="wide", initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="5D Governance Panel", page_icon="🏛️", layout="wide", initial_sidebar_state="expanded")
 
 # Header
 st.title("🏛️ Governance Panel - Autonomy & Outcomes")
@@ -214,9 +211,7 @@ fig2 = px.scatter(
 
 # Regression line
 if show_regression:
-    slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(
-        df["WGI_Voice"], df["IMP_Proxy"]
-    )
+    slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(df["WGI_Voice"], df["IMP_Proxy"])
     df["IMP_Pred"] = slope2 * df["WGI_Voice"] + intercept2
 
     fig2.add_trace(
@@ -278,9 +273,7 @@ with col2:
 st.markdown("---")
 st.subheader("📋 Rohdaten (9 Länder)")
 
-df_display = df[
-    ["Country", "WGI_Voice", "HDI", "IMP_Proxy", "Depression", "Dropout", "Region"]
-].copy()
+df_display = df[["Country", "WGI_Voice", "HDI", "IMP_Proxy", "Depression", "Dropout", "Region"]].copy()
 df_display["Depression"] = df_display["Depression"].apply(lambda x: f"{x:.1%}")
 df_display["Dropout"] = df_display["Dropout"].apply(lambda x: f"{x:.1%}")
 
@@ -300,9 +293,7 @@ st.dataframe(
 
 # Download CSV
 csv = df.to_csv(index=False)
-st.download_button(
-    label="📥 CSV herunterladen", data=csv, file_name="governance_panel_data.csv", mime="text/csv"
-)
+st.download_button(label="📥 CSV herunterladen", data=csv, file_name="governance_panel_data.csv", mime="text/csv")
 
 # BibTeX References
 st.markdown("---")

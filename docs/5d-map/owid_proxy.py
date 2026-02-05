@@ -3,9 +3,7 @@ import sys
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-OWID_URLS = {
-    "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
-}
+OWID_URLS = {"depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"}
 
 
 class ProxyHandler(BaseHTTPRequestHandler):

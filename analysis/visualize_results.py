@@ -14,9 +14,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-def generate_dimension_radar_chart(
-    profile: dict, title: str = "5D-Intelligence Profil"
-) -> go.Figure:
+def generate_dimension_radar_chart(profile: dict, title: str = "5D-Intelligence Profil") -> go.Figure:
     """Radar-Chart für einzelnes 5D-Profil."""
     dimensions = ["Neurobiologie", "Psychologie", "Philosophie", "Ökonomie", "Technologie"]
 
@@ -92,9 +90,7 @@ def generate_comparison_radar(profiles: list[dict], labels: list[str]) -> go.Fig
     return fig
 
 
-def generate_cluster_heatmap(
-    cluster_centers: list[list[float]], feature_names: list[str]
-) -> go.Figure:
+def generate_cluster_heatmap(cluster_centers: list[list[float]], feature_names: list[str]) -> go.Figure:
     """Heatmap der Cluster-Zentren."""
     df = pd.DataFrame(cluster_centers, columns=feature_names)
 
@@ -102,7 +98,7 @@ def generate_cluster_heatmap(
         df,
         labels=dict(x="Feature", y="Cluster", color="Wert"),
         x=feature_names,
-        y=[f"Cluster {i+1}" for i in range(len(cluster_centers))],
+        y=[f"Cluster {i + 1}" for i in range(len(cluster_centers))],
         color_continuous_scale="RdYlGn",
         title="Cluster-Zentren Heatmap",
     )
@@ -174,7 +170,7 @@ def generate_pca_scatter(pca_data: dict, cluster_labels: list[int]) -> go.Figure
         x="PC1",
         y="PC2",
         color="Cluster",
-        title=f"PCA Projektion (Varianz erklärt: {pca_data['total_variance_explained']*100:.1f}%)",
+        title=f"PCA Projektion (Varianz erklärt: {pca_data['total_variance_explained'] * 100:.1f}%)",
         labels={"PC1": "PC1", "PC2": "PC2"},
     )
 

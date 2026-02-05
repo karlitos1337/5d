@@ -68,9 +68,7 @@ def main() -> None:
     all_data: list[dict[str, Any]] = []
     for f in files:
         all_data.append(summarize_file(f))
-    OUT_JSON.write_text(
-        json.dumps({"items": all_data}, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    OUT_JSON.write_text(json.dumps({"items": all_data}, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # Markdown output
     out_lines: list[str] = []

@@ -40,9 +40,7 @@ def generate_anonymous_id() -> str:
         64-Zeichen Hex-String
     """
     # Kombiniere mehrere Zufallsquellen
-    random_data = (
-        str(uuid.uuid4()) + secrets.token_hex(32) + str(datetime.now().timestamp())
-    ).encode()
+    random_data = (str(uuid.uuid4()) + secrets.token_hex(32) + str(datetime.now().timestamp())).encode()
 
     # SHA256 Hash
     anonymous_id = hashlib.sha256(random_data).hexdigest()
@@ -65,10 +63,7 @@ def anonymize_response(response_data: dict[str, Any]) -> dict[str, Any]:
     # Prüfe auf verbotene Felder
     for field in PROHIBITED_FIELDS:
         if field in response_data:
-            raise ValueError(
-                f"Prohibited field '{field}' found in response data. "
-                "This field must not be included."
-            )
+            raise ValueError(f"Prohibited field '{field}' found in response data. This field must not be included.")
 
     # Generiere anonyme ID
     anonymous_id = generate_anonymous_id()

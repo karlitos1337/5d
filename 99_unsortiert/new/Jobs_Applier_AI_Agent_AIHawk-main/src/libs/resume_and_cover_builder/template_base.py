@@ -3,8 +3,6 @@ This module is used to store the global configuration of the application.
 """
 # app/libs/resume_and_cover_builder/template_base.py
 
-
-
 prompt_cover_letter_template = """
 - **Template to Use**
 ```

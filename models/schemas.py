@@ -69,11 +69,7 @@ class Project(BaseModel):
         """Normalisiert Projektnamen (Umlaute/Trimmen/Kapitalisierung)."""
         s = str(v or "").strip().title()
         # Häufige Tippfehler-Korrektur
-        s = (
-            s.replace("Bäckereii", "Bäckerei")
-            .replace("Bäckere", "Bäckerei")
-            .replace("Bäckerei ", "Bäckerei")
-        )
+        s = s.replace("Bäckereii", "Bäckerei").replace("Bäckere", "Bäckerei").replace("Bäckerei ", "Bäckerei")
         s = s.replace("BäckereiI", "Bäckerei").replace("BäckereI", "Bäckerei")
         return s
 

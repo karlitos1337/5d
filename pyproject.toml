@@ -1,24 +1,64 @@
-[tool.black]
-line-length = 100
-target-version = ["py310"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "5d-intelligence"
+version = "0.1.0"
+description = "5D-Intelligence Framework"
+readme = "README.md"
+authors = [
+    { name = "Karlitos1337", email = "karlitos1337@github.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit>=1.28.0",
+    "pandas>=2.1.4",
+    "numpy>=1.24.0",
+    "scipy>=1.11.4",
+    "plotly>=5.17.0",
+    "folium>=0.14.0",
+    "streamlit-folium>=0.15.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.3",
+    "redis>=5.0.0",
+    "networkx>=3.0"
+]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+extend-exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    ".venv",
+    "venv"
+]
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "UP"]
+ignore = ["E501"]
 
-[tool.mypy]
-python_version = "3.10"
-check_untyped_defs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
-warn_unused_ignores = true
-warn_redundant_casts = true
-warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+    "src_python"
+]
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    ".venv",
+    "venv"
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"

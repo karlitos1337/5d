@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+
 from src.logging import logger
+
 
 @dataclass
 class Job:
@@ -25,10 +27,10 @@ class Job:
         - Position: {self.role}
         - At: {self.company}
         - Location: {self.location}
-        - Recruiter Profile: {self.recruiter_link or 'Not available'}
+        - Recruiter Profile: {self.recruiter_link or "Not available"}
         
         ## Description
-        {self.description or 'No description provided.'}
+        {self.description or "No description provided."}
         """
         formatted_information = job_information.strip()
         logger.debug(f"Formatted job information: {formatted_information}")

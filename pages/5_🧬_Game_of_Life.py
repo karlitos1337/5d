@@ -8,11 +8,10 @@ from datetime import datetime
 
 import numpy as np
 import streamlit as st
+
 from utils.mobile_responsive import inject_mobile_css
 
-st.set_page_config(
-    page_title="5D Game of Life", page_icon="🧬", layout="wide", initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="5D Game of Life", page_icon="🧬", layout="wide", initial_sidebar_state="expanded")
 inject_mobile_css()
 
 # Predefined patterns
@@ -167,16 +166,12 @@ def main():
             st.session_state.grid = np.zeros((grid_size, grid_size), dtype=int)
 
             if pattern_name == "Random":
-                st.session_state.grid = np.random.choice(
-                    [0, 1], size=(grid_size, grid_size), p=[0.7, 0.3]
-                )
+                st.session_state.grid = np.random.choice([0, 1], size=(grid_size, grid_size), p=[0.7, 0.3])
             else:
                 pattern = PATTERNS[pattern_name]
                 center_x = grid_size // 2 - pattern.shape[0] // 2
                 center_y = grid_size // 2 - pattern.shape[1] // 2
-                st.session_state.grid = place_pattern(
-                    st.session_state.grid, pattern, center_x, center_y
-                )
+                st.session_state.grid = place_pattern(st.session_state.grid, pattern, center_x, center_y)
 
             st.session_state.generation = 0
 

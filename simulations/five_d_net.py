@@ -151,10 +151,7 @@ class MultiPerspectiveAttention(nn.Module):
 
         # Multiple "perspectives" (attention heads)
         self.perspectives = nn.ModuleList(
-            [
-                nn.Linear(in_features, out_features // num_perspectives)
-                for _ in range(num_perspectives)
-            ]
+            [nn.Linear(in_features, out_features // num_perspectives) for _ in range(num_perspectives)]
         )
 
         # Integration layer (combine perspectives)
@@ -344,9 +341,7 @@ class FiveDNet(nn.Module):
             authenticity = 0.6  # Placeholder
 
             # Multiplicative (weak-link logic)
-            stability = (
-                autonomy * intrinsic_motivation * resilience * social_participation * authenticity
-            )
+            stability = autonomy * intrinsic_motivation * resilience * social_participation * authenticity
 
             return stability
 
@@ -418,9 +413,7 @@ def add_noise(x: torch.Tensor, noise_level: float) -> torch.Tensor:
     return x + noise
 
 
-def fgsm_attack(
-    model: nn.Module, x: torch.Tensor, y: torch.Tensor, epsilon: float = 0.3
-) -> torch.Tensor:
+def fgsm_attack(model: nn.Module, x: torch.Tensor, y: torch.Tensor, epsilon: float = 0.3) -> torch.Tensor:
     """
     FGSM (Fast Gradient Sign Method) adversarial attack
 

@@ -160,9 +160,7 @@ if __name__ == "__main__":
     if result.is_valid:
         print("\n🎯 Hypothesis SUPPORTED")
         print("  → Higher autonomy leads to higher Shannon entropy")
-        print(
-            f"  → Effect is statistically significant (d={result.effect_size:.2f}, p={result.p_value:.4f})"
-        )
+        print(f"  → Effect is statistically significant (d={result.effect_size:.2f}, p={result.p_value:.4f})")
     else:
         print("\n❌ Hypothesis NOT SUPPORTED")
 

@@ -126,9 +126,7 @@ async def research_updates(ctx, keyword="self-directed learning"):
         embed.add_field(name="PubMed Papers", value=papers_text, inline=False)
 
     if not arxiv and not pubmed:
-        embed.description = (
-            "Keine Papers gefunden. Führe zuerst `python 5d_research_scraper.py` aus."
-        )
+        embed.description = "Keine Papers gefunden. Führe zuerst `python 5d_research_scraper.py` aus."
 
     await ctx.send(embed=embed)
 
@@ -149,9 +147,7 @@ async def github_repos(ctx, query="education"):
                 inline=False,
             )
     else:
-        embed.description = (
-            "Keine Repositories gefunden. Führe zuerst `python 5d_github_api.py` aus."
-        )
+        embed.description = "Keine Repositories gefunden. Führe zuerst `python 5d_github_api.py` aus."
 
     await ctx.send(embed=embed)
 

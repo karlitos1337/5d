@@ -49,9 +49,7 @@ def migrate_v1_to_v2(old_file="5d_solutions.json", new_file="5d_solutions.json")
             dimension_scores=dimension_scores,
             plan=plan,
         )
-        Path(new_file).write_text(
-            json.dumps(validated.dict(), indent=2, ensure_ascii=False), encoding="utf-8"
-        )
+        Path(new_file).write_text(json.dumps(validated.dict(), indent=2, ensure_ascii=False), encoding="utf-8")
     else:
         Path(new_file).write_text(
             json.dumps(

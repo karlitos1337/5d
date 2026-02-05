@@ -94,9 +94,7 @@ def test_pipeline_json_schemas_compatible():
                     if all(key in data for key in required_keys):
                         schema_valid = True
                         break
-                assert (
-                    schema_valid
-                ), f"{filename} sollte eins der Schemas erfüllen: {required_keys_options}"
+                assert schema_valid, f"{filename} sollte eins der Schemas erfüllen: {required_keys_options}"
             else:
                 # Single schema
                 for key in required_keys_options:

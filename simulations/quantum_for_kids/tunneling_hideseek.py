@@ -62,9 +62,7 @@ class QuantumTunneling:
     def attempt_tunneling(self):
         """Attempt to tunnel (Monte Carlo)"""
         success = np.random.random() < self.T
-        self.attempts.append(
-            {"success": success, "probability": self.T, "energy": self.E, "barrier_height": self.V0}
-        )
+        self.attempts.append({"success": success, "probability": self.T, "energy": self.E, "barrier_height": self.V0})
         return success
 
 
@@ -73,16 +71,12 @@ class TunnelingVisualizer:
 
     def __init__(self):
         self.tunneling = QuantumTunneling(barrier_height=10, barrier_width=2, particle_energy=5)
-        self.fig, ((self.ax1, self.ax2), (self.ax3, self.ax4)) = plt.subplots(
-            2, 2, figsize=(16, 10)
-        )
+        self.fig, ((self.ax1, self.ax2), (self.ax3, self.ax4)) = plt.subplots(2, 2, figsize=(16, 10))
         self.setup_plot()
 
     def setup_plot(self):
         """Setup matplotlib figure"""
-        self.fig.suptitle(
-            "Quantum Tunneling via VERSTECKSPIEL! 👻🧱", fontsize=16, fontweight="bold"
-        )
+        self.fig.suptitle("Quantum Tunneling via VERSTECKSPIEL! 👻🧱", fontsize=16, fontweight="bold")
 
         # Top-left: Potential barrier
         self.ax1.set_title("Potential Barrier (Die Wand)", fontsize=12)
@@ -192,10 +186,7 @@ class TunnelingVisualizer:
         psi1 = np.where(x < 2, np.cos(k1 * x), 0)
 
         # Region 2: Inside barrier (2 ≤ x ≤ 4)
-        kappa = (
-            np.sqrt(2 * self.tunneling.m * (self.tunneling.V0 - self.tunneling.E))
-            / self.tunneling.hbar
-        )
+        kappa = np.sqrt(2 * self.tunneling.m * (self.tunneling.V0 - self.tunneling.E)) / self.tunneling.hbar
         x_barrier = x[(x >= 2) & (x <= 4)]
         psi2 = np.exp(-kappa * (x_barrier - 2)) if len(x_barrier) > 0 else np.array([])
 
@@ -203,9 +194,7 @@ class TunnelingVisualizer:
         k3 = k1
         x_after = x[x > 4]
         amplitude_transmitted = psi2[-1] if len(psi2) > 0 else 0
-        psi3 = (
-            amplitude_transmitted * np.cos(k3 * (x_after - 4)) if len(x_after) > 0 else np.array([])
-        )
+        psi3 = amplitude_transmitted * np.cos(k3 * (x_after - 4)) if len(x_after) > 0 else np.array([])
 
         # Combine
         psi = np.zeros_like(x)
@@ -244,7 +233,7 @@ class TunnelingVisualizer:
         print("\n" + "=" * 60)
         print("👻 QUANTUM TUNNELING ATTEMPTS")
         print("=" * 60)
-        print(f"Tunneling Probability: T = {self.tunneling.T:.6f} ({self.tunneling.T*100:.4f}%)")
+        print(f"Tunneling Probability: T = {self.tunneling.T:.6f} ({self.tunneling.T * 100:.4f}%)")
         print(f"Expected successes: {num_attempts * self.tunneling.T:.2f} out of {num_attempts}")
         print()
 
@@ -298,21 +287,21 @@ class TunnelingVisualizer:
                 self.ax4.text(
                     0.1,
                     0.80,
-                    f"Attempts: {i+1}/{num_attempts}",
+                    f"Attempts: {i + 1}/{num_attempts}",
                     fontsize=12,
                     transform=self.ax4.transAxes,
                 )
                 self.ax4.text(
                     0.1,
                     0.72,
-                    f"Successes: {success_count} ({success_count/(i+1)*100:.2f}%)",
+                    f"Successes: {success_count} ({success_count / (i + 1) * 100:.2f}%)",
                     fontsize=12,
                     transform=self.ax4.transAxes,
                 )
                 self.ax4.text(
                     0.1,
                     0.64,
-                    f"Expected: {self.tunneling.T*100:.4f}%",
+                    f"Expected: {self.tunneling.T * 100:.4f}%",
                     fontsize=12,
                     transform=self.ax4.transAxes,
                 )
@@ -371,16 +360,16 @@ class TunnelingVisualizer:
                 plt.tight_layout()
                 plt.pause(0.1)
 
-                print(f"Attempt {i+1}: {success_count} successes ({success_count/(i+1)*100:.2f}%)")
+                print(f"Attempt {i + 1}: {success_count} successes ({success_count / (i + 1) * 100:.2f}%)")
 
         # Final stats
         print("\n" + "=" * 60)
         print("📊 FINAL RESULTS")
         print("=" * 60)
         print(f"Total attempts: {num_attempts}")
-        print(f"Successes: {success_count} ({success_count/num_attempts*100:.2f}%)")
-        print(f"Expected: {self.tunneling.T*100:.4f}%")
-        print(f"Difference: {abs(success_count/num_attempts - self.tunneling.T)*100:.4f}%")
+        print(f"Successes: {success_count} ({success_count / num_attempts * 100:.2f}%)")
+        print(f"Expected: {self.tunneling.T * 100:.4f}%")
+        print(f"Difference: {abs(success_count / num_attempts - self.tunneling.T) * 100:.4f}%")
 
         return successes
 
@@ -447,8 +436,7 @@ class TunnelingVisualizer:
             "statistics": {
                 "total_attempts": len(self.tunneling.attempts),
                 "successes": sum(1 for a in self.tunneling.attempts if a["success"]),
-                "observed_rate": sum(1 for a in self.tunneling.attempts if a["success"])
-                / len(self.tunneling.attempts),
+                "observed_rate": sum(1 for a in self.tunneling.attempts if a["success"]) / len(self.tunneling.attempts),
             },
         }
 
@@ -458,9 +446,7 @@ class TunnelingVisualizer:
 
         print(f"\n💾 Results saved: {json_path}")
 
-        plt.savefig(
-            f"{output_dir}/tunneling_hideseek_{timestamp}.png", dpi=300, bbox_inches="tight"
-        )
+        plt.savefig(f"{output_dir}/tunneling_hideseek_{timestamp}.png", dpi=300, bbox_inches="tight")
         print(f"📊 Plot saved: tunneling_hideseek_{timestamp}.png")
 
         return results
