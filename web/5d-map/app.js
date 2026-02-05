@@ -15,6 +15,9 @@ function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
   const msgEl = document.querySelector('.loading-spinner p');
   if (msgEl) msgEl.textContent = message;
+
+  // A11y: Indicate busy state
+  document.getElementById('main-content')?.setAttribute('aria-busy', !!isLoading);
 }
 
 function updateLastUpdateTime() {
