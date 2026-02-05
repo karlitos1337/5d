@@ -1,6 +1,7 @@
 """
 Create a class that generates a job description based on a resume and a job description template.
 """
+
 # app/libs/resume_and_cover_builder/llm_generate_resume_from_job.py
 import os
 from src.libs.resume_and_cover_builder.llm.llm_generate_resume import LLMResumer
@@ -15,11 +16,18 @@ from pathlib import Path
 # Load environment variables from .env file
 load_dotenv()
 
-log_folder = 'log/resume/gpt_resum_job_descr'
+log_folder = "log/resume/gpt_resum_job_descr"
 if not os.path.exists(log_folder):
     os.makedirs(log_folder)
 log_path = Path(log_folder).resolve()
-logger.add(log_path / "gpt_resum_job_descr.log", rotation="1 day", compression="zip", retention="7 days", level="DEBUG")
+logger.add(
+    log_path / "gpt_resum_job_descr.log",
+    rotation="1 day",
+    compression="zip",
+    retention="7 days",
+    level="DEBUG",
+)
+
 
 class LLMResumeJobDescription(LLMResumer):
     def __init__(self, openai_api_key, strings):
@@ -35,17 +43,19 @@ class LLMResumeJobDescription(LLMResumer):
         chain = prompt | self.llm_cheap | StrOutputParser()
         output = chain.invoke({"text": job_description_text})
         self.job_description = output
-    
+
     def generate_header(self) -> str:
         """
         Generate the header section of the resume.
         Returns:
             str: The generated header section.
         """
-        return super().generate_header(data={
-            "personal_information": self.resume.personal_information,
-            "job_description": self.job_description
-        })
+        return super().generate_header(
+            data={
+                "personal_information": self.resume.personal_information,
+                "job_description": self.job_description,
+            }
+        )
 
     def generate_education_section(self) -> str:
         """
@@ -53,10 +63,12 @@ class LLMResumeJobDescription(LLMResumer):
         Returns:
             str: The generated education section.
         """
-        return super().generate_education_section(data={
-            "education_details": self.resume.education_details,
-            "job_description": self.job_description
-        })
+        return super().generate_education_section(
+            data={
+                "education_details": self.resume.education_details,
+                "job_description": self.job_description,
+            }
+        )
 
     def generate_work_experience_section(self) -> str:
         """
@@ -64,10 +76,12 @@ class LLMResumeJobDescription(LLMResumer):
         Returns:
             str: The generated work experience section.
         """
-        return super().generate_work_experience_section(data={
-            "experience_details": self.resume.experience_details,
-            "job_description": self.job_description
-        })
+        return super().generate_work_experience_section(
+            data={
+                "experience_details": self.resume.experience_details,
+                "job_description": self.job_description,
+            }
+        )
 
     def generate_projects_section(self) -> str:
         """
@@ -75,10 +89,9 @@ class LLMResumeJobDescription(LLMResumer):
         Returns:
             str: The generated side projects section.
         """
-        return super().generate_projects_section(data={
-            "projects": self.resume.projects,
-            "job_description": self.job_description
-        })
+        return super().generate_projects_section(
+            data={"projects": self.resume.projects, "job_description": self.job_description}
+        )
 
     def generate_achievements_section(self) -> str:
         """
@@ -86,11 +99,9 @@ class LLMResumeJobDescription(LLMResumer):
         Returns:
             str: The generated achievements section.
         """
-        return super().generate_achievements_section(data={
-            "achievements": self.resume.achievements,
-            "job_description": self.job_description
-        })
-
+        return super().generate_achievements_section(
+            data={"achievements": self.resume.achievements, "job_description": self.job_description}
+        )
 
     def generate_certifications_section(self) -> str:
         """
@@ -98,10 +109,12 @@ class LLMResumeJobDescription(LLMResumer):
         Returns:
             str: The generated certifications section.
         """
-        return super().generate_certifications_section(data={
-            "certifications": self.resume.certifications,
-            "job_description": self.job_description
-        })
+        return super().generate_certifications_section(
+            data={
+                "certifications": self.resume.certifications,
+                "job_description": self.job_description,
+            }
+        )
 
     def generate_additional_skills_section(self) -> str:
         """
@@ -125,10 +138,12 @@ class LLMResumeJobDescription(LLMResumer):
                         skills.update(exam.keys())
         prompt = ChatPromptTemplate.from_template(additional_skills_prompt_template)
         chain = prompt | self.llm_cheap | StrOutputParser()
-        output = chain.invoke({
-            "languages": self.resume.languages,
-            "interests": self.resume.interests,
-            "skills": skills,
-            "job_description": self.job_description
-        })
+        output = chain.invoke(
+            {
+                "languages": self.resume.languages,
+                "interests": self.resume.interests,
+                "skills": skills,
+                "job_description": self.job_description,
+            }
+        )
         return output
