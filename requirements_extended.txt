@@ -16,3 +16,5 @@ black
 mypy
 networkx
 pytest-cov
+discord.py
+pytest-asyncio
