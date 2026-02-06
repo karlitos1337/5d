@@ -12,9 +12,7 @@ import tempfile
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-    parser = argparse.ArgumentParser(
-        description="Check an embedded Python interpreter."
-    )
+    parser = argparse.ArgumentParser(description="Check an embedded Python interpreter.")
     parser.add_argument("--uv", help="Path to a uv binary.")
     args = parser.parse_args()
 
@@ -54,9 +52,7 @@ if __name__ == "__main__":
         # Install, verify, and uninstall a few packages.
         for package in ["pylint", "numpy"]:
             # Install the package.
-            logging.info(
-                f"Installing the package `{package}` into the virtual environment..."
-            )
+            logging.info(f"Installing the package `{package}` into the virtual environment...")
             subprocess.run(
                 [uv, "pip", "install", package, "--verbose"],
                 cwd=temp_dir,
