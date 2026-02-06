@@ -1,27 +1,20 @@
 import base64
-import sys
-from pathlib import Path
+import re
 import traceback
-from typing import List, Optional, Tuple, Dict
+from pathlib import Path
 
-import click
 import inquirer
 import yaml
-from selenium import webdriver
-from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
-import re
 from src.libs.resume_and_cover_builder import ResumeFacade, ResumeGenerator, StyleManager
-from src.resume_schemas.job_application_profile import JobApplicationProfile
-from src.resume_schemas.resume import Resume
 from src.logging import logger
+from src.resume_schemas.resume import Resume
 from src.utils.chrome_utils import init_browser
 from src.utils.constants import (
     PLAIN_TEXT_RESUME_YAML,
     SECRETS_YAML,
     WORK_PREFERENCES_YAML,
 )
+
 # from ai_hawk.bot_facade import AIHawkBotFacade
 # from ai_hawk.job_manager import AIHawkJobManager
 # from ai_hawk.llm.llm_manager import GPTAnswerer
@@ -29,6 +22,7 @@ from src.utils.constants import (
 
 class ConfigError(Exception):
     """Custom exception for configuration-related errors."""
+
     pass
 
 
@@ -77,7 +71,7 @@ class ConfigValidator:
     def load_yaml(yaml_path: Path) -> dict:
         """Load and parse a YAML file."""
         try:
-            with open(yaml_path, "r") as stream:
+            with open(yaml_path) as stream:
                 return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             raise ConfigError(f"Error reading YAML file {yaml_path}: {exc}")
@@ -96,7 +90,10 @@ class ConfigValidator:
                 else:
                     raise ConfigError(f"Missing required key '{key}' in {config_yaml_path}")
             elif not isinstance(parameters[key], expected_type):
-                if key in ["company_blacklist", "title_blacklist", "location_blacklist"] and parameters[key] is None:
+                if (
+                    key in ["company_blacklist", "title_blacklist", "location_blacklist"]
+                    and parameters[key] is None
+                ):
                     parameters[key] = []
                 else:
                     raise ConfigError(
@@ -115,36 +112,28 @@ class ConfigValidator:
         """Ensure experience levels are booleans."""
         for level in cls.EXPERIENCE_LEVELS:
             if not isinstance(experience_levels.get(level), bool):
-                raise ConfigError(
-                    f"Experience level '{level}' must be a boolean in {config_path}"
-                )
+                raise ConfigError(f"Experience level '{level}' must be a boolean in {config_path}")
 
     @classmethod
     def _validate_job_types(cls, job_types: dict, config_path: Path):
         """Ensure job types are booleans."""
         for job_type in cls.JOB_TYPES:
             if not isinstance(job_types.get(job_type), bool):
-                raise ConfigError(
-                    f"Job type '{job_type}' must be a boolean in {config_path}"
-                )
+                raise ConfigError(f"Job type '{job_type}' must be a boolean in {config_path}")
 
     @classmethod
     def _validate_date_filters(cls, date_filters: dict, config_path: Path):
         """Ensure date filters are booleans."""
         for date_filter in cls.DATE_FILTERS:
             if not isinstance(date_filters.get(date_filter), bool):
-                raise ConfigError(
-                    f"Date filter '{date_filter}' must be a boolean in {config_path}"
-                )
+                raise ConfigError(f"Date filter '{date_filter}' must be a boolean in {config_path}")
 
     @classmethod
     def _validate_list_of_strings(cls, parameters: dict, keys: list, config_path: Path):
         """Ensure specified keys are lists of strings."""
         for key in keys:
             if not all(isinstance(item, str) for item in parameters[key]):
-                raise ConfigError(
-                    f"'{key}' must be a list of strings in {config_path}"
-                )
+                raise ConfigError(f"'{key}' must be a list of strings in {config_path}")
 
     @classmethod
     def _validate_distance(cls, distance: int, config_path: Path):
@@ -159,9 +148,7 @@ class ConfigValidator:
         """Ensure blacklists are lists."""
         for blacklist in ["company_blacklist", "title_blacklist", "location_blacklist"]:
             if not isinstance(parameters.get(blacklist), list):
-                raise ConfigError(
-                    f"'{blacklist}' must be a list in {config_path}"
-                )
+                raise ConfigError(f"'{blacklist}' must be a list in {config_path}")
             if parameters[blacklist] is None:
                 parameters[blacklist] = []
 
@@ -187,12 +174,14 @@ class FileManager:
     REQUIRED_FILES = [SECRETS_YAML, WORK_PREFERENCES_YAML, PLAIN_TEXT_RESUME_YAML]
 
     @staticmethod
-    def validate_data_folder(app_data_folder: Path) -> Tuple[Path, Path, Path, Path]:
+    def validate_data_folder(app_data_folder: Path) -> tuple[Path, Path, Path, Path]:
         """Validate the existence of the data folder and required files."""
         if not app_data_folder.is_dir():
             raise FileNotFoundError(f"Data folder not found: {app_data_folder}")
 
-        missing_files = [file for file in FileManager.REQUIRED_FILES if not (app_data_folder / file).exists()]
+        missing_files = [
+            file for file in FileManager.REQUIRED_FILES if not (app_data_folder / file).exists()
+        ]
         if missing_files:
             raise FileNotFoundError(f"Missing files in data folder: {', '.join(missing_files)}")
 
@@ -207,7 +196,7 @@ class FileManager:
         )
 
     @staticmethod
-    def get_uploads(plain_text_resume_file: Path) -> Dict[str, Path]:
+    def get_uploads(plain_text_resume_file: Path) -> dict[str, Path]:
         """Convert resume file paths to a dictionary."""
         if not plain_text_resume_file.exists():
             raise FileNotFoundError(f"Plain text resume file not found: {plain_text_resume_file}")
@@ -225,7 +214,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
         logger.info("Generating a CV based on provided parameters.")
 
         # Carica il resume in testo semplice
-        with open(parameters["uploads"]["plainTextResume"], "r", encoding="utf-8") as file:
+        with open(parameters["uploads"]["plainTextResume"], encoding="utf-8") as file:
             plain_text_resume = file.read()
 
         style_manager = StyleManager()
@@ -254,15 +243,15 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
             else:
                 logger.warning("No style selected. Proceeding with default style.")
         questions = [
-    inquirer.Text('job_url', message="Please enter the URL of the job description:")
+            inquirer.Text("job_url", message="Please enter the URL of the job description:")
         ]
         answers = inquirer.prompt(questions)
-        job_url = answers.get('job_url')
+        job_url = answers.get("job_url")
         resume_generator = ResumeGenerator()
         resume_object = Resume(plain_text_resume)
         driver = init_browser()
         resume_generator.set_resume_object(resume_object)
-        resume_facade = ResumeFacade(            
+        resume_facade = ResumeFacade(
             api_key=llm_api_key,
             style_manager=style_manager,
             resume_generator=resume_generator,
@@ -271,7 +260,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
         )
         resume_facade.set_driver(driver)
         resume_facade.link_to_job(job_url)
-        result_base64, suggested_name = resume_facade.create_cover_letter()         
+        result_base64, suggested_name = resume_facade.create_cover_letter()
 
         # Decodifica Base64 in dati binari
         try:
@@ -287,16 +276,16 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
         try:
             output_dir.mkdir(parents=True, exist_ok=True)
             logger.info(f"Cartella di output creata o già esistente: {output_dir}")
-        except IOError as e:
+        except OSError as e:
             logger.error("Error creating output directory: %s", e)
             raise
-        
+
         output_path = output_dir / "cover_letter_tailored.pdf"
         try:
             with open(output_path, "wb") as file:
                 file.write(pdf_data)
             logger.info(f"CV salvato in: {output_path}")
-        except IOError as e:
+        except OSError as e:
             logger.error("Error writing file: %s", e)
             raise
     except Exception as e:
@@ -312,7 +301,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
         logger.info("Generating a CV based on provided parameters.")
 
         # Carica il resume in testo semplice
-        with open(parameters["uploads"]["plainTextResume"], "r", encoding="utf-8") as file:
+        with open(parameters["uploads"]["plainTextResume"], encoding="utf-8") as file:
             plain_text_resume = file.read()
 
         style_manager = StyleManager()
@@ -340,14 +329,16 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
                         break
             else:
                 logger.warning("No style selected. Proceeding with default style.")
-        questions = [inquirer.Text('job_url', message="Please enter the URL of the job description:")]
+        questions = [
+            inquirer.Text("job_url", message="Please enter the URL of the job description:")
+        ]
         answers = inquirer.prompt(questions)
-        job_url = answers.get('job_url')
+        job_url = answers.get("job_url")
         resume_generator = ResumeGenerator()
         resume_object = Resume(plain_text_resume)
         driver = init_browser()
         resume_generator.set_resume_object(resume_object)
-        resume_facade = ResumeFacade(            
+        resume_facade = ResumeFacade(
             api_key=llm_api_key,
             style_manager=style_manager,
             resume_generator=resume_generator,
@@ -356,7 +347,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
         )
         resume_facade.set_driver(driver)
         resume_facade.link_to_job(job_url)
-        result_base64, suggested_name = resume_facade.create_resume_pdf_job_tailored()         
+        result_base64, suggested_name = resume_facade.create_resume_pdf_job_tailored()
 
         # Decodifica Base64 in dati binari
         try:
@@ -372,16 +363,16 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
         try:
             output_dir.mkdir(parents=True, exist_ok=True)
             logger.info(f"Cartella di output creata o già esistente: {output_dir}")
-        except IOError as e:
+        except OSError as e:
             logger.error("Error creating output directory: %s", e)
             raise
-        
+
         output_path = output_dir / "resume_tailored.pdf"
         try:
             with open(output_path, "wb") as file:
                 file.write(pdf_data)
             logger.info(f"CV salvato in: {output_path}")
-        except IOError as e:
+        except OSError as e:
             logger.error("Error writing file: %s", e)
             raise
     except Exception as e:
@@ -397,7 +388,7 @@ def create_resume_pdf(parameters: dict, llm_api_key: str):
         logger.info("Generating a CV based on provided parameters.")
 
         # Load the plain text resume
-        with open(parameters["uploads"]["plainTextResume"], "r", encoding="utf-8") as file:
+        with open(parameters["uploads"]["plainTextResume"], encoding="utf-8") as file:
             plain_text_resume = file.read()
 
         # Initialize StyleManager
@@ -460,15 +451,15 @@ def create_resume_pdf(parameters: dict, llm_api_key: str):
             with open(output_path, "wb") as file:
                 file.write(pdf_data)
             logger.info(f"Resume saved at: {output_path}")
-        except IOError as e:
+        except OSError as e:
             logger.error("Error writing file: %s", e)
             raise
     except Exception as e:
         logger.exception(f"An error occurred while creating the CV: {e}")
         raise
 
-        
-def handle_inquiries(selected_actions: List[str], parameters: dict, llm_api_key: str):
+
+def handle_inquiries(selected_actions: list[str], parameters: dict, llm_api_key: str):
     """
     Decide which function to call based on the selected user actions.
 
@@ -481,13 +472,15 @@ def handle_inquiries(selected_actions: List[str], parameters: dict, llm_api_key:
             if "Generate Resume" == selected_actions:
                 logger.info("Crafting a standout professional resume...")
                 create_resume_pdf(parameters, llm_api_key)
-                
+
             if "Generate Resume Tailored for Job Description" == selected_actions:
                 logger.info("Customizing your resume to enhance your job application...")
                 create_resume_pdf_job_tailored(parameters, llm_api_key)
-                
+
             if "Generate Tailored Cover Letter for Job Description" == selected_actions:
-                logger.info("Designing a personalized cover letter to enhance your job application...")
+                logger.info(
+                    "Designing a personalized cover letter to enhance your job application..."
+                )
                 create_cover_letter(parameters, llm_api_key)
 
         else:
@@ -495,6 +488,7 @@ def handle_inquiries(selected_actions: List[str], parameters: dict, llm_api_key:
     except Exception as e:
         logger.exception(f"An error occurred while handling inquiries: {e}")
         raise
+
 
 def prompt_user_action() -> str:
     """
@@ -505,7 +499,7 @@ def prompt_user_action() -> str:
     try:
         questions = [
             inquirer.List(
-                'action',
+                "action",
                 message="Select the action you want to perform:",
                 choices=[
                     "Generate Resume",
@@ -518,7 +512,7 @@ def prompt_user_action() -> str:
         if answer is None:
             print("No answer provided. The user may have interrupted.")
             return ""
-        return answer.get('action', "")
+        return answer.get("action", "")
     except Exception as e:
         print(f"An error occurred: {e}")
         return ""
@@ -529,7 +523,9 @@ def main():
     try:
         # Define and validate the data folder
         data_folder = Path("data_folder")
-        secrets_file, config_file, plain_text_resume_file, output_folder = FileManager.validate_data_folder(data_folder)
+        secrets_file, config_file, plain_text_resume_file, output_folder = (
+            FileManager.validate_data_folder(data_folder)
+        )
 
         # Validate configuration and secrets
         config = ConfigValidator.validate_config(config_file)
