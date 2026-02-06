@@ -1,13 +1,14 @@
-import unittest
-from unittest.mock import patch, MagicMock
-import sys
 import os
+import sys
+import unittest
+from unittest.mock import MagicMock, patch
 
 # Add the project root to sys.path so we can import 5d_research_scraper
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Use importlib because the module name starts with a digit
 import importlib.util
+
 spec = importlib.util.spec_from_file_location("research_scraper", "5d_research_scraper.py")
 research_scraper = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(research_scraper)

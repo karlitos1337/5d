@@ -1,11 +1,13 @@
-import os
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager  # Import webdriver_manager
 import urllib
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager  # Import webdriver_manager
+
 from src.logging import logger
+
 
 def chrome_browser_options():
     logger.debug("Setting Chrome browser options")
