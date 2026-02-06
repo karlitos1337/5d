@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 import sys
+import time
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
+
+# Simple in-memory cache: { key: {'data': bytes, 'time': float} }
+CACHE = {}
+CACHE_TTL = 3600  # 1 hour
 
 
 class ProxyHandler(BaseHTTPRequestHandler):
@@ -21,9 +26,28 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
+
+            # Check cache
+            now = time.time()
+            if key in CACHE:
+                entry = CACHE[key]
+                if now - entry["time"] < CACHE_TTL:
+                    data = entry["data"]
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/csv; charset=utf-8")
+                    self.send_header("Content-Length", str(len(data)))
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    self.wfile.write(data)
+                    return
+
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
                     data = resp.read()
+
+                    # Update cache
+                    CACHE[key] = {"data": data, "time": now}
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
