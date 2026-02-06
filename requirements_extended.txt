@@ -15,3 +15,12 @@ ruff
 black
 mypy
 pytest
+networkx
+pytest-asyncio
+discord.py
+pytest-cov
+pydantic
+pyyaml
+fuzzywuzzy
+python-Levenshtein
+PyPDF2
