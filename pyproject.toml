@@ -1,6 +1,23 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+  | 99_unsortiert
+  | external
+  | private-gpt-main
+)/
+'''
 
 [tool.ruff]
 line-length = 100
@@ -26,3 +43,5 @@ exclude = ["private-gpt-main/"]
 [tool.pytest.ini_options]
 norecursedirs = ["99_unsortiert", "external", "node_modules", "private-gpt-main"]
 addopts = "--ignore=99_unsortiert --ignore=external"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
