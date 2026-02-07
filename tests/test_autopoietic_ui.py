@@ -2,6 +2,7 @@
 import os
 import sys
 
+import pytest
 import streamlit as st
 
 # Ensure the pages directory is in the path
@@ -24,7 +25,7 @@ def test_autopoietic_class_import():
         with open('pages/9_🧪_Autopoietic_Class.py') as f:
             compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
     except Exception as e:
-        assert False, f"Syntax Error in Autopoietic Class Page: {e}"
+        pytest.fail(f"Syntax Error in Autopoietic Class Page: {e}")
 
 def test_ui_components_structure():
     """
