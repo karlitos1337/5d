@@ -11,11 +11,13 @@ import streamlit as st
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 # Cache TTL constants (in seconds)
 class CacheTTL:
     STATIC = 3600 * 24  # 24 hours for static files
-    DYNAMIC = 300       # 5 minutes for dynamic data
-    BASELINE = 3600     # 1 hour for baseline data
+    DYNAMIC = 300  # 5 minutes for dynamic data
+    BASELINE = 3600  # 1 hour for baseline data
+
 
 # Redis configuration (optional, fallback to in-memory)
 REDIS_URL = os.getenv("REDIS_URL")
@@ -32,6 +34,7 @@ if REDIS_URL:
 # ============================================================================
 # Core Caching Decorators & Functions
 # ============================================================================
+
 
 @st.cache_data(ttl=CacheTTL.STATIC)
 def preload_solutions_data() -> dict[str, Any]:
@@ -50,6 +53,7 @@ def preload_solutions_data() -> dict[str, Any]:
         logger.error(f"Error loading 5d_solutions.json: {e}")
         return {}
 
+
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
 def preload_research_data() -> dict[str, Any]:
     """
@@ -66,6 +70,7 @@ def preload_research_data() -> dict[str, Any]:
     except Exception as e:
         logger.error(f"Error loading 5d_research_data.json: {e}")
         return {}
+
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
 def preload_github_data() -> dict[str, Any]:
@@ -84,6 +89,7 @@ def preload_github_data() -> dict[str, Any]:
         logger.error(f"Error loading 5d_github_data.json: {e}")
         return {}
 
+
 @st.cache_data(ttl=CacheTTL.BASELINE)
 def preload_map_baseline() -> dict[str, Any]:
     """
@@ -101,6 +107,7 @@ def preload_map_baseline() -> dict[str, Any]:
         logger.error(f"Error loading baseline.json: {e}")
         return {}
 
+
 def get_cached_data(key: str) -> Any:
     """
     Retrieve data from cache (Redis or Streamlit session state).
@@ -116,6 +123,7 @@ def get_cached_data(key: str) -> Any:
     # Fallback to session state
     return st.session_state.get(f"cache_{key}")
 
+
 def set_cached_data(key: str, data: Any, ttl: int = 300):
     """
     Set data in cache.
@@ -127,6 +135,7 @@ def set_cached_data(key: str, data: Any, ttl: int = 300):
             pass
 
     st.session_state[f"cache_{key}"] = data
+
 
 def clear_cache(key: str = None):
     """
@@ -153,14 +162,17 @@ def clear_cache(key: str = None):
         for k in keys_to_del:
             del st.session_state[k]
 
+
 # ============================================================================
 # Advanced Caching Strategies
 # ============================================================================
+
 
 def smart_cache(ttl: int = 300):
     """
     Decorator for smart caching with Redis fallback.
     """
+
     def decorator(func):
         def wrapper(*args, **kwargs):
             # Create a unique key based on function name and arguments
@@ -177,12 +189,16 @@ def smart_cache(ttl: int = 300):
             # Save to cache
             set_cached_data(key, result, ttl)
             return result
+
         return wrapper
+
     return decorator
+
 
 # ============================================================================
 # Cache Warming
 # ============================================================================
+
 
 def warm_up_cache():
     """
@@ -198,19 +214,17 @@ def warm_up_cache():
     except Exception as e:
         logger.error(f"Cache warm-up failed: {e}")
 
+
 # ============================================================================
 # Cache Statistics
 # ============================================================================
+
 
 def get_cache_stats() -> dict[str, Any]:
     """
     Get cache statistics.
     """
-    stats = {
-        "type": "Redis" if redis_client else "Local",
-        "keys": [],
-        "memory_usage": "Unknown"
-    }
+    stats = {"type": "Redis" if redis_client else "Local", "keys": [], "memory_usage": "Unknown"}
 
     if redis_client:
         try:
@@ -222,5 +236,5 @@ def get_cache_stats() -> dict[str, Any]:
     else:
         keys = [k for k in st.session_state.keys() if k.startswith("cache_")]
         stats["keys"] = keys
-        
+
     return stats
