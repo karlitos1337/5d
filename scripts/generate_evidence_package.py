@@ -110,7 +110,7 @@ def main():
 
 ## Empirical Status
 - **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
-- **External Data:** World Bank Education data fetched.
+- **External Data:** World Bank Education data and WGI (Voice & Accountability) fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
 ## Hypothesis & Next Steps
