@@ -48,3 +48,5 @@ data/archive/
 
 # Evidence Package Artifacts
 outputs/
+.coverage
+coverage.xml
