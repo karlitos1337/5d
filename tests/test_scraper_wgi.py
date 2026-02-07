@@ -1,9 +1,8 @@
-import unittest
-from unittest.mock import MagicMock, patch
-import sys
-import os
-from pathlib import Path
 import importlib.util
+import sys
+import unittest
+from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 # Load module dynamically because it starts with a digit
 file_path = Path(__file__).parent.parent / "5d_research_scraper.py"

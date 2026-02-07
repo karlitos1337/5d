@@ -1,129 +1,105 @@
 #!/usr/bin/env python3
 """
-Utility to add YAML frontmatter to markdown files that are missing it.
-
-Usage:
-    python tools/add_frontmatter.py path/to/file.md --title "My Title" --domain "01_bildung_education"
-
-Only adds frontmatter if the file is missing a YAML frontmatter block.
+Helper script to add frontmatter to markdown files.
 """
 
 import argparse
+import os
 import re
-import sys
-from datetime import date
-
-RE_FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
+from datetime import datetime
 
 
-def has_frontmatter(content: str) -> bool:
-    """Check if content starts with a YAML frontmatter block."""
-    return bool(RE_FRONTMATTER.match(content))
-
-
-def create_frontmatter(
-    title: str,
-    author: str = "Unknown",
-    file_date: str = None,
-    domain: str = "",
-    license_type: str = "CC-BY-4.0",
-    evidence: str = "🔮",
-) -> str:
-    """Generate a YAML frontmatter block."""
-    if file_date is None:
-        file_date = date.today().isoformat()
-    return f'''---
-title: "{title}"
-author: "{author}"
-date: "{file_date}"
-domain: "{domain}"
-license: "{license_type}"
-evidence: "{evidence}"
----
-
-'''
-
-
-def add_frontmatter_to_file(
-    filepath: str,
-    title: str,
-    domain: str,
-    author: str = "Unknown",
-    file_date: str = None,
-    license_type: str = "CC-BY-4.0",
-    evidence: str = "🔮",
-    dry_run: bool = False,
-) -> bool:
+def add_frontmatter_to_file(filepath, title=None, description=None, tags=None):
     """
-    Add frontmatter to a file if it's missing.
-
-    Returns True if frontmatter was added, False if already present.
+    Adds YAML frontmatter to a markdown file if it doesn't exist.
     """
-    with open(filepath, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    if has_frontmatter(content):
-        print(f"Skipped (already has frontmatter): {filepath}")
+    if not filepath.endswith(".md"):
+        print(f"Skipping non-markdown file: {filepath}")
         return False
 
-    frontmatter = create_frontmatter(
-        title=title,
-        author=author,
-        file_date=file_date,
-        domain=domain,
-        license_type=license_type,
-        evidence=evidence,
-    )
+    with open(filepath, encoding="utf-8") as f:
+        content = f.read()
 
-    new_content = frontmatter + content
+    # Check if frontmatter already exists
+    if content.startswith("---"):
+        print(f"Frontmatter already exists in: {filepath}")
+        return False
 
-    if dry_run:
-        print(f"Would add frontmatter to: {filepath}")
-        print(frontmatter)
-    else:
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print(f"Added frontmatter to: {filepath}")
+    # Generate frontmatter
+    filename = os.path.basename(filepath)
+    name = os.path.splitext(filename)[0]
 
+    # Infer title if not provided
+    if not title:
+        # Try to find first h1 header
+        h1_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+        if h1_match:
+            title = h1_match.group(1).strip()
+        else:
+            title = name.replace("-", " ").replace("_", " ").title()
+
+    # Default values
+    date = datetime.now().strftime("%Y-%m-%d")
+
+    frontmatter = [
+        "---",
+        f"title: \"{title}\"",
+        f"date: {date}",
+    ]
+
+    if description:
+        frontmatter.append(f"description: \"{description}\"")
+
+    if tags:
+        tag_list = [t.strip() for t in tags.split(",")]
+        frontmatter.append("tags:")
+        for tag in tag_list:
+            frontmatter.append(f"  - {tag}")
+
+    frontmatter.append("---\n\n")
+
+    new_content = "\n".join(frontmatter) + content
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(new_content)
+
+    print(f"✅ Added frontmatter to: {filepath}")
     return True
 
 
+def process_directory(directory, tags=None):
+    """
+    Process all markdown files in a directory.
+    """
+    count = 0
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".md"):
+                filepath = os.path.join(root, file)
+                if add_frontmatter_to_file(filepath, tags=tags):
+                    count += 1
+    print(f"\nProcessed {count} files in {directory}")
+
+
 def main():
-    parser = argparse.ArgumentParser(
-        description="Add YAML frontmatter to markdown files"
-    )
-    parser.add_argument("file", help="Path to the markdown file")
-    parser.add_argument("--title", required=True, help="Document title")
-    parser.add_argument("--domain", required=True, help="Domain/folder name")
-    parser.add_argument("--author", default="Unknown", help="Author name")
-    parser.add_argument("--date", default=None, help="Date (YYYY-MM-DD format)")
-    parser.add_argument("--license", default="CC-BY-4.0", help="License type")
-    parser.add_argument("--evidence", default="🔮", help="Evidence level (✅, ⚠️, or 🔮)")
-    parser.add_argument(
-        "--dry-run", action="store_true", help="Show what would be done without making changes"
-    )
+    parser = argparse.ArgumentParser(description="Add YAML frontmatter to markdown files.")
+    parser.add_argument("path", help="File or directory path")
+    parser.add_argument("--title", help="Title (for single file)")
+    parser.add_argument("--tags", help="Comma-separated tags")
 
     args = parser.parse_args()
 
-    try:
-        added = add_frontmatter_to_file(
-            filepath=args.file,
+    if os.path.isfile(args.path):
+        # We don't use the return value here, so simply call the function
+        add_frontmatter_to_file(
+            filepath=args.path,
             title=args.title,
-            domain=args.domain,
-            author=args.author,
-            file_date=args.date,
-            license_type=args.license,
-            evidence=args.evidence,
-            dry_run=args.dry_run,
+            tags=args.tags
         )
-        return 0
-    except FileNotFoundError:
-        print(f"Error: File not found: {args.file}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        return 1
-
+    elif os.path.isdir(args.path):
+        process_directory(args.path, tags=args.tags)
+    else:
+        print("Invalid path")
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

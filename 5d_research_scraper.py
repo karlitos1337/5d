@@ -5,12 +5,12 @@ Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
 """
 
 import json
-import time
 import re
 import threading
-from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup

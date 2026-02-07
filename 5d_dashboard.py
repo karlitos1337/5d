@@ -7,8 +7,9 @@ Erste Anlaufstelle mit Installation, Navigation und Erklärungen für Einsteiger
 from datetime import datetime
 
 import streamlit as st
+
+from utils.caching import get_cache_stats, init_app_state
 from utils.mobile_responsive import inject_mobile_css
-from utils.caching import preload_all_critical_data, display_cache_info
 
 st.set_page_config(
     page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded"
@@ -16,7 +17,7 @@ st.set_page_config(
 inject_mobile_css()
 
 # Preload critical data on startup
-preload_all_critical_data()
+init_app_state()
 
 
 def main():
@@ -59,7 +60,8 @@ def main():
         st.divider()
 
         # Cache Configuration Display
-        display_cache_info()
+        st.caption("Cache Status")
+        st.json(get_cache_stats())
 
     # Main Content
     st.title("📚 5D Intelligence Framework - Wiki & Guide")
