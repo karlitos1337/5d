@@ -1,415 +1,303 @@
-"""
-Caching utilities for 5D Dashboard
+# Caching Utilities for 5D Framework
+# Implements multi-level caching strategies (RAM, LocalStorage, Redis) to optimize performance.
 
-Provides:
-- Cache configuration constants
-- Preload critical data function
-- Cache invalidation helpers
-- Memory usage monitoring
-- Redis backend for persistent caching
-"""
-
-import os
 import json
 import logging
-import streamlit as st
-import redis
+import os
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
+
+import redis
+import streamlit as st
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# ============================================================================
-# Cache TTL Configuration
-# ============================================================================
+# --- Redis Configuration ---
+# Fallback to None if not configured, enabling graceful degradation to local cache
+REDIS_URL = os.getenv("REDIS_URL")
+redis_client = None
+
+if REDIS_URL:
+    try:
+        redis_client = redis.from_url(REDIS_URL, decode_responses=True)
+        # Test connection
+        redis_client.ping()
+        logger.info("✅ Connected to Redis cache.")
+    except redis.ConnectionError:
+        logger.warning("⚠️ Could not connect to Redis. Falling back to local/memory cache.")
+        redis_client = None
+else:
+    logger.info("ℹ️ No REDIS_URL found. Using local/memory cache.")
+
+# --- Constants ---
+CACHE_PREFIX = "5d_cache:"
 
 class CacheTTL:
-    """
-    Cache Time-To-Live configuration for different data types.
+    """Standard Time-To-Live values in seconds."""
+    SHORT = 60 * 5          # 5 minutes
+    MEDIUM = 60 * 60        # 1 hour
+    LONG = 60 * 60 * 24     # 24 hours
+    STATIC = 60 * 60 * 24 * 30 # 30 days (effectively static)
+    DYNAMIC = 60 * 15       # 15 minutes (for frequently updating data)
+    BASELINE = 60 * 60 * 24 * 7 # 1 week (for baseline data)
 
-    Values in seconds:
-    - STATIC: 3600s (1 hour) - Rarely changes (BibTeX, alternative schools, etc.)
-    - DYNAMIC: 1800s (30 minutes) - Updated occasionally (research data, GitHub API)
-    - BASELINE: 3600s (1 hour) - World map baseline data (from 5d-map)
-    - REALTIME: 300s (5 minutes) - Frequently updated (user inputs, live metrics)
-    """
-    STATIC = 3600      # 1 hour - Static reference data
-    DYNAMIC = 1800     # 30 minutes - API data, scraped content
-    BASELINE = 3600    # 1 hour - Map baseline (rarely changes)
-    REALTIME = 300     # 5 minutes - Frequent updates
-
-
-# ============================================================================
-# Preload Critical Data
-# ============================================================================
+# --- Preloader Functions (Streamlit) ---
+# These functions use @st.cache_data for session-level caching in Streamlit
 
 @st.cache_data(ttl=CacheTTL.STATIC)
-def preload_solutions_data() -> Dict[str, Any]:
+def preload_solutions_data() -> dict[str, Any]:
     """
     Preload 5d_solutions.json on app startup.
-
     Returns:
-        dict: Solutions data or empty dict if not found
+        dict: The loaded solutions data.
     """
-    try:
-        with open("5d_solutions.json", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {"solutions": [], "metadata": {}}
-    except Exception as e:
-        st.error(f"❌ Error loading solutions: {e}")
-        return {"solutions": [], "metadata": {}}
+    filepath = Path("5d_solutions.json")
+    if not filepath.exists():
+        logger.warning(f"File not found: {filepath}")
+        return {}
 
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+        logger.info(f"Loaded {len(data)} solutions from {filepath}")
+        return data
+    except json.JSONDecodeError:
+        logger.error(f"Invalid JSON in {filepath}")
+        return {}
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
-def preload_research_data() -> Dict[str, Any]:
+def preload_research_data() -> dict[str, Any]:
     """
     Preload 5d_research_data.json on app startup.
-
     Returns:
-        dict: Research data or empty dict if not found
+        dict: The loaded research data.
     """
-    try:
-        with open("5d_research_data.json", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-    except Exception as e:
-        st.error(f"❌ Error loading research data: {e}")
+    filepath = Path("5d_research_data.json")
+    if not filepath.exists():
+        logger.warning(f"File not found: {filepath}")
         return {}
 
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+        logger.info(f"Loaded research data from {filepath}")
+        return data
+    except json.JSONDecodeError:
+        logger.error(f"Invalid JSON in {filepath}")
+        return {}
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
-def preload_github_data() -> Dict[str, Any]:
+def preload_github_data() -> dict[str, Any]:
     """
     Preload 5d_github_data.json on app startup.
-
     Returns:
-        dict: GitHub data or empty dict if not found
+        dict: The loaded GitHub data.
     """
-    try:
-        with open("5d_github_data.json", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-    except Exception as e:
-        st.error(f"❌ Error loading GitHub data: {e}")
+    filepath = Path("5d_github_data.json")
+    if not filepath.exists():
+        logger.warning(f"File not found: {filepath}")
         return {}
 
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+        logger.info(f"Loaded GitHub data from {filepath}")
+        return data
+    except json.JSONDecodeError:
+        logger.error(f"Invalid JSON in {filepath}")
+        return {}
 
 @st.cache_data(ttl=CacheTTL.BASELINE)
-def preload_map_baseline() -> Dict[str, Any]:
+def preload_map_baseline() -> dict[str, Any]:
     """
     Preload web/5d-map/data/baseline.json for World Map.
-
     Returns:
-        dict: Baseline map data or empty dict if not found
+        dict: The loaded baseline data.
     """
+    filepath = Path("web/5d-map/data/baseline.json")
+    if not filepath.exists():
+        logger.warning(f"File not found: {filepath}")
+        return {}
+
     try:
-        with open("web/5d-map/data/baseline.json", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+        logger.info(f"Loaded baseline data from {filepath}")
+        return data
+    except json.JSONDecodeError:
+        logger.error(f"Invalid JSON in {filepath}")
         return {}
-    except Exception as e:
-        st.error(f"❌ Error loading map baseline: {e}")
-        return {}
 
+# --- Cache Management ---
 
-def preload_all_critical_data():
+def get_from_cache(key: str) -> Any | None:
     """
-    Preload all critical data on app startup.
-
-    Call this in main dashboard (5d_dashboard.py) to warm up caches.
-
-    Example:
-        from utils.caching import preload_all_critical_data
-
-        def main():
-            preload_all_critical_data()
-            st.title("5D Dashboard")
-            # ... rest of app
-    """
-    preload_solutions_data()
-    preload_research_data()
-    preload_github_data()
-    preload_map_baseline()
-
-
-# ============================================================================
-# Cache Invalidation
-# ============================================================================
-
-def invalidate_cache(cache_key: str = None):
-    """
-    Invalidate Streamlit cache.
+    Retrieve value from cache (Redis if available, else Streamlit session state fallback).
 
     Args:
-        cache_key: Specific cache key to clear (None = clear all)
-
-    Example:
-        # Clear all caches
-        invalidate_cache()
-
-        # Clear specific function cache
-        invalidate_cache("load_research_data")
-    """
-    if cache_key:
-        # Streamlit doesn't support selective invalidation in @st.cache_data
-        # Use st.cache_data.clear() for all or rely on TTL
-        st.warning(f"⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
-    else:
-        st.cache_data.clear()
-        st.success("✅ All caches cleared")
-
-    # Also invalidate Redis cache if enabled
-    if 'redis_cache' in globals() and redis_cache._enabled:
-        redis_cache.invalidate(cache_key)
-        if not cache_key:
-             logger.info("Redis cache cleared")
-
-
-def force_refresh_on_schema_update():
-    """
-    Force cache refresh when schema is updated.
-
-    Usage: Call this after schema changes in models/schemas.py
-
-    Checks:
-    - models/schemas.py modification time
-    - Compare with last known cache timestamp
-    """
-    schema_path = Path("models/schemas.py")
-
-    if not schema_path.exists():
-        return
-
-    schema_mtime = schema_path.stat().st_mtime
-
-    # Store in session state
-    if "schema_cache_timestamp" not in st.session_state:
-        st.session_state.schema_cache_timestamp = schema_mtime
-        return
-
-    # Check if schema was modified since last cache
-    if schema_mtime > st.session_state.schema_cache_timestamp:
-        st.cache_data.clear()
-        st.session_state.schema_cache_timestamp = schema_mtime
-        st.info("🔄 Schema updated - caches refreshed")
-
-
-# ============================================================================
-# Redis Integration
-# ============================================================================
-
-class RedisCache:
-    """
-    Redis backend for persistent caching across sessions.
-    Handles connection pooling, serialization, and namespacing.
-    """
-
-    def __init__(self,
-                 host: str = None,
-                 port: int = None,
-                 db: int = 0,
-                 password: str = None,
-                 socket_connect_timeout: int = 5):
-        """
-        Initialize Redis connection with pooling.
-
-        Args:
-            host: Redis host (default: env REDIS_HOST or 'localhost')
-            port: Redis port (default: env REDIS_PORT or 6379)
-            db: Redis DB index (default: env REDIS_DB or 0)
-            password: Redis password (default: env REDIS_PASSWORD or None)
-        """
-        self.host = host or os.getenv("REDIS_HOST", "localhost")
-        self.port = port or int(os.getenv("REDIS_PORT", 6379))
-        self.db = db or int(os.getenv("REDIS_DB", 0))
-        self.password = password or os.getenv("REDIS_PASSWORD", None)
-
-        self.pool = redis.ConnectionPool(
-            host=self.host,
-            port=self.port,
-            db=self.db,
-            password=self.password,
-            decode_responses=True,
-            socket_connect_timeout=socket_connect_timeout
-        )
-        self.client = redis.Redis(connection_pool=self.pool)
-        self.namespace = "5d"
-        self._enabled = True
-
-        # Test connection
-        try:
-            self.client.ping()
-            logger.info("✅ Redis connected successfully")
-        except redis.ConnectionError:
-            self._enabled = False
-            logger.warning("⚠️ Redis connection failed. Caching disabled.")
-
-    def _get_key(self, key: str) -> str:
-        """Format key with namespace."""
-        return f"{self.namespace}:{key}"
-
-    def get(self, key: str) -> Any:
-        """
-        Retrieve value from cache.
-
-        Args:
-            key: Cache key (without namespace)
-
-        Returns:
-            Deserialized value or None if missing/error
-        """
-        if not self._enabled:
-            return None
-
-        try:
-            value = self.client.get(self._get_key(key))
-            return json.loads(value) if value else None
-        except (redis.RedisError, json.JSONDecodeError) as e:
-            logger.error(f"Redis get error: {e}")
-            return None
-
-    def set(self, key: str, value: Any, ttl: int = CacheTTL.STATIC) -> bool:
-        """
-        Set value in cache with TTL.
-
-        Args:
-            key: Cache key (without namespace)
-            value: Data to cache (must be JSON serializable)
-            ttl: Time to live in seconds
-
-        Returns:
-            bool: True if successful
-        """
-        if not self._enabled:
-            return False
-
-        try:
-            serialized = json.dumps(value)
-            return self.client.setex(
-                self._get_key(key),
-                ttl,
-                serialized
-            )
-        except (redis.RedisError, TypeError) as e:
-            logger.error(f"Redis set error: {e}")
-            return False
-
-    def invalidate(self, key: str = None):
-        """
-        Invalidate cache keys.
-
-        Args:
-            key: Specific key to delete. If None, clears entire namespace.
-        """
-        if not self._enabled:
-            return
-
-        try:
-            if key:
-                self.client.delete(self._get_key(key))
-            else:
-                # Pattern match for namespace
-                keys = self.client.keys(f"{self.namespace}:*")
-                if keys:
-                    self.client.delete(*keys)
-        except redis.RedisError as e:
-            logger.error(f"Redis invalidate error: {e}")
-
-    def warm_up(self):
-        """
-        Warm up cache with critical data.
-        """
-        if not self._enabled:
-            return
-
-        logger.info("Starting Redis cache warm-up...")
-
-        # Load data using existing preload functions
-        solutions = preload_solutions_data()
-        if solutions:
-            self.set("solutions", solutions, CacheTTL.STATIC)
-
-        research = preload_research_data()
-        if research:
-            self.set("research", research, CacheTTL.DYNAMIC)
-
-        github = preload_github_data()
-        if github:
-            self.set("github", github, CacheTTL.DYNAMIC)
-
-        map_data = preload_map_baseline()
-        if map_data:
-            self.set("map_baseline", map_data, CacheTTL.BASELINE)
-
-        logger.info("Redis cache warm-up complete.")
-
-# Global instance
-redis_cache = RedisCache()
-
-
-# ============================================================================
-# Memory Monitoring
-# ============================================================================
-
-def get_cache_stats() -> Dict[str, Any]:
-    """
-    Get cache statistics.
+        key (str): The cache key.
 
     Returns:
-        dict: Cache stats (hit rate, memory usage, etc.)
+        Any | None: The cached value or None if not found.
+    """
+    full_key = f"{CACHE_PREFIX}{key}"
+
+    # 1. Try Redis
+    if redis_client:
+        try:
+            val = redis_client.get(full_key)
+            if val:
+                return json.loads(val)
+        except Exception as e:
+            logger.error(f"Redis read error: {e}")
+
+    # 2. Fallback: Streamlit Session State (Simulated Local Memory)
+    # Note: In a real multi-user app, this only persists per session.
+    if "local_cache" not in st.session_state:
+        st.session_state.local_cache = {}
+
+    return st.session_state.local_cache.get(full_key)
+
+def set_to_cache(key: str, value: Any, ttl: int = CacheTTL.MEDIUM):
+    """
+    Set value in cache (Redis if available, else Streamlit session state).
+
+    Args:
+        key (str): The cache key.
+        value (Any): The value to cache (must be JSON serializable).
+        ttl (int): Time to live in seconds.
+    """
+    full_key = f"{CACHE_PREFIX}{key}"
+
+    # 1. Try Redis
+    if redis_client:
+        try:
+            serialized = json.dumps(value)
+            redis_client.setex(full_key, ttl, serialized)
+            return
+        except Exception as e:
+            logger.error(f"Redis write error: {e}")
+
+    # 2. Fallback: Streamlit Session State
+    if "local_cache" not in st.session_state:
+        st.session_state.local_cache = {}
+
+    st.session_state.local_cache[full_key] = value
+
+def invalidate_cache(key_pattern: str = "*"):
+    """
+    Invalidate cache keys matching a pattern.
+
+    Args:
+        key_pattern (str): Redis-style glob pattern (default: "*").
+    """
+    # 1. Redis
+    if redis_client:
+        try:
+            full_pattern = f"{CACHE_PREFIX}{key_pattern}"
+            keys = redis_client.keys(full_pattern)
+            if keys:
+                redis_client.delete(*keys)
+                logger.info(f"Invalidated {len(keys)} Redis keys matching '{full_pattern}'")
+        except Exception as e:
+            logger.error(f"Redis delete error: {e}")
+
+    # 2. Streamlit Session State
+    if "local_cache" in st.session_state:
+        # Simple glob-like matching not fully implemented for dict, just clearing all for safety if pattern is broad
+        if key_pattern == "*":
+            st.session_state.local_cache = {}
+            logger.info("Cleared local session cache.")
+        else:
+            # Basic suffix matching
+            keys_to_del = [k for k in st.session_state.local_cache.keys() if key_pattern.strip("*") in k]
+            for k in keys_to_del:
+                del st.session_state.local_cache[k]
+
+def clear_app_cache():
+    """
+    Clears all application cache (both data cache and resource cache).
+    Useful for 'Reset' buttons.
+    """
+    # Clear Streamlit cache
+    if hasattr(st, "cache_data"):
+        # Streamlit doesn't support selective invalidation in @st.cache_data
+        # Use st.cache_data.clear() for all or rely on TTL
+        st.warning("⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
+    else:
+        st.cache_data.clear()
+
+    # Clear Custom Redis/Local Cache
+    invalidate_cache("*")
+
+    logger.info("🧹 Application cache cleared.")
+
+# --- Advanced Caching Decorator (Optional) ---
+# Can be used to wrap expensive functions independent of Streamlit
+
+def cached(ttl: int = CacheTTL.MEDIUM):
+    """
+    Decorator to cache function results in Redis/Local.
+    """
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            # Create a key based on function name and arguments
+            # Note: This is a simplistic key generation.
+            key_part = f"{func.__name__}:{args}:{kwargs}"
+            # Hash it to be safe
+            import hashlib
+            key_hash = hashlib.md5(key_part.encode()).hexdigest()
+
+            cached_val = get_from_cache(key_hash)
+            if cached_val is not None:
+                return cached_val
+
+            result = func(*args, **kwargs)
+            set_to_cache(key_hash, result, ttl)
+            return result
+        return wrapper
+    return decorator
+
+# --- Knowledge Graph Caching ---
+
+@st.cache_resource
+def get_shared_knowledge_graph():
+    """
+    Returns a shared instance of the Knowledge Graph (if applicable).
+    Uses st.cache_resource for objects that shouldn't be serialized/copied (like DB connections or large graphs).
+    """
+    # Placeholder for actual graph initialization
+    # form knowledge_graph.core import KnowledgeGraph
+    # return KnowledgeGraph()
+    return None
+
+# --- Cache Inspection (Admin) ---
+
+def get_cache_stats() -> dict[str, Any]:
+    """
+    Get cache statistics.
+    Returns:
+        dict: Stats like hit rate, memory usage (if available).
     """
     stats = {
-        "cache_backend": "streamlit",
-        "ttl_config": {
-            "static": CacheTTL.STATIC,
-            "dynamic": CacheTTL.DYNAMIC,
-            "baseline": CacheTTL.BASELINE,
-            "realtime": CacheTTL.REALTIME,
-        }
+        "backend": "Redis" if redis_client else "Local Memory",
+        "redis_connected": bool(redis_client),
     }
 
-    if redis_cache._enabled:
+    if redis_client:
         try:
-            info = redis_cache.client.info()
-            # Extract some useful info
-            redis_stats = {
-                "connected": True,
+            info = redis_client.info()
+            stats.update({
                 "used_memory_human": info.get("used_memory_human"),
-                "total_connections_received": info.get("total_connections_received"),
-                "total_commands_processed": info.get("total_commands_processed"),
-                "keys": info.get("db0", {}).get("keys", 0) if "db0" in info else 0
-            }
-            stats["redis"] = redis_stats
-            stats["cache_backend"] = "streamlit + redis"
-        except Exception as e:
-            stats["redis"] = {"connected": False, "error": str(e)}
+                "connected_clients": info.get("connected_clients"),
+                "keys_count": len(redis_client.keys(f"{CACHE_PREFIX}*"))
+            })
+        except Exception:
+            stats["error"] = "Could not fetch Redis stats"
 
-    return stats
-
-
-def display_cache_info():
-    """
-    Display cache configuration info in Streamlit sidebar.
-
-    Example:
-        with st.sidebar:
-            display_cache_info()
-    """
-    with st.expander("⚙️ Cache Configuration", expanded=False):
-        st.markdown("""
-        **Cache TTL Settings:**
-        - 🟢 **Static Data**: 1 hour (BibTeX, schools)
-        - 🟡 **Dynamic Data**: 30 min (Research, GitHub)
-        - 🔵 **Baseline**: 1 hour (Map data)
-        - 🔴 **Realtime**: 5 min (Live metrics)
+    if "local_cache" in st.session_state:
+        stats["local_keys_count"] = len(st.session_state.local_cache)
         
-        Data is automatically refreshed after TTL expires.
-        """)
-
-        stats = get_cache_stats()
-        st.json(stats)
+    return stats

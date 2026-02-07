@@ -1,55 +1,45 @@
-
-import pytest
-import streamlit as st
-from unittest.mock import MagicMock, patch
-import sys
+# Simple Unit Tests for Autopoietic UI Components
 import os
+import sys
+
+import streamlit as st
 
 # Ensure the pages directory is in the path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Mock streamlit before importing the page
-st.set_page_config = MagicMock()
-st.title = MagicMock()
-st.markdown = MagicMock()
-st.sidebar = MagicMock()
-st.slider = MagicMock(return_value=10) # Default return value for sliders
-st.checkbox = MagicMock(return_value=True)
-st.button = MagicMock(return_value=False)
-st.metric = MagicMock()
-st.divider = MagicMock()
-st.header = MagicMock()
-st.subheader = MagicMock()
-st.columns = MagicMock(return_value=[MagicMock(), MagicMock(), MagicMock(), MagicMock(), MagicMock()])
-st.spinner = MagicMock()
-st.plotly_chart = MagicMock()
-st.expander = MagicMock()
-st.success = MagicMock()
-st.download_button = MagicMock()
+# Mock Streamlit functions to avoid runtime errors during testing
+# This is a very basic mock, for a full test suite use streamlit.testing
+st.set_page_config = lambda **kwargs: None
+st.title = lambda x: None
+st.write = lambda x: None
+st.markdown = lambda x, unsafe_allow_html=False: None
+st.sidebar = type('obj', (object,), {'header': lambda x: None, 'markdown': lambda x: None})
+st.session_state = {}
 
-def test_autopoietic_simulation_metrics():
+def test_autopoietic_class_import():
+    """Test that the module can be imported without syntax errors."""
+    try:
+        # We can't easily import the page directly because of the emoji in filename and it being a script
+        # So we check syntax using compile()
+        with open('pages/9_🧪_Autopoietic_Class.py') as f:
+            compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
+    except Exception as e:
+        assert False, f"Syntax Error in Autopoietic Class Page: {e}"
+
+def test_ui_components_structure():
     """
-    Test that the autopoietic class simulation page runs and metrics are displayed.
-    This test focuses on the structure and presence of UI elements, not the exact logic.
+    Test key UI components logic (isolated).
+    Since we can't fully run the Streamlit app here, we test the logic functions if any.
+    Currently, the page is mostly imperative code.
+    This test serves as a placeholder for when logic is refactored into testable functions.
     """
-
-    # We need to mock the functions in the module, but since it's a script,
-    # we might need to import it carefully or just test the logic if we extract it.
-
-    # However, since we are just adding `help` arguments, we can use a simpler approach:
-    # We will "run" the page script by executing it in a context where streamlit is mocked.
-
-    # But running the whole script is tricky because it executes immediately.
-    # Instead, let's verify that we can import the module without error (if we wrap it).
-
-    # A better approach for this task (micro UX) is to just modify the code and trust
-    # the static analysis + careful diff application.
-    # But since I need to "verify", I will create a small test that imports the simulation function
-    # if it's importable, or just verifies the file syntax.
-
+    # Example:
+    # from pages.autopoietic_logic import calculate_state
+    # assert calculate_state(...) == ...
     pass
 
+# Manually register checking logic if running with pytest
 def test_syntax():
     """Simple syntax check for the file."""
-    with open('pages/9_🧪_Autopoietic_Class.py', 'r') as f:
+    with open('pages/9_🧪_Autopoietic_Class.py') as f:
         compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
