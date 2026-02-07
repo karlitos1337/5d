@@ -34,8 +34,9 @@ def inject_mobile_css():
         }
         </style>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
+
 
 def get_device_type():
     """

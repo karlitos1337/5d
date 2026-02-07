@@ -38,15 +38,17 @@ except Exception as e:
 
 class CacheTTL:
     """Time-To-Live constants for different data types."""
+
     STATIC = 3600 * 24 * 7  # 1 Week (e.g., Solutions, Theory)
-    BASELINE = 3600 * 24    # 1 Day (e.g., World Map Base Data)
-    DYNAMIC = 3600          # 1 Hour (e.g., Live Research, Github Stats)
-    REALTIME = 60           # 1 Minute (e.g., User Session State)
+    BASELINE = 3600 * 24  # 1 Day (e.g., World Map Base Data)
+    DYNAMIC = 3600  # 1 Hour (e.g., Live Research, Github Stats)
+    REALTIME = 60  # 1 Minute (e.g., User Session State)
 
 
 # ============================================================================
 # 1. CORE DATA PRELOADING (Static/Baseline)
 # ============================================================================
+
 
 @st.cache_data(ttl=CacheTTL.STATIC)
 def preload_solutions_data() -> dict[str, Any]:
@@ -139,6 +141,7 @@ def preload_map_baseline() -> dict[str, Any]:
 # 2. CACHE MANAGEMENT
 # ============================================================================
 
+
 def get_cached_value(key: str) -> Any | None:
     """
     Retrieve value from cache (Redis or Local File).
@@ -213,7 +216,10 @@ def invalidate_cache(key: str = None):
 # 3. HELPER: DATA LOADER WITH FALLBACK
 # ============================================================================
 
-def load_data_with_fallback(primary_key: str, fallback_function, ttl: int = CacheTTL.DYNAMIC) -> Any:
+
+def load_data_with_fallback(
+    primary_key: str, fallback_function, ttl: int = CacheTTL.DYNAMIC
+) -> Any:
     """
     Generic loader:
     1. Check Cache
@@ -247,6 +253,7 @@ def load_data_with_fallback(primary_key: str, fallback_function, ttl: int = Cach
 # 4. MONITORING
 # ============================================================================
 
+
 def check_redis_health() -> bool:
     """Check if Redis is responsive."""
     if not redis_client:
@@ -256,9 +263,11 @@ def check_redis_health() -> bool:
     except Exception:
         return False
 
+
 # ============================================================================
 # 5. INITIALIZATION
 # ============================================================================
+
 
 def init_app_state():
     """
@@ -280,9 +289,11 @@ def init_app_state():
             else:
                 st.toast("ℹ️ Using Local Cache", icon="📂")
 
+
 # ============================================================================
 # 6. CACHE STATS
 # ============================================================================
+
 
 def get_cache_stats() -> dict[str, Any]:
     """
@@ -292,7 +303,7 @@ def get_cache_stats() -> dict[str, Any]:
         "type": "Redis" if redis_client else "Local File",
         "status": "Healthy" if check_redis_health() or not redis_client else "Error",
         "file_cache_count": len(list(CACHE_DIR.glob("*.json"))),
-        "file_cache_size_kb": sum(f.stat().st_size for f in CACHE_DIR.glob("*.json")) / 1024
+        "file_cache_size_kb": sum(f.stat().st_size for f in CACHE_DIR.glob("*.json")) / 1024,
     }
 
     if redis_client:

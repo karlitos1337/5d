@@ -32,7 +32,7 @@ def add_frontmatter_to_file(filepath, title=None, description=None, tags=None):
     # Infer title if not provided
     if not title:
         # Try to find first h1 header
-        h1_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+        h1_match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
         if h1_match:
             title = h1_match.group(1).strip()
         else:
@@ -43,12 +43,12 @@ def add_frontmatter_to_file(filepath, title=None, description=None, tags=None):
 
     frontmatter = [
         "---",
-        f"title: \"{title}\"",
+        f'title: "{title}"',
         f"date: {date}",
     ]
 
     if description:
-        frontmatter.append(f"description: \"{description}\"")
+        frontmatter.append(f'description: "{description}"')
 
     if tags:
         tag_list = [t.strip() for t in tags.split(",")]
@@ -91,15 +91,12 @@ def main():
 
     if os.path.isfile(args.path):
         # We don't use the return value here, so simply call the function
-        add_frontmatter_to_file(
-            filepath=args.path,
-            title=args.title,
-            tags=args.tags
-        )
+        add_frontmatter_to_file(filepath=args.path, title=args.title, tags=args.tags)
     elif os.path.isdir(args.path):
         process_directory(args.path, tags=args.tags)
     else:
         print("Invalid path")
+
 
 if __name__ == "__main__":
     main()

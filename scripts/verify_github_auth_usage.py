@@ -9,7 +9,7 @@ import os
 def check_github_auth_usage(directory):
     usage_found = False
     for root, _dirs, files in os.walk(directory):
-        if "99_unsortiert" in root: # Skip the unsorted/backup directory
+        if "99_unsortiert" in root:  # Skip the unsorted/backup directory
             continue
 
         for file in files:
@@ -36,6 +36,7 @@ def check_github_auth_usage(directory):
         print("No usage of 'auth.github_oauth' found in the codebase (excluding 99_unsortiert).")
     else:
         print("Usage of 'auth.github_oauth' found.")
+
 
 if __name__ == "__main__":
     check_github_auth_usage(".")

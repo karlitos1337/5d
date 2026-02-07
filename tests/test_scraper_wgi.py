@@ -13,6 +13,7 @@ spec.loader.exec_module(research_scraper)
 
 ResearchScraper = research_scraper.ResearchScraper
 
+
 class TestWGIScraper(unittest.TestCase):
     def setUp(self):
         self.scraper = ResearchScraper()
@@ -33,7 +34,7 @@ class TestWGIScraper(unittest.TestCase):
                     "value": 1.5,
                     "unit": "",
                     "obs_status": "",
-                    "decimal": 2
+                    "decimal": 2,
                 },
                 {
                     "indicator": {"id": "VA.EST", "value": "Voice and Accountability: Estimate"},
@@ -43,9 +44,9 @@ class TestWGIScraper(unittest.TestCase):
                     "value": 1.8,
                     "unit": "",
                     "obs_status": "",
-                    "decimal": 2
-                }
-            ]
+                    "decimal": 2,
+                },
+            ],
         ]
 
         # Setup mock
@@ -66,6 +67,7 @@ class TestWGIScraper(unittest.TestCase):
         self.assertEqual(result["USA"]["Voice & Accountability (Autonomy)"]["value"], 1.5)
         self.assertEqual(result["DEU"]["Voice & Accountability (Autonomy)"]["value"], 1.8)
         self.assertEqual(result["USA"]["Voice & Accountability (Autonomy)"]["year"], "2023")
+
 
 if __name__ == "__main__":
     unittest.main()
