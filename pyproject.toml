@@ -42,7 +42,7 @@ exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "node_modules/"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q --cov"
+addopts = "-ra -q"
 testpaths = [
     "tests",
     "src_python/tests",
