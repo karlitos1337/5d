@@ -179,3 +179,17 @@ test.describe('Performance Tests', () => {
     expect(criticalErrors).toHaveLength(0);
   });
 });
+
+test.describe('Accessibility Tests', () => {
+  test('should have accessible loading state', async ({ page }) => {
+    await page.goto('http://localhost:5500');
+
+    // Check static attributes on overlay
+    const overlay = page.locator('.loading-overlay');
+    await expect(overlay).toHaveAttribute('role', 'alert');
+    await expect(overlay).toHaveAttribute('aria-live', 'assertive');
+
+    const spinner = page.locator('.spinner');
+    await expect(spinner).toHaveAttribute('aria-hidden', 'true');
+  });
+});
