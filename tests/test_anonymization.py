@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """Tests für Anonymisierung."""
 
+import os
+import sys
 import pytest
+
+# Add parent dir to path to find 'storage' package
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from storage.anonymize import (
     PROHIBITED_FIELDS,
