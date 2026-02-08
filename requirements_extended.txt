@@ -18,3 +18,4 @@ pytest
 networkx
 pytest-asyncio
 discord.py
+pytest-cov
