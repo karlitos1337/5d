@@ -1,18 +1,18 @@
-const CACHE_KEY = '5d-map-cache-v1';
+const CACHE_PREFIX = '5d-map-cache-v2:';
 const CACHE_TTL = 60 * 60 * 1000; // 1h
 
-function loadCache() {
+function loadCache(key) {
   try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    const raw = localStorage.getItem(CACHE_PREFIX + key);
+    return raw ? JSON.parse(raw) : null;
   } catch {
-    return {};
+    return null;
   }
 }
 
-function saveCache(cache) {
+function saveCache(key, data) {
   try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    localStorage.setItem(CACHE_PREFIX + key, JSON.stringify(data));
   } catch {
     // ignore
   }
@@ -20,7 +20,16 @@ function saveCache(cache) {
 
 export function clearCache() {
   try {
-    localStorage.removeItem(CACHE_KEY);
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(CACHE_PREFIX)) {
+        keysToRemove.push(k);
+      }
+    }
+    for (const k of keysToRemove) {
+      localStorage.removeItem(k);
+    }
   } catch {
     // ignore
   }
@@ -33,16 +42,18 @@ async function fetchJSON(url) {
 }
 
 async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
   const now = Date.now();
-  const entry = cache[key];
+  const entry = loadCache(key);
+
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
     return entry.data;
   }
+
   try {
     const data = await fetcher();
-    cache[key] = { data, timestamp: now };
-    saveCache(cache);
+    // Cache entry structure: { data, timestamp }
+    const newEntry = { data, timestamp: now };
+    saveCache(key, newEntry);
     return data;
   } catch (e) {
     if (entry) return entry.data; // Fallback auf alten Cache
