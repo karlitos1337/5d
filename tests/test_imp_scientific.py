@@ -19,7 +19,7 @@ from models.imp import calculate_imp_verified
 
 
 class TestIMPCalculation:
-    """
+    r"""
     Test IMP calculation against scientifically validated formulas.
 
     Scientific Basis:
@@ -41,7 +41,7 @@ class TestIMPCalculation:
       year={1990},
       publisher={Harper \& Row}
     }
-    r"""
+    """
 
     def test_perfect_score(self):
         """

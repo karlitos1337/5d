@@ -2,6 +2,11 @@
 """Tests für Anonymisierung."""
 
 import pytest
+import sys
+from pathlib import Path
+
+# Add project root to sys.path to ensure storage module is found
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from storage.anonymize import (
     PROHIBITED_FIELDS,
