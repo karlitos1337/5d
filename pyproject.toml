@@ -1,13 +1,30 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.venv
+  | node_modules
+  | 99_unsortiert
+  | external
+  | private-gpt-main
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +38,24 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --cov=."
+testpaths = [
+    "tests",
+    "src_python/tests",
+]
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "node_modules",
+    "private-gpt-main",
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

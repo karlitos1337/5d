@@ -1,4 +1,4 @@
-"""Mathematische/ML-Bausteine
+r"""Mathematische/ML-Bausteine
 
 Reine, seiteneffektfreie Funktionen mit Type Hints. Lesbar, testbar, erweiterbar.
 """
@@ -8,7 +8,7 @@ from collections.abc import Sequence
 
 
 def sigmoid(x: float) -> float:
-    """Standard-Sigmoid $\sigma(x)=1/(1+e^{-x})$.
+    r"""Standard-Sigmoid $\sigma(x)=1/(1+e^{-x})$.
 
     Args:
         x: Eingabewert
