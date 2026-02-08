@@ -41,7 +41,7 @@ class TestIMPCalculation:
       year={1990},
       publisher={Harper \& Row}
     }
-    """
+    r"""
 
     def test_perfect_score(self):
         """
