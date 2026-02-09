@@ -14,4 +14,10 @@ redis>=5.0.0
 ruff
 black
 mypy
-pytest
+networkx
+discord.py
+pytest-cov
+pytest-asyncio
+requests
+pydantic
+streamlit
