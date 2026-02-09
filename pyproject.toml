@@ -1,24 +1,94 @@
 [tool.black]
 line-length = 100
-target-version = ["py310"]
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+  | 99_unsortiert
+  | external
+  | private-gpt-main
+)/
+'''
 
 [tool.ruff]
-line-length = 100
-target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F", "I", "UP", "B"]
+ignore = []
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F", "I", "UP"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "99_unsortiert",
+    "external",
+    "private-gpt-main"
+]
+
+# Same as Black.
+line-length = 100
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.10.
+target-version = "py310"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
 
 [tool.mypy]
 python_version = "3.10"
-check_untyped_defs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
-warn_unused_ignores = true
-warn_redundant_casts = true
+warn_return_any = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+ignore_missing_imports = true
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules"
+]
+
+[tool.pytest.ini_options]
+addopts = "--ignore=99_unsortiert --ignore=external --ignore=private-gpt-main --ignore=node_modules"
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = ["99_unsortiert", "external", "node_modules", "private-gpt-main"]
+python_files = "test_*.py"
+markers = [
+    "asyncio: mark test as async",
+    "integration: mark test as integration test"
+]

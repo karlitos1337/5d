@@ -1,6 +1,7 @@
 import ast
 import os
 
+
 def check_github_auth_usage(directory):
     usage_found = False
     for root, dirs, files in os.walk(directory):
@@ -13,7 +14,7 @@ def check_github_auth_usage(directory):
                     continue
 
                 try:
-                    with open(filepath, "r", encoding="utf-8") as f:
+                    with open(filepath, encoding="utf-8") as f:
                         tree = ast.parse(f.read(), filename=filepath)
 
                     for node in ast.walk(tree):

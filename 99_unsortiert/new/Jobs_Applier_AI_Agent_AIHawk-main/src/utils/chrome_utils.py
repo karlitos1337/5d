@@ -1,11 +1,13 @@
-import os
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager  # Import webdriver_manager
 import urllib
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager  # Import webdriver_manager
+
 from src.logging import logger
+
 
 def chrome_browser_options():
     logger.debug("Setting Chrome browser options")
@@ -90,4 +92,4 @@ def HTML_to_PDF(html_content, driver):
         return pdf_base64['data']
     except Exception as e:
         logger.error(f"Si è verificata un'eccezione WebDriver: {e}")
-        raise RuntimeError(f"Si è verificata un'eccezione WebDriver: {e}")
+        raise RuntimeError(f"Si è verificata un'eccezione WebDriver: {e}") from e
