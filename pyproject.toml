@@ -33,3 +33,8 @@ exclude = ["99_unsortiert", "external", "private-gpt-main", "node_modules"]
 
 [tool.pytest.ini_options]
 norecursedirs = ["99_unsortiert", "external", "private-gpt-main", "node_modules"]
+markers = [
+    "asyncio: mark test as async",
+    "integration: mark test as integration test",
+]
+addopts = "--cov"
