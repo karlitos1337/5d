@@ -23,7 +23,7 @@ Agent-based model demonstrating how the 5 dimensions (A, IM, R, SP, Au)
 evolve over time under different classroom conditions.
 
 **Autopoiesis** (Maturana & Varela 1980): Self-creating, self-maintaining systems.  
-An **autopoietic classroom** fosters intrinsic motivation and self-organization without external coercion.
+An **autopoietic classroom** fosters intrinsic motivation and self-organization without external coercion.  # noqa: E501
 """
 )
 
@@ -377,7 +377,7 @@ with col1:
         title="Active Students Over Time",
         labels={"x": "Step", "y": "Active Students"},
     )
-    fig_active.add_hline(y=n_agents, line_dash="dash", line_color="gray", annotation_text="Initial")
+    fig_active.add_hline(y=n_agents, line_dash="dash", line_color="gray", annotation_text="Initial")  # noqa: E501
     st.plotly_chart(fig_active, width="stretch")
 
 with col2:
@@ -415,7 +415,7 @@ with st.expander("📖 What is Autopoiesis?"):
     describing self-creating, self-maintaining systems.
     
     **Key Papers:**
-    - Maturana, H. R., & Varela, F. J. (1980). *Autopoiesis and Cognition: The Realization of the Living*
+    - Maturana, H. R., & Varela, F. J. (1980). *Autopoiesis and Cognition: The Realization of the Living*  # noqa: E501
     - Luhmann, N. (1995). *Social Systems* (applied to social systems)
     
     **In Education:**
@@ -461,9 +461,9 @@ with st.expander("🎯 Interpreting Results"):
     st.markdown(
         f"""
     **Your Simulation Results:**
-    - Final IMP: **{final_metrics['IMP']:.3f}**
-    - Retention: **{final_metrics['retention_rate']:.1%}**
-    - Dropouts: **{final_metrics['total_dropouts']}** students
+    - Final IMP: **{final_metrics["IMP"]:.3f}**
+    - Retention: **{final_metrics["retention_rate"]:.1%}**
+    - Dropouts: **{final_metrics["total_dropouts"]}** students
     
     **Interpretation Ranges:**
     - **IMP > 0.20:** Healthy learning environment (sustainable)
@@ -473,12 +473,12 @@ with st.expander("🎯 Interpreting Results"):
     **Retention Benchmarks:**
     - Traditional schools: 70-85% (OECD average)
     - Alternative models: 85-95% (Sudbury, Folk High Schools)
-    - Your simulation: **{final_metrics['retention_rate']:.1%}**
+    - Your simulation: **{final_metrics["retention_rate"]:.1%}**
     
     **Key Insights:**
-    - Coercion = {zwang:.2f}: {"⚠️ High stress environment" if zwang > 0.5 else "✅ Moderate stress"}
+    - Coercion = {zwang:.2f}: {"⚠️ High stress environment" if zwang > 0.5 else "✅ Moderate stress"}  # noqa: E501
     - Freedom = {freiheit:.2f}: {"✅ High autonomy" if freiheit > 0.6 else "⚠️ Limited autonomy"}
-    - Balance: {"✅ Freedom > Coercion (healthy)" if freiheit > zwang else "⚠️ Coercion ≥ Freedom (problematic)"}
+    - Balance: {"✅ Freedom > Coercion (healthy)" if freiheit > zwang else "⚠️ Coercion ≥ Freedom (problematic)"}  # noqa: E501
     """
     )
 
@@ -537,10 +537,10 @@ st.header("📚 Scientific References")
 st.markdown(
     """
 **Core Concepts:**
-1. **Maturana, H. R., & Varela, F. J. (1980).** *Autopoiesis and Cognition: The Realization of the Living.* 
-   D. Reidel Publishing Company. [DOI: 10.1007/978-94-009-8947-4](https://doi.org/10.1007/978-94-009-8947-4)
+1. **Maturana, H. R., & Varela, F. J. (1980).** *Autopoiesis and Cognition: The Realization of the Living.*  # noqa: E501
+   D. Reidel Publishing Company. [DOI: 10.1007/978-94-009-8947-4](https://doi.org/10.1007/978-94-009-8947-4)  # noqa: E501
 
-2. **Deci, E. L., & Ryan, R. M. (1985).** *Intrinsic Motivation and Self-Determination in Human Behavior.* 
+2. **Deci, E. L., & Ryan, R. M. (1985).** *Intrinsic Motivation and Self-Determination in Human Behavior.*  # noqa: E501
    Springer. [DOI: 10.1007/978-1-4899-2271-7](https://doi.org/10.1007/978-1-4899-2271-7)
 
 3. **Csíkszentmihályi, M. (1990).** *Flow: The Psychology of Optimal Experience.* 

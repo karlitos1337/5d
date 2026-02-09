@@ -63,7 +63,7 @@ class QuantumTunneling:
         """Attempt to tunnel (Monte Carlo)"""
         success = np.random.random() < self.T
         self.attempts.append(
-            {"success": success, "probability": self.T, "energy": self.E, "barrier_height": self.V0}
+            {"success": success, "probability": self.T, "energy": self.E, "barrier_height": self.V0}  # noqa: E501
         )
         return success
 
@@ -204,7 +204,7 @@ class TunnelingVisualizer:
         x_after = x[x > 4]
         amplitude_transmitted = psi2[-1] if len(psi2) > 0 else 0
         psi3 = (
-            amplitude_transmitted * np.cos(k3 * (x_after - 4)) if len(x_after) > 0 else np.array([])
+            amplitude_transmitted * np.cos(k3 * (x_after - 4)) if len(x_after) > 0 else np.array([])  # noqa: E501
         )
 
         # Combine
@@ -244,7 +244,7 @@ class TunnelingVisualizer:
         print("\n" + "=" * 60)
         print("👻 QUANTUM TUNNELING ATTEMPTS")
         print("=" * 60)
-        print(f"Tunneling Probability: T = {self.tunneling.T:.6f} ({self.tunneling.T*100:.4f}%)")
+        print(f"Tunneling Probability: T = {self.tunneling.T:.6f} ({self.tunneling.T * 100:.4f}%)")
         print(f"Expected successes: {num_attempts * self.tunneling.T:.2f} out of {num_attempts}")
         print()
 
@@ -298,21 +298,21 @@ class TunnelingVisualizer:
                 self.ax4.text(
                     0.1,
                     0.80,
-                    f"Attempts: {i+1}/{num_attempts}",
+                    f"Attempts: {i + 1}/{num_attempts}",
                     fontsize=12,
                     transform=self.ax4.transAxes,
                 )
                 self.ax4.text(
                     0.1,
                     0.72,
-                    f"Successes: {success_count} ({success_count/(i+1)*100:.2f}%)",
+                    f"Successes: {success_count} ({success_count / (i + 1) * 100:.2f}%)",
                     fontsize=12,
                     transform=self.ax4.transAxes,
                 )
                 self.ax4.text(
                     0.1,
                     0.64,
-                    f"Expected: {self.tunneling.T*100:.4f}%",
+                    f"Expected: {self.tunneling.T * 100:.4f}%",
                     fontsize=12,
                     transform=self.ax4.transAxes,
                 )
@@ -371,16 +371,18 @@ class TunnelingVisualizer:
                 plt.tight_layout()
                 plt.pause(0.1)
 
-                print(f"Attempt {i+1}: {success_count} successes ({success_count/(i+1)*100:.2f}%)")
+                print(
+                    f"Attempt {i + 1}: {success_count} successes ({success_count / (i + 1) * 100:.2f}%)"  # noqa: E501
+                )
 
         # Final stats
         print("\n" + "=" * 60)
         print("📊 FINAL RESULTS")
         print("=" * 60)
         print(f"Total attempts: {num_attempts}")
-        print(f"Successes: {success_count} ({success_count/num_attempts*100:.2f}%)")
-        print(f"Expected: {self.tunneling.T*100:.4f}%")
-        print(f"Difference: {abs(success_count/num_attempts - self.tunneling.T)*100:.4f}%")
+        print(f"Successes: {success_count} ({success_count / num_attempts * 100:.2f}%)")
+        print(f"Expected: {self.tunneling.T * 100:.4f}%")
+        print(f"Difference: {abs(success_count / num_attempts - self.tunneling.T) * 100:.4f}%")
 
         return successes
 

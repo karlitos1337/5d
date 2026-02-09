@@ -8,7 +8,7 @@ Flow-Theorie, Neuroplastizität und Aufmerksamkeitsforschung.
 NEUROBIOLOGY_QUESTIONS = [
     {
         "id": "neuro_flow_frequency",
-        "question": "Wie häufig erleben Sie Flow-Zustände (vollständiges Aufgehen in einer Tätigkeit, Verlust des Zeitgefühls)?",
+        "question": "Wie häufig erleben Sie Flow-Zustände (vollständiges Aufgehen in einer Tätigkeit, Verlust des Zeitgefühls)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Nie", "Selten", "Manchmal", "Häufig", "Sehr häufig"],
@@ -19,18 +19,18 @@ NEUROBIOLOGY_QUESTIONS = [
     },
     {
         "id": "neuro_attention_span",
-        "question": "Wie würden Sie Ihre Fähigkeit einschätzen, sich über längere Zeiträume auf eine Aufgabe zu konzentrieren?",
+        "question": "Wie würden Sie Ihre Fähigkeit einschätzen, sich über längere Zeiträume auf eine Aufgabe zu konzentrieren?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schlecht", "Eher schlecht", "Mittelmäßig", "Gut", "Sehr gut"],
         "required": True,
-        "reference": "Posner, M. I., & Petersen, S. E. (1990). The attention system of the human brain.",
+        "reference": "Posner, M. I., & Petersen, S. E. (1990). The attention system of the human brain.",  # noqa: E501
         "bibtex_key": "posner1990attention",
         "sub_dimension": "Attention & Focus",
     },
     {
         "id": "neuro_neuroplasticity",
-        "question": "Wie gut können Sie sich an vollkommen neue Situationen oder Umgebungen anpassen?",
+        "question": "Wie gut können Sie sich an vollkommen neue Situationen oder Umgebungen anpassen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schwer", "Eher schwer", "Mittelmäßig", "Eher leicht", "Sehr leicht"],
@@ -63,7 +63,7 @@ NEUROBIOLOGY_QUESTIONS = [
     },
     {
         "id": "neuro_memory_consolidation",
-        "question": "Wie gut können Sie sich an Details von Ereignissen erinnern, die einige Tage zurückliegen?",
+        "question": "Wie gut können Sie sich an Details von Ereignissen erinnern, die einige Tage zurückliegen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schlecht", "Eher schlecht", "Mittelmäßig", "Gut", "Sehr gut"],
@@ -74,7 +74,7 @@ NEUROBIOLOGY_QUESTIONS = [
     },
     {
         "id": "neuro_cognitive_flexibility",
-        "question": "Wie leicht fällt es Ihnen, zwischen unterschiedlichen Denkweisen oder Perspektiven zu wechseln?",
+        "question": "Wie leicht fällt es Ihnen, zwischen unterschiedlichen Denkweisen oder Perspektiven zu wechseln?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schwer", "Eher schwer", "Normal", "Eher leicht", "Sehr leicht"],
@@ -130,7 +130,7 @@ NEUROBIOLOGY_QUESTIONS = [
     },
     {
         "id": "neuro_default_mode",
-        "question": "Wie oft schweifen Ihre Gedanken ab, wenn Sie eigentlich fokussiert sein möchten?",
+        "question": "Wie oft schweifen Ihre Gedanken ab, wenn Sie eigentlich fokussiert sein möchten?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr häufig", "Häufig", "Manchmal", "Selten", "Nie"],

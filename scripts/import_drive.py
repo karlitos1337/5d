@@ -3,7 +3,7 @@
 Import Google Drive folder contents into the repository as a data source.
 
 Usage:
-  python scripts/import_drive.py --folder "https://drive.google.com/drive/folders/<ID>" [--out drive_import]
+  python scripts/import_drive.py --folder "https://drive.google.com/drive/folders/<ID>" [--out drive_import]  # noqa: E501
 
 Requires:
   pip install gdown

@@ -45,7 +45,7 @@ ENTRANCE_SCHEMA = {
         "max": 99999,
         "required": False,
         "purpose": "Anonymisierte regionale Zuordnung",
-        "privacy_note": "Wird nur für statistische Clusterung verwendet, nicht gespeichert mit anderen Daten",
+        "privacy_note": "Wird nur für statistische Clusterung verwendet, nicht gespeichert mit anderen Daten",  # noqa: E501
     },
     "federal_state": {
         "type": "text",

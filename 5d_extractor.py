@@ -158,7 +158,7 @@ class FiveDExtractor:
 
             for ext in file_types:
                 try:
-                    for file in (extra.rglob(ext) if recursive else extra.glob(ext)):
+                    for file in extra.rglob(ext) if recursive else extra.glob(ext):
                         key = f"{extra.name}:{file.relative_to(extra)}"
                         text = self.extract_text(file)
                         if text:

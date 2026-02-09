@@ -365,7 +365,7 @@ def main():
         )
 
         st.latex(
-            r"f(c, n) = \begin{cases} 1 & \text{if } n = 3 \text{ or } (c = 1 \land n = 2) \\ 0 & \text{sonst} \end{cases}"
+            r"f(c, n) = \begin{cases} 1 & \text{if } n = 3 \text{ or } (c = 1 \land n = 2) \\ 0 & \text{sonst} \end{cases}"  # noqa: E501
         )
 
         st.markdown(
@@ -433,7 +433,7 @@ def main():
         - [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
         
         **2. Gardner, M. (1970)**
-        - *Mathematical Games: The fantastic combinations of John Conway's new solitaire game "life"*
+        - *Mathematical Games: The fantastic combinations of John Conway's new solitaire game "life"*  # noqa: E501
         - *Scientific American* 223: 120-123
         
         **3. Wolfram, S. (2002)**

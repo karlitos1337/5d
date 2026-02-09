@@ -6,9 +6,9 @@ Test Suite for Participation Networks (Page 10)
 Scientific validation of network topology models and diffusion theory.
 
 References:
-- Granovetter, M. S. (1973). The Strength of Weak Ties. American Journal of Sociology, 78(6), 1360-1380.
-- Watts, D. J., & Strogatz, S. H. (1998). Collective dynamics of 'small-world' networks. Nature, 393(6684), 440-442.
-- Barabási, A.-L., & Albert, R. (1999). Emergence of scaling in random networks. Science, 286(5439), 509-512.
+- Granovetter, M. S. (1973). The Strength of Weak Ties. American Journal of Sociology, 78(6), 1360-1380.  # noqa: E501
+- Watts, D. J., & Strogatz, S. H. (1998). Collective dynamics of 'small-world' networks. Nature, 393(6684), 440-442.  # noqa: E501
+- Barabási, A.-L., & Albert, R. (1999). Emergence of scaling in random networks. Science, 286(5439), 509-512.  # noqa: E501
 - Rogers, E. M. (2003). Diffusion of Innovations (5th ed.). Free Press.
 """
 
@@ -159,9 +159,9 @@ class TestWeakTiesTheory:
 
         # Expectation: bridges have lower clustering (not always true, but often)
         # We test a weaker condition: bridges don't have significantly higher clustering
-        assert (
-            avg_clustering_bridges <= avg_clustering_all * 1.2
-        ), f"Bridges have unusually high clustering: {avg_clustering_bridges:.3f} vs {avg_clustering_all:.3f}"
+        assert avg_clustering_bridges <= avg_clustering_all * 1.2, (
+            f"Bridges have unusually high clustering: {avg_clustering_bridges:.3f} vs {avg_clustering_all:.3f}"  # noqa: E501
+        )
 
 
 # ==================== Diffusion Dynamics Tests ====================
@@ -213,9 +213,9 @@ class TestDiffusionDynamics:
 
         # Small-world should be faster (lower t_50)
         if t_50_sw is not None and t_50_lattice is not None:
-            assert (
-                t_50_sw < t_50_lattice
-            ), f"Small-world not faster: t_50={t_50_sw} vs lattice={t_50_lattice}"
+            assert t_50_sw < t_50_lattice, (
+                f"Small-world not faster: t_50={t_50_sw} vs lattice={t_50_lattice}"
+            )
 
     def test_seed_fraction_impact(self):
         """Higher initial activation → faster diffusion."""
@@ -236,9 +236,9 @@ class TestDiffusionDynamics:
 
         # Higher seed should reach 50% faster (or immediately if seed > 50%)
         if t_50_high is not None and t_50_low is not None:
-            assert (
-                t_50_high <= t_50_low
-            ), f"Higher seed not faster: t_50={t_50_high} vs low={t_50_low}"
+            assert t_50_high <= t_50_low, (
+                f"Higher seed not faster: t_50={t_50_high} vs low={t_50_low}"
+            )
 
     @staticmethod
     def _simulate_diffusion(G, seed_frac, threshold, max_steps):

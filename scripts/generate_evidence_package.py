@@ -25,6 +25,7 @@ def run_step(command, description):
         print(e.stderr)
         return False
 
+
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     package_dir = Path(f"outputs/evidence_package/pkg_{timestamp}")
@@ -45,7 +46,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -55,7 +56,12 @@ def main():
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
                 print(f"  -> Moved {f}")
@@ -76,7 +82,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -97,7 +103,7 @@ def main():
 
 | Dimension | Metric | Source | Range | Reliability (α) |
 |-----------|--------|--------|-------|-----------------|
-| **Autonomy** | Voice & Accountability (VA.EST) | World Bank WGI (Source 2) | -2.5 to 2.5 | > 0.80 |
+| **Autonomy** | Voice & Accountability (VA.EST) | World Bank WGI (Source 2) | -2.5 to 2.5 | > 0.80 |  # noqa: E501
 | **Intrinsic Motivation** | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
 | **Resilience** | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
 | **Social Participation** | Network Density | Graph Analysis | 0-1 | N/A |
@@ -128,7 +134,7 @@ def main():
 ## 1. Empirical Status
 ### Validation Study (Pilot, N=30)
 - **Overall Reliability (Cronbach's α):** {validation_alpha}
-- **Interpretation:** {"✅ Valid (α > 0.7)" if validation_alpha != "N/A" and float(validation_alpha) > 0.7 else "⚠️ Requires Revision (α < 0.7)"}
+- **Interpretation:** {"✅ Valid (α > 0.7)" if validation_alpha != "N/A" and float(validation_alpha) > 0.7 else "⚠️ Requires Revision (α < 0.7)"}  # noqa: E501
 - **Data Source:** Synthetic pilot data generated via `validation/imp_validation_study.py`.
 
 ### External Data Integration
@@ -137,12 +143,12 @@ def main():
 - **Gap Analysis:** Successfully closed data gap for Macro-Level Governance indicators.
 
 ## 2. Literature-Backed Insight
-**Context:** Self-Determination Theory (Ryan & Deci) posits autonomy as a primary driver of well-being.
+**Context:** Self-Determination Theory (Ryan & Deci) posits autonomy as a primary driver of well-being.  # noqa: E501
 **Evidence:** Current pilot data supports the internal consistency of the 5D constructs.
-**Constraint:** No speculation allowed. Pilot N=30 is insufficient for generalized claims (requires N > 100).
+**Constraint:** No speculation allowed. Pilot N=30 is insufficient for generalized claims (requires N > 100).  # noqa: E501
 
 ## 3. Hypothesis Generation (Falsifiable)
-**H1:** "Increases in 'Voice & Accountability' (Macro) correlate positively (r > 0.4) with 'Intrinsic Motivation' scores (Micro) in educational settings."
+**H1:** "Increases in 'Voice & Accountability' (Macro) correlate positively (r > 0.4) with 'Intrinsic Motivation' scores (Micro) in educational settings."  # noqa: E501
 **Test:** Correlate WGI country data with user assessment scores.
 
 ## 4. Next Steps
@@ -178,8 +184,9 @@ Generated: {timestamp}
         f.write(manifest_content)
 
     print(f"\n✅ Evidence Package Generated: {package_dir}")
-    # Print the command to list files, but don't execute it, leave it to the user or agent to verify
+    # Print the command to list files, but don't execute it, leave it to the user or agent to verify  # noqa: E501
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()

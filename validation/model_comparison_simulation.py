@@ -214,7 +214,7 @@ class IMPModelComparison:
             print(f"  Geometrisch: {geo:.2f}")
             print(f"  Additiv:     {add:.2f}")
             if add > 0:
-                print(f"  Verhältnis:  {geo/add:.2f} (Geo/Add)")
+                print(f"  Verhältnis:  {geo / add:.2f} (Geo/Add)")
 
 
 def main():

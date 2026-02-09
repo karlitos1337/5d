@@ -85,6 +85,6 @@ def test_save_solutions_validated(tmp_path):
     data = json.loads(out.read_text(encoding="utf-8"))
     assert "projects" in data
     assert len(data["projects"]) == 1
-    # Investment wird zugeordnet, da Länge konsistent mit Projekten nach Dedup ist (2 Namen -> nach Dedup 1 Projekt)
-    # In diesem Fall keine genaue Zuordnung möglich, daher prüfen wir, dass kein falsches Mapping erzwungen wurde
+    # Investment wird zugeordnet, da Länge konsistent mit Projekten nach Dedup ist (2 Namen -> nach Dedup 1 Projekt)  # noqa: E501
+    # In diesem Fall keine genaue Zuordnung möglich, daher prüfen wir, dass kein falsches Mapping erzwungen wurde  # noqa: E501
     assert data["projects"][0].get("investment") in (None, 50000.0, 30000.0)

@@ -108,7 +108,7 @@ def place_gosper_glider_gun(grid: np.ndarray, top: int = 1, left: int = 1) -> No
 def place_lwss(grid: np.ndarray, top: int, left: int) -> None:
     """Lightweight Spaceship (Periodisch, bewegt sich)."""
     # Form (5x4)
-    lwss = np.array([[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [1, 0, 0, 1, 0]], dtype=int)
+    lwss = np.array([[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [1, 0, 0, 1, 0]], dtype=int)  # noqa: E501
     h, w = lwss.shape
     grid[top : top + h, left : left + w] = lwss
 
@@ -307,7 +307,7 @@ def main():
 
     if args.animate:
         if not HAS_MPL:
-            print("⚠️  Matplotlib fehlt – starte Textmodus. Installiere mit: pip install matplotlib")
+            print("⚠️  Matplotlib fehlt – starte Textmodus. Installiere mit: pip install matplotlib")  # noqa: E501
             _, stats = simulate(grid, steps=min(args.steps, 20))
         else:
             animate(
@@ -322,7 +322,7 @@ def main():
         _, stats = simulate(grid, steps=args.steps)
         if args.save_csv:
             np.savetxt(
-                "gol_glider_evolution.csv", stats, delimiter=",", header="step,live_cells", fmt="%d"
+                "gol_glider_evolution.csv", stats, delimiter=",", header="step,live_cells", fmt="%d"  # noqa: E501
             )
             print("✅ CSV 'gol_glider_evolution.csv' gespeichert")
 

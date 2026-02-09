@@ -212,19 +212,23 @@ def main():
 
                 if coords:
                     imp = calculate_imp_proxy(
-                        data.get("depression", 0), data.get("dropout", 0), data.get("governance", 0)
+                        data.get("depression", 0), data.get("dropout", 0), data.get("governance", 0)  # noqa: E501
                     )
 
                     color = (
                         "#00ff00"
                         if imp > 0.7
-                        else "#ffff00" if imp > 0.5 else "#ffa500" if imp > 0.4 else "#ff0000"
+                        else "#ffff00"
+                        if imp > 0.5
+                        else "#ffa500"
+                        if imp > 0.4
+                        else "#ff0000"
                     )
 
                     folium.CircleMarker(
                         location=coords,
                         radius=imp * 20,
-                        popup=f"<b>{country_name}</b><br>IMP: {imp:.2f}<br>Depression: {data.get('depression', 0):.1f}%<br>Dropout: {data.get('dropout', 0):.1f}%",
+                        popup=f"<b>{country_name}</b><br>IMP: {imp:.2f}<br>Depression: {data.get('depression', 0):.1f}%<br>Dropout: {data.get('dropout', 0):.1f}%",  # noqa: E501
                         color=color,
                         fill=True,
                         fillOpacity=0.6,
@@ -235,14 +239,14 @@ def main():
             for school in schools[:10]:  # Limit to 10
                 folium.Marker(
                     location=school.get("coords", [0, 0]),
-                    popup=f"<b>{school.get('name', 'School')}</b><br>{school.get('type', 'Alternative')}",
+                    popup=f"<b>{school.get('name', 'School')}</b><br>{school.get('type', 'Alternative')}",  # noqa: E501
                     icon=folium.Icon(color="green", icon="school", prefix="fa"),
                 ).add_to(m)
 
         st_folium(m, width=700, height=500)
 
         st.info(
-            "💡 For full interactive experience with time-travel and layers: [Open 5D-Map](http://localhost:5500) (requires `make serve-map`)"
+            "💡 For full interactive experience with time-travel and layers: [Open 5D-Map](http://localhost:5500) (requires `make serve-map`)"  # noqa: E501
         )
 
         st.divider()
@@ -524,7 +528,7 @@ def main():
         
         **World Health Organization (WHO):**
         - Website: [who.int](https://www.who.int)
-        - Mental Health Atlas: [who.int/mental_health](https://www.who.int/teams/mental-health-and-substance-use)
+        - Mental Health Atlas: [who.int/mental_health](https://www.who.int/teams/mental-health-and-substance-use)  # noqa: E501
         - License: Open Access
         
         **World Governance Indicators (WGI):**
@@ -566,7 +570,7 @@ def main():
         
         ---
         
-        **Implementation:** Siehe `web/5d-map/` für Frontend, `5d_research_scraper.py` für API-Integration
+        **Implementation:** Siehe `web/5d-map/` für Frontend, `5d_research_scraper.py` für API-Integration  # noqa: E501
         """
         )
 

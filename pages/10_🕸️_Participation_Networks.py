@@ -43,8 +43,8 @@ st.markdown(
     """
 **Agent-Based Simulation von Wissens-Diffusion in sozialen Netzwerken**
 
-Diese Seite untersucht, wie **Netzwerk-Topologien** die Verbreitung von Wissen, Ideen und Innovationen beeinflussen.
-Wir vergleichen drei klassische Modelle und zeigen ihre Relevanz für **Social Participation (SP)** und **Resilience (R)**.
+Diese Seite untersucht, wie **Netzwerk-Topologien** die Verbreitung von Wissen, Ideen und Innovationen beeinflussen.  # noqa: E501
+Wir vergleichen drei klassische Modelle und zeigen ihre Relevanz für **Social Participation (SP)** und **Resilience (R)**.  # noqa: E501
 """
 )
 
@@ -117,7 +117,7 @@ with st.sidebar:
     if topology == "small_world":
         k = st.slider("Nachbarn k", 2, 20, 6, help="Ausgangsgitter-Konnektivität")
         p = st.slider(
-            "Rewire-Wahrscheinlichkeit", 0.001, 0.5, 0.05, step=0.001, help="Höher = mehr Shortcuts"
+            "Rewire-Wahrscheinlichkeit", 0.001, 0.5, 0.05, step=0.001, help="Höher = mehr Shortcuts"  # noqa: E501
         )
     elif topology == "erdos_renyi":
         p = st.slider(
@@ -534,10 +534,10 @@ with imp_col3:
     st.metric("Resilience (R)", f"{IMP_proxies['R']:.2f}", help="1 - (t_50 / steps)")
 
 with imp_col4:
-    st.metric("Social Part. (SP)", f"{IMP_proxies['SP']:.2f}", help="Clustering × Final Activation")
+    st.metric("Social Part. (SP)", f"{IMP_proxies['SP']:.2f}", help="Clustering × Final Activation")  # noqa: E501
 
 with imp_col5:
-    st.metric("Authenticity (Au)", f"{IMP_proxies['Au']:.2f}", help="Neutral (Netzwerk-unabhängig)")
+    st.metric("Authenticity (Au)", f"{IMP_proxies['Au']:.2f}", help="Neutral (Netzwerk-unabhängig)")  # noqa: E501
 
 with imp_col6:
     st.metric("IMP Score", f"{IMP_proxies['IMP']:.3f}", help="A × IM × R × SP × Au")
@@ -549,17 +549,17 @@ st.header("💡 Interpretation")
 with st.expander("🔬 Netzwerk-Metriken erklärt", expanded=False):
     st.markdown(
         f"""
-**Clustering-Koeffizient:** {metrics['clustering']:.3f}
+**Clustering-Koeffizient:** {metrics["clustering"]:.3f}
 - **Bedeutung:** Wie stark sind Nachbarn untereinander vernetzt?
 - **Range:** 0.0 (keine lokalen Cluster) bis 1.0 (perfekt geclustert)
 - **Realwelt:** Soziale Netzwerke typisch 0.3-0.6, Zufallsgraphen ~0.01
 
-**Durchschnittliche Pfadlänge:** {metrics['avg_path_length'] if metrics['avg_path_length'] else 'N/A'}
+**Durchschnittliche Pfadlänge:** {metrics["avg_path_length"] if metrics["avg_path_length"] else "N/A"}  # noqa: E501
 - **Bedeutung:** Durchschnittliche Distanz zwischen zwei Knoten
 - **Small-World:** Niedrig (~3-6 bei 100 Knoten), trotz hohem Clustering
 - **Bedeutung für Diffusion:** Kurze Pfade = schnelle Verbreitung
 
-**Zeit bis 50% (t_50):** {metrics['t_50'] if metrics['t_50'] else 'Nicht erreicht'}
+**Zeit bis 50% (t_50):** {metrics["t_50"] if metrics["t_50"] else "Nicht erreicht"}
 - **Bedeutung:** Wie schnell erreicht Innovation kritische Masse?
 - **Rogers (2003):** 16% Early Adopters → Tipping Point bei ~50%
 - **Hier:** Schritte bis zur Hälfte der Knoten aktiviert
@@ -577,7 +577,7 @@ with st.expander("🎯 5D-Bezug zur Netzwerk-Theorie", expanded=False):
 **Resilience (R):**
 - **Pfadlänge:** Kurze Pfade = schnelle Erholung nach Störungen
 - **t_50:** Niedrig = resilientes System (schnelle Diffusion)
-- **Scale-free:** Hubs machen Netzwerk anfällig (gezielte Angriffe), aber resilient gegen zufällige Ausfälle
+- **Scale-free:** Hubs machen Netzwerk anfällig (gezielte Angriffe), aber resilient gegen zufällige Ausfälle  # noqa: E501
 
 **Intrinsic Motivation (IM):**
 - **Sharing-Wahrscheinlichkeit:** Freiwilligkeit, innere Bereitschaft
@@ -598,7 +598,7 @@ with st.expander("📚 Topologie-Vergleich", expanded=False):
 **Empfehlung für Bildungssysteme:**
 - **Small-World:** Beste Balance (lokale Cluster + globale Erreichbarkeit)
 - **Praxis:** Schulen mit starken Klassen (Clustering) + Austauschprogramme (Shortcuts)
-- **Beispiel:** Montessori Mixed-Age-Klassen (starke Bindungen) + Schulübergreifende Projekte (weak ties)
+- **Beispiel:** Montessori Mixed-Age-Klassen (starke Bindungen) + Schulübergreifende Projekte (weak ties)  # noqa: E501
 """
     )
 
@@ -623,7 +623,9 @@ export_data = {
         k: (
             int(v)
             if isinstance(v, (np.integer, int))
-            else float(v) if isinstance(v, (np.floating, float)) else v
+            else float(v)
+            if isinstance(v, (np.floating, float))
+            else v
         )
         for k, v in metrics.items()
     },
@@ -687,7 +689,7 @@ with st.expander("Literatur & BibTeX", expanded=False):
 
 **Verbindung zu 5D:**
 
-5. **Deci, E. L., & Ryan, R. M. (1985).** *Intrinsic Motivation and Self-Determination in Human Behavior.*  
+5. **Deci, E. L., & Ryan, R. M. (1985).** *Intrinsic Motivation and Self-Determination in Human Behavior.*  # noqa: E501
    Plenum Press.  
    → BibTeX: `deci1985intrinsic` (IM-Dimension)
 

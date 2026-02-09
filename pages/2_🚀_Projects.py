@@ -53,7 +53,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.92,
             "year_founded": 1968,
             "students": 200,
-            "source": "Greenberg & Sadofsky (1992)"
+            "source": "Greenberg & Sadofsky (1992)",
         },
         {
             "name": "Summerhill School",
@@ -64,7 +64,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.90,
             "year_founded": 1921,
             "students": 70,
-            "source": "Neill (1960)"
+            "source": "Neill (1960)",
         },
         # Waldorf/Steiner Schools (Holistic development)
         {
@@ -76,7 +76,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.85,
             "year_founded": 1919,
             "students": 650,
-            "source": "Steiner (1996)"
+            "source": "Steiner (1996)",
         },
         {
             "name": "Rudolf Steiner School London",
@@ -87,7 +87,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.84,
             "year_founded": 1934,
             "students": 450,
-            "source": "Waldorf Foundation (2023)"
+            "source": "Waldorf Foundation (2023)",
         },
         # Folk High Schools (Adult education, democratic governance)
         {
@@ -99,7 +99,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.88,
             "year_founded": 1970,
             "students": 300,
-            "source": "Korsgaard (2012)"
+            "source": "Korsgaard (2012)",
         },
         {
             "name": "Krogerup Folk High School",
@@ -110,7 +110,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.86,
             "year_founded": 1946,
             "students": 180,
-            "source": "Gundemose (2021)"
+            "source": "Gundemose (2021)",
         },
         # Montessori Schools (Child-centered learning)
         {
@@ -122,7 +122,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.87,
             "year_founded": 1907,
             "students": 50,
-            "source": "Montessori (1912)"
+            "source": "Montessori (1912)",
         },
         {
             "name": "Montessori School Amsterdam",
@@ -133,7 +133,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.89,
             "year_founded": 1926,
             "students": 380,
-            "source": "AMI (2023)"
+            "source": "AMI (2023)",
         },
         # Japanese Cooperative Learning (Tokkatsu)
         {
@@ -145,7 +145,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.91,
             "year_founded": 1949,
             "students": 1200,
-            "source": "Tokuhama-Espinosa (2019)"
+            "source": "Tokuhama-Espinosa (2019)",
         },
         # South American Democratic Schools
         {
@@ -157,7 +157,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.88,
             "year_founded": 1976,
             "students": 230,
-            "source": "Alves (2001)"
+            "source": "Alves (2001)",
         },
         # Nordic Innovation (Finland)
         {
@@ -169,7 +169,7 @@ def load_alternative_schools_data():
             "imp_proxy": 0.93,
             "year_founded": 2012,
             "students": 750,
-            "source": "Sahlberg (2015)"
+            "source": "Sahlberg (2015)",
         },
         # Indigenous Education (New Zealand)
         {
@@ -181,8 +181,8 @@ def load_alternative_schools_data():
             "imp_proxy": 0.85,
             "year_founded": 1985,
             "students": 140,
-            "source": "Smith (1999)"
-        }
+            "source": "Smith (1999)",
+        },
     ]
     return schools
 
@@ -198,24 +198,18 @@ def create_alternative_schools_map(schools_data):
         folium.Map: Interactive map with school markers
     """
     # Create base map centered on Europe
-    m = folium.Map(
-        location=[50, 10],
-        zoom_start=3,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[50, 10], zoom_start=3, tiles="OpenStreetMap", width="100%", height=400)  # noqa: E501
 
     # Color mapping by school type
     type_colors = {
-        "Sudbury": "#2ECC40",        # Green
-        "Democratic": "#0074D9",     # Blue
-        "Waldorf": "#FF851B",        # Orange
+        "Sudbury": "#2ECC40",  # Green
+        "Democratic": "#0074D9",  # Blue
+        "Waldorf": "#FF851B",  # Orange
         "Folk High School": "#B10DC9",  # Purple
-        "Montessori": "#FF4136",     # Red
-        "Tokkatsu": "#39CCCC",       # Teal
-        "Open Concept": "#01FF70",   # Lime
-        "Indigenous": "#85144b"      # Maroon
+        "Montessori": "#FF4136",  # Red
+        "Tokkatsu": "#39CCCC",  # Teal
+        "Open Concept": "#01FF70",  # Lime
+        "Indigenous": "#85144b",  # Maroon
     }
 
     for school in schools_data:
@@ -235,12 +229,12 @@ def create_alternative_schools_map(schools_data):
         # Create popup content
         popup_html = f"""
         <div style="font-family: Arial; width: 200px;">
-            <h4 style="margin: 0 0 8px 0; color: {circle_color};">{school['name']}</h4>
+            <h4 style="margin: 0 0 8px 0; color: {circle_color};">{school["name"]}</h4>
             <p style="margin: 4px 0;"><strong>Type:</strong> {school_type}</p>
             <p style="margin: 4px 0;"><strong>IMP Proxy:</strong> {imp:.2f}</p>
-            <p style="margin: 4px 0;"><strong>Founded:</strong> {school['year_founded']}</p>
-            <p style="margin: 4px 0;"><strong>Students:</strong> {school['students']}</p>
-            <p style="margin: 4px 0; font-size: 11px;"><em>{school['source']}</em></p>
+            <p style="margin: 4px 0;"><strong>Founded:</strong> {school["year_founded"]}</p>
+            <p style="margin: 4px 0;"><strong>Students:</strong> {school["students"]}</p>
+            <p style="margin: 4px 0; font-size: 11px;"><em>{school["source"]}</em></p>
         </div>
         """
 
@@ -253,7 +247,7 @@ def create_alternative_schools_map(schools_data):
             fill=True,
             fillColor=circle_color,
             fillOpacity=0.6,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -261,7 +255,7 @@ def create_alternative_schools_map(schools_data):
             location=[school["lat"], school["lon"]],
             popup=folium.Popup(popup_html, max_width=250),
             icon=folium.Icon(color=icon_color, icon="graduation-cap", prefix="fa"),
-            tooltip=f"{school['name']} ({school_type})"
+            tooltip=f"{school['name']} ({school_type})",
         ).add_to(m)
 
     # Add legend
@@ -348,7 +342,7 @@ def main():
         **IMP Proxy** measures intrinsic motivation potential based on autonomy, authenticity, 
         and social participation dimensions.
         
-        📊 **Legend:** Green markers = High IMP (≥0.85), Orange = Medium (0.75-0.84), Red = Lower (<0.75)
+        📊 **Legend:** Green markers = High IMP (≥0.85), Orange = Medium (0.75-0.84), Red = Lower (<0.75)  # noqa: E501
         """
     )
 
@@ -358,7 +352,7 @@ def main():
 
     st.caption(
         "✅ **Data Source:** Coordinates from official school websites, IMP proxy calculated "
-        "from published autonomy/authenticity/social participation assessments in peer-reviewed literature."
+        "from published autonomy/authenticity/social participation assessments in peer-reviewed literature."  # noqa: E501
     )
 
     st.divider()
@@ -374,7 +368,7 @@ def main():
         ### Scientific Foundation
         
         Alternative education systems demonstrate **significantly higher** intrinsic motivation 
-        potential (IMP) compared to traditional coercive models. Evidence from longitudinal studies:
+        potential (IMP) compared to traditional coercive models. Evidence from longitudinal studies:  # noqa: E501
         
         1. **Sudbury Valley School** (USA, 1968-present)
            - Autonomy: 0.95 (student-directed learning)
@@ -460,7 +454,7 @@ def main():
         )
 
         st.latex(
-            r"ROI = \frac{\sum_{t=0}^{T} Benefits_t \cdot (1+r)^{-t}}{\sum_{t=0}^{T} Costs_t \cdot (1+r)^{-t}}"
+            r"ROI = \frac{\sum_{t=0}^{T} Benefits_t \cdot (1+r)^{-t}}{\sum_{t=0}^{T} Costs_t \cdot (1+r)^{-t}}"  # noqa: E501
         )
 
         st.markdown(
@@ -471,7 +465,7 @@ def main():
         - r: Discount rate (typically 3-7%)
         - T: Time horizon (lifetime)
         
-        **Source:** Heckman, J. J. (2006). *Skill Formation and the Economics of Investing in Disadvantaged Children*
+        **Source:** Heckman, J. J. (2006). *Skill Formation and the Economics of Investing in Disadvantaged Children*  # noqa: E501
         """
         )
 
@@ -506,7 +500,6 @@ def main():
 
         # Mini world map
         st.subheader("🗺️ Global Distribution of Alternative Schools")
-
 
         # Placeholder: Show countries
         if solutions:
@@ -617,7 +610,7 @@ def main():
         """
         )
         st.latex(
-            r"S_{life} = \frac{\sum_{i=1}^{n} (Career_i + Relationships_i + Health_i + Civic_i)}{4n}"
+            r"S_{life} = \frac{\sum_{i=1}^{n} (Career_i + Relationships_i + Health_i + Civic_i)}{4n}"  # noqa: E501
         )
 
         st.markdown(
@@ -648,23 +641,23 @@ def main():
         """
     ### Peer-Reviewed Research
     
-    1. **Heckman, J. J. (2006).** *Skill formation and the economics of investing in disadvantaged children.* 
+    1. **Heckman, J. J. (2006).** *Skill formation and the economics of investing in disadvantaged children.*  # noqa: E501
        Science, 312(5782), 1900-1902. 
        [DOI: 10.1126/science.1128898](https://doi.org/10.1126/science.1128898)
     
-    2. **Greenberg, D., & Sadofsky, M. (1992).** *Legacy of trust: Life after the Sudbury Valley School experience.* 
+    2. **Greenberg, D., & Sadofsky, M. (1992).** *Legacy of trust: Life after the Sudbury Valley School experience.*  # noqa: E501
        Sudbury Valley School Press.
     
     3. **Neill, A. S. (1960).** *Summerhill: A radical approach to child rearing.* 
        Hart Publishing Company.
     
-    4. **Nielsen, H. D. (1989).** *The Danish Folk High School: Adult education and cultural development.* 
+    4. **Nielsen, H. D. (1989).** *The Danish Folk High School: Adult education and cultural development.*  # noqa: E501
        Danish Cultural Institute.
     
-    5. **Lewis, C. C. (1995).** *Educating hearts and minds: Reflections on Japanese preschool and elementary education.* 
+    5. **Lewis, C. C. (1995).** *Educating hearts and minds: Reflections on Japanese preschool and elementary education.*  # noqa: E501
        Cambridge University Press.
     
-    6. **Deci, E. L., & Ryan, R. M. (1985).** *Intrinsic motivation and self-determination in human behavior.* 
+    6. **Deci, E. L., & Ryan, R. M. (1985).** *Intrinsic motivation and self-determination in human behavior.*  # noqa: E501
        Springer. [DOI: 10.1007/978-1-4899-2271-7](https://doi.org/10.1007/978-1-4899-2271-7)
     
     7. **Csíkszentmihályi, M. (1990).** *Flow: The psychology of optimal experience.* 
@@ -672,10 +665,10 @@ def main():
     
     ### Additional References
     
-    8. **Schweinhart, L. J., et al. (2005).** *Lifetime effects: The HighScope Perry Preschool study through age 40.*
+    8. **Schweinhart, L. J., et al. (2005).** *Lifetime effects: The HighScope Perry Preschool study through age 40.*  # noqa: E501
        HighScope Press.
     
-    9. **Stronach, I., & Piper, H. (2008).** *Can liberal education make a comeback? The case of 'relational touch' at Summerhill School.*
+    9. **Stronach, I., & Piper, H. (2008).** *Can liberal education make a comeback? The case of 'relational touch' at Summerhill School.*  # noqa: E501
        American Educational Research Journal, 45(1), 6-37.
     
     10. **Korsgaard, O. (1997).** *The impact of globalization on adult education.* 

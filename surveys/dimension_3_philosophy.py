@@ -8,7 +8,7 @@ epistemologischer Pluralität und reflexivem Bewusstsein.
 PHILOSOPHY_QUESTIONS = [
     {
         "id": "philo_critical_thinking",
-        "question": "Wie wichtig ist es Ihnen, etablierte Wahrheiten und Annahmen zu hinterfragen?",
+        "question": "Wie wichtig ist es Ihnen, etablierte Wahrheiten und Annahmen zu hinterfragen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -19,13 +19,13 @@ PHILOSOPHY_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Paul, R., & Elder, L. (2006). Critical thinking: The nature of critical and creative thought.",
+        "reference": "Paul, R., & Elder, L. (2006). Critical thinking: The nature of critical and creative thought.",  # noqa: E501
         "bibtex_key": "paul2006critical",
         "sub_dimension": "Critical Thinking",
     },
     {
         "id": "philo_epistemic_pluralism",
-        "question": "Wie offen sind Sie gegenüber unterschiedlichen Formen von Wissen (wissenschaftlich, kulturell, intuitiv, spirituell)?",
+        "question": "Wie offen sind Sie gegenüber unterschiedlichen Formen von Wissen (wissenschaftlich, kulturell, intuitiv, spirituell)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -36,7 +36,7 @@ PHILOSOPHY_QUESTIONS = [
             "Völlig offen",
         ],
         "required": True,
-        "reference": "Santos, B. d. S. (2014). Epistemologies of the South: Justice against epistemicide.",
+        "reference": "Santos, B. d. S. (2014). Epistemologies of the South: Justice against epistemicide.",  # noqa: E501
         "bibtex_key": "santos2014epistemologies",
         "sub_dimension": "Epistemic Pluralism",
     },
@@ -53,7 +53,7 @@ PHILOSOPHY_QUESTIONS = [
     },
     {
         "id": "philo_dialectical_thinking",
-        "question": "Wie häufig betrachten Sie Probleme aus mehreren, auch widersprüchlichen Perspektiven?",
+        "question": "Wie häufig betrachten Sie Probleme aus mehreren, auch widersprüchlichen Perspektiven?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Nie", "Selten", "Manchmal", "Häufig", "Immer"],
@@ -64,7 +64,7 @@ PHILOSOPHY_QUESTIONS = [
     },
     {
         "id": "philo_ethical_reflection",
-        "question": "Wie intensiv setzen Sie sich mit ethischen Fragen und moralischen Dilemmata auseinander?",
+        "question": "Wie intensiv setzen Sie sich mit ethischen Fragen und moralischen Dilemmata auseinander?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Mäßig", "Intensiv", "Sehr intensiv"],
@@ -75,7 +75,7 @@ PHILOSOPHY_QUESTIONS = [
     },
     {
         "id": "philo_existential_awareness",
-        "question": "Wie häufig denken Sie über existenzielle Fragen nach (Sinn des Lebens, Tod, Freiheit, Verantwortung)?",
+        "question": "Wie häufig denken Sie über existenzielle Fragen nach (Sinn des Lebens, Tod, Freiheit, Verantwortung)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Nie", "Selten", "Manchmal", "Häufig", "Sehr häufig"],
@@ -86,7 +86,7 @@ PHILOSOPHY_QUESTIONS = [
     },
     {
         "id": "philo_socratic_method",
-        "question": "Wie sehr schätzen Sie die Praxis des nicht-wissenden Fragens (Sokrates: 'Ich weiß, dass ich nichts weiß')?",
+        "question": "Wie sehr schätzen Sie die Praxis des nicht-wissenden Fragens (Sokrates: 'Ich weiß, dass ich nichts weiß')?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Mäßig", "Sehr", "Extrem"],
@@ -97,7 +97,7 @@ PHILOSOPHY_QUESTIONS = [
     },
     {
         "id": "philo_power_critique",
-        "question": "Wie wichtig ist es Ihnen, Machtstrukturen und deren Einfluss auf Wissen zu analysieren?",
+        "question": "Wie wichtig ist es Ihnen, Machtstrukturen und deren Einfluss auf Wissen zu analysieren?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -114,7 +114,7 @@ PHILOSOPHY_QUESTIONS = [
     },
     {
         "id": "philo_holistic_thinking",
-        "question": "Inwieweit denken Sie in ganzheitlichen Zusammenhängen statt in isolierten Teilen?",
+        "question": "Inwieweit denken Sie in ganzheitlichen Zusammenhängen statt in isolierten Teilen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Mäßig", "Stark", "Sehr stark"],

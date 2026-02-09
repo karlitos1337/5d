@@ -96,7 +96,7 @@ def load_research_institutions_data():
             "lon": -71.0942,
             "papers_count": 28,
             "domains": ["AI/ML", "Education Tech", "Complexity"],
-            "key_papers": ["Heckman (2006)", "Saxenian (1994)"]
+            "key_papers": ["Heckman (2006)", "Saxenian (1994)"],
         },
         {
             "name": "Stanford University",
@@ -105,7 +105,7 @@ def load_research_institutions_data():
             "lon": -122.1697,
             "papers_count": 22,
             "domains": ["Self-Determination", "Economics"],
-            "key_papers": ["Deci & Ryan (2000)"]
+            "key_papers": ["Deci & Ryan (2000)"],
         },
         # UK - Oxford/Cambridge
         {
@@ -115,7 +115,7 @@ def load_research_institutions_data():
             "lon": 0.1218,
             "papers_count": 19,
             "domains": ["Neuroscience", "Philosophy"],
-            "key_papers": ["Baron-Cohen (2003)"]
+            "key_papers": ["Baron-Cohen (2003)"],
         },
         {
             "name": "University of Oxford",
@@ -124,7 +124,7 @@ def load_research_institutions_data():
             "lon": -1.2544,
             "papers_count": 17,
             "domains": ["Psychology", "Ethics"],
-            "key_papers": ["Dennett (1991)"]
+            "key_papers": ["Dennett (1991)"],
         },
         # Germany - Max Planck
         {
@@ -134,7 +134,7 @@ def load_research_institutions_data():
             "lon": 11.5820,
             "papers_count": 15,
             "domains": ["Cognitive Science", "Neurobiology"],
-            "key_papers": ["Frith (2007)", "Singer (2004)"]
+            "key_papers": ["Frith (2007)", "Singer (2004)"],
         },
         # Switzerland - ETH Zurich
         {
@@ -144,7 +144,7 @@ def load_research_institutions_data():
             "lon": 8.5417,
             "papers_count": 12,
             "domains": ["Complex Systems", "Network Science"],
-            "key_papers": ["Schweitzer (2003)"]
+            "key_papers": ["Schweitzer (2003)"],
         },
         # Denmark - Aarhus (Folk High Schools)
         {
@@ -154,7 +154,7 @@ def load_research_institutions_data():
             "lon": 10.2039,
             "papers_count": 14,
             "domains": ["Alternative Education", "Democratic Governance"],
-            "key_papers": ["Korsgaard (2012)", "Gundemose (2021)"]
+            "key_papers": ["Korsgaard (2012)", "Gundemose (2021)"],
         },
         # Norway - Oslo (Governance)
         {
@@ -164,7 +164,7 @@ def load_research_institutions_data():
             "lon": 10.7217,
             "papers_count": 10,
             "domains": ["Governance", "Social Participation"],
-            "key_papers": ["Ostrom (1990)"]
+            "key_papers": ["Ostrom (1990)"],
         },
         # Japan - Tokyo (Tokkatsu)
         {
@@ -174,7 +174,7 @@ def load_research_institutions_data():
             "lon": 139.7624,
             "papers_count": 18,
             "domains": ["Cooperative Learning", "Education Psychology"],
-            "key_papers": ["Tokuhama-Espinosa (2019)", "Lewis (1995)"]
+            "key_papers": ["Tokuhama-Espinosa (2019)", "Lewis (1995)"],
         },
         # Australia - Melbourne (Mental Health)
         {
@@ -184,7 +184,7 @@ def load_research_institutions_data():
             "lon": 144.9612,
             "papers_count": 13,
             "domains": ["Mental Health", "Youth Psychology"],
-            "key_papers": ["Twenge (2019)", "Haidt (2023)"]
+            "key_papers": ["Twenge (2019)", "Haidt (2023)"],
         },
         # Brazil - São Paulo (Inequality)
         {
@@ -194,7 +194,7 @@ def load_research_institutions_data():
             "lon": -46.7294,
             "papers_count": 8,
             "domains": ["Economic Inequality", "Social Policy"],
-            "key_papers": ["Acemoglu & Robinson (2012)"]
+            "key_papers": ["Acemoglu & Robinson (2012)"],
         },
         # WHO - Geneva (Global Health)
         {
@@ -204,8 +204,8 @@ def load_research_institutions_data():
             "lon": 6.1325,
             "papers_count": 24,
             "domains": ["Global Health", "Mental Health Policy"],
-            "key_papers": ["WHO (2023)", "Patel (2018)"]
-        }
+            "key_papers": ["WHO (2023)", "Patel (2018)"],
+        },
     ]
     return institutions
 
@@ -221,24 +221,18 @@ def create_research_institutions_map(institutions_data):
         folium.Map: Interactive map with institution markers
     """
     # Create base map centered on Europe
-    m = folium.Map(
-        location=[45, 10],
-        zoom_start=2,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[45, 10], zoom_start=2, tiles="OpenStreetMap", width="100%", height=400)  # noqa: E501
 
     for inst in institutions_data:
         papers_count = inst.get("papers_count", 0)
 
         # Marker color by paper count
         if papers_count >= 20:
-            icon_color = "red"         # Major hub (20+ papers)
+            icon_color = "red"  # Major hub (20+ papers)
         elif papers_count >= 10:
-            icon_color = "orange"      # Medium hub (10-19 papers)
+            icon_color = "orange"  # Medium hub (10-19 papers)
         else:
-            icon_color = "blue"        # Emerging hub (<10 papers)
+            icon_color = "blue"  # Emerging hub (<10 papers)
 
         # Circle size by paper count
         radius = 8 + (papers_count * 0.3)
@@ -249,7 +243,7 @@ def create_research_institutions_map(institutions_data):
 
         popup_html = f"""
         <div style="font-family: Arial; width: 220px;">
-            <h4 style="margin: 0 0 8px 0; color: #0074D9;">{inst['name']}</h4>
+            <h4 style="margin: 0 0 8px 0; color: #0074D9;">{inst["name"]}</h4>
             <p style="margin: 4px 0;"><strong>Papers:</strong> {papers_count}</p>
             <p style="margin: 4px 0;"><strong>Domains:</strong></p>
             <div style="font-size: 11px; margin-left: 10px;">{domains_html}</div>
@@ -267,7 +261,7 @@ def create_research_institutions_map(institutions_data):
             fill=True,
             fillColor=icon_color,
             fillOpacity=0.5,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -275,7 +269,7 @@ def create_research_institutions_map(institutions_data):
             location=[inst["lat"], inst["lon"]],
             popup=folium.Popup(popup_html, max_width=280),
             icon=folium.Icon(color=icon_color, icon="university", prefix="fa"),
-            tooltip=f"{inst['name']} ({papers_count} papers)"
+            tooltip=f"{inst['name']} ({papers_count} papers)",
         ).add_to(m)
 
     # Add legend
@@ -587,24 +581,24 @@ def main():
         ### Relevante Publikationen zu 5D-Dimensionen
         
         **Autonomie (A):**
-        - Deci, E. L., & Ryan, R. M. (1985). *Intrinsic Motivation and Self-Determination in Human Behavior.* Springer.
+        - Deci, E. L., & Ryan, R. M. (1985). *Intrinsic Motivation and Self-Determination in Human Behavior.* Springer.  # noqa: E501
         - Rogers, C. R. (1961). *On Becoming a Person.* Houghton Mifflin.
         
         **Intrinsic Motivation (IM):**
         - Csíkszentmihályi, M. (1990). *Flow: The Psychology of Optimal Experience.* Harper & Row.
-        - Pink, D. H. (2009). *Drive: The Surprising Truth About What Motivates Us.* Riverhead Books.
+        - Pink, D. H. (2009). *Drive: The Surprising Truth About What Motivates Us.* Riverhead Books.  # noqa: E501
         
         **Resilienz (R):**
         - Porges, S. W. (2011). *The Polyvagal Theory.* Norton.
         - Masten, A. S. (2014). Ordinary Magic: Resilience in Development. Guilford Press.
         
         **Social Participation (SP):**
-        - Lewis, C. (1995). *Educating Hearts and Minds: Reflections on Japanese Preschool and Elementary Education.* Cambridge UP.
+        - Lewis, C. (1995). *Educating Hearts and Minds: Reflections on Japanese Preschool and Elementary Education.* Cambridge UP.  # noqa: E501
         - Ostrom, E. (1990). *Governing the Commons.* Cambridge UP.
         
         **Authentizität (Au):**
         - Rogers, C. R. (1961). *On Becoming a Person.* Houghton Mifflin.
-        - Kernis, M. H., & Goldman, B. M. (2006). A Multicomponent Conceptualization of Authenticity. *Advances in Experimental Social Psychology, 38*, 283-357.
+        - Kernis, M. H., & Goldman, B. M. (2006). A Multicomponent Conceptualization of Authenticity. *Advances in Experimental Social Psychology, 38*, 283-357.  # noqa: E501
         
         ---
         
@@ -629,7 +623,7 @@ def main():
 
     with col_c:
         st.markdown(
-            "[Scraper Source](5d_research_scraper.py) | [BibTeX](07_daten_analysen/5d-relevant-sources.bib)"
+            "[Scraper Source](5d_research_scraper.py) | [BibTeX](07_daten_analysen/5d-relevant-sources.bib)"  # noqa: E501
         )
 
 

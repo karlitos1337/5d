@@ -53,13 +53,13 @@ TECHNOLOGY_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Floridi, L., et al. (2018). AI4People—An ethical framework for a good AI society.",
+        "reference": "Floridi, L., et al. (2018). AI4People—An ethical framework for a good AI society.",  # noqa: E501
         "bibtex_key": "floridi2018ai4people",
         "sub_dimension": "AI Ethics",
     },
     {
         "id": "tech_decentralization",
-        "question": "Wie wichtig ist Ihnen dezentrale (statt zentralisierter) Technologie-Infrastruktur?",
+        "question": "Wie wichtig ist Ihnen dezentrale (statt zentralisierter) Technologie-Infrastruktur?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -81,13 +81,13 @@ TECHNOLOGY_QUESTIONS = [
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr gering", "Eher gering", "Mittelmäßig", "Gut", "Sehr gut"],
         "required": True,
-        "reference": "Eshet-Alkalai, Y. (2004). Digital literacy: A conceptual framework for survival skills in the digital era.",
+        "reference": "Eshet-Alkalai, Y. (2004). Digital literacy: A conceptual framework for survival skills in the digital era.",  # noqa: E501
         "bibtex_key": "eshet2004digital",
         "sub_dimension": "Digital Literacy",
     },
     {
         "id": "tech_appropriate_technology",
-        "question": "Wie wichtig ist Ihnen angepasste Technologie (einfach, reparierbar, lokal wartbar)?",
+        "question": "Wie wichtig ist Ihnen angepasste Technologie (einfach, reparierbar, lokal wartbar)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -115,7 +115,7 @@ TECHNOLOGY_QUESTIONS = [
     },
     {
         "id": "tech_interoperability",
-        "question": "Wie wichtig ist Ihnen Interoperabilität (Kompatibilität zwischen verschiedenen Systemen)?",
+        "question": "Wie wichtig ist Ihnen Interoperabilität (Kompatibilität zwischen verschiedenen Systemen)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -143,13 +143,13 @@ TECHNOLOGY_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Belkhir, L., & Elmeligi, A. (2018). Assessing ICT global emissions footprint.",
+        "reference": "Belkhir, L., & Elmeligi, A. (2018). Assessing ICT global emissions footprint.",  # noqa: E501
         "bibtex_key": "belkhir2018ict",
         "sub_dimension": "Energy Efficiency",
     },
     {
         "id": "tech_resonance_theory",
-        "question": "Wie sehr interessiert Sie die Idee, dass Technologie harmonisch mit natürlichen Systemen resonieren sollte?",
+        "question": "Wie sehr interessiert Sie die Idee, dass Technologie harmonisch mit natürlichen Systemen resonieren sollte?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Mäßig", "Stark", "Sehr stark"],

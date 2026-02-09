@@ -108,7 +108,11 @@ class QuantumMinecraftVisualizer:
         # LEFT: Superposition heatmap
         superposition_map = self.world.get_superposition_map()
         _im1 = self.ax1.imshow(
-            superposition_map, cmap="YlOrRd", vmin=0, vmax=1, origin="upper"  # noqa: F841
+            superposition_map,
+            cmap="YlOrRd",
+            vmin=0,
+            vmax=1,
+            origin="upper",  # noqa: F841
         )
 
         # Add text annotations
@@ -145,7 +149,11 @@ class QuantumMinecraftVisualizer:
         collapsed_map[self.world.measured] = self.world.blocks[self.world.measured]
 
         _im2 = self.ax2.imshow(
-            collapsed_map, cmap="Blues", vmin=0, vmax=1, origin="upper"  # noqa: F841
+            collapsed_map,
+            cmap="Blues",
+            vmin=0,
+            vmax=1,
+            origin="upper",  # noqa: F841
         )
 
         # Add result annotations
@@ -208,7 +216,7 @@ class QuantumMinecraftVisualizer:
             # Random block
             x, y = np.random.randint(0, self.world.size, size=2)
 
-            print(f"\nMeasurement {i+1}/{num_measurements}: Block ({x}, {y})")
+            print(f"\nMeasurement {i + 1}/{num_measurements}: Block ({x}, {y})")
             result = self.visualize_step(x, y)
 
             if result == 1:
@@ -232,7 +240,7 @@ class QuantumMinecraftVisualizer:
         print("=" * 60)
         print(f"Total measurements: {num_measurements}")
         print(f"Diamonds found: {diamonds_found}")
-        print(f"Success rate: {diamonds_found/num_measurements:.1%}")
+        print(f"Success rate: {diamonds_found / num_measurements:.1%}")
         print(f"Expected rate: {self.world.diamond_probability:.1%}")
 
         # Quantum explanation
@@ -284,7 +292,7 @@ class QuantumMinecraftVisualizer:
 
         print(f"\n💾 Results saved: {json_path}")
 
-        plt.savefig(f"{output_dir}/minecraft_quantum_{timestamp}.png", dpi=300, bbox_inches="tight")
+        plt.savefig(f"{output_dir}/minecraft_quantum_{timestamp}.png", dpi=300, bbox_inches="tight")  # noqa: E501
         print(f"📊 Plot saved: minecraft_quantum_{timestamp}.png")
 
         return results

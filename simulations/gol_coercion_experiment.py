@@ -324,24 +324,24 @@ def run_experiment(
     print("\n📈 STATISTICAL SUMMARY:")
     print("   Diversity (Shannon Entropy):")
     print(
-        f"     Coercive:     {statistics['diversity']['coercive_mean']:.4f} ± {statistics['diversity']['coercive_std']:.4f}"
+        f"     Coercive:     {statistics['diversity']['coercive_mean']:.4f} ± {statistics['diversity']['coercive_std']:.4f}"  # noqa: E501
     )
     print(
-        f"     Non-Coercive: {statistics['diversity']['non_coercive_mean']:.4f} ± {statistics['diversity']['non_coercive_std']:.4f}"
+        f"     Non-Coercive: {statistics['diversity']['non_coercive_mean']:.4f} ± {statistics['diversity']['non_coercive_std']:.4f}"  # noqa: E501
     )
     print(
-        f"     t = {statistics['diversity']['t_statistic']:.4f}, p = {statistics['diversity']['p_value']:.4e}"
+        f"     t = {statistics['diversity']['t_statistic']:.4f}, p = {statistics['diversity']['p_value']:.4e}"  # noqa: E501
     )
     print(f"     Significant: {statistics['diversity']['significant']}")
     print("\n   Longevity (Generations):")
     print(
-        f"     Coercive:     {statistics['longevity']['coercive_mean']:.2f} ± {statistics['longevity']['coercive_std']:.2f}"
+        f"     Coercive:     {statistics['longevity']['coercive_mean']:.2f} ± {statistics['longevity']['coercive_std']:.2f}"  # noqa: E501
     )
     print(
-        f"     Non-Coercive: {statistics['longevity']['non_coercive_mean']:.2f} ± {statistics['longevity']['non_coercive_std']:.2f}"
+        f"     Non-Coercive: {statistics['longevity']['non_coercive_mean']:.2f} ± {statistics['longevity']['non_coercive_std']:.2f}"  # noqa: E501
     )
     print(
-        f"     t = {statistics['longevity']['t_statistic']:.4f}, p = {statistics['longevity']['p_value']:.4e}"
+        f"     t = {statistics['longevity']['t_statistic']:.4f}, p = {statistics['longevity']['p_value']:.4e}"  # noqa: E501
     )
     print(f"     Significant: {statistics['longevity']['significant']}")
     print(f"\n   Hypothesis: {statistics['hypothesis'].upper()}")

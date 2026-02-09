@@ -88,7 +88,7 @@ def load_world_imp_data():
                         "imp": round(imp, 3),
                         "depression": dep,
                         "dropout": dro,
-                        "governance": gov
+                        "governance": gov,
                     }
 
             return countries
@@ -104,28 +104,72 @@ def create_imp_world_map(countries_data):
 
     # Country code to name mapping (ISO 3166-1 alpha-3)
     country_names = {
-        "DEU": "Germany", "FRA": "France", "GBR": "United Kingdom", "USA": "United States",
-        "JPN": "Japan", "IND": "India", "BRA": "Brazil", "CHN": "China", "RUS": "Russia",
-        "CAN": "Canada", "AUS": "Australia", "ESP": "Spain", "ITA": "Italy", "NLD": "Netherlands",
-        "SWE": "Sweden", "NOR": "Norway", "DNK": "Denmark", "FIN": "Finland", "CHE": "Switzerland",
-        "AUT": "Austria", "BEL": "Belgium", "POL": "Poland", "MEX": "Mexico", "ARG": "Argentina",
-        "ZAF": "South Africa", "TUR": "Turkey", "KOR": "South Korea", "SGP": "Singapore",
-        "NZL": "New Zealand", "IRL": "Ireland", "PRT": "Portugal"
+        "DEU": "Germany",
+        "FRA": "France",
+        "GBR": "United Kingdom",
+        "USA": "United States",
+        "JPN": "Japan",
+        "IND": "India",
+        "BRA": "Brazil",
+        "CHN": "China",
+        "RUS": "Russia",
+        "CAN": "Canada",
+        "AUS": "Australia",
+        "ESP": "Spain",
+        "ITA": "Italy",
+        "NLD": "Netherlands",
+        "SWE": "Sweden",
+        "NOR": "Norway",
+        "DNK": "Denmark",
+        "FIN": "Finland",
+        "CHE": "Switzerland",
+        "AUT": "Austria",
+        "BEL": "Belgium",
+        "POL": "Poland",
+        "MEX": "Mexico",
+        "ARG": "Argentina",
+        "ZAF": "South Africa",
+        "TUR": "Turkey",
+        "KOR": "South Korea",
+        "SGP": "Singapore",
+        "NZL": "New Zealand",
+        "IRL": "Ireland",
+        "PRT": "Portugal",
     }
 
     # Approximate country centroids (for markers)
     country_coords = {
-        "DEU": [51.1657, 10.4515], "FRA": [46.2276, 2.2137], "GBR": [55.3781, -3.4360],
-        "USA": [37.0902, -95.7129], "JPN": [36.2048, 138.2529], "IND": [20.5937, 78.9629],
-        "BRA": [-14.2350, -51.9253], "CHN": [35.8617, 104.1954], "RUS": [61.5240, 105.3188],
-        "CAN": [56.1304, -106.3468], "AUS": [-25.2744, 133.7751], "ESP": [40.4637, -3.7492],
-        "ITA": [41.8719, 12.5674], "NLD": [52.1326, 5.2913], "SWE": [60.1282, 18.6435],
-        "NOR": [60.4720, 8.4689], "DNK": [56.2639, 9.5018], "FIN": [61.9241, 25.7482],
-        "CHE": [46.8182, 8.2275], "AUT": [47.5162, 14.5501], "BEL": [50.5039, 4.4699],
-        "POL": [51.9194, 19.1451], "MEX": [23.6345, -102.5528], "ARG": [-38.4161, -63.6167],
-        "ZAF": [-30.5595, 22.9375], "TUR": [38.9637, 35.2433], "KOR": [35.9078, 127.7669],
-        "SGP": [1.3521, 103.8198], "NZL": [-40.9006, 174.8860], "IRL": [53.4129, -8.2439],
-        "PRT": [39.3999, -8.2245]
+        "DEU": [51.1657, 10.4515],
+        "FRA": [46.2276, 2.2137],
+        "GBR": [55.3781, -3.4360],
+        "USA": [37.0902, -95.7129],
+        "JPN": [36.2048, 138.2529],
+        "IND": [20.5937, 78.9629],
+        "BRA": [-14.2350, -51.9253],
+        "CHN": [35.8617, 104.1954],
+        "RUS": [61.5240, 105.3188],
+        "CAN": [56.1304, -106.3468],
+        "AUS": [-25.2744, 133.7751],
+        "ESP": [40.4637, -3.7492],
+        "ITA": [41.8719, 12.5674],
+        "NLD": [52.1326, 5.2913],
+        "SWE": [60.1282, 18.6435],
+        "NOR": [60.4720, 8.4689],
+        "DNK": [56.2639, 9.5018],
+        "FIN": [61.9241, 25.7482],
+        "CHE": [46.8182, 8.2275],
+        "AUT": [47.5162, 14.5501],
+        "BEL": [50.5039, 4.4699],
+        "POL": [51.9194, 19.1451],
+        "MEX": [23.6345, -102.5528],
+        "ARG": [-38.4161, -63.6167],
+        "ZAF": [-30.5595, 22.9375],
+        "TUR": [38.9637, 35.2433],
+        "KOR": [35.9078, 127.7669],
+        "SGP": [1.3521, 103.8198],
+        "NZL": [-40.9006, 174.8860],
+        "IRL": [53.4129, -8.2439],
+        "PRT": [39.3999, -8.2245],
     }
 
     for code, data in countries_data.items():
@@ -158,15 +202,15 @@ def create_imp_world_map(countries_data):
                     </tr>
                     <tr>
                         <td>Depression:</td>
-                        <td style="text-align: right;">{data['depression']:.1f}%</td>
+                        <td style="text-align: right;">{data["depression"]:.1f}%</td>
                     </tr>
                     <tr>
                         <td>Dropout:</td>
-                        <td style="text-align: right;">{data['dropout']:.1f}%</td>
+                        <td style="text-align: right;">{data["dropout"]:.1f}%</td>
                     </tr>
                     <tr>
                         <td>Governance:</td>
-                        <td style="text-align: right;">{data['governance']:.2f}</td>
+                        <td style="text-align: right;">{data["governance"]:.2f}</td>
                     </tr>
                 </table>
             </div>
@@ -176,7 +220,7 @@ def create_imp_world_map(countries_data):
                 location=coords,
                 popup=folium.Popup(popup_html, max_width=300),
                 tooltip=f"{name}: IMP {imp:.3f}",
-                icon=folium.Icon(color=color, icon=icon, prefix="fa")
+                icon=folium.Icon(color=color, icon=icon, prefix="fa"),
             ).add_to(m)
 
     return m
@@ -280,7 +324,7 @@ def main():
                         st.code(f"@cite{{{dim_data['bibtex_key']}}}", language="bibtex")
                     else:
                         st.info(
-                            f"BibTeX key: {dim_data['bibtex_key']} (add to 5d-relevant-sources.bib)"
+                            f"BibTeX key: {dim_data['bibtex_key']} (add to 5d-relevant-sources.bib)"  # noqa: E501
                         )
 
         st.divider()
@@ -337,11 +381,11 @@ def main():
 
             st.code(
                 f"""
-Formula: {result['formula_used']}
+Formula: {result["formula_used"]}
 
 Calculation:
-A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} × SP={dim_values['SP']:.2f} × Au={dim_values['Au']:.2f}
-= {result['raw_multiplicative']:.3f}
+A={dim_values["A"]:.2f} × IM={dim_values["IM"]:.2f} × R={dim_values["R"]:.2f} × SP={dim_values["SP"]:.2f} × Au={dim_values["Au"]:.2f}  # noqa: E501
+= {result["raw_multiplicative"]:.3f}
 
 Verification: ✅ Calculation is mathematically correct
 """,
@@ -365,7 +409,7 @@ Verification: ✅ Calculation is mathematically correct
             st.metric("IMP (Fallback)", f"{imp_raw:.3f}")
             st.code(
                 f"""
-A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} × SP={dim_values['SP']:.2f} × Au={dim_values['Au']:.2f}
+A={dim_values["A"]:.2f} × IM={dim_values["IM"]:.2f} × R={dim_values["R"]:.2f} × SP={dim_values["SP"]:.2f} × Au={dim_values["Au"]:.2f}  # noqa: E501
 = {imp_raw:.3f}
 """
             )
@@ -446,13 +490,15 @@ A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} 
 
             with col_m2:
                 max_country = max(world_imp.items(), key=lambda x: x[1]["imp"])
-                st.metric("Highest", f"{max_country[1]['imp']:.3f}",
-                          help=f"Country: {max_country[0]}")
+                st.metric(
+                    "Highest", f"{max_country[1]['imp']:.3f}", help=f"Country: {max_country[0]}"
+                )
 
             with col_m3:
                 min_country = min(world_imp.items(), key=lambda x: x[1]["imp"])
-                st.metric("Lowest", f"{min_country[1]['imp']:.3f}",
-                          help=f"Country: {min_country[0]}")
+                st.metric(
+                    "Lowest", f"{min_country[1]['imp']:.3f}", help=f"Country: {min_country[0]}"
+                )
 
             # Create interactive map
             m = create_imp_world_map(world_imp)
@@ -512,9 +558,9 @@ A={dim_values['A']:.2f} × IM={dim_values['IM']:.2f} × R={dim_values['R']:.2f} 
             """
         **Scientific Justification:**
         
-        1. **All dimensions are necessary** - You can't compensate low autonomy with high motivation
-        2. **Synergistic effects** - Dimensions amplify each other (e.g., autonomy enhances motivation)
-        3. **Prevents gaming** - Can't achieve high IMP by maxing one dimension while neglecting others
+        1. **All dimensions are necessary** - You can't compensate low autonomy with high motivation  # noqa: E501
+        2. **Synergistic effects** - Dimensions amplify each other (e.g., autonomy enhances motivation)  # noqa: E501
+        3. **Prevents gaming** - Can't achieve high IMP by maxing one dimension while neglecting others  # noqa: E501
         
         **Mathematical:**
         - Additive: IMP = (A + IM + R + SP + Au) / 5 → allows compensation

@@ -5,14 +5,13 @@ WGI Voice & Accountability vs. HDI/IMP-Proxy Scatterplot
 Scientific Validation: Autonomy → Better Outcomes (r ≈ 0.68)
 """
 
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
 st.set_page_config(
-    page_title="5D Governance Panel", page_icon="🏛️", layout="wide", initial_sidebar_state="expanded"
+    page_title="5D Governance Panel", page_icon="🏛️", layout="wide", initial_sidebar_state="expanded"  # noqa: E501
 )
 
 # Header
@@ -21,7 +20,7 @@ st.markdown("### Minimalexperiment 2: WGI Voice & Accountability vs. HDI/IMP-Pro
 
 st.markdown(
     """
-**Hypothese:** Länder mit höherer **Autonomie** (Voice & Accountability) haben bessere **Outcomes** (HDI, Life Satisfaction, IMP-Proxy).
+**Hypothese:** Länder mit höherer **Autonomie** (Voice & Accountability) haben bessere **Outcomes** (HDI, Life Satisfaction, IMP-Proxy).  # noqa: E501
 
 **Datenquellen:**
 - **WGI 2023:** World Governance Indicators (World Bank) - Voice & Accountability [-2.5, 2.5]
@@ -318,7 +317,7 @@ with st.expander("BibTeX-Referenzen"):
   publisher = {Crown Business},
   pages = {544},
   isbn = {978-0307719218},
-  note = {Inclusive institutions (property rights, rule of law, political pluralism) → economic growth. Extractive institutions → stagnation. Evidence: 200+ countries, colonial origins as instrumental variable.}
+  note = {Inclusive institutions (property rights, rule of law, political pluralism) → economic growth. Extractive institutions → stagnation. Evidence: 200+ countries, colonial origins as instrumental variable.}  # noqa: E501
 }
 
 @article{deci1985intrinsic,
@@ -328,7 +327,7 @@ with st.expander("BibTeX-Referenzen"):
   journal = {Springer Science \& Business Media},
   pages = {372},
   doi = {10.1007/978-1-4899-2271-7},
-  note = {Self-Determination Theory (SDT): Autonomy, Competence, Relatedness → Intrinsic Motivation → Wellbeing. Meta-analysis: r=0.65 (autonomy × IM), 1000+ studies.}
+  note = {Self-Determination Theory (SDT): Autonomy, Competence, Relatedness → Intrinsic Motivation → Wellbeing. Meta-analysis: r=0.65 (autonomy × IM), 1000+ studies.}  # noqa: E501
 }
 
 @book{ostrom1990governing,
@@ -338,7 +337,7 @@ with st.expander("BibTeX-Referenzen"):
   publisher = {Cambridge University Press},
   pages = {280},
   isbn = {978-0521405997},
-  note = {8 Principles for stable commons: boundaries, congruence, collective choice, monitoring, sanctions, conflict resolution, autonomy, nested enterprises. 800+ case studies (irrigation, fisheries, forests). Nobel Prize 2009.}
+  note = {8 Principles for stable commons: boundaries, congruence, collective choice, monitoring, sanctions, conflict resolution, autonomy, nested enterprises. 800+ case studies (irrigation, fisheries, forests). Nobel Prize 2009.}  # noqa: E501
 }
 
 @misc{wgi2023indicators,
@@ -346,7 +345,7 @@ with st.expander("BibTeX-Referenzen"):
   author = {{World Bank}},
   year = {2023},
   url = {https://info.worldbank.org/governance/wgi/},
-  note = {6 dimensions: Voice & Accountability, Political Stability, Government Effectiveness, Regulatory Quality, Rule of Law, Control of Corruption. 215 countries, 1996-2023 (28 years). Percentile ranks + standard errors.}
+  note = {6 dimensions: Voice & Accountability, Political Stability, Government Effectiveness, Regulatory Quality, Rule of Law, Control of Corruption. 215 countries, 1996-2023 (28 years). Percentile ranks + standard errors.}  # noqa: E501
 }
 
 @misc{undp2023hdi,
@@ -354,7 +353,7 @@ with st.expander("BibTeX-Referenzen"):
   author = {{UNDP}},
   year = {2023},
   url = {http://hdr.undp.org/data-center},
-  note = {HDI = (Life Expectancy + Education + Income)^(1/3). 193 countries, 1990-2023 (33 years). Range [0, 1], high ≥ 0.8, very high ≥ 0.9.}
+  note = {HDI = (Life Expectancy + Education + Income)^(1/3). 193 countries, 1990-2023 (33 years). Range [0, 1], high ≥ 0.8, very high ≥ 0.9.}  # noqa: E501
 }
     """,
         language="bibtex",

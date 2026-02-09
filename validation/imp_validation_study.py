@@ -209,7 +209,7 @@ class IMPValidationStudy:
         return {
             "dimensions": dim_scores,
             "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
+            "IMP_additive": imp_additive,
         }
 
     def correlation_analysis(self):
@@ -274,7 +274,7 @@ class IMPValidationStudy:
         filename = f"validation_results_{self.timestamp}.png"
         plt.savefig(filename, dpi=300)
         print(f"\n✅ Visualisierung gespeichert: {filename}")
-        plt.close()  # Close plot to prevent it from showing in non-interactive environments if configured
+        plt.close()  # Close plot to prevent it from showing in non-interactive environments if configured  # noqa: E501
 
     def generate_report(self):
         """Generiert Abschlussbericht"""
@@ -298,7 +298,7 @@ class IMPValidationStudy:
         avg_alpha = np.mean([r["cronbach_alpha"] for r in self.results.values()])
 
         if avg_alpha >= 0.8:
-            return "Das 5D-Framework zeigt gute bis exzellente Reliabilität. Bereit für Preprint-Publikation (Pilotstudie)."
+            return "Das 5D-Framework zeigt gute bis exzellente Reliabilität. Bereit für Preprint-Publikation (Pilotstudie)."  # noqa: E501
         elif avg_alpha >= 0.7:
             return "Das Framework ist akzeptabel, aber Verbesserung einzelner Items empfohlen."
         else:
@@ -323,7 +323,7 @@ def main():
     example_data = {}
 
     # Simuliere latente Variablen für jede Dimension (Mittelwert 3.5, SD 0.8)
-    # Probanden haben eine "Grundkompetenz", die die Items beeinflusst -> hohe Korrelation -> hohes Alpha
+    # Probanden haben eine "Grundkompetenz", die die Items beeinflusst -> hohe Korrelation -> hohes Alpha  # noqa: E501
     n_participants = 30
 
     for dimension, questions in QUESTIONS.items():

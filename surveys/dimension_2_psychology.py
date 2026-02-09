@@ -8,18 +8,18 @@ Growth Mindset, Selbstwirksamkeit und positiver Psychologie.
 PSYCHOLOGY_QUESTIONS = [
     {
         "id": "psych_intrinsic_motivation",
-        "question": "Wie stark fühlen Sie sich von innen heraus motiviert bei Ihren Haupttätigkeiten (Arbeit, Studium, Hobbys)?",
+        "question": "Wie stark fühlen Sie sich von innen heraus motiviert bei Ihren Haupttätigkeiten (Arbeit, Studium, Hobbys)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Mittelmäßig", "Stark", "Sehr stark"],
         "required": True,
-        "reference": "Deci, E. L., & Ryan, R. M. (2000). The 'what' and 'why' of goal pursuits: Human needs and the self-determination of behavior.",
+        "reference": "Deci, E. L., & Ryan, R. M. (2000). The 'what' and 'why' of goal pursuits: Human needs and the self-determination of behavior.",  # noqa: E501
         "bibtex_key": "deci2000sdt",
         "sub_dimension": "Autonomy (SDT)",
     },
     {
         "id": "psych_growth_mindset",
-        "question": "Inwieweit glauben Sie, dass Sie durch Anstrengung und Übung Ihre Fähigkeiten grundlegend verbessern können?",
+        "question": "Inwieweit glauben Sie, dass Sie durch Anstrengung und Übung Ihre Fähigkeiten grundlegend verbessern können?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Teilweise", "Weitgehend", "Vollständig"],
@@ -30,7 +30,7 @@ PSYCHOLOGY_QUESTIONS = [
     },
     {
         "id": "psych_self_efficacy",
-        "question": "Wie zuversichtlich sind Sie, dass Sie auch schwierige Aufgaben erfolgreich bewältigen können?",
+        "question": "Wie zuversichtlich sind Sie, dass Sie auch schwierige Aufgaben erfolgreich bewältigen können?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -47,29 +47,29 @@ PSYCHOLOGY_QUESTIONS = [
     },
     {
         "id": "psych_social_relatedness",
-        "question": "Wie stark fühlen Sie sich mit anderen Menschen verbunden und in Ihrer Gemeinschaft eingebunden?",
+        "question": "Wie stark fühlen Sie sich mit anderen Menschen verbunden und in Ihrer Gemeinschaft eingebunden?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Überhaupt nicht", "Wenig", "Mittelmäßig", "Stark", "Sehr stark"],
         "required": True,
-        "reference": "Ryan, R. M., & Deci, E. L. (2000). Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being.",
+        "reference": "Ryan, R. M., & Deci, E. L. (2000). Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being.",  # noqa: E501
         "bibtex_key": "ryan2000sdt",
         "sub_dimension": "Relatedness (SDT)",
     },
     {
         "id": "psych_emotional_regulation",
-        "question": "Wie gut können Sie negative Emotionen regulieren und konstruktiv damit umgehen?",
+        "question": "Wie gut können Sie negative Emotionen regulieren und konstruktiv damit umgehen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schlecht", "Eher schlecht", "Mittelmäßig", "Gut", "Sehr gut"],
         "required": True,
-        "reference": "Gross, J. J. (2015). Emotion regulation: Current status and future prospects.",
+        "reference": "Gross, J. J. (2015). Emotion regulation: Current status and future prospects.",  # noqa: E501
         "bibtex_key": "gross2015emotion",
         "sub_dimension": "Emotional Intelligence",
     },
     {
         "id": "psych_resilience",
-        "question": "Wie gut erholen Sie sich von Rückschlägen oder schwierigen Lebensereignissen?",
+        "question": "Wie gut erholen Sie sich von Rückschlägen oder schwierigen Lebensereignissen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schlecht", "Eher schlecht", "Mittelmäßig", "Gut", "Sehr gut"],
@@ -91,29 +91,29 @@ PSYCHOLOGY_QUESTIONS = [
     },
     {
         "id": "psych_positive_affect",
-        "question": "Wie häufig erleben Sie positive Emotionen wie Freude, Dankbarkeit oder Begeisterung?",
+        "question": "Wie häufig erleben Sie positive Emotionen wie Freude, Dankbarkeit oder Begeisterung?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Nie", "Selten", "Manchmal", "Häufig", "Sehr häufig"],
         "required": True,
-        "reference": "Fredrickson, B. L. (2001). The role of positive emotions in positive psychology.",
+        "reference": "Fredrickson, B. L. (2001). The role of positive emotions in positive psychology.",  # noqa: E501
         "bibtex_key": "fredrickson2001positive",
         "sub_dimension": "Positive Psychology",
     },
     {
         "id": "psych_empathy",
-        "question": "Wie gut können Sie sich in die Gefühle und Perspektiven anderer Menschen hineinversetzen?",
+        "question": "Wie gut können Sie sich in die Gefühle und Perspektiven anderer Menschen hineinversetzen?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schlecht", "Eher schlecht", "Mittelmäßig", "Gut", "Sehr gut"],
         "required": True,
-        "reference": "Decety, J., & Jackson, P. L. (2004). The functional architecture of human empathy.",
+        "reference": "Decety, J., & Jackson, P. L. (2004). The functional architecture of human empathy.",  # noqa: E501
         "bibtex_key": "decety2004empathy",
         "sub_dimension": "Empathy & Social Cognition",
     },
     {
         "id": "psych_metacognition",
-        "question": "Wie häufig reflektieren Sie bewusst über Ihre eigenen Denkprozesse und Lernstrategien?",
+        "question": "Wie häufig reflektieren Sie bewusst über Ihre eigenen Denkprozesse und Lernstrategien?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Nie", "Selten", "Manchmal", "Häufig", "Sehr häufig"],

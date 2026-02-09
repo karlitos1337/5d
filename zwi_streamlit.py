@@ -99,7 +99,7 @@ with col4:
 st.session_state[state_key] = (z_types, z_will, z_pay)
 
 st.write(
-    f"Ø Bereitschaft: {float(np.mean(z_will)):.2f} | Ø Payoff: {float(np.mean(z_pay)):.2f} | Zwinger %: {float(np.mean(z_types==1)*100):.1f}%"
+    f"Ø Bereitschaft: {float(np.mean(z_will)):.2f} | Ø Payoff: {float(np.mean(z_pay)):.2f} | Zwinger %: {float(np.mean(z_types == 1) * 100):.1f}%"  # noqa: E501
 )
 
 mode = st.selectbox("Visualisierung", ["Willingness", "Payoff", "Type"], index=0)

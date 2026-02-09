@@ -90,9 +90,9 @@ def train_quick(
         # Print progress every 10 batches
         if (batch_idx + 1) % 10 == 0:
             print(
-                f"  Batch {batch_idx+1}/{len(loader)} | "
+                f"  Batch {batch_idx + 1}/{len(loader)} | "
                 f"Loss: {loss.item():.4f} | "
-                f"Acc: {100. * correct / total:.2f}%",
+                f"Acc: {100.0 * correct / total:.2f}%",
                 end="\r",
             )
 
@@ -167,9 +167,9 @@ def main():
 
     # Train and test both models
     for model_name in ["5D-Net", "Baseline"]:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"Training: {model_name}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         # Initialize model
         if model_name == "5D-Net":
@@ -191,7 +191,7 @@ def main():
 
         # Training
         for epoch in range(config.epochs):
-            print(f"\nEpoch {epoch+1}/{config.epochs}")
+            print(f"\nEpoch {epoch + 1}/{config.epochs}")
             train_metrics = train_quick(model, train_loader, optimizer, config)
             print(
                 f"  Train Loss: {train_metrics['loss']:.4f} | "

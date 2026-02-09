@@ -8,7 +8,7 @@ Commons-Theorie und nachhaltigen Wirtschaftsmodellen.
 ECONOMICS_QUESTIONS = [
     {
         "id": "econ_participation",
-        "question": "Wie wichtig ist Ihnen Mitbestimmung in wirtschaftlichen Entscheidungen (am Arbeitsplatz, in der Gemeinde)?",
+        "question": "Wie wichtig ist Ihnen Mitbestimmung in wirtschaftlichen Entscheidungen (am Arbeitsplatz, in der Gemeinde)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -19,13 +19,13 @@ ECONOMICS_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Albert, M., & Hahnel, R. (1991). The political economy of participatory economics.",
+        "reference": "Albert, M., & Hahnel, R. (1991). The political economy of participatory economics.",  # noqa: E501
         "bibtex_key": "albert1991parecon",
         "sub_dimension": "Participatory Economics",
     },
     {
         "id": "econ_commons",
-        "question": "Wie wichtig ist Ihnen gemeinschaftliches Eigentum an Ressourcen (Wasser, Land, Wissen)?",
+        "question": "Wie wichtig ist Ihnen gemeinschaftliches Eigentum an Ressourcen (Wasser, Land, Wissen)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -36,13 +36,13 @@ ECONOMICS_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Ostrom, E. (1990). Governing the commons: The evolution of institutions for collective action.",
+        "reference": "Ostrom, E. (1990). Governing the commons: The evolution of institutions for collective action.",  # noqa: E501
         "bibtex_key": "ostrom1990commons",
         "sub_dimension": "Commons Management",
     },
     {
         "id": "econ_degrowth",
-        "question": "Inwieweit stimmen Sie zu, dass endloses Wirtschaftswachstum auf einem endlichen Planeten unmöglich ist?",
+        "question": "Inwieweit stimmen Sie zu, dass endloses Wirtschaftswachstum auf einem endlichen Planeten unmöglich ist?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -53,13 +53,13 @@ ECONOMICS_QUESTIONS = [
             "Stimme voll zu",
         ],
         "required": True,
-        "reference": "Kallis, G., Kostakis, V., Lange, S., Muraca, B., Paulson, S., & Schmelzer, M. (2018). Research on degrowth.",
+        "reference": "Kallis, G., Kostakis, V., Lange, S., Muraca, B., Paulson, S., & Schmelzer, M. (2018). Research on degrowth.",  # noqa: E501
         "bibtex_key": "kallis2018degrowth",
         "sub_dimension": "Degrowth & Sustainability",
     },
     {
         "id": "econ_cooperative",
-        "question": "Wie attraktiv finden Sie Unternehmensformen wie Genossenschaften oder Kollektive?",
+        "question": "Wie attraktiv finden Sie Unternehmensformen wie Genossenschaften oder Kollektive?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -87,7 +87,7 @@ ECONOMICS_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Van Parijs, P., & Vanderborght, Y. (2017). Basic income: A radical proposal for a free society and a sane economy.",
+        "reference": "Van Parijs, P., & Vanderborght, Y. (2017). Basic income: A radical proposal for a free society and a sane economy.",  # noqa: E501
         "bibtex_key": "vanparijs2017ubi",
         "sub_dimension": "Universal Basic Income",
     },
@@ -104,13 +104,13 @@ ECONOMICS_QUESTIONS = [
             "Sehr wichtig",
         ],
         "required": True,
-        "reference": "Shuman, M. (2000). Going local: Creating self-reliant communities in a global age.",
+        "reference": "Shuman, M. (2000). Going local: Creating self-reliant communities in a global age.",  # noqa: E501
         "bibtex_key": "shuman2000local",
         "sub_dimension": "Local Economics",
     },
     {
         "id": "econ_wealth_distribution",
-        "question": "Wie wichtig ist Ihnen eine gerechtere Verteilung von Vermögen in der Gesellschaft?",
+        "question": "Wie wichtig ist Ihnen eine gerechtere Verteilung von Vermögen in der Gesellschaft?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -127,7 +127,7 @@ ECONOMICS_QUESTIONS = [
     },
     {
         "id": "econ_circular_economy",
-        "question": "Wie wichtig ist Ihnen das Konzept der Kreislaufwirtschaft (Wiederverwertung, Reparatur statt Neukauf)?",
+        "question": "Wie wichtig ist Ihnen das Konzept der Kreislaufwirtschaft (Wiederverwertung, Reparatur statt Neukauf)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -144,7 +144,7 @@ ECONOMICS_QUESTIONS = [
     },
     {
         "id": "econ_solidarity_economy",
-        "question": "Wie wichtig ist Ihnen solidarisches Wirtschaften (gegenseitige Hilfe, Tauschsysteme)?",
+        "question": "Wie wichtig ist Ihnen solidarisches Wirtschaften (gegenseitige Hilfe, Tauschsysteme)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": [
@@ -161,12 +161,12 @@ ECONOMICS_QUESTIONS = [
     },
     {
         "id": "econ_financial_literacy",
-        "question": "Wie gut verstehen Sie grundlegende wirtschaftliche Zusammenhänge (Zinsen, Inflation, Aktienmärkte)?",
+        "question": "Wie gut verstehen Sie grundlegende wirtschaftliche Zusammenhänge (Zinsen, Inflation, Aktienmärkte)?",  # noqa: E501
         "type": "likert",
         "scale": [1, 2, 3, 4, 5],
         "labels": ["Sehr schlecht", "Eher schlecht", "Mittelmäßig", "Gut", "Sehr gut"],
         "required": True,
-        "reference": "Lusardi, A., & Mitchell, O. S. (2014). The economic importance of financial literacy.",
+        "reference": "Lusardi, A., & Mitchell, O. S. (2014). The economic importance of financial literacy.",  # noqa: E501
         "bibtex_key": "lusardi2014financial",
         "sub_dimension": "Financial Literacy",
     },

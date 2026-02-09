@@ -9,8 +9,8 @@ st.markdown(
     """
 <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             padding: 2rem; border-radius: 15px; margin-bottom: 2rem; color: white;'>
-    <h2 style='color: white; margin: 0;'>🔬 Akademische Validierung des 5D-Intelligence-Frameworks</h2>
-    <p style='margin-top: 1rem; font-size: 1.1rem;'>Empirische Forschung | Statistische Validierung | Open Science</p>
+    <h2 style='color: white; margin: 0;'>🔬 Akademische Validierung des 5D-Intelligence-Frameworks</h2>  # noqa: E501
+    <p style='margin-top: 1rem; font-size: 1.1rem;'>Empirische Forschung | Statistische Validierung | Open Science</p>  # noqa: E501
 </div>
 """,
     unsafe_allow_html=True,
@@ -179,7 +179,7 @@ st.markdown("---")
 st.markdown(
     """
 <div style='text-align: center; color: #666; padding: 2rem;'>
-    <p>🔬 <strong>Open Science</strong> | 📊 <strong>Data Transparency</strong> | ✅ <strong>Reproducible Research</strong></p>
+    <p>🔬 <strong>Open Science</strong> | 📊 <strong>Data Transparency</strong> | ✅ <strong>Reproducible Research</strong></p>  # noqa: E501
     <p style='margin-top: 1rem;'><em>Letzte Aktualisierung: 05.12.2025</em></p>
 </div>
 """,

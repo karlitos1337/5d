@@ -3,7 +3,7 @@
 Utility to add YAML frontmatter to markdown files that are missing it.
 
 Usage:
-    python tools/add_frontmatter.py path/to/file.md --title "My Title" --domain "01_bildung_education"
+    python tools/add_frontmatter.py path/to/file.md --title "My Title" --domain "01_bildung_education"  # noqa: E501
 
 Only adds frontmatter if the file is missing a YAML frontmatter block.
 """
@@ -89,9 +89,7 @@ def add_frontmatter_to_file(
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Add YAML frontmatter to markdown files"
-    )
+    parser = argparse.ArgumentParser(description="Add YAML frontmatter to markdown files")
     parser.add_argument("file", help="Path to the markdown file")
     parser.add_argument("--title", required=True, help="Document title")
     parser.add_argument("--domain", required=True, help="Domain/folder name")

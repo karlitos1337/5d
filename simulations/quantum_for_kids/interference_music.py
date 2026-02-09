@@ -266,7 +266,7 @@ class InterferenceVisualizer:
                 transform=self.ax4.transAxes,
             )
             self.ax4.text(
-                0.1, 0.65, "⚠️ Wellen teilweise in Phase", fontsize=11, transform=self.ax4.transAxes
+                0.1, 0.65, "⚠️ Wellen teilweise in Phase", fontsize=11, transform=self.ax4.transAxes  # noqa: E501
             )
             self.ax4.text(
                 0.1,

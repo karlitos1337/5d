@@ -64,7 +64,7 @@ class Population:
         self.name = name
         self.organisms = [Organism() for _ in range(size)]
         self.generation = 0
-        self.history = {"diversity": [], "mean_fitness": [], "max_fitness": [], "survival_rate": []}
+        self.history = {"diversity": [], "mean_fitness": [], "max_fitness": [], "survival_rate": []}  # noqa: E501
 
     def evolve(self, environment: dict, generations: int, verbose: bool = True):
         """Evolve population for N generations"""
@@ -153,7 +153,7 @@ class Population:
             "final_max_fitness": (
                 self.history["max_fitness"][-1] if self.history["max_fitness"] else 0
             ),
-            "avg_diversity": np.mean(self.history["diversity"]) if self.history["diversity"] else 0,
+            "avg_diversity": np.mean(self.history["diversity"]) if self.history["diversity"] else 0,  # noqa: E501
         }
 
 
@@ -333,7 +333,7 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
     # Plot 3: Max Fitness
     ax = axes[1, 0]
     ax.plot(
-        generations, controlled.history["max_fitness"], label="Controlled", color="red", linewidth=2
+        generations, controlled.history["max_fitness"], label="Controlled", color="red", linewidth=2  # noqa: E501
     )
     ax.plot(generations, free.history["max_fitness"], label="Free", color="green", linewidth=2)
     ax.set_xlabel("Generation")
