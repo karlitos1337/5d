@@ -22,10 +22,10 @@ class ProxyHandler(BaseHTTPRequestHandler):
             try:
                 key = path.split("/", 1)[1]
             except IndexError:
-                 self._send_headers(404)
-                 self.end_headers()
-                 self.wfile.write(b"Missing key")
-                 return
+                self._send_headers(404)
+                self.end_headers()
+                self.wfile.write(b"Missing key")
+                return
 
             url = OWID_URLS.get(key)
             if not url:
