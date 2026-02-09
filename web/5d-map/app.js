@@ -15,6 +15,16 @@ function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
   const msgEl = document.querySelector('.loading-spinner p');
   if (msgEl) msgEl.textContent = message;
+
+  const main = document.getElementById('main-content');
+  if (main) {
+    main.setAttribute('aria-busy', String(!!isLoading));
+    main.setAttribute('aria-hidden', String(!!isLoading));
+  }
+  const overlay = document.querySelector('.loading-overlay');
+  if (overlay) {
+    overlay.setAttribute('aria-hidden', String(!isLoading));
+  }
 }
 
 function updateLastUpdateTime() {
