@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-05-24 - Granular LocalStorage
+**Learning:** Monolithic LocalStorage objects block the main thread during `JSON.parse/stringify` when the cache is large.
+**Action:** Use granular keys (e.g., `prefix:key`) for caching individual items instead of one large object to reduce parsing overhead and improve responsiveness.
