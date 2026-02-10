@@ -18,7 +18,8 @@ describe('Performance Optimization: Granular Caching', () => {
           if (urlStr.includes('schools.json')) return [];
           if (urlStr.includes('validation.json')) return { validatedISO3: [], items: [] };
           if (urlStr.includes('baseline.json')) return { depression_latest: {}, dropout_latest: {} };
-          if (urlStr.includes('worldbank.org')) return [{}, []]; // [meta, data]
+          // Fix CodeQL alert: verify exact domain prefix to avoid arbitrary host matches
+          if (urlStr.startsWith('https://api.worldbank.org/')) return [{}, []]; // [meta, data]
           if (urlStr.includes('geojson')) return { type: 'FeatureCollection', features: [] };
           return {};
         },
