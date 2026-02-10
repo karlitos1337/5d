@@ -16,6 +16,7 @@ const STATIC_ASSETS = [
   './js/imp-choropleth.js',
   './js/school-markers.js',
   './js/time-travel.js',
+  './init.js',
   './data/baseline.json',
   './data/country-boundaries.geojson',
   // Leaflet CDN files
