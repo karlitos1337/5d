@@ -45,3 +45,7 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Generated Artifacts
+outputs/
+verify_wb_source.py
