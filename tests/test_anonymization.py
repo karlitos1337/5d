@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """Tests für Anonymisierung."""
 
+import sys
+import os
+from pathlib import Path
+
 import pytest
+
+# Add parent directory to path to ensure storage module can be imported
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from storage.anonymize import (
     PROHIBITED_FIELDS,
