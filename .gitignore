@@ -49,3 +49,8 @@ data/archive/
 # Generated Artifacts
 outputs/
 verify_wb_source.py
+
+# Coverage artifacts
+coverage.xml
+.coverage
+htmlcov/
