@@ -158,7 +158,7 @@ def invalidate_cache(cache_key: str = None):
     if cache_key:
         # Streamlit doesn't support selective invalidation in @st.cache_data
         # Use st.cache_data.clear() for all or rely on TTL
-        st.warning(f"⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
+        st.warning("⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
     else:
         st.cache_data.clear()
         st.success("✅ All caches cleared")
