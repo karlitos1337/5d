@@ -209,7 +209,7 @@ class IMPValidationStudy:
         return {
             "dimensions": dim_scores,
             "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
+            "IMP_additive": imp_additive,
         }
 
     def correlation_analysis(self):
