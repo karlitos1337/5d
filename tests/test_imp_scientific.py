@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""
+r"""
 Test IMP Calculation with Scientific Validation
 Tests based on peer-reviewed formulas and validated data
-"""
+r"""
 
 import sys
 from pathlib import Path
@@ -19,7 +19,7 @@ from models.imp import calculate_imp_verified
 
 
 class TestIMPCalculation:
-    """
+    r"""
     Test IMP calculation against scientifically validated formulas.
 
     Scientific Basis:
@@ -41,17 +41,17 @@ class TestIMPCalculation:
       year={1990},
       publisher={Harper \& Row}
     }
-    """
+    r"""
 
     def test_perfect_score(self):
-        """
+        r"""
         Test maximum IMP score (all dimensions = 1.0).
 
         Scientific Validation:
         Perfect scores in all dimensions should yield IMP = 1.0 (mathematical)
 
         Expected: 1.0 × 1.0 × 1.0 × 1.0 × 1.0 = 1.0
-        """
+        r"""
         dimensions = {
             "A": 1.0,  # Autonomy
             "IM": 1.0,  # Intrinsic Motivation
@@ -67,7 +67,7 @@ class TestIMPCalculation:
         assert "formula_used" in result
 
     def test_zero_dimension_yields_zero(self):
-        """
+        r"""
         Test that single zero dimension yields IMP = 0.
 
         Scientific Basis:
@@ -79,7 +79,7 @@ class TestIMPCalculation:
         Reference: deci1985intrinsic (Deci & Ryan, 1985)
 
         Expected: 1.0 × 0.0 × 1.0 × 1.0 × 1.0 = 0.0
-        """
+        r"""
         dimensions = {"A": 1.0, "IM": 0.0, "R": 1.0, "SP": 1.0, "Au": 1.0}  # Zero motivation
 
         result = calculate_imp_verified(dimensions)
@@ -87,7 +87,7 @@ class TestIMPCalculation:
         assert result["raw_multiplicative"] == pytest.approx(0.0, abs=0.001)
 
     def test_realistic_5d_model(self):
-        """
+        r"""
         Test realistic 5D model scores.
 
         Based on:
@@ -103,7 +103,7 @@ class TestIMPCalculation:
         - Lewis, C. C. (1995). Educating Hearts and Minds (Tokkatsu)
 
         Expected: 0.95 × 0.88 × 0.82 × 0.79 × 0.91 ≈ 0.518
-        """
+        r"""
         dimensions = {
             "A": 0.95,  # High autonomy (Sudbury model)
             "IM": 0.88,  # Strong intrinsic motivation (Flow states)
@@ -122,7 +122,7 @@ class TestIMPCalculation:
         assert 0.0 <= result["normalized"] <= 1.0
 
     def test_denmark_reference(self):
-        """
+        r"""
         Test Denmark as reference system.
 
         Scientific Data Sources:
@@ -139,7 +139,7 @@ class TestIMPCalculation:
         - Authenticity: 0.70 (individualism-collectivism balance)
 
         Expected: 0.75 × 0.70 × 0.65 × 0.75 × 0.70 ≈ 0.187
-        """
+        r"""
         dimensions = {"A": 0.75, "IM": 0.70, "R": 0.65, "SP": 0.75, "Au": 0.70}
 
         result = calculate_imp_verified(dimensions)
@@ -149,7 +149,7 @@ class TestIMPCalculation:
         assert result["raw_multiplicative"] == pytest.approx(expected, abs=0.01)
 
     def test_multiplicative_vs_additive(self):
-        """
+        r"""
         Test that multiplicative formula prevents compensation.
 
         Scientific Justification:
@@ -166,7 +166,7 @@ class TestIMPCalculation:
 
         Additive would rate Person B higher (0.80 vs 0.75)
         Multiplicative correctly rates Person A higher (0.237 vs 0.0)
-        """
+        r"""
         # Person A: Balanced
         balanced = {"A": 0.75, "IM": 0.75, "R": 0.75, "SP": 0.75, "Au": 0.75}
 
@@ -191,7 +191,7 @@ class TestIMPCalculation:
         assert result_unbalanced["raw_multiplicative"] == 0.0
 
     def test_dimensions_in_valid_range(self):
-        """
+        r"""
         Test that all dimensions must be in [0, 1] range.
 
         Scientific Basis:
@@ -201,7 +201,7 @@ class TestIMPCalculation:
         3. Intuitive interpretation (percentage of optimal)
 
         Invalid ranges should raise ValueError.
-        """
+        r"""
         # Test negative value
         try:
             result = calculate_imp_verified({"A": -0.1, "IM": 0.5, "R": 0.5, "SP": 0.5, "Au": 0.5})
@@ -218,7 +218,7 @@ class TestIMPCalculation:
             pass  # Validation working correctly
 
     def test_weighted_additive_fallback(self):
-        """
+        r"""
         Test weighted additive calculation as fallback method.
 
         Scientific Note:
@@ -233,7 +233,7 @@ class TestIMPCalculation:
         - Authenticity: 1.0 (baseline, Rogers)
 
         Sum of weights: 5.1
-        """
+        r"""
         dimensions = {"A": 0.95, "IM": 0.88, "R": 0.82, "SP": 0.79, "Au": 0.91}
 
         result = calculate_imp_verified(dimensions)
@@ -249,19 +249,19 @@ class TestIMPCalculation:
 
 
 class TestScientificReferences:
-    """
+    r"""
     Verify that all cited scientific references exist in BibTeX file.
-    """
+    r"""
 
     def test_bibtex_file_exists(self):
-        """BibTeX file must exist for reference validation."""
+        r"""BibTeX file must exist for reference validation.r"""
         bibtex_path = Path("07_daten_analysen/5d-relevant-sources.bib")
         assert (
             bibtex_path.exists()
         ), "BibTeX file missing: 07_daten_analysen/5d-relevant-sources.bib"
 
     def test_key_references_in_bibtex(self):
-        """
+        r"""
         Test that key scientific references are documented in BibTeX.
 
         Critical references:
@@ -270,7 +270,7 @@ class TestScientificReferences:
         - porges2011polyvagal (Polyvagal Theory)
         - bandura1977social (Social Learning Theory)
         - rogers1961becoming (Humanistic Psychology)
-        """
+        r"""
         bibtex_path = Path("07_daten_analysen/5d-relevant-sources.bib")
 
         if not bibtex_path.exists():
@@ -294,19 +294,19 @@ class TestScientificReferences:
 
 
 class TestDataSourceValidation:
-    """
+    r"""
     Validate external data sources for empirical claims.
-    """
+    r"""
 
     def test_world_bank_data_reference(self):
-        """
+        r"""
         Test that World Bank data is referenced correctly.
 
         Expected format in code:
         - Source: "World Bank WGI 2023"
         - URL: https://info.worldbank.org/governance/wgi/
         - Variable: "Voice and Accountability" (for Autonomy proxy)
-        """
+        r"""
         # This test documents expected data sources
         # Actual data fetching tested in integration tests
 
@@ -320,14 +320,14 @@ class TestDataSourceValidation:
             assert url.startswith("https://"), f"Data source {source} must use HTTPS"
 
     def test_confidence_levels_documented(self):
-        """
+        r"""
         Test that confidence levels are clearly documented.
 
         Confidence Classification:
         - High (>0.80): Peer-reviewed, replicated studies
         - Medium (0.60-0.80): Single study, or non-peer-reviewed
         - Low (<0.60): Own analysis, not yet validated
-        """
+        r"""
         confidence_thresholds = {"high": 0.80, "medium": 0.60, "low": 0.0}
 
         # Test that thresholds are reasonable

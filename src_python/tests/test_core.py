@@ -1,4 +1,4 @@
-import pytest
+
 from src_python.knowledge_graph.core import CognitiveGraph
 
 def test_serendipity_calculation():
