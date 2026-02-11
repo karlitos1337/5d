@@ -15,6 +15,16 @@ function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
   const msgEl = document.querySelector('.loading-spinner p');
   if (msgEl) msgEl.textContent = message;
+
+  const mainContent = document.getElementById('main-content');
+  if (mainContent) {
+    mainContent.setAttribute('aria-busy', !!isLoading);
+    mainContent.setAttribute('aria-hidden', !!isLoading);
+  }
+  const overlay = document.querySelector('.loading-overlay');
+  if (overlay) {
+    overlay.setAttribute('aria-hidden', !isLoading);
+  }
 }
 
 function updateLastUpdateTime() {
@@ -41,8 +51,12 @@ function activateLayer(layerName) {
     infoEl.style.display = 'block';
   }
   document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+  document.querySelectorAll('.btn[id^="layer-"]').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
   const btn = document.getElementById(`layer-${layerName}`);
-  if (btn) btn.classList.add('btn--primary');
+  if (btn) {
+    btn.classList.add('btn--primary');
+    btn.setAttribute('aria-pressed', 'true');
+  }
 
   switch (layerName) {
     case 'status-quo':

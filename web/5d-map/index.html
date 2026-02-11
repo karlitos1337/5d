@@ -35,6 +35,7 @@
         id="layer-status-quo" 
         class="btn btn--primary"
         title="Zeigt Heatmap für Depression & Dropout-Raten weltweit"
+        aria-pressed="true"
         aria-label="Status Quo Heatmap anzeigen">
         Status Quo
       </button>
@@ -49,6 +50,7 @@
         id="layer-schools" 
         class="btn"
         title="Alternative Schulmodelle: Sudbury, Waldorf, Folk High Schools, Tokkatsu"
+        aria-pressed="false"
         aria-label="Alternative Schulen auf Karte anzeigen">
         Alternative Schulen
       </button>
@@ -56,6 +58,7 @@
         id="layer-imp" 
         class="btn"
         title="Intrinsisches Motivationspotenzial (IMP = A×IM×R×SP×Au)"
+        aria-pressed="false"
         aria-label="IMP-Score Choropleth anzeigen">
         IMP‑Score
       </button>
@@ -63,6 +66,7 @@
         id="layer-validation" 
         class="btn"
         title="Validierung (Ringe): zeigt Länder/Regionen mit extern verifizierten Daten (validation.json)"
+        aria-pressed="false"
         aria-label="Validierung (Ringe) anzeigen">
         Validierung (Ringe)
       </button>
@@ -85,6 +89,7 @@
         id="layer-sources" 
         class="btn"
         title="Quellen (Marker): zeigt Anzahl/Kategorien pro Land (validation.json)"
+        aria-pressed="false"
         aria-label="Quellen (Marker) anzeigen">
         Quellen (Marker)
       </button>
@@ -92,6 +97,7 @@
         id="layer-time" 
         class="btn"
         title="Zeitreise durch historische Daten (2000-2025)"
+        aria-pressed="false"
         aria-label="Zeitreise-Modus aktivieren">
         Zeitreise ⏱️
       </button>
@@ -111,7 +117,7 @@
   </main>
 
   <!-- Loading Overlay -->
-  <div class="loading-overlay">
+  <div class="loading-overlay" role="alert" aria-live="assertive" aria-hidden="true">
     <div class="loading-spinner">
       <div class="spinner"></div>
       <p>Lade Daten...</p>
