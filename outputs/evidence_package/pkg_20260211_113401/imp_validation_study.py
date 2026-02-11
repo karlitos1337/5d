@@ -20,12 +20,12 @@ from scipy.stats import gmean
 
 # Fragebogen-Definitionen (abgestimmt auf Preprint v1.1)
 QUESTIONS = {
-    "Autonomy": [
-        "Ich fühle mich frei, meine eigenen Entscheidungen zu treffen.",
-        "Meine Entscheidungen spiegeln wider, was ich wirklich will.",
-        "Ich fühle, dass meine Wahlmöglichkeiten ausdrücken, wer ich wirklich bin.",
-        "Ich habe das Gefühl, Dinge zu tun, die mich wirklich interessieren.",
-        "Ich fühle mich frei, Dinge auf meine eigene Art zu tun.",
+    "Cognitive_Efficiency": [
+        "Ich kann komplexe Probleme in kleinere, lösbare Teile zerlegen.",
+        "Neue Konzepte verstehe ich schnell und gründlich.",
+        "Ich erkenne Muster und Zusammenhänge in unterschiedlichen Kontexten.",
+        "Abstrakte Ideen kann ich gut erfassen und anwenden.",
+        "Ich finde kreative Lösungen für unbekannte Probleme.",
     ],
     "Intrinsic_Motivation": [
         "Ich arbeite an Aufgaben, weil sie mich wirklich interessieren.",
@@ -48,12 +48,12 @@ QUESTIONS = {
         "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
         "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
     ],
-    "Authenticity": [
-        "Ich bin in den meisten Situationen mir selbst treu.",
-        "Ich lebe im Einklang mit meinen Werten und Überzeugungen.",
-        "Ich fühle mich wie mein wahres Selbst.",
-        "Ich drücke meine wahren Gefühle und Meinungen aus.",
-        "Ich fühle mich am besten, wenn ich ich selbst sein kann.",
+    "Environment_Optimization": [
+        "Ich gestalte meine Arbeitsumgebung gezielt für optimale Konzentration.",
+        "Ich erkenne, wann meine Umgebung meine Leistung beeinträchtigt.",
+        "Ich weiß, welche Bedingungen ich für Flow-Zustände brauche.",
+        "Ich passe meine Arbeitsweise flexibel an unterschiedliche Kontexte an.",
+        "Ich suche aktiv nach Umgebungen, die meine Stärken fördern.",
     ],
 }
 

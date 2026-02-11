@@ -62,7 +62,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41657833/"
       }
     ],
-    "timestamp": "2026-02-11T11:42:00.340689"
+    "timestamp": "2026-02-11T11:34:09.929524"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -132,7 +132,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41663497/"
       }
     ],
-    "timestamp": "2026-02-11T11:42:03.333474"
+    "timestamp": "2026-02-11T11:34:12.946655"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -195,7 +195,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41664379/"
       }
     ],
-    "timestamp": "2026-02-11T11:42:05.364172"
+    "timestamp": "2026-02-11T11:34:14.963512"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -261,7 +261,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-02-11T11:42:08.354324"
+    "timestamp": "2026-02-11T11:34:17.929003"
   },
   "democratic schools": {
     "arxiv": [
@@ -309,26 +309,6 @@
     ],
     "pubmed": [
       {
-        "title": "A novel combination of genomic loci in ITGB2, COL5A1 and VEGFA associated with anterior cruciate ligament rupture susceptibility: insights from Australian, Polish, Swedish, and South African cohorts.",
-        "authors": [
-          "Dlamini SB",
-          "Saunders CJ",
-          "Cieszczyk P"
-        ],
-        "published": "2026 Jan",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41668933/"
-      },
-      {
-        "title": "Exploring antibiotic stewardship interventions within a One Health context: a scoping review.",
-        "authors": [
-          "Delpy L",
-          "Astbury CC",
-          "Kavulikirwa OK"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41668857/"
-      },
-      {
         "title": "Severe malaria treatment with rectal artesunate and artemisinin-based combination therapy in remote settings: an effectiveness-implementation hybrid type 3 study protocol (SEMA ReACT).",
         "authors": [
           "Hachizovu S",
@@ -337,9 +317,29 @@
         ],
         "published": "2026 Feb 9",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41664036/"
+      },
+      {
+        "title": "Prevalence and factors associated with malaria among children aged 6-59 months in the Democratic Republic of the Congo: a nationwide cross-sectional survey.",
+        "authors": [
+          "Adam J",
+          "Mukuku O",
+          "Tawi JM"
+        ],
+        "published": "2026 Feb 9",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41664023/"
+      },
+      {
+        "title": "Multicountry genomic analysis underscores regional cholera spread in Africa.",
+        "authors": [
+          "Mboowa G",
+          "Matteson NL",
+          "Tanui CK"
+        ],
+        "published": "2026 Feb 9",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41663395/"
       }
     ],
-    "timestamp": "2026-02-11T11:42:09.334745"
+    "timestamp": "2026-02-11T11:34:18.942075"
   },
   "student agency": {
     "arxiv": [
@@ -409,11 +409,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41659763/"
       }
     ],
-    "timestamp": "2026-02-11T11:42:10.330452"
+    "timestamp": "2026-02-11T11:34:19.922820"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2026-02-11T11:42:10.331873",
+    "timestamp": "2026-02-11T11:34:19.924190",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -535,7 +535,7 @@
         }
       }
     },
-    "timestamp": "2026-02-11T11:42:13.517028",
+    "timestamp": "2026-02-11T11:34:26.736633",
     "source": "World Bank EdStats API"
   },
   "world_bank_wgi": {
@@ -601,7 +601,7 @@
         }
       }
     },
-    "timestamp": "2026-02-11T11:42:14.505774",
+    "timestamp": "2026-02-11T11:34:33.915616",
     "source": "World Bank WGI"
   }
 }
