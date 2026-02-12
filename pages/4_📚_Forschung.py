@@ -48,8 +48,7 @@ with tab1:
 
     with col1:
         st.subheader("🎯 Forschungsziele")
-        st.markdown(
-            """
+        st.markdown("""
         Das 5D-Intelligence-Framework wird aktuell **empirisch validiert** um:
         
         1. **Reliabilität** nachzuweisen (Cronbach's α > 0.8)
@@ -68,12 +67,10 @@ with tab1:
         2. Wie korrelieren die Dimensionen untereinander?
         3. Ist das multiplikative IMP-Modell dem additiven überlegen?
         4. Welche Sensitivität zeigt das Framework gegenüber Interventionen?
-        """
-        )
+        """)
 
     with col2:
-        st.info(
-            """
+        st.info("""
         **📅 Timeline**
         
         **Phase 1** (Aktuell)
@@ -87,14 +84,12 @@ with tab1:
         **Phase 3** (Q2 2026)
         - Preprint-Publikation
         - Peer Review
-        """
-        )
+        """)
 
 # TAB 2: Methodologie
 with tab2:
     st.header("📊 Methodologie")
-    st.markdown(
-        """
+    st.markdown("""
     ### Fragebogen-Design
     - **25 Items** (5 pro Dimension)
     - **Likert-Skala**: 1-7 (stimme gar nicht zu - stimme voll zu)
@@ -105,8 +100,7 @@ with tab2:
     - Reliabilitätsanalyse (Cronbach's α)
     - Korrelationsanalyse
     - Modellvergleich (multiplikativ vs. additiv)
-    """
-    )
+    """)
 
     if st.button("📄 Fragebogen herunterladen"):
         st.info("Fragebogen wird generiert...")
@@ -115,28 +109,24 @@ with tab2:
 # TAB 3: Ergebnisse
 with tab3:
     st.header("📈 Aktuelle Ergebnisse")
-    st.warning(
-        """
+    st.warning("""
     ⚠️ **Status**: Datensammlung ausstehend
     
     Sobald N=30 Probanden erreicht sind, werden hier erste Ergebnisse präsentiert:
     - Reliabilitätskoeffizienten
     - Korrelationsmatrizen
     - IMP-Score-Verteilungen
-    """
-    )
+    """)
 
 # TAB 4: Publikationen
 with tab4:
     st.header("📝 Publikationen")
-    st.info(
-        """
+    st.info("""
     **Geplant**:
     - Preprint auf arXiv (Q2 2026)
     - Peer-Review-Paper (Q3 2026)
     - Open Science Framework (OSF) Repository
-    """
-    )
+    """)
 
 # TAB 5: Ressourcen
 with tab5:
@@ -146,8 +136,7 @@ with tab5:
 
     with col1:
         st.subheader("📚 Literatur")
-        st.markdown(
-            """
+        st.markdown("""
         **Psychometrie**:
         - Cronbach (1951): Coefficient Alpha
         - Nunnally (1978): Psychometric Theory
@@ -156,13 +145,11 @@ with tab5:
         - Csikszentmihalyi (1990): Flow
         - Deci & Ryan (2000): Self-Determination
         - Masten (2001): Resilience
-        """
-        )
+        """)
 
     with col2:
         st.subheader("🛠️ Tools")
-        st.markdown(
-            """
+        st.markdown("""
         **Code**:
         - [GitHub Repository](https://github.com/karlitos1337/5d)
         - [Validation Tools](/validation)
@@ -171,8 +158,7 @@ with tab5:
         ```
         pip install -r validation/requirements.txt
         ```
-        """
-        )
+        """)
 
 # Footer
 st.markdown("---")

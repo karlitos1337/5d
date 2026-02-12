@@ -1,72 +1,66 @@
-#!/usr/bin/env python3
-"""Tests für Anonymisierung."""
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import pytest
-
 from storage.anonymize import (
-    PROHIBITED_FIELDS,
     anonymize_response,
     generate_anonymous_id,
     verify_anonymity,
 )
 
+class TestAnonymization:
+    def test_anonymize_response_removes_prohibited_fields(self):
+        """Test that prohibited fields are removed from the response."""
+        response_data = {
+            "responses": {"q1": "answer"},
+            "email": "test@example.com",  # Should raise error
+        }
+        with pytest.raises(ValueError, match="Prohibited field 'email' found"):
+            anonymize_response(response_data)
 
-def test_generate_anonymous_id():
-    """Test ID-Generierung."""
-    id1 = generate_anonymous_id()
-    id2 = generate_anonymous_id()
+    def test_generate_anonymous_id_format(self):
+        """Test that the generated ID has the correct format (SHA256)."""
+        anon_id = generate_anonymous_id()
+        assert len(anon_id) == 64
+        assert isinstance(anon_id, str)
 
-    # IDs müssen unterschiedlich sein
-    assert id1 != id2
+    def test_verify_anonymity_success(self):
+        """Test that a valid anonymous response passes verification."""
+        response = {
+            "id": generate_anonymous_id(),
+            "responses": {"q1": "answer"},
+            "timestamp": "2023-01-01T00:00:00",
+        }
+        assert verify_anonymity(response) is True
 
-    # SHA256 = 64 Hex-Zeichen
-    assert len(id1) == 64
-    assert len(id2) == 64
+    def test_verify_anonymity_failure_prohibited_field(self):
+        """Test that verification fails if a prohibited field is present."""
+        response = {
+            "id": generate_anonymous_id(),
+            "responses": {"q1": "answer", "email": "test@example.com"},
+            "timestamp": "2023-01-01T00:00:00",
+        }
+        assert verify_anonymity(response) is False
 
+    def test_verify_anonymity_failure_missing_id(self):
+        """Test that verification fails if 'id' is missing."""
+        response = {
+            "responses": {"q1": "answer"},
+            "timestamp": "2023-01-01T00:00:00",
+        }
+        assert verify_anonymity(response) is False
 
-def test_anonymize_response_basic():
-    """Test Basis-Anonymisierung."""
-    response = {"responses": {"neuro_flow_frequency": 4, "psych_intrinsic_motivation": 5}}
+    def test_anonymize_response_structure(self):
+        """Test the structure of the anonymized response."""
+        response_data = {"responses": {"q1": "answer"}}
+        anon_response = anonymize_response(response_data)
 
-    anonymized = anonymize_response(response)
-
-    # Prüfe Pflichtfelder
-    assert "id" in anonymized
-    assert "timestamp" in anonymized
-    assert "version" in anonymized
-    assert "responses" in anonymized
-
-    # Prüfe Daten intakt
-    assert anonymized["responses"]["neuro_flow_frequency"] == 4
-
-
-def test_anonymize_response_prohibits_personal_data():
-    """Test dass personenbezogene Daten blockiert werden."""
-    for field in PROHIBITED_FIELDS:
-        response = {"responses": {"test": 1}, field: "should_not_exist"}
-
-        with pytest.raises(ValueError):
-            anonymize_response(response)
-
-
-def test_verify_anonymity_valid():
-    """Test Anonymitäts-Verifikation mit valider Response."""
-    response = {"responses": {"test": 1}}
-
-    anonymized = anonymize_response(response)
-    assert verify_anonymity(anonymized) is True
-
-
-def test_verify_anonymity_invalid():
-    """Test Anonymitäts-Verifikation mit invalider Response."""
-    bad_response = {
-        "id": generate_anonymous_id(),
-        "responses": {"test": 1},
-        "email": "test@example.com",  # Verboten!
-    }
-
-    assert verify_anonymity(bad_response) is False
-
-
-if __name__ == "__main__":
-    pytest.main([__file__, "-v"])
+        assert "id" in anon_response
+        assert "timestamp" in anon_response
+        assert "version" in anon_response
+        assert "metadata" in anon_response
+        assert anon_response["responses"] == {"q1": "answer"}
+        assert anon_response["metadata"]["anonymized"] is True

@@ -480,7 +480,7 @@ class ResearchScraper:
 
                 if response.status_code == 400:
                     # Fallback without source param if needed
-                    print(f"    ⚠️  World Bank WGI 400 Error. Retrying without source param...")
+                    print("    ⚠️  World Bank WGI 400 Error. Retrying without source param...")
                     if "source" in params:
                         params.pop("source")
                     response = requests.get(url, params=params, timeout=15)

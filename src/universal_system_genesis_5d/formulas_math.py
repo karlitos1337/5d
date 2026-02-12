@@ -1,65 +1,47 @@
-"""Mathematische/ML-Bausteine
+r"""
+5D-Kompetenz-Metrik
+===================
+Mathematische Definitionen für die Berechnung von 5D-Scores.
 
-Reine, seiteneffektfreie Funktionen mit Type Hints. Lesbar, testbar, erweiterbar.
+Basierend auf der System-Genesis-Formel.
 """
 
 import math
-from collections.abc import Sequence
+import numpy as np
 
+def sigmoid(x):
+    r"""Standard-Sigmoid $\sigma(x)=1/(1+e^{-x})$."""
+    return 1 / (1 + math.exp(-x))
 
-def sigmoid(x: float) -> float:
-    """Standard-Sigmoid $\sigma(x)=1/(1+e^{-x})$.
+def softmax(x):
+    """Berechnet die Softmax-Funktion."""
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum(axis=0)
 
-    Args:
-        x: Eingabewert
-    Returns:
-        Wert in [0,1]
-    """
-    return 1.0 / (1.0 + math.exp(-x))
-
-
-def softmax(xs: Sequence[float]) -> list[float]:
-    """Numerisch stabile Softmax über eine Sequenz.
-
-    Args:
-        xs: Werte
-    Returns:
-        Wahrscheinlichkeitsverteilung (sum=1)
-    """
-    if not xs:
-        return []
-    m = max(xs)
-    exps = [math.exp(x - m) for x in xs]
-    s = sum(exps)
-    return [e / s for e in exps]
-
-
-def min_max_normalize(x: float, min_v: float, max_v: float) -> float:
-    """Normiert x auf [0,1] basierend auf Min/Max.
-
-    Clamped falls außerhalb des Bereichs.
-    """
-    if max_v == min_v:
+def min_max_normalize(x, min_val, max_val):
+    """Normalisiert x auf [0, 1] basierend auf min_val und max_val."""
+    if x < min_val:
         return 0.0
-    v = (x - min_v) / (max_v - min_v)
-    return max(0.0, min(1.0, v))
-
-
-def dot(a: Sequence[float], b: Sequence[float]) -> float:
-    """Skalarprodukt zweier gleich langer Sequenzen."""
-    if len(a) != len(b):
-        raise ValueError("Vectors must have same length")
-    return sum(x * y for x, y in zip(a, b, strict=True))
-
-
-def weighted_mean(values: Sequence[float], weights: Sequence[float]) -> float:
-    """Gewichtetes Mittel; Gewichte müssen Länge von values haben.
-
-    Rückgabe 0.0, wenn Summe der Gewichte == 0.
-    """
-    if len(values) != len(weights):
-        raise ValueError("values and weights must have same length")
-    sw = sum(weights)
-    if sw == 0:
+    if x > max_val:
+        return 1.0
+    if max_val == min_val:
         return 0.0
-    return sum(v * w for v, w in zip(values, weights, strict=True)) / sw
+    return (x - min_val) / (max_val - min_val)
+
+def dot(a, b):
+    """Berechnet das Skalarprodukt von a und b."""
+    return sum(i * j for i, j in zip(a, b))
+
+def weighted_mean(values, weights):
+    """Berechnet das gewichtete arithmetische Mittel."""
+    if sum(weights) == 0:
+        return 0.0
+    return dot(values, weights) / sum(weights)
+
+def calculate_imp_score(autonomy, motivation, resilience, participation, authenticity):
+    """
+    Berechnet den IMP-Score (Individual Maturity Potential).
+
+    IMP = (A + M + R + P + Au) / 5
+    """
+    return np.mean([autonomy, motivation, resilience, participation, authenticity])
