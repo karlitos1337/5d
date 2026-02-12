@@ -13,6 +13,8 @@ let validationCountEl;
 
 function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
+  const main = document.getElementById('main-content');
+  if (main) main.setAttribute('aria-busy', !!isLoading);
   const msgEl = document.querySelector('.loading-spinner p');
   if (msgEl) msgEl.textContent = message;
 }
@@ -40,9 +42,15 @@ function activateLayer(layerName) {
     infoTextEl.textContent = txt;
     infoEl.style.display = 'block';
   }
-  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.classList.remove('btn--primary');
+    if (btn.id.startsWith('layer-')) btn.setAttribute('aria-pressed', 'false');
+  });
   const btn = document.getElementById(`layer-${layerName}`);
-  if (btn) btn.classList.add('btn--primary');
+  if (btn) {
+    btn.classList.add('btn--primary');
+    btn.setAttribute('aria-pressed', 'true');
+  }
 
   switch (layerName) {
     case 'status-quo':
