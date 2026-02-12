@@ -18,14 +18,18 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("X-Content-Type-Options", "nosniff")
-                self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                self.send_header(
+                    "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
+                )
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
                 # Add User-Agent to avoid 403 Forbidden
-                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; 5D-Bot/1.0)"})
+                req = urllib.request.Request(
+                    url, headers={"User-Agent": "Mozilla/5.0 (compatible; 5D-Bot/1.0)"}
+                )
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = resp.read()
                     self.send_response(200)
@@ -33,7 +37,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
                     self.send_header("Content-Length", str(len(data)))
                     # Security Headers
                     self.send_header("X-Content-Type-Options", "nosniff")
-                    self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                    self.send_header(
+                        "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
+                    )
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
                     self.end_headers()
@@ -43,7 +49,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("X-Content-Type-Options", "nosniff")
-                self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                self.send_header(
+                    "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
+                )
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(msg)
@@ -51,7 +59,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("X-Content-Type-Options", "nosniff")
-            self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+            self.send_header(
+                "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
+            )
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")
