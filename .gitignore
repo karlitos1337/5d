@@ -1,6 +1,10 @@
 # Python Artefakte
 __pycache__/
 *.pyc
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
 
 # Virtuelle Umgebungen
 .venv/
@@ -45,3 +49,8 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Generated
+outputs/
+verify_wb_source.py
+verify_proxy_security.py
