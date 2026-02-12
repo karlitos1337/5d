@@ -11,6 +11,7 @@ from storage.anonymize import (
     verify_anonymity,
 )
 
+
 class TestAnonymization:
     def test_anonymize_response_removes_prohibited_fields(self):
         """Test that prohibited fields are removed from the response."""
