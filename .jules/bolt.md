@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-11-20 - Parallel Fetching with LocalStorage
+**Learning:** Using `Promise.all` for parallel fetching while writing to `localStorage` can cause race conditions if the cache is read once at the start. One fetch might overwrite another's cache update.
+**Action:** Always re-read `localStorage` immediately before writing to it in async functions, or use a proper locking mechanism/in-memory queue for cache updates.
