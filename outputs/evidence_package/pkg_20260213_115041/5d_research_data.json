@@ -66,7 +66,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41679804/"
       }
     ],
-    "timestamp": "2026-02-13T11:52:22.422882"
+    "timestamp": "2026-02-13T11:50:49.892121"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -136,7 +136,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41663497/"
       }
     ],
-    "timestamp": "2026-02-13T11:52:25.417058"
+    "timestamp": "2026-02-13T11:50:52.926501"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -201,7 +201,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41680727/"
       }
     ],
-    "timestamp": "2026-02-13T11:52:27.699068"
+    "timestamp": "2026-02-13T11:50:55.110274"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -267,7 +267,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-02-13T11:52:30.441321"
+    "timestamp": "2026-02-13T11:50:57.892053"
   },
   "democratic schools": {
     "arxiv": [
@@ -345,7 +345,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41684063/"
       }
     ],
-    "timestamp": "2026-02-13T11:52:31.476283"
+    "timestamp": "2026-02-13T11:50:58.913187"
   },
   "student agency": {
     "arxiv": [
@@ -414,11 +414,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41678760/"
       }
     ],
-    "timestamp": "2026-02-13T11:52:32.433025"
+    "timestamp": "2026-02-13T11:51:00.082566"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2026-02-13T11:52:32.434088",
+    "timestamp": "2026-02-13T11:51:00.083926",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -672,133 +672,7 @@
         }
       }
     },
-    "timestamp": "2026-02-13T11:52:39.592076",
+    "timestamp": "2026-02-13T11:51:42.310262",
     "source": "World Bank EdStats API"
-  },
-  "world_bank_wgi": {
-    "data": {
-      "AUS": {
-        "Voice & Accountability": {
-          "value": 1.50660192966461,
-          "year": "2023"
-        }
-      },
-      "BRA": {
-        "Voice & Accountability": {
-          "value": 0.382853865623474,
-          "year": "2023"
-        }
-      },
-      "CAN": {
-        "Voice & Accountability": {
-          "value": 1.4796462059021,
-          "year": "2023"
-        }
-      },
-      "CHN": {
-        "Voice & Accountability": {
-          "value": -1.50455415248871,
-          "year": "2023"
-        }
-      },
-      "DEU": {
-        "Voice & Accountability": {
-          "value": 1.46138572692871,
-          "year": "2023"
-        }
-      },
-      "FRA": {
-        "Voice & Accountability": {
-          "value": 1.15460133552551,
-          "year": "2023"
-        }
-      },
-      "GBR": {
-        "Voice & Accountability": {
-          "value": 1.26162397861481,
-          "year": "2023"
-        }
-      },
-      "IND": {
-        "Voice & Accountability": {
-          "value": 0.0944044888019562,
-          "year": "2023"
-        }
-      },
-      "JPN": {
-        "Voice & Accountability": {
-          "value": 1.10550534725189,
-          "year": "2023"
-        }
-      },
-      "USA": {
-        "Voice & Accountability": {
-          "value": 0.877519071102142,
-          "year": "2023"
-        }
-      },
-      "CHE": {
-        "Voice & Accountability": {
-          "value": 1.66502690315247,
-          "year": "2023"
-        }
-      },
-      "DNK": {
-        "Voice & Accountability": {
-          "value": 1.66469931602478,
-          "year": "2023"
-        }
-      },
-      "ESP": {
-        "Voice & Accountability": {
-          "value": 1.19472968578339,
-          "year": "2023"
-        }
-      },
-      "FIN": {
-        "Voice & Accountability": {
-          "value": 1.63263607025146,
-          "year": "2023"
-        }
-      },
-      "ITA": {
-        "Voice & Accountability": {
-          "value": 1.11553084850311,
-          "year": "2023"
-        }
-      },
-      "KOR": {
-        "Voice & Accountability": {
-          "value": 0.8595951795578,
-          "year": "2023"
-        }
-      },
-      "NLD": {
-        "Voice & Accountability": {
-          "value": 1.55626440048218,
-          "year": "2023"
-        }
-      },
-      "NOR": {
-        "Voice & Accountability": {
-          "value": 1.77725434303284,
-          "year": "2023"
-        }
-      },
-      "NZL": {
-        "Voice & Accountability": {
-          "value": 1.68778347969055,
-          "year": "2023"
-        }
-      },
-      "SWE": {
-        "Voice & Accountability": {
-          "value": 1.57483160495758,
-          "year": "2023"
-        }
-      }
-    },
-    "timestamp": "2026-02-13T11:52:46.217326",
-    "source": "World Bank Worldwide Governance Indicators"
   }
 }
