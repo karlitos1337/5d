@@ -13,6 +13,8 @@ let validationCountEl;
 
 function setLoading(isLoading, message = 'Lade Daten...') {
   document.body.classList.toggle('loading', !!isLoading);
+  const main = document.getElementById('main-content');
+  if (main) main.setAttribute('aria-busy', !!isLoading);
   const msgEl = document.querySelector('.loading-spinner p');
   if (msgEl) msgEl.textContent = message;
 }
