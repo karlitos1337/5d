@@ -1,6 +1,9 @@
 # Python Artefakte
 __pycache__/
 *.pyc
+.coverage
+coverage.xml
+htmlcov/
 
 # Virtuelle Umgebungen
 .venv/
