@@ -38,5 +38,6 @@ def run():
         finally:
             browser.close()
 
+
 if __name__ == "__main__":
     run()
