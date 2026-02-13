@@ -1,4 +1,5 @@
-from playwright.sync_api import sync_playwright, expect
+from playwright.sync_api import expect, sync_playwright
+
 
 def run():
     with sync_playwright() as p:
