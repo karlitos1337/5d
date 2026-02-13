@@ -216,3 +216,10 @@ body.loading .loading-overlay {
     font-size: 18px;
   }
 }
+
+/* Fallback styles moved from index.html */
+#map { min-height: 70vh; }
+.btn[disabled] { opacity: .6; cursor: not-allowed; }
+body.loading { cursor: progress; }
+body.loading .btn { pointer-events: none; opacity: .7; }
+.app-header, .app-footer { padding: .75rem 1rem; }

@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-title" content="5D-Map" />
   
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: https://*.tile.openstreetmap.org https://*.wikimedia.org; connect-src 'self' https://ourworldindata.org https://api.worldbank.org https://api.github.com; font-src 'self' data:; frame-src 'none'; base-uri 'self'; form-action 'self';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: https://*.tile.openstreetmap.org https://*.wikimedia.org; connect-src 'self' http://localhost:5510 https://raw.githubusercontent.com https://ourworldindata.org https://api.worldbank.org https://api.github.com; font-src 'self' data:; frame-src 'none'; base-uri 'self'; form-action 'self';" />
   
   <title>5D‑Intelligenz Weltkarte</title>
   
@@ -132,101 +132,7 @@
   <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   
-  <!-- Web Vitals Performance Monitoring -->
-  <script type="module">
-    // Core Web Vitals tracking
-    import {onCLS, onFID, onLCP, onFCP, onTTFB} from 'https://unpkg.com/web-vitals@3/dist/web-vitals.js?module';
-    
-    function sendToAnalytics({name, value, rating}) {
-      console.log(`[Web Vitals] ${name}: ${value.toFixed(2)}ms (${rating})`);
-      
-      // Optional: Send to analytics service
-      // fetch('/analytics', {
-      //   method: 'POST',
-      //   body: JSON.stringify({metric: name, value, rating})
-      // });
-    }
-    
-    onCLS(sendToAnalytics);  // Cumulative Layout Shift
-    onFID(sendToAnalytics);  // First Input Delay
-    onLCP(sendToAnalytics);  // Largest Contentful Paint
-    onFCP(sendToAnalytics);  // First Contentful Paint
-    onTTFB(sendToAnalytics); // Time to First Byte
-  </script>
-  
-  <!-- Service Worker Registration -->
-  <script>
-    // Register service worker for PWA functionality
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then((registration) => {
-            console.log('✓ Service Worker registered:', registration.scope);
-            
-            // Check for updates
-            registration.addEventListener('updatefound', () => {
-              const newWorker = registration.installing;
-              console.log('Service Worker update found');
-              
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // New version available, show update notification
-                  if (confirm('Neue Version verfügbar! Seite neu laden?')) {
-                    newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    window.location.reload();
-                  }
-                }
-              });
-            });
-          })
-          .catch((error) => {
-            console.warn('Service Worker registration failed:', error);
-          });
-      });
-      
-      // Listen for controller change (new service worker activated)
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('Service Worker updated, reloading...');
-        window.location.reload();
-      });
-    }
-    
-    // PWA install prompt
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      
-      // Show custom install button (optional)
-      const installBtn = document.getElementById('install-btn');
-      if (installBtn) {
-        installBtn.style.display = 'block';
-        installBtn.addEventListener('click', () => {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then((choice) => {
-            console.log('PWA install choice:', choice.outcome);
-            deferredPrompt = null;
-            installBtn.style.display = 'none';
-          });
-        });
-      }
-    });
-    
-    // Track PWA installation
-    window.addEventListener('appinstalled', () => {
-      console.log('✓ PWA installed successfully');
-      deferredPrompt = null;
-    });
-  </script>
-  
+  <script type="module" src="init.js"></script>
   <script type="module" src="app.js"></script>
 </body>
-<style>
-  /* Fallback, falls styles.css nicht lädt */
-  #map { min-height: 70vh; }
-  .btn[disabled] { opacity: .6; cursor: not-allowed; }
-  body.loading { cursor: progress; }
-  body.loading .btn { pointer-events: none; opacity: .7; }
-  .app-header, .app-footer { padding: .75rem 1rem; }
-</style>
 </html>
