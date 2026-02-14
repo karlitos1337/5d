@@ -16,3 +16,5 @@ black
 mypy
 pytest
 networkx>=3.0
+pytest-asyncio
+discord.py
