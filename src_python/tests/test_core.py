@@ -9,6 +9,7 @@ def test_serendipity_calculation():
     score = kg.calculate_serendipity_score(["A", "B"])
     assert score > 0, "Connected thoughts should have positive serendipity"
 
+
 def test_empty_graph():
     kg = CognitiveGraph()
     score = kg.calculate_serendipity_score([])

@@ -70,7 +70,9 @@ if __name__ == "__main__":
     parser.add_argument("file", help="File or directory to process")
     parser.add_argument("--title", "-t", help="Title to add (default: filename)")
     parser.add_argument("--desc", "-d", help="Description to add")
-    parser.add_argument("--recursive", "-r", action="store_true", help="Process directories recursively")
+    parser.add_argument(
+        "--recursive", "-r", action="store_true", help="Process directories recursively"
+    )
 
     args = parser.parse_args()
 
@@ -78,11 +80,7 @@ if __name__ == "__main__":
         process_directory(args.file, args.recursive)
     elif os.path.isfile(args.file):
         try:
-            add_frontmatter_to_file(
-                filepath=args.file,
-                title=args.title,
-                description=args.desc
-            )
+            add_frontmatter_to_file(filepath=args.file, title=args.title, description=args.desc)
             print(f"✅ Processed {args.file}")
         except Exception as e:
             print(f"❌ Error processing {args.file}: {e}")

@@ -48,11 +48,7 @@ def generate_package():
     print("\n🚀 Running IMP Validation Study...")
     try:
         # Running validation study
-        subprocess.run(
-            [sys.executable, "validation/imp_validation_study.py"],
-            check=True,
-            env=env
-        )
+        subprocess.run([sys.executable, "validation/imp_validation_study.py"], check=True, env=env)
         print("✅ Validation study completed.")
     except subprocess.CalledProcessError as e:
         print(f"❌ Validation study failed: {e}")
@@ -83,8 +79,8 @@ def generate_package():
     try:
         subprocess.run(
             [sys.executable, "5d_research_scraper.py"],
-            check=False, # Don't fail if scraper has network issues
-            env=env
+            check=False,  # Don't fail if scraper has network issues
+            env=env,
         )
         # Copy Scraper Script
         shutil.copy("5d_research_scraper.py", package_dir / "5d_research_scraper.py")
@@ -110,7 +106,7 @@ def generate_package():
 
     # 4. Create Archive
     print("\n🗜️  Zipping package...")
-    shutil.make_archive(str(package_dir), 'zip', output_dir, package_name)
+    shutil.make_archive(str(package_dir), "zip", output_dir, package_name)
 
     # Cleanup directory (optional, keep zip)
     # shutil.rmtree(package_dir)

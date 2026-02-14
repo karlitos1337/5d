@@ -13,11 +13,14 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         self.redirect_uri = "http://localhost:8501"
 
         # Patch environment variables for GitHubAuth
-        self.env_patcher = patch.dict(os.environ, {
-            "GITHUB_CLIENT_ID": self.client_id,
-            "GITHUB_CLIENT_SECRET": self.client_secret,
-            "GITHUB_REDIRECT_URI": self.redirect_uri
-        })
+        self.env_patcher = patch.dict(
+            os.environ,
+            {
+                "GITHUB_CLIENT_ID": self.client_id,
+                "GITHUB_CLIENT_SECRET": self.client_secret,
+                "GITHUB_REDIRECT_URI": self.redirect_uri,
+            },
+        )
         self.env_patcher.start()
 
         self.auth = GitHubAuth()
@@ -56,7 +59,7 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         mock_post.return_value.json.return_value = {
             "access_token": "gho_test_token",
             "token_type": "bearer",
-            "scope": "read:user"
+            "scope": "read:user",
         }
 
         # Mock User Info Response
@@ -64,7 +67,7 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         mock_get.return_value.json.return_value = {
             "login": "testuser",
             "id": 12345,
-            "email": "test@example.com"
+            "email": "test@example.com",
         }
 
         # Mocking verify_user_exists to rely on our mocked get
@@ -84,12 +87,13 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         mock_post.return_value.status_code = 200
         mock_post.return_value.json.return_value = {
             "error": "bad_verification_code",
-            "error_description": "The code passed is incorrect or expired."
+            "error_description": "The code passed is incorrect or expired.",
         }
 
         # authenticate calls exchange_code_for_token
         result = self.auth.authenticate("invalid_code", "state123", "state123")
         self.assertIsNone(result)
+
 
 if __name__ == "__main__":
     unittest.main()

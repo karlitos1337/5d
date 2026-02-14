@@ -31,7 +31,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 # Add User-Agent to avoid being blocked
                 req = urllib.request.Request(
                     url,
-                    headers={"User-Agent": "Mozilla/5.0 (compatible; 5D-Bot/1.0; +https://github.com/karlitos1337/5d)"}
+                    headers={
+                        "User-Agent": "Mozilla/5.0 (compatible; 5D-Bot/1.0; +https://github.com/karlitos1337/5d)"
+                    },
                 )
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = resp.read()

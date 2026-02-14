@@ -7,7 +7,7 @@ import urllib.request
 from http.server import HTTPServer
 
 # Add the parent directory to sys.path to import owid_proxy
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import owid_proxy
 
@@ -15,9 +15,11 @@ SERVER_PORT = 5511
 SERVER_HOST = "127.0.0.1"
 SERVER_URL = f"http://{SERVER_HOST}:{SERVER_PORT}"
 
+
 def run_server():
     server = HTTPServer((SERVER_HOST, SERVER_PORT), owid_proxy.ProxyHandler)
     server.serve_forever()
+
 
 def check_headers(url, expected_headers):
     try:
@@ -28,7 +30,10 @@ def check_headers(url, expected_headers):
                 if header not in headers:
                     return False, f"Missing header: {header}"
                 if value and value not in headers[header]:
-                    return False, f"Header {header} mismatch: expected {value}, got {headers[header]}"
+                    return (
+                        False,
+                        f"Header {header} mismatch: expected {value}, got {headers[header]}",
+                    )
             return True, "OK"
     except urllib.error.HTTPError as e:
         headers = e.headers
@@ -36,10 +41,14 @@ def check_headers(url, expected_headers):
             if header not in headers:
                 return False, f"Missing header: {header} in error response {e.code}"
             if value and value not in headers[header]:
-                return False, f"Header {header} mismatch in error response: expected {value}, got {headers[header]}"
+                return (
+                    False,
+                    f"Header {header} mismatch in error response: expected {value}, got {headers[header]}",
+                )
         return True, "OK"
     except Exception as e:
         return False, f"Request failed: {e}"
+
 
 def test_proxy_security():
     print(f"🚀 Starting test server on {SERVER_URL}...")
@@ -50,7 +59,7 @@ def test_proxy_security():
     expected_security_headers = {
         "X-Content-Type-Options": "nosniff",
         "Content-Security-Policy": "default-src 'none'",
-        "X-Frame-Options": "DENY"
+        "X-Frame-Options": "DENY",
     }
 
     # 1. Test 404 path
@@ -61,7 +70,9 @@ def test_proxy_security():
 
     # 2. Test valid proxy path
     print("\n🔍 Testing proxy path...")
-    success, msg = check_headers(f"{SERVER_URL}/proxy/depression-prevalence.csv", expected_security_headers)
+    success, msg = check_headers(
+        f"{SERVER_URL}/proxy/depression-prevalence.csv", expected_security_headers
+    )
     # We assert success only if it's a header failure. Connection failure (e.g. upstream timeout)
     # might happen in CI if network is restricted, but the proxy should still return headers on error?
     # Actually, my proxy only sends headers if it catches an exception and returns 502.
@@ -73,6 +84,7 @@ def test_proxy_security():
     assert success, f"Proxy Security Headers Check Failed: {msg}"
 
     print("\n✅ Test completed.")
+
 
 if __name__ == "__main__":
     test_proxy_security()

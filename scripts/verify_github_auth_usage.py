@@ -5,7 +5,7 @@ import os
 def check_github_auth_usage(directory):
     usage_found = False
     for root, _dirs, files in os.walk(directory):
-        if "99_unsortiert" in root: # Skip the unsorted/backup directory
+        if "99_unsortiert" in root:  # Skip the unsorted/backup directory
             continue
 
         for file in files:
@@ -17,7 +17,9 @@ def check_github_auth_usage(directory):
 
                     for node in ast.walk(tree):
                         if isinstance(node, ast.ImportFrom):
-                            if node.module == "auth.github_oauth" and "GitHubAuth" in [n.name for n in node.names]:
+                            if node.module == "auth.github_oauth" and "GitHubAuth" in [
+                                n.name for n in node.names
+                            ]:
                                 print(f"✅ Found GitHubAuth usage in: {filepath}")
                                 usage_found = True
                 except Exception as e:
@@ -27,6 +29,7 @@ def check_github_auth_usage(directory):
         print("❌ No usage of GitHubAuth found in the codebase (excluding 99_unsortiert).")
     else:
         print("\n✅ Verification Complete: GitHubAuth is integrated.")
+
 
 if __name__ == "__main__":
     check_github_auth_usage(".")
