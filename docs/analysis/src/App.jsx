@@ -529,7 +529,7 @@ const App = () => {
 
         {/* Conclusion Section */}
         <section id="schlussfolgerung" className={`py-16 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
-          <div className="max-w-4xl mx-auto px-6">
+          <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-8 text-center">Schlussfolgerung</h2>
 
             <div className={`p-8 rounded-xl shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
