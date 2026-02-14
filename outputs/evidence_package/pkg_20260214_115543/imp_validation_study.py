@@ -20,12 +20,12 @@ from scipy.stats import gmean
 
 # Fragebogen-Definitionen (abgestimmt auf Preprint v1.1)
 QUESTIONS = {
-    "Autonomy": [
-        "Ich fühle mich frei, meine eigenen Entscheidungen zu treffen.",
-        "Meine Handlungen stimmen mit meinen eigenen Werten überein.",
-        "Ich kann meine Aufgaben selbstständig strukturieren und planen.",
-        "Ich übernehme Verantwortung für mein eigenes Lernen und Handeln.",
-        "Ich fühle mich nicht von anderen kontrolliert oder unter Druck gesetzt.",
+    "Cognitive_Efficiency": [
+        "Ich kann komplexe Probleme in kleinere, lösbare Teile zerlegen.",
+        "Neue Konzepte verstehe ich schnell und gründlich.",
+        "Ich erkenne Muster und Zusammenhänge in unterschiedlichen Kontexten.",
+        "Abstrakte Ideen kann ich gut erfassen und anwenden.",
+        "Ich finde kreative Lösungen für unbekannte Probleme.",
     ],
     "Intrinsic_Motivation": [
         "Ich arbeite an Aufgaben, weil sie mich wirklich interessieren.",
@@ -34,13 +34,6 @@ QUESTIONS = {
         "Auch bei Schwierigkeiten bleibe ich bei meinen Projekten.",
         "Lernen und Weiterentwicklung sind mir wichtiger als Noten oder Anerkennung.",
     ],
-    "Resilience": [
-        "Nach Rückschlägen finde ich schnell zu meiner Leistungsfähigkeit zurück.",
-        "Ich kann meine Emotionen auch in schwierigen Situationen regulieren.",
-        "Stress beeinflusst meine Leistung nur vorübergehend.",
-        "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
-        "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
-    ],
     "Social_Participation": [
         "In Gruppenprojekten trage ich aktiv zur Lösung bei.",
         "Ich kann meine Ideen klar und überzeugend kommunizieren.",
@@ -48,12 +41,19 @@ QUESTIONS = {
         "Zusammenarbeit mit anderen bereichert meine Arbeit.",
         "Ich kann mich gut in die Perspektiven anderer hineinversetzen.",
     ],
-    "Authenticity": [
-        "Ich verhalte mich so, wie es meinem wahren Selbst entspricht.",
-        "Ich muss mich nicht verstellen, um akzeptiert zu werden.",
-        "Meine Kommunikation ist ehrlich und direkt.",
-        "Ich stehe zu meinen Überzeugungen, auch wenn es schwierig ist.",
-        "Ich fühle mich in meinen Beziehungen als 'ich selbst'.",
+    "Resilience": [
+        "Nach Rückschlägen finde ich schnell zu meiner Leistungsfähigkeit zurück.",
+        "Ich kann meine Emotionen auch in schwierigen Situationen regulieren.",
+        "Stress beeinflusst meine Leistung nur vorübergehend.",
+        "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
+        "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
+    ],
+    "Environment_Optimization": [
+        "Ich gestalte meine Arbeitsumgebung gezielt für optimale Konzentration.",
+        "Ich erkenne, wann meine Umgebung meine Leistung beeinträchtigt.",
+        "Ich weiß, welche Bedingungen ich für Flow-Zustände brauche.",
+        "Ich passe meine Arbeitsweise flexibel an unterschiedliche Kontexte an.",
+        "Ich suche aktiv nach Umgebungen, die meine Stärken fördern.",
     ],
 }
 
