@@ -3,6 +3,7 @@
 Adds frontmatter to a markdown file or all markdown files in a directory.
 Usage: python tools/add_frontmatter.py <file_or_directory> --title <title>
 """
+
 import argparse
 import datetime
 import os
@@ -48,6 +49,7 @@ date: {date_str}
     print(f"Added frontmatter to {filename}")
     return True
 
+
 def process_directory(directory):
     """
     Process all .md files in a directory.
@@ -58,10 +60,13 @@ def process_directory(directory):
                 filepath = os.path.join(root, file)
                 add_frontmatter_to_file(filepath)
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Add frontmatter to markdown files.")
     parser.add_argument("file", help="File or directory to process")
-    parser.add_argument("--title", help="Title for the frontmatter (only for single file)", default=None)
+    parser.add_argument(
+        "--title", help="Title for the frontmatter (only for single file)", default=None
+    )
 
     args = parser.parse_args()
 
