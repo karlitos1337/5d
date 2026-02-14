@@ -1,9 +1,9 @@
+import os
+import sys
 import threading
 import time
-import urllib.request
 import urllib.error
-import sys
-import os
+import urllib.request
 from http.server import HTTPServer
 
 # Add the parent directory to sys.path to import owid_proxy
