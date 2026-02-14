@@ -18,14 +18,14 @@ def get_device_type():
     Returns:
         str: 'mobile', 'tablet', or 'desktop'
     """
-    # Inject JavaScript to detect screen width
-    js_code = """
-    <script>
-        const width = window.innerWidth;
-        const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
-        window.parent.postMessage({type: 'streamlit:setComponentValue', value: deviceType}, '*');
-    </script>
-    """
+    # Inject JavaScript to detect screen width (code stored for future use)
+    # js_code = """
+    # <script>
+    #     const width = window.innerWidth;
+    #     const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
+    #     window.parent.postMessage({type: 'streamlit:setComponentValue', value: deviceType}, '*');
+    # </script>
+    # """
 
     # Use st.components for device detection (simplified)
     # In practice, we use CSS media queries instead
