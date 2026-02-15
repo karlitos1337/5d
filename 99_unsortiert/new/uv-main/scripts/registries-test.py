@@ -182,9 +182,7 @@ def run_test(
 ) -> bool:
     print(uv)
     """Attempt to install a package from this registry."""
-    print(
-        f"{registry_name} -- Running test for {registry_url} with username {username}"
-    )
+    print(f"{registry_name} -- Running test for {registry_url} with username {username}")
     if package == DEFAULT_PKG_NAME:
         print(
             f"** Using default test package name: {package}. To choose a different package, set UV_TEST_{registry_name.upper()}_PKG"
@@ -246,9 +244,7 @@ def run_test(
                     print(f"  stderr: {result.stderr.strip()}")
                 return True
             else:
-                print(
-                    f"{Fore.RED}{registry_name}: FAIL{Fore.RESET} - Failed to install {package}."
-                )
+                print(f"{Fore.RED}{registry_name}: FAIL{Fore.RESET} - Failed to install {package}.")
 
         except subprocess.TimeoutExpired:
             print(f"{Fore.RED}{registry_name}: TIMEOUT{Fore.RESET} (>{timeout}s)")
@@ -429,9 +425,7 @@ def main() -> None:
         print("\nNo tests were run - have you defined at least one registry?")
         print("     * UV_TEST_<registry_name>_URL")
         print("     * UV_TEST_<registry_name>_TOKEN")
-        print(
-            "     * UV_TEST_<registry_name>_PKG (the private package to test installing)"
-        )
+        print("     * UV_TEST_<registry_name>_PKG (the private package to test installing)")
         print('     * UV_TEST_<registry_name>_USERNAME (defaults to "__token__")')
         sys.exit(1)
 
