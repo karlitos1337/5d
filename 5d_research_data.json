@@ -65,7 +65,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41680756/"
       }
     ],
-    "timestamp": "2026-02-15T12:11:56.881315"
+    "timestamp": "2026-02-15T12:23:16.634036"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -134,7 +134,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41690172/"
       }
     ],
-    "timestamp": "2026-02-15T12:11:59.884920"
+    "timestamp": "2026-02-15T12:23:17.623128"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -198,7 +198,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41683238/"
       }
     ],
-    "timestamp": "2026-02-15T12:12:01.922067"
+    "timestamp": "2026-02-15T12:23:21.625296"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -264,7 +264,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-02-15T12:12:04.892797"
+    "timestamp": "2026-02-15T12:23:23.625066"
   },
   "democratic schools": {
     "arxiv": [
@@ -340,7 +340,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41686449/"
       }
     ],
-    "timestamp": "2026-02-15T12:12:05.890045"
+    "timestamp": "2026-02-15T12:23:24.617225"
   },
   "student agency": {
     "arxiv": [
@@ -410,11 +410,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41683198/"
       }
     ],
-    "timestamp": "2026-02-15T12:12:06.891999"
+    "timestamp": "2026-02-15T12:23:25.630341"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2026-02-15T12:12:06.893564",
+    "timestamp": "2026-02-15T12:23:25.631854",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -668,7 +668,7 @@
         }
       }
     },
-    "timestamp": "2026-02-15T12:12:14.078012",
+    "timestamp": "2026-02-15T12:23:32.803574",
     "source": "World Bank EdStats API"
   },
   "world_bank_wgi": {
@@ -954,7 +954,7 @@
         }
       }
     },
-    "timestamp": "2026-02-15T12:12:20.044622",
+    "timestamp": "2026-02-15T12:23:38.788423",
     "source": "World Bank Worldwide Governance Indicators"
   }
 }
