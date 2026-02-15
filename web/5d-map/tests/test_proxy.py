@@ -11,6 +11,7 @@ from http.server import HTTPServer
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import owid_proxy
 
+
 class TestProxy(unittest.TestCase):
     def setUp(self):
         self.port = 5511
@@ -35,13 +36,17 @@ class TestProxy(unittest.TestCase):
             with urllib.request.urlopen(req, timeout=10) as response:
                 self.assertEqual(response.status, 200)
                 self.assertEqual(response.headers.get("X-Content-Type-Options"), "nosniff")
-                self.assertEqual(response.headers.get("Content-Security-Policy"), "default-src 'none'; frame-ancestors 'none'")
+                self.assertEqual(
+                    response.headers.get("Content-Security-Policy"),
+                    "default-src 'none'; frame-ancestors 'none'",
+                )
                 self.assertEqual(response.headers.get("X-Frame-Options"), "DENY")
                 self.assertEqual(response.headers.get("Access-Control-Allow-Origin"), "*")
         except urllib.error.HTTPError as e:
             # Even on error, security headers should be present
             self.assertEqual(e.headers.get("X-Content-Type-Options"), "nosniff")
             self.assertEqual(e.headers.get("Access-Control-Allow-Origin"), "*")
+
 
 if __name__ == "__main__":
     unittest.main()
