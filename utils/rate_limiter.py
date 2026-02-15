@@ -6,7 +6,6 @@ Implements fair rate limiting with burst capacity
 
 import asyncio
 import time
-from typing import Dict, Optional
 
 
 class TokenBucketRateLimiter:
@@ -19,7 +18,7 @@ class TokenBucketRateLimiter:
     Reference: Token bucket algorithm (Tanenbaum, Computer Networks)
     """
     
-    def __init__(self, rate: float, max_tokens: Optional[int] = None):
+    def __init__(self, rate: float, max_tokens: int | None = None):
         """
         Initialize rate limiter.
         
@@ -80,10 +79,10 @@ class DomainRateLimiter:
             default_rate: Default tokens per second for new domains
         """
         self.default_rate = default_rate
-        self.limiters: Dict[str, TokenBucketRateLimiter] = {}
+        self.limiters: dict[str, TokenBucketRateLimiter] = {}
         self.lock = asyncio.Lock()
         
-    async def acquire(self, domain: str, tokens: int = 1, rate: Optional[float] = None) -> None:
+    async def acquire(self, domain: str, tokens: int = 1, rate: float | None = None) -> None:
         """
         Acquire tokens for a specific domain.
         
@@ -101,7 +100,7 @@ class DomainRateLimiter:
         # Acquire tokens from domain-specific limiter
         await self.limiters[domain].acquire(tokens)
     
-    def get_status(self, domain: str) -> Optional[Dict[str, float]]:
+    def get_status(self, domain: str) -> dict[str, float] | None:
         """
         Get current status of a domain's rate limiter.
         

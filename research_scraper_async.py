@@ -8,7 +8,6 @@ import asyncio
 import json
 import time
 from datetime import datetime
-from typing import List, Dict, Optional
 
 import aiohttp
 from bs4 import BeautifulSoup
@@ -86,7 +85,7 @@ class AsyncResearchScraper:
         if self.connector:
             await self.connector.close()
     
-    async def search_arxiv_async(self, query: str, max_results: int = 5) -> List[Dict]:
+    async def search_arxiv_async(self, query: str, max_results: int = 5) -> list[dict]:
         """
         Search arXiv papers asynchronously.
         
@@ -124,10 +123,20 @@ class AsyncResearchScraper:
                     
                     papers = []
                     for entry in soup.find_all("entry"):
+                        authors_list = (
+                            [a.text for a in entry.find_all("author")]
+                            if entry.find_all("author")
+                            else []
+                        )
+                        summary_text = (
+                            entry.summary.text.strip()[:200]
+                            if entry.summary
+                            else "N/A"
+                        )
                         paper = {
                             "title": entry.title.text.strip() if entry.title else "N/A",
-                            "authors": [a.text for a in entry.find_all("author")] if entry.find_all("author") else [],
-                            "summary": (entry.summary.text.strip()[:200] if entry.summary else "N/A"),
+                            "authors": authors_list,
+                            "summary": summary_text,
                             "published": entry.published.text if entry.published else "N/A",
                             "link": entry.id.text if entry.id else "N/A",
                         }
@@ -150,7 +159,7 @@ class AsyncResearchScraper:
         
         return []
     
-    async def search_pubmed_async(self, query: str, max_results: int = 5) -> List[Dict]:
+    async def search_pubmed_async(self, query: str, max_results: int = 5) -> list[dict]:
         """
         Search PubMed papers asynchronously.
         
@@ -224,8 +233,8 @@ class AsyncResearchScraper:
     
     async def fetch_world_bank_education_data_async(
         self, 
-        countries: Optional[List[str]] = None
-    ) -> Dict:
+        countries: list[str] | None = None
+    ) -> dict:
         """
         Fetch education indicators from World Bank EdStats API asynchronously.
         
@@ -299,7 +308,11 @@ class AsyncResearchScraper:
                 except aiohttp.ClientError as e:
                     if attempt < self.max_retries - 1:
                         wait_time = (self.retry_backoff ** attempt)
-                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                        error_msg = (
+                            f"    ⚠️  World Bank error "
+                            f"(attempt {attempt + 1}/{self.max_retries}): {e}"
+                        )
+                        print(error_msg)
                         await asyncio.sleep(wait_time)
                     else:
                         print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
@@ -310,7 +323,7 @@ class AsyncResearchScraper:
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
     
-    async def scrape_keyword_async(self, keyword: str) -> tuple[str, Dict]:
+    async def scrape_keyword_async(self, keyword: str) -> tuple[str, dict]:
         """
         Scrape research data for a single keyword asynchronously.
         
@@ -338,7 +351,7 @@ class AsyncResearchScraper:
         
         return keyword, result
     
-    async def scrape_all_async(self) -> Dict:
+    async def scrape_all_async(self) -> dict:
         """
         Scrape all research data asynchronously.
         
@@ -377,7 +390,7 @@ class AsyncResearchScraper:
         
         return all_research
     
-    def save_results(self, data: Dict, filename: str = "5d_research_data.json"):
+    def save_results(self, data: dict, filename: str = "5d_research_data.json"):
         """
         Save results to JSON file.
         
