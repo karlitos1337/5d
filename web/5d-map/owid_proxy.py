@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import sys
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -57,8 +58,6 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
 
 def main():
-    import os
-
     port = 5510
     if len(sys.argv) > 1:
         try:

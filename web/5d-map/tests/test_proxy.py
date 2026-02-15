@@ -1,9 +1,10 @@
-import sys
+# ruff: noqa: I001
 import os
+import sys
 import threading
 import time
-import urllib.request
 import unittest
+import urllib.request
 from http.server import HTTPServer
 
 # Add parent directory to path to import owid_proxy

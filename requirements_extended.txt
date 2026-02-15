@@ -14,4 +14,4 @@ redis>=5.0.0
 ruff
 black
 mypy
-pytest
+pytestnetworkx>=3.0
