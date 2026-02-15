@@ -430,10 +430,68 @@ class ResearchScraper:
         print(f"\n💾 Gespeichert: {filename}")
 
 
+def run_async_scraper():
+    """
+    Run async version of scraper for better performance.
+    
+    This is a convenience wrapper that uses the async scraper
+    when available for 5-10x speedup.
+    """
+    try:
+        import asyncio
+        from research_scraper_async import AsyncResearchScraper
+        
+        async def _run():
+            async with AsyncResearchScraper() as scraper:
+                data = await scraper.scrape_all_async()
+                scraper.save_results(data)
+                return data
+        
+        return asyncio.run(_run())
+    except ImportError:
+        print("⚠️  Async scraper not available, falling back to sync version")
+        scraper = ResearchScraper()
+        data = scraper.scrape_all()
+        scraper.save_results(data)
+        return data
+
+
 if __name__ == "__main__":
-    scraper = ResearchScraper()
-    research_data = scraper.scrape_all()
-    scraper.save_results(research_data)
+    # Try to use async version for better performance
+    import sys
+    
+    use_async = "--async" in sys.argv or "-a" in sys.argv
+    use_sync = "--sync" in sys.argv or "-s" in sys.argv
+    
+    if use_sync:
+        print("🔄 Running SYNCHRONOUS scraper (--sync flag)")
+        scraper = ResearchScraper()
+        research_data = scraper.scrape_all()
+        scraper.save_results(research_data)
+    elif use_async:
+        print("⚡ Running ASYNCHRONOUS scraper (--async flag)")
+        research_data = run_async_scraper()
+    else:
+        # Default: try async, fall back to sync
+        print("⚡ Running scraper (use --async or --sync to choose)")
+        try:
+            research_data = run_async_scraper()
+        except Exception as e:
+            print(f"⚠️  Async failed ({e}), using sync version")
+            scraper = ResearchScraper()
+            research_data = scraper.scrape_all()
+            scraper.save_results(research_data)
+    
+    # Statistik
+    total_papers = sum(
+        len(data.get("arxiv", [])) + len(data.get("pubmed", [])) 
+        for data in research_data.values() 
+        if "arxiv" in data
+    )
+    print(f"\n📊 Total: {total_papers} Papers gefunden")
+            scraper = ResearchScraper()
+            research_data = scraper.scrape_all()
+            scraper.save_results(research_data)
 
     # Statistik
     total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values() if "arxiv" in data)
