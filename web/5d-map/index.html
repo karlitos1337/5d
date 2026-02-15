@@ -98,7 +98,7 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" aria-busy="false">
     <div id="map"></div>
     <div id="layer-info" style="display:none;padding:0.5rem 1rem;max-width:640px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
       <strong>Layer‑Info:</strong> <span id="layer-info-text">—</span>
@@ -111,7 +111,7 @@
   </main>
 
   <!-- Loading Overlay -->
-  <div class="loading-overlay">
+  <div class="loading-overlay" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="loading-spinner">
       <div class="spinner"></div>
       <p>Lade Daten...</p>
