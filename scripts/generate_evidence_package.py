@@ -6,6 +6,7 @@ Orchestrates validation, scraping, and packaging.
 
 import os
 import glob
+import json
 import shutil
 import datetime
 import subprocess
@@ -53,11 +54,15 @@ def main():
 
         # Move artifacts
         moved_count = 0
+        report_path = None
         for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
             for f in glob.glob(pattern):
-                shutil.move(f, package_dir / os.path.basename(f))
+                dest = package_dir / os.path.basename(f)
+                shutil.move(f, dest)
                 print(f"  -> Moved {f}")
                 moved_count += 1
+                if "validation_report_" in f:
+                    report_path = dest
 
         if moved_count == 0:
             print("⚠️  No validation artifacts found to move.")
@@ -65,6 +70,15 @@ def main():
     except subprocess.CalledProcessError as e:
         print("❌ Error during IMP Validation Study:")
         print(e.stderr)
+
+    # Load Validation Data for dynamic reporting
+    validation_data = {}
+    if report_path and report_path.exists():
+        try:
+            with open(report_path, "r", encoding="utf-8") as f:
+                validation_data = json.load(f)
+        except Exception as e:
+            print(f"⚠️  Could not load validation report: {e}")
 
     # 2. Run Research Scraper
     print(f"\n🚀 Running Research Scraper...")
@@ -89,38 +103,82 @@ def main():
         print("❌ Error during Research Scraper:")
         print(e.stderr)
 
-    # 3. Create Metric Mapping Table
-    mapping_content = """
-| Dimension | Metric | Source | Range | Reliability (α) |
-|-----------|--------|--------|-------|-----------------|
-| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 |
-| Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
-| Resilience | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
-| Social Participation | Network Density | Graph Analysis | 0-1 | N/A |
-| Authenticity | Congruence Score | Self-Report | 0-5 | > 0.8 |
+    # 3. Create Metric Mapping Table (Dynamic)
+    print(f"\n📊 Generating Metric Mapping Table...")
+
+    # Default values if validation failed
+    alphas = {
+        "Autonomy": "N/A",
+        "Intrinsic_Motivation": "N/A",
+        "Resilience": "N/A",
+        "Social_Participation": "N/A",
+        "Authenticity": "N/A"
+    }
+
+    if "dimensions" in validation_data:
+        for dim, stats in validation_data["dimensions"].items():
+            if "cronbach_alpha" in stats:
+                alphas[dim] = f"{stats['cronbach_alpha']:.3f}"
+
+    mapping_content = f"""
+| Dimension | Metric | Source | Range | Reliability (α) | Status |
+|-----------|--------|--------|-------|-----------------|--------|
+| Autonomy | Voice & Accountability (WGI) / Self-Report | World Bank / Survey | -2.5 to 2.5 / 0-5 | {alphas.get('Autonomy', 'N/A')} | {'✅ Validated' if alphas.get('Autonomy') != 'N/A' and float(alphas.get('Autonomy')) > 0.7 else '⚠️ Review'} |
+| Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | {alphas.get('Intrinsic_Motivation', 'N/A')} | {'✅ Validated' if alphas.get('Intrinsic_Motivation') != 'N/A' and float(alphas.get('Intrinsic_Motivation')) > 0.7 else '⚠️ Review'} |
+| Resilience | HRV / Stress Tolerance / CD-RISC | Bio-Feedback / Survey | 0-100 / 0-5 | {alphas.get('Resilience', 'N/A')} | {'✅ Validated' if alphas.get('Resilience') != 'N/A' and float(alphas.get('Resilience')) > 0.7 else '⚠️ Review'} |
+| Social Participation | Network Density / Belonging | Graph Analysis / Survey | 0-1 / 0-5 | {alphas.get('Social_Participation', 'N/A')} | {'✅ Validated' if alphas.get('Social_Participation') != 'N/A' and float(alphas.get('Social_Participation')) > 0.7 else '⚠️ Review'} |
+| Authenticity | Congruence Score | Self-Report | 0-5 | {alphas.get('Authenticity', 'N/A')} | {'✅ Validated' if alphas.get('Authenticity') != 'N/A' and float(alphas.get('Authenticity')) > 0.7 else '⚠️ Review'} |
     """
     with open(package_dir / "METRIC_MAPPING.md", "w") as f:
         f.write(mapping_content)
 
-    # 4. Create Interpretation
+    # 4. Create Interpretation (Dynamic)
+    print(f"\n🧠 Generating Scientific Interpretation...")
+
+    wgi_status = "Available" if os.path.exists("5d_research_data.json") else "Pending"
+    wgi_details = ""
+    try:
+        with open("5d_research_data.json", "r") as f:
+            rd = json.load(f)
+            if "world_bank_wgi" in rd:
+                wgi_details = f"- **Governance Data:** Fetched for {len(rd['world_bank_wgi'].get('data', {}))} countries (Voice & Accountability, Rule of Law, Gov Effectiveness)."
+            else:
+                 wgi_details = "- **Governance Data:** ⚠️ Missing in fetch result."
+    except:
+        pass
+
     interpretation_content = f"""
 # Scientific Interpretation
 **Generated via Professor Dr. A. I. Nexus Protocol**
 **Date:** {datetime.datetime.now().isoformat()}
 
-## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
-- **External Data:** World Bank Education data fetched.
+## 1. Empirical Status
+### Validation Study (Micro-Level)
+- **Sample Size:** {validation_data.get('n_participants', 'N/A')} (Pilot)
+- **Reliability Check (Cronbach's α > 0.7):**
+  - **Autonomy:** {alphas.get('Autonomy')}
+  - **Intrinsic Motivation:** {alphas.get('Intrinsic_Motivation')}
+  - **Resilience:** {alphas.get('Resilience')}
+  - **Social Participation:** {alphas.get('Social_Participation')}
+  - **Authenticity:** {alphas.get('Authenticity')}
+
+### External Data (Macro-Level)
+- **Education Data:** World Bank EdStats fetched.
+{wgi_details}
 - **Literature:** arXiv/PubMed papers scraped for context.
 
-## Hypothesis & Next Steps
-Based on the zero-impact principle, any dimension < 0.7 requires immediate intervention.
-Refer to `validation_results_*.png` for visual distribution.
+## 2. Hypothesis & Gap Analysis
+**Protocol Rule:** Any dimension with α < 0.7 requires immediate item revision.
+**Status:** {'✅ All dimensions validated (α > 0.7).' if all(float(v) > 0.7 for v in alphas.values() if v != 'N/A') else '⚠️ Some dimensions require revision.'}
+
+## 3. Discriminant Validity
+Refer to `validation_results_*.png` (Heatmap) to ensure correlations between dimensions are < 0.85.
 
 [PUSH TO DOWNLOAD]
 - Analysis Script: validation/imp_validation_study.py
 - Metric Mapping: METRIC_MAPPING.md
 - Visualization: validation_results_*.png
+- Research Data: 5d_research_data.json
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)

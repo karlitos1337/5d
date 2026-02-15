@@ -18,42 +18,42 @@ import pandas as pd
 import seaborn as sns
 from scipy.stats import gmean
 
-# Fragebogen-Definitionen (abgestimmt auf Preprint v1.1)
+# Fragebogen-Definitionen (abgestimmt auf 5D-Intelligence Framework)
 QUESTIONS = {
-    "Cognitive_Efficiency": [
-        "Ich kann komplexe Probleme in kleinere, lösbare Teile zerlegen.",
-        "Neue Konzepte verstehe ich schnell und gründlich.",
-        "Ich erkenne Muster und Zusammenhänge in unterschiedlichen Kontexten.",
-        "Abstrakte Ideen kann ich gut erfassen und anwenden.",
-        "Ich finde kreative Lösungen für unbekannte Probleme.",
+    "Autonomy": [
+        "Ich treffe meine Entscheidungen basierend auf meinen eigenen Werten.",
+        "Ich fühle mich frei, meine Meinung zu äußern, auch wenn andere widersprechen.",
+        "Ich habe das Gefühl, die Kontrolle über mein Leben zu haben.",
+        "Ich kann komplexe Probleme eigenständig in lösbare Teile zerlegen.",
+        "Ich gestalte meine Umgebung so, dass sie meine Ziele unterstützt.",
     ],
     "Intrinsic_Motivation": [
         "Ich arbeite an Aufgaben, weil sie mich wirklich interessieren.",
         "Herausforderungen motivieren mich, auch ohne äußere Belohnung.",
         "Ich setze mir eigenständig anspruchsvolle Ziele.",
-        "Auch bei Schwierigkeiten bleibe ich bei meinen Projekten.",
+        "Ich verliere das Zeitgefühl, wenn ich an etwas arbeite, das mir wichtig ist (Flow).",
         "Lernen und Weiterentwicklung sind mir wichtiger als Noten oder Anerkennung.",
-    ],
-    "Social_Participation": [
-        "In Gruppenprojekten trage ich aktiv zur Lösung bei.",
-        "Ich kann meine Ideen klar und überzeugend kommunizieren.",
-        "Ich höre anderen aufmerksam zu und baue auf ihren Ideen auf.",
-        "Zusammenarbeit mit anderen bereichert meine Arbeit.",
-        "Ich kann mich gut in die Perspektiven anderer hineinversetzen.",
     ],
     "Resilience": [
         "Nach Rückschlägen finde ich schnell zu meiner Leistungsfähigkeit zurück.",
         "Ich kann meine Emotionen auch in schwierigen Situationen regulieren.",
         "Stress beeinflusst meine Leistung nur vorübergehend.",
         "Aus Fehlern lerne ich konstruktiv für die Zukunft.",
-        "Ich bleibe auch unter Druck fokussiert und handlungsfähig.",
+        "Ich betrachte Schwierigkeiten als Gelegenheit zum Wachstum.",
     ],
-    "Environment_Optimization": [
-        "Ich gestalte meine Arbeitsumgebung gezielt für optimale Konzentration.",
-        "Ich erkenne, wann meine Umgebung meine Leistung beeinträchtigt.",
-        "Ich weiß, welche Bedingungen ich für Flow-Zustände brauche.",
-        "Ich passe meine Arbeitsweise flexibel an unterschiedliche Kontexte an.",
-        "Ich suche aktiv nach Umgebungen, die meine Stärken fördern.",
+    "Social_Participation": [
+        "In Gruppenprojekten trage ich aktiv zur Lösung bei.",
+        "Ich fühle mich als wertvoller Teil meiner Gemeinschaft.",
+        "Ich höre anderen aufmerksam zu und baue auf ihren Ideen auf.",
+        "Zusammenarbeit mit anderen bereichert meine Arbeit.",
+        "Ich kann mich gut in die Perspektiven anderer hineinversetzen.",
+    ],
+    "Authenticity": [
+        "Ich verhalte mich so, dass es meinem wahren Ich entspricht.",
+        "Es fällt mir leicht, offen über meine Überzeugungen zu sprechen.",
+        "Ich muss mich nicht verstellen, um von anderen akzeptiert zu werden.",
+        "Meine Handlungen stimmen mit meinen inneren Werten überein.",
+        "Ich kenne meine Stärken und Schwächen genau.",
     ],
 }
 

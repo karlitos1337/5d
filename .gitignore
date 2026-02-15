@@ -45,3 +45,5 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+outputs/
+verify_wb_source.py
