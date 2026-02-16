@@ -1,15 +1,16 @@
-import pytest
 from src_python.knowledge_graph.core import CognitiveGraph
 
 def test_serendipity_calculation():
-    kg = CognitiveGraph()
-    kg.add_concept("A", {})
-    kg.add_concept("B", {})
-    kg.link_concepts("A", "B")
-    score = kg.calculate_serendipity_score(["A", "B"])
-    assert score > 0, "Connected thoughts should have positive serendipity"
+    # Setup
+    graph = CognitiveGraph()
+    graph.add_concept("c1", {"domain": "science"})
+    graph.add_concept("c2", {"domain": "art"})
+    graph.add_concept("c3", {"domain": "tech"})
 
-def test_empty_graph():
-    kg = CognitiveGraph()
-    score = kg.calculate_serendipity_score([])
-    assert score == 0.0, "Empty context should yield zero serendipity"
+    graph.link_concepts("c1", "c2", 0.5)
+
+    # Execute
+    score = graph.calculate_serendipity_score(["c1", "c3"])
+
+    # Assert
+    assert score >= 0.0

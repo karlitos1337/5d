@@ -37,7 +37,7 @@ from math import pi
 # Configure style
 try:
     plt.style.use('seaborn-v0_8-whitegrid')
-except:
+except Exception:
     plt.style.use('seaborn-whitegrid') # Fallback for older mpl
 
 DIMENSIONS = [

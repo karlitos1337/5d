@@ -43,7 +43,7 @@ def main():
     env["PYTHONPATH"] = os.getcwd()
 
     # 1. Run Validation Study
-    print(f"\n🚀 Running IMP Validation Study...")
+    print("\n🚀 Running IMP Validation Study...")
     validation_report_data = {}
     try:
         # Running validation study
@@ -58,7 +58,7 @@ def main():
 
         # Copy Analysis Script
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
-        print(f"  -> Copied Analysis Script: imp_validation_study.py")
+        print("  -> Copied Analysis Script: imp_validation_study.py")
 
         # Move artifacts and capture report data
         moved_count = 0
@@ -79,7 +79,7 @@ def main():
         print(e.stderr)
 
     # 2. Run Research Scraper
-    print(f"\n🚀 Running Research Scraper...")
+    print("\n🚀 Running Research Scraper...")
     research_data = {}
     try:
         result = subprocess.run(
@@ -95,7 +95,7 @@ def main():
         if os.path.exists("5d_research_data.json"):
             shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
             research_data = load_json_safe("5d_research_data.json")
-            print(f"  -> Copied 5d_research_data.json")
+            print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")
 
@@ -106,7 +106,7 @@ def main():
     # 3. Copy Visualization Template
     if os.path.exists("scripts/visualization_template.py"):
         shutil.copy("scripts/visualization_template.py", package_dir / "visualization_template.py")
-        print(f"  -> Copied Visualization Template: visualization_template.py")
+        print("  -> Copied Visualization Template: visualization_template.py")
     else:
         print("⚠️  scripts/visualization_template.py not found.")
 
