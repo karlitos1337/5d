@@ -6,8 +6,8 @@ import time
 from abc import ABC, abstractmethod
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Union
 
+import ai_hawk.llm.prompts as prompts
 import httpx
 from dotenv import load_dotenv
 from langchain_core.messages import BaseMessage
@@ -16,9 +16,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompt_values import StringPromptValue
 from langchain_core.prompts import ChatPromptTemplate
 from Levenshtein import distance
-
-import ai_hawk.llm.prompts as prompts
-from config import JOB_SUITABILITY_SCORE
+from src.job import Job
+from src.logging import logger
 from src.utils.constants import (
     AVAILABILITY,
     CERTIFICATIONS,
@@ -38,15 +37,14 @@ from src.utils.constants import (
     JOB_DESCRIPTION,
     LANGUAGES,
     LEGAL_AUTHORIZATION,
-    LLM_MODEL_TYPE,
     LOGPROBS,
     MODEL,
     MODEL_NAME,
     OLLAMA,
     OPENAI,
-    PERPLEXITY,
     OPTIONS,
     OUTPUT_TOKENS,
+    PERPLEXITY,
     PERSONAL_INFORMATION,
     PHRASE,
     PROJECTS,
@@ -70,9 +68,9 @@ from src.utils.constants import (
     USAGE_METADATA,
     WORK_PREFERENCES,
 )
-from src.job import Job
-from src.logging import logger
+
 import config as cfg
+from config import JOB_SUITABILITY_SCORE
 
 load_dotenv()
 
@@ -213,12 +211,12 @@ class AIAdapter:
 
 
 class LLMLogger:
-    def __init__(self, llm: Union[OpenAIModel, OllamaModel, ClaudeModel, GeminiModel]):
+    def __init__(self, llm: OpenAIModel | OllamaModel | ClaudeModel | GeminiModel):
         self.llm = llm
         logger.debug(f"LLMLogger successfully initialized with LLM: {llm}")
 
     @staticmethod
-    def log_request(prompts, parsed_reply: Dict[str, Dict]):
+    def log_request(prompts, parsed_reply: dict[str, dict]):
         logger.debug("Starting log_request method")
         logger.debug(f"Prompts received: {prompts}")
         logger.debug(f"Parsed reply received: {parsed_reply}")
@@ -234,7 +232,7 @@ class LLMLogger:
             logger.debug("Prompts are of type StringPromptValue")
             prompts = prompts.text
             logger.debug(f"Prompts converted to text: {prompts}")
-        elif isinstance(prompts, Dict):
+        elif isinstance(prompts, dict):
             logger.debug("Prompts are of type Dict")
             try:
                 prompts = {
@@ -325,11 +323,11 @@ class LLMLogger:
 
 
 class LoggerChatModel:
-    def __init__(self, llm: Union[OpenAIModel, OllamaModel, ClaudeModel, GeminiModel]):
+    def __init__(self, llm: OpenAIModel | OllamaModel | ClaudeModel | GeminiModel):
         self.llm = llm
         logger.debug(f"LoggerChatModel successfully initialized with LLM: {llm}")
 
-    def __call__(self, messages: List[Dict[str, str]]) -> str:
+    def __call__(self, messages: list[dict[str, str]]) -> str:
         logger.debug(f"Entering __call__ method with messages: {messages}")
         while True:
             try:
@@ -384,7 +382,7 @@ class LoggerChatModel:
                 time.sleep(30)
                 continue
 
-    def parse_llmresult(self, llmresult: AIMessage) -> Dict[str, Dict]:
+    def parse_llmresult(self, llmresult: AIMessage) -> dict[str, dict]:
         logger.debug(f"Parsing LLM result: {llmresult}")
 
         try:
