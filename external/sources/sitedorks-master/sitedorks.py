@@ -144,10 +144,12 @@ if aArguments.ubb:
                     parsed_url = urllib.parse.urlparse(sInScopeValue)
                     sHost = parsed_url.hostname if parsed_url.hostname else sInScopeValue
                     if (
-                        (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "amazonaws.com"
-                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "cloudfront.net"
-                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurefd.net"
-                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurewebsites.net"
+                        (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost)) == "amazonaws.com"
+                        or (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost))
+                        == "cloudfront.net"
+                        or (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost)) == "azurefd.net"
+                        or (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost))
+                        == "azurewebsites.net"
                     ):
                         sDomain = sHost
                     else:
@@ -173,10 +175,12 @@ if aArguments.ubb:
                     sHost = parsed_url.hostname if parsed_url.hostname else sOutScopeValue
 
                     if (
-                        (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "amazonaws.com"
-                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "cloudfront.net"
-                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurefd.net"
-                        or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "azurewebsites.net"
+                        (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost)) == "amazonaws.com"
+                        or (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost))
+                        == "cloudfront.net"
+                        or (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost)) == "azurefd.net"
+                        or (lambda ex: ex.domain + "." + ex.suffix)(extract(sHost))
+                        == "azurewebsites.net"
                     ):
                         sDomain = sHost
                     else:
