@@ -1,24 +1,67 @@
 [tool.black]
 line-length = 100
-target-version = ["py310"]
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | 99_unsortiert
+    | external
+    | private-gpt-main
+    | node_modules
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules"
+]
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "UP"]
+ignore = ["E501"]
 
 [tool.mypy]
 python_version = "3.10"
-check_untyped_defs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
-warn_unused_ignores = true
-warn_redundant_casts = true
+warn_return_any = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+ignore_missing_imports = true
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules"
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov"
+testpaths = ["tests", "src_python/tests"]
+python_files = "test_*.py"
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules"
+]
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark test as integration"
+]

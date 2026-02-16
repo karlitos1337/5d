@@ -44,9 +44,7 @@ def main() -> None:
         # Cargo workspace aware and won't otherwise bump these when updating the member `Cargo.toml`
         # files. We could make Rooster smarter instead of this.
         if name in NO_BUMP_CRATES:
-            manifest_dependency = parsed_workspace_manifest["workspace"][
-                "dependencies"
-            ].get(name)
+            manifest_dependency = parsed_workspace_manifest["workspace"]["dependencies"].get(name)
             if manifest_dependency is None:
                 continue
             manifest_version = manifest_dependency["version"]
