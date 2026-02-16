@@ -1,17 +1,16 @@
+import http.client
+import os
+import sys
 import threading
 import time
 import unittest
-import urllib.request
-import urllib.error
 from http.server import HTTPServer
-import sys
-import os
-from unittest.mock import patch, MagicMock
-import http.client
+from unittest.mock import MagicMock, patch
 
 # Add the parent directory to sys.path
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import owid_proxy
+
 
 class TestOWIDProxy(unittest.TestCase):
     @classmethod
