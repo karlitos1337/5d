@@ -370,6 +370,105 @@ class ResearchScraper:
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
 
+    def fetch_world_bank_wgi_data(self, countries=None):
+        """
+        Fetch World Bank Governance Indicators (WGI).
+
+        Args:
+            countries: List of ISO3 country codes (default: top 20 countries)
+
+        Returns:
+            dict: WGI data by country
+        """
+        if countries is None:
+            countries = [
+                "USA",
+                "GBR",
+                "DEU",
+                "FRA",
+                "JPN",
+                "CHN",
+                "IND",
+                "BRA",
+                "CAN",
+                "AUS",
+                "NOR",
+                "SWE",
+                "DNK",
+                "FIN",
+                "NLD",
+                "CHE",
+                "NZL",
+                "ESP",
+                "ITA",
+                "KOR",
+            ]
+
+        valid_countries = [c for c in countries if self._validate_country_code(c)]
+        if not valid_countries:
+            print("❌ No valid countries provided for WGI data fetch")
+            return {}
+
+        # WGI Indicators
+        indicators = {
+            "VA.EST": "Voice and Accountability",
+            "RL.EST": "Rule of Law",
+            "GE.EST": "Government Effectiveness",
+        }
+
+        wgi_data = {}
+
+        for indicator_code, indicator_name in indicators.items():
+            print(f"  🏛️ World Bank WGI: Fetching {indicator_name}...")
+
+            for attempt in range(self.max_retries):
+                try:
+                    self._rate_limit("worldbank")
+                    countries_str = ";".join(valid_countries[:10])
+                    url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                    params = {"format": "json", "date": "2020:2023", "per_page": 500}
+
+                    response = requests.get(url, params=params, timeout=15)
+
+                    if response.status_code == 429:
+                        time.sleep(self.rate_limit_delay * (self.retry_backoff**attempt))
+                        continue
+
+                    response.raise_for_status()
+                    data = response.json()
+
+                    if isinstance(data, list) and len(data) > 1:
+                        for entry in data[1]:
+                            country_code = entry.get("countryiso3code")
+                            val = entry.get("value")
+                            year = entry.get("date")
+
+                            if country_code and val is not None:
+                                if country_code not in wgi_data:
+                                    wgi_data[country_code] = {}
+
+                                # Store raw value and normalized value
+                                # Normalization: (x + 2.5) / 5 -> [0, 1]
+                                try:
+                                    norm_val = (float(val) + 2.5) / 5.0
+                                    norm_val = max(0.0, min(1.0, norm_val))
+                                except (ValueError, TypeError):
+                                    norm_val = None
+
+                                if indicator_name not in wgi_data[country_code]:
+                                    wgi_data[country_code][indicator_name] = {
+                                        "value": val,
+                                        "normalized": norm_val,
+                                        "year": year,
+                                    }
+                    break
+                except Exception as e:
+                    print(f"    ❌ WGI Error: {e}")
+                    break
+
+        print(f"  ✅ WGI: {len(wgi_data)} countries fetched")
+        return wgi_data
+
     def _scrape_single_keyword(self, keyword):
         """Helper to scrape a single keyword (runs in thread)."""
         print(f"\n📚 Suche: {keyword}")
@@ -419,6 +518,15 @@ class ResearchScraper:
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
             "source": "World Bank EdStats API"
+        }
+
+        # World Bank WGI Data
+        print("\n🏛️ Fetching World Bank WGI Data...")
+        wgi_data = self.fetch_world_bank_wgi_data()
+        all_research["world_bank_wgi"] = {
+            "data": wgi_data,
+            "timestamp": datetime.now().isoformat(),
+            "source": "World Bank Governance Indicators"
         }
 
         return all_research
