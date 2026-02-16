@@ -183,7 +183,11 @@ class IMPValidationStudy:
         # Additives Modell (zum Vergleich)
         imp_additive = np.mean(score_values)
 
-        return {"dimensions": scores, "IMP_geometric": imp_geometric, "IMP_additive": imp_additive}
+        return {
+            "dimensions": scores,
+            "IMP_geometric": imp_geometric,
+            "IMP_additive": imp_additive,
+        }
 
     def calculate_imp_scores_vectorized(self, df):
         """Berechnet IMP-Scores für einen DataFrame (vektorisiert)"""
@@ -209,7 +213,7 @@ class IMPValidationStudy:
         return {
             "dimensions": dim_scores,
             "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
+            "IMP_additive": imp_additive,
         }
 
     def correlation_analysis(self):

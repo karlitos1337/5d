@@ -13,6 +13,7 @@ import sys
 import json
 from pathlib import Path
 
+
 def run_step(command, description):
     print(f"\n🚀 {description}...")
     try:
@@ -24,12 +25,14 @@ def run_step(command, description):
         print(e.stderr)
         return False
 
+
 def load_json_safe(filepath):
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception:
         return {}
+
 
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -52,17 +55,25 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
         # Copy Analysis Script
-        shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
+        shutil.copy(
+            "validation/imp_validation_study.py",
+            package_dir / "imp_validation_study.py",
+        )
         print("  -> Copied Analysis Script: imp_validation_study.py")
 
         # Move artifacts and capture report data
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 if "validation_report" in f:
                     validation_report_data = load_json_safe(f)
@@ -87,7 +98,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -105,7 +116,10 @@ def main():
 
     # 3. Copy Visualization Template
     if os.path.exists("scripts/visualization_template.py"):
-        shutil.copy("scripts/visualization_template.py", package_dir / "visualization_template.py")
+        shutil.copy(
+            "scripts/visualization_template.py",
+            package_dir / "visualization_template.py",
+        )
         print("  -> Copied Visualization Template: visualization_template.py")
     else:
         print("⚠️  scripts/visualization_template.py not found.")
@@ -131,9 +145,17 @@ def main():
     # 5. Create Interpretation (Dynamic)
 
     # Extract stats
-    n_papers = sum(len(d.get("arxiv", [])) + len(d.get("pubmed", [])) for d in research_data.values() if isinstance(d, dict))
+    n_papers = sum(
+        len(d.get("arxiv", [])) + len(d.get("pubmed", []))
+        for d in research_data.values()
+        if isinstance(d, dict)
+    )
     alpha = validation_report_data.get("overall_reliability", 0.0)
-    alpha_status = "Excellent" if alpha >= 0.9 else "Good" if alpha >= 0.8 else "Acceptable" if alpha >= 0.7 else "Low"
+    alpha_status = (
+        "Excellent"
+        if alpha >= 0.9
+        else "Good" if alpha >= 0.8 else "Acceptable" if alpha >= 0.7 else "Low"
+    )
 
     wgi_data = research_data.get("world_bank_wgi", {}).get("data", {})
     wgi_count = len(wgi_data)
@@ -197,6 +219,7 @@ Generated: {timestamp}
     print(f"\n✅ Evidence Package Generated: {package_dir}")
     # Print the command to list files, but don't execute it, leave it to the user or agent to verify
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()

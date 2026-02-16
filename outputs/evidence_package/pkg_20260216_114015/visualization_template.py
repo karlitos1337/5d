@@ -36,17 +36,18 @@ from math import pi
 
 # Configure style
 try:
-    plt.style.use('seaborn-v0_8-whitegrid')
+    plt.style.use("seaborn-v0_8-whitegrid")
 except:
-    plt.style.use('seaborn-whitegrid') # Fallback for older mpl
+    plt.style.use("seaborn-whitegrid")  # Fallback for older mpl
 
 DIMENSIONS = [
     "Autonomy",
     "Intrinsic_Motivation",
     "Resilience",
     "Social_Participation",
-    "Authenticity"
+    "Authenticity",
 ]
+
 
 def load_data(filepath):
     """Loads data from CSV."""
@@ -57,6 +58,7 @@ def load_data(filepath):
     except Exception as e:
         print(f"❌ Error loading file: {e}")
         sys.exit(1)
+
 
 def calculate_dimension_scores(df):
     """Calculates mean scores for dimensions if raw item data is provided."""
@@ -88,10 +90,13 @@ def calculate_dimension_scores(df):
                 scores[dim] = df[dim_cols].mean(axis=1)
                 print(f"   -> Calculated {dim} from {len(dim_cols)} items.")
             else:
-                print(f"⚠️  Warning: No data found for dimension '{dim}'. Filling with 0.")
+                print(
+                    f"⚠️  Warning: No data found for dimension '{dim}'. Filling with 0."
+                )
                 scores[dim] = 0.0
 
     return scores
+
 
 def plot_radar_chart(scores_df, output_file="5d_radar_chart.png"):
     """Generates a radar chart of average scores."""
@@ -110,7 +115,7 @@ def plot_radar_chart(scores_df, output_file="5d_radar_chart.png"):
     fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
 
     # Draw one axe per variable + labels
-    plt.xticks(angles[:-1], DIMENSIONS, color='grey', size=10)
+    plt.xticks(angles[:-1], DIMENSIONS, color="grey", size=10)
 
     # Draw ylabels
     ax.set_rlabel_position(0)
@@ -118,16 +123,24 @@ def plot_radar_chart(scores_df, output_file="5d_radar_chart.png"):
     plt.ylim(0, 5)
 
     # Plot data
-    ax.plot(angles, means, linewidth=2, linestyle='solid', color='blue', label='Average Profile')
-    ax.fill(angles, means, 'b', alpha=0.1)
+    ax.plot(
+        angles,
+        means,
+        linewidth=2,
+        linestyle="solid",
+        color="blue",
+        label="Average Profile",
+    )
+    ax.fill(angles, means, "b", alpha=0.1)
 
     plt.title("5D-Competence Profile (Average)", size=15, y=1.1)
-    plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1))
+    plt.legend(loc="upper right", bbox_to_anchor=(0.1, 0.1))
 
     plt.tight_layout()
     plt.savefig(output_file, dpi=300)
     print(f"✅ Saved Radar Chart: {output_file}")
     plt.close()
+
 
 def plot_distribution(scores_df, output_file="5d_distribution.png"):
     """Generates a distribution plot of the overall score."""
@@ -139,8 +152,13 @@ def plot_distribution(scores_df, output_file="5d_distribution.png"):
 
     plt.figure(figsize=(10, 6))
     if not overall_scores.dropna().empty:
-        sns.histplot(overall_scores, kde=True, bins=15, color='purple')
-        plt.axvline(overall_scores.mean(), color='red', linestyle='--', label=f'Mean: {overall_scores.mean():.2f}')
+        sns.histplot(overall_scores, kde=True, bins=15, color="purple")
+        plt.axvline(
+            overall_scores.mean(),
+            color="red",
+            linestyle="--",
+            label=f"Mean: {overall_scores.mean():.2f}",
+        )
     else:
         print("⚠️  Not enough data to plot distribution.")
 
@@ -154,11 +172,22 @@ def plot_distribution(scores_df, output_file="5d_distribution.png"):
     print(f"✅ Saved Distribution Plot: {output_file}")
     plt.close()
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Generate 5D-Intelligence Visualizations")
+    parser = argparse.ArgumentParser(
+        description="Generate 5D-Intelligence Visualizations"
+    )
     parser.add_argument("csv_file", help="Path to input CSV file")
-    parser.add_argument("--output-radar", default="5d_radar_chart.png", help="Output filename for radar chart")
-    parser.add_argument("--output-dist", default="5d_distribution.png", help="Output filename for distribution plot")
+    parser.add_argument(
+        "--output-radar",
+        default="5d_radar_chart.png",
+        help="Output filename for radar chart",
+    )
+    parser.add_argument(
+        "--output-dist",
+        default="5d_distribution.png",
+        help="Output filename for distribution plot",
+    )
 
     args = parser.parse_args()
 
@@ -172,6 +201,7 @@ def main():
     plot_distribution(scores, args.output_dist)
 
     print("\n✅ Visualization generation complete.")
+
 
 if __name__ == "__main__":
     main()

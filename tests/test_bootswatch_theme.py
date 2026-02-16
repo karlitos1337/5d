@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 def test_theme_files_exist():
     """Verify that Bootswatch theme files exist."""
     css_path = Path("utils/bootswatch_theme.css")

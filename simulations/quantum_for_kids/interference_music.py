@@ -200,7 +200,11 @@ class InterferenceVisualizer:
                 transform=self.ax4.transAxes,
             )
             self.ax4.text(
-                0.1, 0.30, "   → Musik 2x lauter! 🎵🎵", fontsize=10, transform=self.ax4.transAxes
+                0.1,
+                0.30,
+                "   → Musik 2x lauter! 🎵🎵",
+                fontsize=10,
+                transform=self.ax4.transAxes,
             )
 
         elif int_type == "destructive":
@@ -266,7 +270,11 @@ class InterferenceVisualizer:
                 transform=self.ax4.transAxes,
             )
             self.ax4.text(
-                0.1, 0.65, "⚠️ Wellen teilweise in Phase", fontsize=11, transform=self.ax4.transAxes
+                0.1,
+                0.65,
+                "⚠️ Wellen teilweise in Phase",
+                fontsize=11,
+                transform=self.ax4.transAxes,
             )
             self.ax4.text(
                 0.1,
@@ -432,7 +440,9 @@ class InterferenceVisualizer:
         print(f"\n💾 Results saved: {json_path}")
 
         plt.savefig(
-            f"{output_dir}/music_interference_{timestamp}.png", dpi=300, bbox_inches="tight"
+            f"{output_dir}/music_interference_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
         )
         print(f"📊 Plot saved: music_interference_{timestamp}.png")
 

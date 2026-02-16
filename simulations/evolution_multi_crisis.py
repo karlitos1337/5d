@@ -267,7 +267,13 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     controlled_diversity = [c["diversity"] for c in results["controlled"]["crises"]]
 
     ax.plot(
-        crisis_range, free_diversity, "o-", label="Free", linewidth=2, markersize=8, color="#10b981"
+        crisis_range,
+        free_diversity,
+        "o-",
+        label="Free",
+        linewidth=2,
+        markersize=8,
+        color="#10b981",
     )
     ax.plot(
         crisis_range,
@@ -309,7 +315,9 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     ax.set_xlabel("Trait Value", fontsize=12)
     ax.set_ylabel("Count", fontsize=12)
     ax.set_title(
-        f"Free Population Traits (n={len(alive_traits_free)})", fontsize=14, fontweight="bold"
+        f"Free Population Traits (n={len(alive_traits_free)})",
+        fontsize=14,
+        fontweight="bold",
     )
     ax.grid(True, alpha=0.3, axis="y")
 
@@ -331,7 +339,12 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     crisis_types = results["crisis_types"]
     crisis_counts = {ct: crisis_types.count(ct) for ct in set(crisis_types)}
 
-    colors = {"low": "#3b82f6", "high": "#f59e0b", "mid": "#8b5cf6", "extreme": "#ef4444"}
+    colors = {
+        "low": "#3b82f6",
+        "high": "#f59e0b",
+        "mid": "#8b5cf6",
+        "extreme": "#ef4444",
+    }
     ax.bar(
         crisis_counts.keys(),
         crisis_counts.values(),

@@ -91,20 +91,30 @@ class LoggerChatModel:
                 return reply
             except (openai.RateLimitError, HTTPStatusError) as err:
                 if isinstance(err, HTTPStatusError) and err.response.status_code == 429:
-                    logger.warning(f"HTTP 429 Too Many Requests: Waiting for {retry_delay} seconds before retrying (Attempt {attempt + 1}/{max_retries})...")
+                    logger.warning(
+                        f"HTTP 429 Too Many Requests: Waiting for {retry_delay} seconds before retrying (Attempt {attempt + 1}/{max_retries})..."
+                    )
                     time.sleep(retry_delay)
                     retry_delay *= 2
                 else:
                     wait_time = self.parse_wait_time_from_error_message(str(err))
-                    logger.warning(f"Rate limit exceeded or API error. Waiting for {wait_time} seconds before retrying (Attempt {attempt + 1}/{max_retries})...")
+                    logger.warning(
+                        f"Rate limit exceeded or API error. Waiting for {wait_time} seconds before retrying (Attempt {attempt + 1}/{max_retries})..."
+                    )
                     time.sleep(wait_time)
             except Exception as e:
-                logger.error(f"Unexpected error occurred: {str(e)}, retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                logger.error(
+                    f"Unexpected error occurred: {str(e)}, retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})"
+                )
                 time.sleep(retry_delay)
                 retry_delay *= 2
 
-        logger.critical("Failed to get a response from the model after multiple attempts.")
-        raise Exception("Failed to get a response from the model after multiple attempts.")
+        logger.critical(
+            "Failed to get a response from the model after multiple attempts."
+        )
+        raise Exception(
+            "Failed to get a response from the model after multiple attempts."
+        )
 
     def parse_llmresult(self, llmresult: AIMessage) -> Dict[str, Dict]:
         # Parse the LLM result into a structured format.

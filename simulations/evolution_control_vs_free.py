@@ -64,7 +64,12 @@ class Population:
         self.name = name
         self.organisms = [Organism() for _ in range(size)]
         self.generation = 0
-        self.history = {"diversity": [], "mean_fitness": [], "max_fitness": [], "survival_rate": []}
+        self.history = {
+            "diversity": [],
+            "mean_fitness": [],
+            "max_fitness": [],
+            "survival_rate": [],
+        }
 
     def evolve(self, environment: dict, generations: int, verbose: bool = True):
         """Evolve population for N generations"""
@@ -146,19 +151,24 @@ class Population:
         return {
             "name": self.name,
             "control": self.control,
-            "final_diversity": self.history["diversity"][-1] if self.history["diversity"] else 0,
+            "final_diversity": (self.history["diversity"][-1] if self.history["diversity"] else 0),
             "final_mean_fitness": (
                 self.history["mean_fitness"][-1] if self.history["mean_fitness"] else 0
             ),
             "final_max_fitness": (
                 self.history["max_fitness"][-1] if self.history["max_fitness"] else 0
             ),
-            "avg_diversity": np.mean(self.history["diversity"]) if self.history["diversity"] else 0,
+            "avg_diversity": (
+                np.mean(self.history["diversity"]) if self.history["diversity"] else 0
+            ),
         }
 
 
 def run_experiment(
-    pop_size: int = 100, generations: int = 100, crisis_shift: float = 0.3, seed: int = 42
+    pop_size: int = 100,
+    generations: int = 100,
+    crisis_shift: float = 0.3,
+    seed: int = 42,
 ) -> tuple[Population, Population, dict]:
     """
     Run complete evolution experiment
@@ -306,7 +316,11 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
         linewidth=2,
     )
     ax.plot(
-        generations, free.history["diversity"], label="Free (Natural)", color="green", linewidth=2
+        generations,
+        free.history["diversity"],
+        label="Free (Natural)",
+        color="green",
+        linewidth=2,
     )
     ax.set_xlabel("Generation")
     ax.set_ylabel("Genetic Diversity (std)")
@@ -323,7 +337,13 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
         color="red",
         linewidth=2,
     )
-    ax.plot(generations, free.history["mean_fitness"], label="Free", color="green", linewidth=2)
+    ax.plot(
+        generations,
+        free.history["mean_fitness"],
+        label="Free",
+        color="green",
+        linewidth=2,
+    )
     ax.set_xlabel("Generation")
     ax.set_ylabel("Mean Fitness")
     ax.set_title("Mean Fitness Over Time")
@@ -333,9 +353,19 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
     # Plot 3: Max Fitness
     ax = axes[1, 0]
     ax.plot(
-        generations, controlled.history["max_fitness"], label="Controlled", color="red", linewidth=2
+        generations,
+        controlled.history["max_fitness"],
+        label="Controlled",
+        color="red",
+        linewidth=2,
     )
-    ax.plot(generations, free.history["max_fitness"], label="Free", color="green", linewidth=2)
+    ax.plot(
+        generations,
+        free.history["max_fitness"],
+        label="Free",
+        color="green",
+        linewidth=2,
+    )
     ax.set_xlabel("Generation")
     ax.set_ylabel("Max Fitness")
     ax.set_title("Best Organism Fitness Over Time")
@@ -351,7 +381,13 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
         color="red",
         linewidth=2,
     )
-    ax.plot(generations, free.history["survival_rate"], label="Free", color="green", linewidth=2)
+    ax.plot(
+        generations,
+        free.history["survival_rate"],
+        label="Free",
+        color="green",
+        linewidth=2,
+    )
     ax.set_xlabel("Generation")
     ax.set_ylabel("Survival Rate (fitness > 0.5)")
     ax.set_title("Survival Rate Over Time")

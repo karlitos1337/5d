@@ -146,7 +146,12 @@ class GitHubExplorer:
             self._check_and_refresh_token()
 
             url = f"{self.base_url}/search/repositories"
-            params = {"q": f"topic:{topic}", "sort": "updated", "order": "desc", "per_page": 5}
+            params = {
+                "q": f"topic:{topic}",
+                "sort": "updated",
+                "order": "desc",
+                "per_page": 5,
+            }
 
             try:
                 response = requests.get(url, headers=self.headers, params=params, timeout=10)
@@ -177,7 +182,11 @@ class GitHubExplorer:
 
     def explore_all(self):
         """Sammelt alle GitHub Daten"""
-        all_data = {"repositories": {}, "trending": {}, "timestamp": datetime.now().isoformat()}
+        all_data = {
+            "repositories": {},
+            "trending": {},
+            "timestamp": datetime.now().isoformat(),
+        }
 
         print("🔍 GitHub API Exploration...")
 

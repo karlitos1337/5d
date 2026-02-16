@@ -443,9 +443,9 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(
+            poetry_lock
+        ), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         # TODO(charlie): Make this a `setup`.
@@ -499,9 +499,9 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(
+            poetry_lock
+        ), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         # TODO(charlie): Make this a `setup`.
@@ -536,9 +536,9 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(
+            poetry_lock
+        ), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         # TODO(charlie): Make this a `setup`.
@@ -581,9 +581,9 @@ class Poetry(Suite):
         self.setup(requirements_file, cwd=cwd)
 
         poetry_lock = os.path.join(cwd, "poetry.lock")
-        assert not os.path.exists(poetry_lock), (
-            f"Lockfile already exists at: {poetry_lock}"
-        )
+        assert not os.path.exists(
+            poetry_lock
+        ), f"Lockfile already exists at: {poetry_lock}"
 
         # Run a resolution, to ensure that the lockfile exists.
         subprocess.check_call(
@@ -1432,11 +1432,15 @@ def main():
     benchmarks = (
         [Benchmark(benchmark) for benchmark in args.benchmark]
         if args.benchmark is not None
-        else [Benchmark.RESOLVE_COLD, Benchmark.RESOLVE_WARM]
-        if requirements_file.endswith(".in")
-        else [Benchmark.INSTALL_COLD, Benchmark.INSTALL_WARM]
-        if requirements_file.endswith(".txt")
-        else list(Benchmark)
+        else (
+            [Benchmark.RESOLVE_COLD, Benchmark.RESOLVE_WARM]
+            if requirements_file.endswith(".in")
+            else (
+                [Benchmark.INSTALL_COLD, Benchmark.INSTALL_WARM]
+                if requirements_file.endswith(".txt")
+                else list(Benchmark)
+            )
+        )
     )
 
     logging.info(f"Reading requirements from: {requirements_file}")

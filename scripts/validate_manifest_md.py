@@ -33,7 +33,9 @@ def main() -> int:
     )
     parser.add_argument("manifest_dir", nargs="?", default="manifest", help="Base manifest dir")
     parser.add_argument(
-        "--fix", action="store_true", help="Automatically add minimal frontmatter where missing"
+        "--fix",
+        action="store_true",
+        help="Automatically add minimal frontmatter where missing",
     )
     args = parser.parse_args()
 

@@ -84,7 +84,8 @@ metrics["final_frac"] = float(arr[-1])
 cols = st.columns(2)
 with cols[0]:
     st.plotly_chart(
-        px.line(hist, x="step", y="active_frac", title="Aktive Fraktion"), use_container_width=True
+        px.line(hist, x="step", y="active_frac", title="Aktive Fraktion"),
+        use_container_width=True,
     )
 with cols[1]:
     st.write({"Kennzahlen": metrics})
@@ -93,7 +94,10 @@ with cols[1]:
 # SP ~ clustering & final_frac, R ~ Konnektivität (t_50 niedrig), IM ~ share_prob/threshold-Kontext
 IMP = {
     "SP": float(
-        min(1.0, 0.5 * metrics.get("clustering", 0.0) + 0.5 * metrics.get("final_frac", 0.0))
+        min(
+            1.0,
+            0.5 * metrics.get("clustering", 0.0) + 0.5 * metrics.get("final_frac", 0.0),
+        )
     ),
     "R": float(
         0.0 if metrics.get("t_50") is None else max(0.0, 1.0 - metrics["t_50"] / max(1, steps))

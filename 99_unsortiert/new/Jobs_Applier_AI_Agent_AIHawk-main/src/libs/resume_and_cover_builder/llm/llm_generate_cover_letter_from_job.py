@@ -1,6 +1,7 @@
 """
 This creates the cover letter (in html, utils will then convert in PDF) matching with job description and plain-text resume
 """
+
 # app/libs/resume_and_cover_builder/llm_generate_cover_letter_from_job.py
 import os
 import textwrap
@@ -18,15 +19,26 @@ from loguru import logger
 load_dotenv()
 
 # Configure log file
-log_folder = 'log/cover_letter/gpt_cover_letter_job_descr'
+log_folder = "log/cover_letter/gpt_cover_letter_job_descr"
 if not os.path.exists(log_folder):
     os.makedirs(log_folder)
 log_path = Path(log_folder).resolve()
-logger.add(log_path / "gpt_cover_letter_job_descr.log", rotation="1 day", compression="zip", retention="7 days", level="DEBUG")
+logger.add(
+    log_path / "gpt_cover_letter_job_descr.log",
+    rotation="1 day",
+    compression="zip",
+    retention="7 days",
+    level="DEBUG",
+)
+
 
 class LLMCoverLetterJobDescription:
     def __init__(self, openai_api_key, strings):
-        self.llm_cheap = LoggerChatModel(ChatOpenAI(model_name="gpt-4o-mini", openai_api_key=openai_api_key, temperature=0.4))
+        self.llm_cheap = LoggerChatModel(
+            ChatOpenAI(
+                model_name="gpt-4o-mini", openai_api_key=openai_api_key, temperature=0.4
+            )
+        )
         self.llm_embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
         self.strings = strings
 
@@ -56,7 +68,9 @@ class LLMCoverLetterJobDescription:
             job_description_text (str): The plain text job description to be used.
         """
         logger.debug("Starting job description summarization...")
-        prompt = ChatPromptTemplate.from_template(self.strings.summarize_prompt_template)
+        prompt = ChatPromptTemplate.from_template(
+            self.strings.summarize_prompt_template
+        )
         chain = prompt | self.llm_cheap | StrOutputParser()
         output = chain.invoke({"text": job_description_text})
         self.job_description = output
@@ -69,7 +83,9 @@ class LLMCoverLetterJobDescription:
             str: The generated cover letter
         """
         logger.debug("Starting cover letter generation...")
-        prompt_template = self._preprocess_template_string(self.strings.cover_letter_template)
+        prompt_template = self._preprocess_template_string(
+            self.strings.cover_letter_template
+        )
         logger.debug(f"Cover letter template after preprocessing: {prompt_template}")
 
         prompt = ChatPromptTemplate.from_template(prompt_template)
@@ -78,10 +94,7 @@ class LLMCoverLetterJobDescription:
         chain = prompt | self.llm_cheap | StrOutputParser()
         logger.debug(f"Chain created: {chain}")
 
-        input_data = {
-            "job_description": self.job_description,
-            "resume": self.resume
-        }
+        input_data = {"job_description": self.job_description, "resume": self.resume}
         logger.debug(f"Input data: {input_data}")
 
         output = chain.invoke(input_data)

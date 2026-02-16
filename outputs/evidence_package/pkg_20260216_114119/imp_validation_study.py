@@ -183,7 +183,11 @@ class IMPValidationStudy:
         # Additives Modell (zum Vergleich)
         imp_additive = np.mean(score_values)
 
-        return {"dimensions": scores, "IMP_geometric": imp_geometric, "IMP_additive": imp_additive}
+        return {
+            "dimensions": scores,
+            "IMP_geometric": imp_geometric,
+            "IMP_additive": imp_additive,
+        }
 
     def calculate_imp_scores_vectorized(self, df):
         """Berechnet IMP-Scores für einen DataFrame (vektorisiert)"""
@@ -209,7 +213,7 @@ class IMPValidationStudy:
         return {
             "dimensions": dim_scores,
             "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
+            "IMP_additive": imp_additive,
         }
 
     def correlation_analysis(self):
@@ -236,7 +240,9 @@ class IMPValidationStudy:
         # 1. Cronbach's Alpha Balkendiagramm
         alphas = [self.results[dim]["cronbach_alpha"] for dim in QUESTIONS.keys()]
         axes[0, 0].barh(list(QUESTIONS.keys()), alphas, color="skyblue")
-        axes[0, 0].axvline(x=0.7, color="red", linestyle="--", label="Akzeptabel-Schwelle")
+        axes[0, 0].axvline(
+            x=0.7, color="red", linestyle="--", label="Akzeptabel-Schwelle"
+        )
         axes[0, 0].set_xlabel("Cronbach's Alpha")
         axes[0, 0].set_title("Reliabilität der Dimensionen")
         axes[0, 0].legend()
@@ -258,7 +264,9 @@ class IMPValidationStudy:
         results_vec = self.calculate_imp_scores_vectorized(self.data)
         imp_scores = results_vec["IMP_geometric"]
 
-        axes[1, 1].hist(imp_scores, bins=10, color="purple", alpha=0.7, edgecolor="black")
+        axes[1, 1].hist(
+            imp_scores, bins=10, color="purple", alpha=0.7, edgecolor="black"
+        )
         axes[1, 1].set_xlabel("IMP-Score (0-5)")
         axes[1, 1].set_ylabel("Häufigkeit")
         axes[1, 1].set_title("Verteilung der IMP-Scores (Geometrisch)")
@@ -282,7 +290,9 @@ class IMPValidationStudy:
             "timestamp": self.timestamp,
             "n_participants": len(self.data) if self.data is not None else 0,
             "dimensions": self.results,
-            "overall_reliability": np.mean([r["cronbach_alpha"] for r in self.results.values()]),
+            "overall_reliability": np.mean(
+                [r["cronbach_alpha"] for r in self.results.values()]
+            ),
             "recommendation": self._generate_recommendation(),
         }
 
@@ -340,7 +350,9 @@ def main():
 
     df = pd.DataFrame(example_data)
     df.to_csv(f"example_responses_{study.timestamp}.csv", index=False)
-    print("    → Beispiel-CSV erstellt (mit korrelierten Daten für realistisches Alpha)")
+    print(
+        "    → Beispiel-CSV erstellt (mit korrelierten Daten für realistisches Alpha)"
+    )
 
     # 3. Daten laden
     print("\n[3/5] Lade Daten...")

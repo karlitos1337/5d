@@ -39,22 +39,19 @@ st.set_page_config(
 
 # ==================== HEADER ====================
 st.title("🕸️ Partizipations-Netzwerke")
-st.markdown(
-    """
+st.markdown("""
 **Agent-Based Simulation von Wissens-Diffusion in sozialen Netzwerken**
 
 Diese Seite untersucht, wie **Netzwerk-Topologien** die Verbreitung von Wissen, Ideen und Innovationen beeinflussen.
 Wir vergleichen drei klassische Modelle und zeigen ihre Relevanz für **Social Participation (SP)** und **Resilience (R)**.
-"""
-)
+""")
 
 # Scientific context in sidebar
 with st.sidebar:
     st.header("Wissenschaftlicher Kontext")
 
     with st.expander("🔬 Netzwerk-Theorie", expanded=False):
-        st.markdown(
-            """
+        st.markdown("""
 **Granovetter (1973) - Weak Ties:**
 - Starke Verbindungen (Familie): redundante Information
 - Schwache Verbindungen (Bekannte): neue Informationen
@@ -69,12 +66,10 @@ with st.sidebar:
 - Hubs (hoch vernetzte Knoten)
 - Power-Law-Verteilung: P(k) ~ k^(-γ)
 - **Beispiele:** Internet, Flughäfen, Proteinnetze
-"""
-        )
+""")
 
     with st.expander("📊 5D-Dimensionen", expanded=False):
-        st.markdown(
-            """
+        st.markdown("""
 **Social Participation (SP):**
 - Clustering-Koeffizient (lokale Dichte)
 - Finale Aktivierungsrate (Teilnahme)
@@ -86,8 +81,7 @@ with st.sidebar:
 **Intrinsic Motivation (IM):**
 - Sharing-Wahrscheinlichkeit (freiwillig)
 - Aktivierungs-Schwelle (Motivation)
-"""
-        )
+""")
 
 st.divider()
 
@@ -117,7 +111,12 @@ with st.sidebar:
     if topology == "small_world":
         k = st.slider("Nachbarn k", 2, 20, 6, help="Ausgangsgitter-Konnektivität")
         p = st.slider(
-            "Rewire-Wahrscheinlichkeit", 0.001, 0.5, 0.05, step=0.001, help="Höher = mehr Shortcuts"
+            "Rewire-Wahrscheinlichkeit",
+            0.001,
+            0.5,
+            0.05,
+            step=0.001,
+            help="Höher = mehr Shortcuts",
         )
     elif topology == "erdos_renyi":
         p = st.slider(
@@ -131,7 +130,11 @@ with st.sidebar:
         k = 4  # dummy
     else:  # scale_free
         k = st.slider(
-            "Initiale Kanten m", 1, 10, 3, help="Neue Knoten verbinden sich mit m existierenden"
+            "Initiale Kanten m",
+            1,
+            10,
+            3,
+            help="Neue Knoten verbinden sich mit m existierenden",
         )
         p = 0.05  # dummy
 
@@ -512,12 +515,10 @@ with viz_col2:
 st.divider()
 st.header("🎯 5D-Dimension Proxies")
 
-st.markdown(
-    """
+st.markdown("""
 **Achtung:** Diese Werte sind **grobe Schätzungen** basierend auf Netzwerk-Eigenschaften.
 Echte 5D-Scores erfordern individuelle Messungen (Surveys, Verhaltensbeobachtungen).
-"""
-)
+""")
 
 # IMP metrics
 imp_col1, imp_col2, imp_col3, imp_col4, imp_col5, imp_col6 = st.columns(6)
@@ -527,17 +528,27 @@ with imp_col1:
 
 with imp_col2:
     st.metric(
-        "Intrinsic Mot. (IM)", f"{IMP_proxies['IM']:.2f}", help="Sharing-Prob. × (1-Threshold)"
+        "Intrinsic Mot. (IM)",
+        f"{IMP_proxies['IM']:.2f}",
+        help="Sharing-Prob. × (1-Threshold)",
     )
 
 with imp_col3:
     st.metric("Resilience (R)", f"{IMP_proxies['R']:.2f}", help="1 - (t_50 / steps)")
 
 with imp_col4:
-    st.metric("Social Part. (SP)", f"{IMP_proxies['SP']:.2f}", help="Clustering × Final Activation")
+    st.metric(
+        "Social Part. (SP)",
+        f"{IMP_proxies['SP']:.2f}",
+        help="Clustering × Final Activation",
+    )
 
 with imp_col5:
-    st.metric("Authenticity (Au)", f"{IMP_proxies['Au']:.2f}", help="Neutral (Netzwerk-unabhängig)")
+    st.metric(
+        "Authenticity (Au)",
+        f"{IMP_proxies['Au']:.2f}",
+        help="Neutral (Netzwerk-unabhängig)",
+    )
 
 with imp_col6:
     st.metric("IMP Score", f"{IMP_proxies['IMP']:.3f}", help="A × IM × R × SP × Au")
@@ -547,8 +558,7 @@ st.divider()
 st.header("💡 Interpretation")
 
 with st.expander("🔬 Netzwerk-Metriken erklärt", expanded=False):
-    st.markdown(
-        f"""
+    st.markdown(f"""
 **Clustering-Koeffizient:** {metrics['clustering']:.3f}
 - **Bedeutung:** Wie stark sind Nachbarn untereinander vernetzt?
 - **Range:** 0.0 (keine lokalen Cluster) bis 1.0 (perfekt geclustert)
@@ -563,12 +573,10 @@ with st.expander("🔬 Netzwerk-Metriken erklärt", expanded=False):
 - **Bedeutung:** Wie schnell erreicht Innovation kritische Masse?
 - **Rogers (2003):** 16% Early Adopters → Tipping Point bei ~50%
 - **Hier:** Schritte bis zur Hälfte der Knoten aktiviert
-"""
-    )
+""")
 
 with st.expander("🎯 5D-Bezug zur Netzwerk-Theorie", expanded=False):
-    st.markdown(
-        """
+    st.markdown("""
 **Social Participation (SP):**
 - **Clustering:** Hohe lokale Dichte = starke Community-Bindung
 - **Finale Aktivierung:** Anteil der Teilnehmenden am Ende
@@ -583,12 +591,10 @@ with st.expander("🎯 5D-Bezug zur Netzwerk-Theorie", expanded=False):
 - **Sharing-Wahrscheinlichkeit:** Freiwilligkeit, innere Bereitschaft
 - **Schwelle:** Niedrig = intrinsisch motiviert (geringe externe Anreize nötig)
 - **Deci & Ryan (1985):** Autonomy, competence, relatedness fördern intrinsische Motivation
-"""
-    )
+""")
 
 with st.expander("📚 Topologie-Vergleich", expanded=False):
-    st.markdown(
-        """
+    st.markdown("""
 | Topologie | Clustering | Pfadlänge | Robustheit | Realwelt-Beispiele |
 |-----------|------------|-----------|------------|-------------------|
 | **Erdős-Rényi** | Niedrig | Niedrig | Mittel | Theoretisches Baseline-Modell |
@@ -599,8 +605,7 @@ with st.expander("📚 Topologie-Vergleich", expanded=False):
 - **Small-World:** Beste Balance (lokale Cluster + globale Erreichbarkeit)
 - **Praxis:** Schulen mit starken Klassen (Clustering) + Austauschprogramme (Shortcuts)
 - **Beispiel:** Montessori Mixed-Age-Klassen (starke Bindungen) + Schulübergreifende Projekte (weak ties)
-"""
-    )
+""")
 
 # ==================== EXPORT ====================
 st.divider()
@@ -665,8 +670,7 @@ st.divider()
 st.header("📚 Wissenschaftliche Referenzen")
 
 with st.expander("Literatur & BibTeX", expanded=False):
-    st.markdown(
-        """
+    st.markdown("""
 **Zentrale Arbeiten:**
 
 1. **Granovetter, M. S. (1973).** *The Strength of Weak Ties.*  
@@ -698,8 +702,7 @@ with st.expander("Literatur & BibTeX", expanded=False):
 ---
 
 **Alle Referenzen verfügbar in:** `07_daten_analysen/5d-relevant-sources.bib`
-"""
-    )
+""")
 
 st.divider()
 st.caption("Page 10 | Participation Networks | Version 1.0 | December 2, 2025")

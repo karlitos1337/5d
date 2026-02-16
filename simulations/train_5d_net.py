@@ -270,7 +270,10 @@ def run_experiment(config: dict) -> dict:
         print(f"5D-Net:   {acc_5d:.2f}% (drop: {drop_5d:.2f}%)")
         print(f"Baseline: {acc_baseline:.2f}% (drop: {drop_baseline:.2f}%)")
 
-        noise_results_5d[f"noise_{int(noise_level*100)}"] = {"accuracy": acc_5d, "drop": drop_5d}
+        noise_results_5d[f"noise_{int(noise_level*100)}"] = {
+            "accuracy": acc_5d,
+            "drop": drop_5d,
+        }
         noise_results_baseline[f"noise_{int(noise_level*100)}"] = {
             "accuracy": acc_baseline,
             "drop": drop_baseline,

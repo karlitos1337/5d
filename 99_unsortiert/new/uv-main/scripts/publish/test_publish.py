@@ -343,8 +343,7 @@ def build_project_at_version(
         init_py = (
             project_root.joinpath("src")
             # dist info naming
-            .joinpath(project_name.replace("-", "_"))
-            .joinpath("__init__.py")
+            .joinpath(project_name.replace("-", "_")).joinpath("__init__.py")
         )
         init_py.write_text("x = 1")
 

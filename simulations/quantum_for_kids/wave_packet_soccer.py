@@ -138,7 +138,9 @@ class SoccerWaveVisualizer:
 
         # Left: Before measurement (wave packet)
         self.ax1.set_title(
-            "BEFORE: Ball als Welle (überall gleichzeitig!)", fontsize=12, fontweight="bold"
+            "BEFORE: Ball als Welle (überall gleichzeitig!)",
+            fontsize=12,
+            fontweight="bold",
         )
         self.ax1.set_xlim(0, 10)
         self.ax1.set_ylim(0, 10)
@@ -162,7 +164,13 @@ class SoccerWaveVisualizer:
         """Draw soccer field"""
         # Field outline
         rect = patches.Rectangle(
-            (0, 0), 10, 10, linewidth=2, edgecolor="green", facecolor="lightgreen", alpha=0.2
+            (0, 0),
+            10,
+            10,
+            linewidth=2,
+            edgecolor="green",
+            facecolor="lightgreen",
+            alpha=0.2,
         )
         ax.add_patch(rect)
 
@@ -196,7 +204,12 @@ class SoccerWaveVisualizer:
 
             # Plot wave packet (probability cloud)
             im = self.ax1.contourf(
-                self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="YlOrRd", alpha=0.7
+                self.ball.X,
+                self.ball.Y,
+                self.ball.wave_packet,
+                levels=20,
+                cmap="YlOrRd",
+                alpha=0.7,
             )
 
             # Add colorbar
@@ -271,7 +284,12 @@ class SoccerWaveVisualizer:
 
         # Plot collapsed state
         im2 = self.ax2.contourf(
-            self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="Blues", alpha=0.7
+            self.ball.X,
+            self.ball.Y,
+            self.ball.wave_packet,
+            levels=20,
+            cmap="Blues",
+            alpha=0.7,
         )
         plt.colorbar(im2, ax=self.ax2, label="Collapsed State")
 
@@ -285,7 +303,14 @@ class SoccerWaveVisualizer:
             markeredgecolor="black",
             markeredgewidth=3,
         )
-        self.ax2.text(measured_pos[0], measured_pos[1], "⚽", ha="center", va="center", fontsize=25)
+        self.ax2.text(
+            measured_pos[0],
+            measured_pos[1],
+            "⚽",
+            ha="center",
+            va="center",
+            fontsize=25,
+        )
 
         # Goalkeeper
         self.ax2.plot(
@@ -391,7 +416,10 @@ class SoccerWaveVisualizer:
             "timestamp": datetime.now().isoformat(),
             "experiment": "wave_packet_soccer",
             "measurements": self.ball.measurements,
-            "final_state": {"measured": self.ball.measured, "position": self.ball.measured_pos},
+            "final_state": {
+                "measured": self.ball.measured,
+                "position": self.ball.measured_pos,
+            },
         }
 
         json_path = f"{output_dir}/soccer_wavepacket_{timestamp}.json"
@@ -400,7 +428,11 @@ class SoccerWaveVisualizer:
 
         print(f"\n💾 Results saved: {json_path}")
 
-        plt.savefig(f"{output_dir}/soccer_wavepacket_{timestamp}.png", dpi=300, bbox_inches="tight")
+        plt.savefig(
+            f"{output_dir}/soccer_wavepacket_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
+        )
         print(f"📊 Plot saved: soccer_wavepacket_{timestamp}.png")
 
         return results

@@ -85,7 +85,10 @@ class GitHubAuth:
         KEINE Speicherung von User-Daten!
         """
         url = "https://api.github.com/user"
-        headers = {"Authorization": f"token {access_token}", "Accept": "application/json"}
+        headers = {
+            "Authorization": f"token {access_token}",
+            "Accept": "application/json",
+        }
 
         # Sentinel: Added timeout=10 to prevent hanging
         response = requests.get(url, headers=headers, timeout=10)

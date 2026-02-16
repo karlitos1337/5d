@@ -59,7 +59,9 @@ class SimpleTDA:
 
         return distances
 
-    def compute_persistent_homology_0d(self, max_scale: float = 2.0) -> list[PersistenceInterval]:
+    def compute_persistent_homology_0d(
+        self, max_scale: float = 2.0
+    ) -> list[PersistenceInterval]:
         """Compute 0-dimensional persistence (connected components).
 
         Simplified version using Union-Find algorithm.
@@ -148,7 +150,9 @@ if __name__ == "__main__":
 
     for interval in sorted(intervals, key=lambda x: x.persistence, reverse=True)[:5]:
         death_str = "Inf" if np.isinf(interval.death) else f"{interval.death:.3f}"
-        pers_str = "Inf" if np.isinf(interval.persistence) else f"{interval.persistence:.3f}"
+        pers_str = (
+            "Inf" if np.isinf(interval.persistence) else f"{interval.persistence:.3f}"
+        )
         print(f"{interval.birth:8.3f} {death_str:>8} {pers_str:>12}")
 
     # Interpretation

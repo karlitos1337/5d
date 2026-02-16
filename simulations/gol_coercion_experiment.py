@@ -308,7 +308,12 @@ def run_experiment(
 
     results = {
         "experiment": "game_of_life_coercion",
-        "parameters": {"n_trials": n_trials, "size": size, "steps": steps, "density": density},
+        "parameters": {
+            "n_trials": n_trials,
+            "size": size,
+            "steps": steps,
+            "density": density,
+        },
         "coercive": coercive_results,
         "non_coercive": non_coercive_results,
         "statistics": statistics,
@@ -356,10 +361,16 @@ def main():
     parser.add_argument("--size", type=int, default=20, help="Grid size NxN")
     parser.add_argument("--steps", type=int, default=200, help="Max generations per trial")
     parser.add_argument(
-        "--density", type=float, default=0.3, help="Initial density for non-coercive (0-1)"
+        "--density",
+        type=float,
+        default=0.3,
+        help="Initial density for non-coercive (0-1)",
     )
     parser.add_argument(
-        "--output", type=str, default="gol_experiment_results.json", help="Output JSON file"
+        "--output",
+        type=str,
+        default="gol_experiment_results.json",
+        help="Output JSON file",
     )
     args = parser.parse_args()
 

@@ -58,7 +58,10 @@ def add_noise(images: torch.Tensor, noise_level: float) -> torch.Tensor:
 
 
 def train_quick(
-    model: nn.Module, loader: DataLoader, optimizer: optim.Optimizer, config: QuickConfig
+    model: nn.Module,
+    loader: DataLoader,
+    optimizer: optim.Optimizer,
+    config: QuickConfig,
 ) -> dict[str, float]:
     """Quick training for one epoch."""
     model.train()
@@ -186,7 +189,9 @@ def main():
         print(f"Parameters: {n_params:,}")
 
         optimizer = optim.Adam(
-            model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
+            model.parameters(),
+            lr=config.learning_rate,
+            weight_decay=config.weight_decay,
         )
 
         # Training

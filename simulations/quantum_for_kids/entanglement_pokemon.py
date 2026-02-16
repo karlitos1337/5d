@@ -97,7 +97,12 @@ class EntangledPokemon:
         """Separate Pokémon → no more instant correlation!"""
         self.entangled = False
         self.measurements.append(
-            {"action": "separate", "hp_a": self.hp_a, "hp_b": self.hp_b, "entangled": False}
+            {
+                "action": "separate",
+                "hp_a": self.hp_a,
+                "hp_b": self.hp_b,
+                "entangled": False,
+            }
         )
 
     def reset(self):
@@ -366,7 +371,9 @@ class EntanglementVisualizer:
         print(f"\n💾 Results saved: {json_path}")
 
         plt.savefig(
-            f"{output_dir}/pokemon_entanglement_{timestamp}.png", dpi=300, bbox_inches="tight"
+            f"{output_dir}/pokemon_entanglement_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
         )
         print(f"📊 Plot saved: pokemon_entanglement_{timestamp}.png")
 

@@ -174,7 +174,12 @@ class APIEndpointTests(unittest.TestCase):
     def test_api_response_format(self):
         """Test API response has required format"""
         # Expected response format
-        expected_structure = {"status": "success", "data": {}, "timestamp": "", "version": "1.0"}
+        expected_structure = {
+            "status": "success",
+            "data": {},
+            "timestamp": "",
+            "version": "1.0",
+        }
 
         self.assertIn("status", expected_structure)
         self.assertIn("data", expected_structure)

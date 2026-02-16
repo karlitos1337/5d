@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from src.logging import logger
 
+
 @dataclass
 class Job:
     role: str = ""
@@ -18,7 +19,9 @@ class Job:
         """
         Formats the job information as a markdown string.
         """
-        logger.debug(f"Formatting job information for job: {self.role} at {self.company}")
+        logger.debug(
+            f"Formatting job information for job: {self.role} at {self.company}"
+        )
         job_information = f"""
         # Job Description
         ## Job Information 

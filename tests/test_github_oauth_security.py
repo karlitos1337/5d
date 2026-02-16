@@ -4,6 +4,7 @@ import os
 from urllib.parse import parse_qs, urlparse
 from auth.github_oauth import GitHubAuth
 
+
 class TestGitHubOAuthSecurity(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
@@ -24,11 +25,14 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         self.redirect_uri = "http://localhost:8000/callback"
 
         # Patch environment variables
-        self.env_patcher = patch.dict(os.environ, {
-            "GITHUB_CLIENT_ID": self.client_id,
-            "GITHUB_CLIENT_SECRET": self.client_secret,
-            "REDIRECT_URI": self.redirect_uri
-        })
+        self.env_patcher = patch.dict(
+            os.environ,
+            {
+                "GITHUB_CLIENT_ID": self.client_id,
+                "GITHUB_CLIENT_SECRET": self.client_secret,
+                "REDIRECT_URI": self.redirect_uri,
+            },
+        )
         self.env_patcher.start()
 
         self.auth = GitHubAuth()
@@ -40,10 +44,10 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         """Test that state parameter is generated and unique."""
         url1 = self.auth.get_authorization_url()
         # Ensure we're parsing string output
-        state1 = parse_qs(urlparse(str(url1)).query)['state'][0]
+        state1 = parse_qs(urlparse(str(url1)).query)["state"][0]
 
         url2 = self.auth.get_authorization_url()
-        state2 = parse_qs(urlparse(str(url2)).query)['state'][0]
+        state2 = parse_qs(urlparse(str(url2)).query)["state"][0]
 
         self.assertNotEqual(state1, state2)
         self.assertTrue(len(state1) > 10)
@@ -67,6 +71,6 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
             self.assertTrue(parsed.path.endswith("/login/oauth/authorize"))
 
         params = parse_qs(parsed.query)
-        self.assertEqual(params['client_id'][0], self.client_id)
-        self.assertEqual(params['redirect_uri'][0], self.redirect_uri)
-        self.assertIn('state', params)
+        self.assertEqual(params["client_id"][0], self.client_id)
+        self.assertEqual(params["redirect_uri"][0], self.redirect_uri)
+        self.assertIn("state", params)

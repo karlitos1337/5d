@@ -18,7 +18,13 @@ def generate_dimension_radar_chart(
     profile: dict, title: str = "5D-Intelligence Profil"
 ) -> go.Figure:
     """Radar-Chart für einzelnes 5D-Profil."""
-    dimensions = ["Neurobiologie", "Psychologie", "Philosophie", "Ökonomie", "Technologie"]
+    dimensions = [
+        "Neurobiologie",
+        "Psychologie",
+        "Philosophie",
+        "Ökonomie",
+        "Technologie",
+    ]
 
     scores = [
         profile["dimension_scores"]["neurobiology"]["normalized_score"],
@@ -58,11 +64,22 @@ def generate_dimension_radar_chart(
 
 def generate_comparison_radar(profiles: list[dict], labels: list[str]) -> go.Figure:
     """Vergleich mehrerer Profile."""
-    dimensions = ["Neurobiologie", "Psychologie", "Philosophie", "Ökonomie", "Technologie"]
+    dimensions = [
+        "Neurobiologie",
+        "Psychologie",
+        "Philosophie",
+        "Ökonomie",
+        "Technologie",
+    ]
 
     fig = go.Figure()
 
-    colors = ["rgb(50, 184, 198)", "rgb(192, 21, 47)", "rgb(168, 75, 47)", "rgb(98, 108, 113)"]
+    colors = [
+        "rgb(50, 184, 198)",
+        "rgb(192, 21, 47)",
+        "rgb(168, 75, 47)",
+        "rgb(98, 108, 113)",
+    ]
 
     for i, (profile, label) in enumerate(zip(profiles, labels, strict=False)):
         scores = [

@@ -253,14 +253,26 @@ with st.sidebar:
                 "Steps min", min_value=1, max_value=100000, value=b["steps_min"], step=1
             )
             b["interval_min"] = st.number_input(
-                "Intervall min (ms)", min_value=1, max_value=10000, value=b["interval_min"], step=1
+                "Intervall min (ms)",
+                min_value=1,
+                max_value=10000,
+                value=b["interval_min"],
+                step=1,
             )
             b["px_min"] = st.number_input(
-                "Bild min (px)", min_value=10, max_value=10000, value=b["px_min"], step=10
+                "Bild min (px)",
+                min_value=10,
+                max_value=10000,
+                value=b["px_min"],
+                step=10,
             )
         with c2:
             b["size_max"] = st.number_input(
-                "Grid max", min_value=b["size_min"], max_value=2000, value=b["size_max"], step=1
+                "Grid max",
+                min_value=b["size_min"],
+                max_value=2000,
+                value=b["size_max"],
+                step=1,
             )
             b["steps_max"] = st.number_input(
                 "Steps max",
@@ -277,7 +289,11 @@ with st.sidebar:
                 step=10,
             )
             b["px_max"] = st.number_input(
-                "Bild max (px)", min_value=b["px_min"], max_value=20000, value=b["px_max"], step=50
+                "Bild max (px)",
+                min_value=b["px_min"],
+                max_value=20000,
+                value=b["px_max"],
+                step=50,
             )
 
     preset = st.selectbox(
@@ -357,7 +373,8 @@ with st.sidebar:
 
     st.subheader("Speichern")
     save_snapshot_btn = st.button(
-        "Snapshot speichern (Grid + PNG)", help="Speichert aktuelles Grid als .npy und PNG."
+        "Snapshot speichern (Grid + PNG)",
+        help="Speichert aktuelles Grid als .npy und PNG.",
     )
     save_history_btn = st.button(
         "Verlauf speichern (CSV)", help="Speichert (step, live_cells) als CSV."
@@ -652,7 +669,10 @@ if save_history_btn:
 if export_gif_btn:
     try:
         frames, h = simulate_frames(
-            st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px
+            st.session_state.grid,
+            steps=export_steps,
+            engine_mode=engine,
+            size_px=size_px,
         )
         buf = io.BytesIO()
         frames[0].save(
@@ -682,7 +702,10 @@ if export_mp4_btn:
     else:
         try:
             frames, h = simulate_frames(
-                st.session_state.grid, steps=export_steps, engine_mode=engine, size_px=size_px
+                st.session_state.grid,
+                steps=export_steps,
+                engine_mode=engine,
+                size_px=size_px,
             )
             buf = io.BytesIO()
             # imageio benötigt raw arrays (H,W,3) oder (H,W) – konvertieren zu RGB
@@ -789,8 +812,7 @@ with st.expander("Editor-Modus (Zellen anklicken/setzen)"):
 
 # Parameter-Übersicht
 with st.expander("Parameter-Übersicht"):
-    st.markdown(
-        f"""
+    st.markdown(f"""
         | Parameter | Attribut | Wert | Min | Max |
         |---|---|---:|---:|---:|
         | Preset | Muster | `{preset}` | - | - |
@@ -798,13 +820,11 @@ with st.expander("Parameter-Übersicht"):
         | Schritte (Auto) | Iterationen | `{steps}` | `{int(b['steps_min'])}` | `{int(b['steps_max'])}` |
         | Intervall | ms/Step | `{interval_ms}` | `{int(b['interval_min'])}` | `{int(b['interval_max'])}` |
         | Bild-Pixelgröße | px | `{size_px}` | `{int(b['px_min'])}` | `{int(b['px_max'])}` |
-        """
-    )
+        """)
 
 # Umso mehr / desto … – Kontext-Hinweise
 with st.expander("Umso mehr … desto … / Umso weniger … dann …"):
-    st.markdown(
-        """
+    st.markdown("""
         - Grid-Größe: Je mehr Zellen, desto detailreicher und langlebiger die Dynamik; je weniger, desto schneller, aber randempfindlicher.
         - Schritte (Auto-Run): Je mehr, desto größer der zeitliche Vorsprung pro Start; je weniger, desto feinere Beobachtung.
         - Intervall (ms): Je höher, desto gemächlicher die Aktualisierung; je niedriger, desto flüssiger, aber CPU-intensiver.
@@ -815,5 +835,4 @@ with st.expander("Umso mehr … desto … / Umso weniger … dann …"):
         - Export-Schritte: Je mehr, desto längere Clips und größere Dateien; je weniger, desto kompakt.
         - Frame-Dauer (ms): Je höher, desto längere Gesamtspielzeit bei gleicher Schrittzahl; je niedriger, desto schnellere Wiedergabe.
         - Preset: Einfache Oszillatoren (Blinker/Toad) sind stabil; komplexe Muster (Gosper) erzeugen wandernde Glider und Interferenzen.
-        """
-    )
+        """)

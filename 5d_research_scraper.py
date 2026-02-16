@@ -122,7 +122,12 @@ class ResearchScraper:
     def search_pubmed(self, query, max_results=5):
         """Sucht medizinische/psychologische Papers auf PubMed mit Rate-Limiting"""
         base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
-        params = {"db": "pubmed", "term": query, "retmax": max_results, "retmode": "json"}
+        params = {
+            "db": "pubmed",
+            "term": query,
+            "retmax": max_results,
+            "retmode": "json",
+        }
 
         for attempt in range(self.max_retries):
             try:
@@ -191,9 +196,28 @@ class ResearchScraper:
         """
         if countries is None:
             # Top 20 countries for baseline
-            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
-                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
-                         "NZL", "ESP", "ITA", "KOR"]
+            countries = [
+                "USA",
+                "GBR",
+                "DEU",
+                "FRA",
+                "JPN",
+                "CHN",
+                "IND",
+                "BRA",
+                "CAN",
+                "AUS",
+                "NOR",
+                "SWE",
+                "DNK",
+                "FIN",
+                "NLD",
+                "CHE",
+                "NZL",
+                "ESP",
+                "ITA",
+                "KOR",
+            ]
 
         # Filter out invalid country codes
         valid_countries = [c for c in countries if self._validate_country_code(c)]
@@ -209,7 +233,7 @@ class ResearchScraper:
         indicators = {
             "MH_12": "Depression prevalence (%)",  # Depressive disorders
             "MH_1": "Mental health workers (per 100,000)",
-            "MH_17": "Suicide mortality rate"
+            "MH_17": "Suicide mortality rate",
         }
 
         mental_health_data = {}
@@ -255,7 +279,7 @@ class ResearchScraper:
 
                                 mental_health_data[country][indicator_name] = {
                                     "value": value,
-                                    "year": year
+                                    "year": year,
                                 }
 
                     break  # Success
@@ -285,9 +309,28 @@ class ResearchScraper:
             dict: Education data by country
         """
         if countries is None:
-            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
-                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
-                         "NZL", "ESP", "ITA", "KOR"]
+            countries = [
+                "USA",
+                "GBR",
+                "DEU",
+                "FRA",
+                "JPN",
+                "CHN",
+                "IND",
+                "BRA",
+                "CAN",
+                "AUS",
+                "NOR",
+                "SWE",
+                "DNK",
+                "FIN",
+                "NLD",
+                "CHE",
+                "NZL",
+                "ESP",
+                "ITA",
+                "KOR",
+            ]
 
         # Filter out invalid country codes
         valid_countries = [c for c in countries if self._validate_country_code(c)]
@@ -304,7 +347,7 @@ class ResearchScraper:
             "SE.SEC.DURS": "Secondary education duration (years)",
             "SE.PRM.CMPT.ZS": "Primary completion rate (%)",
             "SE.XPD.TOTL.GD.ZS": "Government education expenditure (% of GDP)",
-            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)"
+            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)",
         }
 
         education_data = {}
@@ -322,7 +365,7 @@ class ResearchScraper:
                     params = {
                         "format": "json",
                         "date": "2020:2023",  # Recent years
-                        "per_page": 500
+                        "per_page": 500,
                     }
 
                     response = requests.get(url, params=params, timeout=15)
@@ -351,7 +394,7 @@ class ResearchScraper:
                                 if indicator_name not in education_data[country_code]:
                                     education_data[country_code][indicator_name] = {
                                         "value": value,
-                                        "year": year
+                                        "year": year,
                                     }
 
                     break  # Success
@@ -359,7 +402,9 @@ class ResearchScraper:
                 except requests.exceptions.RequestException as e:
                     if attempt < self.max_retries - 1:
                         wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                        print(
+                            f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}"
+                        )
                         time.sleep(wait_time)
                     else:
                         print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
@@ -499,7 +544,9 @@ class ResearchScraper:
             for future in as_completed(future_to_keyword):
                 keyword, result = future.result()
                 all_research[keyword] = result
-                print(f"  ✅ {keyword}: {len(result['arxiv'])} arXiv, {len(result['pubmed'])} PubMed")
+                print(
+                    f"  ✅ {keyword}: {len(result['arxiv'])} arXiv, {len(result['pubmed'])} PubMed"
+                )
 
         # WHO Mental Health Data
         # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
@@ -508,7 +555,7 @@ class ResearchScraper:
         all_research["who_mental_health"] = {
             "data": {},
             "timestamp": datetime.now().isoformat(),
-            "source": "WHO Global Health Observatory (Disabled)"
+            "source": "WHO Global Health Observatory (Disabled)",
         }
 
         # World Bank Education Data
@@ -517,7 +564,7 @@ class ResearchScraper:
         all_research["world_bank_education"] = {
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
-            "source": "World Bank EdStats API"
+            "source": "World Bank EdStats API",
         }
 
         # World Bank WGI Data
@@ -526,7 +573,7 @@ class ResearchScraper:
         all_research["world_bank_wgi"] = {
             "data": wgi_data,
             "timestamp": datetime.now().isoformat(),
-            "source": "World Bank Governance Indicators"
+            "source": "World Bank Governance Indicators",
         }
 
         return all_research
@@ -544,5 +591,9 @@ if __name__ == "__main__":
     scraper.save_results(research_data)
 
     # Statistik
-    total_papers = sum(len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values() if "arxiv" in data)
+    total_papers = sum(
+        len(data.get("arxiv", [])) + len(data.get("pubmed", []))
+        for data in research_data.values()
+        if "arxiv" in data
+    )
     print(f"\n📊 Total: {total_papers} Papers gefunden")

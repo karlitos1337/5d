@@ -63,7 +63,12 @@ class QuantumTunneling:
         """Attempt to tunnel (Monte Carlo)"""
         success = np.random.random() < self.T
         self.attempts.append(
-            {"success": success, "probability": self.T, "energy": self.E, "barrier_height": self.V0}
+            {
+                "success": success,
+                "probability": self.T,
+                "energy": self.E,
+                "barrier_height": self.V0,
+            }
         )
         return success
 
@@ -162,7 +167,14 @@ class TunnelingVisualizer:
                 markeredgecolor="black",
                 markeredgewidth=2,
             )
-            ax.text(particle_pos, self.tunneling.E, emoji, ha="center", va="center", fontsize=20)
+            ax.text(
+                particle_pos,
+                self.tunneling.E,
+                emoji,
+                ha="center",
+                va="center",
+                fontsize=20,
+            )
 
             if tunneled:
                 # Arrow showing tunneling
@@ -459,7 +471,9 @@ class TunnelingVisualizer:
         print(f"\n💾 Results saved: {json_path}")
 
         plt.savefig(
-            f"{output_dir}/tunneling_hideseek_{timestamp}.png", dpi=300, bbox_inches="tight"
+            f"{output_dir}/tunneling_hideseek_{timestamp}.png",
+            dpi=300,
+            bbox_inches="tight",
         )
         print(f"📊 Plot saved: tunneling_hideseek_{timestamp}.png")
 

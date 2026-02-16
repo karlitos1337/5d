@@ -12,15 +12,31 @@ def create_alternative_schools_map():
     m = folium.Map(location=[30, 0], zoom_start=2, tiles="CartoDB positron")
 
     schools = {
-        "Sudbury Valley (USA)": {"coords": [42.37, -71.36], "type": "Sudbury", "color": "#00ff00"},
-        "Summerhill (UK)": {"coords": [52.21, 1.40], "type": "Democratic", "color": "#00ff00"},
-        "ESBZ Berlin (DE)": {"coords": [52.52, 13.41], "type": "Democratic", "color": "#00ff00"},
+        "Sudbury Valley (USA)": {
+            "coords": [42.37, -71.36],
+            "type": "Sudbury",
+            "color": "#00ff00",
+        },
+        "Summerhill (UK)": {
+            "coords": [52.21, 1.40],
+            "type": "Democratic",
+            "color": "#00ff00",
+        },
+        "ESBZ Berlin (DE)": {
+            "coords": [52.52, 13.41],
+            "type": "Democratic",
+            "color": "#00ff00",
+        },
         "Tokkatsu (Japan)": {
             "coords": [35.68, 139.76],
             "type": "Social Learning",
             "color": "#90ee90",
         },
-        "Folk High School (DK)": {"coords": [56.26, 9.50], "type": "Folk HS", "color": "#90ee90"},
+        "Folk High School (DK)": {
+            "coords": [56.26, 9.50],
+            "type": "Folk HS",
+            "color": "#90ee90",
+        },
         "Green School (Bali)": {
             "coords": [-8.54, 115.28],
             "type": "Sustainability",
@@ -69,12 +85,20 @@ def create_developer_community_map():
     m = folium.Map(location=[30, 0], zoom_start=2, tiles="CartoDB positron")
 
     dev_hubs = {
-        "Silicon Valley (USA)": {"coords": [37.39, -122.08], "devs": 50000, "color": "#ff0000"},
+        "Silicon Valley (USA)": {
+            "coords": [37.39, -122.08],
+            "devs": 50000,
+            "color": "#ff0000",
+        },
         "London (UK)": {"coords": [51.51, -0.13], "devs": 25000, "color": "#ff6600"},
         "Berlin (DE)": {"coords": [52.52, 13.41], "devs": 18000, "color": "#ffa500"},
         "Bangalore (IN)": {"coords": [12.97, 77.59], "devs": 35000, "color": "#ff0000"},
         "Tel Aviv (IL)": {"coords": [32.08, 34.78], "devs": 12000, "color": "#ffff00"},
-        "São Paulo (BR)": {"coords": [-23.55, -46.63], "devs": 15000, "color": "#ffff00"},
+        "São Paulo (BR)": {
+            "coords": [-23.55, -46.63],
+            "devs": 15000,
+            "color": "#ffff00",
+        },
     }
 
     for city, data in dev_hubs.items():
@@ -142,11 +166,27 @@ def create_regional_adoption_map():
     m = folium.Map(location=[30, 0], zoom_start=2, tiles="CartoDB positron")
 
     regions = {
-        "Nordic Countries": {"coords": [60.0, 10.0], "adoption_2040": 70, "color": "#00ff00"},
-        "Western Europe": {"coords": [50.0, 5.0], "adoption_2040": 50, "color": "#90ee90"},
-        "North America": {"coords": [40.0, -100.0], "adoption_2040": 40, "color": "#ffff00"},
+        "Nordic Countries": {
+            "coords": [60.0, 10.0],
+            "adoption_2040": 70,
+            "color": "#00ff00",
+        },
+        "Western Europe": {
+            "coords": [50.0, 5.0],
+            "adoption_2040": 50,
+            "color": "#90ee90",
+        },
+        "North America": {
+            "coords": [40.0, -100.0],
+            "adoption_2040": 40,
+            "color": "#ffff00",
+        },
         "East Asia": {"coords": [35.0, 130.0], "adoption_2040": 35, "color": "#ffa500"},
-        "Latin America": {"coords": [-15.0, -60.0], "adoption_2040": 25, "color": "#ffa500"},
+        "Latin America": {
+            "coords": [-15.0, -60.0],
+            "adoption_2040": 25,
+            "color": "#ffa500",
+        },
         "Africa": {"coords": [0.0, 20.0], "adoption_2040": 18, "color": "#ff6600"},
     }
 

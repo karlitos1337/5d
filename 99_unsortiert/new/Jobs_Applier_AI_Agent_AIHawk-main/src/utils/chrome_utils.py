@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager  # Import webdriver_man
 import urllib
 from src.logging import logger
 
+
 def chrome_browser_options():
     logger.debug("Setting Chrome browser options")
     options = Options()
@@ -29,23 +30,27 @@ def chrome_browser_options():
     options.add_argument("--disable-animations")
     options.add_argument("--disable-cache")
     options.add_argument("--incognito")
-    options.add_argument("--allow-file-access-from-files")  # Consente l'accesso ai file locali
-    options.add_argument("--disable-web-security")         # Disabilita la sicurezza web
+    options.add_argument(
+        "--allow-file-access-from-files"
+    )  # Consente l'accesso ai file locali
+    options.add_argument("--disable-web-security")  # Disabilita la sicurezza web
     logger.debug("Using Chrome in incognito mode")
-    
+
     return options
+
 
 def init_browser() -> webdriver.Chrome:
     try:
         options = chrome_browser_options()
         # Use webdriver_manager to handle ChromeDriver
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+        driver = webdriver.Chrome(
+            service=ChromeService(ChromeDriverManager().install()), options=options
+        )
         logger.debug("Chrome browser initialized successfully.")
         return driver
     except Exception as e:
         logger.error(f"Failed to initialize browser: {str(e)}")
         raise RuntimeError(f"Failed to initialize browser: {str(e)}")
-
 
 
 def HTML_to_PDF(html_content, driver):
@@ -69,25 +74,30 @@ def HTML_to_PDF(html_content, driver):
     try:
         driver.get(data_url)
         # Attendi che la pagina si carichi completamente
-        time.sleep(2)  # Potrebbe essere necessario aumentare questo tempo per HTML complessi
+        time.sleep(
+            2
+        )  # Potrebbe essere necessario aumentare questo tempo per HTML complessi
 
         # Esegue il comando CDP per stampare la pagina in PDF
-        pdf_base64 = driver.execute_cdp_cmd("Page.printToPDF", {
-            "printBackground": True,          # Includi lo sfondo nella stampa
-            "landscape": False,               # Stampa in verticale (False per ritratto)
-            "paperWidth": 8.27,               # Larghezza del foglio in pollici (A4)
-            "paperHeight": 11.69,             # Altezza del foglio in pollici (A4)
-            "marginTop": 0.8,                  # Margine superiore in pollici (circa 2 cm)
-            "marginBottom": 0.8,               # Margine inferiore in pollici (circa 2 cm)
-            "marginLeft": 0.5,                 # Margine sinistro in pollici (circa 1.27 cm)
-            "marginRight": 0.5,                # Margine destro in pollici (circa 1.27 cm)
-            "displayHeaderFooter": False,      # Non visualizzare intestazioni e piè di pagina
-            "preferCSSPageSize": True,         # Preferire le dimensioni della pagina CSS
-            "generateDocumentOutline": False,  # Non generare un sommario del documento
-            "generateTaggedPDF": False,        # Non generare PDF taggato
-            "transferMode": "ReturnAsBase64"   # Restituire il PDF come stringa base64
-        })
-        return pdf_base64['data']
+        pdf_base64 = driver.execute_cdp_cmd(
+            "Page.printToPDF",
+            {
+                "printBackground": True,  # Includi lo sfondo nella stampa
+                "landscape": False,  # Stampa in verticale (False per ritratto)
+                "paperWidth": 8.27,  # Larghezza del foglio in pollici (A4)
+                "paperHeight": 11.69,  # Altezza del foglio in pollici (A4)
+                "marginTop": 0.8,  # Margine superiore in pollici (circa 2 cm)
+                "marginBottom": 0.8,  # Margine inferiore in pollici (circa 2 cm)
+                "marginLeft": 0.5,  # Margine sinistro in pollici (circa 1.27 cm)
+                "marginRight": 0.5,  # Margine destro in pollici (circa 1.27 cm)
+                "displayHeaderFooter": False,  # Non visualizzare intestazioni e piè di pagina
+                "preferCSSPageSize": True,  # Preferire le dimensioni della pagina CSS
+                "generateDocumentOutline": False,  # Non generare un sommario del documento
+                "generateTaggedPDF": False,  # Non generare PDF taggato
+                "transferMode": "ReturnAsBase64",  # Restituire il PDF come stringa base64
+            },
+        )
+        return pdf_base64["data"]
     except Exception as e:
         logger.error(f"Si è verificata un'eccezione WebDriver: {e}")
         raise RuntimeError(f"Si è verificata un'eccezione WebDriver: {e}")

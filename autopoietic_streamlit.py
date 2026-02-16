@@ -77,7 +77,10 @@ for t in range(steps):
 cols = st.columns(2)
 with cols[0]:
     fig = px.line(
-        hist, x="step", y=["A", "IM", "R", "SP", "Au"], title="IMP-Dimensionen (Mittelwerte)"
+        hist,
+        x="step",
+        y=["A", "IM", "R", "SP", "Au"],
+        title="IMP-Dimensionen (Mittelwerte)",
     )
     st.plotly_chart(fig, use_container_width=True)
 with cols[1]:

@@ -116,7 +116,10 @@ def apply_mapping(
         scaled = {k: float(deltas[k]) * float(scales.get(k, 1.0)) for k in deltas}
         # Cappen
         scaled = {k: clamp(v, -1.0, +1.0) for k, v in scaled.items()}
-        out["adjusted"]["projects"][pj_name] = {"delta": scaled, "cap": {"min": cmin, "max": cmax}}
+        out["adjusted"]["projects"][pj_name] = {
+            "delta": scaled,
+            "cap": {"min": cmin, "max": cmax},
+        }
 
     return out
 

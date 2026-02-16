@@ -80,7 +80,13 @@ class TestIMPCalculation:
 
         Expected: 1.0 × 0.0 × 1.0 × 1.0 × 1.0 = 0.0
         """
-        dimensions = {"A": 1.0, "IM": 0.0, "R": 1.0, "SP": 1.0, "Au": 1.0}  # Zero motivation
+        dimensions = {
+            "A": 1.0,
+            "IM": 0.0,
+            "R": 1.0,
+            "SP": 1.0,
+            "Au": 1.0,
+        }  # Zero motivation
 
         result = calculate_imp_verified(dimensions)
 
@@ -171,7 +177,13 @@ class TestIMPCalculation:
         balanced = {"A": 0.75, "IM": 0.75, "R": 0.75, "SP": 0.75, "Au": 0.75}
 
         # Person B: One dimension missing
-        unbalanced = {"A": 1.0, "IM": 0.0, "R": 1.0, "SP": 1.0, "Au": 1.0}  # No motivation
+        unbalanced = {
+            "A": 1.0,
+            "IM": 0.0,
+            "R": 1.0,
+            "SP": 1.0,
+            "Au": 1.0,
+        }  # No motivation
 
         result_balanced = calculate_imp_verified(balanced)
         result_unbalanced = calculate_imp_verified(unbalanced)

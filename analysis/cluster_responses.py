@@ -68,7 +68,15 @@ def kmeans_clustering(profiles: list[dict], n_clusters: int = 5) -> dict:
         "cluster_labels": cluster_labels.tolist(),
         "cluster_centers": kmeans.cluster_centers_.tolist(),
         "inertia": float(kmeans.inertia_),
-        "feature_names": ["neuro", "psych", "philo", "econ", "tech", "life_sat", "fin_sit"],
+        "feature_names": [
+            "neuro",
+            "psych",
+            "philo",
+            "econ",
+            "tech",
+            "life_sat",
+            "fin_sit",
+        ],
     }
 
 

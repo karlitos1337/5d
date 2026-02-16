@@ -18,6 +18,7 @@ Acknowledgements:
     Derived from https://github.com/mitsuhiko/rye/tree/f9822267a7f00332d15be8551f89a212e7bc9017
     Originally authored by Armin Ronacher under the MIT license
 """
+
 # https://github.com/mitsuhiko/rye/raw/f9822267a7f00332d15be8551f89a212e7bc9017/LICENSE
 #
 # MIT License
@@ -216,8 +217,7 @@ class CPythonFinder(Finder):
         "ppc64le": "powerpc64le",
     }
 
-    _filename_re = re.compile(
-        r"""(?x)
+    _filename_re = re.compile(r"""(?x)
         ^
             cpython-
             (?P<ver>\d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?)(?:\+\d+)?\+
@@ -230,11 +230,9 @@ class CPythonFinder(Finder):
             (?P<flavor>[a-z_]+)?
             \.tar\.(?:gz|zst)
         $
-        """
-    )
+        """)
 
-    _legacy_filename_re = re.compile(
-        r"""(?x)
+    _legacy_filename_re = re.compile(r"""(?x)
         ^
             cpython-
             (?P<ver>\d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?)(?:\+\d+)?-
@@ -243,8 +241,7 @@ class CPythonFinder(Finder):
             (?P<date>[a-zA-z\d]+)
             \.tar\.(?:gz|zst)
         $
-        """
-    )
+        """)
 
     def __init__(self, client: httpx.AsyncClient):
         self.client = client

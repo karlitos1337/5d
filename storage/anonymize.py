@@ -79,7 +79,10 @@ def anonymize_response(response_data: dict[str, Any]) -> dict[str, Any]:
         "responses": response_data.get("responses", {}),
         "timestamp": datetime.now().isoformat(),
         "version": "1.0.0",
-        "metadata": {"anonymized": True, "anonymization_timestamp": datetime.now().isoformat()},
+        "metadata": {
+            "anonymized": True,
+            "anonymization_timestamp": datetime.now().isoformat(),
+        },
     }
 
     # Doppelte Prüfung
@@ -188,7 +191,10 @@ if __name__ == "__main__":
 
     # Test mit verbotendem Feld
     try:
-        bad_response = {"responses": {"test": 1}, "email": "test@example.com"}  # Verboten!
+        bad_response = {
+            "responses": {"test": 1},
+            "email": "test@example.com",
+        }  # Verboten!
         anonymize_response(bad_response)
     except ValueError as e:
         print(f"\nExpected error caught: {e}")

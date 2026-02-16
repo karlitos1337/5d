@@ -17,15 +17,13 @@ st.set_page_config(page_title="Autopoietic Class", page_icon="🧪", layout="wid
 
 # === HEADER ===
 st.title("🧪 Autopoietic Class Simulation")
-st.markdown(
-    """
+st.markdown("""
 Agent-based model demonstrating how the 5 dimensions (A, IM, R, SP, Au) 
 evolve over time under different classroom conditions.
 
 **Autopoiesis** (Maturana & Varela 1980): Self-creating, self-maintaining systems.  
 An **autopoietic classroom** fosters intrinsic motivation and self-organization without external coercion.
-"""
-)
+""")
 
 # === SIDEBAR: PARAMETERS ===
 with st.sidebar:
@@ -269,7 +267,13 @@ st.subheader("🌊 Evolution of 5D Dimensions Over Time")
 # Create figure with mean + std bands
 fig = go.Figure()
 
-colors = {"A": "#FF6B6B", "IM": "#4ECDC4", "R": "#45B7D1", "SP": "#FFA07A", "Au": "#98D8C8"}
+colors = {
+    "A": "#FF6B6B",
+    "IM": "#4ECDC4",
+    "R": "#45B7D1",
+    "SP": "#FFA07A",
+    "Au": "#98D8C8",
+}
 
 for dim in ["A", "IM", "R", "SP", "Au"]:
     mean = history[f"{dim}_mean"]
@@ -297,7 +301,11 @@ for dim in ["A", "IM", "R", "SP", "Au"]:
     # Add mean line
     fig.add_trace(
         go.Scatter(
-            x=steps_list, y=mean, mode="lines", name=dim, line=dict(color=colors[dim], width=2)
+            x=steps_list,
+            y=mean,
+            mode="lines",
+            name=dim,
+            line=dict(color=colors[dim], width=2),
         )
     )
 
@@ -326,7 +334,11 @@ if show_individual and len(individual_history) > 0:
 
         fig_ind.add_trace(
             go.Scatter(
-                x=history["step"], y=imp_traj, mode="lines", name=f"Student {idx}", opacity=0.7
+                x=history["step"],
+                y=imp_traj,
+                mode="lines",
+                name=f"Student {idx}",
+                opacity=0.7,
             )
         )
 
@@ -409,8 +421,7 @@ st.divider()
 st.header("🔬 Scientific Interpretation")
 
 with st.expander("📖 What is Autopoiesis?"):
-    st.markdown(
-        """
+    st.markdown("""
     **Autopoiesis** (Greek: *auto* = self, *poiesis* = creation) is a concept from biology 
     describing self-creating, self-maintaining systems.
     
@@ -424,12 +435,10 @@ with st.expander("📖 What is Autopoiesis?"):
     - Intrinsic motivation drives engagement
     - Peer interactions create emergent social structures
     - Teacher acts as facilitator, not controller
-    """
-    )
+    """)
 
 with st.expander("📊 Model Parameters Explained"):
-    st.markdown(
-        """
+    st.markdown("""
     **Coercion Level:**
     - High coercion → Stress → Decreased IM, R
     - Examples: Strict deadlines, punishment, surveillance
@@ -454,12 +463,10 @@ with st.expander("📊 Model Parameters Explained"):
     - Variety matches interests → Increased IM
     - Examples: Multiple pathways, differentiated instruction
     - Scientific basis: Csíkszentmihályi (1990) - Flow Theory (challenge-skill balance)
-    """
-    )
+    """)
 
 with st.expander("🎯 Interpreting Results"):
-    st.markdown(
-        f"""
+    st.markdown(f"""
     **Your Simulation Results:**
     - Final IMP: **{final_metrics['IMP']:.3f}**
     - Retention: **{final_metrics['retention_rate']:.1%}**
@@ -479,8 +486,7 @@ with st.expander("🎯 Interpreting Results"):
     - Coercion = {zwang:.2f}: {"⚠️ High stress environment" if zwang > 0.5 else "✅ Moderate stress"}
     - Freedom = {freiheit:.2f}: {"✅ High autonomy" if freiheit > 0.6 else "⚠️ Limited autonomy"}
     - Balance: {"✅ Freedom > Coercion (healthy)" if freiheit > zwang else "⚠️ Coercion ≥ Freedom (problematic)"}
-    """
-    )
+    """)
 
 # === SAVE RESULTS ===
 st.divider()
@@ -534,8 +540,7 @@ if st.button("📥 Export Results (JSON)", type="primary"):
 st.divider()
 st.header("📚 Scientific References")
 
-st.markdown(
-    """
+st.markdown("""
 **Core Concepts:**
 1. **Maturana, H. R., & Varela, F. J. (1980).** *Autopoiesis and Cognition: The Realization of the Living.* 
    D. Reidel Publishing Company. [DOI: 10.1007/978-94-009-8947-4](https://doi.org/10.1007/978-94-009-8947-4)
@@ -557,5 +562,4 @@ st.markdown(
    Prentice Hall.
 
 **All references available in:** `07_daten_analysen/5d-relevant-sources.bib`
-"""
-)
+""")

@@ -11,7 +11,10 @@ from utils.mobile_responsive import inject_mobile_css
 from utils.caching import preload_all_critical_data, display_cache_info
 
 st.set_page_config(
-    page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded"
+    page_title="5D Wiki & Home",
+    page_icon="📚",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 inject_mobile_css()
 
@@ -30,10 +33,20 @@ def main():
         st.markdown("### 🧭 Navigation")
         st.page_link("pages/1_📊_IMP_Analysis.py", label="📊 IMP-Analyse", icon="📊")
         st.page_link("pages/2_🚀_Projects.py", label="🚀 Projekte", icon="🚀")
-        st.page_link("pages/12_🧠_Forschungsplanung_Template.py", label="🧠 Forschungsplanung (Template)", icon="🧠")
-        st.page_link("pages/13_🧪_NN_Playground_Demo.py", label="🧪 NN Playground (Demo)", icon="🧪")
+        st.page_link(
+            "pages/12_🧠_Forschungsplanung_Template.py",
+            label="🧠 Forschungsplanung (Template)",
+            icon="🧠",
+        )
+        st.page_link(
+            "pages/13_🧪_NN_Playground_Demo.py",
+            label="🧪 NN Playground (Demo)",
+            icon="🧪",
+        )
         st.markdown("### 🆕 Neues Dashboard")
-        st.info("Ein neues React-basiertes Dashboard ist verfügbar unter `web/validation_dashboard`. Bauen Sie es mit `cd web/validation_dashboard && npm run build`.")
+        st.info(
+            "Ein neues React-basiertes Dashboard ist verfügbar unter `web/validation_dashboard`. Bauen Sie es mit `cd web/validation_dashboard && npm run build`."
+        )
         st.markdown("- 📚 Research (coming soon)")
         st.markdown("- 💻 GitHub (coming soon)")
         st.markdown("- 🧬 Game of Life (coming soon)")
@@ -84,14 +97,19 @@ def main():
 
     # Tabs für verschiedene Bereiche
     tab1, tab2, tab3, tab4, tab5 = st.tabs(
-        ["🚀 Schnellstart", "💻 Installation", "📖 Befehle erklärt", "🧭 Navigation", "🆘 Hilfe"]
+        [
+            "🚀 Schnellstart",
+            "💻 Installation",
+            "📖 Befehle erklärt",
+            "🧭 Navigation",
+            "🆘 Hilfe",
+        ]
     )
 
     with tab1:
         st.header("🚀 Schnellstart (3 Schritte)")
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Du willst direkt loslegen? So geht's:
         
         **Schritt 1: Code öffnen**
@@ -99,8 +117,7 @@ def main():
         - Falls nicht: [GitHub Codespaces](https://github.com/karlitos1337/5d) öffnen
         
         **Schritt 2: Dashboard starten**
-        """
-        )
+        """)
 
         col_a, col_b = st.columns([2, 1])
 
@@ -110,18 +127,15 @@ def main():
 
         with col_b:
             if st.button("▶️ Was macht start.sh?", key="explain_start"):
-                st.info(
-                    """
+                st.info("""
                 **start.sh tut folgendes:**
                 1. Installiert benötigte Programme
                 2. Lädt die neuesten Daten
                 3. Startet das Dashboard
                 4. Öffnet es in deinem Browser
-                """
-                )
+                """)
 
-        st.markdown(
-            """
+        st.markdown("""
         **Schritt 3: Erkunden**
         - 👈 Links in der Sidebar findest du alle Themen
         - 📊 IMP-Analyse: Wissenschaftliche Grundlagen
@@ -155,8 +169,7 @@ def main():
         ✅ **Research lesen:** Neueste Papers von arXiv, PubMed, WHO  
         ✅ **Simulationen:** Game of Life, Zwanglosigkeits-Modell  
         ✅ **Code anschauen:** Alles Open Source auf GitHub  
-        """
-        )
+        """)
 
         st.divider()
 
@@ -171,8 +184,7 @@ def main():
     with tab2:
         st.header("💻 Installation (Schritt für Schritt)")
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Variante 1: GitHub Codespaces (Empfohlen für Anfänger)
         
         **Was ist Codespaces?**
@@ -181,8 +193,7 @@ def main():
         - Kostenlos für GitHub-Nutzer (60 Stunden/Monat)
         
         **So geht's:**
-        """
-        )
+        """)
 
         st.markdown("**1. Gehe zu GitHub:**")
         st.code("https://github.com/karlitos1337/5d", language="text")
@@ -196,8 +207,7 @@ def main():
 
         st.divider()
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Variante 2: Lokal auf deinem Computer
         
         **Voraussetzungen:**
@@ -205,8 +215,7 @@ def main():
         - Git
         
         **Schritt 1: Python installieren**
-        """
-        )
+        """)
 
         col1, col2, col3 = st.columns(3)
 
@@ -225,11 +234,9 @@ def main():
             st.code("sudo apt install python3.10", language="bash")
             st.caption("(Ubuntu/Debian)")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Schritt 2: Projekt herunterladen**
-        """
-        )
+        """)
 
         st.code(
             """
@@ -261,13 +268,11 @@ pip install -r requirements_extended.txt
 
         st.divider()
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Variante 3: Docker (für Fortgeschrittene)
         
         **Falls Docker installiert ist:**
-        """
-        )
+        """)
 
         st.code(
             """
@@ -289,13 +294,11 @@ docker run -p 8501:8501 5d-dashboard
     with tab3:
         st.header("📖 Befehle erklärt (für Einsteiger)")
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Was bedeuten diese seltsamen Zeichen? 🤔
         
         Keine Sorge! Hier ist alles erklärt:
-        """
-        )
+        """)
 
         # Befehle-Tabelle
         befehle = [
@@ -369,8 +372,7 @@ docker run -p 8501:8501 5d-dashboard
 
         st.divider()
 
-        st.markdown(
-            """
+        st.markdown("""
         ### 🔤 Begriffe erklärt
         
         **Terminal / Kommandozeile / Shell:**
@@ -397,20 +399,17 @@ docker run -p 8501:8501 5d-dashboard
         **pytest:**
         - Werkzeug zum automatischen Testen
         - Prüft: "Funktioniert der Code?"
-        """
-        )
+        """)
 
     with tab4:
         st.header("🧭 Navigation & Seitenübersicht")
 
-        st.markdown(
-            """
+        st.markdown("""
         ### Wie finde ich was?
         
         **In der Sidebar (links 👈)** sind alle Seiten aufgelistet.  
         Klick einfach drauf!
-        """
-        )
+        """)
 
         st.divider()
 
@@ -566,8 +565,7 @@ docker run -p 8501:8501 5d-dashboard
 
         st.divider()
 
-        st.markdown(
-            """
+        st.markdown("""
         ### 🔗 Wichtige Links
         
         **Dokumentation:**
@@ -588,8 +586,7 @@ docker run -p 8501:8501 5d-dashboard
         - [WHO](https://www.who.int/data)
         - [arXiv](https://arxiv.org)
         - [PubMed](https://pubmed.ncbi.nlm.nih.gov)
-        """
-        )
+        """)
 
     with tab5:
         st.header("🆘 Hilfe & Troubleshooting")
@@ -704,11 +701,9 @@ docker run -p 8501:8501 5d-dashboard
         # Troubleshooting Checkliste
         st.subheader("🔧 Troubleshooting Checkliste")
 
-        st.markdown(
-            """
+        st.markdown("""
         Wenn etwas nicht funktioniert, gehe diese Liste durch:
-        """
-        )
+        """)
 
         checks = [
             "Python 3.10+ installiert? (`python --version`)",
@@ -734,23 +729,19 @@ docker run -p 8501:8501 5d-dashboard
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown(
-                """
+            st.markdown("""
             **Community:**
             - [GitHub Discussions](https://github.com/karlitos1337/5d/discussions)
             - [Issues melden](https://github.com/karlitos1337/5d/issues/new)
-            """
-            )
+            """)
 
         with col2:
-            st.markdown(
-                """
+            st.markdown("""
             **Dokumentation:**
             - [docs/](docs/) - Alle Guides
             - [CONTRIBUTING.md](CONTRIBUTING.md)
             - [README.md](README.md)
-            """
-            )
+            """)
 
         st.info(
             "💡 **Tipp:** Beschreibe dein Problem genau: Was hast du versucht? Welche Fehlermeldung kam? Welches Betriebssystem?"
