@@ -5,6 +5,7 @@ norecursedirs = [
     "external",
     "private-gpt-main",
     "node_modules",
+    "outputs",
 ]
 
 [tool.ruff]
@@ -15,6 +16,7 @@ exclude = [
     "external",
     "private-gpt-main",
     "node_modules",
+    "outputs",
 ]
 
 [tool.mypy]
@@ -23,4 +25,5 @@ exclude = [
     "external",
     "private-gpt-main",
     "node_modules",
+    "outputs",
 ]
