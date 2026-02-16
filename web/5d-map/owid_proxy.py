@@ -1,70 +1,57 @@
-#!/usr/bin/env python3
-import sys
+import http.server
+import os
+import socketserver
+import urllib.error
 import urllib.request
-from http.server import BaseHTTPRequestHandler, HTTPServer
 
-OWID_URLS = {
-    "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
-}
+PORT = 5510
+HOST = os.environ.get('OWID_PROXY_HOST', '127.0.0.1')
 
+# Allow CORS and Security Headers
+class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none'")
+        self.send_header('X-Frame-Options', 'DENY')
+        super().end_headers()
 
-class ProxyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        path = self.path.lstrip("/")
-        if path.startswith("proxy/"):
-            key = path.split("/", 1)[1]
-            url = OWID_URLS.get(key)
-            if not url:
-                self.send_response(404)
-                self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(b"Unknown proxy key")
-                return
-            try:
-                with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+        if self.path.startswith('/proxy/'):
+            # Extract filename from path
+            filename = self.path.split('/')[-1]
+            # Map filenames to OWID URLs
+            url_map = {
+                'depression-prevalence.csv': 'https://ourworldindata.org/grapher/depression-prevalence.csv?v=1&csvType=full&useColumnShortNames=true',
+                # Add more mappings as needed
+            }
+
+            target_url = url_map.get(filename)
+
+            if target_url:
+                try:
+                    # Fetch from OWID with timeout and User-Agent
+                    req = urllib.request.Request(
+                        target_url,
+                        headers={'User-Agent': 'Mozilla/5.0 (5d-map-proxy)'}
+                    )
+                    with urllib.request.urlopen(req, timeout=15) as response:
+                        content = response.read()
+
                     self.send_response(200)
-                    self.send_header("Content-Type", "text/csv; charset=utf-8")
-                    self.send_header("Content-Length", str(len(data)))
-                    # CORS
-                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header('Content-type', 'text/csv')
                     self.end_headers()
-                    self.wfile.write(data)
-            except Exception as e:
-                msg = f"Fetch error: {e}".encode()
-                self.send_response(502)
-                self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(msg)
+                    self.wfile.write(content)
+                except Exception as e:
+                    self.send_error(500, f"Proxy error: {str(e)}")
+            else:
+                self.send_error(404, "File not found in proxy map")
         else:
-            self.send_response(404)
-            self.send_header("Content-Type", "text/plain; charset=utf-8")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(b"Use /proxy/<file>")
-
-    def log_message(self, fmt, *args):
-        # Quiet log
-        pass
-
-
-def main():
-    port = 5510
-    if len(sys.argv) > 1:
-        try:
-            port = int(sys.argv[1])
-        except ValueError:
-            pass
-    server = HTTPServer(("0.0.0.0", port), ProxyHandler)
-    print(f"OWID proxy listening on http://localhost:{port}/proxy/<file>")
-    print("Supported keys:", ", ".join(OWID_URLS.keys()))
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
+            self.send_error(403, "Forbidden")
 
 if __name__ == "__main__":
-    main()
+    print(f"Starting OWID Proxy on {HOST}:{PORT}...")
+    # Bind to localhost only for security
+    with socketserver.TCPServer((HOST, PORT), CORSRequestHandler) as httpd:
+        print(f"Proxy running. Access via http://{HOST}:{PORT}/proxy/depression-prevalence.csv")
+        httpd.serve_forever()
