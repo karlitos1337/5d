@@ -1,31 +1,30 @@
-import math
 
+import pytest
 from src.universal_system_genesis_5d.formulas_math import (
-    dot,
-    min_max_normalize,
+    relu,
     sigmoid,
-    softmax,
-    weighted_mean,
+    sigmoid_derivative,
+    tanh,
 )
 
+def test_sigmoid():
+    # Test values
+    assert sigmoid(0) == pytest.approx(0.5)
+    # Check limits
+    assert sigmoid(100) == pytest.approx(1.0)
+    assert sigmoid(-100) == pytest.approx(0.0)
 
-def test_sigmoid_bounds():
-    assert 0.0 < sigmoid(0.0) < 1.0
-    assert math.isclose(sigmoid(0), 0.5, rel_tol=1e-9)
+def test_sigmoid_derivative():
+    # d/dx sigma(x) = sigma(x)(1-sigma(x))
+    # at x=0, sigma(0)=0.5, deriv=0.5*0.5=0.25
+    assert sigmoid_derivative(0) == pytest.approx(0.25)
 
+def test_tanh():
+    assert tanh(0) == 0.0
+    assert tanh(100) == pytest.approx(1.0)
+    assert tanh(-100) == pytest.approx(-1.0)
 
-def test_softmax_distribution():
-    v = softmax([1.0, 2.0, 3.0])
-    assert len(v) == 3
-    assert math.isclose(sum(v), 1.0, rel_tol=1e-9)
-
-
-def test_min_max_normalize():
-    assert min_max_normalize(5, 0, 10) == 0.5
-    assert min_max_normalize(-1, 0, 10) == 0.0
-    assert min_max_normalize(11, 0, 10) == 1.0
-
-
-def test_dot_and_weighted_mean():
-    assert dot([1, 2, 3], [4, 5, 6]) == 32
-    assert math.isclose(weighted_mean([1, 2, 3], [1, 1, 2]), (1 * 1 + 2 * 1 + 3 * 2) / 4)
+def test_relu():
+    assert relu(5) == 5
+    assert relu(-5) == 0
+    assert relu(0) == 0
