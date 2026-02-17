@@ -1,8 +1,10 @@
+import os
 import unittest
 from unittest.mock import patch
-import os
 from urllib.parse import parse_qs, urlparse
+
 from auth.github_oauth import GitHubAuth
+
 
 class TestGitHubOAuthSecurity(unittest.TestCase):
 

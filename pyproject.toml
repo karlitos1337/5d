@@ -26,3 +26,5 @@ exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "node_modules/"]
 [tool.pytest.ini_options]
 addopts = "--cov=. --cov-report=xml"
 norecursedirs = ["99_unsortiert", "external", "private-gpt-main", "node_modules"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
