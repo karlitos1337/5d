@@ -32,7 +32,7 @@ def create_frontmatter(
     """Generate a YAML frontmatter block."""
     if file_date is None:
         file_date = date.today().isoformat()
-    return f'''---
+    return f"""---
 title: "{title}"
 author: "{author}"
 date: "{file_date}"
@@ -41,7 +41,7 @@ license: "{license_type}"
 evidence: "{evidence}"
 ---
 
-'''
+"""
 
 
 def add_frontmatter_to_file(
@@ -89,20 +89,14 @@ def add_frontmatter_to_file(
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Add YAML frontmatter to markdown files"
-    )
+    parser = argparse.ArgumentParser(description="Add YAML frontmatter to markdown files")
     parser.add_argument("file", help="Path to the markdown file")
     parser.add_argument("--title", required=True, help="Document title")
     parser.add_argument("--domain", required=True, help="Domain/folder name")
     parser.add_argument("--author", default="Unknown", help="Author name")
     parser.add_argument("--date", default=None, help="Date (YYYY-MM-DD format)")
-    parser.add_argument(
-        "--license", default="CC-BY-4.0", help="License type"
-    )
-    parser.add_argument(
-        "--evidence", default="🔮", help="Evidence level (✅, ⚠️, or 🔮)"
-    )
+    parser.add_argument("--license", default="CC-BY-4.0", help="License type")
+    parser.add_argument("--evidence", default="🔮", help="Evidence level (✅, ⚠️, or 🔮)")
     parser.add_argument(
         "--dry-run",
         action="store_true",

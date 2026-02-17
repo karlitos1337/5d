@@ -18,3 +18,5 @@ pytest
 networkx>=3.0
 httpx>=0.24.0
 keyring>=24.0.0
+discord.py
+pytest-asyncio

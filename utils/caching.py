@@ -163,9 +163,7 @@ def invalidate_cache(cache_key: str = None):
     if cache_key:
         # Streamlit doesn't support selective invalidation in @st.cache_data
         # Use st.cache_data.clear() for all or rely on TTL
-        st.warning(
-            "⚠️ Selective cache invalidation not supported. Use TTL or restart app."
-        )
+        st.warning("⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
     else:
         st.cache_data.clear()
         st.success("✅ All caches cleared")
@@ -409,8 +407,7 @@ def display_cache_info():
             display_cache_info()
     """
     with st.expander("⚙️ Cache Configuration", expanded=False):
-        st.markdown(
-            """
+        st.markdown("""
         **Cache TTL Settings:**
         - 🟢 **Static Data**: 1 hour (BibTeX, schools)
         - 🟡 **Dynamic Data**: 30 min (Research, GitHub)
@@ -418,8 +415,7 @@ def display_cache_info():
         - 🔴 **Realtime**: 5 min (Live metrics)
         
         Data is automatically refreshed after TTL expires.
-        """
-        )
+        """)
 
         stats = get_cache_stats()
         st.json(stats)

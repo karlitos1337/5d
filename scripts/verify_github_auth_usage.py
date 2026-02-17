@@ -23,19 +23,14 @@ def check_github_auth_usage(directory):
                         if isinstance(node, ast.Name) and node.id == "GitHubAuth":
                             print(f"Found usage in {filepath} line {node.lineno}")
                             usage_found = True
-                        elif (
-                            isinstance(node, ast.Attribute)
-                            and node.attr == "GitHubAuth"
-                        ):
+                        elif isinstance(node, ast.Attribute) and node.attr == "GitHubAuth":
                             print(f"Found usage in {filepath} line {node.lineno}")
                             usage_found = True
                 except Exception as e:
                     print(f"Could not parse {filepath}: {e}")
 
     if not usage_found:
-        print(
-            "No usage of GitHubAuth found in the codebase (excluding definition and test)."
-        )
+        print("No usage of GitHubAuth found in the codebase (excluding definition and test).")
     else:
         print("WARNING: GitHubAuth usage detected!")
 

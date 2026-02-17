@@ -90,9 +90,7 @@ def main():
 
         # Copy artifacts (Keep original in root as master DB)
         if os.path.exists("5d_research_data.json"):
-            shutil.copy(
-                "5d_research_data.json", package_dir / "5d_research_data.json"
-            )
+            shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
             print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")

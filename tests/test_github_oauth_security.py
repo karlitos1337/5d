@@ -63,9 +63,7 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         state = "valid_state"
         code = "valid_code"
 
-        result = self.auth.authenticate(
-            code, received_state=state, expected_state=state
-        )
+        result = self.auth.authenticate(code, received_state=state, expected_state=state)
 
         self.assertIsNotNone(result)
         self.assertIn("session_token", result)
@@ -92,14 +90,10 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
 
     def test_authenticate_missing_state(self):
         """Test that authentication fails when state is missing."""
-        result = self.auth.authenticate(
-            "code", received_state="", expected_state="good_state"
-        )
+        result = self.auth.authenticate("code", received_state="", expected_state="good_state")
         self.assertIsNone(result)
 
-        result = self.auth.authenticate(
-            "code", received_state="good_state", expected_state=None
-        )
+        result = self.auth.authenticate("code", received_state="good_state", expected_state=None)
         self.assertIsNone(result)
 
 
