@@ -40,9 +40,20 @@ function activateLayer(layerName) {
     infoTextEl.textContent = txt;
     infoEl.style.display = 'block';
   }
-  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
-  const btn = document.getElementById(`layer-${layerName}`);
-  if (btn) btn.classList.add('btn--primary');
+  // Update aria-pressed and classes for layer buttons
+  const layerButtons = [
+    'layer-status-quo', 'layer-schools', 'layer-imp',
+    'layer-validation', 'layer-sources', 'layer-time'
+  ];
+
+  layerButtons.forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+      const isActive = (id === `layer-${layerName}`);
+      btn.classList.toggle('btn--primary', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    }
+  });
 
   switch (layerName) {
     case 'status-quo':

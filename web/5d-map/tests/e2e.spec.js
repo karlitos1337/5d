@@ -17,30 +17,38 @@ test.describe('5D Map E2E Tests', () => {
     await expect(page.locator('.app-header h1')).toContainText('5D‑Intelligenz Global');
   });
 
-  test('should have all 4 layer buttons', async ({ page }) => {
+  test('should have all 6 layer buttons', async ({ page }) => {
     await expect(page.locator('#layer-status-quo')).toBeVisible();
     await expect(page.locator('#layer-schools')).toBeVisible();
     await expect(page.locator('#layer-imp')).toBeVisible();
+    await expect(page.locator('#layer-validation')).toBeVisible();
+    await expect(page.locator('#layer-sources')).toBeVisible();
     await expect(page.locator('#layer-time')).toBeVisible();
   });
 
-  test('should toggle between layers', async ({ page }) => {
+  test('should toggle between layers and update aria-pressed', async ({ page }) => {
     // Start mit Status Quo
     await expect(page.locator('#layer-status-quo')).toHaveClass(/btn--primary/);
+    await expect(page.locator('#layer-status-quo')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#layer-schools')).toHaveAttribute('aria-pressed', 'false');
     
     // Klick auf Schulen
     await page.click('#layer-schools');
     await expect(page.locator('#layer-schools')).toHaveClass(/btn--primary/);
+    await expect(page.locator('#layer-schools')).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('#layer-status-quo')).not.toHaveClass(/btn--primary/);
+    await expect(page.locator('#layer-status-quo')).toHaveAttribute('aria-pressed', 'false');
     
     // Klick auf IMP
     await page.click('#layer-imp');
     await expect(page.locator('#layer-imp')).toHaveClass(/btn--primary/);
+    await expect(page.locator('#layer-imp')).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('.legend')).toBeVisible();
     
     // Klick auf Zeitreise
     await page.click('#layer-time');
     await expect(page.locator('#layer-time')).toHaveClass(/btn--primary/);
+    await expect(page.locator('#layer-time')).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('#time-controls')).toBeVisible();
   });
 
