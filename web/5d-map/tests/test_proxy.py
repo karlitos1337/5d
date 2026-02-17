@@ -16,7 +16,7 @@ class TestProxy(unittest.TestCase):
     def setUp(self):
         self.server = None
         self.thread = None
-        self.port = 5511 # Use a different port for testing to avoid conflicts
+        self.port = 5511  # Use a different port for testing to avoid conflicts
 
     def tearDown(self):
         if self.server:
@@ -35,7 +35,7 @@ class TestProxy(unittest.TestCase):
         self.thread = threading.Thread(target=self.server.serve_forever)
         self.thread.daemon = True
         self.thread.start()
-        time.sleep(0.5) # Give it a moment to start
+        time.sleep(0.5)  # Give it a moment to start
 
     def test_security_headers_present(self):
         self.start_server()
@@ -44,7 +44,7 @@ class TestProxy(unittest.TestCase):
         # Request a non-existent key to trigger a simple response
         conn.request("GET", "/proxy/invalid_key")
         response = conn.getresponse()
-        response.read() # Consume body
+        response.read()  # Consume body
 
         # Check for security headers
         headers = {k.lower(): v for k, v in response.getheaders()}
@@ -81,15 +81,18 @@ class TestProxy(unittest.TestCase):
             conn.request("GET", f"/proxy/{valid_key}")
 
             response = conn.getresponse()
-            body = response.read().decode('utf-8')
+            body = response.read().decode("utf-8")
 
             self.assertEqual(response.status, 502)
-            self.assertNotIn("Sensitive internal info", body, "Error message leaked internal exception details")
-            self.assertIn("Fetch error", body) # We can keep "Fetch error" but not the details
+            self.assertNotIn(
+                "Sensitive internal info", body, "Error message leaked internal exception details"
+            )
+            self.assertIn("Fetch error", body)  # We can keep "Fetch error" but not the details
 
             conn.close()
         finally:
             owid_proxy.urllib.request.urlopen = original_urlopen
+
 
 if __name__ == "__main__":
     unittest.main()

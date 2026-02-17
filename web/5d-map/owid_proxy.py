@@ -63,6 +63,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
 def main():
     import os
+
     port = 5510
     host = os.environ.get("OWID_PROXY_HOST", "127.0.0.1")
 
