@@ -1,151 +1,113 @@
-#!/usr/bin/env python3
-"""
-5D-Intelligence Evidence Package Generator
-Orchestrates validation, scraping, and packaging.
-"""
-
-import os
-import glob
-import shutil
 import datetime
+import glob
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+
 def run_step(command, description):
-    print(f"\n🚀 {description}...")
+    """Runs a shell command and prints progress."""
+    print(f"⏳ {description}...")
     try:
-        result = subprocess.run(command, check=True, text=True, capture_output=True)
-        print(result.stdout)
-        return True
+        result = subprocess.run(command, shell=True, check=True, capture_output=True, text=True)
+        print(f"✅ {description} complete.")
+        return result.stdout
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error during {description}:")
-        print(e.stderr)
-        return False
+        print(f"❌ {description} failed!")
+        print(f"Error: {e.stderr}")
+        sys.exit(1)
 
 def main():
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    package_dir = Path(f"outputs/evidence_package/pkg_{timestamp}")
+    print("📦 Generating Evidence Package...")
+
+    # Setup paths
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    package_dir = Path(f"outputs/evidence_package_{timestamp}")
     package_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"📦 Initializing Evidence Package: {package_dir}")
-
-    # 1. Run Validation Study
-    # Set PYTHONPATH to include current directory so imports work if needed
+    # 1. Run Validation Study (IMP)
+    # Ensure PYTHONPATH is set so scripts can import modules
     env = os.environ.copy()
     env["PYTHONPATH"] = os.getcwd()
 
-    print(f"\n🚀 Running IMP Validation Study...")
+    print("\n🚀 Running IMP Validation Study...")
     try:
-        # Running validation study
+        # Assuming imp_validation_study.py is in validation/ directory and runnable
         result = subprocess.run(
             [sys.executable, "validation/imp_validation_study.py"],
-            check=True,
-            text=True,
             capture_output=True,
+            text=True,
             env=env
         )
-        print(result.stdout)
+        if result.returncode == 0:
+            print("✅ IMP Validation Study complete.")
+            # Save output log
+            with open(package_dir / "validation_study.log", "w") as f:
+                f.write(result.stdout)
+        else:
+            print("⚠️  IMP Validation Study finished with errors (check log).")
+            print(result.stderr)
 
         # Copy Analysis Script
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
-        print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
+        print("  -> Copied Analysis Script: validation/imp_validation_study.py")
 
         # Move artifacts
-        moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
-            for f in glob.glob(pattern):
-                shutil.move(f, package_dir / os.path.basename(f))
-                print(f"  -> Moved {f}")
-                moved_count += 1
+        # (Assuming the script generates validation_report.json in current dir or output dir)
+        # Adjust logic to find where the script actually outputs files
+        for f in glob.glob("validation_report_*.json"):
+             shutil.copy(f, package_dir / f)
+             print(f"  -> Copied {f}")
 
-        if moved_count == 0:
-            print("⚠️  No validation artifacts found to move.")
+        for f in glob.glob("outputs/*.png"):
+             shutil.copy(f, package_dir / os.path.basename(f))
+             print(f"  -> Copied {f}")
 
-    except subprocess.CalledProcessError as e:
-        print("❌ Error during IMP Validation Study:")
-        print(e.stderr)
+    except Exception as e:
+        print(f"❌ Error running validation study: {e}")
 
     # 2. Run Research Scraper
-    print(f"\n🚀 Running Research Scraper...")
+    print("\n🚀 Running Research Scraper...")
     try:
         result = subprocess.run(
             [sys.executable, "5d_research_scraper.py"],
-            check=True,
-            text=True,
             capture_output=True,
+            text=True,
             env=env
         )
-        print(result.stdout)
+        if result.returncode == 0:
+             print("✅ Research Scraper complete.")
+        else:
+             print("⚠️  Research Scraper finished with errors.")
+             print(result.stderr)
 
-        # Copy artifacts (Keep original in root as master DB)
         if os.path.exists("5d_research_data.json"):
             shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
-            print(f"  -> Copied 5d_research_data.json")
+            print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")
 
-    except subprocess.CalledProcessError as e:
-        print("❌ Error during Research Scraper:")
-        print(e.stderr)
+    except Exception as e:
+        print(f"❌ Error running scraper: {e}")
 
-    # 3. Create Metric Mapping Table
-    mapping_content = """
-| Dimension | Metric | Source | Range | Reliability (α) |
-|-----------|--------|--------|-------|-----------------|
-| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 |
-| Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
-| Resilience | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
-| Social Participation | Network Density | Graph Analysis | 0-1 | N/A |
-| Authenticity | Congruence Score | Self-Report | 0-5 | > 0.8 |
-    """
-    with open(package_dir / "METRIC_MAPPING.md", "w") as f:
-        f.write(mapping_content)
+    # 3. Generate Interpretation & Metrics MD
+    # (Here we could parse the JSONs and generate the markdown files dynamically)
+    # For now, just placeholder or copying if they exist
+    print("\n📝 Generating Documentation...")
 
-    # 4. Create Interpretation
-    interpretation_content = f"""
-# Scientific Interpretation
-**Generated via Professor Dr. A. I. Nexus Protocol**
-**Date:** {datetime.datetime.now().isoformat()}
+    # ... logic to parse validation_report.json and create INTERPRETATION.md ...
 
-## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
-- **External Data:** World Bank Education data fetched.
-- **Literature:** arXiv/PubMed papers scraped for context.
+    with open(package_dir / "README.md", "w") as f:
+        f.write(f"# Evidence Package {timestamp}\n\n")
+        f.write("Generated by scripts/generate_evidence_package.py\n")
+        f.write("## Contents\n")
+        f.write("- validation_study.log: Output log of the validation study\n")
+        f.write("- 5d_research_data.json: Scraped research data\n")
+        f.write("- imp_validation_study.py: The script used for validation\n")
 
-## Hypothesis & Next Steps
-Based on the zero-impact principle, any dimension < 0.7 requires immediate intervention.
-Refer to `validation_results_*.png` for visual distribution.
-
-[PUSH TO DOWNLOAD]
-- Analysis Script: validation/imp_validation_study.py
-- Metric Mapping: METRIC_MAPPING.md
-- Visualization: validation_results_*.png
-    """
-    with open(package_dir / "INTERPRETATION.md", "w") as f:
-        f.write(interpretation_content)
-
-    # 5. Manifest
-    manifest_content = f"""
-# Evidence Package Manifest
-Generated: {timestamp}
-
-## Contents
-- **Validation Data**: CSV responses, JSON questionnaire, Report
-- **Analysis**: Validation results plots
-- **Research**: Scraped data from arXiv/PubMed/World Bank
-- **Documentation**: Interpretation and Metric Mapping
-
-## Protocol
-- **Validation Script**: `validation/imp_validation_study.py`
-- **Scraper**: `5d_research_scraper.py`
-    """
-    with open(package_dir / "MANIFEST.md", "w") as f:
-        f.write(manifest_content)
-
-    print(f"\n✅ Evidence Package Generated: {package_dir}")
-    # Print the command to list files, but don't execute it, leave it to the user or agent to verify
-    # print(f"   Run `ls -R {package_dir}` to view contents.")
+    print(f"\n📦 Package generated at: {package_dir}")
 
 if __name__ == "__main__":
     main()
