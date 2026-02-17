@@ -5,9 +5,17 @@ target-version = ["py310"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "node_modules/",
+    ".venv/"
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E203", "E501"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +29,25 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "node_modules/"
+]
+
+[tool.pytest.ini_options]
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "node_modules",
+    "private-gpt-main",
+    ".git",
+    ".venv"
+]
+addopts = "--cov --cov-report=xml"
+asyncio_mode = "auto"
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark test as integration"
+]
