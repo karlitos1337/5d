@@ -312,63 +312,166 @@ class ResearchScraper:
         for indicator_code, indicator_name in indicators.items():
             print(f"  🏫 World Bank: Fetching {indicator_name}...")
 
-            for attempt in range(self.max_retries):
-                try:
-                    self._rate_limit("worldbank")
+            # Iterate over countries in chunks of 10
+            for i in range(0, len(countries), 10):
+                chunk = countries[i:i + 10]
+                countries_str = ";".join(chunk)
 
-                    # World Bank API endpoint
-                    countries_str = ";".join(countries[:10])  # Limit to 10 per request
-                    url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
-                    params = {
-                        "format": "json",
-                        "date": "2020:2023",  # Recent years
-                        "per_page": 500
-                    }
+                for attempt in range(self.max_retries):
+                    try:
+                        self._rate_limit("worldbank")
 
-                    response = requests.get(url, params=params, timeout=15)
+                        # World Bank API endpoint
+                        url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                        params = {
+                            "format": "json",
+                            "date": "2020:2023",  # Recent years
+                            "per_page": 500
+                        }
 
-                    if response.status_code == 429:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
-                        time.sleep(wait_time)
-                        continue
+                        response = requests.get(url, params=params, timeout=15)
 
-                    response.raise_for_status()
-                    data = response.json()
+                        if response.status_code == 429:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
+                            time.sleep(wait_time)
+                            continue
 
-                    # Parse World Bank response
-                    if isinstance(data, list) and len(data) > 1:
-                        for entry in data[1]:  # Data is in second element
-                            country_code = entry.get("countryiso3code")
-                            value = entry.get("value")
-                            year = entry.get("date")
+                        response.raise_for_status()
+                        data = response.json()
 
-                            if country_code and value is not None:
-                                if country_code not in education_data:
-                                    education_data[country_code] = {}
+                        # Parse World Bank response
+                        if isinstance(data, list) and len(data) > 1:
+                            for entry in data[1]:  # Data is in second element
+                                country_code = entry.get("countryiso3code")
+                                value = entry.get("value")
+                                year = entry.get("date")
 
-                                # Keep most recent data
-                                if indicator_name not in education_data[country_code]:
-                                    education_data[country_code][indicator_name] = {
-                                        "value": value,
-                                        "year": year
-                                    }
+                                if country_code and value is not None:
+                                    if country_code not in education_data:
+                                        education_data[country_code] = {}
 
-                    break  # Success
+                                    # Keep most recent data
+                                    if indicator_name not in education_data[country_code]:
+                                        education_data[country_code][indicator_name] = {
+                                            "value": value,
+                                            "year": year
+                                        }
 
-                except requests.exceptions.RequestException as e:
-                    if attempt < self.max_retries - 1:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
-                        time.sleep(wait_time)
-                    else:
-                        print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
-                except Exception as e:
-                    print(f"    ❌ World Bank Error: {e}")
-                    break
+                        break  # Success
+
+                    except requests.exceptions.RequestException as e:
+                        if attempt < self.max_retries - 1:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                            time.sleep(wait_time)
+                        else:
+                            print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
+                    except Exception as e:
+                        print(f"    ❌ World Bank Error: {e}")
+                        break
 
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
+
+    def fetch_world_bank_wgi_data(self, countries=None):
+        """
+        Fetch Worldwide Governance Indicators (WGI) from World Bank.
+        Source 3: Worldwide Governance Indicators
+        Indicators:
+            VA.EST: Voice and Accountability: Estimate
+            RL.EST: Rule of Law: Estimate
+            GE.EST: Government Effectiveness: Estimate
+        """
+        if countries is None:
+            countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
+                         "CAN", "AUS", "NOR", "SWE", "DNK", "FIN", "NLD", "CHE",
+                         "NZL", "ESP", "ITA", "KOR"]
+
+        # Filter out invalid country codes
+        valid_countries = [c for c in countries if self._validate_country_code(c)]
+        if len(valid_countries) < len(countries):
+            print(f"⚠️  Filtered out {len(countries) - len(valid_countries)} invalid country codes")
+        countries = valid_countries
+
+        if not countries:
+            print("❌ No valid countries provided for World Bank WGI data fetch")
+            return {}
+
+        # World Bank indicator codes for WGI
+        indicators = {
+            "VA.EST": "Voice and Accountability",
+            "RL.EST": "Rule of Law",
+            "GE.EST": "Government Effectiveness"
+        }
+
+        wgi_data = {}
+
+        for indicator_code, indicator_name in indicators.items():
+            print(f"  🏛️ World Bank WGI: Fetching {indicator_name}...")
+
+            # Iterate over countries in chunks of 10
+            for i in range(0, len(countries), 10):
+                chunk = countries[i:i + 10]
+                countries_str = ";".join(chunk)
+
+                for attempt in range(self.max_retries):
+                    try:
+                        self._rate_limit("worldbank")
+
+                        # World Bank API endpoint
+                        url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                        params = {
+                            "format": "json",
+                            "date": "2020:2023",  # Recent years
+                            "per_page": 500,
+                            "source": 3  # Source 3 = Worldwide Governance Indicators
+                        }
+
+                        response = requests.get(url, params=params, timeout=15)
+
+                        if response.status_code == 429:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
+                            time.sleep(wait_time)
+                            continue
+
+                        response.raise_for_status()
+                        data = response.json()
+
+                        # Parse World Bank response
+                        if isinstance(data, list) and len(data) > 1:
+                            for entry in data[1]:  # Data is in second element
+                                country_code = entry.get("countryiso3code")
+                                value = entry.get("value")
+                                year = entry.get("date")
+
+                                if country_code and value is not None:
+                                    if country_code not in wgi_data:
+                                        wgi_data[country_code] = {}
+
+                                    # Keep most recent data
+                                    if indicator_name not in wgi_data[country_code]:
+                                        wgi_data[country_code][indicator_name] = {
+                                            "value": value,
+                                            "year": year
+                                        }
+
+                        break  # Success
+
+                    except requests.exceptions.RequestException as e:
+                        if attempt < self.max_retries - 1:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⚠️  World Bank WGI error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                            time.sleep(wait_time)
+                        else:
+                            print(f"    ❌ World Bank WGI Error after {self.max_retries} attempts: {e}")
+                    except Exception as e:
+                        print(f"    ❌ World Bank WGI Error: {e}")
+                        break
+
+        print(f"  ✅ World Bank WGI: {len(wgi_data)} countries fetched")
+        return wgi_data
 
     def _scrape_single_keyword(self, keyword):
         """Helper to scrape a single keyword (runs in thread)."""
@@ -419,6 +522,15 @@ class ResearchScraper:
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
             "source": "World Bank EdStats API"
+        }
+
+        # World Bank WGI Data
+        print("\n🏛️ Fetching World Bank WGI Data...")
+        wgi_data = self.fetch_world_bank_wgi_data()
+        all_research["world_bank_wgi"] = {
+            "data": wgi_data,
+            "timestamp": datetime.now().isoformat(),
+            "source": "World Bank Worldwide Governance Indicators"
         }
 
         return all_research
