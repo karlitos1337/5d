@@ -4,13 +4,14 @@
 Orchestrates validation, scraping, and packaging.
 """
 
-import os
-import glob
-import shutil
 import datetime
+import glob
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
+
 
 def run_step(command, description):
     print(f"\n🚀 {description}...")
@@ -22,6 +23,7 @@ def run_step(command, description):
         print(f"❌ Error during {description}:")
         print(e.stderr)
         return False
+
 
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -35,7 +37,7 @@ def main():
     env = os.environ.copy()
     env["PYTHONPATH"] = os.getcwd()
 
-    print(f"\n🚀 Running IMP Validation Study...")
+    print("\n🚀 Running IMP Validation Study...")
     try:
         # Running validation study
         result = subprocess.run(
@@ -43,17 +45,25 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
         # Copy Analysis Script
-        shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
-        print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
+        shutil.copy(
+            "validation/imp_validation_study.py",
+            package_dir / "imp_validation_study.py",
+        )
+        print("  -> Copied Analysis Script: validation/imp_validation_study.py")
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
                 print(f"  -> Moved {f}")
@@ -67,21 +77,23 @@ def main():
         print(e.stderr)
 
     # 2. Run Research Scraper
-    print(f"\n🚀 Running Research Scraper...")
+    print("\n🚀 Running Research Scraper...")
     try:
         result = subprocess.run(
             [sys.executable, "5d_research_scraper.py"],
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
         # Copy artifacts (Keep original in root as master DB)
         if os.path.exists("5d_research_data.json"):
-            shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
-            print(f"  -> Copied 5d_research_data.json")
+            shutil.copy(
+                "5d_research_data.json", package_dir / "5d_research_data.json"
+            )
+            print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")
 
@@ -146,6 +158,7 @@ Generated: {timestamp}
     print(f"\n✅ Evidence Package Generated: {package_dir}")
     # Print the command to list files, but don't execute it, leave it to the user or agent to verify
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()

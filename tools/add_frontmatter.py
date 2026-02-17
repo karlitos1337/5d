@@ -59,7 +59,7 @@ def add_frontmatter_to_file(
 
     Returns True if frontmatter was added, False if already present.
     """
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8") as f:
         content = f.read()
 
     if has_frontmatter(content):
@@ -97,16 +97,22 @@ def main():
     parser.add_argument("--domain", required=True, help="Domain/folder name")
     parser.add_argument("--author", default="Unknown", help="Author name")
     parser.add_argument("--date", default=None, help="Date (YYYY-MM-DD format)")
-    parser.add_argument("--license", default="CC-BY-4.0", help="License type")
-    parser.add_argument("--evidence", default="🔮", help="Evidence level (✅, ⚠️, or 🔮)")
     parser.add_argument(
-        "--dry-run", action="store_true", help="Show what would be done without making changes"
+        "--license", default="CC-BY-4.0", help="License type"
+    )
+    parser.add_argument(
+        "--evidence", default="🔮", help="Evidence level (✅, ⚠️, or 🔮)"
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Show what would be done without making changes",
     )
 
     args = parser.parse_args()
 
     try:
-        added = add_frontmatter_to_file(
+        add_frontmatter_to_file(
             filepath=args.file,
             title=args.title,
             domain=args.domain,
