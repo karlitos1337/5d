@@ -7,7 +7,16 @@ line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".venv/",
+    "venv/"
+]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +30,20 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "node_modules/"
+]
+
+[tool.pytest.ini_options]
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "node_modules",
+    "private-gpt-main",
+    ".git",
+    "dist",
+    "build"
+]
