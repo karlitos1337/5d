@@ -1,15 +1,16 @@
-import sys
+import http.client
 import os
+import sys
 import threading
 import time
 import unittest
-import http.client
 
 # Add parent directory to path to import owid_proxy
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Import the module to test
 import owid_proxy
+
 
 class TestProxy(unittest.TestCase):
     def setUp(self):

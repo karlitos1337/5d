@@ -14,3 +14,7 @@
 **Vulnerability:** The CI pipeline was executing tests in `99_unsortiert`, a directory containing unmaintained and experimental code. This led to false positives and obscured real security issues, creating a "boy who cried wolf" scenario where CI failures might be ignored.
 **Learning:** Security and quality gates must explicitly define the scope of maintained code. "Grab bag" directories like `99_unsortiert` should be strictly excluded from automated testing and linting to maintain a clean signal.
 **Prevention:** Updated `pyproject.toml` to explicitly exclude `99_unsortiert` from `pytest`, `ruff`, and `mypy` configurations.
+## 2026-02-17 - [Linting Blindspots]
+**Vulnerability:** The CI pipeline failed due to extensive linting errors (200+) in maintained code, including import sorting and unused variables. This indicates a lack of local pre-commit enforcement, allowing "code rot" to accumulate and block critical security fixes.
+**Learning:** Security fixes are often blocked by unrelated quality issues if the codebase isn't kept clean. Automated formatters (`ruff --fix`) are essential to clear this debt quickly.
+**Prevention:** Ran `ruff check . --fix` to resolve 197 issues. Manually fixed remaining unused variables. Added `storage/__init__.py` to fix package resolution errors.
