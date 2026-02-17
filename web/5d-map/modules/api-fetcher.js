@@ -1,26 +1,35 @@
-const CACHE_KEY = '5d-map-cache-v1';
+const CACHE_PREFIX = '5d-map-v1:';
+const LEGACY_CACHE_KEY = '5d-map-cache-v1';
 const CACHE_TTL = 60 * 60 * 1000; // 1h
 
-function loadCache() {
+function loadCache(key) {
   try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    const raw = localStorage.getItem(CACHE_PREFIX + key);
+    return raw ? JSON.parse(raw) : null;
   } catch {
-    return {};
+    return null;
   }
 }
 
-function saveCache(cache) {
+function saveCache(key, entry) {
   try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
-  } catch {
-    // ignore
+    localStorage.setItem(CACHE_PREFIX + key, JSON.stringify(entry));
+  } catch (e) {
+    console.warn('Cache save failed', e);
   }
 }
 
 export function clearCache() {
   try {
-    localStorage.removeItem(CACHE_KEY);
+    // Legacy cleanup
+    localStorage.removeItem(LEGACY_CACHE_KEY);
+    // Granular cleanup
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(CACHE_PREFIX)) keys.push(k);
+    }
+    keys.forEach(k => localStorage.removeItem(k));
   } catch {
     // ignore
   }
@@ -32,17 +41,15 @@ async function fetchJSON(url) {
   return res.json();
 }
 
-async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
+export async function fetchWithCache(key, fetcher) {
+  const entry = loadCache(key);
   const now = Date.now();
-  const entry = cache[key];
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
     return entry.data;
   }
   try {
     const data = await fetcher();
-    cache[key] = { data, timestamp: now };
-    saveCache(cache);
+    saveCache(key, { data, timestamp: now });
     return data;
   } catch (e) {
     if (entry) return entry.data; // Fallback auf alten Cache
