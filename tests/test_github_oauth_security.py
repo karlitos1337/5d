@@ -15,11 +15,14 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
         self.redirect_uri = "http://localhost:8501"
 
         # Patch environment variables
-        self.env_patcher = patch.dict(os.environ, {
-            "GITHUB_CLIENT_ID": self.client_id,
-            "GITHUB_CLIENT_SECRET": self.client_secret,
-            "REDIRECT_URI": self.redirect_uri
-        })
+        self.env_patcher = patch.dict(
+            os.environ,
+            {
+                "GITHUB_CLIENT_ID": self.client_id,
+                "GITHUB_CLIENT_SECRET": self.client_secret,
+                "REDIRECT_URI": self.redirect_uri,
+            },
+        )
         self.env_patcher.start()
 
         self.auth = GitHubAuth()
@@ -42,6 +45,7 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
     # Note: Removed test_get_auth_url_stores_state as GitHubAuth is designed to be stateless
     # regarding session storage (it returns state, caller handles storage).
     # The previous test mocked 'st' which isn't present in GitHubAuth class anymore.
+
 
 if __name__ == "__main__":
     unittest.main()

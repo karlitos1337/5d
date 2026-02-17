@@ -42,8 +42,9 @@ def inject_mobile_css():
         }
         </style>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
+
 
 def check_mobile_view():
     """

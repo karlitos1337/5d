@@ -19,6 +19,7 @@ def run_step(command, description):
         print(f"Error: {e.stderr}")
         sys.exit(1)
 
+
 def main():
     print("📦 Generating Evidence Package...")
 
@@ -39,7 +40,7 @@ def main():
             [sys.executable, "validation/imp_validation_study.py"],
             capture_output=True,
             text=True,
-            env=env
+            env=env,
         )
         if result.returncode == 0:
             print("✅ IMP Validation Study complete.")
@@ -58,12 +59,12 @@ def main():
         # (Assuming the script generates validation_report.json in current dir or output dir)
         # Adjust logic to find where the script actually outputs files
         for f in glob.glob("validation_report_*.json"):
-             shutil.copy(f, package_dir / f)
-             print(f"  -> Copied {f}")
+            shutil.copy(f, package_dir / f)
+            print(f"  -> Copied {f}")
 
         for f in glob.glob("outputs/*.png"):
-             shutil.copy(f, package_dir / os.path.basename(f))
-             print(f"  -> Copied {f}")
+            shutil.copy(f, package_dir / os.path.basename(f))
+            print(f"  -> Copied {f}")
 
     except Exception as e:
         print(f"❌ Error running validation study: {e}")
@@ -72,16 +73,13 @@ def main():
     print("\n🚀 Running Research Scraper...")
     try:
         result = subprocess.run(
-            [sys.executable, "5d_research_scraper.py"],
-            capture_output=True,
-            text=True,
-            env=env
+            [sys.executable, "5d_research_scraper.py"], capture_output=True, text=True, env=env
         )
         if result.returncode == 0:
-             print("✅ Research Scraper complete.")
+            print("✅ Research Scraper complete.")
         else:
-             print("⚠️  Research Scraper finished with errors.")
-             print(result.stderr)
+            print("⚠️  Research Scraper finished with errors.")
+            print(result.stderr)
 
         if os.path.exists("5d_research_data.json"):
             shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
@@ -108,6 +106,7 @@ def main():
         f.write("- imp_validation_study.py: The script used for validation\n")
 
     print(f"\n📦 Package generated at: {package_dir}")
+
 
 if __name__ == "__main__":
     main()

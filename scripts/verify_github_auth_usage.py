@@ -5,7 +5,7 @@ import os
 def check_github_auth_usage(directory):
     usage_found = False
     for root, _dirs, files in os.walk(directory):
-        if "99_unsortiert" in root: # Skip the unsorted/backup directory
+        if "99_unsortiert" in root:  # Skip the unsorted/backup directory
             continue
         for file in files:
             if file.endswith(".py"):
@@ -15,19 +15,22 @@ def check_github_auth_usage(directory):
                         tree = ast.parse(f.read(), filename=filepath)
                     for node in ast.walk(tree):
                         if isinstance(node, ast.ImportFrom):
-                            if node.module == "auth.github_oauth" and "GitHubAuth" in [n.name for n in node.names]:
+                            if node.module == "auth.github_oauth" and "GitHubAuth" in [
+                                n.name for n in node.names
+                            ]:
                                 print(f"Found GitHubAuth usage in: {filepath}")
                                 usage_found = True
                         elif isinstance(node, ast.Attribute):
-                             if getattr(node.value, "id", "") == "GitHubAuth":
-                                 print(f"Found GitHubAuth attribute usage in: {filepath}")
-                                 usage_found = True
+                            if getattr(node.value, "id", "") == "GitHubAuth":
+                                print(f"Found GitHubAuth attribute usage in: {filepath}")
+                                usage_found = True
 
                 except Exception as e:
                     print(f"Error parsing {filepath}: {e}")
 
     if not usage_found:
         print("No usage of GitHubAuth found in the specified directory.")
+
 
 if __name__ == "__main__":
     # Check in the current directory and subdirectories

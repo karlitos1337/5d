@@ -17,6 +17,7 @@ import pytest
 # Let's try to mock discord module globally if it's really missing during the dynamic import context
 # or if it's just a path issue.
 
+
 @pytest.fixture(autouse=True)
 def mock_discord_imports():
     """Mock discord module to prevent import errors during dynamic loading if actual module has issues."""
@@ -25,6 +26,7 @@ def mock_discord_imports():
     # Actually, the error `ModuleNotFoundError: No module named 'discord'` inside the test execution
     # suggests the environment where `exec_module` runs might be missing it, but that's the same env.
     pass
+
 
 @pytest.mark.asyncio
 async def test_5d_command_sends_embed():
@@ -65,6 +67,7 @@ async def test_5d_command_sends_embed():
     embed = kwargs.get("embed")
     assert embed is not None
 
+
 @pytest.mark.asyncio
 async def test_embed_structure_is_present():
     """Validiert nur die Struktur."""
@@ -95,6 +98,7 @@ async def test_embed_structure_is_present():
     assert embed is not None
     assert isinstance(getattr(embed, "title", ""), str)
 
+
 @pytest.mark.asyncio
 async def test_help_command_exists():
     bot_path = pathlib.Path(__file__).resolve().parent.parent / "5d_discord_bot.py"
@@ -103,13 +107,14 @@ async def test_help_command_exists():
     spec = importlib.util.spec_from_file_location("five_d_discord_bot", str(bot_path))
     bot_module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(bot_module) # type: ignore
+        spec.loader.exec_module(bot_module)  # type: ignore
     except ImportError:
         pytest.skip("Discord module dependency missing")
 
     bot = getattr(bot_module, "bot", None)
     assert bot is not None
     assert bot.help_command is not None or bot.get_command("help") is not None
+
 
 @pytest.mark.asyncio
 async def test_stats_command_sends_message():
@@ -119,7 +124,7 @@ async def test_stats_command_sends_message():
     spec = importlib.util.spec_from_file_location("five_d_discord_bot", str(bot_path))
     bot_module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(bot_module) # type: ignore
+        spec.loader.exec_module(bot_module)  # type: ignore
     except ImportError:
         pytest.skip("Discord module dependency missing")
 
@@ -133,6 +138,7 @@ async def test_stats_command_sends_message():
     await cmd.callback(ctx)
     assert ctx.send.called
 
+
 @pytest.mark.asyncio
 async def test_project_command_sends_message():
     bot_path = pathlib.Path(__file__).resolve().parent.parent / "5d_discord_bot.py"
@@ -141,7 +147,7 @@ async def test_project_command_sends_message():
     spec = importlib.util.spec_from_file_location("five_d_discord_bot", str(bot_path))
     bot_module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(bot_module) # type: ignore
+        spec.loader.exec_module(bot_module)  # type: ignore
     except ImportError:
         pytest.skip("Discord module dependency missing")
 
@@ -155,6 +161,7 @@ async def test_project_command_sends_message():
     await cmd.callback(ctx)
     assert ctx.send.called
 
+
 @pytest.mark.asyncio
 async def test_embed_contains_imp_score():
     bot_path = pathlib.Path(__file__).resolve().parent.parent / "5d_discord_bot.py"
@@ -163,7 +170,7 @@ async def test_embed_contains_imp_score():
     spec = importlib.util.spec_from_file_location("five_d_discord_bot", str(bot_path))
     bot_module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(bot_module) # type: ignore
+        spec.loader.exec_module(bot_module)  # type: ignore
     except ImportError:
         pytest.skip("Discord module dependency missing")
 
@@ -184,6 +191,7 @@ async def test_embed_contains_imp_score():
     # Check simple keyword presence
     assert "imp" in text or "5d" in text or "autonomie" in text
 
+
 def test_bot_module_can_be_imported():
     bot_path = pathlib.Path(__file__).resolve().parent.parent / "5d_discord_bot.py"
     if not bot_path.exists():
@@ -191,10 +199,11 @@ def test_bot_module_can_be_imported():
     spec = importlib.util.spec_from_file_location("five_d_discord_bot", str(bot_path))
     bot_module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(bot_module) # type: ignore
+        spec.loader.exec_module(bot_module)  # type: ignore
     except ImportError:
         pytest.skip("Discord module dependency missing")
     assert hasattr(bot_module, "bot")
+
 
 def test_bot_has_commands():
     bot_path = pathlib.Path(__file__).resolve().parent.parent / "5d_discord_bot.py"
@@ -203,7 +212,7 @@ def test_bot_has_commands():
     spec = importlib.util.spec_from_file_location("five_d_discord_bot", str(bot_path))
     bot_module = importlib.util.module_from_spec(spec)
     try:
-        spec.loader.exec_module(bot_module) # type: ignore
+        spec.loader.exec_module(bot_module)  # type: ignore
     except ImportError:
         pytest.skip("Discord module dependency missing")
     bot = getattr(bot_module, "bot", None)

@@ -11,6 +11,7 @@ def has_frontmatter(content):
     """
     return content.startswith("---\n")
 
+
 def add_frontmatter_to_file(filepath, title=None):
     """
     Adds YAML frontmatter to a markdown file if it doesn't exist.
@@ -31,9 +32,9 @@ def add_frontmatter_to_file(filepath, title=None):
 
     frontmatter = {
         "title": title,
-        "date": "2024-01-01", # Default date, could be dynamic
+        "date": "2024-01-01",  # Default date, could be dynamic
         "tags": ["documentation"],
-        "author": "System"
+        "author": "System",
     }
 
     yaml_frontmatter = "---\n" + yaml.dump(frontmatter, default_flow_style=False) + "---\n\n"
@@ -44,6 +45,7 @@ def add_frontmatter_to_file(filepath, title=None):
         f.write(new_content)
 
     return True
+
 
 def process_directory(directory):
     """
@@ -61,6 +63,7 @@ def process_directory(directory):
                     # print(f"Skipped (already has frontmatter): {filepath}")
                     pass
     return count
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Add YAML frontmatter to markdown files.")

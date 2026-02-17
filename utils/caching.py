@@ -30,9 +30,9 @@ try:
         port=REDIS_PORT,
         db=REDIS_DB,
         password=REDIS_PASSWORD,
-        decode_responses=True
+        decode_responses=True,
     )
-    redis_client.ping() # Check connection
+    redis_client.ping()  # Check connection
     logger.info("Connected to Redis.")
 except redis.ConnectionError:
     logger.warning("Could not connect to Redis. Caching will be disabled or fall back to memory.")
@@ -42,15 +42,18 @@ except redis.ConnectionError:
 # Caching Decorators & Functions
 # ============================================================================
 
+
 class CacheTTL:
     """Standard TTLs in seconds."""
+
     MINUTE = 60
     HOUR = 3600
     DAY = 86400
     WEEK = 604800
-    STATIC = None # Never expire (until restart/cleared)
-    DYNAMIC = 300 # 5 minutes for frequently changing data
-    BASELINE = 3600 # 1 hour for baseline data
+    STATIC = None  # Never expire (until restart/cleared)
+    DYNAMIC = 300  # 5 minutes for frequently changing data
+    BASELINE = 3600  # 1 hour for baseline data
+
 
 @st.cache_data(ttl=CacheTTL.STATIC)
 def preload_solutions_data() -> dict[str, Any]:
@@ -71,6 +74,7 @@ def preload_solutions_data() -> dict[str, Any]:
         logger.error(f"Error loading 5d_solutions.json: {e}")
         return {}
 
+
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
 def preload_research_data() -> dict[str, Any]:
     """
@@ -89,6 +93,7 @@ def preload_research_data() -> dict[str, Any]:
     except Exception as e:
         logger.error(f"Error loading 5d_research_data.json: {e}")
         return {}
+
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
 def preload_github_data() -> dict[str, Any]:
@@ -109,6 +114,7 @@ def preload_github_data() -> dict[str, Any]:
         logger.error(f"Error loading 5d_github_data.json: {e}")
         return {}
 
+
 @st.cache_data(ttl=CacheTTL.BASELINE)
 def preload_map_baseline() -> dict[str, Any]:
     """
@@ -128,6 +134,7 @@ def preload_map_baseline() -> dict[str, Any]:
         logger.error(f"Error loading baseline.json: {e}")
         return {}
 
+
 def get_cached_data(key: str, ttl: int = CacheTTL.HOUR) -> Any:
     """
     Retrieve data from Redis cache if available, otherwise return None.
@@ -143,6 +150,7 @@ def get_cached_data(key: str, ttl: int = CacheTTL.HOUR) -> Any:
             logger.error(f"Redis get error for {key}: {e}")
     return None
 
+
 def set_cached_data(key: str, data: Any, ttl: int = CacheTTL.HOUR):
     """
     Set data in Redis cache.
@@ -152,6 +160,7 @@ def set_cached_data(key: str, data: Any, ttl: int = CacheTTL.HOUR):
             redis_client.setex(key, ttl, json.dumps(data))
         except Exception as e:
             logger.error(f"Redis set error for {key}: {e}")
+
 
 def clear_app_cache(selective: bool = False):
     """
@@ -175,9 +184,11 @@ def clear_app_cache(selective: bool = False):
                 logger.error(f"Error flushing Redis: {e}")
         logger.info("Streamlit cache cleared.")
 
+
 # ============================================================================
 # Cache Statistics (Optional)
 # ============================================================================
+
 
 def get_cache_stats() -> dict[str, Any]:
     """
@@ -185,7 +196,7 @@ def get_cache_stats() -> dict[str, Any]:
     """
     stats = {
         "streamlit_cache_data_info": "N/A (Streamlit internal)",
-        "redis_connected": redis_client is not None
+        "redis_connected": redis_client is not None,
     }
     if redis_client:
         try:
