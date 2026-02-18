@@ -18,3 +18,4 @@ mypy
 pytest
 pytest-asyncio
 discord.py
+pydantic
