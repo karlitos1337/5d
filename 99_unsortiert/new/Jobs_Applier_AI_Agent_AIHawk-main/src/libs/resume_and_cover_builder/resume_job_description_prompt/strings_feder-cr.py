@@ -39,7 +39,7 @@ To implement this, follow these steps:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_education_template
+""" + prompt_education_template
 
 
 prompt_working_experience = """
@@ -61,7 +61,7 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_working_experience_template
+""" + prompt_working_experience_template
 
 
 prompt_projects = """
@@ -82,7 +82,7 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_projects_template
+""" + prompt_projects_template
 
 
 prompt_achievements = """
@@ -102,7 +102,7 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_achievements_template
+""" + prompt_achievements_template
 
 
 prompt_certifications = """
@@ -122,7 +122,7 @@ If any of the certification details (e.g., descriptions) are not provided (i.e.,
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_certifications_template
+""" + prompt_certifications_template
 
 
 prompt_additional_skills = """
@@ -146,7 +146,7 @@ To implement this:
 
 - **Job Description:**  
   {job_description}
-"""+ prompt_additional_skills_template
+""" + prompt_additional_skills_template
 
 summarize_prompt_template = """
 As a seasoned HR expert, your task is to identify and outline the key skills and requirements necessary for the position of this job. Use the provided job description as input to extract all relevant information. This will involve conducting a thorough analysis of the job's responsibilities and the industry standards. You should consider both the technical and soft skills needed to excel in this role. Additionally, specify any educational qualifications, certifications, or experiences that are essential. Your analysis should also reflect on the evolving nature of this role, considering future trends and how they might affect the required competencies.

@@ -22,9 +22,7 @@ def run_command(command: list[str]) -> subprocess.CompletedProcess:
     # Prepend either the parent uv path to the PATH or the current directory
     env = {
         **env,
-        "PATH": str(
-            pathlib.Path(env.get("UV")).parent if "UV" in env else pathlib.Path.cwd()
-        )
+        "PATH": str(pathlib.Path(env.get("UV")).parent if "UV" in env else pathlib.Path.cwd())
         + os.pathsep
         + env.get("PATH"),
     }
