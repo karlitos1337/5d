@@ -1,8 +1,7 @@
-from dataclasses import dataclass, field
 import os
+from dataclasses import dataclass, field
+
 from neo4j import GraphDatabase
-
-
 
 #########################Aufgabe 2) a)####################################
 
@@ -66,7 +65,7 @@ class FriendParser(Parser):
     def parse(self):
         for file in os.listdir(self.path):
             if file.endswith(".feat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 for line in lines:
                     id = line.split()[0]
                     friends[id] = Friend(id)   
@@ -76,7 +75,7 @@ class FriendEdgeParser(Parser):
     def parse(self):
         for file in os.listdir(self.path):
             if file.endswith(".edges"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 for line in lines:
                     nodeA = line.split()[0]
                     nodeB = line.split()[1]
@@ -86,7 +85,7 @@ class FriendEdgeParser(Parser):
                         friendEdges[nodeA] = FriendEdge(nodeA, [Person(nodeB)])
 
             elif file.endswith(".feat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     nodeB = line.split()[0]
@@ -100,7 +99,7 @@ class CircleEdgeParser(Parser):
     def parse(self):
         for file in os.listdir(self.path):
             if file.endswith(".circles"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     circleId = line.split()[0]
@@ -143,7 +142,7 @@ class AttributeParser(Parser):
         # Read all attributes and write in dict of type (egoId, attribute index) -> (attribute name, feature)
         for file in os.listdir(self.path):
             if file.endswith(".featnames"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     index = line.split()[0]
@@ -155,7 +154,7 @@ class AttributeParser(Parser):
         # Read and assign attributes to friends
         for file in os.listdir(self.path):
             if file.endswith(".feat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     friendId = line.split()[0]
@@ -172,7 +171,7 @@ class AttributeParser(Parser):
         # Read and assign attributes to ego user
         for file in os.listdir(self.path):
             if file.endswith(".egofeat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     attributeIndex = 0

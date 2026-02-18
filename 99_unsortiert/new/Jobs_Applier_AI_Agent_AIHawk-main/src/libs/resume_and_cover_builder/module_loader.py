@@ -5,6 +5,7 @@ This module is used to store the global configuration of the application.
 import importlib
 import sys
 
+
 def load_module(module_path: str, module_name: str):
     spec = importlib.util.spec_from_file_location(module_name, module_path)
     module = importlib.util.module_from_spec(spec)
