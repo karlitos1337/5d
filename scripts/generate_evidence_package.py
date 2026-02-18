@@ -10,6 +10,7 @@ import shutil
 import datetime
 import subprocess
 import sys
+import json
 from pathlib import Path
 
 def run_step(command, description):
@@ -66,6 +67,31 @@ def main():
         print("❌ Error during IMP Validation Study:")
         print(e.stderr)
 
+    # Extract validation data for interpretation
+    report_files = list(package_dir.glob("validation_report_*.json"))
+    validation_stats = ""
+    n_participants = 0
+    if report_files:
+        latest_report = sorted(report_files)[-1]
+        try:
+            with open(latest_report, 'r') as f:
+                report_data = json.load(f)
+
+            n_participants = report_data.get('n_participants', 0)
+            dims = report_data.get('dimensions', {})
+
+            stats_lines = []
+            for dim, data in dims.items():
+                alpha = data.get('cronbach_alpha', 0)
+                interp = data.get('interpretation', 'N/A')
+                stats_lines.append(f"- **{dim}**: α={alpha:.3f} ({interp})")
+            validation_stats = "\n".join(stats_lines)
+        except Exception as e:
+            print(f"⚠️ Error reading validation report: {e}")
+            validation_stats = "Error reading validation report."
+    else:
+        validation_stats = "No validation report found."
+
     # 2. Run Research Scraper
     print(f"\n🚀 Running Research Scraper...")
     try:
@@ -109,7 +135,10 @@ def main():
 **Date:** {datetime.datetime.now().isoformat()}
 
 ## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
+- **Validation Study:** Completed (N={n_participants} Pilot).
+- **Reliability Metrics (Cronbach's Alpha):**
+{validation_stats}
+
 - **External Data:** World Bank Education data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
