@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import sys
 import os
+import sys
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 

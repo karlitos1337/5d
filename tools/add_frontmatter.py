@@ -59,7 +59,7 @@ def add_frontmatter_to_file(
 
     Returns True if frontmatter was added, False if already present.
     """
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8") as f:
         content = f.read()
 
     if has_frontmatter(content):
