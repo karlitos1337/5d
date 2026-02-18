@@ -19,3 +19,4 @@ networkx
 httpx
 discord.py
 pytest-asyncio
+pydantic
