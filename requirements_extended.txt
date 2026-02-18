@@ -15,3 +15,7 @@ ruff
 black
 mypy
 pytest
+networkx
+httpx
+discord.py
+pytest-asyncio
