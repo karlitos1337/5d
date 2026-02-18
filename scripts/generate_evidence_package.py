@@ -25,6 +25,7 @@ def run_step(command, description):
         print(e.stderr)
         return False
 
+
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     package_dir = Path(f"outputs/evidence_package/pkg_{timestamp}")
@@ -45,7 +46,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -55,7 +56,12 @@ def main():
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
                 print(f"  -> Moved {f}")
@@ -78,13 +84,13 @@ def main():
             with open(latest_report) as f:
                 report_data = json.load(f)
 
-            n_participants = report_data.get('n_participants', 0)
-            dims = report_data.get('dimensions', {})
+            n_participants = report_data.get("n_participants", 0)
+            dims = report_data.get("dimensions", {})
 
             stats_lines = []
             for dim, data in dims.items():
-                alpha = data.get('cronbach_alpha', 0)
-                interp = data.get('interpretation', 'N/A')
+                alpha = data.get("cronbach_alpha", 0)
+                interp = data.get("interpretation", "N/A")
                 stats_lines.append(f"- **{dim}**: α={alpha:.3f} ({interp})")
             validation_stats = "\n".join(stats_lines)
         except Exception as e:
@@ -101,7 +107,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -176,6 +182,7 @@ Generated: {timestamp}
     print(f"\n✅ Evidence Package Generated: {package_dir}")
     # Print the command to list files, but don't execute it, leave it to the user or agent to verify
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()

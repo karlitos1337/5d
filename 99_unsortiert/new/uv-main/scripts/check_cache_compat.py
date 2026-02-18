@@ -33,8 +33,7 @@ def install_package(*, uv: str, package: str, flags: list[str]):
 
     logging.info(f"Installing the package {package!r} with {uv!r}.")
     subprocess.run(
-        [uv, "pip", "install", package, "--cache-dir", os.path.join(temp_dir, "cache")]
-        + flags,
+        [uv, "pip", "install", package, "--cache-dir", os.path.join(temp_dir, "cache")] + flags,
         cwd=temp_dir,
         check=True,
     )
@@ -100,12 +99,8 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     parser = argparse.ArgumentParser(description="Check a Python interpreter.")
-    parser.add_argument(
-        "-c", "--uv-current", help="Path to a current uv binary.", required=True
-    )
-    parser.add_argument(
-        "-p", "--uv-previous", help="Path to a previous uv binary.", required=True
-    )
+    parser.add_argument("-c", "--uv-current", help="Path to a current uv binary.", required=True)
+    parser.add_argument("-p", "--uv-previous", help="Path to a previous uv binary.", required=True)
     parser.add_argument(
         "-t",
         "--test-package",

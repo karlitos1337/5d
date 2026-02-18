@@ -1,4 +1,3 @@
-
 from unittest.mock import MagicMock
 
 import streamlit as st
@@ -8,19 +7,22 @@ st.set_page_config = MagicMock()
 st.title = MagicMock()
 st.markdown = MagicMock()
 st.sidebar = MagicMock()
-st.slider = MagicMock(return_value=10) # Default return value for sliders
+st.slider = MagicMock(return_value=10)  # Default return value for sliders
 st.checkbox = MagicMock(return_value=True)
 st.button = MagicMock(return_value=False)
 st.metric = MagicMock()
 st.divider = MagicMock()
 st.header = MagicMock()
 st.subheader = MagicMock()
-st.columns = MagicMock(return_value=[MagicMock(), MagicMock(), MagicMock(), MagicMock(), MagicMock()])
+st.columns = MagicMock(
+    return_value=[MagicMock(), MagicMock(), MagicMock(), MagicMock(), MagicMock()]
+)
 st.spinner = MagicMock()
 st.plotly_chart = MagicMock()
 st.expander = MagicMock()
 st.success = MagicMock()
 st.download_button = MagicMock()
+
 
 def test_autopoietic_simulation_metrics():
     """
@@ -44,7 +46,8 @@ def test_autopoietic_simulation_metrics():
 
     pass
 
+
 def test_syntax():
     """Simple syntax check for the file."""
-    with open('pages/9_🧪_Autopoietic_Class.py') as f:
-        compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
+    with open("pages/9_🧪_Autopoietic_Class.py") as f:
+        compile(f.read(), "pages/9_🧪_Autopoietic_Class.py", "exec")

@@ -113,9 +113,7 @@ def filter_snapshot(snapshot: str) -> str:
         r"DownloadUrl \1: <downloadUrl>\3DownloadSha256",
         snapshot,
     )
-    snapshot = re.sub(
-        "DownloadSha256 ( *): .*", r"DownloadSha256 \1: <downloadSha256>", snapshot
-    )
+    snapshot = re.sub("DownloadSha256 ( *): .*", r"DownloadSha256 \1: <downloadSha256>", snapshot)
     return snapshot
 
 
@@ -175,11 +173,7 @@ def main(uv: str):
         subprocess.check_call([uv, "python", "uninstall", "-v", "--preview", "3.11.11"])
         listed_interpreters = subprocess.check_output(["py", "--list-paths"], text=True)
         py_listed = set(listed_interpreters.splitlines())
-        if (
-            py_311_line in py_listed
-            or py_312_line not in py_listed
-            or py_313_line not in py_listed
-        ):
+        if py_311_line in py_listed or py_312_line not in py_listed or py_313_line not in py_listed:
             print(
                 "Python launcher interpreter not removed: "
                 f"{py_listed} vs. {py_312_line}, {py_313_line}"
@@ -203,11 +197,7 @@ def main(uv: str):
             sys.exit(1)
         listed_interpreters = subprocess.check_output(["py", "--list-paths"], text=True)
         py_listed = set(listed_interpreters.splitlines())
-        if (
-            py_311_line in py_listed
-            or py_312_line in py_listed
-            or py_313_line in py_listed
-        ):
+        if py_311_line in py_listed or py_312_line in py_listed or py_313_line in py_listed:
             print(f"Python launcher interpreter not cleared: {py_listed}")
             sys.exit(1)
 
