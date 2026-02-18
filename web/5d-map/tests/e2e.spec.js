@@ -142,6 +142,35 @@ test.describe('5D Map E2E Tests', () => {
     expect(title).toBeTruthy();
     expect(title).toContain('Depression');
   });
+
+  test('should toggle aria-pressed attribute on layer buttons', async ({ page, browserName }) => {
+    // Skip on Firefox due to environment flakiness
+    test.skip(browserName === 'firefox', 'Skipping flaky accessibility test on Firefox');
+
+    // Wait for loading to finish (event listeners are attached after data load)
+    await expect(page.locator('body')).not.toHaveClass(/loading/);
+
+    const statusQuoBtn = page.locator('#layer-status-quo');
+    const schoolsBtn = page.locator('#layer-schools');
+    const impBtn = page.locator('#layer-imp');
+
+    // Initial state: Status Quo active
+    await expect(statusQuoBtn).toHaveAttribute('aria-pressed', 'true');
+    await expect(schoolsBtn).toHaveAttribute('aria-pressed', 'false');
+    await expect(impBtn).toHaveAttribute('aria-pressed', 'false');
+
+    // Click Schools
+    await schoolsBtn.click();
+    await expect(statusQuoBtn).toHaveAttribute('aria-pressed', 'false');
+    await expect(schoolsBtn).toHaveAttribute('aria-pressed', 'true');
+    await expect(impBtn).toHaveAttribute('aria-pressed', 'false');
+
+    // Click IMP
+    await impBtn.click();
+    await expect(statusQuoBtn).toHaveAttribute('aria-pressed', 'false');
+    await expect(schoolsBtn).toHaveAttribute('aria-pressed', 'false');
+    await expect(impBtn).toHaveAttribute('aria-pressed', 'true');
+  });
 });
 
 test.describe('Performance Tests', () => {

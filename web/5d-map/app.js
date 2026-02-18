@@ -44,6 +44,13 @@ function activateLayer(layerName) {
   const btn = document.getElementById(`layer-${layerName}`);
   if (btn) btn.classList.add('btn--primary');
 
+  // Accessibility: Update aria-pressed
+  const layerIds = ['layer-status-quo', 'layer-schools', 'layer-imp', 'layer-validation', 'layer-sources', 'layer-time'];
+  layerIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('aria-pressed', id === `layer-${layerName}` ? 'true' : 'false');
+  });
+
   switch (layerName) {
     case 'status-quo':
       activeLayer = createHeatmapLayer(cachedData.heatmapPoints);
