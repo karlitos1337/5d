@@ -45,3 +45,11 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Outputs
+outputs/
+validation_report_*.json
+questionnaire_*.json
+example_responses_*.csv
+validation_results_*.png
+5d_research_data.json

@@ -10,6 +10,7 @@ import shutil
 import datetime
 import subprocess
 import sys
+import json
 from pathlib import Path
 
 def run_step(command, description):
@@ -36,6 +37,7 @@ def main():
     env["PYTHONPATH"] = os.getcwd()
 
     print(f"\n🚀 Running IMP Validation Study...")
+    validation_report_data = None
     try:
         # Running validation study
         result = subprocess.run(
@@ -51,8 +53,19 @@ def main():
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
         print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
 
-        # Move artifacts
+        # Move artifacts and load report
         moved_count = 0
+        report_files = glob.glob("validation_report_*.json")
+        if report_files:
+            # Sort by modification time to get the latest
+            latest_report = max(report_files, key=os.path.getmtime)
+            try:
+                with open(latest_report, 'r') as f:
+                    validation_report_data = json.load(f)
+                print(f"  -> Loaded validation report: {latest_report}")
+            except Exception as e:
+                print(f"❌ Failed to load validation report: {e}")
+
         for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
@@ -90,26 +103,82 @@ def main():
         print(e.stderr)
 
     # 3. Create Metric Mapping Table
-    mapping_content = """
+    # Default values if report is missing
+    reliabilities = {
+        "Autonomy": "N/A",
+        "Intrinsic Motivation": "N/A",
+        "Resilience": "N/A",
+        "Social Participation": "N/A",
+        "Authenticity": "N/A"
+    }
+
+    if validation_report_data and "dimensions" in validation_report_data:
+        dims = validation_report_data["dimensions"]
+        # Map study dimensions to 5D framework
+        # Study: Cognitive_Efficiency, Intrinsic_Motivation, Social_Participation, Resilience, Environment_Optimization
+
+        if "Environment_Optimization" in dims:
+            alpha = dims["Environment_Optimization"]["cronbach_alpha"]
+            reliabilities["Autonomy"] = f"{alpha:.2f}"
+
+        if "Intrinsic_Motivation" in dims:
+            alpha = dims["Intrinsic_Motivation"]["cronbach_alpha"]
+            reliabilities["Intrinsic Motivation"] = f"{alpha:.2f}"
+
+        if "Resilience" in dims:
+            alpha = dims["Resilience"]["cronbach_alpha"]
+            reliabilities["Resilience"] = f"{alpha:.2f}"
+
+        if "Social_Participation" in dims:
+            alpha = dims["Social_Participation"]["cronbach_alpha"]
+            reliabilities["Social Participation"] = f"{alpha:.2f}"
+
+        # Authenticity - No direct mapping in current study.
+        reliabilities["Authenticity"] = "Gap (Missing in Pilot)"
+
+    mapping_content = f"""
 | Dimension | Metric | Source | Range | Reliability (α) |
 |-----------|--------|--------|-------|-----------------|
-| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 |
-| Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
-| Resilience | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
-| Social Participation | Network Density | Graph Analysis | 0-1 | N/A |
-| Authenticity | Congruence Score | Self-Report | 0-5 | > 0.8 |
+| Autonomy | Environment Optimization (Proxy) | IMP Survey | 0-5 | {reliabilities['Autonomy']} |
+| Intrinsic Motivation | Intrinsic Motivation Scale | IMP Survey | 0-5 | {reliabilities['Intrinsic Motivation']} |
+| Resilience | Resilience Scale | IMP Survey | 0-5 | {reliabilities['Resilience']} |
+| Social Participation | Social Participation Scale | IMP Survey | 0-5 | {reliabilities['Social Participation']} |
+| Authenticity | Congruence Score | Self-Report | 0-5 | {reliabilities['Authenticity']} |
     """
     with open(package_dir / "METRIC_MAPPING.md", "w") as f:
         f.write(mapping_content)
 
     # 4. Create Interpretation
+    # Generate dynamic insights
+    insights = []
+    if validation_report_data:
+        overall_rel = validation_report_data.get("overall_reliability", 0)
+        insights.append(f"- **Overall Reliability:** {overall_rel:.2f} (Target: > 0.8)")
+
+        for dim, val in reliabilities.items():
+            # Check if val is a number (it might be "Gap..." or "N/A")
+            try:
+                alpha = float(val)
+                if alpha < 0.7:
+                    insights.append(f"- **Warning:** {dim} reliability ({alpha}) is below threshold 0.7. Review items.")
+                elif alpha >= 0.8:
+                    insights.append(f"- **Success:** {dim} reliability ({alpha}) is excellent.")
+            except ValueError:
+                if "Gap" in val:
+                    insights.append(f"- **Gap:** {dim} is missing validated metrics.")
+
+    insights_text = "\n".join(insights)
+
     interpretation_content = f"""
 # Scientific Interpretation
 **Generated via Professor Dr. A. I. Nexus Protocol**
 **Date:** {datetime.datetime.now().isoformat()}
 
 ## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
+- **Validation Study:** Completed (N={validation_report_data.get('n_participants', 'Unknown') if validation_report_data else 'Unknown'}).
+- **Reliability Check:**
+{insights_text}
+
 - **External Data:** World Bank Education data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
