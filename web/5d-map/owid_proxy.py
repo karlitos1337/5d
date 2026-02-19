@@ -26,7 +26,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
             try:
                 req = urllib.request.Request(
                     url,
-                    headers={"User-Agent": "5d-map-proxy/1.0 (https://github.com/karlitos1337/5d)"}
+                    headers={"User-Agent": "5d-map-proxy/1.0 (https://github.com/karlitos1337/5d)"},
                 )
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = resp.read()
