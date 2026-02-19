@@ -35,7 +35,8 @@
         id="layer-status-quo" 
         class="btn btn--primary"
         title="Zeigt Heatmap für Depression & Dropout-Raten weltweit"
-        aria-label="Status Quo Heatmap anzeigen">
+        aria-label="Status Quo Heatmap anzeigen"
+        aria-pressed="true">
         Status Quo
       </button>
       <button 
@@ -49,21 +50,24 @@
         id="layer-schools" 
         class="btn"
         title="Alternative Schulmodelle: Sudbury, Waldorf, Folk High Schools, Tokkatsu"
-        aria-label="Alternative Schulen auf Karte anzeigen">
+        aria-label="Alternative Schulen auf Karte anzeigen"
+        aria-pressed="false">
         Alternative Schulen
       </button>
       <button 
         id="layer-imp" 
         class="btn"
         title="Intrinsisches Motivationspotenzial (IMP = A×IM×R×SP×Au)"
-        aria-label="IMP-Score Choropleth anzeigen">
+        aria-label="IMP-Score Choropleth anzeigen"
+        aria-pressed="false">
         IMP‑Score
       </button>
       <button 
         id="layer-validation" 
         class="btn"
         title="Validierung (Ringe): zeigt Länder/Regionen mit extern verifizierten Daten (validation.json)"
-        aria-label="Validierung (Ringe) anzeigen">
+        aria-label="Validierung (Ringe) anzeigen"
+        aria-pressed="false">
         Validierung (Ringe)
       </button>
       <button 
@@ -85,14 +89,16 @@
         id="layer-sources" 
         class="btn"
         title="Quellen (Marker): zeigt Anzahl/Kategorien pro Land (validation.json)"
-        aria-label="Quellen (Marker) anzeigen">
+        aria-label="Quellen (Marker) anzeigen"
+        aria-pressed="false">
         Quellen (Marker)
       </button>
       <button 
         id="layer-time" 
         class="btn"
         title="Zeitreise durch historische Daten (2000-2025)"
-        aria-label="Zeitreise-Modus aktivieren">
+        aria-label="Zeitreise-Modus aktivieren"
+        aria-pressed="false">
         Zeitreise ⏱️
       </button>
     </div>
@@ -100,7 +106,7 @@
 
   <main id="main-content">
     <div id="map"></div>
-    <div id="layer-info" style="display:none;padding:0.5rem 1rem;max-width:640px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
+    <div id="layer-info" role="status" aria-live="polite" style="display:none;padding:0.5rem 1rem;max-width:640px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
       <strong>Layer‑Info:</strong> <span id="layer-info-text">—</span>
     </div>
     <div id="time-controls" style="display:none;padding:0.5rem 1rem;max-width:480px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
@@ -111,9 +117,9 @@
   </main>
 
   <!-- Loading Overlay -->
-  <div class="loading-overlay">
+  <div class="loading-overlay" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="loading-spinner">
-      <div class="spinner"></div>
+      <div class="spinner" aria-hidden="true"></div>
       <p>Lade Daten...</p>
     </div>
   </div>

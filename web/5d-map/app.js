@@ -40,9 +40,19 @@ function activateLayer(layerName) {
     infoTextEl.textContent = txt;
     infoEl.style.display = 'block';
   }
-  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+  const layers = ['status-quo', 'schools', 'imp', 'validation', 'sources', 'time'];
+  layers.forEach(id => {
+    const el = document.getElementById(`layer-${id}`);
+    if (el) {
+      el.classList.remove('btn--primary');
+      el.setAttribute('aria-pressed', 'false');
+    }
+  });
   const btn = document.getElementById(`layer-${layerName}`);
-  if (btn) btn.classList.add('btn--primary');
+  if (btn) {
+    btn.classList.add('btn--primary');
+    btn.setAttribute('aria-pressed', 'true');
+  }
 
   switch (layerName) {
     case 'status-quo':

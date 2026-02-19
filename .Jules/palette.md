@@ -1,3 +1,3 @@
-## 2024-05-23 - Micro-UX in Streamlit
-**Learning:** Streamlit metrics lack built-in explanations by default, making dashboards confusing for new users. Adding `help` tooltips to `st.metric` is a high-impact, low-effort micro-UX win.
-**Action:** When working on Streamlit dashboards, always check if metrics are self-explanatory. If not, add context via the `help` parameter. Also, `st.toast` is great for feedback on long-running processes.
+## 2026-02-19 - Accessibility State Management
+**Learning:** Toggle buttons that switch between mutually exclusive layers on a single view (map) benefit significantly from `aria-pressed` to communicate state, rather than just relying on visual class changes (like `btn--primary`).
+**Action:** When implementing custom toggle groups that aren't native radio buttons, always ensure `aria-pressed` or `aria-current` is updated programmatically alongside visual classes.
