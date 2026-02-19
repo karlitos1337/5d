@@ -51,7 +51,7 @@ exclude = [
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q --cov=."
+addopts = "-ra -q"
 testpaths = [
     "tests",
     "src_python/tests",
@@ -71,4 +71,11 @@ python_files = "test_*.py"
 markers = [
     "asyncio: mark test as async",
     "integration: mark test as integration test",
+]
+pythonpath = [
+    ".",
+    "src_python",
+    "storage",
+    "models",
+    "auth",
 ]
