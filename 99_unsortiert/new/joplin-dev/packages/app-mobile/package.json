@@ -45,7 +45,7 @@
     "expo-av": "15.1.7",
     "expo-camera": "16.1.11",
     "expo-local-authentication": "16.0.5",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "md5": "2.3.0",
     "path-browserify": "1.0.1",
     "prop-types": "15.8.1",
@@ -138,7 +138,7 @@
     "ts-node": "10.9.2",
     "typescript": "5.8.3",
     "url-loader": "4.1.1",
-    "webpack": "5.95.0",
+    "webpack": "5.104.1",
     "webpack-cli": "5.1.4",
     "webpack-dev-server": "5.2.2"
   },
