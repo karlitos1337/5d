@@ -155,15 +155,11 @@ class IMPValidationStudy:
     def _interpret_alpha(self, alpha):
         """Interpretiert Cronbach's Alpha"""
         if alpha >= 0.9:
-            return "Exzellent"
+            return "Exzellent (Validated Insight)"
         elif alpha >= 0.8:
-            return "Gut"
-        elif alpha >= 0.7:
-            return "Akzeptabel"
-        elif alpha >= 0.6:
-            return "Fragwürdig"
+            return "Gut (Validated Insight)"
         else:
-            return "Inakzeptabel"
+            return "Unzureichend (Hypothesis Generation Needed)"
 
     def calculate_imp_score(self, row):
         """Berechnet IMP-Score für einen Probanden"""
@@ -209,7 +205,7 @@ class IMPValidationStudy:
         return {
             "dimensions": dim_scores,
             "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
+            "IMP_additive": imp_additive,
         }
 
     def correlation_analysis(self):
@@ -295,14 +291,13 @@ class IMPValidationStudy:
 
     def _generate_recommendation(self):
         """Generiert Empfehlungen basierend auf Ergebnissen"""
-        avg_alpha = np.mean([r["cronbach_alpha"] for r in self.results.values()])
+        # Strict reliability check: ANY dimension < 0.8 triggers revision
+        min_alpha = min([r["cronbach_alpha"] for r in self.results.values()])
 
-        if avg_alpha >= 0.8:
-            return "Das 5D-Framework zeigt gute bis exzellente Reliabilität. Bereit für Preprint-Publikation (Pilotstudie)."
-        elif avg_alpha >= 0.7:
-            return "Das Framework ist akzeptabel, aber Verbesserung einzelner Items empfohlen."
+        if min_alpha >= 0.8:
+            return "VALIDATED: Alle Dimensionen zeigen gute bis exzellente Reliabilität (α >= 0.8). Bereit für Preprint."
         else:
-            return "Reliabilität unter Schwelle. Items müssen überarbeitet werden."
+            return f"HYPOTHESIS GENERATION: Mindestens eine Dimension ist unter 0.8 (Min: {min_alpha:.2f}). Revision erforderlich."
 
 
 # MAIN EXECUTION
