@@ -302,9 +302,7 @@ class ManifestOrganizer:
             for file in files:
                 if file.name != "INDEX.md":
                     size = file.stat().st_size
-                    size_str = (
-                        f"{size/1024:.1f}KB" if size < 1024 * 1024 else f"{size/(1024*1024):.1f}MB"
-                    )
+                    size_str = f"{size/1024:.1f}KB" if size < 1024 * 1024 else f"{size/(1024*1024):.1f}MB"
                     index_content += f"- [{file.name}](./{file.name}) ({size_str})\n"
 
             (cat_dir / "INDEX.md").write_text(index_content, encoding="utf-8")

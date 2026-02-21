@@ -152,6 +152,4 @@ if __name__ == "__main__":
 
     results = cluster_analysis(test_profiles)
     print(f"Found {results['kmeans']['n_clusters']} K-Means clusters")
-    print(
-        f"Found {results['dbscan']['n_clusters']} DBSCAN clusters ({results['dbscan']['n_noise_points']} outliers)"
-    )
+    print(f"Found {results['dbscan']['n_clusters']} DBSCAN clusters ({results['dbscan']['n_noise_points']} outliers)")

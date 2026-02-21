@@ -240,9 +240,7 @@ class TestIMPCalculation:
 
         # Manual calculation with weights
         weights = {"A": 1.1, "IM": 1.05, "R": 1.0, "SP": 0.95, "Au": 1.0}
-        expected_weighted = (
-            0.95 * 1.1 + 0.88 * 1.05 + 0.82 * 1.0 + 0.79 * 0.95 + 0.91 * 1.0
-        ) / sum(weights.values())
+        expected_weighted = (0.95 * 1.1 + 0.88 * 1.05 + 0.82 * 1.0 + 0.79 * 0.95 + 0.91 * 1.0) / sum(weights.values())
 
         assert "weighted_additive" in result
         assert result["weighted_additive"] == pytest.approx(expected_weighted, abs=0.01)
@@ -256,9 +254,7 @@ class TestScientificReferences:
     def test_bibtex_file_exists(self):
         """BibTeX file must exist for reference validation."""
         bibtex_path = Path("07_daten_analysen/5d-relevant-sources.bib")
-        assert (
-            bibtex_path.exists()
-        ), "BibTeX file missing: 07_daten_analysen/5d-relevant-sources.bib"
+        assert bibtex_path.exists(), "BibTeX file missing: 07_daten_analysen/5d-relevant-sources.bib"
 
     def test_key_references_in_bibtex(self):
         """

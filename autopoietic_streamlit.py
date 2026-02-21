@@ -23,12 +23,8 @@ with st.sidebar:
     zwang = st.slider("Zwangsgrad", 0.0, 1.0, 0.2, step=0.05, help="Erhöht Stress, senkt IM/R")
     freiheit = st.slider("Wahlfreiheit", 0.0, 1.0, 0.7, step=0.05, help="Erhöht IM/Au")
     peers = st.slider("Peer-Interaktion", 0.0, 1.0, 0.5, step=0.05, help="Fördert SP/IM")
-    lehrer_support = st.slider(
-        "Lehrer-Support", 0.0, 1.0, 0.5, step=0.05, help="Senkt Stress, erhöht R"
-    )
-    aufgaben_vielfalt = st.slider(
-        "Aufgabenvielfalt", 0.0, 1.0, 0.6, step=0.05, help="Erhöht IM durch Passung"
-    )
+    lehrer_support = st.slider("Lehrer-Support", 0.0, 1.0, 0.5, step=0.05, help="Senkt Stress, erhöht R")
+    aufgaben_vielfalt = st.slider("Aufgabenvielfalt", 0.0, 1.0, 0.6, step=0.05, help="Erhöht IM durch Passung")
 
 # Init Agentenzustände (0..1)
 rs = np.random.default_rng(42)
@@ -76,9 +72,7 @@ for t in range(steps):
 # Visualisierung
 cols = st.columns(2)
 with cols[0]:
-    fig = px.line(
-        hist, x="step", y=["A", "IM", "R", "SP", "Au"], title="IMP-Dimensionen (Mittelwerte)"
-    )
+    fig = px.line(hist, x="step", y=["A", "IM", "R", "SP", "Au"], title="IMP-Dimensionen (Mittelwerte)")
     st.plotly_chart(fig, use_container_width=True)
 with cols[1]:
     fig2 = px.line(hist, x="step", y="dropout", title="Dropout pro Schritt")

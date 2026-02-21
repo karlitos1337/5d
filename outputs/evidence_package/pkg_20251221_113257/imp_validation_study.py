@@ -206,11 +206,7 @@ class IMPValidationStudy:
         # Additives Modell
         imp_additive = dim_scores.mean(axis=1)
 
-        return {
-            "dimensions": dim_scores,
-            "IMP_geometric": imp_geometric,
-            "IMP_additive": imp_additive
-        }
+        return {"dimensions": dim_scores, "IMP_geometric": imp_geometric, "IMP_additive": imp_additive}
 
     def correlation_analysis(self):
         """Korrelationsanalyse zwischen Dimensionen"""

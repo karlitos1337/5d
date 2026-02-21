@@ -126,23 +126,15 @@ def main():
         for dim, stats in validation_data["dimensions"].items():
             alpha = stats.get("cronbach_alpha", 0)
             status = "✅ Validated" if alpha >= 0.8 else "⚠️ Needs Revision"
-            rows.append(
-                f"| {dim} | Internal Consistency | Pilot Survey | 0-5 | {alpha:.3f} ({status}) |"
-            )
+            rows.append(f"| {dim} | Internal Consistency | Pilot Survey | 0-5 | {alpha:.3f} ({status}) |")
     else:
-        rows.append(
-            "| 5D Dimensions | Internal Consistency | Pilot Survey | 0-5 | N/A (Run Failed) |"
-        )
+        rows.append("| 5D Dimensions | Internal Consistency | Pilot Survey | 0-5 | N/A (Run Failed) |")
 
     # External Metrics (from Research Scraper)
     if "world_bank_wgi" in research_data and "data" in research_data["world_bank_wgi"]:
-        rows.append(
-            "| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | Global Std |"
-        )
+        rows.append("| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | Global Std |")
         rows.append("| Resilience | Rule of Law | World Bank WGI | -2.5 to 2.5 | Global Std |")
-        rows.append(
-            "| Environment Opt. | Gov. Effectiveness | World Bank WGI | -2.5 to 2.5 | Global Std |"
-        )
+        rows.append("| Environment Opt. | Gov. Effectiveness | World Bank WGI | -2.5 to 2.5 | Global Std |")
 
     mapping_table = "\n".join(rows)
 
@@ -170,9 +162,7 @@ def main():
                 )
 
     gap_analysis = (
-        "\n".join(reliability_gaps)
-        if reliability_gaps
-        else "No reliability gaps detected. All dimensions α >= 0.8."
+        "\n".join(reliability_gaps) if reliability_gaps else "No reliability gaps detected. All dimensions α >= 0.8."
     )
 
     # External Data Availability

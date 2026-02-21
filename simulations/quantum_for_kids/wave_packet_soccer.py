@@ -56,10 +56,7 @@ class QuantumSoccerBall:
         """Create Gaussian wave packet"""
         # Gaussian envelope: |ψ(x,y)|²
         gaussian = np.exp(
-            -(
-                (self.X - self.x0) ** 2 / (2 * self.sigma_x**2)
-                + (self.Y - self.y0) ** 2 / (2 * self.sigma_y**2)
-            )
+            -((self.X - self.x0) ** 2 / (2 * self.sigma_x**2) + (self.Y - self.y0) ** 2 / (2 * self.sigma_y**2))
         )
 
         # Add momentum (plane wave): e^(i(kx + ky))
@@ -137,9 +134,7 @@ class SoccerWaveVisualizer:
         self.fig.suptitle("Quantum Wave Packets via FUSSBALL! ⚽🌊", fontsize=16, fontweight="bold")
 
         # Left: Before measurement (wave packet)
-        self.ax1.set_title(
-            "BEFORE: Ball als Welle (überall gleichzeitig!)", fontsize=12, fontweight="bold"
-        )
+        self.ax1.set_title("BEFORE: Ball als Welle (überall gleichzeitig!)", fontsize=12, fontweight="bold")
         self.ax1.set_xlim(0, 10)
         self.ax1.set_ylim(0, 10)
         self.ax1.set_xlabel("Field X (m)")
@@ -148,9 +143,7 @@ class SoccerWaveVisualizer:
         self.ax1.grid(True, alpha=0.3)
 
         # Right: After measurement (collapsed)
-        self.ax2.set_title(
-            "AFTER: Torwart fängt → Welle kollabiert!", fontsize=12, fontweight="bold"
-        )
+        self.ax2.set_title("AFTER: Torwart fängt → Welle kollabiert!", fontsize=12, fontweight="bold")
         self.ax2.set_xlim(0, 10)
         self.ax2.set_ylim(0, 10)
         self.ax2.set_xlabel("Field X (m)")
@@ -161,21 +154,15 @@ class SoccerWaveVisualizer:
     def draw_field(self, ax):
         """Draw soccer field"""
         # Field outline
-        rect = patches.Rectangle(
-            (0, 0), 10, 10, linewidth=2, edgecolor="green", facecolor="lightgreen", alpha=0.2
-        )
+        rect = patches.Rectangle((0, 0), 10, 10, linewidth=2, edgecolor="green", facecolor="lightgreen", alpha=0.2)
         ax.add_patch(rect)
 
         # Goal
-        goal = patches.Rectangle(
-            (4, 0), 2, 0.5, linewidth=2, edgecolor="white", facecolor="white", alpha=0.5
-        )
+        goal = patches.Rectangle((4, 0), 2, 0.5, linewidth=2, edgecolor="white", facecolor="white", alpha=0.5)
         ax.add_patch(goal)
 
         # Center circle
-        circle = patches.Circle(
-            (5, 5), 1.5, linewidth=2, edgecolor="white", facecolor="none", alpha=0.5
-        )
+        circle = patches.Circle((5, 5), 1.5, linewidth=2, edgecolor="white", facecolor="none", alpha=0.5)
         ax.add_patch(circle)
 
     def visualize_step(self, goalkeeper_x=5.0, goalkeeper_y=1.0, num_frames=5):
@@ -195,9 +182,7 @@ class SoccerWaveVisualizer:
             self.draw_field(self.ax1)
 
             # Plot wave packet (probability cloud)
-            im = self.ax1.contourf(
-                self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="YlOrRd", alpha=0.7
-            )
+            im = self.ax1.contourf(self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="YlOrRd", alpha=0.7)
 
             # Add colorbar
             if frame == 0:
@@ -258,9 +243,7 @@ class SoccerWaveVisualizer:
 
         # Clear RIGHT plot
         self.ax2.clear()
-        self.ax2.set_title(
-            "AFTER: Torwart fängt → Welle kollabiert!", fontsize=12, fontweight="bold"
-        )
+        self.ax2.set_title("AFTER: Torwart fängt → Welle kollabiert!", fontsize=12, fontweight="bold")
         self.ax2.set_xlim(0, 10)
         self.ax2.set_ylim(0, 10)
         self.ax2.set_xlabel("Field X (m)")
@@ -270,9 +253,7 @@ class SoccerWaveVisualizer:
         self.draw_field(self.ax2)
 
         # Plot collapsed state
-        im2 = self.ax2.contourf(
-            self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="Blues", alpha=0.7
-        )
+        im2 = self.ax2.contourf(self.ball.X, self.ball.Y, self.ball.wave_packet, levels=20, cmap="Blues", alpha=0.7)
         plt.colorbar(im2, ax=self.ax2, label="Collapsed State")
 
         # Ball at measured position

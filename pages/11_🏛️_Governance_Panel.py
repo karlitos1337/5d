@@ -5,22 +5,18 @@ WGI Voice & Accountability vs. HDI/IMP-Proxy Scatterplot
 Scientific Validation: Autonomy → Better Outcomes (r ≈ 0.68)
 """
 
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-st.set_page_config(
-    page_title="5D Governance Panel", page_icon="🏛️", layout="wide", initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="5D Governance Panel", page_icon="🏛️", layout="wide", initial_sidebar_state="expanded")
 
 # Header
 st.title("🏛️ Governance Panel - Autonomy & Outcomes")
 st.markdown("### Minimalexperiment 2: WGI Voice & Accountability vs. HDI/IMP-Proxy")
 
-st.markdown(
-    """
+st.markdown("""
 **Hypothese:** Länder mit höherer **Autonomie** (Voice & Accountability) haben bessere **Outcomes** (HDI, Life Satisfaction, IMP-Proxy).
 
 **Datenquellen:**
@@ -32,8 +28,7 @@ st.markdown(
 - Acemoglu & Robinson (2012): Inclusive Institutions → Wohlstand
 - Ostrom (1990): Self-Governance → Resilient Commons
 - Deci & Ryan (1985): Autonomy → Intrinsic Motivation → Wellbeing
-"""
-)
+""")
 
 # Sidebar
 st.sidebar.header("🎛️ Optionen")
@@ -214,9 +209,7 @@ fig2 = px.scatter(
 
 # Regression line
 if show_regression:
-    slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(
-        df["WGI_Voice"], df["IMP_Proxy"]
-    )
+    slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(df["WGI_Voice"], df["IMP_Proxy"])
     df["IMP_Pred"] = slope2 * df["WGI_Voice"] + intercept2
 
     fig2.add_trace(
@@ -241,8 +234,7 @@ st.subheader("🔬 Wissenschaftliche Interpretation")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown(
-        """
+    st.markdown("""
     **✅ Hypothese bestätigt (r = 0.68-0.73):**
     - Starke positive Korrelation zwischen **Autonomie** (Voice) und **Outcomes** (HDI, IMP-Proxy)
     - Regression statistisch signifikant (p < 0.05 bei n=9)
@@ -254,12 +246,10 @@ with col1:
     - **Resilienz (R):** Inclusive Institutions → Adaptive Capacity
     - **Soziale Partizipation (SP):** Voice → Civic Engagement
     - **Authentizität (Au):** Self-Governance → Authentic Structures
-    """
-    )
+    """)
 
 with col2:
-    st.markdown(
-        """
+    st.markdown("""
     **⚠️ Limitierungen (n=9):**
     - Kleine Stichprobe (nur 9 high-income Länder)
     - Selection Bias (keine low-income Länder, alle HDI > 0.92)
@@ -271,16 +261,13 @@ with col2:
     - [ ] Kontrollvariablen (GDP per capita, Education Index)
     - [ ] Längsschnitt (1996-2023, 28 Jahre WGI Daten)
     - [ ] Instrumentalvariablen (IV Regression, Kausalität)
-    """
-    )
+    """)
 
 # Data Table
 st.markdown("---")
 st.subheader("📋 Rohdaten (9 Länder)")
 
-df_display = df[
-    ["Country", "WGI_Voice", "HDI", "IMP_Proxy", "Depression", "Dropout", "Region"]
-].copy()
+df_display = df[["Country", "WGI_Voice", "HDI", "IMP_Proxy", "Depression", "Dropout", "Region"]].copy()
 df_display["Depression"] = df_display["Depression"].apply(lambda x: f"{x:.1%}")
 df_display["Dropout"] = df_display["Dropout"].apply(lambda x: f"{x:.1%}")
 
@@ -300,9 +287,7 @@ st.dataframe(
 
 # Download CSV
 csv = df.to_csv(index=False)
-st.download_button(
-    label="📥 CSV herunterladen", data=csv, file_name="governance_panel_data.csv", mime="text/csv"
-)
+st.download_button(label="📥 CSV herunterladen", data=csv, file_name="governance_panel_data.csv", mime="text/csv")
 
 # BibTeX References
 st.markdown("---")
@@ -362,11 +347,9 @@ with st.expander("BibTeX-Referenzen"):
 
 # Footer
 st.markdown("---")
-st.markdown(
-    """
+st.markdown("""
 **Version:** 1.0.0  
 **Last Updated:** 2025-12-03  
 **Maintainer:** 5D Intelligence Framework  
 **License:** MIT (Code), CC BY 4.0 (Data)
-"""
-)
+""")

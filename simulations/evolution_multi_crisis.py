@@ -208,9 +208,7 @@ def run_multi_crisis_experiment(pop_size=1000, num_crises=10, crisis_types=None,
     print("📊 FINAL RESULTS")
     print(f"{'='*60}")
     print(f"Free: {pop_free.alive.sum()} survivors ({pop_free.alive.sum()/pop_size*100:.1f}%)")
-    print(
-        f"Controlled: {pop_controlled.alive.sum()} survivors ({pop_controlled.alive.sum()/pop_size*100:.1f}%)"
-    )
+    print(f"Controlled: {pop_controlled.alive.sum()} survivors ({pop_controlled.alive.sum()/pop_size*100:.1f}%)")
     print(f"{'='*60}\n")
 
     # Add final stats
@@ -266,9 +264,7 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     free_diversity = [c["diversity"] for c in results["free"]["crises"]]
     controlled_diversity = [c["diversity"] for c in results["controlled"]["crises"]]
 
-    ax.plot(
-        crisis_range, free_diversity, "o-", label="Free", linewidth=2, markersize=8, color="#10b981"
-    )
+    ax.plot(crisis_range, free_diversity, "o-", label="Free", linewidth=2, markersize=8, color="#10b981")
     ax.plot(
         crisis_range,
         controlled_diversity,
@@ -308,9 +304,7 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
     ax.hist(alive_traits_free, bins=20, color="#10b981", alpha=0.7, edgecolor="black")
     ax.set_xlabel("Trait Value", fontsize=12)
     ax.set_ylabel("Count", fontsize=12)
-    ax.set_title(
-        f"Free Population Traits (n={len(alive_traits_free)})", fontsize=14, fontweight="bold"
-    )
+    ax.set_title(f"Free Population Traits (n={len(alive_traits_free)})", fontsize=14, fontweight="bold")
     ax.grid(True, alpha=0.3, axis="y")
 
     # 5. Trait Distribution (Controlled)
@@ -354,9 +348,7 @@ def visualize_results(results, pop_free, pop_controlled, save_path=None):
 
 if __name__ == "__main__":
     # Run experiment
-    results, pop_free, pop_controlled = run_multi_crisis_experiment(
-        pop_size=1000, num_crises=10, severity=0.5
-    )
+    results, pop_free, pop_controlled = run_multi_crisis_experiment(pop_size=1000, num_crises=10, severity=0.5)
 
     # Visualize
     output_dir = "../08-experimente-validierung/experiments/results"
@@ -380,9 +372,7 @@ if __name__ == "__main__":
     print("\n✅ Multi-crisis experiment complete!")
     print("📊 Hypothesis Test: Does diversity help over multiple crises?")
     print(f"   Free final survival: {results['free']['final']['survival_rate']*100:.1f}%")
-    print(
-        f"   Controlled final survival: {results['controlled']['final']['survival_rate']*100:.1f}%"
-    )
+    print(f"   Controlled final survival: {results['controlled']['final']['survival_rate']*100:.1f}%")
 
     if results["free"]["final"]["survival_rate"] > results["controlled"]["final"]["survival_rate"]:
         print("   ✅ HYPOTHESIS CONFIRMED: Diversity wins over multiple crises!")

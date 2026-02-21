@@ -39,22 +39,19 @@ st.set_page_config(
 
 # ==================== HEADER ====================
 st.title("🕸️ Partizipations-Netzwerke")
-st.markdown(
-    """
+st.markdown("""
 **Agent-Based Simulation von Wissens-Diffusion in sozialen Netzwerken**
 
 Diese Seite untersucht, wie **Netzwerk-Topologien** die Verbreitung von Wissen, Ideen und Innovationen beeinflussen.
 Wir vergleichen drei klassische Modelle und zeigen ihre Relevanz für **Social Participation (SP)** und **Resilience (R)**.
-"""
-)
+""")
 
 # Scientific context in sidebar
 with st.sidebar:
     st.header("Wissenschaftlicher Kontext")
 
     with st.expander("🔬 Netzwerk-Theorie", expanded=False):
-        st.markdown(
-            """
+        st.markdown("""
 **Granovetter (1973) - Weak Ties:**
 - Starke Verbindungen (Familie): redundante Information
 - Schwache Verbindungen (Bekannte): neue Informationen
@@ -69,12 +66,10 @@ with st.sidebar:
 - Hubs (hoch vernetzte Knoten)
 - Power-Law-Verteilung: P(k) ~ k^(-γ)
 - **Beispiele:** Internet, Flughäfen, Proteinnetze
-"""
-        )
+""")
 
     with st.expander("📊 5D-Dimensionen", expanded=False):
-        st.markdown(
-            """
+        st.markdown("""
 **Social Participation (SP):**
 - Clustering-Koeffizient (lokale Dichte)
 - Finale Aktivierungsrate (Teilnahme)
@@ -86,8 +81,7 @@ with st.sidebar:
 **Intrinsic Motivation (IM):**
 - Sharing-Wahrscheinlichkeit (freiwillig)
 - Aktivierungs-Schwelle (Motivation)
-"""
-        )
+""")
 
 st.divider()
 
@@ -116,9 +110,7 @@ with st.sidebar:
     # Topology-specific parameters
     if topology == "small_world":
         k = st.slider("Nachbarn k", 2, 20, 6, help="Ausgangsgitter-Konnektivität")
-        p = st.slider(
-            "Rewire-Wahrscheinlichkeit", 0.001, 0.5, 0.05, step=0.001, help="Höher = mehr Shortcuts"
-        )
+        p = st.slider("Rewire-Wahrscheinlichkeit", 0.001, 0.5, 0.05, step=0.001, help="Höher = mehr Shortcuts")
     elif topology == "erdos_renyi":
         p = st.slider(
             "Kantenwahrscheinlichkeit p",
@@ -130,9 +122,7 @@ with st.sidebar:
         )
         k = 4  # dummy
     else:  # scale_free
-        k = st.slider(
-            "Initiale Kanten m", 1, 10, 3, help="Neue Knoten verbinden sich mit m existierenden"
-        )
+        k = st.slider("Initiale Kanten m", 1, 10, 3, help="Neue Knoten verbinden sich mit m existierenden")
         p = 0.05  # dummy
 
     st.divider()
@@ -190,17 +180,13 @@ with st.sidebar:
 
     # Display options
     st.subheader("Anzeige-Optionen")
-    show_network_viz = st.checkbox(
-        "Netzwerk visualisieren", value=False, help="Kann bei >100 Knoten langsam sein"
-    )
+    show_network_viz = st.checkbox("Netzwerk visualisieren", value=False, help="Kann bei >100 Knoten langsam sein")
     show_degree_dist = st.checkbox("Grad-Verteilung", value=True)
 
 
 # ==================== SIMULATION ====================
 @st.cache_data
-def run_network_simulation(
-    topology, n_nodes, k, p, steps, seed_frac, threshold, share_prob, meeting_cost
-):
+def run_network_simulation(topology, n_nodes, k, p, steps, seed_frac, threshold, share_prob, meeting_cost):
     """
     Run knowledge diffusion simulation on different network topologies.
 
@@ -301,9 +287,7 @@ def run_network_simulation(
     # Diffusion speed (average slope in first half of simulation)
     if len(arr) > 1:
         half_point = len(arr) // 2
-        metrics["diffusion_speed"] = (
-            float((arr[half_point] - arr[0]) / half_point) if half_point > 0 else 0.0
-        )
+        metrics["diffusion_speed"] = float((arr[half_point] - arr[0]) / half_point) if half_point > 0 else 0.0
     else:
         metrics["diffusion_speed"] = 0.0
 
@@ -311,9 +295,7 @@ def run_network_simulation(
     IMP_proxies = {}
 
     # Social Participation (SP): clustering × final_activation
-    IMP_proxies["SP"] = float(
-        min(1.0, 0.5 * metrics["clustering"] + 0.5 * metrics["final_activation"])
-    )
+    IMP_proxies["SP"] = float(min(1.0, 0.5 * metrics["clustering"] + 0.5 * metrics["final_activation"]))
 
     # Resilience (R): based on network efficiency (inverse of t_50)
     if metrics["t_50"] is not None and metrics["t_50"] > 0:
@@ -335,11 +317,7 @@ def run_network_simulation(
 
     # IMP score (multiplicative)
     IMP_proxies["IMP"] = float(
-        IMP_proxies["A"]
-        * IMP_proxies["IM"]
-        * IMP_proxies["R"]
-        * IMP_proxies["SP"]
-        * IMP_proxies["Au"]
+        IMP_proxies["A"] * IMP_proxies["IM"] * IMP_proxies["R"] * IMP_proxies["SP"] * IMP_proxies["Au"]
     )
 
     return G, history, metrics, IMP_proxies
@@ -365,9 +343,7 @@ with col1:
     )
 
 with col2:
-    t_50_display = (
-        f"{metrics['t_50']} Schritte" if metrics["t_50"] is not None else "Nicht erreicht"
-    )
+    t_50_display = f"{metrics['t_50']} Schritte" if metrics["t_50"] is not None else "Nicht erreicht"
     st.metric(
         "Zeit bis 50%",
         t_50_display,
@@ -382,9 +358,7 @@ with col3:
     )
 
 with col4:
-    path_len_display = (
-        f"{metrics['avg_path_length']:.2f}" if metrics["avg_path_length"] is not None else "N/A"
-    )
+    path_len_display = f"{metrics['avg_path_length']:.2f}" if metrics["avg_path_length"] is not None else "N/A"
     st.metric(
         "Ø Pfadlänge",
         path_len_display,
@@ -486,10 +460,7 @@ with viz_col2:
                     colorbar=dict(title="Grad"),
                     line_width=1,
                 ),
-                text=[
-                    f"Knoten {n}<br>Grad: {d}"
-                    for n, d in zip(G.nodes(), node_degrees, strict=False)
-                ],
+                text=[f"Knoten {n}<br>Grad: {d}" for n, d in zip(G.nodes(), node_degrees, strict=False)],
                 hoverinfo="text",
                 showlegend=False,
             )
@@ -512,12 +483,10 @@ with viz_col2:
 st.divider()
 st.header("🎯 5D-Dimension Proxies")
 
-st.markdown(
-    """
+st.markdown("""
 **Achtung:** Diese Werte sind **grobe Schätzungen** basierend auf Netzwerk-Eigenschaften.
 Echte 5D-Scores erfordern individuelle Messungen (Surveys, Verhaltensbeobachtungen).
-"""
-)
+""")
 
 # IMP metrics
 imp_col1, imp_col2, imp_col3, imp_col4, imp_col5, imp_col6 = st.columns(6)
@@ -526,9 +495,7 @@ with imp_col1:
     st.metric("Autonomy (A)", f"{IMP_proxies['A']:.2f}", help="Neutral (Netzwerk-unabhängig)")
 
 with imp_col2:
-    st.metric(
-        "Intrinsic Mot. (IM)", f"{IMP_proxies['IM']:.2f}", help="Sharing-Prob. × (1-Threshold)"
-    )
+    st.metric("Intrinsic Mot. (IM)", f"{IMP_proxies['IM']:.2f}", help="Sharing-Prob. × (1-Threshold)")
 
 with imp_col3:
     st.metric("Resilience (R)", f"{IMP_proxies['R']:.2f}", help="1 - (t_50 / steps)")
@@ -547,8 +514,7 @@ st.divider()
 st.header("💡 Interpretation")
 
 with st.expander("🔬 Netzwerk-Metriken erklärt", expanded=False):
-    st.markdown(
-        f"""
+    st.markdown(f"""
 **Clustering-Koeffizient:** {metrics['clustering']:.3f}
 - **Bedeutung:** Wie stark sind Nachbarn untereinander vernetzt?
 - **Range:** 0.0 (keine lokalen Cluster) bis 1.0 (perfekt geclustert)
@@ -563,12 +529,10 @@ with st.expander("🔬 Netzwerk-Metriken erklärt", expanded=False):
 - **Bedeutung:** Wie schnell erreicht Innovation kritische Masse?
 - **Rogers (2003):** 16% Early Adopters → Tipping Point bei ~50%
 - **Hier:** Schritte bis zur Hälfte der Knoten aktiviert
-"""
-    )
+""")
 
 with st.expander("🎯 5D-Bezug zur Netzwerk-Theorie", expanded=False):
-    st.markdown(
-        """
+    st.markdown("""
 **Social Participation (SP):**
 - **Clustering:** Hohe lokale Dichte = starke Community-Bindung
 - **Finale Aktivierung:** Anteil der Teilnehmenden am Ende
@@ -583,12 +547,10 @@ with st.expander("🎯 5D-Bezug zur Netzwerk-Theorie", expanded=False):
 - **Sharing-Wahrscheinlichkeit:** Freiwilligkeit, innere Bereitschaft
 - **Schwelle:** Niedrig = intrinsisch motiviert (geringe externe Anreize nötig)
 - **Deci & Ryan (1985):** Autonomy, competence, relatedness fördern intrinsische Motivation
-"""
-    )
+""")
 
 with st.expander("📚 Topologie-Vergleich", expanded=False):
-    st.markdown(
-        """
+    st.markdown("""
 | Topologie | Clustering | Pfadlänge | Robustheit | Realwelt-Beispiele |
 |-----------|------------|-----------|------------|-------------------|
 | **Erdős-Rényi** | Niedrig | Niedrig | Mittel | Theoretisches Baseline-Modell |
@@ -599,8 +561,7 @@ with st.expander("📚 Topologie-Vergleich", expanded=False):
 - **Small-World:** Beste Balance (lokale Cluster + globale Erreichbarkeit)
 - **Praxis:** Schulen mit starken Klassen (Clustering) + Austauschprogramme (Shortcuts)
 - **Beispiel:** Montessori Mixed-Age-Klassen (starke Bindungen) + Schulübergreifende Projekte (weak ties)
-"""
-    )
+""")
 
 # ==================== EXPORT ====================
 st.divider()
@@ -620,11 +581,7 @@ export_data = {
         "meeting_cost": float(meeting_cost),
     },
     "metrics": {
-        k: (
-            int(v)
-            if isinstance(v, (np.integer, int))
-            else float(v) if isinstance(v, (np.floating, float)) else v
-        )
+        k: (int(v) if isinstance(v, (np.integer, int)) else float(v) if isinstance(v, (np.floating, float)) else v)
         for k, v in metrics.items()
     },
     "IMP_proxies": IMP_proxies,
@@ -665,8 +622,7 @@ st.divider()
 st.header("📚 Wissenschaftliche Referenzen")
 
 with st.expander("Literatur & BibTeX", expanded=False):
-    st.markdown(
-        """
+    st.markdown("""
 **Zentrale Arbeiten:**
 
 1. **Granovetter, M. S. (1973).** *The Strength of Weak Ties.*  
@@ -698,8 +654,7 @@ with st.expander("Literatur & BibTeX", expanded=False):
 ---
 
 **Alle Referenzen verfügbar in:** `07_daten_analysen/5d-relevant-sources.bib`
-"""
-    )
+""")
 
 st.divider()
 st.caption("Page 10 | Participation Networks | Version 1.0 | December 2, 2025")

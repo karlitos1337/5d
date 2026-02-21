@@ -61,12 +61,7 @@ def scan_external() -> dict:
                 data["ext_genesis_raw"].append({"file": str(md), "terms": found_gen})
     # Deduplicate simple lists
     for k in list(data.keys()):
-        if (
-            k.endswith("_projects")
-            or k.endswith("_roi")
-            or k.endswith("_pilots")
-            or k.endswith("_terms")
-        ):
+        if k.endswith("_projects") or k.endswith("_roi") or k.endswith("_pilots") or k.endswith("_terms"):
             data[k] = sorted(set(data[k]))
     return dict(data)
 

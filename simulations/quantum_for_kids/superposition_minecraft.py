@@ -75,14 +75,10 @@ class QuantumMinecraftVisualizer:
 
     def setup_plot(self):
         """Setup matplotlib figure"""
-        self.fig.suptitle(
-            "Quantum Superposition via MINECRAFT! ⛏️💎", fontsize=16, fontweight="bold"
-        )
+        self.fig.suptitle("Quantum Superposition via MINECRAFT! ⛏️💎", fontsize=16, fontweight="bold")
 
         # Left: Superposition state (BEFORE measurement)
-        self.ax1.set_title(
-            "BEFORE Breaking Block\n(Superposition: Diamanten ÜBERALL!)", fontsize=12
-        )
+        self.ax1.set_title("BEFORE Breaking Block\n(Superposition: Diamanten ÜBERALL!)", fontsize=12)
         self.ax1.set_xlabel("X")
         self.ax1.set_ylabel("Y")
         self.ax1.set_xticks(range(self.world.size))
@@ -90,9 +86,7 @@ class QuantumMinecraftVisualizer:
         self.ax1.grid(True, alpha=0.3)
 
         # Right: Collapsed state (AFTER measurement)
-        self.ax2.set_title(
-            "AFTER Breaking Block\n(Collapsed: Diamant HIER oder NICHT!)", fontsize=12
-        )
+        self.ax2.set_title("AFTER Breaking Block\n(Collapsed: Diamant HIER oder NICHT!)", fontsize=12)
         self.ax2.set_xlabel("X")
         self.ax2.set_ylabel("Y")
         self.ax2.set_xticks(range(self.world.size))
@@ -107,9 +101,7 @@ class QuantumMinecraftVisualizer:
 
         # LEFT: Superposition heatmap
         superposition_map = self.world.get_superposition_map()
-        _im1 = self.ax1.imshow(
-            superposition_map, cmap="YlOrRd", vmin=0, vmax=1, origin="upper"  # noqa: F841
-        )
+        _im1 = self.ax1.imshow(superposition_map, cmap="YlOrRd", vmin=0, vmax=1, origin="upper")  # noqa: F841
 
         # Add text annotations
         for i in range(self.world.size):
@@ -132,9 +124,7 @@ class QuantumMinecraftVisualizer:
                 )
 
         # Highlight current block
-        rect1 = patches.Rectangle(
-            (y - 0.5, x - 0.5), 1, 1, linewidth=3, edgecolor="cyan", facecolor="none"
-        )
+        rect1 = patches.Rectangle((y - 0.5, x - 0.5), 1, 1, linewidth=3, edgecolor="cyan", facecolor="none")
         self.ax1.add_patch(rect1)
 
         # Measure block!
@@ -144,9 +134,7 @@ class QuantumMinecraftVisualizer:
         collapsed_map = np.zeros_like(self.world.blocks)
         collapsed_map[self.world.measured] = self.world.blocks[self.world.measured]
 
-        _im2 = self.ax2.imshow(
-            collapsed_map, cmap="Blues", vmin=0, vmax=1, origin="upper"  # noqa: F841
-        )
+        _im2 = self.ax2.imshow(collapsed_map, cmap="Blues", vmin=0, vmax=1, origin="upper")  # noqa: F841
 
         # Add result annotations
         for i in range(self.world.size):
@@ -158,9 +146,7 @@ class QuantumMinecraftVisualizer:
                     else:
                         text = "🪨"
                         color = "gray"
-                    self.ax2.text(
-                        j, i, text, ha="center", va="center", fontsize=14, fontweight="bold"
-                    )
+                    self.ax2.text(j, i, text, ha="center", va="center", fontsize=14, fontweight="bold")
 
         # Highlight measured block
         if result == 1:
@@ -170,9 +156,7 @@ class QuantumMinecraftVisualizer:
             result_text = "Nur Stein 🪨"
             result_color = "red"
 
-        rect2 = patches.Rectangle(
-            (y - 0.5, x - 0.5), 1, 1, linewidth=3, edgecolor=result_color, facecolor="none"
-        )
+        rect2 = patches.Rectangle((y - 0.5, x - 0.5), 1, 1, linewidth=3, edgecolor=result_color, facecolor="none")
         self.ax2.add_patch(rect2)
 
         # Add result text

@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright, expect
 import os
 
+
 def verify_app(page):
     # Ensure verification directory exists
     os.makedirs("verification", exist_ok=True)
@@ -16,11 +17,12 @@ def verify_app(page):
 
     # Scroll a bit to trigger animations
     page.evaluate("window.scrollTo(0, 500)")
-    page.wait_for_timeout(1000) # Wait for animations
+    page.wait_for_timeout(1000)  # Wait for animations
 
     # Take screenshot
     page.screenshot(path="verification/app_verification.png", full_page=True)
     print("Screenshot saved to verification/app_verification.png")
+
 
 if __name__ == "__main__":
     with sync_playwright() as p:

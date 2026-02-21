@@ -194,9 +194,7 @@ def animate(
 ):
     """Einfaches Matplotlib-Anim mit imshow; optional CSV schreiben."""
     if not HAS_MPL:
-        raise RuntimeError(
-            "Matplotlib nicht installiert. Bitte 'pip install matplotlib' ausführen."
-        )
+        raise RuntimeError("Matplotlib nicht installiert. Bitte 'pip install matplotlib' ausführen.")
 
     fig, ax = plt.subplots()
     im = ax.imshow(grid, cmap="binary", interpolation="nearest")
@@ -236,9 +234,7 @@ def animate(
 
     if save_csv and stats:
         csv = np.array(stats, dtype=int)
-        np.savetxt(
-            "gol_glider_evolution.csv", csv, delimiter=",", header="step,live_cells", fmt="%d"
-        )
+        np.savetxt("gol_glider_evolution.csv", csv, delimiter=",", header="step,live_cells", fmt="%d")
         print("✅ CSV 'gol_glider_evolution.csv' gespeichert:")
         print(csv)
 
@@ -247,9 +243,7 @@ def main():
     parser = argparse.ArgumentParser(description="Conway's Game of Life – Glider Demo")
     parser.add_argument("--size", type=int, default=10, help="Gittergröße NxN (>= 5)")
     parser.add_argument("--steps", type=int, default=50, help="Anzahl der Schritte")
-    parser.add_argument(
-        "--animate", dest="animate", action="store_true", help="Animation mit Matplotlib anzeigen"
-    )
+    parser.add_argument("--animate", dest="animate", action="store_true", help="Animation mit Matplotlib anzeigen")
     parser.add_argument(
         "--no-animate",
         dest="animate",
@@ -264,15 +258,9 @@ def main():
         choices=["glider", "blinker", "toad", "gosper", "lwss", "pulsar"],
         help="Startmuster",
     )
-    parser.add_argument(
-        "--save-gif", type=str, default=None, help="GIF-Datei speichern (erfordert Pillow)"
-    )
-    parser.add_argument(
-        "--save-mp4", type=str, default=None, help="MP4 speichern (erfordert ffmpeg)"
-    )
-    parser.add_argument(
-        "--no-csv", dest="save_csv", action="store_false", help="Kein CSV schreiben"
-    )
+    parser.add_argument("--save-gif", type=str, default=None, help="GIF-Datei speichern (erfordert Pillow)")
+    parser.add_argument("--save-mp4", type=str, default=None, help="MP4 speichern (erfordert ffmpeg)")
+    parser.add_argument("--no-csv", dest="save_csv", action="store_false", help="Kein CSV schreiben")
     parser.set_defaults(animate=True, save_csv=True)
     args = parser.parse_args()
 
@@ -321,9 +309,7 @@ def main():
     else:
         _, stats = simulate(grid, steps=args.steps)
         if args.save_csv:
-            np.savetxt(
-                "gol_glider_evolution.csv", stats, delimiter=",", header="step,live_cells", fmt="%d"
-            )
+            np.savetxt("gol_glider_evolution.csv", stats, delimiter=",", header="step,live_cells", fmt="%d")
             print("✅ CSV 'gol_glider_evolution.csv' gespeichert")
 
     print("Hinweis: Für umfangreiche Muster siehe Gosper Glider Gun etc.")

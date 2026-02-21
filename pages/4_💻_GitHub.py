@@ -84,7 +84,7 @@ def load_github_developer_hubs():
             "active_repos": 450,
             "active_developers": 3200,
             "key_projects": ["Khan Academy", "edX", "Coursera"],
-            "tech_stack": ["React", "Python", "Node.js"]
+            "tech_stack": ["React", "Python", "Node.js"],
         },
         # USA - Boston/Cambridge (MIT/Harvard)
         {
@@ -95,7 +95,7 @@ def load_github_developer_hubs():
             "active_repos": 320,
             "active_developers": 1800,
             "key_projects": ["MIT OpenCourseWare", "Scratch"],
-            "tech_stack": ["JavaScript", "Java", "Python"]
+            "tech_stack": ["JavaScript", "Java", "Python"],
         },
         # UK - London
         {
@@ -106,7 +106,7 @@ def load_github_developer_hubs():
             "active_repos": 280,
             "active_developers": 2100,
             "key_projects": ["FutureLearn", "Raspberry Pi Foundation"],
-            "tech_stack": ["TypeScript", "React", "Go"]
+            "tech_stack": ["TypeScript", "React", "Go"],
         },
         # Germany - Berlin
         {
@@ -117,7 +117,7 @@ def load_github_developer_hubs():
             "active_repos": 190,
             "active_developers": 1400,
             "key_projects": ["Moodle Germany", "HPI Schul-Cloud"],
-            "tech_stack": ["PHP", "Python", "Vue.js"]
+            "tech_stack": ["PHP", "Python", "Vue.js"],
         },
         # India - Bangalore
         {
@@ -128,7 +128,7 @@ def load_github_developer_hubs():
             "active_repos": 340,
             "active_developers": 2800,
             "key_projects": ["BYJU'S Open Source", "Unacademy"],
-            "tech_stack": ["React Native", "Python", "Flutter"]
+            "tech_stack": ["React Native", "Python", "Flutter"],
         },
         # China - Beijing
         {
@@ -139,7 +139,7 @@ def load_github_developer_hubs():
             "active_repos": 410,
             "active_developers": 3500,
             "key_projects": ["XuetangX", "17zuoye"],
-            "tech_stack": ["Vue.js", "Python", "Golang"]
+            "tech_stack": ["Vue.js", "Python", "Golang"],
         },
         # Israel - Tel Aviv
         {
@@ -150,7 +150,7 @@ def load_github_developer_hubs():
             "active_repos": 150,
             "active_developers": 900,
             "key_projects": ["Codecademy", "Verbit"],
-            "tech_stack": ["React", "Node.js", "Python"]
+            "tech_stack": ["React", "Node.js", "Python"],
         },
         # Australia - Sydney
         {
@@ -161,7 +161,7 @@ def load_github_developer_hubs():
             "active_repos": 120,
             "active_developers": 750,
             "key_projects": ["Canva Education", "Mathspace"],
-            "tech_stack": ["React", "TypeScript", "Kotlin"]
+            "tech_stack": ["React", "TypeScript", "Kotlin"],
         },
         # Canada - Toronto
         {
@@ -172,7 +172,7 @@ def load_github_developer_hubs():
             "active_repos": 180,
             "active_developers": 1200,
             "key_projects": ["D2L (Desire2Learn)", "Top Hat"],
-            "tech_stack": ["React", "Java", "Python"]
+            "tech_stack": ["React", "Java", "Python"],
         },
         # Brazil - São Paulo
         {
@@ -183,8 +183,8 @@ def load_github_developer_hubs():
             "active_repos": 140,
             "active_developers": 980,
             "key_projects": ["Descomplica", "Veduca"],
-            "tech_stack": ["React", "Node.js", "PHP"]
-        }
+            "tech_stack": ["React", "Node.js", "PHP"],
+        },
     ]
     return hubs
 
@@ -200,13 +200,7 @@ def create_github_developer_map(hubs_data):
         folium.Map: Interactive map with developer hub markers
     """
     # Create base map centered on global view
-    m = folium.Map(
-        location=[20, 0],
-        zoom_start=2,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[20, 0], zoom_start=2, tiles="OpenStreetMap", width="100%", height=400)
 
     for hub in hubs_data:
         active_repos = hub.get("active_repos", 0)
@@ -214,11 +208,11 @@ def create_github_developer_map(hubs_data):
 
         # Marker color by repository count
         if active_repos >= 300:
-            icon_color = "red"         # Major hub (300+ repos)
+            icon_color = "red"  # Major hub (300+ repos)
         elif active_repos >= 150:
-            icon_color = "orange"      # Medium hub (150-299 repos)
+            icon_color = "orange"  # Medium hub (150-299 repos)
         else:
-            icon_color = "blue"        # Emerging hub (<150 repos)
+            icon_color = "blue"  # Emerging hub (<150 repos)
 
         # Circle size by developer count
         radius = 10 + (active_developers / 200)
@@ -248,7 +242,7 @@ def create_github_developer_map(hubs_data):
             fill=True,
             fillColor=icon_color,
             fillOpacity=0.5,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -256,7 +250,7 @@ def create_github_developer_map(hubs_data):
             location=[hub["lat"], hub["lon"]],
             popup=folium.Popup(popup_html, max_width=280),
             icon=folium.Icon(color=icon_color, icon="github", prefix="fa"),
-            tooltip=f"{hub['name']} ({active_repos} repos, {active_developers} devs)"
+            tooltip=f"{hub['name']} ({active_repos} repos, {active_developers} devs)",
         ).add_to(m)
 
     # Add legend
@@ -287,8 +281,7 @@ def main():
         st.divider()
 
         st.markdown("### 🔬 Scientific Basis")
-        st.markdown(
-            """
+        st.markdown("""
         **Activity Score:**
         
         Basiert auf:
@@ -297,14 +290,12 @@ def main():
         - Community Engagement
         
         **Status:** ⚠️ Own Research
-        """
-        )
+        """)
 
         st.divider()
 
         st.markdown("### 🔑 API Info")
-        st.markdown(
-            """
+        st.markdown("""
         **Rate Limits:**
         - Ohne Token: 60/hour
         - Mit Token: 5000/hour
@@ -314,8 +305,7 @@ def main():
         export GITHUB_TOKEN=ghp_xxx
         python 5d_github_api.py
         ```
-        """
-        )
+        """)
 
     # Main Content
     st.title("💻 GitHub & Open Source Projects")
@@ -353,14 +343,12 @@ def main():
 
     # World Map: Developer Communities
     st.header("🗺️ Global Developer Communities")
-    st.markdown(
-        """
+    st.markdown("""
         Interactive map showing major EdTech and Open Source developer hubs worldwide. 
         Data reflects **active repositories** and **developer counts** in each region.
         
         📊 **Legend:** Red = Major Hub (≥300 repos), Orange = Medium (150-299), Blue = Emerging (<150)
-        """
-    )
+        """)
 
     hubs_data = load_github_developer_hubs()
     developer_map = create_github_developer_map(hubs_data)
@@ -380,8 +368,7 @@ def main():
         st.header("🔍 Repositories nach Thema")
 
         if not repos:
-            st.warning(
-                """
+            st.warning("""
             **Keine GitHub-Daten verfügbar.**
             
             Führe den GitHub Explorer aus:
@@ -390,8 +377,7 @@ def main():
             ```
             
             **Optional:** Setze `GITHUB_TOKEN` für höhere Rate Limits
-            """
-            )
+            """)
         else:
             # Query Filter
             queries = list(repos.keys())
@@ -403,9 +389,7 @@ def main():
                 st.subheader(f"📦 {len(repo_list)} Repositories zu '{selected_query}'")
 
                 # Sort options
-                sort_by = st.radio(
-                    "Sortieren nach:", ["Stars", "Activity Score", "Forks", "Name"], horizontal=True
-                )
+                sort_by = st.radio("Sortieren nach:", ["Stars", "Activity Score", "Forks", "Name"], horizontal=True)
 
                 if sort_by == "Stars":
                     repo_list = sorted(repo_list, key=lambda x: x.get("stars", 0), reverse=True)
@@ -417,9 +401,7 @@ def main():
                     repo_list = sorted(repo_list, key=lambda x: x.get("name", ""))
 
                 for i, repo in enumerate(repo_list[:15], 1):
-                    with st.expander(
-                        f"{i}. {repo.get('name', 'No name')} ⭐ {repo.get('stars', 0)}"
-                    ):
+                    with st.expander(f"{i}. {repo.get('name', 'No name')} ⭐ {repo.get('stars', 0)}"):
                         col_a, col_b = st.columns([3, 1])
 
                         with col_a:
@@ -467,8 +449,7 @@ def main():
 
         # License Distribution
         st.subheader("📜 License Info")
-        st.markdown(
-            """
+        st.markdown("""
         **Open Source Lizenzen:**
         - MIT (am häufigsten)
         - Apache 2.0
@@ -476,8 +457,7 @@ def main():
         - BSD-3-Clause
         
         **Best Practice:** MIT für maximale Kompatibilität
-        """
-        )
+        """)
 
     st.divider()
 
@@ -491,8 +471,7 @@ def main():
 
         st.latex(r"A_{score} = 0.4 \cdot S + 0.3 \cdot F + 0.2 \cdot U + 0.1 \cdot C")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Komponenten:**
         - **S (Stars):** GitHub Stars (Community Interest)
         - **F (Forks):** Anzahl Forks (Active Usage)
@@ -511,8 +490,7 @@ def main():
         - Vergleich mit GitHub Trending Algorithm
         - Korrelation mit Download-Statistiken
         - Community Feedback (Developer Survey)
-        """
-        )
+        """)
 
         # Interactive Calculator
         st.subheader("🧮 Activity Score Rechner")
@@ -528,10 +506,7 @@ def main():
             contributors_input = st.number_input("Contributors", 1, 1000, 10, 1)
 
         calculated_score = (
-            (stars_input * 0.4)
-            + (forks_input * 0.3)
-            + (updates_input * 0.2)
-            + (contributors_input * 0.1)
+            (stars_input * 0.4) + (forks_input * 0.3) + (updates_input * 0.2) + (contributors_input * 0.1)
         ) / 100
 
         st.metric("Berechneter Activity Score", f"{calculated_score:.2f}")
@@ -539,8 +514,7 @@ def main():
     with tab2:
         st.subheader("Quality Metrics")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Repository Quality Assessment:**
         
         | Metric | Weight | Source |
@@ -559,14 +533,12 @@ def main():
         - **Poor:** 0-39 points
         
         **Implementation:** Custom scoring algorithm in `5d_github_api.py`
-        """
-        )
+        """)
 
     with tab3:
         st.subheader("Community Health")
 
-        st.markdown(
-            """
+        st.markdown("""
         **GitHub Community Health Score:**
         
         Automatisch berechnet von GitHub (seit 2017):
@@ -593,8 +565,7 @@ def main():
         **Resources:**
         - [GitHub Community Guidelines](https://docs.github.com/en/communities)
         - [Open Source Guides](https://opensource.guide)
-        """
-        )
+        """)
 
     st.divider()
 
@@ -602,8 +573,7 @@ def main():
     st.header("📚 Open Source Best Practices")
 
     with st.expander("🔬 Resources & Standards (expandable)"):
-        st.markdown(
-            """
+        st.markdown("""
         ### Relevante Standards & Richtlinien
         
         **Open Source Licenses:**
@@ -627,8 +597,7 @@ def main():
         ---
         
         **Implementation:** Siehe `5d_github_api.py` für API-Integration
-        """
-        )
+        """)
 
     # Footer
     st.divider()
@@ -643,9 +612,7 @@ def main():
         st.markdown(f"**Page Updated:** {datetime.now().strftime('%Y-%m-%d')}")
 
     with col_c:
-        st.markdown(
-            "[Explorer Source](5d_github_api.py) | [GitHub Repo](https://github.com/karlitos1337/5d)"
-        )
+        st.markdown("[Explorer Source](5d_github_api.py) | [GitHub Repo](https://github.com/karlitos1337/5d)")
 
 
 if __name__ == "__main__":

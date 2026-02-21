@@ -295,9 +295,7 @@ class TestCoercionAlternatives:
         max_resolution_days = 7
         traditional_resolution_days = 30
 
-        assert (
-            max_resolution_days < traditional_resolution_days
-        ), "Faster resolution than traditional"
+        assert max_resolution_days < traditional_resolution_days, "Faster resolution than traditional"
 
     def test_rule_legitimacy_perception(self):
         """

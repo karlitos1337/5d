@@ -295,7 +295,9 @@ class IMPValidationStudy:
         min_alpha = min([r["cronbach_alpha"] for r in self.results.values()])
 
         if min_alpha >= 0.8:
-            return "VALIDATED: Alle Dimensionen zeigen gute bis exzellente Reliabilität (α >= 0.8). Bereit für Preprint."
+            return (
+                "VALIDATED: Alle Dimensionen zeigen gute bis exzellente Reliabilität (α >= 0.8). Bereit für Preprint."
+            )
         else:
             return f"HYPOTHESIS GENERATION: Mindestens eine Dimension ist unter 0.8 (Min: {min_alpha:.2f}). Revision erforderlich."
 

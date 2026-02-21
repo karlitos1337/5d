@@ -83,9 +83,7 @@ def display_bibtex_reference(key: str, title: str, description: str = None):
         st.caption("💡 Click the copy icon in the code block above to copy BibTeX entry")
 
 
-def display_reference_section(
-    references: list[dict], title: str = "📚 Wissenschaftliche Referenzen"
-):
+def display_reference_section(references: list[dict], title: str = "📚 Wissenschaftliche Referenzen"):
     """
     Display a section with multiple references.
 
@@ -110,18 +108,14 @@ def display_reference_section(
     st.divider()
     st.header(title)
 
-    st.markdown(
-        """
+    st.markdown("""
     **Alle Referenzen verfügbar in:** `07_daten_analysen/5d-relevant-sources.bib`
     
     Klicken Sie auf eine Referenz, um die vollständige BibTeX-Citation anzuzeigen.
-    """
-    )
+    """)
 
     for ref in references:
-        display_bibtex_reference(
-            key=ref["key"], title=ref["title"], description=ref.get("description", None)
-        )
+        display_bibtex_reference(key=ref["key"], title=ref["title"], description=ref.get("description", None))
 
 
 def get_reference_count():

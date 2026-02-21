@@ -17,9 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from utils.mobile_responsive import inject_mobile_css
 
-st.set_page_config(
-    page_title="5D Non-Coercion", page_icon="🤝", layout="wide", initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="5D Non-Coercion", page_icon="🤝", layout="wide", initial_sidebar_state="expanded")
 
 # Inject mobile-responsive CSS
 inject_mobile_css()
@@ -46,7 +44,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.92,
             "governance_quality": 1.78,  # WGI 2023
             "key_features": ["Referendums", "Cantonal autonomy", "Consensus decision-making"],
-            "source": "Ostrom (2000), WGI (2023)"
+            "source": "Ostrom (2000), WGI (2023)",
         },
         # Spain - Mondragon Cooperatives
         {
@@ -58,7 +56,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.88,
             "workers": 81000,
             "key_features": ["Worker ownership", "Democratic management", "Profit sharing"],
-            "source": "Cheney (1999)"
+            "source": "Cheney (1999)",
         },
         # USA - Amish Communities
         {
@@ -70,7 +68,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.90,
             "community_size": 35000,
             "key_features": ["Mutual aid", "Barn raising", "Resource sharing"],
-            "source": "Ostrom (1990)"
+            "source": "Ostrom (1990)",
         },
         # Japan - Iriaichi Commons
         {
@@ -82,7 +80,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.89,
             "years_active": 400,
             "key_features": ["Community forest management", "Self-regulation", "No tragedy of commons"],
-            "source": "Ostrom (1990), McKean (1992)"
+            "source": "Ostrom (1990), McKean (1992)",
         },
         # Philippines - Zanjera Irrigation
         {
@@ -94,7 +92,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.86,
             "years_active": 200,
             "key_features": ["Water sharing", "Community maintenance", "Dispute resolution"],
-            "source": "Ostrom (1990), Siy (1982)"
+            "source": "Ostrom (1990), Siy (1982)",
         },
         # Turkey - Alanya Fisheries
         {
@@ -106,7 +104,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.87,
             "fishermen": 100,
             "key_features": ["Rotating fishing spots", "Self-monitoring", "Local enforcement"],
-            "source": "Ostrom (1990), Berkes (1986)"
+            "source": "Ostrom (1990), Berkes (1986)",
         },
         # Nepal - Forest User Groups
         {
@@ -118,7 +116,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.85,
             "user_groups": 22000,
             "key_features": ["Community management", "Benefit sharing", "Sustainable harvesting"],
-            "source": "Ostrom (2000), Chhatre & Agrawal (2009)"
+            "source": "Ostrom (2000), Chhatre & Agrawal (2009)",
         },
         # India - Gram Panchayat
         {
@@ -130,7 +128,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.84,
             "villages": 941,
             "key_features": ["Participatory budgeting", "Local autonomy", "Social programs"],
-            "source": "Putnam (1993), Isaac & Franke (2002)"
+            "source": "Putnam (1993), Isaac & Franke (2002)",
         },
         # Denmark - Folk High Schools Network
         {
@@ -142,7 +140,7 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.91,
             "schools": 70,
             "key_features": ["Student governance", "Democratic learning", "Community integration"],
-            "source": "Korsgaard (2012), Gundemose (2021)"
+            "source": "Korsgaard (2012), Gundemose (2021)",
         },
         # Bolivia - Indigenous Commons
         {
@@ -154,8 +152,8 @@ def load_cooperative_systems_data():
             "cooperation_score": 0.83,
             "community_size": 50000,
             "key_features": ["Ayllu system", "Reciprocity (Ayni)", "Collective land management"],
-            "source": "Ostrom (1990), Van den Berg & Mamani (2019)"
-        }
+            "source": "Ostrom (1990), Van den Berg & Mamani (2019)",
+        },
     ]
     return systems
 
@@ -171,25 +169,19 @@ def create_cooperative_systems_map(systems_data):
         folium.Map: Interactive map with cooperative system markers
     """
     # Create base map centered on Europe
-    m = folium.Map(
-        location=[30, 10],
-        zoom_start=2,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[30, 10], zoom_start=2, tiles="OpenStreetMap", width="100%", height=400)
 
     # Color mapping by system type
     type_colors = {
-        "Direct Democracy": "#2ECC40",        # Green
-        "Worker Cooperative": "#FF851B",      # Orange
-        "Traditional Commons": "#0074D9",     # Blue
-        "Forest Commons": "#3D9970",          # Teal
-        "Water Commons": "#39CCCC",           # Cyan
-        "Fishery Commons": "#01FF70",         # Lime
-        "Local Governance": "#B10DC9",        # Purple
+        "Direct Democracy": "#2ECC40",  # Green
+        "Worker Cooperative": "#FF851B",  # Orange
+        "Traditional Commons": "#0074D9",  # Blue
+        "Forest Commons": "#3D9970",  # Teal
+        "Water Commons": "#39CCCC",  # Cyan
+        "Fishery Commons": "#01FF70",  # Lime
+        "Local Governance": "#B10DC9",  # Purple
         "Educational Cooperative": "#F012BE",  # Magenta
-        "Indigenous Commons": "#85144b"       # Maroon
+        "Indigenous Commons": "#85144b",  # Maroon
     }
 
     for system in systems_data:
@@ -230,7 +222,7 @@ def create_cooperative_systems_map(systems_data):
             fill=True,
             fillColor=circle_color,
             fillOpacity=0.6,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -238,7 +230,7 @@ def create_cooperative_systems_map(systems_data):
             location=[system["lat"], system["lon"]],
             popup=folium.Popup(popup_html, max_width=280),
             icon=folium.Icon(color=icon_color, icon="handshake-o", prefix="fa"),
-            tooltip=f"{system['name']} ({system_type})"
+            tooltip=f"{system['name']} ({system_type})",
         ).add_to(m)
 
     # Add legend
@@ -319,8 +311,7 @@ def main():
         st.divider()
 
         st.markdown("### 🔬 Scientific Basis")
-        st.markdown(
-            """
+        st.markdown("""
         **Commons Theory:**
         
         Ostrom, E. (1990)
@@ -332,14 +323,12 @@ def main():
         - Intrinsische Motivation
         
         **Status:** ✅ Peer-Reviewed (Nobelpreis 2009)
-        """
-        )
+        """)
 
         st.divider()
 
         st.markdown("### 📖 Key Ideas")
-        st.markdown(
-            """
+        st.markdown("""
         **Zwanglosigkeit:**
         1. Freiwillige Teilnahme
         2. Keine Bestrafung
@@ -347,8 +336,7 @@ def main():
         4. Intrinsische Motivation
         
         **Kooperation > Zwang**
-        """
-        )
+        """)
 
     # Main Content
     st.title("🤝 Non-Coercion: Zwanglosigkeit & Kooperation")
@@ -356,15 +344,13 @@ def main():
 
     # World Map: Cooperative Systems
     st.header("🗺️ Successful Cooperative Systems Worldwide")
-    st.markdown(
-        """
+    st.markdown("""
         Interactive map showing **Ostrom's Commons** examples and contemporary cooperative 
         governance systems. **Cooperation Score** reflects sustainability, self-governance, 
         and absence of coercion.
         
         📊 **Legend:** Green markers = High cooperation (≥0.88), Orange = Medium (0.80-0.87), Blue = Lower (<0.80)
-        """
-    )
+        """)
 
     systems_data = load_cooperative_systems_data()
     systems_map = create_cooperative_systems_map(systems_data)
@@ -400,15 +386,13 @@ def main():
     with col_left:
         st.header("🎮 Agent-Based Simulation")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Modell:** Agenten wählen zwischen Kooperation und Defektion
         
         - **Kooperation:** Alle profitieren (Common Pool Resource)
         - **Defektion:** Kurzfristiger Vorteil, langfristige Kosten
         - **Zwang (Coercion Penalty):** Reduziert Defektion-Payoff
-        """
-        )
+        """)
 
         # Parameters
         st.subheader("⚙️ Parameter")
@@ -420,14 +404,10 @@ def main():
                 "Cooperation Payoff", 1.0, 10.0, 5.0, 0.5, help="Payoff pro Runde bei Kooperation"
             )
 
-            agents = st.slider(
-                "Anzahl Agents", 10, 200, 50, 10, help="Mehr Agents → komplexere Dynamik"
-            )
+            agents = st.slider("Anzahl Agents", 10, 200, 50, 10, help="Mehr Agents → komplexere Dynamik")
 
         with param_col2:
-            coercion_penalty = st.slider(
-                "Coercion Penalty", 0.0, 10.0, 3.0, 0.5, help="Strafe für Defektion (Zwang)"
-            )
+            coercion_penalty = st.slider("Coercion Penalty", 0.0, 10.0, 3.0, 0.5, help="Strafe für Defektion (Zwang)")
 
             rounds = st.slider("Runden", 10, 200, 50, 10, help="Simulationsschritte")
 
@@ -479,8 +459,7 @@ def main():
             st.subheader("📈 Interpretation")
 
             if coop_ratio > 75:
-                st.success(
-                    f"""
+                st.success(f"""
                 ✅ **Kooperation dominiert ({coop_ratio:.1f}%)**
                 
                 - Hohe Cooperation Payoffs fördern Zusammenarbeit
@@ -488,11 +467,9 @@ def main():
                 - Stabile Kooperation erreicht
                 
                 **Parallele:** Funktioniert wie alternative Schulen (Sudbury, Folk High Schools)
-                """
-                )
+                """)
             elif coop_ratio > 40:
-                st.warning(
-                    f"""
+                st.warning(f"""
                 ⚠️ **Mixed Equilibrium ({coop_ratio:.1f}%)**
                 
                 - Kooperation und Defektion koexistieren
@@ -500,11 +477,9 @@ def main():
                 - Potenzial für Verbesserung durch höhere Payoffs
                 
                 **Parallele:** Traditionelle Schulen mit Zwangsmaßnahmen
-                """
-                )
+                """)
             else:
-                st.error(
-                    f"""
+                st.error(f"""
                 ❌ **Defektion dominiert ({100 - coop_ratio:.1f}%)**
                 
                 - Zu niedrige Cooperation Payoffs
@@ -512,8 +487,7 @@ def main():
                 - Kollabierende Kooperation
                 
                 **Parallele:** Gescheiterte Common Pool Resources (Hardin's "Tragedy of the Commons")
-                """
-                )
+                """)
 
             # ASCII Chart (simple bar chart)
             st.divider()
@@ -522,9 +496,7 @@ def main():
             st.markdown("**Cooperators (🟢) vs. Defectors (🔴)**")
 
             # Sample every 5 rounds for display
-            sample_rounds = list(
-                range(0, len(history["cooperators"]), max(1, len(history["cooperators"]) // 20))
-            )
+            sample_rounds = list(range(0, len(history["cooperators"]), max(1, len(history["cooperators"]) // 20)))
 
             for i in sample_rounds:
                 coop = history["cooperators"][i]
@@ -539,8 +511,7 @@ def main():
     with col_right:
         st.header("📖 Ostrom's Principles")
 
-        st.markdown(
-            """
+        st.markdown("""
         **8 Design Principles for Successful Commons:**
         
         1️⃣ **Clearly Defined Boundaries**
@@ -574,8 +545,7 @@ def main():
         8️⃣ **Nested Enterprises**
         - Mehrere Ebenen
         - Polyzentrisch
-        """
-        )
+        """)
 
         st.divider()
 
@@ -591,8 +561,7 @@ def main():
 
         st.divider()
 
-        st.markdown(
-            """
+        st.markdown("""
         **Categories:**
         
         🌊 **Fishing Communities:**
@@ -611,15 +580,13 @@ def main():
         - Sudbury Valley School (USA)
         - Folk High Schools (Denmark)
         - Free Schools (UK)
-        """
-        )
+        """)
 
         st.divider()
 
         st.subheader("🧮 Implementation")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Simulation Details:**
         
         - Agent-Based Model
@@ -627,8 +594,7 @@ def main():
         - Dynamic Equilibrium
         
         **Code:** `zwi_streamlit.py` (standalone app)
-        """
-        )
+        """)
 
     st.divider()
 
@@ -640,8 +606,7 @@ def main():
     with tab1:
         st.subheader("Payoff Matrix")
 
-        st.markdown(
-            """
+        st.markdown("""
         **2-Player Game:**
         
         |   | Cooperate | Defect |
@@ -658,16 +623,12 @@ def main():
         **Prisoner's Dilemma:** T > R > P > S
         
         **In unserer Simulation:**
-        """
-        )
+        """)
 
         st.latex(r"\text{Payoff}_{cooperate} = C \cdot \frac{N_{coop}}{N_{total}}")
-        st.latex(
-            r"\text{Payoff}_{defect} = 0.5 \cdot C - Penalty \cdot \frac{N_{defect}}{N_{total}}"
-        )
+        st.latex(r"\text{Payoff}_{defect} = 0.5 \cdot C - Penalty \cdot \frac{N_{defect}}{N_{total}}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Parameter:**
         - C: Cooperation Payoff (Slider)
         - Penalty: Coercion Penalty (Slider)
@@ -679,14 +640,12 @@ def main():
         - Mehr Cooperators → höherer Payoff für alle Cooperators
         - Mehr Defectors → höherer Penalty für alle Defectors
         - **Tipping Point:** Ab bestimmtem Cooperation-Anteil wird Kooperation dominant
-        """
-        )
+        """)
 
     with tab2:
         st.subheader("Nash Equilibrium")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Definition:**
         
         Ein **Nash Equilibrium** ist ein Strategieprofil, bei dem kein Spieler durch einseitige Strategieänderung seinen Payoff verbessern kann.
@@ -704,15 +663,13 @@ def main():
         - Kommunikation
         
         **In unserer Simulation:**
-        """
-        )
+        """)
 
         st.latex(
             r"\text{Equilibrium} = \begin{cases} \text{Cooperate} & \text{if } C > Penalty \\ \text{Defect} & \text{if } Penalty > C \end{cases}"
         )
 
-        st.markdown(
-            """
+        st.markdown("""
         **Dynamisches Gleichgewicht:**
         - Agents lernen und passen Strategien an
         - Evolutionär stabile Strategien (ESS)
@@ -724,14 +681,12 @@ def main():
         - **Resilience:** System erholt sich von Defektion
         - **Social Participation:** Interaktion notwendig
         - **Authenticity:** Ehrliche Signale
-        """
-        )
+        """)
 
     with tab3:
         st.subheader("Ostrom's Theory")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Governing the Commons (1990):**
         
         Elinor Ostrom widerlegte **Garrett Hardin's "Tragedy of the Commons"** (1968):
@@ -748,15 +703,11 @@ def main():
         - Keine zentrale Autorität notwendig
         
         **Kernidee:**
-        """
-        )
+        """)
 
-        st.latex(
-            r"\text{Cooperation} \propto \frac{\text{Trust} \times \text{Communication}}{\text{Coercion}}"
-        )
+        st.latex(r"\text{Cooperation} \propto \frac{\text{Trust} \times \text{Communication}}{\text{Coercion}}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **8 Design Principles** (siehe rechte Spalte) garantieren Erfolg
         
         **Nobelpreis 2009:**
@@ -773,8 +724,7 @@ def main():
         - Ostrom, E. (1990). *Governing the Commons*. Cambridge University Press.
         - Ostrom, E. (2010). *Beyond Markets and States*. Nobel Prize Lecture.
         - Axelrod, R. (1984). *The Evolution of Cooperation*. Basic Books.
-        """
-        )
+        """)
 
     st.divider()
 
@@ -782,8 +732,7 @@ def main():
     st.header("📚 Wissenschaftliche Quellen")
 
     with st.expander("🔬 References (expandable)"):
-        st.markdown(
-            """
+        st.markdown("""
         ### Primärquellen
         
         **1. Ostrom, E. (1990)**
@@ -838,8 +787,7 @@ def main():
         **BibTeX:** Siehe `07_daten_analysen/5d-relevant-sources.bib`
         
         **Code:** `zwi_streamlit.py` (standalone app)
-        """
-        )
+        """)
 
     # Footer
     st.divider()

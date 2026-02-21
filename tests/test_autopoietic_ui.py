@@ -1,18 +1,17 @@
-
 import streamlit as st
 from unittest.mock import MagicMock
 import sys
 import os
 
 # Ensure the pages directory is in the path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 # Mock streamlit before importing the page
 st.set_page_config = MagicMock()
 st.title = MagicMock()
 st.markdown = MagicMock()
 st.sidebar = MagicMock()
-st.slider = MagicMock(return_value=10) # Default return value for sliders
+st.slider = MagicMock(return_value=10)  # Default return value for sliders
 st.checkbox = MagicMock(return_value=True)
 st.button = MagicMock(return_value=False)
 st.metric = MagicMock()
@@ -25,6 +24,7 @@ st.plotly_chart = MagicMock()
 st.expander = MagicMock()
 st.success = MagicMock()
 st.download_button = MagicMock()
+
 
 def test_autopoietic_simulation_metrics():
     """
@@ -48,7 +48,8 @@ def test_autopoietic_simulation_metrics():
 
     pass
 
+
 def test_syntax():
     """Simple syntax check for the file."""
-    with open('pages/9_🧪_Autopoietic_Class.py', 'r') as f:
-        compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
+    with open("pages/9_🧪_Autopoietic_Class.py", "r") as f:
+        compile(f.read(), "pages/9_🧪_Autopoietic_Class.py", "exec")

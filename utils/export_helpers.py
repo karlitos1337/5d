@@ -15,9 +15,7 @@ import pandas as pd
 import streamlit as st
 
 
-def create_export_buttons(
-    data: dict[str, Any], filename_base: str, include_formats: list[str] | None = None
-):
+def create_export_buttons(data: dict[str, Any], filename_base: str, include_formats: list[str] | None = None):
     """
     Create download buttons for multiple export formats.
 
@@ -156,9 +154,7 @@ def _prepare_for_json(data: dict[str, Any]) -> dict[str, Any]:
         elif isinstance(value, dict):
             result[key] = _prepare_for_json(value)
         elif isinstance(value, (list, tuple)):
-            result[key] = [
-                _prepare_for_json(item) if isinstance(item, dict) else item for item in value
-            ]
+            result[key] = [_prepare_for_json(item) if isinstance(item, dict) else item for item in value]
         else:
             result[key] = value
 
@@ -235,12 +231,10 @@ def display_export_section(
         st.markdown("**Save locally:**")
         create_save_button(data, filename_base)
 
-    st.caption(
-        """
+    st.caption("""
     💡 **Tip:** JSON files include complete simulation state and can be re-loaded.
     CSV files are best for analysis in Excel/Python/R.
-    """
-    )
+    """)
 
 
 # Example usage

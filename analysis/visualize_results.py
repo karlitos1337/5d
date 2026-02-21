@@ -14,9 +14,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-def generate_dimension_radar_chart(
-    profile: dict, title: str = "5D-Intelligence Profil"
-) -> go.Figure:
+def generate_dimension_radar_chart(profile: dict, title: str = "5D-Intelligence Profil") -> go.Figure:
     """Radar-Chart für einzelnes 5D-Profil."""
     dimensions = ["Neurobiologie", "Psychologie", "Philosophie", "Ökonomie", "Technologie"]
 
@@ -92,9 +90,7 @@ def generate_comparison_radar(profiles: list[dict], labels: list[str]) -> go.Fig
     return fig
 
 
-def generate_cluster_heatmap(
-    cluster_centers: list[list[float]], feature_names: list[str]
-) -> go.Figure:
+def generate_cluster_heatmap(cluster_centers: list[list[float]], feature_names: list[str]) -> go.Figure:
     """Heatmap der Cluster-Zentren."""
     df = pd.DataFrame(cluster_centers, columns=feature_names)
 

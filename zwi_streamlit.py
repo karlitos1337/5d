@@ -113,6 +113,4 @@ else:
     mat = z_types
     scale = "Gray"
 
-st.plotly_chart(
-    px.imshow(mat, color_continuous_scale=scale, origin="upper"), use_container_width=True
-)
+st.plotly_chart(px.imshow(mat, color_continuous_scale=scale, origin="upper"), use_container_width=True)

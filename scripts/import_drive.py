@@ -73,17 +73,13 @@ def apply_mapping(root: Path, force: bool = False):
             continue
 
         # Web map data
-        if (
-            "web" in rel.parts or "5d-map" in rel.parts or "map" in rel.parts
-        ) and p.suffix.lower() == ".json":
+        if ("web" in rel.parts or "5d-map" in rel.parts or "map" in rel.parts) and p.suffix.lower() == ".json":
             dst = Path("web/5d-map/data") / p.name
             safe_copy(p, dst, force)
             continue
 
         # BibTeX sources
-        if p.suffix.lower() == ".bib" and (
-            "07_daten_analysen" in rel_str or "bib" in p.name.lower()
-        ):
+        if p.suffix.lower() == ".bib" and ("07_daten_analysen" in rel_str or "bib" in p.name.lower()):
             dst = Path("07_daten_analysen") / p.name
             safe_copy(p, dst, force)
             continue

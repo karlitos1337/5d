@@ -145,9 +145,7 @@ def main():
 
     # Load MNIST (subset)
     print("\nLoading MNIST...")
-    transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
-    )
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 
     train_dataset = datasets.MNIST("data", train=True, download=True, transform=transform)
     test_dataset = datasets.MNIST("data", train=False, transform=transform)
@@ -173,30 +171,21 @@ def main():
 
         # Initialize model
         if model_name == "5D-Net":
-            model = FiveDNet(input_size=784, hidden_size=config.hidden_dim, num_classes=10).to(
-                config.device
-            )
+            model = FiveDNet(input_size=784, hidden_size=config.hidden_dim, num_classes=10).to(config.device)
         else:
-            model = BaselineNet(input_size=784, hidden_size=config.hidden_dim, num_classes=10).to(
-                config.device
-            )
+            model = BaselineNet(input_size=784, hidden_size=config.hidden_dim, num_classes=10).to(config.device)
 
         # Count parameters
         n_params = sum(p.numel() for p in model.parameters())
         print(f"Parameters: {n_params:,}")
 
-        optimizer = optim.Adam(
-            model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
-        )
+        optimizer = optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay)
 
         # Training
         for epoch in range(config.epochs):
             print(f"\nEpoch {epoch+1}/{config.epochs}")
             train_metrics = train_quick(model, train_loader, optimizer, config)
-            print(
-                f"  Train Loss: {train_metrics['loss']:.4f} | "
-                f"Train Acc: {train_metrics['accuracy']:.2f}%"
-            )
+            print(f"  Train Loss: {train_metrics['loss']:.4f} | " f"Train Acc: {train_metrics['accuracy']:.2f}%")
 
         # Evaluation on clean test set
         print("\nEvaluation...")

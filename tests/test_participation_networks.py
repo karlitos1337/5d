@@ -213,9 +213,7 @@ class TestDiffusionDynamics:
 
         # Small-world should be faster (lower t_50)
         if t_50_sw is not None and t_50_lattice is not None:
-            assert (
-                t_50_sw < t_50_lattice
-            ), f"Small-world not faster: t_50={t_50_sw} vs lattice={t_50_lattice}"
+            assert t_50_sw < t_50_lattice, f"Small-world not faster: t_50={t_50_sw} vs lattice={t_50_lattice}"
 
     def test_seed_fraction_impact(self):
         """Higher initial activation → faster diffusion."""
@@ -225,20 +223,14 @@ class TestDiffusionDynamics:
         max_steps = 50
 
         # Low seed
-        t_50_low = self._simulate_diffusion(
-            G, seed_frac=0.05, threshold=threshold, max_steps=max_steps
-        )
+        t_50_low = self._simulate_diffusion(G, seed_frac=0.05, threshold=threshold, max_steps=max_steps)
 
         # High seed
-        t_50_high = self._simulate_diffusion(
-            G, seed_frac=0.20, threshold=threshold, max_steps=max_steps
-        )
+        t_50_high = self._simulate_diffusion(G, seed_frac=0.20, threshold=threshold, max_steps=max_steps)
 
         # Higher seed should reach 50% faster (or immediately if seed > 50%)
         if t_50_high is not None and t_50_low is not None:
-            assert (
-                t_50_high <= t_50_low
-            ), f"Higher seed not faster: t_50={t_50_high} vs low={t_50_low}"
+            assert t_50_high <= t_50_low, f"Higher seed not faster: t_50={t_50_high} vs low={t_50_low}"
 
     @staticmethod
     def _simulate_diffusion(G, seed_frac, threshold, max_steps):

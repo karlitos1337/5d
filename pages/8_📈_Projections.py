@@ -17,9 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from utils.mobile_responsive import inject_mobile_css
 
-st.set_page_config(
-    page_title="5D Projections", page_icon="📈", layout="wide", initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="5D Projections", page_icon="📈", layout="wide", initial_sidebar_state="expanded")
 
 # Inject mobile-responsive CSS
 inject_mobile_css()
@@ -76,7 +74,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.45,  # 45% adoption projected
             "readiness_score": 0.88,
             "key_drivers": ["Folk High Schools legacy", "High WGI governance", "Low dropout rates"],
-            "scenario": "Optimistic"
+            "scenario": "Optimistic",
         },
         {
             "name": "Netherlands",
@@ -86,7 +84,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.42,
             "readiness_score": 0.85,
             "key_drivers": ["Montessori tradition", "Progressive education policy", "High autonomy"],
-            "scenario": "Optimistic"
+            "scenario": "Optimistic",
         },
         # Westeuropa - Moderate readiness
         {
@@ -97,7 +95,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.35,
             "readiness_score": 0.78,
             "key_drivers": ["Waldorf schools network", "Federal education system", "Mixed governance"],
-            "scenario": "Moderate"
+            "scenario": "Moderate",
         },
         {
             "name": "UK",
@@ -107,7 +105,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.32,
             "readiness_score": 0.75,
             "key_drivers": ["Summerhill legacy", "Democratic schools movement", "High mental health burden"],
-            "scenario": "Moderate"
+            "scenario": "Moderate",
         },
         # Nordamerika - Mixed adoption
         {
@@ -118,7 +116,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.38,
             "readiness_score": 0.80,
             "key_drivers": ["Sudbury schools", "MIT/Harvard research hubs", "Homeschooling culture"],
-            "scenario": "Moderate"
+            "scenario": "Moderate",
         },
         {
             "name": "USA - California",
@@ -128,7 +126,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.40,
             "readiness_score": 0.82,
             "key_drivers": ["EdTech innovation", "Progressive policies", "High depression rates drive demand"],
-            "scenario": "Optimistic"
+            "scenario": "Optimistic",
         },
         # Asien - Rapid growth regions
         {
@@ -139,7 +137,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.28,
             "readiness_score": 0.70,
             "key_drivers": ["Tokkatsu tradition", "Low dropout but high stress", "Aging population concerns"],
-            "scenario": "Conservative"
+            "scenario": "Conservative",
         },
         {
             "name": "South Korea",
@@ -149,7 +147,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.25,
             "readiness_score": 0.68,
             "key_drivers": ["Mental health crisis", "High education pressure", "Tech infrastructure"],
-            "scenario": "Conservative"
+            "scenario": "Conservative",
         },
         {
             "name": "India",
@@ -159,7 +157,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.22,
             "readiness_score": 0.62,
             "key_drivers": ["EdTech growth", "Large youth population", "Governance challenges"],
-            "scenario": "Conservative"
+            "scenario": "Conservative",
         },
         # Lateinamerika - Emerging adoption
         {
@@ -170,7 +168,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.20,
             "readiness_score": 0.58,
             "key_drivers": ["Inequality driver", "Democratic education pilots", "Limited resources"],
-            "scenario": "Conservative"
+            "scenario": "Conservative",
         },
         {
             "name": "Chile",
@@ -180,7 +178,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.24,
             "readiness_score": 0.65,
             "key_drivers": ["Education reform efforts", "Student activism", "Moderate governance"],
-            "scenario": "Conservative"
+            "scenario": "Conservative",
         },
         # Afrika - Early-stage
         {
@@ -191,7 +189,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.15,
             "readiness_score": 0.48,
             "key_drivers": ["Mobile EdTech", "Youth demographic dividend", "Resource constraints"],
-            "scenario": "Conservative"
+            "scenario": "Conservative",
         },
         # Ozeanien
         {
@@ -202,7 +200,7 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.36,
             "readiness_score": 0.77,
             "key_drivers": ["Indigenous education models", "High mental health awareness", "Strong governance"],
-            "scenario": "Moderate"
+            "scenario": "Moderate",
         },
         {
             "name": "New Zealand",
@@ -212,8 +210,8 @@ def load_regional_adoption_projections():
             "adoption_2030": 0.40,
             "readiness_score": 0.83,
             "key_drivers": ["Māori Kura Kaupapa", "Progressive policies", "Low population enables pilots"],
-            "scenario": "Optimistic"
-        }
+            "scenario": "Optimistic",
+        },
     ]
     return regions
 
@@ -229,19 +227,13 @@ def create_regional_adoption_map(regions_data):
         folium.Map: Interactive map with regional adoption projections
     """
     # Create base map centered on global view
-    m = folium.Map(
-        location=[20, 0],
-        zoom_start=2,
-        tiles="OpenStreetMap",
-        width="100%",
-        height=400
-    )
+    m = folium.Map(location=[20, 0], zoom_start=2, tiles="OpenStreetMap", width="100%", height=400)
 
     # Scenario colors
     scenario_colors = {
-        "Optimistic": "#2ECC40",    # Green
-        "Moderate": "#FF851B",       # Orange
-        "Conservative": "#0074D9"    # Blue
+        "Optimistic": "#2ECC40",  # Green
+        "Moderate": "#FF851B",  # Orange
+        "Conservative": "#0074D9",  # Blue
     }
 
     for region in regions_data:
@@ -254,11 +246,11 @@ def create_regional_adoption_map(regions_data):
 
         # Icon color by adoption rate
         if adoption_2030 >= 0.35:
-            icon_color = "green"     # High adoption (≥35%)
+            icon_color = "green"  # High adoption (≥35%)
         elif adoption_2030 >= 0.25:
-            icon_color = "orange"    # Medium adoption (25-34%)
+            icon_color = "orange"  # Medium adoption (25-34%)
         else:
-            icon_color = "blue"      # Lower adoption (<25%)
+            icon_color = "blue"  # Lower adoption (<25%)
 
         # Circle size by readiness score
         radius = 8 + (readiness_score * 12)
@@ -286,7 +278,7 @@ def create_regional_adoption_map(regions_data):
             fill=True,
             fillColor=scenario_color,
             fillOpacity=0.5,
-            weight=2
+            weight=2,
         ).add_to(m)
 
         # Add standard marker on top
@@ -294,7 +286,7 @@ def create_regional_adoption_map(regions_data):
             location=[region["lat"], region["lon"]],
             popup=folium.Popup(popup_html, max_width=280),
             icon=folium.Icon(color=icon_color, icon="line-chart", prefix="fa"),
-            tooltip=f"{region['name']}: {adoption_2030 * 100:.0f}% by 2030 ({scenario})"
+            tooltip=f"{region['name']}: {adoption_2030 * 100:.0f}% by 2030 ({scenario})",
         ).add_to(m)
 
     # Add legend
@@ -325,8 +317,7 @@ def main():
         st.divider()
 
         st.markdown("### 🔬 Scientific Basis")
-        st.markdown(
-            """
+        st.markdown("""
         **Diffusion Theory:**
         
         Rogers, E. M. (2003)
@@ -338,14 +329,12 @@ def main():
         *Skill Formation & Economics*
         
         **Status:** ✅ Peer-Reviewed
-        """
-        )
+        """)
 
         st.divider()
 
         st.markdown("### 📊 Scenarios")
-        st.markdown(
-            """
+        st.markdown("""
         **3 Szenarien:**
         
         🐌 **Conservative:**
@@ -359,8 +348,7 @@ def main():
         🌟 **Optimistic:**
         - Schnelle Adoption
         - Policy Support
-        """
-        )
+        """)
 
     # Main Content
     st.title("📈 Future Projections: 5D Intelligence Adoption")
@@ -385,15 +373,13 @@ def main():
 
     # World Map: Regional Adoption Projections
     st.header("🗺️ Regional Adoption Projections (2030)")
-    st.markdown(
-        """
+    st.markdown("""
         Interactive map showing **projected adoption rates** for 5D Framework by region. 
         **Readiness Score** combines governance quality, existing alternative education infrastructure, 
         and mental health/dropout drivers.
         
         📊 **Legend:** Green = Optimistic (≥35%), Orange = Moderate (25-34%), Blue = Conservative (<25%)
-        """
-    )
+        """)
 
     regions_data = load_regional_adoption_projections()
     adoption_map = create_regional_adoption_map(regions_data)
@@ -412,13 +398,11 @@ def main():
     with col_left:
         st.header("🎯 Adoption Curve Simulation")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Logistic Growth Model (S-Curve):**
         
         Typisch für Innovation Diffusion (Rogers 2003)
-        """
-        )
+        """)
 
         # Parameters
         st.subheader("⚙️ Parameter")
@@ -426,13 +410,9 @@ def main():
         param_col1, param_col2 = st.columns(2)
 
         with param_col1:
-            max_adoption = st.slider(
-                "Max Adoption (%)", 10, 100, 50, 5, help="Carrying Capacity (L)"
-            )
+            max_adoption = st.slider("Max Adoption (%)", 10, 100, 50, 5, help="Carrying Capacity (L)")
 
-            inflection_year = st.slider(
-                "Inflection Year", 2030, 2045, 2035, 1, help="Midpoint (x₀)"
-            )
+            inflection_year = st.slider("Inflection Year", 2030, 2045, 2035, 1, help="Midpoint (x₀)")
 
         with param_col2:
             steepness = st.slider("Steepness (k)", 0.1, 1.0, 0.3, 0.05, help="Höher = schneller")
@@ -445,9 +425,7 @@ def main():
         years = np.arange(start_year, end_year + 1)
 
         # Conservative
-        conservative = logistic_curve(
-            years, max_adoption * 0.6, steepness * 0.5, inflection_year + 5
-        )
+        conservative = logistic_curve(years, max_adoption * 0.6, steepness * 0.5, inflection_year + 5)
 
         # Moderate
         moderate = logistic_curve(years, max_adoption, steepness, inflection_year)
@@ -542,15 +520,12 @@ def main():
             st.metric("Return", f"€{impact['return']:,.0f}")
 
         with impact_col3:
-            st.metric(
-                "Net Impact", f"€{impact['net_impact']:,.0f}", delta=f"{impact['roi']:.1f}% ROI"
-            )
+            st.metric("Net Impact", f"€{impact['net_impact']:,.0f}", delta=f"{impact['roi']:.1f}% ROI")
 
     with col_right:
         st.header("🌍 Global Impact")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Projection by Sector:**
         
         🚗 **Automotive (Electric Vehicles):**
@@ -576,20 +551,17 @@ def main():
         - 2030: 12%
         - 2040: 30%
         - 2050: 50%+
-        """
-        )
+        """)
 
         st.divider()
 
         st.subheader("🗺️ Regional Projections for 2040")
 
-
         st.divider()
 
         st.subheader("⚡ Tipping Points")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Critical Mass:** 16-20% adoption
         
         **Rogers' Diffusion:**
@@ -600,8 +572,7 @@ def main():
         5. Laggards (16%)
         
         **Bei 16%:** Self-sustaining growth
-        """
-        )
+        """)
 
     st.divider()
 
@@ -615,8 +586,7 @@ def main():
 
         st.latex(r"A(t) = \frac{L}{1 + e^{-k(t - t_0)}}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Parameter:**
         - **A(t):** Adoption rate zur Zeit t (%)
         - **L:** Maximum adoption (Carrying Capacity)
@@ -634,28 +604,24 @@ def main():
         - Technology Adoption (Bass 1969)
         
         **Ableitungen:**
-        """
-        )
+        """)
 
         st.latex(r"\frac{dA}{dt} = k \cdot A \cdot (1 - \frac{A}{L})")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Interpretation:**
         - Wachstum proportional zu A (mehr Adopters → mehr Adoption)
         - Gebremst durch (1 - A/L) (Sättigung)
         
         **Quelle:** Verhulst, P. F. (1838). *Notice sur la loi que la population suit dans son accroissement*
-        """
-        )
+        """)
 
     with tab2:
         st.subheader("Economic Impact Calculation")
 
         st.latex(r"\text{NPV} = \sum_{t=0}^{T} \frac{R_t - C_t}{(1 + r)^t}")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Net Present Value (NPV):**
         
         - **R_t:** Returns in year t
@@ -664,13 +630,11 @@ def main():
         - **T:** Time horizon (years)
         
         **Simplified (für Projection):**
-        """
-        )
+        """)
 
         st.latex(r"\text{Impact} = I \cdot (1 + \text{ROI}) \cdot A_t - I")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Wo:**
         - **I:** Total Investment
         - **ROI:** Return on Investment (%)
@@ -688,14 +652,12 @@ def main():
         - Perry Preschool: 7-10% annual return
         - Abecedarian: 10-13% annual return
         - **Alternative Bildung:** 15-20% geschätzt (konservativ)
-        """
-        )
+        """)
 
     with tab3:
         st.subheader("Diffusion of Innovations Theory")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Rogers (2003): 5 Adopter Categories**
         
         | Category | % of Population | Characteristics |
@@ -709,13 +671,11 @@ def main():
         **Tipping Point:** Bei ~16% (Innovators + Early Adopters)
         
         **Bass Diffusion Model:**
-        """
-        )
+        """)
 
         st.latex(r"f(t) = \frac{dA}{dt} = (p + q \cdot A(t)) \cdot (L - A(t))")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Parameter:**
         - **p:** Coefficient of Innovation (external influence)
         - **q:** Coefficient of Imitation (internal influence)
@@ -736,8 +696,7 @@ def main():
         - Rogers, E. M. (2003). *Diffusion of Innovations* (5th ed.). Free Press.
         - Bass, F. M. (1969). *A New Product Growth Model for Consumer Durables*. Management Science, 15(5): 215-227.
         - Mahajan, V., Muller, E., & Bass, F. M. (1990). *New Product Diffusion Models in Marketing*. Journal of Marketing, 54(1): 1-26.
-        """
-        )
+        """)
 
     st.divider()
 
@@ -745,8 +704,7 @@ def main():
     st.header("📚 Wissenschaftliche Quellen")
 
     with st.expander("🔬 References (expandable)"):
-        st.markdown(
-            """
+        st.markdown("""
         ### Primärquellen
         
         **1. Rogers, E. M. (2003)**
@@ -814,8 +772,7 @@ def main():
         ---
         
         **BibTeX:** Siehe `07_daten_analysen/5d-relevant-sources.bib`
-        """
-        )
+        """)
 
     # Footer
     st.divider()

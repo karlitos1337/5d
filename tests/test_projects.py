@@ -30,10 +30,7 @@ class TestROICalculation:
         years = 40
         discount_rate = 0.03
 
-        npv = (
-            sum(annual_benefit / ((1 + discount_rate) ** t) for t in range(1, years + 1))
-            - initial_cost
-        )
+        npv = sum(annual_benefit / ((1 + discount_rate) ** t) for t in range(1, years + 1)) - initial_cost
 
         # Perry Preschool showed 7-10% return
         # NPV should be positive and substantial

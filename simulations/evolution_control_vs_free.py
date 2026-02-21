@@ -104,9 +104,7 @@ class Population:
                     probs = np.ones(len(fitnesses)) / len(fitnesses)
 
                 survivor_count = max(1, self.size // 2)
-                survivor_indices = np.random.choice(
-                    len(self.organisms), size=survivor_count, p=probs, replace=False
-                )
+                survivor_indices = np.random.choice(len(self.organisms), size=survivor_count, p=probs, replace=False)
                 survivors = [self.organisms[i] for i in survivor_indices]
                 mutation_rate = 0.05  # Higher mutation (no control)
 
@@ -125,10 +123,7 @@ class Population:
 
             # Verbose output
             if verbose and (gen % 20 == 0 or gen == generations - 1):
-                print(
-                    f"  Gen {gen:3d}: Diversity={diversity:.3f}, "
-                    f"Mean Fit={mean_fit:.3f}, Max Fit={max_fit:.3f}"
-                )
+                print(f"  Gen {gen:3d}: Diversity={diversity:.3f}, " f"Mean Fit={mean_fit:.3f}, Max Fit={max_fit:.3f}")
 
     def crisis_survival(self, crisis_environment: dict) -> float:
         """Test survival during environmental crisis"""
@@ -147,12 +142,8 @@ class Population:
             "name": self.name,
             "control": self.control,
             "final_diversity": self.history["diversity"][-1] if self.history["diversity"] else 0,
-            "final_mean_fitness": (
-                self.history["mean_fitness"][-1] if self.history["mean_fitness"] else 0
-            ),
-            "final_max_fitness": (
-                self.history["max_fitness"][-1] if self.history["max_fitness"] else 0
-            ),
+            "final_mean_fitness": (self.history["mean_fitness"][-1] if self.history["mean_fitness"] else 0),
+            "final_max_fitness": (self.history["max_fitness"][-1] if self.history["max_fitness"] else 0),
             "avg_diversity": np.mean(self.history["diversity"]) if self.history["diversity"] else 0,
         }
 
@@ -305,9 +296,7 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
         color="red",
         linewidth=2,
     )
-    ax.plot(
-        generations, free.history["diversity"], label="Free (Natural)", color="green", linewidth=2
-    )
+    ax.plot(generations, free.history["diversity"], label="Free (Natural)", color="green", linewidth=2)
     ax.set_xlabel("Generation")
     ax.set_ylabel("Genetic Diversity (std)")
     ax.set_title("Diversity Over Time")
@@ -332,9 +321,7 @@ def plot_results(controlled: Population, free: Population, save_path: str = None
 
     # Plot 3: Max Fitness
     ax = axes[1, 0]
-    ax.plot(
-        generations, controlled.history["max_fitness"], label="Controlled", color="red", linewidth=2
-    )
+    ax.plot(generations, controlled.history["max_fitness"], label="Controlled", color="red", linewidth=2)
     ax.plot(generations, free.history["max_fitness"], label="Free", color="green", linewidth=2)
     ax.set_xlabel("Generation")
     ax.set_ylabel("Max Fitness")

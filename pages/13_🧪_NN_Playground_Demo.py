@@ -4,6 +4,7 @@ Streamlit-Seite: NN Playground (externes iFrame)
 - Integriert den TensorFlow Playground als Referenz/Ideengeber für Interaktiv-Grafiken
 - Verweist klar auf die Quelle (Google/TensorFlow)
 """
+
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go

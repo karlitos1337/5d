@@ -54,9 +54,7 @@ CONFIG = {
 
 def get_mnist_loaders(batch_size: int = 128) -> tuple[DataLoader, DataLoader]:
     """Load MNIST train and test datasets"""
-    transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
-    )
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 
     train_dataset = datasets.MNIST(root="./data", train=True, download=True, transform=transform)
     test_dataset = datasets.MNIST(root="./data", train=False, download=True, transform=transform)
@@ -118,9 +116,7 @@ def train_epoch(
     return total_loss / len(train_loader)
 
 
-def evaluate(
-    model: nn.Module, test_loader: DataLoader, device: str, noise_level: float = 0.0
-) -> tuple[float, float]:
+def evaluate(model: nn.Module, test_loader: DataLoader, device: str, noise_level: float = 0.0) -> tuple[float, float]:
     """Evaluate model accuracy"""
     model.eval()
     correct = 0
@@ -197,9 +193,7 @@ def run_experiment(config: dict) -> dict:
     print("\nInitializing models...")
     five_d = FiveDNet(input_size=784, num_classes=10, hidden_size=config["hidden_size"]).to(device)
 
-    baseline = BaselineNet(input_size=784, num_classes=10, hidden_size=config["hidden_size"]).to(
-        device
-    )
+    baseline = BaselineNet(input_size=784, num_classes=10, hidden_size=config["hidden_size"]).to(device)
 
     print(f"5D-Net parameters: {count_parameters(five_d):,}")
     print(f"Baseline parameters: {count_parameters(baseline):,}")
@@ -320,12 +314,8 @@ def run_experiment(config: dict) -> dict:
     print("TASK 4: Adversarial Robustness (FGSM Attack)")
     print("=" * 80)
 
-    adv_acc_5d, _ = evaluate_adversarial(
-        five_d, test_loader, device, epsilon=config["fgsm_epsilon"]
-    )
-    adv_acc_baseline, _ = evaluate_adversarial(
-        baseline, test_loader, device, epsilon=config["fgsm_epsilon"]
-    )
+    adv_acc_5d, _ = evaluate_adversarial(five_d, test_loader, device, epsilon=config["fgsm_epsilon"])
+    adv_acc_baseline, _ = evaluate_adversarial(baseline, test_loader, device, epsilon=config["fgsm_epsilon"])
 
     adv_drop_5d = clean_acc_5d - adv_acc_5d
     adv_drop_baseline = clean_acc_baseline - adv_acc_baseline

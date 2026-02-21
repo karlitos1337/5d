@@ -25,9 +25,7 @@ class ResearchScraper:
             max_retries: Maximum number of retries on failure (default: 3)
             retry_backoff: Exponential backoff multiplier (default: 2.0)
         """
-        self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        }
+        self.headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
         self.keywords = [
             "self-directed learning",
             "intrinsic motivation education",
@@ -358,9 +356,7 @@ class ResearchScraper:
                     try:
                         self._rate_limit("worldbank")
 
-                        url = (
-                            f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
-                        )
+                        url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
                         params = {
                             "format": "json",
                             "date": "2020:2023",  # Recent years
@@ -398,9 +394,7 @@ class ResearchScraper:
                     except requests.exceptions.RequestException as e:
                         if attempt < self.max_retries - 1:
                             wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                            print(
-                                f"    ⚠️  WGI error (attempt {attempt + 1}/{self.max_retries}): {e}"
-                            )
+                            print(f"    ⚠️  WGI error (attempt {attempt + 1}/{self.max_retries}): {e}")
                             time.sleep(wait_time)
                         else:
                             print(f"    ❌ WGI Error after {self.max_retries} attempts: {e}")
@@ -477,9 +471,7 @@ class ResearchScraper:
                         self._rate_limit("worldbank")
 
                         # World Bank API endpoint
-                        url = (
-                            f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
-                        )
+                        url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
                         params = {
                             "format": "json",
                             "date": "2020:2023",  # Recent years
@@ -520,9 +512,7 @@ class ResearchScraper:
                     except requests.exceptions.RequestException as e:
                         if attempt < self.max_retries - 1:
                             wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                            print(
-                                f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}"
-                            )
+                            print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
                             time.sleep(wait_time)
                         else:
                             print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
@@ -556,16 +546,13 @@ class ResearchScraper:
         # Academic papers - Parallel execution
         with ThreadPoolExecutor(max_workers=5) as executor:
             future_to_keyword = {
-                executor.submit(self._scrape_single_keyword, keyword): keyword
-                for keyword in self.keywords
+                executor.submit(self._scrape_single_keyword, keyword): keyword for keyword in self.keywords
             }
 
             for future in as_completed(future_to_keyword):
                 keyword, result = future.result()
                 all_research[keyword] = result
-                print(
-                    f"  ✅ {keyword}: {len(result['arxiv'])} arXiv, {len(result['pubmed'])} PubMed"
-                )
+                print(f"  ✅ {keyword}: {len(result['arxiv'])} arXiv, {len(result['pubmed'])} PubMed")
 
         # WHO Mental Health Data
         # TODO: WHO API is currently considered broken/flaky. Re-enable after fixing or replacing.
@@ -611,8 +598,6 @@ if __name__ == "__main__":
 
     # Statistik
     total_papers = sum(
-        len(data.get("arxiv", [])) + len(data.get("pubmed", []))
-        for data in research_data.values()
-        if "arxiv" in data
+        len(data.get("arxiv", [])) + len(data.get("pubmed", [])) for data in research_data.values() if "arxiv" in data
     )
     print(f"\n📊 Total: {total_papers} Papers gefunden")
