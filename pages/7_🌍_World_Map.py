@@ -77,8 +77,7 @@ def main():
         st.divider()
 
         st.markdown("### 🔬 Data Sources")
-        st.markdown(
-            """
+        st.markdown("""
         **Depression:**
         - Our World in Data (OWID)
         - IHME Global Burden of Disease
@@ -93,14 +92,12 @@ def main():
         
         **Alternative Schools:**
         - Manual research (Wikipedia, school websites)
-        """
-        )
+        """)
 
         st.divider()
 
         st.markdown("### 🗺️ Map Features")
-        st.markdown(
-            """
+        st.markdown("""
         **Interactive Layers:**
         - 🟥 Depression Heatmap
         - 🟧 Dropout Heatmap
@@ -110,8 +107,7 @@ def main():
         **Time Travel:**
         - Slider: 1990-2023
         - Compare historical data
-        """
-        )
+        """)
 
     # Main Content
     st.title("🌍 World Map: Global 5D Intelligence")
@@ -156,8 +152,7 @@ def main():
     with col_left:
         st.header("🗺️ Interactive Map")
 
-        st.info(
-            """
+        st.info("""
         **Live-Karte:** [5D-Map öffnen](http://localhost:5500) (wenn Server läuft)
         
         **Features:**
@@ -173,21 +168,18 @@ def main():
         python3 -m http.server 5500
         # → http://localhost:5500
         ```
-        """
-        )
+        """)
 
         st.divider()
 
         # Embed attempt (iframe)
         st.subheader("📍 Map Embed (Preview)")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Note:** Volle Funktionalität nur in separatem Browser-Tab.
         
         **Grund:** CORS, LocalStorage, API-Calls
-        """
-        )
+        """)
 
         # Create Folium map with IMP data
         m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
@@ -324,8 +316,7 @@ def main():
 
         st.subheader("🎨 Legend")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Color Codes (IMP Proxy):**
         
         🟩 **Hoch (>0.70):**
@@ -344,15 +335,13 @@ def main():
         - Hohe Dropout-Raten
         - Niedrige Governance
         - **Kritisch**
-        """
-        )
+        """)
 
         st.divider()
 
         st.subheader("🔄 Update Frequency")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Data Refresh:**
         - OWID: Monatlich
         - World Bank: Jährlich
@@ -362,8 +351,7 @@ def main():
         **Caching:**
         - Browser: 1 Stunde (LocalStorage)
         - Dashboard: 1 Stunde (st.cache_data)
-        """
-        )
+        """)
 
     st.divider()
 
@@ -377,8 +365,7 @@ def main():
 
         st.latex(r"\text{IMP}_{proxy} = (1 - D) \times (1 - E) \times G")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Komponenten:**
         - **D (Depression Rate):** Prozentualer Anteil Bevölkerung mit Depressionen (0-1)
         - **E (Education Dropout):** Prozentualer Anteil Schulabbrecher (0-1)
@@ -408,8 +395,7 @@ def main():
         **Status:** ⚠️ Own Research (Proxy-Mapping nicht peer-reviewed)
         
         **Validation:** Siehe Tab 3
-        """
-        )
+        """)
 
         # Interactive Calculator
         st.subheader("🧮 IMP-Proxy Rechner")
@@ -432,8 +418,7 @@ def main():
     with tab2:
         st.subheader("Data Integration")
 
-        st.markdown(
-            """
+        st.markdown("""
         **API & Datenquellen:**
         
         | Source | API | Update Freq | Coverage |
@@ -457,14 +442,12 @@ def main():
         - Normalization: Min-Max Scaling
         
         **Code:** `web/5d-map/app.js` (frontend), `5d_research_scraper.py` (backend)
-        """
-        )
+        """)
 
     with tab3:
         st.subheader("Validation Methodology")
 
-        st.markdown(
-            """
+        st.markdown("""
         **Validierung des IMP-Proxy:**
         
         **1. Construct Validity:**
@@ -498,8 +481,7 @@ def main():
         - Longitudinal Analysis (Time-Series)
         
         **Publikation:** Geplant (2025)
-        """
-        )
+        """)
 
     st.divider()
 
@@ -507,8 +489,7 @@ def main():
     st.header("📚 Data Sources & References")
 
     with st.expander("🔬 References (expandable)"):
-        st.markdown(
-            """
+        st.markdown("""
         ### Data Sources
         
         **Our World in Data (OWID):**
@@ -567,8 +548,7 @@ def main():
         ---
         
         **Implementation:** Siehe `web/5d-map/` für Frontend, `5d_research_scraper.py` für API-Integration
-        """
-        )
+        """)
 
     # Footer
     st.divider()
