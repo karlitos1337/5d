@@ -26,6 +26,7 @@ def get_device_type():
         window.parent.postMessage({type: 'streamlit:setComponentValue', value: deviceType}, '*');
     </script>
     """
+    _ = js_code  # Mark as used to satisfy linter
 
     # Use st.components for device detection (simplified)
     # In practice, we use CSS media queries instead
