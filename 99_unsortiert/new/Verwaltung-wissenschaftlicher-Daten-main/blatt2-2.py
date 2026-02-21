@@ -66,7 +66,7 @@ class FriendParser(Parser):
     def parse(self):
         for file in os.listdir(self.path):
             if file.endswith(".feat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 for line in lines:
                     id = line.split()[0]
                     friends[id] = Friend(id)   
@@ -76,23 +76,23 @@ class FriendEdgeParser(Parser):
     def parse(self):
         for file in os.listdir(self.path):
             if file.endswith(".edges"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 for line in lines:
                     nodeA = line.split()[0]
                     nodeB = line.split()[1]
-                    if friendEdges.get(nodeA) != None and Person(nodeB) not in friendEdges[nodeA].toNode:
+                    if friendEdges.get(nodeA) is not None and Person(nodeB) not in friendEdges[nodeA].toNode:
                         friendEdges[nodeA].toNode.append(Person(nodeB))
-                    elif friendEdges.get(nodeA) == None: 
+                    elif friendEdges.get(nodeA) is None:
                         friendEdges[nodeA] = FriendEdge(nodeA, [Person(nodeB)])
 
             elif file.endswith(".feat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     nodeB = line.split()[0]
-                    if friendEdges.get(egoId) != None and Person(nodeB) not in friendEdges[egoId].toNode:
+                    if friendEdges.get(egoId) is not None and Person(nodeB) not in friendEdges[egoId].toNode:
                         friendEdges[egoId].toNode.append(Person(nodeB))
-                    elif friendEdges.get(egoId) == None: 
+                    elif friendEdges.get(egoId) is None:
                         friendEdges[egoId] = FriendEdge(egoId, [Person(nodeB)])
                  
 class CircleEdgeParser(Parser):
@@ -100,14 +100,14 @@ class CircleEdgeParser(Parser):
     def parse(self):
         for file in os.listdir(self.path):
             if file.endswith(".circles"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     circleId = line.split()[0]
                     for nodeB in line.split()[1:]:         
-                        if circleEdges.get((circleId, egoId)) != None and nodeB not in circleEdges[(circleId, egoId)].member:
+                        if circleEdges.get((circleId, egoId)) is not None and nodeB not in circleEdges[(circleId, egoId)].member:
                             circleEdges[(circleId, egoId)].member.append(Friend(nodeB))
-                        elif circleEdges.get((circleId, egoId)) == None: 
+                        elif circleEdges.get((circleId, egoId)) is None:
                             circleEdges[(circleId, egoId)] = CircleEdge(circleId, egoId, [Friend(nodeB)])
 
 
@@ -128,7 +128,7 @@ circleEdgeParser.parse()
 
 # Delete egos from friends
 for ego in egoUsers:
-    if friends.get(ego) != None:
+    if friends.get(ego) is not None:
         del friends[ego]
 
 
@@ -143,7 +143,7 @@ class AttributeParser(Parser):
         # Read all attributes and write in dict of type (egoId, attribute index) -> (attribute name, feature)
         for file in os.listdir(self.path):
             if file.endswith(".featnames"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     index = line.split()[0]
@@ -155,7 +155,7 @@ class AttributeParser(Parser):
         # Read and assign attributes to friends
         for file in os.listdir(self.path):
             if file.endswith(".feat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     friendId = line.split()[0]
@@ -164,7 +164,7 @@ class AttributeParser(Parser):
                         if attribute == "0":
                             attributeIndex += 1
                             continue
-                        if attribute == "1" and friends.get(friendId) != None:
+                        if attribute == "1" and friends.get(friendId) is not None:
                             nameAndFeature = attributes[(egoId, str(attributeIndex))]
                             friends[friendId].attributeList.append(nameAndFeature)
                             attributeIndex += 1
@@ -172,7 +172,7 @@ class AttributeParser(Parser):
         # Read and assign attributes to ego user
         for file in os.listdir(self.path):
             if file.endswith(".egofeat"):
-                lines = open(self.path + "/" + file, "r").readlines()
+                lines = open(self.path + "/" + file).readlines()
                 egoId = os.path.splitext(file)[0]
                 for line in lines:
                     attributeIndex = 0
