@@ -1,24 +1,46 @@
-[tool.black]
-line-length = 100
-target-version = ["py310"]
-
 [tool.ruff]
-line-length = 100
-target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs",
+    ".venv",
+    "__pycache__"
+]
+line-length = 120
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+[tool.black]
+line-length = 120
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | 99_unsortiert
+  | external
+  | node_modules
+)/
+'''
 
-[tool.mypy]
-python_version = "3.10"
-check_untyped_defs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
-warn_unused_ignores = true
-warn_redundant_casts = true
-warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+[tool.pytest.ini_options]
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs"
+]
+python_files = "test_*.py"
+markers = [
+    "asyncio: mark test as async",
+    "integration: mark test as integration test"
+]
