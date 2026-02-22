@@ -53,6 +53,18 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('tabIndex', '0');
+      btn.setAttribute('aria-label', `Quelle anzeigen: ${url}`);
+
+      btn.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.stopPropagation();
+          e.preventDefault();
+          window.open(url, '_blank');
+        }
+      };
+
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
       el.appendChild(btn);
@@ -128,6 +140,8 @@ const App = () => {
                 className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
+                aria-label={darkMode ? 'Dunkelmodus deaktivieren' : 'Dunkelmodus aktivieren'}
+                title={darkMode ? 'Dunkelmodus deaktivieren' : 'Dunkelmodus aktivieren'}
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
@@ -137,6 +151,9 @@ const App = () => {
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
+                title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
