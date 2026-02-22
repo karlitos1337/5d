@@ -66,7 +66,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41706282/"
       }
     ],
-    "timestamp": "2026-02-22T11:55:04.333716"
+    "timestamp": "2026-02-22T11:52:30.617456"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -132,7 +132,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41705170/"
       }
     ],
-    "timestamp": "2026-02-22T11:55:07.373546"
+    "timestamp": "2026-02-22T11:52:33.615720"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -198,7 +198,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41721583/"
       }
     ],
-    "timestamp": "2026-02-22T11:55:09.350949"
+    "timestamp": "2026-02-22T11:52:35.606794"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -264,7 +264,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-02-22T11:55:12.345354"
+    "timestamp": "2026-02-22T11:52:38.620404"
   },
   "democratic schools": {
     "arxiv": [
@@ -342,7 +342,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41719292/"
       }
     ],
-    "timestamp": "2026-02-22T11:55:13.354186"
+    "timestamp": "2026-02-22T11:52:39.615934"
   },
   "student agency": {
     "arxiv": [
@@ -412,11 +412,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41718571/"
       }
     ],
-    "timestamp": "2026-02-22T11:55:14.349060"
+    "timestamp": "2026-02-22T11:52:40.610114"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2026-02-22T11:55:14.350079",
+    "timestamp": "2026-02-22T11:52:40.611247",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_data": {
@@ -658,7 +658,7 @@
         }
       }
     },
-    "timestamp": "2026-02-22T11:55:20.525642",
+    "timestamp": "2026-02-22T11:52:46.778493",
     "source": "World Bank API"
   }
 }

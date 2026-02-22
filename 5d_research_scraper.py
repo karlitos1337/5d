@@ -5,12 +5,12 @@ Holt Live-Daten zu Bildung, Autonomie, Self-Directed Learning
 """
 
 import json
-import time
 import re
 import threading
-from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
@@ -274,15 +274,15 @@ class ResearchScraper:
         print(f"  ✅ WHO: {len(mental_health_data)} countries fetched")
         return mental_health_data
 
-    def fetch_world_bank_education_data(self, countries=None):
+    def fetch_world_bank_data(self, countries=None):
         """
-        Fetch education indicators from World Bank EdStats API.
+        Fetch education and governance indicators from World Bank API.
 
         Args:
             countries: List of ISO3 country codes (default: top 20 countries)
 
         Returns:
-            dict: Education data by country
+            dict: Education and Governance data by country
         """
         if countries is None:
             countries = ["USA", "GBR", "DEU", "FRA", "JPN", "CHN", "IND", "BRA",
@@ -299,12 +299,17 @@ class ResearchScraper:
             print("❌ No valid countries provided for World Bank data fetch")
             return {}
 
-        # World Bank indicator codes for education
+        # World Bank indicator codes for education and governance (WGI)
         indicators = {
+            # Education
             "SE.SEC.DURS": "Secondary education duration (years)",
             "SE.PRM.CMPT.ZS": "Primary completion rate (%)",
             "SE.XPD.TOTL.GD.ZS": "Government education expenditure (% of GDP)",
-            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)"
+            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)",
+            # Governance (WGI)
+            "VA.EST": "Voice and Accountability",
+            "RL.EST": "Rule of Law",
+            "GE.EST": "Government Effectiveness"
         }
 
         education_data = {}
@@ -412,13 +417,13 @@ class ResearchScraper:
             "source": "WHO Global Health Observatory (Disabled)"
         }
 
-        # World Bank Education Data
-        print("\n🏫 Fetching World Bank Education Data...")
-        wb_data = self.fetch_world_bank_education_data()
-        all_research["world_bank_education"] = {
+        # World Bank Data (Education + WGI)
+        print("\n🏫 Fetching World Bank Data (Education + WGI)...")
+        wb_data = self.fetch_world_bank_data()
+        all_research["world_bank_data"] = {
             "data": wb_data,
             "timestamp": datetime.now().isoformat(),
-            "source": "World Bank EdStats API"
+            "source": "World Bank API"
         }
 
         return all_research
