@@ -50,7 +50,6 @@ exclude = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "--cov=."
 norecursedirs = [
     "99_unsortiert",
     "external",
