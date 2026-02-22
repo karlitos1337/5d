@@ -32,8 +32,8 @@ async function fetchJSON(url) {
   return res.json();
 }
 
-async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
+export async function fetchWithCache(key, fetcher) {
+  let cache = loadCache();
   const now = Date.now();
   const entry = cache[key];
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
@@ -41,6 +41,8 @@ async function fetchWithCache(key, fetcher) {
   }
   try {
     const data = await fetcher();
+    // Re-read cache to avoid race conditions
+    cache = loadCache();
     cache[key] = { data, timestamp: now };
     saveCache(cache);
     return data;
@@ -52,115 +54,46 @@ async function fetchWithCache(key, fetcher) {
 
 export async function fetchAllData() {
   const result = {};
-  // Schulen (statisch, lokal)
-  result.schools = await fetchWithCache('schools', () => fetchJSON('./data/schools.json'))
-    .catch(() => []);
-  // Länder-Zentroiddaten (lokal)
-  const countries = await fetchWithCache('countries', () => fetchJSON('./data/countries.json'))
-    .catch(() => []);
-  // Validierungsdaten (lokal)
-  const validation = await fetchWithCache('validation', () => fetchJSON('./data/validation.json'))
-    .catch(() => ({ validatedISO3: [], items: [] }));
-  // Baseline Snapshot (feste Ausgangswerte)
-  const baseline = await fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json'))
-    .catch(() => null);
 
-  // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
-  const depressionMap = await fetchWithCache('owid_depression', async () => {
-    const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
-    const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
-    try {
-      // Erst lokaler Proxy (CORS-frei), dann Remote
-      let res = await fetch(proxyUrl, { cache: 'no-store' });
-      if (!res.ok) {
-        res = await fetch(remoteUrl, { cache: 'no-store' });
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
-      const text = await res.text();
-      const rows = parseCSV(text);
-      return reduceLatestByCode(rows, 'Code');
-    } catch (e) {
-      console.warn('Depression remote fetch fehlgeschlagen, nutze lokalen Fallback:', e.message);
-      // Lokaler Fallback (Sample CSV im Repo)
-      const localRes = await fetch('./data/depression_sample.csv');
-      const localText = await localRes.text();
-      const localRows = parseCSV(localText);
-      return reduceLatestByCode(localRows, 'Code');
+  // -- 1. Prepare Shared Data Promises (Memoized) --
+  // These ensure we only fetch raw CSV/JSON once, even if needed by multiple map/series layers
+  let depressionRawPromise = null;
+  const getDepressionRaw = () => {
+    if (!depressionRawPromise) {
+      depressionRawPromise = (async () => {
+        const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
+        const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+        try {
+          let res = await fetch(proxyUrl, { cache: 'no-store' });
+          if (!res.ok) {
+            res = await fetch(remoteUrl, { cache: 'no-store' });
+          }
+          if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+          const text = await res.text();
+          return parseCSV(text);
+        } catch (e) {
+          console.warn('Depression remote fetch failed, using local fallback:', e.message);
+          const localRes = await fetch('./data/depression_sample.csv');
+          const localText = await localRes.text();
+          return parseCSV(localText);
+        }
+      })();
     }
-  }).catch(() => ({}));
+    return depressionRawPromise;
+  };
 
-  // Depression Jahres‑Serien (iso3 -> {year: value})
-  const depressionSeries = await fetchWithCache('owid_depression_series', async () => {
-    const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
-    const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
-    const buildSeries = (rows) => {
-      const series = {};
-      for (const r of rows) {
-        const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
-        const val = r[valueKey];
-        if (!code || !year || val == null || Number.isNaN(val)) continue;
-        if (!series[code]) series[code] = {};
-        series[code][year] = val;
-      }
-      return series;
-    };
-    try {
-      let res = await fetch(proxyUrl, { cache: 'no-store' });
-      if (!res.ok) {
-        res = await fetch(remoteUrl, { cache: 'no-store' });
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
-      const text = await res.text();
-      const rows = parseCSV(text);
-      return buildSeries(rows);
-    } catch (e) {
-      console.warn('Depression series remote fetch fehlgeschlagen, Fallback lokal:', e.message);
-      const localRes = await fetch('./data/depression_sample.csv');
-      const localText = await localRes.text();
-      const localRows = parseCSV(localText);
-      return buildSeries(localRows);
+  let dropoutRawPromise = null;
+  const getDropoutRaw = () => {
+    if (!dropoutRawPromise) {
+      dropoutRawPromise = (async () => {
+        const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
+        const data = await fetchJSON(url);
+        return Array.isArray(data) ? data[1] || [] : [];
+      })();
     }
-  }).catch(() => ({}));
+    return dropoutRawPromise;
+  };
 
-  // Dropout: World Bank JSON (alle Länder, neuerster Wert)
-  const dropoutMap = await fetchWithCache('wb_dropout', async () => {
-    const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
-    const data = await fetchJSON(url);
-    // data = [meta, rows]
-    const rows = Array.isArray(data) ? data[1] || [] : [];
-    const latest = {};
-    for (const r of rows) {
-      const iso3 = r?.countryiso3code; const year = Number(r?.date);
-      const val = r?.value == null ? null : Number(r.value);
-      if (!iso3 || val == null || Number.isNaN(val)) continue;
-      const prev = latest[iso3];
-      if (!prev || year > prev.year) latest[iso3] = { value: val, year };
-    }
-    const map = {};
-    for (const [k, v] of Object.entries(latest)) map[k] = v.value;
-    return map;
-  }).catch(() => ({}));
-
-  // Dropout Jahres‑Serien
-  const dropoutSeries = await fetchWithCache('wb_dropout_series', async () => {
-    try {
-      const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
-      const data = await fetchJSON(url);
-      const rows = Array.isArray(data) ? data[1] || [] : [];
-      const series = {};
-      for (const r of rows) {
-        const iso3 = r?.countryiso3code; const year = Number(r?.date); const val = r?.value == null ? null : Number(r.value);
-        if (!iso3 || !year || val == null || Number.isNaN(val)) continue;
-        if (!series[iso3]) series[iso3] = {};
-        series[iso3][year] = val;
-      }
-      return series;
-    } catch { return {}; }
-  }).catch(() => ({}));
-
-  // WGI‑Proxies (World Bank Governance Indicators), Werte in [-2.5, 2.5]
-  // RL.EST (Rule of Law) -> R, VA.EST (Voice & Accountability) -> SP, GE.EST (Gov. Effectiveness) -> Au
-  // Normalisierung: (x + 2.5) / 5  -> [0,1]
   const wgiFetch = async (code) => {
     const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&per_page=20000`;
     const data = await fetchJSON(url);
@@ -178,9 +111,87 @@ export async function fetchAllData() {
     return map;
   };
 
-  const wgi_rl_raw = await fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({}));
-  const wgi_va_raw = await fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({}));
-  const wgi_ge_raw = await fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}));
+  // -- 2. Fire All Requests in Parallel --
+  const p = {
+    schools: fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
+    countries: fetchWithCache('countries', () => fetchJSON('./data/countries.json')).catch(() => []),
+    validation: fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
+    baseline: fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null),
+
+    depressionMap: fetchWithCache('owid_depression', async () => {
+      const rows = await getDepressionRaw();
+      return reduceLatestByCode(rows, 'Code');
+    }).catch(() => ({})),
+
+    depressionSeries: fetchWithCache('owid_depression_series', async () => {
+      const rows = await getDepressionRaw();
+      const series = {};
+      for (const r of rows) {
+        const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
+        const val = r[valueKey];
+        if (!code || !year || val == null || Number.isNaN(val)) continue;
+        if (!series[code]) series[code] = {};
+        series[code][year] = val;
+      }
+      return series;
+    }).catch(() => ({})),
+
+    dropoutMap: fetchWithCache('wb_dropout', async () => {
+      const rows = await getDropoutRaw();
+      const latest = {};
+      for (const r of rows) {
+        const iso3 = r?.countryiso3code; const year = Number(r?.date);
+        const val = r?.value == null ? null : Number(r.value);
+        if (!iso3 || val == null || Number.isNaN(val)) continue;
+        const prev = latest[iso3];
+        if (!prev || year > prev.year) latest[iso3] = { value: val, year };
+      }
+      const map = {};
+      for (const [k, v] of Object.entries(latest)) map[k] = v.value;
+      return map;
+    }).catch(() => ({})),
+
+    dropoutSeries: fetchWithCache('wb_dropout_series', async () => {
+      const rows = await getDropoutRaw();
+      const series = {};
+      for (const r of rows) {
+        const iso3 = r?.countryiso3code; const year = Number(r?.date); const val = r?.value == null ? null : Number(r.value);
+        if (!iso3 || !year || val == null || Number.isNaN(val)) continue;
+        if (!series[iso3]) series[iso3] = {};
+        series[iso3][year] = val;
+      }
+      return series;
+    }).catch(() => ({})),
+
+    wgiRL: fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({})),
+    wgiVA: fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({})),
+    wgiGE: fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({})),
+
+    worldGeoJSON: fetchWithCache('world_geojson', async () => {
+      const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
+      return fetchJSON(url);
+    }).catch(() => null)
+  };
+
+  // -- 3. Await All --
+  const [
+    schools, countries, validation, baseline,
+    depressionMap, depressionSeries,
+    dropoutMap, dropoutSeries,
+    wgi_rl_raw, wgi_va_raw, wgi_ge_raw,
+    worldGeoJSON
+  ] = await Promise.all([
+    p.schools, p.countries, p.validation, p.baseline,
+    p.depressionMap, p.depressionSeries,
+    p.dropoutMap, p.dropoutSeries,
+    p.wgiRL, p.wgiVA, p.wgiGE,
+    p.worldGeoJSON
+  ]);
+
+  // -- 4. Process Results --
+  result.schools = schools;
+  result.countries = countries;
+  result.worldGeoJSON = worldGeoJSON;
 
   const normalizeWGI = (m) => {
     const out = {};
@@ -232,12 +243,6 @@ export async function fetchAllData() {
     const intensity = Math.max(0, Math.min(1, (vals.reduce((a,b)=>a+b,0)/vals.length) / 100));
     result.heatmapPoints.push([lat, lng, intensity]);
   }
-
-  // Welt-GeoJSON laden (für Choropleth); CORS-freundliche Quelle
-  result.worldGeoJSON = await fetchWithCache('world_geojson', async () => {
-    const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
-    return fetchJSON(url);
-  }).catch(() => null);
 
   // IMP-Berechnung (Proxy-basiert) pro ISO3, nutzt Depression & Dropout
   // Dimensionen in [0,1]:
