@@ -6,3 +6,8 @@
 **Vulnerability:** The `5d_research_scraper.py` script used an insecure HTTP URL (`http://export.arxiv.org`) for the arXiv API. This could allow Man-in-the-Middle (MitM) attacks to intercept or modify research data.
 **Learning:** Always verify if external APIs support HTTPS and enforce it. Even for public data, integrity is crucial.
 **Prevention:** Changed the URL to `https://export.arxiv.org`. Added a test case to verify HTTPS usage for API endpoints.
+
+## 2026-02-22 - [Information Leakage in Proxy Service]
+**Vulnerability:** The `web/5d-map/owid_proxy.py` script (and its documentation counterpart) leaked detailed exception messages in HTTP responses, potentially exposing internal configuration or network details. It also lacked essential security headers and bound to `0.0.0.0` by default.
+**Learning:** Simple proxy scripts often overlook security headers and error sanitization, becoming an easy target for reconnaissance.
+**Prevention:** Sanitized error messages to generic "Upstream fetch error". Added `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Content-Security-Policy`, and `Referrer-Policy` headers. Changed default binding to `127.0.0.1`.
