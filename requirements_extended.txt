@@ -16,3 +16,4 @@ black
 mypy
 pytest
 networkx>=3.0
+pydantic>=2.0
