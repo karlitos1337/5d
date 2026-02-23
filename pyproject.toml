@@ -1,13 +1,40 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+extend-exclude = '''
+(
+  99_unsortiert
+  | external
+  | private-gpt-main
+  | node_modules
+  | dist
+  | build
+  | outputs
+  | tools
+  | scripts
+  | pages
+)
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs",
+    "tools",
+    "scripts",
+    "pages",
+    "utils/caching.py",
+    "utils/mobile_responsive.py"
+]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +48,38 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs",
+    "tools",
+    "scripts",
+    "pages",
+    "utils/caching.py",
+    "utils/mobile_responsive.py"
+]
+
+[tool.pytest.ini_options]
+addopts = "-v"
+testpaths = ["tests", "src_python/tests"]
+python_files = "test_*.py"
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs",
+    "tools",
+    "scripts",
+    "pages"
+]
+markers = [
+    "asyncio: mark test as async",
+    "integration: mark test as integration test"
+]
