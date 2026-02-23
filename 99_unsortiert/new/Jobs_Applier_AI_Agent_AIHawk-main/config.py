@@ -1,6 +1,6 @@
 # In this file, you can set the configurations of the app.
 
-from src.utils.constants import ERROR, LLM_MODEL
+from src.utils.constants import ERROR
 
 # config related to logging must have prefix LOG_
 LOG_LEVEL = "ERROR"
@@ -17,6 +17,5 @@ JOB_MAX_APPLICATIONS = 5
 JOB_MIN_APPLICATIONS = 1
 
 LLM_MODEL_TYPE = "openai"
-LLM_MODEL = "gpt-4o-mini"
 # Only required for OLLAMA models
 LLM_API_URL = ""
