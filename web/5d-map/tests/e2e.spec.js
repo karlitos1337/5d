@@ -69,6 +69,11 @@ test.describe('5D Map E2E Tests', () => {
     
     // Loading overlay sollte kurz sichtbar sein
     const loadingOverlay = page.locator('.loading-overlay');
+
+    // Prüfe auf Barrierefreiheit (Attribute müssen immer da sein)
+    await expect(loadingOverlay).toHaveAttribute('role', 'alert');
+    await expect(loadingOverlay).toHaveAttribute('aria-live', 'assertive');
+
     // Wir können nicht garantieren dass wir es sehen (zu schnell),
     // aber wenn body.loading existiert, sollte overlay display:flex haben
     const bodyClass = await page.locator('body').getAttribute('class');
