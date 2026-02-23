@@ -36,7 +36,9 @@ class ResumeGenerator:
             with open(style_path) as f:
                 style_css = f.read()  # Correzione: chiama il metodo `read` con le parentesi
         except FileNotFoundError as e:
-            raise ValueError(f"Il file di stile non è stato trovato nel percorso: {style_path}") from e
+            raise ValueError(
+                f"Il file di stile non è stato trovato nel percorso: {style_path}"
+            ) from e
         except Exception as e:
             raise RuntimeError(f"Errore durante la lettura del file CSS: {e}") from e
 
