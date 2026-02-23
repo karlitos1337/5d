@@ -4,14 +4,15 @@
 Orchestrates validation, scraping, and packaging.
 """
 
-import os
-import glob
-import shutil
-import json
 import datetime
+import glob
+import json
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
+
 
 def run_step(command, description):
     print(f"\n🚀 {description}...")
@@ -36,7 +37,7 @@ def main():
     env = os.environ.copy()
     env["PYTHONPATH"] = os.getcwd()
 
-    print(f"\n🚀 Running IMP Validation Study...")
+    print("\n🚀 Running IMP Validation Study...")
     try:
         # Running validation study
         result = subprocess.run(
@@ -50,7 +51,7 @@ def main():
 
         # Copy Analysis Script
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
-        print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
+        print("  -> Copied Analysis Script: validation/imp_validation_study.py")
 
         # Parse Validation Report for Metrics
         report_files = glob.glob("validation_report_*.json")
@@ -60,7 +61,7 @@ def main():
         validation_metrics = {}
         if report_files:
             try:
-                with open(report_files[0], "r") as f:
+                with open(report_files[0]) as f:
                     report_data = json.load(f)
                     validation_metrics = report_data.get("dimensions", {})
                 print(f"  -> Parsed validation metrics from {report_files[0]}")
@@ -83,7 +84,7 @@ def main():
         print(e.stderr)
 
     # 2. Run Research Scraper
-    print(f"\n🚀 Running Research Scraper...")
+    print("\n🚀 Running Research Scraper...")
     try:
         result = subprocess.run(
             [sys.executable, "5d_research_scraper.py"],
@@ -97,7 +98,7 @@ def main():
         # Copy artifacts (Keep original in root as master DB)
         if os.path.exists("5d_research_data.json"):
             shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
-            print(f"  -> Copied 5d_research_data.json")
+            print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")
 
