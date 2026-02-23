@@ -55,9 +55,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     uv: str = os.path.abspath(args.uv) if args.uv else "uv"
-    allow_externally_managed = (
-        ["--break-system-packages"] if args.externally_managed else []
-    )
+    allow_externally_managed = ["--break-system-packages"] if args.externally_managed else []
     python = ["--python", args.python] if args.python else []
 
     # Create a temporary directory.
@@ -82,9 +80,7 @@ if __name__ == "__main__":
         )
 
         # Ensure that the package (`pylint`) is installed.
-        logging.info(
-            f"Checking that `pylint` is installed with `{sys.executable} -m pip`."
-        )
+        logging.info(f"Checking that `pylint` is installed with `{sys.executable} -m pip`.")
         code = subprocess.run(
             [sys.executable, "-m", "pip", "show", "pylint"],
             cwd=temp_dir,
@@ -103,9 +99,7 @@ if __name__ == "__main__":
         # Uninstall the package (`pylint`).
         logging.info("Uninstalling the package `pylint`.")
         subprocess.run(
-            [uv, "pip", "uninstall", "pylint", "--system"]
-            + allow_externally_managed
-            + python,
+            [uv, "pip", "uninstall", "pylint", "--system"] + allow_externally_managed + python,
             cwd=temp_dir,
             check=True,
         )
@@ -161,9 +155,7 @@ if __name__ == "__main__":
             cwd=temp_dir,
         )
         if code.returncode == 0:
-            raise Exception(
-                "The package `pylint` is installed globally (but shouldn't be)."
-            )
+            raise Exception("The package `pylint` is installed globally (but shouldn't be).")
 
         # Ensure that the package (`pylint`) is installed in the virtual environment.
         logging.info("Checking that `pylint` is installed.")
@@ -172,9 +164,7 @@ if __name__ == "__main__":
             cwd=temp_dir,
         )
         if code.returncode != 0:
-            raise Exception(
-                "The package `pylint` isn't installed in the virtual environment."
-            )
+            raise Exception("The package `pylint` isn't installed in the virtual environment.")
 
         # Uninstall the package (`pylint`).
         logging.info("Uninstalling the package `pylint`.")

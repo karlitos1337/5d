@@ -1,4 +1,12 @@
-from src.libs.resume_and_cover_builder.template_base import prompt_header_template, prompt_education_template, prompt_working_experience_template, prompt_projects_template, prompt_achievements_template, prompt_certifications_template, prompt_additional_skills_template
+from src.libs.resume_and_cover_builder.template_base import (
+    prompt_achievements_template,
+    prompt_additional_skills_template,
+    prompt_certifications_template,
+    prompt_education_template,
+    prompt_header_template,
+    prompt_projects_template,
+    prompt_working_experience_template,
+)
 
 prompt_header = """
 Act as an HR expert and resume writer specializing in ATS-friendly resumes. Your task is to create a professional and polished header for the resume. The header should:
@@ -21,7 +29,7 @@ Act as an HR expert and resume writer with a specialization in creating ATS-frie
 
 - **My information:**  
   {education_details}
-"""+ prompt_education_template
+""" + prompt_education_template
 
 
 prompt_working_experience = """
@@ -34,7 +42,7 @@ Act as an HR expert and resume writer with a specialization in creating ATS-frie
 
 - **My information:**  
   {experience_details}
-"""+ prompt_working_experience_template
+""" + prompt_working_experience_template
 
 
 prompt_projects = """
@@ -46,7 +54,7 @@ Act as an HR expert and resume writer with a specialization in creating ATS-frie
 
 - **My information:**  
   {projects}
-"""+ prompt_projects_template
+""" + prompt_projects_template
 
 
 prompt_achievements = """
@@ -57,7 +65,7 @@ Act as an HR expert and resume writer with a specialization in creating ATS-frie
 
 - **My information:**  
   {achievements}
-"""+ prompt_achievements_template
+""" + prompt_achievements_template
 
 
 prompt_certifications = """
@@ -75,7 +83,7 @@ If any of the certification details (e.g., descriptions) are not provided (i.e.,
 - **My information:**  
   {certifications}
 
-"""+ prompt_certifications_template
+""" + prompt_certifications_template
 
 
 prompt_additional_skills = """
@@ -89,4 +97,4 @@ Act as an HR expert and resume writer with a specialization in creating ATS-frie
   {languages}
   {interests}
   {skills}
-"""+ prompt_additional_skills_template
+""" + prompt_additional_skills_template
