@@ -7,6 +7,7 @@ Orchestrates validation, scraping, and packaging.
 import os
 import glob
 import shutil
+import json
 import datetime
 import subprocess
 import sys
@@ -51,6 +52,21 @@ def main():
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
         print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
 
+        # Parse Validation Report for Metrics
+        report_files = glob.glob("validation_report_*.json")
+        # Sort by name (timestamp) descending to get the latest
+        report_files.sort(reverse=True)
+
+        validation_metrics = {}
+        if report_files:
+            try:
+                with open(report_files[0], "r") as f:
+                    report_data = json.load(f)
+                    validation_metrics = report_data.get("dimensions", {})
+                print(f"  -> Parsed validation metrics from {report_files[0]}")
+            except Exception as e:
+                print(f"⚠️  Could not parse validation report: {e}")
+
         # Move artifacts
         moved_count = 0
         for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
@@ -90,28 +106,46 @@ def main():
         print(e.stderr)
 
     # 3. Create Metric Mapping Table
-    mapping_content = """
+    # Extract alphas safely
+    def get_alpha(dim):
+        return f"{validation_metrics.get(dim, {}).get('cronbach_alpha', 0.0):.3f}" if dim in validation_metrics else "N/A"
+
+    mapping_content = f"""
 | Dimension | Metric | Source | Range | Reliability (α) |
 |-----------|--------|--------|-------|-----------------|
-| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 |
-| Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
-| Resilience | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
-| Social Participation | Network Density | Graph Analysis | 0-1 | N/A |
-| Authenticity | Congruence Score | Self-Report | 0-5 | > 0.8 |
+| Autonomy | Environment Optimization (Proxy) | Validation Study | 0-5 | {get_alpha('Environment_Optimization')} |
+| Intrinsic Motivation | Intrinsic Motivation Score | Validation Study | 0-5 | {get_alpha('Intrinsic_Motivation')} |
+| Resilience | Resilience Score | Validation Study | 0-5 | {get_alpha('Resilience')} |
+| Social Participation | Social Participation Score | Validation Study | 0-5 | {get_alpha('Social_Participation')} |
+| Authenticity | GAP (Missing validated metric) | Gap Analysis | N/A | N/A |
+| Cognitive Efficiency | Cognitive Efficiency Score | Validation Study | 0-5 | {get_alpha('Cognitive_Efficiency')} |
+
+**Note:** 'Environment Optimization' is used as a proxy for Autonomy in the current pilot. 'Authenticity' requires immediate instrument development.
     """
     with open(package_dir / "METRIC_MAPPING.md", "w") as f:
         f.write(mapping_content)
 
     # 4. Create Interpretation
+    avg_alpha = 0.0
+    if validation_metrics:
+        alphas = [m.get('cronbach_alpha', 0) for m in validation_metrics.values()]
+        if alphas:
+            avg_alpha = sum(alphas) / len(alphas)
+
     interpretation_content = f"""
 # Scientific Interpretation
 **Generated via Professor Dr. A. I. Nexus Protocol**
 **Date:** {datetime.datetime.now().isoformat()}
 
 ## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
+- **Validation Study:** Completed (N=30 Pilot).
+- **Overall Reliability:** Cronbach's α = {avg_alpha:.3f} (Target: > 0.8).
 - **External Data:** World Bank Education data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
+
+## Gap Analysis
+- **Authenticity:** Currently missing from the validated instrument. Requires hypothesis generation and item creation.
+- **Autonomy:** Measured via 'Environment Optimization' proxy. Correlation analysis required to validate this proxy.
 
 ## Hypothesis & Next Steps
 Based on the zero-impact principle, any dimension < 0.7 requires immediate intervention.
