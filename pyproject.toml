@@ -1,6 +1,25 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+  | 99_unsortiert
+  | external
+  | 5d
+  | private-gpt-main
+  | outputs
+)/
+'''
 
 [tool.ruff]
 line-length = 100
