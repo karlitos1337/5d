@@ -1,7 +1,5 @@
-import os
-from pathlib import Path
-from typing import Dict, List, Tuple, Optional
 import logging
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -9,15 +7,17 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %
 
 class StyleManager:
     def __init__(self):
-        self.selected_style: Optional[str] = None
+        self.selected_style: str | None = None
         current_file = Path(__file__).resolve()
         project_root = current_file.parent.parent.parent.parent
-        self.styles_directory = project_root / "src" / "libs" / "resume_and_cover_builder" / "resume_style"
+        self.styles_directory = (
+            project_root / "src" / "libs" / "resume_and_cover_builder" / "resume_style"
+        )
 
         logging.debug(f"Project root determined as: {project_root}")
         logging.debug(f"Styles directory set to: {self.styles_directory}")
 
-    def get_styles(self) -> Dict[str, Tuple[str, str]]:
+    def get_styles(self) -> dict[str, tuple[str, str]]:
         """
         Retrieve the available styles from the styles directory.
         Returns:
@@ -52,7 +52,7 @@ class StyleManager:
             logging.error(f"Unexpected error while reading styles: {e}")
         return styles_to_files
 
-    def format_choices(self, styles_to_files: Dict[str, Tuple[str, str]]) -> List[str]:
+    def format_choices(self, styles_to_files: dict[str, tuple[str, str]]) -> list[str]:
         """
         Format the style choices for user presentation.
         Args:
@@ -60,7 +60,10 @@ class StyleManager:
         Returns:
             List[str]: A list of formatted style choices.
         """
-        return [f"{style_name} (style author -> {author_link})" for style_name, (file_name, author_link) in styles_to_files.items()]
+        return [
+            f"{style_name} (style author -> {author_link})"
+            for style_name, (file_name, author_link) in styles_to_files.items()
+        ]
 
     def set_selected_style(self, selected_style: str):
         """
@@ -71,7 +74,7 @@ class StyleManager:
         self.selected_style = selected_style
         logging.info(f"Selected style set to: {self.selected_style}")
 
-    def get_style_path(self) -> Optional[Path]:
+    def get_style_path(self) -> Path | None:
         """
         Get the path to the selected style.
         Returns:

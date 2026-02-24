@@ -1,13 +1,37 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+  | 99_unsortiert
+  | external
+  | private-gpt-main
+  | outputs
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "node_modules/",
+    "outputs/"
+]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +45,34 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = [
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs"
+]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test", "*Tests"]
+python_functions = ["test_*"]
+markers = [
+    "asyncio: mark a test as an asyncio coroutine",
+    "integration: mark a test as an integration test",
+    "slow: mark test as slow",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    # Ignore invalid escape sequence warnings from third-party libs or non-critical files
+    "ignore:invalid escape sequence:SyntaxWarning"
+]
