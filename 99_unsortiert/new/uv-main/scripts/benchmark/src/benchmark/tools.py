@@ -149,9 +149,7 @@ class Uv(Suite):
         self.path = path or os.path.join(
             os.path.dirname(
                 os.path.dirname(
-                    os.path.dirname(
-                        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                    )
+                    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
                 )
             ),
             "target",
@@ -226,12 +224,8 @@ class Uv(Suite):
 
 def main():
     """Run the benchmark."""
-    parser = argparse.ArgumentParser(
-        description="Benchmark uv against other packaging tools."
-    )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true", help="Print verbose output."
-    )
+    parser = argparse.ArgumentParser(description="Benchmark uv against other packaging tools.")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Print verbose output.")
     parser.add_argument("--json", action="store_true", help="Export results to JSON.")
     parser.add_argument(
         "--warmup",
