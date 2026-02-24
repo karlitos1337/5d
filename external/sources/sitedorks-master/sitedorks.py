@@ -168,6 +168,7 @@ if aArguments.ubb:
                     # Parse the value to extract the hostname if needed
                     parsed_url = urllib.parse.urlparse(sOutScopeValue)
                     sHost = parsed_url.hostname if parsed_url.hostname else sOutScopeValue
+
             if sOutScope["type"] == "web":
                 lOutScopeValues = sOutScope["value"].lower().split(",")
                 for sOutScopeValue in lOutScopeValues:
