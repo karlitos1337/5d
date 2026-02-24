@@ -55,6 +55,30 @@ const App = () => {
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
+      // Accessibility enhancements
+      btn.tabIndex = 0;
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('aria-label', `Quellenverweis ${indexNum}: Öffne Quelle in neuem Tab`);
+
+      btn.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(url, '_blank');
+        }
+      };
+
+      btn.onfocus = () => Object.assign(btn.style, {
+        outline: '2px solid #3b82f6',
+        outlineOffset: '2px',
+        zIndex: '10'
+      });
+
+      btn.onblur = () => Object.assign(btn.style, {
+        outline: 'none',
+        zIndex: 'auto'
+      });
+
       el.appendChild(btn);
 
       el.dataset.citationProcessed = 'true';
@@ -111,6 +135,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  aria-current={activeSection === section.id ? 'true' : undefined}
                   className={`text-sm font-medium transition-colors duration-200 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
@@ -125,6 +150,7 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
+                aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                 className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -134,6 +160,8 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobileMenuOpen}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
