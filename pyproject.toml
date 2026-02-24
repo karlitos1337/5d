@@ -22,3 +22,11 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
 exclude = ["private-gpt-main/"]
+
+[tool.pytest.ini_options]
+norecursedirs = ["99_unsortiert", "external", "5d"]
+testpaths = ["tests", "src_python/tests"]
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark test as integration"
+]

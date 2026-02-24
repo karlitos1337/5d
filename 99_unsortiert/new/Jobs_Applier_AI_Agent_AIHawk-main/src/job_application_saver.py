@@ -1,13 +1,13 @@
-from src.logging import logger
-import os
 import json
+import os
 import shutil
-
 from dataclasses import asdict
 
-from config import JOB_APPLICATIONS_DIR
 from job import Job
 from job_application import JobApplication
+
+from config import JOB_APPLICATIONS_DIR
+from src.logging import logger
 
 # Base directory where all applications will be saved
 BASE_DIR = JOB_APPLICATIONS_DIR
