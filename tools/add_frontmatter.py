@@ -1,129 +1,93 @@
 #!/usr/bin/env python3
 """
-Utility to add YAML frontmatter to markdown files that are missing it.
-
-Usage:
-    python tools/add_frontmatter.py path/to/file.md --title "My Title" --domain "01_bildung_education"
-
-Only adds frontmatter if the file is missing a YAML frontmatter block.
+Add Frontmatter to Markdown Files
+=================================
+Fügt YAML-Frontmatter zu Markdown-Dateien hinzu, falls noch nicht vorhanden.
 """
 
 import argparse
-import re
-import sys
-from datetime import date
+import os
+from pathlib import Path
 
-RE_FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
-
-
-def has_frontmatter(content: str) -> bool:
-    """Check if content starts with a YAML frontmatter block."""
-    return bool(RE_FRONTMATTER.match(content))
+import yaml
 
 
-def create_frontmatter(
-    title: str,
-    author: str = "Unknown",
-    file_date: str = None,
-    domain: str = "",
-    license_type: str = "CC-BY-4.0",
-    evidence: str = "🔮",
-) -> str:
-    """Generate a YAML frontmatter block."""
-    if file_date is None:
-        file_date = date.today().isoformat()
-    return f'''---
-title: "{title}"
-author: "{author}"
-date: "{file_date}"
-domain: "{domain}"
-license: "{license_type}"
-evidence: "{evidence}"
----
-
-'''
-
-
-def add_frontmatter_to_file(
-    filepath: str,
-    title: str,
-    domain: str,
-    author: str = "Unknown",
-    file_date: str = None,
-    license_type: str = "CC-BY-4.0",
-    evidence: str = "🔮",
-    dry_run: bool = False,
-) -> bool:
+def add_frontmatter_to_file(filepath, title=None, tags=None):
     """
-    Add frontmatter to a file if it's missing.
+    Fügt Frontmatter zu einer Datei hinzu.
 
-    Returns True if frontmatter was added, False if already present.
+    Args:
+        filepath (str): Pfad zur Datei
+        title (str, optional): Titel für Frontmatter. Wenn None, wird Dateiname verwendet.
+        tags (list, optional): Liste von Tags.
+
+    Returns:
+        bool: True wenn Frontmatter hinzugefügt wurde, False wenn schon vorhanden.
     """
-    with open(filepath, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    if has_frontmatter(content):
-        print(f"Skipped (already has frontmatter): {filepath}")
+    path = Path(filepath)
+    if not path.exists():
+        print(f"❌ Datei nicht gefunden: {filepath}")
         return False
 
-    frontmatter = create_frontmatter(
-        title=title,
-        author=author,
-        file_date=file_date,
-        domain=domain,
-        license_type=license_type,
-        evidence=evidence,
-    )
+    try:
+        content = path.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"❌ Fehler beim Lesen von {filepath}: {e}")
+        return False
 
-    new_content = frontmatter + content
+    # Check if frontmatter already exists (starts with ---)
+    if content.strip().startswith("---"):
+        print(f"⚠️  Frontmatter bereits vorhanden in {filepath}")
+        return False
 
-    if dry_run:
-        print(f"Would add frontmatter to: {filepath}")
-        print(frontmatter)
-    else:
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print(f"Added frontmatter to: {filepath}")
+    # Prepare Frontmatter
+    if title is None:
+        # Use filename as title (remove extension and replace underscores)
+        title = path.stem.replace("_", " ").title()
 
-    return True
+    frontmatter = {
+        "title": title,
+        "date": "2024-03-20",  # Default date or current date
+        "tags": tags or ["5d-intelligence", "documentation"],
+    }
 
+    # Convert to YAML string
+    yaml_str = yaml.dump(frontmatter, sort_keys=False).strip()
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Add YAML frontmatter to markdown files"
-    )
-    parser.add_argument("file", help="Path to the markdown file")
-    parser.add_argument("--title", required=True, help="Document title")
-    parser.add_argument("--domain", required=True, help="Domain/folder name")
-    parser.add_argument("--author", default="Unknown", help="Author name")
-    parser.add_argument("--date", default=None, help="Date (YYYY-MM-DD format)")
-    parser.add_argument("--license", default="CC-BY-4.0", help="License type")
-    parser.add_argument("--evidence", default="🔮", help="Evidence level (✅, ⚠️, or 🔮)")
-    parser.add_argument(
-        "--dry-run", action="store_true", help="Show what would be done without making changes"
-    )
-
-    args = parser.parse_args()
+    new_content = f"---\n{yaml_str}\n---\n\n{content}"
 
     try:
-        added = add_frontmatter_to_file(
-            filepath=args.file,
-            title=args.title,
-            domain=args.domain,
-            author=args.author,
-            file_date=args.date,
-            license_type=args.license,
-            evidence=args.evidence,
-            dry_run=args.dry_run,
-        )
-        return 0
-    except FileNotFoundError:
-        print(f"Error: File not found: {args.file}", file=sys.stderr)
-        return 1
+        path.write_text(new_content, encoding="utf-8")
+        print(f"✅ Frontmatter hinzugefügt zu {filepath}")
+        return True
     except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        return 1
+        print(f"❌ Fehler beim Schreiben von {filepath}: {e}")
+        return False
+
+
+def process_directory(directory):
+    """Verarbeitet alle Markdown-Dateien in einem Verzeichnis rekursiv."""
+    print(f"📂 Verarbeite Verzeichnis: {directory}")
+    for root, _dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".md"):
+                filepath = os.path.join(root, file)
+                add_frontmatter_to_file(filepath)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description="Add YAML frontmatter to markdown files.")
+    parser.add_argument("path", help="File or directory path")
+    parser.add_argument("--title", help="Title for the frontmatter (only for single file)")
+
+    args = parser.parse_args()
+
+    if os.path.isfile(args.path):
+        _added = add_frontmatter_to_file(
+            filepath=args.path,
+            title=args.title,
+        )
+    elif os.path.isdir(args.path):
+        process_directory(args.path)
+    else:
+        print("❌ Ungültiger Pfad.")
