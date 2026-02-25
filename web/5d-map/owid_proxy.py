@@ -23,10 +23,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
-                req = urllib.request.Request(
-                    url,
-                    headers={"User-Agent": "OWID-Proxy/1.0"}
-                )
+                req = urllib.request.Request(url, headers={"User-Agent": "OWID-Proxy/1.0"})
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = resp.read()
                     self.send_response(200)
@@ -35,7 +32,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
                     # Security headers
                     self.send_header("X-Content-Type-Options", "nosniff")
-                    self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                    self.send_header(
+                        "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
+                    )
                     self.send_header("X-Frame-Options", "DENY")
                     self.send_header("Referrer-Policy", "no-referrer")
 
@@ -53,7 +52,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
                 # Security headers
                 self.send_header("X-Content-Type-Options", "nosniff")
-                self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                self.send_header(
+                    "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
+                )
                 self.send_header("X-Frame-Options", "DENY")
                 self.send_header("Referrer-Policy", "no-referrer")
 
