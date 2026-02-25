@@ -45,3 +45,4 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+.mypy_cache/

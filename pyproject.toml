@@ -41,6 +41,7 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
 exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "dist", "build", "outputs"]
+explicit_package_bases = true
 
 [tool.pytest.ini_options]
 minversion = "6.0"

@@ -33,8 +33,9 @@ jobs:
         run: black --check .
 
       - name: Mypy Type Check
-        run: mypy src
+        run: mypy .
 
       - name: Run tests (only repo tests)
         run: |
+          export PYTHONPATH=$PYTHONPATH:.
           pytest tests -q
