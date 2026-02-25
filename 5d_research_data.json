@@ -24,49 +24,49 @@
         "link": "http://arxiv.org/abs/2506.09781v2"
       },
       {
-        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
+        "title": "The Dimension of Self-Directed Learning",
         "authors": [
-          "\nHarkirat Singh Behl\n",
-          "\nAtılım Güneş Baydin\n",
-          "\nPhilip H. S. Torr\n"
+          "\nPramith Devulapalli\n",
+          "\nSteve Hanneke\n"
         ],
-        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
-        "published": "2019-05-17T18:45:25Z",
-        "link": "http://arxiv.org/abs/1905.07435v1"
+        "summary": "Understanding the self-directed learning complexity has been an important problem that has captured the attention of the online learning theory community since the early 1990s. Within this framework, ",
+        "published": "2024-02-20T21:59:41Z",
+        "link": "http://arxiv.org/abs/2402.13400v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
+        "title": "Exploring contextual demands that challenge nursing students in their self-directed learning of bioscience: a comparative qualitative content analysis.",
         "authors": [
-          "Gutiérrez Hernández A",
-          "Pompa Mansilla M",
-          "Vadillo Bueno G"
+          "Ravik M",
+          "Bjerva HN",
+          "Weider C"
         ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41415999/"
+        "published": "2026 Feb 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41723460/"
       },
       {
-        "title": "Challenges in anatomy education among Sudanese medical students during the 2023 armed conflict: a cross-sectional survey.",
+        "title": "Case-based in-person teaching improves self-directed mastery of the MDS-UPDRS motor scoring.",
         "authors": [
-          "Eltieb QDA",
-          "Muhammed A",
-          "Ahmed LNM"
+          "Zhang M",
+          "Yuan J",
+          "Xu D"
         ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41398249/"
+        "published": "2026 Feb 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41723403/"
       },
       {
-        "title": "Reimagining Graduate Study With Generative Artificial Intelligence-Supported Study Strategies: A Doctor of Nursing Practice Student's Perspective.",
+        "title": "Using participatory action research to develop an artificial intelligence-augmented, peer-driven, case-based, and simulation-enhanced curriculum for emergency medicine residents.",
         "authors": [
-          "Silva KA",
-          "Sheets DM"
+          "Eastwood KW",
+          "Allali D",
+          "Leela-Amornsin S"
         ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41397874/"
+        "published": "2026 Feb 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41706282/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:05.150148"
+    "timestamp": "2026-02-25T11:50:01.446114"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,37 +106,37 @@
     ],
     "pubmed": [
       {
-        "title": "Eurogame escape room of physics in veterinary education: a pilot study.",
+        "title": "Understanding motivating and demotivating factors among maternal healthcare professionals in Somalia: a qualitative interview study.",
         "authors": [
-          "Bräuninger SA",
-          "Motz DA",
-          "Lüpke M"
+          "Sheikh NS",
+          "Gele A",
+          "Bonfrer I"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421988/"
+        "published": "2026 Feb 24",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41735005/"
       },
       {
-        "title": "The impact of AI tools enabled student engagement on academic performance, employability, and empowerment in Ha'il Region, Saudi Arabia.",
+        "title": "From Realism to Learner Engagement: Rethinking Fidelity in Simulation-Based Education.",
         "authors": [
-          "Singh A",
-          "Singh HP",
-          "Alam MF"
+          "Pico J",
+          "Evain JN",
+          "Aron C"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421110/"
+        "published": "2026 Feb 23",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41730203/"
       },
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "How do grit and emotions shape university students' motivation in learning English as a foreign language?",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "Sun Q",
+          "Yang K",
+          "Sun PP"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2026 Feb 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41709354/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:08.080663"
+    "timestamp": "2026-02-25T11:50:05.472341"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,37 +172,37 @@
     ],
     "pubmed": [
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "Effects of a school-based cycling intervention on commuting to school behavior and device-measured activity in Spanish adolescents: the PACO cluster-randomized controlled trial.",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "Campos-Garzón P",
+          "Huertas-Delgado FJ",
+          "Cadenas-Sanchez C"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2026 Feb 24",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41736046/"
       },
       {
-        "title": "Development of Digital Literacy: Application of Artificial Intelligence in Education and Clinical Practice of Oncology Nurses.",
+        "title": "Parental Attachment and Mental Health Literacy in Young Adults: The Mediational Role of Emotional Regulation on Well-Being and Psychopathological.",
         "authors": [
-          "Šimunić N",
-          "Višnjić Junaković N",
-          "Skelin M"
+          "Mota CP",
+          "Alves CP",
+          "Rodrigues DA"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419399/"
+        "published": "2026 Feb 24",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41732860/"
       },
       {
-        "title": "Opportunities to flip the narrative from burden to action for young women joining the National Cervical Screening Programme in Aotearoa New Zealand: a Kaupapa Māori qualitative exploration of experiences and knowledge of cervical screening for 18-30 year olds.",
+        "title": "Paid placements for medical students-barriers and enablers to success.",
         "authors": [
-          "Slater T",
-          "Stevenson K",
-          "Adcock A"
+          "Viswanathan T",
+          "Urquhart L",
+          "McConville K"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41414979/"
+        "published": "2026 Feb 23",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41731479/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:11.084001"
+    "timestamp": "2026-02-25T11:50:06.530018"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -242,6 +242,14 @@
     ],
     "pubmed": [
       {
+        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
+        "authors": [
+          "Liu Y"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+      },
+      {
         "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
         "authors": [
           "Porges SW"
@@ -258,19 +266,9 @@
         ],
         "published": "2025 Jul 1",
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
-      },
-      {
-        "title": "Neuroception of psychological safety scale (NPSS): validation with a UK based adult community sample.",
-        "authors": [
-          "Cogan N",
-          "Morton L",
-          "Campbell J"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:14.101425"
+    "timestamp": "2026-02-25T11:50:08.462481"
   },
   "democratic schools": {
     "arxiv": [
@@ -297,46 +295,58 @@
         "link": "http://arxiv.org/abs/1502.04264v1"
       },
       {
-        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
+        "title": "Can AI mediation improve democratic deliberation?",
         "authors": [
-          "\nCliver Oliver Turpo Benique\n"
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
         ],
-        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
-        "published": "2025-07-14T02:32:04Z",
-        "link": "http://arxiv.org/abs/2507.14191v1"
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Factors associated with unsuppressed HIV viral load among children under 15 years in sub-Saharan africa: a systematic review.",
+        "title": "Riboflavin Deficiency Is Highly Prevalent in Females and Children across High and Low/Middle Income Countries Worldwide.",
         "authors": [
-          "Balowe JK",
-          "Alain NM",
-          "Mampasi AL"
+          "McAnena L",
+          "Ward M",
+          "McCann A"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41422218/"
+        "published": "2026 Dec 22",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41735095/"
       },
       {
-        "title": "Cross-cultural differences of leadership style and emotional intelligence level in physical education teacher's success of China and Ukraine.",
+        "title": "Pro-tobacco legislative representation and current smoking: an individual-level panel study of older adults in Japan.",
         "authors": [
-          "Zhang L"
+          "Sato K",
+          "Takahara I",
+          "Kawachi I"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421108/"
+        "published": "2026 Feb 24",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41735042/"
       },
       {
-        "title": "Transformative Potential of Outsider Art for Neurodivergent Artists.",
+        "title": "School shootings and the strategic contributions of gun policy PACs in US House elections.",
         "authors": [
-          "Sochor P",
-          "Sochorova D",
-          "Kubiatko M"
+          "Baldwin EA",
+          "Iwasaki T",
+          "Donohue JJ"
         ],
-        "published": "2025 Dec 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420883/"
+        "published": "2026 Mar 3",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41734078/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:17.080561"
+    "timestamp": "2026-02-25T11:50:10.723066"
   },
   "student agency": {
     "arxiv": [
@@ -376,90 +386,44 @@
     ],
     "pubmed": [
       {
-        "title": "Beliefs, practices, and awareness of written corrective feedback among EFL teachers: a mixed-methods study.",
+        "title": "Challenging Structural Inequities in Education to Promote Positive Psychosocial Outcomes in Migration-Diverse Societies: A Commentary.",
         "authors": [
-          "Mostafavi M",
-          "Shokrpour N",
-          "Afraz S"
+          "Phalet K"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420260/"
+        "published": "2026 Mar",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41724487/"
       },
       {
-        "title": "Aligning expectations and experiences: Medical student perspectives on progress testing for National Licensing Examination preparation.",
+        "title": "Exploring contextual demands that challenge nursing students in their self-directed learning of bioscience: a comparative qualitative content analysis.",
         "authors": [
-          "Doherty SE",
-          "Cullen KM",
-          "Cole AJ"
+          "Ravik M",
+          "Bjerva HN",
+          "Weider C"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41416766/"
+        "published": "2026 Feb 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41723460/"
       },
       {
-        "title": "Factors associated with unintended pregnancies among unmarried adolescents in Eastern Uganda: a cross-sectional study.",
+        "title": "Reorienting nursing education toward a culture of self-care: Nursing students' experiences of nurse self-care integration-A qualitative systematic review.",
         "authors": [
-          "Komasawa M",
-          "Sato M",
-          "Saito K"
+          "Damayanti MR",
+          "Shimoinaba K",
+          "Recoche K"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413894/"
+        "published": "2026 Feb 16",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41722235/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:20.380653"
+    "timestamp": "2026-02-25T11:50:11.439647"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2025-12-21T11:33:20.380723",
+    "timestamp": "2026-02-25T11:50:11.441414",
     "source": "WHO Global Health Observatory (Disabled)"
   },
-  "world_bank_education": {
+  "world_bank_data": {
     "data": {
-      "AUS": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.05916023254395,
-          "year": "2022"
-        }
-      },
-      "BRA": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.61922979354858,
-          "year": "2022"
-        }
-      },
-      "CAN": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.88021993637085,
-          "year": "2022"
-        }
-      },
-      "CHN": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.00127983093262,
-          "year": "2023"
-        }
-      },
       "DEU": {
-        "Secondary education duration (years)": {
-          "value": 9,
-          "year": "2023"
-        },
         "Primary completion rate (%)": {
           "value": 99.2837371826172,
           "year": "2023"
@@ -467,23 +431,17 @@
         "Government education expenditure (% of GDP)": {
           "value": 5.23916006088257,
           "year": "2022"
-        }
-      },
-      "FRA": {
-        "Secondary education duration (years)": {
-          "value": 7,
+        },
+        "Voice and Accountability": {
+          "value": 1.46138572692871,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.32435989379883,
-          "year": "2022"
+        "Rule of Law": {
+          "value": 1.55120778083801,
+          "year": "2023"
         }
       },
       "GBR": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
         "Primary completion rate (%)": {
           "value": 101.423362731934,
           "year": "2023"
@@ -491,13 +449,17 @@
         "Government education expenditure (% of GDP)": {
           "value": 5.90682983398438,
           "year": "2021"
+        },
+        "Voice and Accountability": {
+          "value": 1.26162397861481,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.39836597442627,
+          "year": "2023"
         }
       },
       "IND": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
         "Primary completion rate (%)": {
           "value": 93.8187311671038,
           "year": "2023"
@@ -505,23 +467,17 @@
         "Government education expenditure (% of GDP)": {
           "value": 4.09865814174589,
           "year": "2022"
-        }
-      },
-      "JPN": {
-        "Secondary education duration (years)": {
-          "value": 6,
+        },
+        "Voice and Accountability": {
+          "value": 0.0944044888019562,
           "year": "2023"
         },
-        "Government education expenditure (% of GDP)": {
-          "value": 3.33563995361328,
-          "year": "2021"
+        "Rule of Law": {
+          "value": 0.188364565372467,
+          "year": "2023"
         }
       },
       "USA": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
         "Primary completion rate (%)": {
           "value": 95.743522644043,
           "year": "2022"
@@ -529,10 +485,102 @@
         "Government education expenditure (% of GDP)": {
           "value": 5.42038011550903,
           "year": "2021"
+        },
+        "Voice and Accountability": {
+          "value": 0.877519071102142,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.3276778459549,
+          "year": "2023"
+        }
+      },
+      "AUS": {
+        "Government education expenditure (% of GDP)": {
+          "value": 5.05916023254395,
+          "year": "2022"
+        },
+        "Voice and Accountability": {
+          "value": 1.50660192966461,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.52318394184113,
+          "year": "2023"
+        }
+      },
+      "BRA": {
+        "Government education expenditure (% of GDP)": {
+          "value": 5.61922979354858,
+          "year": "2022"
+        },
+        "Voice and Accountability": {
+          "value": 0.382853865623474,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": -0.308802843093872,
+          "year": "2023"
+        }
+      },
+      "CAN": {
+        "Government education expenditure (% of GDP)": {
+          "value": 4.88021993637085,
+          "year": "2022"
+        },
+        "Voice and Accountability": {
+          "value": 1.4796462059021,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.47300565242767,
+          "year": "2023"
+        }
+      },
+      "CHN": {
+        "Government education expenditure (% of GDP)": {
+          "value": 4.00127983093262,
+          "year": "2023"
+        },
+        "Voice and Accountability": {
+          "value": -1.50455415248871,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": -0.0401299707591534,
+          "year": "2023"
+        }
+      },
+      "FRA": {
+        "Government education expenditure (% of GDP)": {
+          "value": 5.32435989379883,
+          "year": "2022"
+        },
+        "Voice and Accountability": {
+          "value": 1.15460133552551,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.18057084083557,
+          "year": "2023"
+        }
+      },
+      "JPN": {
+        "Government education expenditure (% of GDP)": {
+          "value": 3.33563995361328,
+          "year": "2021"
+        },
+        "Voice and Accountability": {
+          "value": 1.10550534725189,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.53553938865662,
+          "year": "2023"
         }
       }
     },
-    "timestamp": "2025-12-21T11:33:40.499254",
-    "source": "World Bank EdStats API"
+    "timestamp": "2026-02-25T11:52:51.447446",
+    "source": "World Bank API (EdStats + WGI)"
   }
 }
