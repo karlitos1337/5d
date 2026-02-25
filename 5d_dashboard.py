@@ -7,8 +7,9 @@ Erste Anlaufstelle mit Installation, Navigation und Erklärungen für Einsteiger
 from datetime import datetime
 
 import streamlit as st
+
+from utils.caching import display_cache_info, preload_all_critical_data
 from utils.mobile_responsive import inject_mobile_css
-from utils.caching import preload_all_critical_data, display_cache_info
 
 st.set_page_config(
     page_title="5D Wiki & Home", page_icon="📚", layout="wide", initial_sidebar_state="expanded"
