@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import sys
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -22,19 +23,40 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
-                with urllib.request.urlopen(url, timeout=15) as resp:
+                req = urllib.request.Request(
+                    url,
+                    headers={"User-Agent": "OWID-Proxy/1.0"}
+                )
+                with urllib.request.urlopen(req, timeout=15) as resp:
                     data = resp.read()
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
+
+                    # Security headers
+                    self.send_header("X-Content-Type-Options", "nosniff")
+                    self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                    self.send_header("X-Frame-Options", "DENY")
+                    self.send_header("Referrer-Policy", "no-referrer")
+
                     # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
                     self.end_headers()
                     self.wfile.write(data)
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Log full error to stderr but don't leak details to client
+                sys.stderr.write(f"Fetch error for {url}: {e}\n")
+
+                msg = b"Fetch error"
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
+
+                # Security headers
+                self.send_header("X-Content-Type-Options", "nosniff")
+                self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+                self.send_header("X-Frame-Options", "DENY")
+                self.send_header("Referrer-Policy", "no-referrer")
+
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(msg)
@@ -57,8 +79,10 @@ def main():
             port = int(sys.argv[1])
         except ValueError:
             pass
-    server = HTTPServer(("0.0.0.0", port), ProxyHandler)
-    print(f"OWID proxy listening on http://localhost:{port}/proxy/<file>")
+    # Security: Bind to localhost by default to prevent external access
+    host = os.environ.get("OWID_PROXY_HOST", "127.0.0.1")
+    server = HTTPServer((host, port), ProxyHandler)
+    print(f"OWID proxy listening on http://{host}:{port}/proxy/<file>")
     print("Supported keys:", ", ".join(OWID_URLS.keys()))
     try:
         server.serve_forever()
