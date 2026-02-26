@@ -15,3 +15,17 @@
 ## 2026-02-26 - race-condition-localstorage-parallel-fetch
 **Learning:** `localStorage` is synchronous, but `await fetch()` releases the thread. If you implement a cache with `read -> await -> write`, you create a race condition when multiple async functions run in parallel. Updates made by other functions during the `await` are lost because the final write overwrites the state with the stale copy read at the beginning.
 **Action:** Always re-read `localStorage` (or any shared mutable state) immediately before writing in an async function to ensure you are modifying the latest state. For simple key-value caches, this optimistic locking strategy (read-modify-write in critical section) is sufficient and performant.
+
+## 2026-02-26 - linting-and-dependency-hygiene
+**Learning:** CI failures are often caused by:
+1.  Checking linting on vendor/backup directories (, ) because configuration files () lack explicit exclusions.
+2.  Missing dependencies in  that are installed in the dev environment but not in CI (e.g.,  for tests).
+3.  Invalid git submodules (directories with  inside them but no  entry) causing exit code 128.
+**Action:** Always verify  exclusions match the project structure. Keep  in sync with imports. Use  for accidental submodules.
+
+## 2026-02-26 - linting-and-dependency-hygiene
+**Learning:** CI failures are often caused by:
+1.  Checking linting on vendor/backup directories (`99_unsortiert`, `external`) because configuration files (`pyproject.toml`) lack explicit exclusions.
+2.  Missing dependencies in `requirements.txt` that are installed in the dev environment but not in CI (e.g., `networkx` for tests).
+3.  Invalid git submodules (directories with `.git` inside them but no `.gitmodules` entry) causing exit code 128.
+**Action:** Always verify `pyproject.toml` exclusions match the project structure. Keep `requirements_extended.txt` in sync with imports. Use `git rm --cached` for accidental submodules.
