@@ -45,3 +45,11 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Generated Evidence Package Artifacts
+outputs/
+validation_report_*.json
+validation_results_*.png
+questionnaire_*.json
+example_responses_*.csv
+5d_research_data.json
