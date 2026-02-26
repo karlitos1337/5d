@@ -15,3 +15,7 @@ ruff
 black
 mypy
 pytest
+networkx>=3.0
+httpx
+keyring
+pytest-asyncio
