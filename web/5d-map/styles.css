@@ -70,6 +70,10 @@ body {
 .btn--primary:hover {
   background: #1a6a75;
 }
+.btn:focus-visible {
+  outline: 3px solid var(--color-warning);
+  outline-offset: 2px;
+}
 
 main { height: calc(100vh - 132px); }
 #map { width: 100%; height: 100%; }
