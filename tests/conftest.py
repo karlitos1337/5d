@@ -1,5 +1,4 @@
 import sys
-import os
 from pathlib import Path
 
 # Add the project root to sys.path so that 'storage', 'models', etc. can be imported
