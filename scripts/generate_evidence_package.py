@@ -18,13 +18,7 @@ from pathlib import Path
 def run_step(command, description, env=None):
     print(f"\n🚀 {description}...")
     try:
-        result = subprocess.run(
-            command,
-            check=True,
-            text=True,
-            capture_output=True,
-            env=env
-        )
+        result = subprocess.run(command, check=True, text=True, capture_output=True, env=env)
         print(result.stdout)
         return True
     except subprocess.CalledProcessError as e:
@@ -32,21 +26,24 @@ def run_step(command, description, env=None):
         print(e.stderr)
         return False
 
+
 def get_latest_file(pattern):
     files = glob.glob(pattern)
     if not files:
         return None
     return max(files, key=os.path.getmtime)
 
+
 def load_json(filepath):
     if not filepath or not os.path.exists(filepath):
         return None
     try:
-        with open(filepath, encoding='utf-8') as f:
+        with open(filepath, encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
         print(f"⚠️ Error reading {filepath}: {e}")
         return None
+
 
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -63,7 +60,7 @@ def main():
     run_step(
         [sys.executable, "validation/imp_validation_study.py"],
         "Running IMP Validation Study",
-        env=env
+        env=env,
     )
 
     # Find latest validation artifacts
@@ -75,15 +72,13 @@ def main():
     if validation_report_path:
         shutil.copy(validation_report_path, package_dir / os.path.basename(validation_report_path))
     if validation_results_path:
-        shutil.copy(validation_results_path, package_dir / os.path.basename(validation_results_path))
+        shutil.copy(
+            validation_results_path, package_dir / os.path.basename(validation_results_path)
+        )
     shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
 
     # 2. Run Research Scraper
-    run_step(
-        [sys.executable, "5d_research_scraper.py"],
-        "Running Research Scraper",
-        env=env
-    )
+    run_step([sys.executable, "5d_research_scraper.py"], "Running Research Scraper", env=env)
 
     # Find latest research data
     research_data_path = "5d_research_data.json"  # Scraper overwrites this file
@@ -102,8 +97,12 @@ def main():
     if validation_data:
         for dim, stats in validation_data.get("dimensions", {}).items():
             alpha = stats.get("cronbach_alpha", 0.0)
-            reliability_status = "Validated Insight" if alpha >= 0.8 else "Hypothesis Generation Needed"
-            mapping_rows.append(f"| {dim} | IMP Score (Internal) | Pilot Study (N={validation_data.get('n_participants', '?')}) | 0-5 | {alpha:.3f} ({reliability_status}) |")
+            reliability_status = (
+                "Validated Insight" if alpha >= 0.8 else "Hypothesis Generation Needed"
+            )
+            mapping_rows.append(
+                f"| {dim} | IMP Score (Internal) | Pilot Study (N={validation_data.get('n_participants', '?')}) | 0-5 | {alpha:.3f} ({reliability_status}) |"
+            )
     else:
         mapping_rows.append("| Validation Data Missing | N/A | N/A | N/A | N/A |")
 
@@ -113,19 +112,25 @@ def main():
         # Example: Check for a specific country or aggregate
         # For now, just add a generic row if data exists
         if wb_data:
-             mapping_rows.append("| Macro-Governance | World Bank Education | World Bank API | Various | External Validated Source |")
+            mapping_rows.append(
+                "| Macro-Governance | World Bank Education | World Bank API | Various | External Validated Source |"
+            )
 
-    mapping_content = f"""
+    mapping_content = (
+        f"""
 # Metric Mapping Table
 **Protocol:** Professor Dr. A. I. Nexus
 **Date:** {datetime.datetime.now().isoformat()}
 
 | Dimension | Metric | Source | Range | Reliability / Status |
 |-----------|--------|--------|-------|----------------------|
-""" + "\n".join(mapping_rows) + """
+"""
+        + "\n".join(mapping_rows)
+        + """
 | Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 (External) |
 | Social Participation | Network Density | Graph Analysis | 0-1 | Hypothesis Phase |
 """
+    )
 
     with open(package_dir / "METRIC_MAPPING.md", "w", encoding="utf-8") as f:
         f.write(mapping_content)
@@ -138,13 +143,17 @@ def main():
     if research_data:
         for _keyword, data in research_data.items():
             if isinstance(data, dict) and "arxiv" in data:
-                for paper in data["arxiv"][:2]: # Top 2 per keyword
-                    literature_list.append(f"- **{paper['title']}** (ArXiv) - {paper['summary'][:100]}...")
+                for paper in data["arxiv"][:2]:  # Top 2 per keyword
+                    literature_list.append(
+                        f"- **{paper['title']}** (ArXiv) - {paper['summary'][:100]}..."
+                    )
             if isinstance(data, dict) and "pubmed" in data:
                 for paper in data["pubmed"][:2]:
                     literature_list.append(f"- **{paper['title']}** (PubMed)")
 
-    literature_section = "\n".join(literature_list) if literature_list else "- No external literature scraped."
+    literature_section = (
+        "\n".join(literature_list) if literature_list else "- No external literature scraped."
+    )
 
     interpretation_content = f"""
 # Scientific Interpretation
@@ -209,6 +218,7 @@ Generated: {timestamp}
         f.write(manifest_content)
 
     print(f"\n✅ Evidence Package Generated: {package_dir}")
+
 
 if __name__ == "__main__":
     main()
