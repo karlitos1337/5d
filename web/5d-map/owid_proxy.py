@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import sys
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -9,7 +10,23 @@ OWID_URLS = {
 
 
 class ProxyHandler(BaseHTTPRequestHandler):
+    def _set_security_headers(self):
+        """Add security headers to response."""
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Referrer-Policy", "no-referrer")
+
+    def do_HEAD(self):
+        """Handle HEAD requests similarly to GET but without body."""
+        self._handle_request(method="HEAD")
+
     def do_GET(self):
+        """Handle GET requests."""
+        self._handle_request(method="GET")
+
+    def _handle_request(self, method="GET"):
         path = self.path.lstrip("/")
         if path.startswith("proxy/"):
             key = path.split("/", 1)[1]
@@ -17,33 +34,52 @@ class ProxyHandler(BaseHTTPRequestHandler):
             if not url:
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("Access-Control-Allow-Origin", "*")
+                self._set_security_headers()
                 self.end_headers()
-                self.wfile.write(b"Unknown proxy key")
+                if method == "GET":
+                    self.wfile.write(b"Unknown proxy key")
                 return
+
             try:
-                with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
+                # Use custom User-Agent
+                req = urllib.request.Request(
+                    url, headers={"User-Agent": "OWID-Proxy/1.0"}, method=method
+                )
+
+                with urllib.request.urlopen(req, timeout=15) as resp:
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
-                    self.send_header("Content-Length", str(len(data)))
-                    # CORS
-                    self.send_header("Access-Control-Allow-Origin", "*")
+
+                    # Forward Content-Length if available
+                    content_length = resp.headers.get("Content-Length")
+                    if content_length:
+                        self.send_header("Content-Length", content_length)
+
+                    self._set_security_headers()
                     self.end_headers()
-                    self.wfile.write(data)
+
+                    if method == "GET":
+                        data = resp.read()
+                        self.wfile.write(data)
+
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Log actual error to stderr
+                print(f"Error fetching {url}: {e}", file=sys.stderr)
+
+                # Send sanitized error to client
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("Access-Control-Allow-Origin", "*")
+                self._set_security_headers()
                 self.end_headers()
-                self.wfile.write(msg)
+                if method == "GET":
+                    self.wfile.write(b"Upstream fetch error")
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
-            self.send_header("Access-Control-Allow-Origin", "*")
+            self._set_security_headers()
             self.end_headers()
-            self.wfile.write(b"Use /proxy/<file>")
+            if method == "GET":
+                self.wfile.write(b"Use /proxy/<file>")
 
     def log_message(self, fmt, *args):
         # Quiet log
@@ -57,8 +93,12 @@ def main():
             port = int(sys.argv[1])
         except ValueError:
             pass
-    server = HTTPServer(("0.0.0.0", port), ProxyHandler)
-    print(f"OWID proxy listening on http://localhost:{port}/proxy/<file>")
+
+    # Secure binding: Default to localhost, allow override via env var
+    host = os.environ.get("OWID_PROXY_HOST", "127.0.0.1")
+
+    server = HTTPServer((host, port), ProxyHandler)
+    print(f"OWID proxy listening on http://{host}:{port}/proxy/<file>")
     print("Supported keys:", ", ".join(OWID_URLS.keys()))
     try:
         server.serve_forever()

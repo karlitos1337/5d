@@ -6,3 +6,7 @@
 **Vulnerability:** The `5d_research_scraper.py` script used an insecure HTTP URL (`http://export.arxiv.org`) for the arXiv API. This could allow Man-in-the-Middle (MitM) attacks to intercept or modify research data.
 **Learning:** Always verify if external APIs support HTTPS and enforce it. Even for public data, integrity is crucial.
 **Prevention:** Changed the URL to `https://export.arxiv.org`. Added a test case to verify HTTPS usage for API endpoints.
+## 2026-02-26 - [Insecure Development Proxy Binding]
+**Vulnerability:** The `owid_proxy.py` script (used for local development) bound to `0.0.0.0` by default, exposing the proxy service to the entire network without authentication. It also lacked standard security headers (CSP, X-Frame-Options).
+**Learning:** Development tools often prioritize convenience (universal access) over security, creating accidental exposure risks when run in shared environments.
+**Prevention:** Changed default binding to `127.0.0.1` and added strict security headers. Configuration should require explicit opt-in (via environment variables) for external access.
