@@ -16,17 +16,28 @@ def verify_dashboard():
         page.wait_for_selector("text=Validierung des 5D-Intelligence Frameworks")
 
         # Verify Sections
-        sections = ["Einleitung", "5D-Intelligence Framework", "Methodik", "Ergebnisse", "Validierung", "Implikationen", "Zukunftsperspektiven", "Schlussfolgerung"]
+        sections = [
+            "Einleitung",
+            "5D-Intelligence Framework",
+            "Methodik",
+            "Ergebnisse",
+            "Validierung",
+            "Implikationen",
+            "Zukunftsperspektiven",
+            "Schlussfolgerung",
+        ]
         for section in sections:
             if not page.is_visible(f"text={section}"):
-                print(f"Section '{section}' not found visible on initial load (might be in menu or lower down).")
+                print(
+                    f"Section '{section}' not found visible on initial load (might be in menu or lower down)."
+                )
             else:
                 print(f"Section '{section}' is visible.")
 
         # Test Navigation
         print("Clicking 'Methodik'...")
         page.click("text=Methodik")
-        time.sleep(1) # Allow scroll
+        time.sleep(1)  # Allow scroll
 
         # Test Dark Mode
         print("Toggling Dark Mode...")
@@ -73,6 +84,7 @@ def verify_dashboard():
         print(f"Found {citation_count} citations.")
 
         browser.close()
+
 
 if __name__ == "__main__":
     verify_dashboard()
