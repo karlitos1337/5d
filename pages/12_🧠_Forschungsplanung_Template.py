@@ -3,8 +3,9 @@
 Streamlit-Seite: Forschungsplanung (Template) im 5D-Style
 - Betten das bereitgestellte Homepage-Design inkl. Charts via st.components.html ein
 """
-from pathlib import Path
 import json
+from pathlib import Path
+
 import streamlit as st
 
 st.set_page_config(
