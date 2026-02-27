@@ -1,5 +1,7 @@
 import sys
+
 from playwright.sync_api import sync_playwright
+
 
 def verify_dashboard_update():
     """
@@ -29,9 +31,14 @@ def verify_dashboard_update():
 
         # 2. Verify Key Sections (Navigation)
         sections = [
-            "Einleitung", "5D-Intelligence Framework", "Methodik",
-            "Ergebnisse", "Validierung", "Implikationen",
-            "Zukunftsperspektiven", "Schlussfolgerung"
+            "Einleitung",
+            "5D-Intelligence Framework",
+            "Methodik",
+            "Ergebnisse",
+            "Validierung",
+            "Implikationen",
+            "Zukunftsperspektiven",
+            "Schlussfolgerung",
         ]
 
         for section in sections:
@@ -44,16 +51,15 @@ def verify_dashboard_update():
 
         # 3. Verify Specific Content (New Content Check)
         # Check for specific text introduced in the update
-        specific_content = "Weltweit regierungsindikatoren (WGI)" # Typo in user prompt? Let's check a reliable string from the code provided.
         # "Worldwide Governance Indicators (WGI)" from "Methodik und Datenquellen" section
         specific_content_1 = "Worldwide Governance Indicators (WGI)"
-        specific_content_2 = "Human Development Index (HDI)"
+        _specific_content_2 = "Human Development Index (HDI)"
 
         if page.get_by_text(specific_content_1).first.is_visible():
-             print(f"Content '{specific_content_1}' found.")
+            print(f"Content '{specific_content_1}' found.")
         else:
-             print(f"ERROR: Content '{specific_content_1}' NOT found.")
-             # Don't exit yet, might be collapsed or off-screen, but it should be in DOM
+            print(f"ERROR: Content '{specific_content_1}' NOT found.")
+            # Don't exit yet, might be collapsed or off-screen, but it should be in DOM
 
         # 4. Verify Dark Mode Toggle
         # Click the toggle button (sun/moon icon)
@@ -110,6 +116,7 @@ def verify_dashboard_update():
 
         browser.close()
         print("Verification successful!")
+
 
 if __name__ == "__main__":
     verify_dashboard_update()
