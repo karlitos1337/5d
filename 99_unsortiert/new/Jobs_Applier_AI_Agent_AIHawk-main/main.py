@@ -74,9 +74,9 @@ class ConfigValidator:
             with open(yaml_path) as stream:
                 return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
-            raise ConfigError(f"Error reading YAML file {yaml_path}: {exc}")
-        except FileNotFoundError:
-            raise ConfigError(f"YAML file not found: {yaml_path}")
+            raise ConfigError(f"Error reading YAML file {yaml_path}: {exc}") from exc
+        except FileNotFoundError as exc:
+            raise ConfigError(f"YAML file not found: {yaml_path}") from exc
 
     @classmethod
     def validate_config(cls, config_yaml_path: Path) -> dict:
@@ -235,7 +235,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
             style_answer = inquirer.prompt(questions)
             if style_answer and "style" in style_answer:
                 selected_choice = style_answer["style"]
-                for style_name, (file_name, author_link) in available_styles.items():
+                for style_name, (_file_name, _author_link) in available_styles.items():
                     if selected_choice.startswith(style_name):
                         style_manager.set_selected_style(style_name)
                         logger.info(f"Selected style: {style_name}")
@@ -322,7 +322,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
             style_answer = inquirer.prompt(questions)
             if style_answer and "style" in style_answer:
                 selected_choice = style_answer["style"]
-                for style_name, (file_name, author_link) in available_styles.items():
+                for style_name, (_file_name, _author_link) in available_styles.items():
                     if selected_choice.startswith(style_name):
                         style_manager.set_selected_style(style_name)
                         logger.info(f"Selected style: {style_name}")

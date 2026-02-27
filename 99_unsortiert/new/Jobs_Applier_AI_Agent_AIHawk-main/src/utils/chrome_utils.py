@@ -49,7 +49,7 @@ def init_browser() -> webdriver.Chrome:
         return driver
     except Exception as e:
         logger.error(f"Failed to initialize browser: {str(e)}")
-        raise RuntimeError(f"Failed to initialize browser: {str(e)}")
+        raise RuntimeError(f"Failed to initialize browser: {str(e)}") from e
 
 
 def HTML_to_PDF(html_content, driver):
@@ -97,4 +97,4 @@ def HTML_to_PDF(html_content, driver):
         return pdf_base64["data"]
     except Exception as e:
         logger.error(f"Si è verificata un'eccezione WebDriver: {e}")
-        raise RuntimeError(f"Si è verificata un'eccezione WebDriver: {e}")
+        raise RuntimeError(f"Si è verificata un'eccezione WebDriver: {e}") from e
