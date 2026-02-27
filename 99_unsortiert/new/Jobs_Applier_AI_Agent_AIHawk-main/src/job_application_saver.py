@@ -1,13 +1,13 @@
-from src.logging import logger
-import os
 import json
+import os
 import shutil
-
 from dataclasses import asdict
 
-from config import JOB_APPLICATIONS_DIR
 from job import Job
 from job_application import JobApplication
+
+from config import JOB_APPLICATIONS_DIR
+from src.logging import logger
 
 # Base directory where all applications will be saved
 BASE_DIR = JOB_APPLICATIONS_DIR
@@ -40,9 +40,7 @@ class ApplicationSaver:
                 "Job application file path is not set. Please create the application directory first."
             )
 
-        json_file_path = os.path.join(
-            self.job_application_files_path, "job_application.json"
-        )
+        json_file_path = os.path.join(self.job_application_files_path, "job_application.json")
         with open(json_file_path, "w") as json_file:
             json.dump(self.job_application.application, json_file, indent=4)
 
@@ -64,9 +62,7 @@ class ApplicationSaver:
 
         job: Job = self.job_application.job
 
-        json_file_path = os.path.join(
-            self.job_application_files_path, "job_description.json"
-        )
+        json_file_path = os.path.join(self.job_application_files_path, "job_description.json")
         with open(json_file_path, "w") as json_file:
             json.dump(asdict(job), json_file, indent=4)
 
@@ -88,5 +84,5 @@ class ApplicationSaver:
             saver.save_file(
                 saver.job_application_files_path,
                 job_application.job.cover_letter_path,
-                "cover_letter.pdf"
+                "cover_letter.pdf",
             )

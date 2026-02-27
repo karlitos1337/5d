@@ -4,14 +4,15 @@
 Orchestrates validation, scraping, and packaging.
 """
 
-import os
-import glob
-import shutil
 import datetime
+import glob
+import json
+import os
+import shutil
 import subprocess
 import sys
-import json
 from pathlib import Path
+
 
 def run_step(command, description):
     print(f"\n🚀 {description}...")
@@ -23,6 +24,7 @@ def run_step(command, description):
         print(f"❌ Error during {description}:")
         print(e.stderr)
         return False
+
 
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -36,7 +38,7 @@ def main():
     env = os.environ.copy()
     env["PYTHONPATH"] = os.getcwd()
 
-    print(f"\n🚀 Running IMP Validation Study...")
+    print("\n🚀 Running IMP Validation Study...")
     validation_report_path = None
     try:
         # Running validation study
@@ -45,17 +47,22 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
         # Copy Analysis Script
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
-        print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
+        print("  -> Copied Analysis Script: validation/imp_validation_study.py")
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 dest = package_dir / os.path.basename(f)
                 shutil.move(f, dest)
@@ -72,21 +79,21 @@ def main():
         print(e.stderr)
 
     # 2. Run Research Scraper
-    print(f"\n🚀 Running Research Scraper...")
+    print("\n🚀 Running Research Scraper...")
     try:
         result = subprocess.run(
             [sys.executable, "5d_research_scraper.py"],
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
         # Copy artifacts (Keep original in root as master DB)
         if os.path.exists("5d_research_data.json"):
             shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
-            print(f"  -> Copied 5d_research_data.json")
+            print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")
 
@@ -98,7 +105,7 @@ def main():
     validation_data = {}
     if validation_report_path and validation_report_path.exists():
         try:
-            with open(validation_report_path, 'r') as f:
+            with open(validation_report_path) as f:
                 validation_data = json.load(f)
         except Exception as e:
             print(f"⚠️ Could not read validation report: {e}")
@@ -108,17 +115,23 @@ def main():
     mapping_rows = []
 
     # Add WGI if available (Static mapping for now as it's external)
-    mapping_rows.append("| Autonomy (Macro) | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | N/A (Macro) |")
+    mapping_rows.append(
+        "| Autonomy (Macro) | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | N/A (Macro) |"
+    )
 
     # Add dimensions from validation study
     if "dimensions" in validation_data:
         for dim, stats in validation_data["dimensions"].items():
             alpha = stats.get("cronbach_alpha", 0)
             status = "Validated Insight" if alpha >= 0.8 else "Hypothesis Generation Needed"
-            mapping_rows.append(f"| {dim} | Survey Scale | IMP Validation Study | 0-5 | {alpha:.3f} ({status}) |")
+            mapping_rows.append(
+                f"| {dim} | Survey Scale | IMP Validation Study | 0-5 | {alpha:.3f} ({status}) |"
+            )
     else:
         # Fallback if no data
-        mapping_rows.append("| 5D Dimensions | Survey Scale | IMP Validation Study | 0-5 | Pending |")
+        mapping_rows.append(
+            "| 5D Dimensions | Survey Scale | IMP Validation Study | 0-5 | Pending |"
+        )
 
     mapping_content = f"""
 | Dimension | Metric | Source | Range | Reliability (α) / Status |
@@ -137,12 +150,22 @@ def main():
         for dim, stats in validation_data["dimensions"].items():
             alpha = stats.get("cronbach_alpha", 0)
             if alpha >= 0.8:
-                empirical_status.append(f"- **{dim}**: Validated (α={alpha:.3f}, p<0.05). Empirical Knowledge.")
+                empirical_status.append(
+                    f"- **{dim}**: Validated (α={alpha:.3f}, p<0.05). Empirical Knowledge."
+                )
             else:
-                hypothesis_needed.append(f"- **{dim}**: Hypothesis Generation Needed (α={alpha:.3f}). Suggest item revision.")
+                hypothesis_needed.append(
+                    f"- **{dim}**: Hypothesis Generation Needed (α={alpha:.3f}). Suggest item revision."
+                )
 
-    empirical_section = "\n".join(empirical_status) if empirical_status else "- No dimensions met the strict validation criteria (>0.8)."
-    hypothesis_section = "\n".join(hypothesis_needed) if hypothesis_needed else "- All dimensions validated."
+    empirical_section = (
+        "\n".join(empirical_status)
+        if empirical_status
+        else "- No dimensions met the strict validation criteria (>0.8)."
+    )
+    hypothesis_section = (
+        "\n".join(hypothesis_needed) if hypothesis_needed else "- All dimensions validated."
+    )
 
     interpretation_content = f"""
 # SYSTEM PROMPT: PROFESSOR DR. A. I. NEXUS (5D-INTELLIGENCE)
@@ -218,6 +241,7 @@ Generated: {timestamp}
         f.write(manifest_content)
 
     print(f"\n✅ Evidence Package Generated: {package_dir}")
+
 
 if __name__ == "__main__":
     main()
