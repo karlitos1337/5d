@@ -50,7 +50,8 @@ exclude = [
     "99_unsortiert",
     "external",
     "5d",
-    "node_modules"
+    "node_modules",
+    "outputs"
 ]
 
 [tool.pytest.ini_options]
