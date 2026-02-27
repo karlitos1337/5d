@@ -1,0 +1,9 @@
+
+> 5d-analysis-dashboard@0.0.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 279 ms
+
+  ➜  Local:   http://localhost:5173/5d/docs/analysis/
+  ➜  Network: use --host to expose
