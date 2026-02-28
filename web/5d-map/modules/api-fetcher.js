@@ -306,18 +306,32 @@ export async function fetchAllData() {
 
 // --- Helpers ---
 function parseCSV(text) {
-  const lines = text.split(/\r?\n/).filter(Boolean);
-  if (!lines.length) return [];
-  const headers = splitCSVLine(lines[0]);
+  const lines = text.split(/\r?\n/);
+
+  // Find first non-empty line for headers
+  let headerIndex = 0;
+  while (headerIndex < lines.length && !lines[headerIndex]) {
+    headerIndex++;
+  }
+  if (headerIndex >= lines.length) return [];
+
+  const headers = splitCSVLine(lines[headerIndex]);
   const rows = [];
-  for (let i = 1; i < lines.length; i++) {
-    const cols = splitCSVLine(lines[i]);
+  const headersLen = headers.length;
+
+  for (let i = headerIndex + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line) continue;
+
+    const cols = splitCSVLine(line);
     if (!cols.length) continue;
     const obj = {};
-    headers.forEach((h, idx) => obj[h] = cols[idx]);
+    for (let j = 0; j < headersLen; j++) {
+      obj[headers[j]] = cols[j];
+    }
     // normalize numeric
     if (obj.Year) obj.Year = Number(obj.Year);
-    const valueKey = headers[headers.length - 1];
+    const valueKey = headers[headersLen - 1];
     if (obj[valueKey] != null) obj[valueKey] = Number(obj[valueKey]);
     rows.push(obj);
   }
@@ -326,19 +340,39 @@ function parseCSV(text) {
 
 function splitCSVLine(line) {
   const res = [];
-  let cur = '', inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
+  let start = 0;
+  let inQuotes = false;
+  let hasEscapedQuotes = false;
+  const len = line.length;
+
+  for (let i = 0; i < len; i++) {
     const ch = line[i];
     if (ch === '"') {
-      if (inQuotes && line[i+1] === '"') { cur += '"'; i++; }
-      else { inQuotes = !inQuotes; }
+      if (inQuotes && i + 1 < len && line[i + 1] === '"') {
+        hasEscapedQuotes = true;
+        i++; // skip escaped quote
+      } else {
+        inQuotes = !inQuotes;
+      }
     } else if (ch === ',' && !inQuotes) {
-      res.push(cur); cur = '';
-    } else {
-      cur += ch;
+      let val = line.substring(start, i);
+      if (val.length > 0 && val.charCodeAt(0) === 34 && val.charCodeAt(val.length - 1) === 34) {
+        val = val.substring(1, val.length - 1);
+        if (hasEscapedQuotes) val = val.replace(/""/g, '"');
+      }
+      res.push(val);
+      start = i + 1;
+      hasEscapedQuotes = false;
     }
   }
-  res.push(cur);
+
+  let val = line.substring(start);
+  if (val.length > 0 && val.charCodeAt(0) === 34 && val.charCodeAt(val.length - 1) === 34) {
+    val = val.substring(1, val.length - 1);
+    if (hasEscapedQuotes) val = val.replace(/""/g, '"');
+  }
+  res.push(val);
+
   return res;
 }
 
