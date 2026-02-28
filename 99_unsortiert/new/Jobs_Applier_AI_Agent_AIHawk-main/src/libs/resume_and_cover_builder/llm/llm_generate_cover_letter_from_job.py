@@ -1,32 +1,42 @@
 """
 This creates the cover letter (in html, utils will then convert in PDF) matching with job description and plain-text resume
 """
+
 # app/libs/resume_and_cover_builder/llm_generate_cover_letter_from_job.py
 import os
 import textwrap
-from ..utils import LoggerChatModel
+from pathlib import Path
+
+from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from pathlib import Path
-from dotenv import load_dotenv
-from requests.exceptions import HTTPError as HTTPStatusError
-from pathlib import Path
 from loguru import logger
+
+from ..utils import LoggerChatModel
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Configure log file
-log_folder = 'log/cover_letter/gpt_cover_letter_job_descr'
+log_folder = "log/cover_letter/gpt_cover_letter_job_descr"
 if not os.path.exists(log_folder):
     os.makedirs(log_folder)
 log_path = Path(log_folder).resolve()
-logger.add(log_path / "gpt_cover_letter_job_descr.log", rotation="1 day", compression="zip", retention="7 days", level="DEBUG")
+logger.add(
+    log_path / "gpt_cover_letter_job_descr.log",
+    rotation="1 day",
+    compression="zip",
+    retention="7 days",
+    level="DEBUG",
+)
+
 
 class LLMCoverLetterJobDescription:
     def __init__(self, openai_api_key, strings):
-        self.llm_cheap = LoggerChatModel(ChatOpenAI(model_name="gpt-4o-mini", openai_api_key=openai_api_key, temperature=0.4))
+        self.llm_cheap = LoggerChatModel(
+            ChatOpenAI(model_name="gpt-4o-mini", openai_api_key=openai_api_key, temperature=0.4)
+        )
         self.llm_embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
         self.strings = strings
 
@@ -78,10 +88,7 @@ class LLMCoverLetterJobDescription:
         chain = prompt | self.llm_cheap | StrOutputParser()
         logger.debug(f"Chain created: {chain}")
 
-        input_data = {
-            "job_description": self.job_description,
-            "resume": self.resume
-        }
+        input_data = {"job_description": self.job_description, "resume": self.resume}
         logger.debug(f"Input data: {input_data}")
 
         output = chain.invoke(input_data)
