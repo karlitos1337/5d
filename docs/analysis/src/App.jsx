@@ -37,10 +37,14 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      if (!el.textContent?.trim() && el.tagName.toLowerCase() !== 'img') return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
+
+      btn.setAttribute('tabIndex', '0');
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('aria-label', `Citation ${indexNum}`);
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
@@ -54,8 +58,28 @@ const App = () => {
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      btn.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.stopPropagation(); e.preventDefault(); window.open(url, '_blank');
+        }
+      };
 
-      el.appendChild(btn);
+      if (el.tagName.toLowerCase() === 'img') {
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline-block';
+        wrapper.style.width = '100%';
+        el.parentNode.insertBefore(wrapper, el);
+        wrapper.appendChild(el);
+
+        btn.style.position = 'absolute';
+        btn.style.top = '10px';
+        btn.style.right = '10px';
+        btn.style.zIndex = '10';
+        wrapper.appendChild(btn);
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
