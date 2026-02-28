@@ -4,6 +4,7 @@ import yaml
 class ConfigError(Exception):
     pass
 
+
 class Main:
     @classmethod
     def load_config(cls, yaml_path):

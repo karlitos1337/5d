@@ -13,6 +13,7 @@ def add_frontmatter_to_file(filepath, title):
         f.write(frontmatter + content)
     return True
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", required=True)

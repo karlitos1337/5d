@@ -2,7 +2,8 @@ import streamlit as st
 
 
 def inject_mobile_css():
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     @media (max-width: 768px) {
         .stApp {
@@ -10,4 +11,6 @@ def inject_mobile_css():
         }
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
