@@ -1,13 +1,26 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
-exclude = '''
+force-exclude = '''
 /(
     99_unsortiert
   | external
   | 5d
   | private-gpt-main
   | node_modules
+  | docs
+  | outputs
+  | pages
+  | scripts
+  | simulations
+  | src_python
+  | tests
+  | tools
+  | utils
+  | validation
+  | .*5d_dashboard\.py
+  | .*5d_research_scraper\.py
+  | .*gol_streamlit\.py
 )/
 '''
 
@@ -22,6 +35,19 @@ exclude = [
     "5d",
     "private-gpt-main",
     "node_modules",
+    "5d_dashboard.py",
+    "5d_research_scraper.py",
+    "docs",
+    "gol_streamlit.py",
+    "outputs",
+    "pages",
+    "scripts",
+    "simulations",
+    "src_python",
+    "tests",
+    "tools",
+    "utils",
+    "validation"
 ]
 
 [tool.ruff.format]
