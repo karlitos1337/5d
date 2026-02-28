@@ -30,7 +30,7 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "5d/", "node_modules/"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "5d/", "node_modules/", "outputs/", "docs/5d-map/"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "src_python/tests"]
