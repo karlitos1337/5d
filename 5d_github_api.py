@@ -83,7 +83,7 @@ class GitHubExplorer:
             print(f"⚠️  Token check failed: {e}")
             return True  # Continue anyway
 
-    def search_repositories(self, query, max_results=10):
+    def search_repositories(self, query, max_results=10, _retries=0):
         """Sucht relevante GitHub Repositories mit Rate-Limit-Handling"""
         # Check token validity
         self._check_and_refresh_token()
@@ -104,11 +104,11 @@ class GitHubExplorer:
 
                 if self.rate_limit_reset:
                     wait_time = self.rate_limit_reset - time.time()
-                    if wait_time > 0 and wait_time < 3600:  # Max 1 hour
+                    if wait_time > 0 and wait_time < 3600 and _retries < 1:  # Max 1 hour
                         print(f"⏳ Waiting {wait_time:.0f}s for rate limit reset...")
                         time.sleep(wait_time + 1)
                         # Retry once
-                        return self.search_repositories(query, max_results)
+                        return self.search_repositories(query, max_results, _retries=_retries + 1)
                 return []
 
             response.raise_for_status()
