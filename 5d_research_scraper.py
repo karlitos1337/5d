@@ -299,12 +299,15 @@ class ResearchScraper:
             print("❌ No valid countries provided for World Bank data fetch")
             return {}
 
-        # World Bank indicator codes for education
+        # World Bank indicator codes for education and governance
         indicators = {
             "SE.SEC.DURS": "Secondary education duration (years)",
             "SE.PRM.CMPT.ZS": "Primary completion rate (%)",
             "SE.XPD.TOTL.GD.ZS": "Government education expenditure (% of GDP)",
-            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)"
+            "SE.SEC.ENRL.GC.FE.ZS": "Gross enrolment ratio, secondary, female (%)",
+            "VA.EST": "Voice & Accountability",
+            "RL.EST": "Rule of Law",
+            "GE.EST": "Government Effectiveness"
         }
 
         education_data = {}
@@ -312,60 +315,64 @@ class ResearchScraper:
         for indicator_code, indicator_name in indicators.items():
             print(f"  🏫 World Bank: Fetching {indicator_name}...")
 
-            for attempt in range(self.max_retries):
-                try:
-                    self._rate_limit("worldbank")
+            chunk_size = 10
+            for i in range(0, len(countries), chunk_size):
+                chunk = countries[i:i + chunk_size]
+                countries_str = ";".join(chunk)
 
-                    # World Bank API endpoint
-                    countries_str = ";".join(countries[:10])  # Limit to 10 per request
-                    url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
-                    params = {
-                        "format": "json",
-                        "date": "2020:2023",  # Recent years
-                        "per_page": 500
-                    }
+                for attempt in range(self.max_retries):
+                    try:
+                        self._rate_limit("worldbank")
 
-                    response = requests.get(url, params=params, timeout=15)
+                        # World Bank API endpoint
+                        url = f"{self.wb_base_url}/country/{countries_str}/indicator/{indicator_code}"
+                        params = {
+                            "format": "json",
+                            "date": "2020:2023",  # Recent years
+                            "per_page": 500
+                        }
 
-                    if response.status_code == 429:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
-                        time.sleep(wait_time)
-                        continue
+                        response = requests.get(url, params=params, timeout=15)
 
-                    response.raise_for_status()
-                    data = response.json()
+                        if response.status_code == 429:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⏳ World Bank rate limit, waiting {wait_time:.1f}s...")
+                            time.sleep(wait_time)
+                            continue
 
-                    # Parse World Bank response
-                    if isinstance(data, list) and len(data) > 1:
-                        for entry in data[1]:  # Data is in second element
-                            country_code = entry.get("countryiso3code")
-                            value = entry.get("value")
-                            year = entry.get("date")
+                        response.raise_for_status()
+                        data = response.json()
 
-                            if country_code and value is not None:
-                                if country_code not in education_data:
-                                    education_data[country_code] = {}
+                        # Parse World Bank response
+                        if isinstance(data, list) and len(data) > 1:
+                            for entry in data[1]:  # Data is in second element
+                                country_code = entry.get("countryiso3code")
+                                value = entry.get("value")
+                                year = entry.get("date")
 
-                                # Keep most recent data
-                                if indicator_name not in education_data[country_code]:
-                                    education_data[country_code][indicator_name] = {
-                                        "value": value,
-                                        "year": year
-                                    }
+                                if country_code and value is not None:
+                                    if country_code not in education_data:
+                                        education_data[country_code] = {}
 
-                    break  # Success
+                                    # Keep most recent data
+                                    if indicator_name not in education_data[country_code]:
+                                        education_data[country_code][indicator_name] = {
+                                            "value": value,
+                                            "year": year
+                                        }
 
-                except requests.exceptions.RequestException as e:
-                    if attempt < self.max_retries - 1:
-                        wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
-                        print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
-                        time.sleep(wait_time)
-                    else:
-                        print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
-                except Exception as e:
-                    print(f"    ❌ World Bank Error: {e}")
-                    break
+                        break  # Success
+
+                    except requests.exceptions.RequestException as e:
+                        if attempt < self.max_retries - 1:
+                            wait_time = self.rate_limit_delay * (self.retry_backoff**attempt)
+                            print(f"    ⚠️  World Bank error (attempt {attempt + 1}/{self.max_retries}): {e}")
+                            time.sleep(wait_time)
+                        else:
+                            print(f"    ❌ World Bank Error after {self.max_retries} attempts: {e}")
+                    except Exception as e:
+                        print(f"    ❌ World Bank Error: {e}")
+                        break
 
         print(f"  ✅ World Bank: {len(education_data)} countries fetched")
         return education_data
