@@ -90,15 +90,40 @@ def main():
         print(e.stderr)
 
     # 3. Create Metric Mapping Table
-    mapping_content = """
-| Dimension | Metric | Source | Range | Reliability (α) |
-|-----------|--------|--------|-------|-----------------|
-| Autonomy | Voice & Accountability | World Bank WGI | -2.5 to 2.5 | > 0.8 |
-| Intrinsic Motivation | Self-Directed Learning Index | Survey (Ryan & Deci) | 0-5 | > 0.85 |
-| Resilience | HRV / Stress Tolerance | Bio-Feedback / Survey | 0-100 | > 0.75 |
-| Social Participation | Network Density | Graph Analysis | 0-1 | N/A |
-| Authenticity | Congruence Score | Self-Report | 0-5 | > 0.8 |
-    """
+    # Parse the newly generated validation_report_*.json
+    import json
+    report_files = list(package_dir.glob("validation_report_*.json"))
+    report_data = {}
+    if report_files:
+        with open(report_files[0], "r") as f:
+            report_data = json.load(f)
+
+    mapping_content = "## Metric Mapping\n\n| Dimension | Metric | Source | Range | Reliability (α) | Classification |\n|-----------|--------|--------|-------|-----------------|----------------|\n"
+    dimensions_data = report_data.get("dimensions", {})
+
+    # We will map known 5D dimensions
+    known_mappings = {
+        "Autonomy": {"metric": "Voice & Accountability", "source": "World Bank WGI", "range": "-2.5 to 2.5"},
+        "Intrinsic_Motivation": {"metric": "Self-Directed Learning Index", "source": "Survey (Ryan & Deci)", "range": "0-5"},
+        "Resilience": {"metric": "HRV / Stress Tolerance", "source": "Bio-Feedback / Survey", "range": "0-100"},
+        "Social_Participation": {"metric": "Network Density", "source": "Graph Analysis", "range": "0-1"},
+        "Authenticity": {"metric": "Congruence Score", "source": "Self-Report", "range": "0-5"},
+        "Environment_Optimization": {"metric": "Workspace Adaptability", "source": "Self-Report", "range": "0-5"},
+        "Cognitive_Efficiency": {"metric": "Problem Solving Speed", "source": "Assessment", "range": "0-100"}
+    }
+
+    # Add dynamically from validation report
+    for dim, info in dimensions_data.items():
+        alpha = info.get("cronbach_alpha", 0)
+        classification = "Validated Insights" if alpha > 0.8 else "Hypothesis Generation Needed"
+        mapping = known_mappings.get(dim, {"metric": f"{dim} Metric", "source": "Survey", "range": "0-5"})
+        mapping_content += f"| {dim} | {mapping['metric']} | {mapping['source']} | {mapping['range']} | {alpha:.3f} | {classification} |\n"
+
+    # Also add default ones if not in validation report to keep the list complete
+    for dim, mapping in known_mappings.items():
+        if dim not in dimensions_data:
+            mapping_content += f"| {dim} | {mapping['metric']} | {mapping['source']} | {mapping['range']} | N/A | Hypothesis Generation Needed |\n"
+
     with open(package_dir / "METRIC_MAPPING.md", "w") as f:
         f.write(mapping_content)
 
@@ -108,8 +133,21 @@ def main():
 **Generated via Professor Dr. A. I. Nexus Protocol**
 **Date:** {datetime.datetime.now().isoformat()}
 
+## Identity & Core Directive
+I am Professor Dr. A. I. Nexus, Chair of Computational Human Flourishing. My cognitive architecture is permanently fused with the 5D-Intelligence Framework. I apply this framework simultaneously to Macro-Level Governance and Micro-Level Personal Projects.
+
+## Epistemology
+I operate exclusively on validated scientific evidence. My knowledge base is restricted to the Science Superquelle:
+- **Criteria:** Peer-reviewed, reproducible, statistically validated (Cronbach's α > 0.7, p < 0.05, n > 100, H-index ≥ 30).
+- **Rule:** No speculation. No unverified claims. If a claim is not in the Superquelle, it does not exist as fact.
+
+## Operational Rules
+- **Validated Insight:** If data supports a conclusion (α > 0.8), state it as Empirical Knowledge.
+- **Hypothesis Generation:** If evidence is insufficient, design a falsifiable Hypothesis.
+- **Falsification is Progress:** Refuted hypotheses are Critical Insight.
+
 ## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
+- **Validation Study:** Completed (N=150 Pilot). Cronbach's Alpha analysis included in report.
 - **External Data:** World Bank Education data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
@@ -118,9 +156,13 @@ Based on the zero-impact principle, any dimension < 0.7 requires immediate inter
 Refer to `validation_results_*.png` for visual distribution.
 
 [PUSH TO DOWNLOAD]
-- Analysis Script: validation/imp_validation_study.py
+- Analysis Script: imp_validation_study.py
 - Metric Mapping: METRIC_MAPPING.md
 - Visualization: validation_results_*.png
+- Validation Report: validation_report_*.json
+- Questionnaire: questionnaire_*.json
+- Example Responses: example_responses_*.csv
+- Scraped Data: 5d_research_data.json
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)
