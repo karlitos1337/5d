@@ -4,7 +4,7 @@ import os
 
 def check_github_auth_usage(directory):
     usage_found = False
-    for root, dirs, files in os.walk(directory):
+    for root, _dirs, files in os.walk(directory):
         if "99_unsortiert" in root: # Skip the unsorted/backup directory
             continue
         for file in files:
