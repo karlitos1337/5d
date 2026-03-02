@@ -24,6 +24,7 @@ def run_step(command, description):
         print(e.stderr)
         return False
 
+
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     package_dir = Path(f"outputs/evidence_package/pkg_{timestamp}")
@@ -44,7 +45,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -54,7 +55,12 @@ def main():
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
                 print(f"  -> Moved {f}")
@@ -75,7 +81,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -93,6 +99,7 @@ def main():
     # 3. Create Metric Mapping Table
     # Parse the newly generated validation_report_*.json
     import json
+
     report_files = list(package_dir.glob("validation_report_*.json"))
     report_data = {}
     if report_files:
@@ -104,20 +111,46 @@ def main():
 
     # We will map known 5D dimensions
     known_mappings = {
-        "Autonomy": {"metric": "Voice & Accountability", "source": "World Bank WGI", "range": "-2.5 to 2.5"},
-        "Intrinsic_Motivation": {"metric": "Self-Directed Learning Index", "source": "Survey (Ryan & Deci)", "range": "0-5"},
-        "Resilience": {"metric": "HRV / Stress Tolerance", "source": "Bio-Feedback / Survey", "range": "0-100"},
-        "Social_Participation": {"metric": "Network Density", "source": "Graph Analysis", "range": "0-1"},
+        "Autonomy": {
+            "metric": "Voice & Accountability",
+            "source": "World Bank WGI",
+            "range": "-2.5 to 2.5",
+        },
+        "Intrinsic_Motivation": {
+            "metric": "Self-Directed Learning Index",
+            "source": "Survey (Ryan & Deci)",
+            "range": "0-5",
+        },
+        "Resilience": {
+            "metric": "HRV / Stress Tolerance",
+            "source": "Bio-Feedback / Survey",
+            "range": "0-100",
+        },
+        "Social_Participation": {
+            "metric": "Network Density",
+            "source": "Graph Analysis",
+            "range": "0-1",
+        },
         "Authenticity": {"metric": "Congruence Score", "source": "Self-Report", "range": "0-5"},
-        "Environment_Optimization": {"metric": "Workspace Adaptability", "source": "Self-Report", "range": "0-5"},
-        "Cognitive_Efficiency": {"metric": "Problem Solving Speed", "source": "Assessment", "range": "0-100"}
+        "Environment_Optimization": {
+            "metric": "Workspace Adaptability",
+            "source": "Self-Report",
+            "range": "0-5",
+        },
+        "Cognitive_Efficiency": {
+            "metric": "Problem Solving Speed",
+            "source": "Assessment",
+            "range": "0-100",
+        },
     }
 
     # Add dynamically from validation report
     for dim, info in dimensions_data.items():
         alpha = info.get("cronbach_alpha", 0)
         classification = "Validated Insights" if alpha > 0.8 else "Hypothesis Generation Needed"
-        mapping = known_mappings.get(dim, {"metric": f"{dim} Metric", "source": "Survey", "range": "0-5"})
+        mapping = known_mappings.get(
+            dim, {"metric": f"{dim} Metric", "source": "Survey", "range": "0-5"}
+        )
         mapping_content += f"| {dim} | {mapping['metric']} | {mapping['source']} | {mapping['range']} | {alpha:.3f} | {classification} |\n"
 
     # Also add default ones if not in validation report to keep the list complete
@@ -189,6 +222,7 @@ Generated: {timestamp}
     print(f"\n✅ Evidence Package Generated: {package_dir}")
     # Print the command to list files, but don't execute it, leave it to the user or agent to verify
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()
