@@ -6,3 +6,7 @@
 **Vulnerability:** The `5d_research_scraper.py` script used an insecure HTTP URL (`http://export.arxiv.org`) for the arXiv API. This could allow Man-in-the-Middle (MitM) attacks to intercept or modify research data.
 **Learning:** Always verify if external APIs support HTTPS and enforce it. Even for public data, integrity is crucial.
 **Prevention:** Changed the URL to `https://export.arxiv.org`. Added a test case to verify HTTPS usage for API endpoints.
+## 2024-03-02 - [XSS via innerHTML in Map App]
+**Vulnerability:** The `updateValidationCount` function in `web/5d-map/app.js` and `docs/5d-map/app.js` used `innerHTML` with a dynamically constructed string that included the `validationFilter` variable. If a custom event was dispatched with a malicious payload in `e.detail.status`, it could lead to Cross-Site Scripting (XSS).
+**Learning:** Avoid `innerHTML` whenever user-controlled input or external dynamic variables are used to construct the content. Even if the variable currently seems safe, DOM-based manipulation is safer.
+**Prevention:** Replaced `innerHTML` assignment with safe DOM API methods: `textContent` and `document.createElement('strong')`.
