@@ -24,49 +24,46 @@
         "link": "http://arxiv.org/abs/2506.09781v2"
       },
       {
-        "title": "Alpha MAML: Adaptive Model-Agnostic Meta-Learning",
+        "title": "The Dimension of Self-Directed Learning",
         "authors": [
-          "\nHarkirat Singh Behl\n",
-          "\nAtılım Güneş Baydin\n",
-          "\nPhilip H. S. Torr\n"
+          "\nPramith Devulapalli\n",
+          "\nSteve Hanneke\n"
         ],
-        "summary": "Model-agnostic meta-learning (MAML) is a meta-learning technique to train a model on a multitude of learning tasks in a way that primes the model for few-shot learning of new tasks. The MAML algorithm",
-        "published": "2019-05-17T18:45:25Z",
-        "link": "http://arxiv.org/abs/1905.07435v1"
+        "summary": "Understanding the self-directed learning complexity has been an important problem that has captured the attention of the online learning theory community since the early 1990s. Within this framework, ",
+        "published": "2024-02-20T21:59:41Z",
+        "link": "http://arxiv.org/abs/2402.13400v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
+        "title": "Assessment of the effectiveness of \"conceive, design, implement, and operate-based\" flipped classroom approach to laparoscopic nursing training.",
         "authors": [
-          "Gutiérrez Hernández A",
-          "Pompa Mansilla M",
-          "Vadillo Bueno G"
+          "Shao Q",
+          "Zhou K"
         ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41415999/"
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41773335/"
       },
       {
-        "title": "Challenges in anatomy education among Sudanese medical students during the 2023 armed conflict: a cross-sectional survey.",
+        "title": "Research on Visual Evaluation of Engineering Skills in Health Applications Based on Artificial Intelligence Assisted 3D Modeling.",
         "authors": [
-          "Eltieb QDA",
-          "Muhammed A",
-          "Ahmed LNM"
+          "Wang Y"
         ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41398249/"
+        "published": "2026 Feb 13",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41770703/"
       },
       {
-        "title": "Reimagining Graduate Study With Generative Artificial Intelligence-Supported Study Strategies: A Doctor of Nursing Practice Student's Perspective.",
+        "title": "General Practitioner Engagement with Continuing Professional Development: A Scoping Review Protocol.",
         "authors": [
-          "Silva KA",
-          "Sheets DM"
+          "Sullivan LG",
+          "King SM",
+          "Damarell RA"
         ],
-        "published": "2025 Dec 15",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41397874/"
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41769228/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:05.150148"
+    "timestamp": "2026-03-03T12:04:52.450185"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,37 +103,35 @@
     ],
     "pubmed": [
       {
-        "title": "Eurogame escape room of physics in veterinary education: a pilot study.",
+        "title": "Constructing well-being through music education: A qualitative inquiry into older women's emotional, social, and cognitive lives in China.",
         "authors": [
-          "Bräuninger SA",
-          "Motz DA",
-          "Lüpke M"
-        ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421988/"
-      },
-      {
-        "title": "The impact of AI tools enabled student engagement on academic performance, employability, and empowerment in Ha'il Region, Saudi Arabia.",
-        "authors": [
-          "Singh A",
-          "Singh HP",
-          "Alam MF"
-        ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421110/"
-      },
-      {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
-        "authors": [
-          "Gao X",
           "Li Z",
-          "Song Y"
+          "Wu X",
+          "Wang H"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41773383/"
+      },
+      {
+        "title": "Associations between perceived teacher-student interaction quality and intrinsic motivation and psychological resilience in one-on-one clarinet instruction: a social cognitive theory perspective.",
+        "authors": [
+          "Sun J"
+        ],
+        "published": "2026 Mar 3",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41772716/"
+      },
+      {
+        "title": "Motivation and determinants of research careers among physicians: Exploring pros and cons of the Dutch MD-PhD model.",
+        "authors": [
+          "Weggemans MM",
+          "Wolters FJ",
+          "Benedictus R"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41770761/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:08.080663"
+    "timestamp": "2026-03-03T12:04:55.448200"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -172,37 +167,35 @@
     ],
     "pubmed": [
       {
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
+        "title": "The Current Landscape and Future Prospects of Vaccine Manufacturing in Africa: Challenges, Innovations, and Opportunities: A Narrative Review.",
         "authors": [
-          "Gao X",
-          "Li Z",
-          "Song Y"
+          "Chandipwisa C",
+          "Shimilimo A",
+          "Uwishema O"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419515/"
+        "published": "2026 Mar",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41773217/"
       },
       {
-        "title": "Development of Digital Literacy: Application of Artificial Intelligence in Education and Clinical Practice of Oncology Nurses.",
+        "title": "Lumbar Stabilization and Gluteal Strengthening Exercises Versus Health Education for Chronic Low Back Pain: A Retrospective Observational Study.",
         "authors": [
-          "Šimunić N",
-          "Višnjić Junaković N",
-          "Skelin M"
+          "Rekha AT",
+          "Kulothungan K",
+          "Kanagamuthu R"
         ],
-        "published": "2025 Dec 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41419399/"
+        "published": "2026 Jan",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41773115/"
       },
       {
-        "title": "Opportunities to flip the narrative from burden to action for young women joining the National Cervical Screening Programme in Aotearoa New Zealand: a Kaupapa Māori qualitative exploration of experiences and knowledge of cervical screening for 18-30 year olds.",
+        "title": "Co-producing shared wound care education: experiences of service users and healthcare professionals.",
         "authors": [
-          "Slater T",
-          "Stevenson K",
-          "Adcock A"
+          "Blackburn J"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41414979/"
+        "published": "2026 Dec 31",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41769811/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:11.084001"
+    "timestamp": "2026-03-03T12:04:57.454421"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -242,6 +235,14 @@
     ],
     "pubmed": [
       {
+        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
+        "authors": [
+          "Liu Y"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+      },
+      {
         "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
         "authors": [
           "Porges SW"
@@ -258,19 +259,9 @@
         ],
         "published": "2025 Jul 1",
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
-      },
-      {
-        "title": "Neuroception of psychological safety scale (NPSS): validation with a UK based adult community sample.",
-        "authors": [
-          "Cogan N",
-          "Morton L",
-          "Campbell J"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40326393/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:14.101425"
+    "timestamp": "2026-03-03T12:05:00.444130"
   },
   "democratic schools": {
     "arxiv": [
@@ -297,46 +288,58 @@
         "link": "http://arxiv.org/abs/1502.04264v1"
       },
       {
-        "title": "School Attendance Control System Based on RFID Technology with Raspberry Pi and Arduino: EDURFID",
+        "title": "Can AI mediation improve democratic deliberation?",
         "authors": [
-          "\nCliver Oliver Turpo Benique\n"
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
         ],
-        "summary": "This paper presents EDURFID, an automated school attendance control system based on RFID technology designed for rural educational institutions in Peru. The system integrates open-source hardware (Ras",
-        "published": "2025-07-14T02:32:04Z",
-        "link": "http://arxiv.org/abs/2507.14191v1"
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
       }
     ],
     "pubmed": [
       {
-        "title": "Factors associated with unsuppressed HIV viral load among children under 15 years in sub-Saharan africa: a systematic review.",
+        "title": "Attitudes of mothers to male circumcision in North-East Democratic Republic of Congo: A cross-sectional study.",
         "authors": [
-          "Balowe JK",
-          "Alain NM",
-          "Mampasi AL"
+          "Dochynets V",
+          "Schellenberg AE",
+          "Wood P"
         ],
-        "published": "2025 Dec 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41422218/"
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41773384/"
       },
       {
-        "title": "Cross-cultural differences of leadership style and emotional intelligence level in physical education teacher's success of China and Ukraine.",
+        "title": "The effects of political advertising on Facebook and Instagram before the 2020 US election.",
         "authors": [
-          "Zhang L"
+          "Allcott H",
+          "Gentzkow M",
+          "Levy R"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41421108/"
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41772056/"
       },
       {
-        "title": "Transformative Potential of Outsider Art for Neurodivergent Artists.",
+        "title": "Artificial Intelligence in Point-of-Care Ultrasound.",
         "authors": [
-          "Sochor P",
-          "Sochorova D",
-          "Kubiatko M"
+          "Wu D",
+          "Arntfield R",
+          "Millington SJ"
         ],
-        "published": "2025 Dec 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420883/"
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41771537/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:17.080561"
+    "timestamp": "2026-03-03T12:05:01.460622"
   },
   "student agency": {
     "arxiv": [
@@ -376,41 +379,41 @@
     ],
     "pubmed": [
       {
-        "title": "Beliefs, practices, and awareness of written corrective feedback among EFL teachers: a mixed-methods study.",
+        "title": "Integrating the Mindset Model to Enhance Nursing Student Achievement in Competency-Based Education.",
         "authors": [
-          "Mostafavi M",
-          "Shokrpour N",
-          "Afraz S"
+          "Lewis LS",
+          "Williams CA",
+          "Dawson S"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41420260/"
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41770137/"
       },
       {
-        "title": "Aligning expectations and experiences: Medical student perspectives on progress testing for National Licensing Examination preparation.",
+        "title": "Metatranscriptomic Analysis of Anopheles Species from Menoreh Hills Endemic Area in Central Java, Indonesia.",
         "authors": [
-          "Doherty SE",
-          "Cullen KM",
-          "Cole AJ"
+          "Nuranindita R",
+          "Natanegara S",
+          "Wusono AD"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41416766/"
+        "published": "2026 Feb 25",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41759875/"
       },
       {
-        "title": "Factors associated with unintended pregnancies among unmarried adolescents in Eastern Uganda: a cross-sectional study.",
+        "title": "The association between subjective socioeconomic status and future decent work perception: A moderated mediation model.",
         "authors": [
-          "Komasawa M",
-          "Sato M",
-          "Saito K"
+          "Sheng X",
+          "Jiang K",
+          "Yu Y"
         ],
-        "published": "2025 Dec 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41413894/"
+        "published": "2026 Feb 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41759440/"
       }
     ],
-    "timestamp": "2025-12-21T11:33:20.380653"
+    "timestamp": "2026-03-03T12:05:02.445345"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2025-12-21T11:33:20.380723",
+    "timestamp": "2026-03-03T12:05:02.446959",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -532,7 +535,293 @@
         }
       }
     },
-    "timestamp": "2025-12-21T11:33:40.499254",
+    "timestamp": "2026-03-03T12:05:05.616310",
     "source": "World Bank EdStats API"
+  },
+  "world_bank_wgi": {
+    "data": {
+      "AUS": {
+        "Voice & Accountability": {
+          "value": 1.50660192966461,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.52318394184113,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.58987963199615,
+          "year": "2023"
+        }
+      },
+      "BRA": {
+        "Voice & Accountability": {
+          "value": 0.382853865623474,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": -0.308802843093872,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": -0.546764314174652,
+          "year": "2023"
+        }
+      },
+      "CAN": {
+        "Voice & Accountability": {
+          "value": 1.4796462059021,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.47300565242767,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.51680326461792,
+          "year": "2023"
+        }
+      },
+      "CHN": {
+        "Voice & Accountability": {
+          "value": -1.50455415248871,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": -0.0401299707591534,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 0.679014027118683,
+          "year": "2023"
+        }
+      },
+      "DEU": {
+        "Voice & Accountability": {
+          "value": 1.46138572692871,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.55120778083801,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.18541669845581,
+          "year": "2023"
+        }
+      },
+      "FRA": {
+        "Voice & Accountability": {
+          "value": 1.15460133552551,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.18057084083557,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.14462625980377,
+          "year": "2023"
+        }
+      },
+      "GBR": {
+        "Voice & Accountability": {
+          "value": 1.26162397861481,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.39836597442627,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.16114270687103,
+          "year": "2023"
+        }
+      },
+      "IND": {
+        "Voice & Accountability": {
+          "value": 0.0944044888019562,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 0.188364565372467,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 0.47511014342308,
+          "year": "2023"
+        }
+      },
+      "JPN": {
+        "Voice & Accountability": {
+          "value": 1.10550534725189,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.53553938865662,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.63126504421234,
+          "year": "2023"
+        }
+      },
+      "USA": {
+        "Voice & Accountability": {
+          "value": 0.877519071102142,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.3276778459549,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.21720099449158,
+          "year": "2023"
+        }
+      },
+      "CHE": {
+        "Voice & Accountability": {
+          "value": 1.66502690315247,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.76172566413879,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 2.13492703437805,
+          "year": "2023"
+        }
+      },
+      "DNK": {
+        "Voice & Accountability": {
+          "value": 1.66469931602478,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.90893590450287,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 2.01564884185791,
+          "year": "2023"
+        }
+      },
+      "ESP": {
+        "Voice & Accountability": {
+          "value": 1.19472968578339,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 0.822885692119598,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 0.752065539360046,
+          "year": "2023"
+        }
+      },
+      "FIN": {
+        "Voice & Accountability": {
+          "value": 1.63263607025146,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.96704590320587,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.73860657215118,
+          "year": "2023"
+        }
+      },
+      "ITA": {
+        "Voice & Accountability": {
+          "value": 1.11553084850311,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 0.390358686447144,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 0.611036896705627,
+          "year": "2023"
+        }
+      },
+      "KOR": {
+        "Voice & Accountability": {
+          "value": 0.8595951795578,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.24850225448608,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.40480732917786,
+          "year": "2023"
+        }
+      },
+      "NLD": {
+        "Voice & Accountability": {
+          "value": 1.55626440048218,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.64250445365906,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.62553191184998,
+          "year": "2023"
+        }
+      },
+      "NOR": {
+        "Voice & Accountability": {
+          "value": 1.77725434303284,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.83398151397705,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.79993534088135,
+          "year": "2023"
+        }
+      },
+      "NZL": {
+        "Voice & Accountability": {
+          "value": 1.68778347969055,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.70570802688599,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.5299768447876,
+          "year": "2023"
+        }
+      },
+      "SWE": {
+        "Voice & Accountability": {
+          "value": 1.57483160495758,
+          "year": "2023"
+        },
+        "Rule of Law": {
+          "value": 1.60402345657349,
+          "year": "2023"
+        },
+        "Government Effectiveness": {
+          "value": 1.60138332843781,
+          "year": "2023"
+        }
+      }
+    },
+    "timestamp": "2026-03-03T12:05:11.639144",
+    "source": "World Bank WGI API"
   }
 }

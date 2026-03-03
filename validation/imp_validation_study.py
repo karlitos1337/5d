@@ -318,13 +318,13 @@ def main():
     print(f"    → {len(questionnaire)} Fragen erstellt")
 
     # 2. Beispiel-Daten generieren (für Demo - simuliert realistische Korrelationen)
-    print("\n[2/5] Generiere Beispiel-Daten (30 Probanden)...")
+    print("\n[2/5] Generiere Beispiel-Daten (150 Probanden)...")
     np.random.seed(42)
     example_data = {}
 
     # Simuliere latente Variablen für jede Dimension (Mittelwert 3.5, SD 0.8)
     # Probanden haben eine "Grundkompetenz", die die Items beeinflusst -> hohe Korrelation -> hohes Alpha
-    n_participants = 30
+    n_participants = 150
 
     for dimension, questions in QUESTIONS.items():
         # Latente Fähigkeit des Probanden in dieser Dimension
