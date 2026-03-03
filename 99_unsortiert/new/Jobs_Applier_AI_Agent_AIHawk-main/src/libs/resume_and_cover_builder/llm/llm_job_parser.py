@@ -1,25 +1,19 @@
 import os
+import re  # For email validation
 import tempfile
 import textwrap
-import time
-import re  # For email validation
-from src.libs.resume_and_cover_builder.utils import LoggerChatModel
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
-from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from loguru import logger
 from pathlib import Path
-from langchain_core.prompt_values import StringPromptValue
-from langchain_core.runnables import RunnablePassthrough
-from langchain_text_splitters import TokenTextSplitter
+
+from dotenv import load_dotenv
+from langchain_community.document_loaders import TextLoader
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from lib_resume_builder_AIHawk.config import global_config
-from langchain_community.document_loaders import TextLoader
-from requests.exceptions import HTTPError as HTTPStatusError  # HTTP error handling
-import openai
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from langchain_text_splitters import TokenTextSplitter
+from loguru import logger
+from src.libs.resume_and_cover_builder.utils import LoggerChatModel
 
 # Load environment variables from the .env file
 load_dotenv()

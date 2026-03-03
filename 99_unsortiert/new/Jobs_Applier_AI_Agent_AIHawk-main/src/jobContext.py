@@ -1,8 +1,8 @@
+from dataclasses import dataclass
+
 from src.job import Job
 from src.job_application import JobApplication
 
-
-from dataclasses import dataclass
 
 @dataclass
 class JobContext:

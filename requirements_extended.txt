@@ -15,6 +15,3 @@ ruff
 black
 mypy
 pytest
-networkx>=3.0
-discord.py
-pytest-asyncio
