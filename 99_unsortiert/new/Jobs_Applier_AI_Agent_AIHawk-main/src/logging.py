@@ -1,8 +1,7 @@
-import logging
 import logging.handlers
 import os
 import sys
-
+import logging
 from loguru import logger
 from selenium.webdriver.remote.remote_connection import LOGGER as selenium_logger
 
@@ -21,7 +20,7 @@ def init_loguru_logger():
     """Initialize and configure loguru logger."""
 
     def get_log_filename():
-        return "log/app.log"
+        return f"log/app.log"
 
     log_file = get_log_filename()
 

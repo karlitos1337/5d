@@ -19,7 +19,7 @@ def get_device_type():
         str: 'mobile', 'tablet', or 'desktop'
     """
     # Inject JavaScript to detect screen width
-    _js_code = """
+    js_code = """
     <script>
         const width = window.innerWidth;
         const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';

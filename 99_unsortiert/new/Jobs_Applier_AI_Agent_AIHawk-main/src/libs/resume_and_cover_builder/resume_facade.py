@@ -3,16 +3,15 @@ This module contains the FacadeManager class, which is responsible for managing 
 """
 # app/libs/resume_and_cover_builder/manager_facade.py
 import hashlib
+import inquirer
 from pathlib import Path
 
-import inquirer
 from loguru import logger
-from src.job import Job
+
 from src.libs.resume_and_cover_builder.llm.llm_job_parser import LLMParser
+from src.job import Job
 from src.utils.chrome_utils import HTML_to_PDF
-
 from .config import global_config
-
 
 class ResumeFacade:
     def __init__(self, api_key, style_manager, resume_generator, resume_object, output_path):

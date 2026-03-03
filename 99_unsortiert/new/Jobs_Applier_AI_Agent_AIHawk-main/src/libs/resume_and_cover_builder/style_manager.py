@@ -1,5 +1,7 @@
-import logging
+import os
 from pathlib import Path
+from typing import Dict, List, Tuple, Optional
+import logging
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -7,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %
 
 class StyleManager:
     def __init__(self):
-        self.selected_style: str | None = None
+        self.selected_style: Optional[str] = None
         current_file = Path(__file__).resolve()
         project_root = current_file.parent.parent.parent.parent
         self.styles_directory = project_root / "src" / "libs" / "resume_and_cover_builder" / "resume_style"
@@ -15,7 +17,7 @@ class StyleManager:
         logging.debug(f"Project root determined as: {project_root}")
         logging.debug(f"Styles directory set to: {self.styles_directory}")
 
-    def get_styles(self) -> dict[str, tuple[str, str]]:
+    def get_styles(self) -> Dict[str, Tuple[str, str]]:
         """
         Retrieve the available styles from the styles directory.
         Returns:
@@ -50,7 +52,7 @@ class StyleManager:
             logging.error(f"Unexpected error while reading styles: {e}")
         return styles_to_files
 
-    def format_choices(self, styles_to_files: dict[str, tuple[str, str]]) -> list[str]:
+    def format_choices(self, styles_to_files: Dict[str, Tuple[str, str]]) -> List[str]:
         """
         Format the style choices for user presentation.
         Args:
@@ -69,7 +71,7 @@ class StyleManager:
         self.selected_style = selected_style
         logging.info(f"Selected style set to: {self.selected_style}")
 
-    def get_style_path(self) -> Path | None:
+    def get_style_path(self) -> Optional[Path]:
         """
         Get the path to the selected style.
         Returns:

@@ -1,5 +1,6 @@
 from src.libs.resume_and_cover_builder.template_base import prompt_cover_letter_template
 
+
 cover_letter_template = """
 Compose a brief and impactful cover letter based on the provided job description and resume. The letter should be no longer than three paragraphs and should be written in a professional, yet conversational tone. Avoid using any placeholders, and ensure that the letter flows naturally and is tailored to the job.
 
