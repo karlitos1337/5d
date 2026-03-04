@@ -8,6 +8,8 @@ exclude = '''
   | 5d
   | private-gpt-main
   | node_modules
+  | outputs
+  | simulations
 )/
 '''
 
@@ -16,7 +18,7 @@ line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules"]
+exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "outputs", "simulations"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -24,8 +26,8 @@ indent-style = "space"
 
 [tool.mypy]
 python_version = "3.10"
-exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules"]
+exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "outputs", "simulations"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "src_python/tests"]
-norecursedirs = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules"]
+norecursedirs = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "outputs", "simulations"]
