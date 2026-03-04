@@ -171,7 +171,6 @@ test.describe('Performance Tests', () => {
       'Failed to fetch',
       'CORS',
       'Content Security Policy',
-      'CSP',
       'violates the following directive'
     ];
     
