@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2025-03-04 - Promise.all and Synchronous Stores
+**Learning:** Concurrent async executions (e.g., using `Promise.all` for fetch requests) that modify a shared synchronous store like `localStorage` can cause race conditions. If you read the cache state before awaiting a fetch, and then save the cache after the fetch, you might overwrite changes made by other parallel fetches that completed in the meantime.
+**Action:** Always re-read the cache from `localStorage` immediately prior to writing back to it within the async function.
