@@ -162,7 +162,7 @@ test.describe('Performance Tests', () => {
       }
     });
     
-    await page.goto('http://localhost:5500');
+    await page.goto('http://localhost:5500', { waitUntil: 'commit' });
     await page.waitForTimeout(2000);
     
     // Erlaubte Warnings (z.B. CORS, fehlende Favicons)

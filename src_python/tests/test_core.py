@@ -1,5 +1,5 @@
+import pytest
 from src_python.knowledge_graph.core import CognitiveGraph
-
 
 def test_serendipity_calculation():
     kg = CognitiveGraph()
@@ -8,7 +8,6 @@ def test_serendipity_calculation():
     kg.link_concepts("A", "B")
     score = kg.calculate_serendipity_score(["A", "B"])
     assert score > 0, "Connected thoughts should have positive serendipity"
-
 
 def test_empty_graph():
     kg = CognitiveGraph()
