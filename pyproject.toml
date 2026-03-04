@@ -1,13 +1,25 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+exclude = '''
+/(
+    99_unsortiert
+  | external
+  | 5d
+  | private-gpt-main
+  | node_modules
+  | outputs
+  | .venv
+  | simulations
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "outputs", ".venv", "simulations"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +33,8 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "outputs", ".venv", "simulations"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "outputs", ".venv", "simulations"]
