@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import os
 from glob import glob
+import os
 
 TYPES_KV = ["GGML_TYPE_Q4_0", "GGML_TYPE_Q4_1", "GGML_TYPE_Q5_0", "GGML_TYPE_Q5_1", "GGML_TYPE_Q8_0", "GGML_TYPE_F16"]
 
