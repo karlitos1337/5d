@@ -6,7 +6,7 @@ Akademische Validierungsstudie für das 5D-Framework
 Basierend auf der Analyse vom 04.12.2025
 
 Autor: karlitos1337
-Ziel: Empirische Validierung der 5 Dimensionen (Pilotstudie, N=150)
+Ziel: Empirische Validierung der 5 Dimensionen (Pilotstudie, N=30)
 """
 
 import json
@@ -318,13 +318,13 @@ def main():
     print(f"    → {len(questionnaire)} Fragen erstellt")
 
     # 2. Beispiel-Daten generieren (für Demo - simuliert realistische Korrelationen)
-    print("\n[2/5] Generiere Beispiel-Daten (150 Probanden)...")
+    print("\n[2/5] Generiere Beispiel-Daten (30 Probanden)...")
     np.random.seed(42)
     example_data = {}
 
     # Simuliere latente Variablen für jede Dimension (Mittelwert 3.5, SD 0.8)
     # Probanden haben eine "Grundkompetenz", die die Items beeinflusst -> hohe Korrelation -> hohes Alpha
-    n_participants = 150
+    n_participants = 30
 
     for dimension, questions in QUESTIONS.items():
         # Latente Fähigkeit des Probanden in dieser Dimension
@@ -361,7 +361,7 @@ def main():
     print(f"\nEMPFEHLUNG: {report['recommendation']}")
     print(f"Durchschnittliche Reliabilität (α): {report['overall_reliability']:.3f}")
     print("\nNÄCHSTE SCHRITTE:")
-    print("  1. Echte Probanden rekrutieren (Ziel: 150+)")
+    print("  1. Echte Probanden rekrutieren (Ziel: 30+)")
     print("  2. Fragebogen online stellen")
     print("  3. Daten sammeln und in CSV exportieren")
     print("  4. Dieses Skript erneut mit echten Daten ausführen")
