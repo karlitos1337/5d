@@ -32,7 +32,7 @@ class TestIMPCalculation:
       title={Intrinsic motivation and self-determination in human behavior},
       author={Deci, Edward L and Ryan, Richard M},
       year={1985},
-      publisher={Springer Science \& Business Media}
+      publisher={Springer Science \\& Business Media}
     }
 
     @book{csikszentmihalyi1990flow,

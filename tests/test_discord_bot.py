@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test_5d_command_sends_embed():
     """Testet das `!5d` Kommando: erwartet einen gesendeten Embed.
     Hinweis: Dieser Test setzt voraus, dass der Bot ein Command `5d` registriert hat
@@ -45,7 +45,7 @@ async def test_5d_command_sends_embed():
     assert isinstance(desc, str)
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test_embed_structure_is_present():
     """Validiert nur die Struktur: Embed vorhanden, Titel/Description Strings."""
     import importlib.util
@@ -77,7 +77,7 @@ async def test_embed_structure_is_present():
     assert isinstance(getattr(embed, "description", ""), str)
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test_help_command_exists():
     """Testet ob das `!help` Kommando existiert."""
     import importlib.util
@@ -97,7 +97,7 @@ async def test_help_command_exists():
     assert bot.help_command is not None or bot.get_command("help") is not None
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test_stats_command_sends_message():
     """Testet das `!stats` Kommando falls vorhanden."""
     import importlib.util
@@ -125,7 +125,7 @@ async def test_stats_command_sends_message():
     assert ctx.send.called, "ctx.send wurde nicht aufgerufen"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test_project_command_sends_message():
     """Testet das `!project` Kommando falls vorhanden."""
     import importlib.util
@@ -153,7 +153,7 @@ async def test_project_command_sends_message():
     assert ctx.send.called, "ctx.send wurde nicht aufgerufen"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test_embed_contains_imp_score():
     """Testet ob der Embed IMP-bezogene Informationen enthält."""
     import importlib.util
