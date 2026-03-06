@@ -40,3 +40,7 @@ testpaths = [
     "tests",
     "src_python/tests"
 ]
+markers = [
+    "asyncio: mark a test as requiring asyncio",
+    "integration: mark a test as an integration test",
+]
