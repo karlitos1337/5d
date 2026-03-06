@@ -4,14 +4,15 @@ Create a class that generates a resume based on a resume and a resume template.
 # app/libs/resume_and_cover_builder/gpt_resume.py
 import os
 import textwrap
-from src.libs.resume_and_cover_builder.utils import LoggerChatModel
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
+from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from loguru import logger
-from pathlib import Path
+from src.libs.resume_and_cover_builder.utils import LoggerChatModel
 
 # Load environment variables from .env file
 load_dotenv()

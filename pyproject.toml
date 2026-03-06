@@ -9,6 +9,11 @@ lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
 exclude = ["private-gpt-main/"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = ["99_unsortiert", "private-gpt-main", "external", "node_modules"]
+addopts = "--ignore=99_unsortiert/ --ignore=private-gpt-main/ --ignore=external/"
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
