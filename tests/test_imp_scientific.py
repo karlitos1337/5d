@@ -39,7 +39,7 @@ class TestIMPCalculation:
       title={Flow: The psychology of optimal experience},
       author={Csíkszentmihályi, Mihaly},
       year={1990},
-      publisher={Harper \& Row}
+      publisher={Harper \\& Row}
     }
     """
 
