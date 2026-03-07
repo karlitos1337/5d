@@ -24,9 +24,7 @@ def find_uv_bin() -> str:
             _join(_matching_parents(_module_path(), "Lib/site-packages/uv"), "Scripts")
             if sys.platform == "win32"
             # On Unix,  with module path `<prefix>/lib/python3.13/site-packages/uv`
-            else _join(
-                _matching_parents(_module_path(), "lib/python*/site-packages/uv"), "bin"
-            )
+            else _join(_matching_parents(_module_path(), "lib/python*/site-packages/uv"), "bin")
         ),
         # Adjacent to the package root, e.g., from `pip install --target`
         # with module path `<target>/uv`

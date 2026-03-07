@@ -19,7 +19,7 @@ Please write the cover letter in a way that directly addresses the job role and 
 ```
 {resume}
 ```
-"""+ prompt_cover_letter_template
+""" + prompt_cover_letter_template
 
 
 summarize_prompt_template = """

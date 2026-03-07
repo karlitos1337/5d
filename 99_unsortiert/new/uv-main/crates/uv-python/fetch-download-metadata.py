@@ -18,6 +18,7 @@ Acknowledgements:
     Derived from https://github.com/mitsuhiko/rye/tree/f9822267a7f00332d15be8551f89a212e7bc9017
     Originally authored by Armin Ronacher under the MIT license
 """
+
 # https://github.com/mitsuhiko/rye/raw/f9822267a7f00332d15be8551f89a212e7bc9017/LICENSE
 #
 # MIT License
@@ -145,9 +146,7 @@ class Variant(StrEnum):
     FREETHREADED_DEBUG = "freethreaded+debug"
 
     @classmethod
-    def from_build_options(
-        cls: type["Variant"], build_options: list[str]
-    ) -> "Variant" | None:
+    def from_build_options(cls: type["Variant"], build_options: list[str]) -> "Variant" | None:
         if "debug" in build_options and "freethreaded" in build_options:
             return cls.FREETHREADED_DEBUG
         elif "debug" in build_options:
@@ -190,9 +189,7 @@ class Finder:
 class CPythonFinder(Finder):
     implementation = ImplementationName.CPYTHON
 
-    RELEASE_URL = (
-        "https://api.github.com/repos/astral-sh/python-build-standalone/releases"
-    )
+    RELEASE_URL = "https://api.github.com/repos/astral-sh/python-build-standalone/releases"
 
     FLAVOR_PREFERENCES = [
         "install_only_stripped",
@@ -216,8 +213,7 @@ class CPythonFinder(Finder):
         "ppc64le": "powerpc64le",
     }
 
-    _filename_re = re.compile(
-        r"""(?x)
+    _filename_re = re.compile(r"""(?x)
         ^
             cpython-
             (?P<ver>\d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?)(?:\+\d+)?\+
@@ -230,11 +226,9 @@ class CPythonFinder(Finder):
             (?P<flavor>[a-z_]+)?
             \.tar\.(?:gz|zst)
         $
-        """
-    )
+        """)
 
-    _legacy_filename_re = re.compile(
-        r"""(?x)
+    _legacy_filename_re = re.compile(r"""(?x)
         ^
             cpython-
             (?P<ver>\d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?)(?:\+\d+)?-
@@ -243,8 +237,7 @@ class CPythonFinder(Finder):
             (?P<date>[a-zA-z\d]+)
             \.tar\.(?:gz|zst)
         $
-        """
-    )
+        """)
 
     def __init__(self, client: httpx.AsyncClient):
         self.client = client
@@ -261,9 +254,7 @@ class CPythonFinder(Finder):
         # Collect all available Python downloads
         for page in range(1, pages + 1):
             logging.info("Fetching CPython release page %d", page)
-            resp = await self.client.get(
-                self.RELEASE_URL, params={"page": page, "per_page": 10}
-            )
+            resp = await self.client.get(self.RELEASE_URL, params={"page": page, "per_page": 10})
             resp.raise_for_status()
             rows = resp.json()
             if not rows:
@@ -281,9 +272,7 @@ class CPythonFinder(Finder):
                     ):
                         continue
                     logging.debug("Found %s (%s)", download.key(), download.filename)
-                    downloads_by_version.setdefault(download.version, []).append(
-                        download
-                    )
+                    downloads_by_version.setdefault(download.version, []).append(download)
 
         # Collapse CPython variants to a single flavor per triple and variant
         downloads = []
@@ -341,9 +330,7 @@ class CPythonFinder(Finder):
         completed = 0
         tasks = []
         for batch in batched(checksum_urls, n):
-            logging.info(
-                "Fetching CPython checksums: %d/%d", completed, len(checksum_urls)
-            )
+            logging.info("Fetching CPython checksums: %d/%d", completed, len(checksum_urls))
             async with asyncio.TaskGroup() as tg:
                 for url in batch:
                     task = tg.create_task(fetch_checksums(url))
@@ -380,9 +367,7 @@ class CPythonFinder(Finder):
         if digest := asset["digest"]:
             sha256 = digest.removeprefix("sha256:")
 
-        match = self._filename_re.match(filename) or self._legacy_filename_re.match(
-            filename
-        )
+        match = self._filename_re.match(filename) or self._legacy_filename_re.match(filename)
         if match is None:
             logging.debug("Skipping %s: no regex match", filename)
             return None
@@ -476,13 +461,9 @@ class PyPyFinder(Finder):
     implementation = ImplementationName.PYPY
 
     RELEASE_URL = "https://raw.githubusercontent.com/pypy/pypy/main/pypy/tool/release/versions.json"
-    CHECKSUM_URL = (
-        "https://raw.githubusercontent.com/pypy/pypy.org/main/pages/checksums.rst"
-    )
+    CHECKSUM_URL = "https://raw.githubusercontent.com/pypy/pypy.org/main/pages/checksums.rst"
 
-    _checksum_re = re.compile(
-        r"^\s*(?P<checksum>\w{64})\s+(?P<filename>pypy.+)$", re.MULTILINE
-    )
+    _checksum_re = re.compile(r"^\s*(?P<checksum>\w{64})\s+(?P<filename>pypy.+)$", re.MULTILINE)
 
     ARCH_MAPPING = {
         "x64": "x86_64",
@@ -569,9 +550,7 @@ class PyodideFinder(Finder):
     implementation = ImplementationName.CPYTHON
 
     RELEASE_URL = "https://api.github.com/repos/pyodide/pyodide/releases"
-    METADATA_URL = (
-        "https://pyodide.github.io/pyodide/api/pyodide-cross-build-environments.json"
-    )
+    METADATA_URL = "https://pyodide.github.io/pyodide/api/pyodide-cross-build-environments.json"
 
     TRIPLE = PlatformTriple(
         platform="emscripten",
@@ -815,9 +794,7 @@ def render(downloads: list[PythonDownload]) -> None:
             )
             continue
 
-        logging.info(
-            "Selected %s%s", key, (" (%s)" % download.flavor) if download.flavor else ""
-        )
+        logging.info("Selected %s%s", key, (" (%s)" % download.flavor) if download.flavor else "")
         results[key] = {
             "name": download.implementation,
             "arch": asdict(download.triple.arch),

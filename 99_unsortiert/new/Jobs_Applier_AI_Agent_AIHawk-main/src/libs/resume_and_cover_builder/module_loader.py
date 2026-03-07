@@ -1,6 +1,7 @@
 """
 This module is used to store the global configuration of the application.
 """
+
 # app/libs/resume_and_cover_builder/module_loader.py
 import importlib
 import sys

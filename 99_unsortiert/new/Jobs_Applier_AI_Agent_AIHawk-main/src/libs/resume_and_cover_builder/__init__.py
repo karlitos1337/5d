@@ -1,4 +1,4 @@
-__version__ = '0.1'
+__version__ = "0.1"
 
 # Import all the necessary classes and functions, called when the package is imported
 from .resume_facade import ResumeFacade

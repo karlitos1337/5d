@@ -1,6 +1,20 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+extend-exclude = '''
+/(
+  99_unsortiert
+  | external
+  | outputs
+  | 5d
+  | private-gpt-main
+  | node_modules
+  | dist
+  | docs
+  | simulations
+  | venv
+)/
+'''
 
 [tool.ruff]
 line-length = 100
