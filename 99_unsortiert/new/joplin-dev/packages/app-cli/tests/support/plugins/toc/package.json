@@ -20,7 +20,7 @@
     "tar": "^7.5.10",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.3",
-    "webpack": "^4.43.0",
+    "webpack": "^5.105.4",
     "webpack-cli": "^3.3.11",
     "chalk": "^4.1.0",
     "yargs": "^16.2.0"
