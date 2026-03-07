@@ -153,7 +153,7 @@ scipy==1.10.1
     # via scikit-learn
 secretstorage==3.3.3
     # via keyring
-setuptools==78.1.1
+setuptools==82.0.0
     # via
     #   spacy
     #   spacy-lookups-data
