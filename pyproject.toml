@@ -22,3 +22,10 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
 exclude = ["private-gpt-main/"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "asyncio: mark a test as async",
+    "integration: mark a test as an integration test",
+]
