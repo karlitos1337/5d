@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2026-03-07 - React Scroll Event Throttling
+**Learning:** High-frequency scroll events in React components can cause significant layout thrashing and main-thread blocking, particularly when combined with DOM queries or state updates on every tick.
+**Action:** Always throttle scroll handlers using `requestAnimationFrame` with a boolean tracking flag (ticking lock) to synchronize execution with the browser's repaint cycle, and use `{ passive: true }` for the event listener to prevent scrolling performance degradation.
