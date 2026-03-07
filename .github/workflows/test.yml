@@ -18,7 +18,7 @@ jobs:
           pip install -r requirements_extended.txt
           pip install pytest pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2
       - name: Run Tests
-        run: pytest -v --cov=. --cov-report=xml
+        run: PYTHONPATH=. pytest -v --cov=. --cov-report=xml
       - name: Validate JSON Schema (optional)
         run: |
           python - << 'PY'
