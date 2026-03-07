@@ -21,20 +21,20 @@ class TestMapDataStructures:
             "imp_proxy": 0.85,
             "year_founded": 1919,
             "students": 650,
-            "source": "Test Source"
+            "source": "Test Source",
         }
-        
+
         # Validate structure
         assert "name" in school
         assert "type" in school
         assert "lat" in school
         assert "lon" in school
         assert "imp_proxy" in school
-        
+
         # Validate coordinates
         assert -90 <= school["lat"] <= 90
         assert -180 <= school["lon"] <= 180
-        
+
         # Validate IMP proxy
         assert 0 <= school["imp_proxy"] <= 1
 
@@ -46,15 +46,15 @@ class TestMapDataStructures:
             "lon": -71.0942,
             "papers_count": 28,
             "domains": ["AI/ML", "Education Tech"],
-            "key_papers": ["Heckman (2006)"]
+            "key_papers": ["Heckman (2006)"],
         }
-        
+
         # Validate structure
         assert "name" in institution
         assert "lat" in institution
         assert "papers_count" in institution
         assert institution["papers_count"] > 0
-        
+
         # Validate coordinates
         assert -90 <= institution["lat"] <= 90
         assert -180 <= institution["lon"] <= 180
@@ -68,16 +68,16 @@ class TestMapDataStructures:
             "active_repos": 450,
             "active_developers": 3200,
             "key_projects": ["Khan Academy"],
-            "tech_stack": ["React", "Python"]
+            "tech_stack": ["React", "Python"],
         }
-        
+
         # Validate structure
         assert "name" in hub
         assert "active_repos" in hub
         assert "active_developers" in hub
         assert hub["active_repos"] > 0
         assert hub["active_developers"] > 0
-        
+
         # Validate coordinates
         assert -90 <= hub["lat"] <= 90
         assert -180 <= hub["lon"] <= 180
@@ -91,15 +91,15 @@ class TestMapDataStructures:
             "lon": 7.4474,
             "cooperation_score": 0.92,
             "key_features": ["Referendums", "Autonomy"],
-            "source": "Ostrom (2000)"
+            "source": "Ostrom (2000)",
         }
-        
+
         # Validate structure
         assert "name" in system
         assert "type" in system
         assert "cooperation_score" in system
         assert 0 <= system["cooperation_score"] <= 1
-        
+
         # Validate coordinates
         assert -90 <= system["lat"] <= 90
         assert -180 <= system["lon"] <= 180
@@ -113,19 +113,19 @@ class TestMapDataStructures:
             "adoption_2030": 0.45,
             "readiness_score": 0.88,
             "scenario": "Optimistic",
-            "key_drivers": ["Folk High Schools legacy"]
+            "key_drivers": ["Folk High Schools legacy"],
         }
-        
+
         # Validate structure
         assert "name" in region
         assert "adoption_2030" in region
         assert "readiness_score" in region
         assert "scenario" in region
-        
+
         # Validate coordinates
         assert -90 <= region["lat"] <= 90
         assert -180 <= region["lon"] <= 180
-        
+
         # Validate metrics
         assert 0 <= region["adoption_2030"] <= 1
         assert 0 <= region["readiness_score"] <= 1
@@ -140,11 +140,11 @@ class TestMapColorThresholds:
         # Green: ≥0.85
         assert 0.90 >= 0.85
         assert 0.85 >= 0.85
-        
+
         # Orange: 0.75-0.84
         assert 0.84 >= 0.75 and 0.84 < 0.85
         assert 0.75 >= 0.75 and 0.75 < 0.85
-        
+
         # Red: <0.75
         assert 0.74 < 0.75
         assert 0.50 < 0.75
@@ -154,11 +154,11 @@ class TestMapColorThresholds:
         # Green: ≥0.35 (35%)
         assert 0.45 >= 0.35
         assert 0.35 >= 0.35
-        
+
         # Orange: 0.25-0.34 (25-34%)
         assert 0.30 >= 0.25 and 0.30 < 0.35
         assert 0.25 >= 0.25 and 0.25 < 0.35
-        
+
         # Blue: <0.25 (< 25%)
         assert 0.20 < 0.25
         assert 0.15 < 0.25
@@ -168,11 +168,11 @@ class TestMapColorThresholds:
         # Red (Major): ≥20 papers
         assert 28 >= 20
         assert 20 >= 20
-        
+
         # Orange (Medium): 10-19 papers
         assert 15 >= 10 and 15 < 20
         assert 10 >= 10 and 10 < 20
-        
+
         # Blue (Emerging): <10 papers
         assert 8 < 10
         assert 5 < 10
@@ -182,11 +182,11 @@ class TestMapColorThresholds:
         # Red (Major): ≥300 repos
         assert 450 >= 300
         assert 300 >= 300
-        
+
         # Orange (Medium): 150-299 repos
         assert 200 >= 150 and 200 < 300
         assert 150 >= 150 and 150 < 300
-        
+
         # Blue (Emerging): <150 repos
         assert 120 < 150
         assert 50 < 150
