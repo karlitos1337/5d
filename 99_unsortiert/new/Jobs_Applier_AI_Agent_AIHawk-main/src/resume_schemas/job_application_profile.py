@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 import yaml
-
 from src.logging import logger
 
 
