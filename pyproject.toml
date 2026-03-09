@@ -7,7 +7,16 @@ line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = ["99_unsortiert", "external", "outputs", "5d", "private-gpt-main", "node_modules", "dist", "docs", "simulations", "venv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = [".git", "venv", "99_unsortiert", "private-gpt-main", "external", "5d", "node_modules", "dist", "docs", "simulations"]
+addopts = "--ignore=99_unsortiert/ --ignore=private-gpt-main/ --ignore=external/ --ignore=5d/"
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark a test as an integration test",
+]
 
 [tool.ruff.format]
 quote-style = "double"
