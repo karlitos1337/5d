@@ -1,0 +1,38 @@
+{
+  "timestamp": "20260309_114517",
+  "n_participants": 150,
+  "dimensions": {
+    "Cognitive_Efficiency": {
+      "cronbach_alpha": 0.8566167731936274,
+      "mean": 3.430666666666667,
+      "std": 0.9299483780042925,
+      "interpretation": "Gut"
+    },
+    "Intrinsic_Motivation": {
+      "cronbach_alpha": 0.8538384073127275,
+      "mean": 3.5800000000000005,
+      "std": 0.9555117463230081,
+      "interpretation": "Gut"
+    },
+    "Social_Participation": {
+      "cronbach_alpha": 0.8603273506940601,
+      "mean": 3.4519999999999995,
+      "std": 0.9108181012735328,
+      "interpretation": "Gut"
+    },
+    "Resilience": {
+      "cronbach_alpha": 0.8286672864848301,
+      "mean": 3.4839999999999995,
+      "std": 0.9294432428752204,
+      "interpretation": "Gut"
+    },
+    "Environment_Optimization": {
+      "cronbach_alpha": 0.8502280830869571,
+      "mean": 3.4106666666666663,
+      "std": 0.9495705524140776,
+      "interpretation": "Gut"
+    }
+  },
+  "overall_reliability": 0.8499355801544404,
+  "recommendation": "Das 5D-Framework zeigt gute bis exzellente Reliabilität. Bereit für Preprint-Publikation (Pilotstudie)."
+}

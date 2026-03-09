@@ -109,7 +109,7 @@ def main():
 **Date:** {datetime.datetime.now().isoformat()}
 
 ## Empirical Status
-- **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
+- **Validation Study:** Completed (N=150 Pilot). Cronbach's Alpha analysis included in report.
 - **External Data:** World Bank Education data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
