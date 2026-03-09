@@ -10,7 +10,6 @@ from datetime import datetime
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
-
 from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(

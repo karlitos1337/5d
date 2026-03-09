@@ -4,17 +4,16 @@ This module contains utility functions for the Resume and Cover Letter Builder s
 
 # app/libs/resume_and_cover_builder/utils.py
 import json
+import openai
 import time
 from datetime import datetime
-
-import openai
+from typing import Dict, List
 from langchain_core.messages.ai import AIMessage
 from langchain_core.prompt_values import StringPromptValue
 from langchain_openai import ChatOpenAI
+from .config import global_config
 from loguru import logger
 from requests.exceptions import HTTPError as HTTPStatusError
-
-from .config import global_config
 
 
 class LLMLogger:
@@ -23,11 +22,11 @@ class LLMLogger:
         self.llm = llm
 
     @staticmethod
-    def log_request(prompts, parsed_reply: dict[str, dict]):
+    def log_request(prompts, parsed_reply: Dict[str, Dict]):
         calls_log = global_config.LOG_OUTPUT_FILE_PATH / "open_ai_calls.json"
         if isinstance(prompts, StringPromptValue):
             prompts = prompts.text
-        elif isinstance(prompts, dict):
+        elif isinstance(prompts, Dict):
             # Convert prompts to a dictionary if they are not in the expected format
             prompts = {
                 f"prompt_{i+1}": prompt.content
@@ -80,7 +79,7 @@ class LoggerChatModel:
     def __init__(self, llm: ChatOpenAI):
         self.llm = llm
 
-    def __call__(self, messages: list[dict[str, str]]) -> str:
+    def __call__(self, messages: List[Dict[str, str]]) -> str:
         max_retries = 15
         retry_delay = 10
 
@@ -107,7 +106,7 @@ class LoggerChatModel:
         logger.critical("Failed to get a response from the model after multiple attempts.")
         raise Exception("Failed to get a response from the model after multiple attempts.")
 
-    def parse_llmresult(self, llmresult: AIMessage) -> dict[str, dict]:
+    def parse_llmresult(self, llmresult: AIMessage) -> Dict[str, Dict]:
         # Parse the LLM result into a structured format.
         content = llmresult.content
         response_metadata = llmresult.response_metadata

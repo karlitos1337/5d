@@ -1,20 +1,27 @@
 import base64
-import re
-import traceback
+import sys
 from pathlib import Path
+import traceback
+from typing import List, Optional, Tuple, Dict
 
+import click
 import inquirer
 import yaml
+from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+import re
 from src.libs.resume_and_cover_builder import ResumeFacade, ResumeGenerator, StyleManager
-from src.logging import logger
+from src.resume_schemas.job_application_profile import JobApplicationProfile
 from src.resume_schemas.resume import Resume
+from src.logging import logger
 from src.utils.chrome_utils import init_browser
 from src.utils.constants import (
     PLAIN_TEXT_RESUME_YAML,
     SECRETS_YAML,
     WORK_PREFERENCES_YAML,
 )
-
 # from ai_hawk.bot_facade import AIHawkBotFacade
 # from ai_hawk.job_manager import AIHawkJobManager
 # from ai_hawk.llm.llm_manager import GPTAnswerer
@@ -70,7 +77,7 @@ class ConfigValidator:
     def load_yaml(yaml_path: Path) -> dict:
         """Load and parse a YAML file."""
         try:
-            with open(yaml_path) as stream:
+            with open(yaml_path, "r") as stream:
                 return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             raise ConfigError(f"Error reading YAML file {yaml_path}: {exc}")
@@ -180,7 +187,7 @@ class FileManager:
     REQUIRED_FILES = [SECRETS_YAML, WORK_PREFERENCES_YAML, PLAIN_TEXT_RESUME_YAML]
 
     @staticmethod
-    def validate_data_folder(app_data_folder: Path) -> tuple[Path, Path, Path, Path]:
+    def validate_data_folder(app_data_folder: Path) -> Tuple[Path, Path, Path, Path]:
         """Validate the existence of the data folder and required files."""
         if not app_data_folder.is_dir():
             raise FileNotFoundError(f"Data folder not found: {app_data_folder}")
@@ -200,7 +207,7 @@ class FileManager:
         )
 
     @staticmethod
-    def get_uploads(plain_text_resume_file: Path) -> dict[str, Path]:
+    def get_uploads(plain_text_resume_file: Path) -> Dict[str, Path]:
         """Convert resume file paths to a dictionary."""
         if not plain_text_resume_file.exists():
             raise FileNotFoundError(f"Plain text resume file not found: {plain_text_resume_file}")
@@ -218,7 +225,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
         logger.info("Generating a CV based on provided parameters.")
 
         # Carica il resume in testo semplice
-        with open(parameters["uploads"]["plainTextResume"], encoding="utf-8") as file:
+        with open(parameters["uploads"]["plainTextResume"], "r", encoding="utf-8") as file:
             plain_text_resume = file.read()
 
         style_manager = StyleManager()
@@ -239,7 +246,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
             style_answer = inquirer.prompt(questions)
             if style_answer and "style" in style_answer:
                 selected_choice = style_answer["style"]
-                for style_name, (_file_name, _author_link) in available_styles.items():
+                for style_name, (file_name, author_link) in available_styles.items():
                     if selected_choice.startswith(style_name):
                         style_manager.set_selected_style(style_name)
                         logger.info(f"Selected style: {style_name}")
@@ -280,7 +287,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
         try:
             output_dir.mkdir(parents=True, exist_ok=True)
             logger.info(f"Cartella di output creata o già esistente: {output_dir}")
-        except OSError as e:
+        except IOError as e:
             logger.error("Error creating output directory: %s", e)
             raise
         
@@ -289,7 +296,7 @@ def create_cover_letter(parameters: dict, llm_api_key: str):
             with open(output_path, "wb") as file:
                 file.write(pdf_data)
             logger.info(f"CV salvato in: {output_path}")
-        except OSError as e:
+        except IOError as e:
             logger.error("Error writing file: %s", e)
             raise
     except Exception as e:
@@ -305,7 +312,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
         logger.info("Generating a CV based on provided parameters.")
 
         # Carica il resume in testo semplice
-        with open(parameters["uploads"]["plainTextResume"], encoding="utf-8") as file:
+        with open(parameters["uploads"]["plainTextResume"], "r", encoding="utf-8") as file:
             plain_text_resume = file.read()
 
         style_manager = StyleManager()
@@ -326,7 +333,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
             style_answer = inquirer.prompt(questions)
             if style_answer and "style" in style_answer:
                 selected_choice = style_answer["style"]
-                for style_name, (_file_name, _author_link) in available_styles.items():
+                for style_name, (file_name, author_link) in available_styles.items():
                     if selected_choice.startswith(style_name):
                         style_manager.set_selected_style(style_name)
                         logger.info(f"Selected style: {style_name}")
@@ -365,7 +372,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
         try:
             output_dir.mkdir(parents=True, exist_ok=True)
             logger.info(f"Cartella di output creata o già esistente: {output_dir}")
-        except OSError as e:
+        except IOError as e:
             logger.error("Error creating output directory: %s", e)
             raise
         
@@ -374,7 +381,7 @@ def create_resume_pdf_job_tailored(parameters: dict, llm_api_key: str):
             with open(output_path, "wb") as file:
                 file.write(pdf_data)
             logger.info(f"CV salvato in: {output_path}")
-        except OSError as e:
+        except IOError as e:
             logger.error("Error writing file: %s", e)
             raise
     except Exception as e:
@@ -390,7 +397,7 @@ def create_resume_pdf(parameters: dict, llm_api_key: str):
         logger.info("Generating a CV based on provided parameters.")
 
         # Load the plain text resume
-        with open(parameters["uploads"]["plainTextResume"], encoding="utf-8") as file:
+        with open(parameters["uploads"]["plainTextResume"], "r", encoding="utf-8") as file:
             plain_text_resume = file.read()
 
         # Initialize StyleManager
@@ -412,7 +419,7 @@ def create_resume_pdf(parameters: dict, llm_api_key: str):
             style_answer = inquirer.prompt(questions)
             if style_answer and "style" in style_answer:
                 selected_choice = style_answer["style"]
-                for style_name, (_file_name, _author_link) in available_styles.items():
+                for style_name, (file_name, author_link) in available_styles.items():
                     if selected_choice.startswith(style_name):
                         style_manager.set_selected_style(style_name)
                         logger.info(f"Selected style: {style_name}")
@@ -453,7 +460,7 @@ def create_resume_pdf(parameters: dict, llm_api_key: str):
             with open(output_path, "wb") as file:
                 file.write(pdf_data)
             logger.info(f"Resume saved at: {output_path}")
-        except OSError as e:
+        except IOError as e:
             logger.error("Error writing file: %s", e)
             raise
     except Exception as e:
@@ -461,7 +468,7 @@ def create_resume_pdf(parameters: dict, llm_api_key: str):
         raise
 
         
-def handle_inquiries(selected_actions: list[str], parameters: dict, llm_api_key: str):
+def handle_inquiries(selected_actions: List[str], parameters: dict, llm_api_key: str):
     """
     Decide which function to call based on the selected user actions.
 
