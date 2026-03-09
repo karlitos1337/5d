@@ -11,6 +11,7 @@ exclude = ["99_unsortiert", "external", "outputs", "5d", "private-gpt-main", "no
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "src_python/tests"]
+pythonpath = ["."]
 norecursedirs = [".git", "venv", "99_unsortiert", "private-gpt-main", "external", "5d", "node_modules", "dist", "docs", "simulations"]
 addopts = "--ignore=99_unsortiert/ --ignore=private-gpt-main/ --ignore=external/ --ignore=5d/"
 markers = [
