@@ -1,0 +1,9 @@
+--- docs/analysis/verify_app.py
++++ docs/analysis/verify_app.py
+@@ -1,5 +1,5 @@
+-from playwright.sync_api import sync_playwright, expect
+ import os
++from playwright.sync_api import sync_playwright, expect
+
+ def verify_app(page):
+     # Ensure verification directory exists
