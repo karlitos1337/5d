@@ -8,7 +8,6 @@ from datetime import datetime
 
 import numpy as np
 import streamlit as st
-
 from utils.mobile_responsive import inject_mobile_css
 
 st.set_page_config(
