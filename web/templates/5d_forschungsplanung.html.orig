@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
         .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; }
@@ -41,8 +40,8 @@
     <!-- Secondary: #10B981 (Emerald 500) - Growth/Nature -->
     <!-- Accent: #F59E0B (Amber 500) - Energy/Warning -->
     <!-- Danger: #EF4444 (Red 500) - Crisis -->
-    
-    <!-- Application Structure Plan: 
+
+    <!-- Application Structure Plan:
          The SPA is designed as a vertical narrative scroll.
          1. Introduction: Hook the user with the core conflict (Status Quo vs. Potential).
          2. The Crisis (Status Quo): Visualize the negative ROI and human cost. Goal: Shock/Inform.
@@ -80,7 +79,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">Szenario A: Der Preis des Stillstands</h2>
                 <p class="text-slate-600 max-w-2xl mx-auto">
-                    Analyse der aktuellen Bildungsstrukturen basierend auf Neurobiologie- und Systemtheorie-Studien. 
+                    Analyse der aktuellen Bildungsstrukturen basierend auf Neurobiologie- und Systemtheorie-Studien.
                     Der "Status Quo" produziert nicht nur Stagnation, sondern aktiven volkswirtschaftlichen Schaden.
                 </p>
             </div>
@@ -158,7 +157,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-indigo-900 mb-4">Das 5D-Modell: Emergenz statt Kontrolle</h2>
                 <p class="text-indigo-700 max-w-3xl mx-auto">
-                    Ein radikaler Ansatz basierend auf Arbeiten von Luria, Gardner und Porges. 
+                    Ein radikaler Ansatz basierend auf Arbeiten von Luria, Gardner und Porges.
                     Das System ersetzt Druck durch intrinsische Motivation und dezentrale Vernetzung.
                 </p>
             </div>
@@ -382,7 +381,7 @@
 
         // --- 2. Qualitative Comparison (Bar Chart) ---
         const ctxQualitative = document.getElementById('qualitativeChart').getContext('2d');
-        
+
         // Data processing for labels
         const qualLabels = ['Schul- abbrecher', 'Depressionen', 'Fehlerquote', 'Selbst- wirksamkeit'];
         const qualLabelsWrapped = qualLabels.map(l => wrapLabel(l));
@@ -561,12 +560,12 @@
         function closeModal() { document.getElementById('apiKeyModal').classList.add('hidden'); }
         function saveApiKey() {
             const input = document.getElementById('apiKeyInput').value.trim();
-            if (input) { 
-                apiKey = input; 
+            if (input) {
+                apiKey = input;
                 // Encrypt before saving to localStorage
-                localStorage.setItem('geminiApiKey', encryptApiKey(apiKey)); 
-                updateApiStatus(); 
-                closeModal(); 
+                localStorage.setItem('geminiApiKey', encryptApiKey(apiKey));
+                updateApiStatus();
+                closeModal();
             }
         }
         updateApiStatus();
@@ -591,7 +590,7 @@
                 loadingSpinner.classList.add('hidden');
                 if (data.candidates && data.candidates[0].content) {
                     const text = data.candidates[0].content.parts[0].text;
-                    aiResponse.innerHTML = DOMPurify.sanitize(marked.parse(text));
+                    aiResponse.innerHTML = marked.parse(text);
                 } else {
                     aiResponse.innerHTML = '<p class="text-red-500">Fehler bei der Antwortgenerierung. Bitte prüfe deinen API Key.</p>';
                 }
