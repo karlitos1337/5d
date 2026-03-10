@@ -14,4 +14,13 @@ redis>=5.0.0
 ruff
 black
 mypy
-pytest
+pytestdiscord.py
+pytest-asyncio
+pydantic>=2.0
+httpx
+pyyaml
+fuzzywuzzy
+python-Levenshtein
+PyPDF2
+keyring
+networkx>=3.0
