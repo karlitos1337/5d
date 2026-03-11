@@ -33,7 +33,7 @@ jobs:
         run: black --check .
 
       - name: Mypy Type Check
-        run: mypy src
+        run: mypy src_python
 
       - name: Run tests (only repo tests)
         run: |
