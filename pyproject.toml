@@ -1,13 +1,38 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+extend-exclude = '''
+/(
+  | 99_unsortiert
+  | external
+  | outputs
+  | 5d
+  | private-gpt-main
+  | node_modules
+  | dist
+  | docs
+  | simulations
+  | venv
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "99_unsortiert",
+    "external",
+    "outputs",
+    "5d",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "docs",
+    "simulations",
+    "venv",
+]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -21,4 +46,36 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+ignore_errors = true
+exclude = [
+    "99_unsortiert",
+    "external",
+    "outputs",
+    "5d",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "docs",
+    "simulations",
+    "venv",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = [
+    "99_unsortiert",
+    "private-gpt-main",
+    "external",
+    "5d",
+    "node_modules",
+    "dist",
+    "docs",
+    "simulations",
+    "venv"
+]
+addopts = "--ignore=99_unsortiert --ignore=private-gpt-main --ignore=external --ignore=5d --ignore=node_modules --ignore=dist --ignore=docs --ignore=simulations --ignore=venv"
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark test as integration"
+]
