@@ -11,3 +11,6 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+## 2026-03-11 - Scroll Event Optimization
+**Learning:** Scroll event handlers in React SPAs (like `web/validation_dashboard`) can cause significant main-thread blocking and layout thrashing, hurting performance. This is especially true when doing DOM lookups (like `document.getElementById`) inside the handler.
+**Action:** Throttle scroll event handlers using `requestAnimationFrame` with a boolean tracking flag (ticking lock) and add `{ passive: true }` to the event listener options.
