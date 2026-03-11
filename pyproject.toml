@@ -13,6 +13,16 @@ exclude = ["private-gpt-main/"]
 quote-style = "double"
 indent-style = "space"
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = ["99_unsortiert", "private-gpt-main", "external", "5d", "node_modules", "dist", "venv"]
+addopts = "--ignore=99_unsortiert --ignore=private-gpt-main --ignore=external --ignore=5d --ignore=node_modules --ignore=dist --ignore=venv"
+markers = [
+    "asyncio: mark a test as an asyncio test",
+    "integration: mark a test as an integration test"
+]
+
 [tool.mypy]
 python_version = "3.10"
 check_untyped_defs = true
