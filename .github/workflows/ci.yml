@@ -24,19 +24,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements_extended.txt
-          pip install ruff black mypy pydantic networkx
+          pip install ruff black mypy
 
       - name: Ruff Lint
         run: ruff check .
 
       - name: Black Format Check
-        continue-on-error: true
-        run: black --check --extend-exclude '/(99_unsortiert|utils|streamlit|src|scripts|simulations|tests|tools|pages|auth|jules|Jules|external|analysis|config|data|manifest|private-gpt-main)/' .
+        run: black --check .
 
       - name: Mypy Type Check
-        continue-on-error: true
         run: mypy src
 
       - name: Run tests (only repo tests)
         run: |
-          pytest tests -q --ignore=tests/test_anonymization.py --ignore=tests/test_extractor.py --ignore=tests/test_participation_networks.py --ignore=tests/test_discord_bot.py -p no:warnings
+          pytest tests -q
