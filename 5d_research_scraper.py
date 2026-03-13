@@ -531,14 +531,3 @@ if __name__ == "__main__":
         if "arxiv" in data
     )
     print(f"\n📊 Total: {total_papers} Papers gefunden")
-            scraper = ResearchScraper()
-            research_data = scraper.scrape_all()
-            scraper.save_results(research_data)
-
-    # Statistik
-    total_papers = sum(
-        len(data.get("arxiv", [])) + len(data.get("pubmed", []))
-        for data in research_data.values()
-        if "arxiv" in data
-    )
-    print(f"\n📊 Total: {total_papers} Papers gefunden")
