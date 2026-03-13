@@ -13,7 +13,7 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 
-from simulations.utils import write_run
+from simulations.sim_utils import write_run
 
 st.set_page_config(page_title="Partizipations-Netzwerke", page_icon="🕸️", layout="centered")
 st.title("🕸️ Partizipations-Netzwerke – Simulation")
