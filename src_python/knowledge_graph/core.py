@@ -1,5 +1,7 @@
 from typing import Any
 
+from typing import Any
+
 import networkx as nx
 
 

@@ -6,7 +6,6 @@ extend-exclude = '''
     99_unsortiert
   | external
   | outputs
-  | web
   | 5d
   | private-gpt-main
   | node_modules
