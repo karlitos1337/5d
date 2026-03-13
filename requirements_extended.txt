@@ -15,6 +15,11 @@ ruff
 black
 mypy
 pytest
+networkx>=3.0
+discord.py
+pytest-asyncio
+pydantic>=2.0
+httpx
 pytest-cov
 pytest-asyncio
 networkx>=3.0
@@ -24,5 +29,6 @@ pyyaml
 fuzzywuzzy
 python-Levenshtein
 PyPDF2
+keyring
 keyring>=24.0.0
 discord.py
