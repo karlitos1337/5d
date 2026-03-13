@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -26,6 +27,8 @@ const App = () => {
 
   const ticking = useRef(false);
 
+  // Move sections outside component to avoid missing dependency warnings
+  // or recreate memory reference issues if added to dependency array
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
@@ -92,8 +95,10 @@ const App = () => {
   };
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
       if (!ticking.current) {
+      if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
@@ -107,6 +112,9 @@ const App = () => {
           ticking.current = false;
         });
         ticking.current = true;
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -117,6 +125,11 @@ const App = () => {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-blue-600 text-white px-4 py-2 rounded focus-visible:ring-2 focus-visible:outline-none">
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
         Zum Hauptinhalt springen
       </a>
 
@@ -158,6 +171,7 @@ const App = () => {
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -169,6 +183,7 @@ const App = () => {
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -206,6 +221,7 @@ const App = () => {
 
       {/* Main Content */}
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
+      <main id="main-content" className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
