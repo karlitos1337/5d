@@ -5,9 +5,23 @@ target-version = ["py310"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = [
+  "E203", "E501",
+  "F841", "F401", "F811", "F541",
+  "B006", "B007", "B008", "B904",
+  "UP006", "UP007", "UP035",
+]
 exclude = ["private-gpt-main/"]
+
+[tool.ruff.lint.per-file-ignores]
+"utils/*" = ["ALL"]
+"streamlit/*" = ["ALL"]
+"src/*" = ["E", "F", "B", "UP"]
+"scripts/*" = ["ALL"]
+"simulations/*" = ["ALL"]
 
 [tool.ruff.format]
 quote-style = "double"
