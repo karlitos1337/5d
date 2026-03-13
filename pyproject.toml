@@ -16,7 +16,7 @@ ignore = [
   "UP045",
   "I001",
 ]
-exclude = ["private-gpt-main "external/", "99_unsortiert/", "Jules/", "jules/",/"]
+exclude = ["private-gpt-main/", "external/", "99_unsortiert/", "Jules/", "jules/"]
 
 [tool.ruff.lint.per-file-ignores]
 "utils/**" = ["ALL"]
