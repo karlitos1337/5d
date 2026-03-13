@@ -11,3 +11,8 @@
 **Vulnerability:** The `web/5d-map/owid_proxy.py` script (and its documentation counterpart) leaked detailed exception messages in HTTP responses, potentially exposing internal configuration or network details. It also lacked essential security headers and bound to `0.0.0.0` by default.
 **Learning:** Simple proxy scripts often overlook security headers and error sanitization, becoming an easy target for reconnaissance.
 **Prevention:** Sanitized error messages to generic "Upstream fetch error". Added `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Content-Security-Policy`, and `Referrer-Policy` headers. Changed default binding to `127.0.0.1`.
+
+## 2024-06-25 - [DOM-based XSS in Markdown Parsing]
+**Vulnerability:** The `web/templates/5d_forschungsplanung.html` file used `marked.parse(text)` directly assigned to `element.innerHTML`. This allowed any malicious markdown (like `<img src=x onerror=alert(1)>`) from the AI response or user input to execute arbitrary JavaScript.
+**Learning:** Client-side markdown renderers do not sanitize output by default. Trusting AI responses or user inputs to be safe HTML is a common pitfall.
+**Prevention:** Always wrap markdown parser outputs with a sanitizer like `DOMPurify.sanitize()` before injecting into the DOM, and prefer `textContent` for plain text error messages.
