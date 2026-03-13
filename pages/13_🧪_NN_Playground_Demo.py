@@ -5,9 +5,9 @@ Streamlit-Seite: NN Playground (externes iFrame)
 - Verweist klar auf die Quelle (Google/TensorFlow)
 """
 
-import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
+import streamlit as st
 
 st.set_page_config(
     page_title="NN Playground (Demo)",
