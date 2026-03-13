@@ -11,3 +11,7 @@
 ## 2024-05-23 - Redis Caching
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
+
+## 2024-05-28 - React Scroll Handlers
+**Learning:** Unthrottled scroll event handlers in React applications can cause main-thread blocking and layout thrashing, leading to poor scrolling performance. Missing `useMemo` on complex objects in dependencies can cause infinite loop regressions.
+**Action:** Throttled scroll event handlers using `requestAnimationFrame` with a boolean tracking flag, and event listeners should include `{ passive: true }`. Complex objects like array literals inside a component body that are used in `useEffect` dependency arrays must be memoized using `useMemo` or moved outside the component context.
