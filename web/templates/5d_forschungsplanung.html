@@ -593,11 +593,19 @@
                     const text = data.candidates[0].content.parts[0].text;
                     aiResponse.innerHTML = DOMPurify.sanitize(marked.parse(text));
                 } else {
-                    aiResponse.innerHTML = '<p class="text-red-500">Fehler bei der Antwortgenerierung. Bitte prüfe deinen API Key.</p>';
+                    aiResponse.innerHTML = '';
+                    const p = document.createElement('p');
+                    p.className = 'text-red-500';
+                    p.textContent = 'Fehler bei der Antwortgenerierung. Bitte prüfe deinen API Key.';
+                    aiResponse.appendChild(p);
                 }
             } catch (error) {
                 loadingSpinner.classList.add('hidden');
-                aiResponse.innerHTML = `<p class="text-red-500">Netzwerkfehler: ${error.message}</p>`;
+                aiResponse.innerHTML = '';
+                const p = document.createElement('p');
+                p.className = 'text-red-500';
+                p.textContent = `Netzwerkfehler: ${error.message}`;
+                aiResponse.appendChild(p);
             }
         }
     </script>
