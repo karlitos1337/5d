@@ -10,6 +10,11 @@ def check_github_auth_usage(directory):
         for file in files:
             if file.endswith(".py"):
                 filepath = os.path.join(root, file)
+                if filepath.endswith("auth/github_oauth.py") or filepath.endswith(
+                    "tests/test_github_oauth_security.py"
+                ):
+                    continue
+
                 try:
                     with open(filepath, encoding="utf-8") as f:
                         tree = ast.parse(f.read(), filename=filepath)
@@ -19,9 +24,13 @@ def check_github_auth_usage(directory):
                             # This is a heuristic, might need refinement
                             usage_found = True
                             print(f"Potential Github Auth usage found in: {filepath}")
+                        elif isinstance(node, ast.Attribute) and node.attr == "GitHubAuth":
+                            print(f"Found usage in {filepath} line {node.lineno}")
+                            usage_found = True
                 except Exception as e:
                     print(f"Could not parse {filepath}: {e}")
     return usage_found
+
 
 
 if __name__ == "__main__":

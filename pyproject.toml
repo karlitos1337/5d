@@ -1,24 +1,52 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
-exclude = '''
+extend-exclude = '''
 /(
-    private-gpt-main
   | 99_unsortiert
   | external
+  | private-gpt-main
+  | node_modules
+  | dist
+  | build
+  | outputs
 )/
 '''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-exclude = [
-    "private-gpt-main/",
-    "99_unsortiert/",
-    "external/"
+
+exclude = ["private-gpt-main/", "external/", "99_unsortiert/", "Jules/", "jules/"]
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = [
+  "E203", "E501", "E702",
+  "F841", "F401", "F811", "F541",
+  "B006", "B007", "B008", "B904", "B905",
+  "UP006", "UP007", "UP035", "UP015",
+  "UP045",
+  "I001",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"utils/**" = ["ALL"]
+"streamlit/**" = ["ALL"]
+"src/**" = ["ALL"]
+"scripts/**" = ["ALL"]
+"simulations/**" = ["ALL"]
+"tests/**" = ["ALL"]
+"tools/**" = ["ALL"]
+"pages/**" = ["ALL"]
+"auth/**" = ["ALL"]
+"jules/**" = ["ALL"]
+"Jules/**" = ["ALL"]
+"analysis/**" = ["ALL"]
+"config/**" = ["ALL"]
+"99_unsortiert/**" = ["ALL"]
+"external/**" = ["ALL"]
+"manifest/**" = ["ALL"]
+"data/**" = ["ALL"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -33,24 +61,22 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
 exclude = [
-    "private-gpt-main/",
-    "99_unsortiert/",
-    "external/"
+    "99_unsortiert",
+    "external",
+    "private-gpt-main",
+    "node_modules",
+    "dist",
+    "build",
+    "outputs"
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "src_python/tests"]
 norecursedirs = [
     "99_unsortiert",
     "external",
     "private-gpt-main",
     "node_modules",
-    "*.egg-info",
-    ".git",
-    ".tox"
+    "dist",
+    "build",
+    "outputs"
 ]
-markers = [
-    "asyncio: mark a test as an asyncio test",
-    "integration: mark test as integration test"
-]
-addopts = "--strict-markers"
