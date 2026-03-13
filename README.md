@@ -300,3 +300,56 @@ Nicht weil Experten es sagen. Sondern weil **Lehrer, Eltern und Kinder es erlebe
 **Bereit?** 🚀
 
 → Starten Sie mit VISION.md
+
+---
+
+## Wissenschaftliches Modell v2.0 - IMP & Lagrange
+
+> **Neu (2025):** Das 5D-System wurde um ein formales mathematisches Fundament erweitert.
+
+### IMP v2.0 - Integriertes Manifestations-Potential
+
+Die erweiterte IMP-Formel integriert drei theoretische Frameworks:
+
+```
+IMP = (w^T * psi) * (1 - gamma(HRV)) * (1 + k_Phi * Phi) * P_perc
+```
+
+| Komponente | Theorie | Beschreibung |
+|-----------|---------|-------------|
+| `w^T * psi` | 5D-Basismodell | Gewichtete Summe der 5 Dimensionen |
+| `gamma(HRV)` | Polyvagal (Porges) | HRV-basierte Daempfung |
+| `Phi` | IIT (Tononi) | Integrierte Information |
+| `P_perc` | Perkolation (Stauffer) | Emergenz-Ordnungsparameter |
+
+### Neue Dateien
+
+| Datei | Inhalt |
+|-------|--------|
+| `models/imp_v2.py` | IMP v2.0 Python-Implementierung |
+| `models/lagrange_simulator.py` | Numerischer Lagrange-Dynamik-Simulator |
+| `models/perkolation.py` | Perkolationsmodell fuer Bewusstseins-Emergenz |
+| `docs/02-integration-polyvagal.md` | Polyvagal-Theorie Integration (HRV, Trauma, SES) |
+| `docs/03-lagrange-formalism.md` | Lagrange-Formalismus (Variationsprinzip, Euler-Lagrange) |
+| `ethik/bewusstseinsmessung.md` | Ethische Richtlinien fuer Bewusstseinsmessung |
+
+### Schnellstart IMP v2.0
+
+```python
+from models.imp_v2 import State5D, imp_v2
+
+state = State5D(
+    psi_1=0.8, psi_2=0.75, psi_3=0.7, psi_4=0.65, psi_5=0.6,
+    hrv_rmssd=60.0  # Polyvagaler Zustand: ventral-vagal
+)
+
+result = imp_v2(state, verbose=True)
+print(f"IMP = {result['imp']:.4f}")
+```
+
+### Theoretische Referenzen
+
+- Tononi, G. et al. (2016). IIT: integrated information theory. *Nature Reviews Neuroscience*
+- Porges, S. W. (2011). *The Polyvagal Theory*. Norton
+- Friston, K. (2010). The free-energy principle. *Nature Reviews Neuroscience*
+- Stauffer, D. & Aharony, A. (1994). *Introduction to Percolation Theory*
