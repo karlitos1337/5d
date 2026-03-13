@@ -19,15 +19,3 @@ jobs:
           pip install pytest pytest-cov pydantic pyaml fuzzywuzzy python-Levenshtein PyPDF2 networkx
       - name: Run Tests
         run: pytest -v --cov=. --cov-report=xml --ignore=tests/test_anonymization.py --ignore=tests/test_extractor.py --ignore=tests/test_participation_networks.py --ignore=tests/test_discord_bot.py -p no:warnings
-      - name: Validate JSON Schema (optional)
-        run: |
-          python -c 'py
-import json
-from models.schemas import Solutions
-try:
-    with open("5d_solutions.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-    Solutions(**data)
-except FileNotFoundError:
-    print("No 5d_solutions.json present; skipping validation.")
-'
