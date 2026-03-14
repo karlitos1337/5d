@@ -6,7 +6,7 @@ attrs==23.2.0
     # via outcome
 babel==2.14.0
     # via sphinx
-certifi==2025.11.12
+certifi==2026.2.25
     # via requests
 cffi==1.16.0
     # via cryptography
