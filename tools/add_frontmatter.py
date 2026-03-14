@@ -104,8 +104,6 @@ def main():
     args = parser.parse_args()
 
     try:
-        _added = add_frontmatter_to_file(
-        _ = add_frontmatter_to_file(
         add_frontmatter_to_file(
             filepath=args.file,
             title=args.title,

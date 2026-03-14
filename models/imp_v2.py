@@ -15,9 +15,9 @@ Referenzen:
 
 from __future__ import annotations
 
-import numpy as np
 from dataclasses import dataclass, field
-from typing import Optional
+
+import numpy as np
 
 
 @dataclass
@@ -30,7 +30,7 @@ class State5D:
     psi_4: float = 0.5  # Soziale Verbundenheit [0, 1]
     psi_5: float = 0.5  # Transzendente Oeffnung [0, 1]
     hrv_rmssd: float = 50.0  # HRV RMSSD in ms
-    hrv_sdnn: float = 60.0   # HRV SDNN in ms
+    hrv_sdnn: float = 60.0  # HRV SDNN in ms
 
     @property
     def psi_vec(self) -> np.ndarray:
@@ -43,9 +43,9 @@ class State5D:
         if self.hrv_rmssd >= 50:
             return "ventral_vagal"  # Sicherheit, Verbundenheit
         elif self.hrv_rmssd >= 25:
-            return "sympathisch"    # Mobilisierung, Stress
+            return "sympathisch"  # Mobilisierung, Stress
         else:
-            return "dorsal_vagal"   # Erstarrung, Dissoziation
+            return "dorsal_vagal"  # Erstarrung, Dissoziation
 
 
 @dataclass
@@ -53,21 +53,19 @@ class IMPv2Config:
     """Konfiguration fuer IMP v2.0 Berechnung."""
 
     # Polyvagal-Daempfungskoeffizienten
-    gamma_ventral: float = 0.1   # Niedrige Daempfung bei Sicherheit
+    gamma_ventral: float = 0.1  # Niedrige Daempfung bei Sicherheit
     gamma_sympathisch: float = 0.4  # Moderate Daempfung bei Mobilisierung
-    gamma_dorsal: float = 0.8    # Starke Daempfung bei Erstarrung
+    gamma_dorsal: float = 0.8  # Starke Daempfung bei Erstarrung
 
     # IIT-Gewicht
     k_phi: float = 1.0
 
     # Perkolations-Parameter
     perkolation_threshold: float = 0.6  # Kritischer Schwellenwert pc
-    perkolation_beta: float = 0.45      # Kritischer Exponent (2D)
+    perkolation_beta: float = 0.45  # Kritischer Exponent (2D)
 
     # Dimensionsgewichte fuer IMP
-    weights: np.ndarray = field(
-        default_factory=lambda: np.array([0.25, 0.25, 0.20, 0.15, 0.15])
-    )
+    weights: np.ndarray = field(default_factory=lambda: np.array([0.25, 0.25, 0.20, 0.15, 0.15]))
 
 
 def gamma_hrv(state: State5D, config: IMPv2Config) -> float:
@@ -146,7 +144,7 @@ def perkolation_order_param(p: float, config: IMPv2Config) -> float:
 
 def imp_v2(
     state: State5D,
-    config: Optional[IMPv2Config] = None,
+    config: IMPv2Config | None = None,
     verbose: bool = False,
 ) -> dict:
     """Berechnet IMP v2.0 - Integriertes Manifestations-Potential.
@@ -203,7 +201,7 @@ def imp_v2(
     }
 
     if verbose:
-        print(f"IMP v2.0 Berechnung:")
+        print("IMP v2.0 Berechnung:")
         print(f"  Basis (w^T * psi):        {base:.4f}")
         print(f"  HRV/Polyvagal:            {state.polyvagal_state} (gamma={gamma:.3f})")
         print(f"  IIT Phi:                  {phi:.4f} (Faktor: {iit_factor:.4f})")
@@ -217,10 +215,7 @@ if __name__ == "__main__":
     # Beispiel 1: Optimaler Zustand (hohe HRV, alle Dimensionen aktiv)
     print("=" * 50)
     print("Beispiel 1: Optimaler Zustand")
-    optimal = State5D(
-        psi_1=0.9, psi_2=0.85, psi_3=0.8, psi_4=0.75, psi_5=0.7,
-        hrv_rmssd=80.0
-    )
+    optimal = State5D(psi_1=0.9, psi_2=0.85, psi_3=0.8, psi_4=0.75, psi_5=0.7, hrv_rmssd=80.0)
     result1 = imp_v2(optimal, verbose=True)
     print(f"  IMP = {result1['imp']:.4f}")
 
@@ -229,10 +224,7 @@ if __name__ == "__main__":
     # Beispiel 2: Stresszustand (niedrige HRV, reduzierte Verbundenheit)
     print("=" * 50)
     print("Beispiel 2: Akuter Stresszustand")
-    stress = State5D(
-        psi_1=0.6, psi_2=0.3, psi_3=0.4, psi_4=0.3, psi_5=0.2,
-        hrv_rmssd=20.0
-    )
+    stress = State5D(psi_1=0.6, psi_2=0.3, psi_3=0.4, psi_4=0.3, psi_5=0.2, hrv_rmssd=20.0)
     result2 = imp_v2(stress, verbose=True)
     print(f"  IMP = {result2['imp']:.4f}")
 
@@ -241,9 +233,6 @@ if __name__ == "__main__":
     # Beispiel 3: Erholung (mittlere HRV, wachsende Integration)
     print("=" * 50)
     print("Beispiel 3: Erholungszustand")
-    recovery = State5D(
-        psi_1=0.7, psi_2=0.65, psi_3=0.6, psi_4=0.55, psi_5=0.5,
-        hrv_rmssd=40.0
-    )
+    recovery = State5D(psi_1=0.7, psi_2=0.65, psi_3=0.6, psi_4=0.55, psi_5=0.5, hrv_rmssd=40.0)
     result3 = imp_v2(recovery, verbose=True)
     print(f"  IMP = {result3['imp']:.4f}")

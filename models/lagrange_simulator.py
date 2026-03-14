@@ -11,12 +11,13 @@ Verwendung:
 
 from __future__ import annotations
 
-import numpy as np
 from dataclasses import dataclass, field
-from typing import Optional, Tuple
+
+import numpy as np
 
 try:
     import matplotlib.pyplot as plt
+
     HAS_MATPLOTLIB = True
 except ImportError:
     HAS_MATPLOTLIB = False
@@ -26,15 +27,9 @@ except ImportError:
 class LagrangeConfig:
     """Konfiguration fuer den Lagrange-Simulator."""
 
-    mass_diag: np.ndarray = field(
-        default_factory=lambda: np.array([1.0, 1.0, 0.8, 0.8, 0.6])
-    )
-    spring_k: np.ndarray = field(
-        default_factory=lambda: np.array([2.0, 2.0, 1.5, 1.5, 1.0])
-    )
-    equilibrium: np.ndarray = field(
-        default_factory=lambda: np.array([0.6, 0.6, 0.55, 0.5, 0.45])
-    )
+    mass_diag: np.ndarray = field(default_factory=lambda: np.array([1.0, 1.0, 0.8, 0.8, 0.6]))
+    spring_k: np.ndarray = field(default_factory=lambda: np.array([2.0, 2.0, 1.5, 1.5, 1.0]))
+    equilibrium: np.ndarray = field(default_factory=lambda: np.array([0.6, 0.6, 0.55, 0.5, 0.45]))
     coupling_strength: float = 0.3
     gamma_base: float = 0.2
     hrv_rmssd: float = 50.0
@@ -45,7 +40,7 @@ class LagrangeConfig:
 class LagrangeSimulator:
     """Numerischer Simulator fuer 5D Lagrange Bewusstseinsdynamik."""
 
-    def __init__(self, config: Optional[LagrangeConfig] = None):
+    def __init__(self, config: LagrangeConfig | None = None):
         self.config = config or LagrangeConfig()
         self._dim = 5
 
@@ -80,8 +75,10 @@ class LagrangeSimulator:
         eps = 1e-5
         grad = np.zeros(self._dim)
         for i in range(self._dim):
-            pp = psi.copy(); pm = psi.copy()
-            pp[i] += eps; pm[i] -= eps
+            pp = psi.copy()
+            pm = psi.copy()
+            pp[i] += eps
+            pm[i] -= eps
             grad[i] = (self._phi_iit(pp) - self._phi_iit(pm)) / (2 * eps)
         return grad
 
@@ -94,8 +91,8 @@ class LagrangeSimulator:
         return self.config.gamma_base * 3.0
 
     def _equations_of_motion(self, t: float, state: np.ndarray) -> np.ndarray:
-        psi = state[:self._dim]
-        dpsi = state[self._dim:]
+        psi = state[: self._dim]
+        dpsi = state[self._dim :]
         M_inv = np.linalg.inv(self._mass_matrix())
         grad_V = self._potential_gradient(psi)
         grad_phi = self._phi_gradient(psi)
@@ -112,8 +109,8 @@ class LagrangeSimulator:
     def simulate(
         self,
         initial_psi: np.ndarray,
-        initial_dpsi: Optional[np.ndarray] = None,
-        t_span: Tuple[float, float] = (0, 50),
+        initial_dpsi: np.ndarray | None = None,
+        t_span: tuple[float, float] = (0, 50),
         n_steps: int = 500,
     ) -> dict:
         if initial_dpsi is None:
@@ -124,24 +121,32 @@ class LagrangeSimulator:
         states, t_vals = [state.copy()], [t]
         for _ in range(n_steps - 1):
             k1 = self._equations_of_motion(t, state)
-            k2 = self._equations_of_motion(t + dt/2, state + dt/2 * k1)
-            k3 = self._equations_of_motion(t + dt/2, state + dt/2 * k2)
+            k2 = self._equations_of_motion(t + dt / 2, state + dt / 2 * k1)
+            k3 = self._equations_of_motion(t + dt / 2, state + dt / 2 * k2)
             k4 = self._equations_of_motion(t + dt, state + dt * k3)
-            state = state + dt/6 * (k1 + 2*k2 + 2*k3 + k4)
+            state = state + dt / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
             t += dt
             states.append(state.copy())
             t_vals.append(t)
         states = np.array(states)
         t_vals = np.array(t_vals)
-        psi_traj = states[:, :self._dim]
+        psi_traj = states[:, : self._dim]
         phi_traj = np.array([self._phi_iit(p) for p in psi_traj])
         gamma = self._gamma_hrv()
         weights = np.array([0.25, 0.25, 0.20, 0.15, 0.15])
-        imp_traj = np.array([
-            np.dot(weights, p) * (1 - gamma) * (1 + self.config.k_phi * phi)
-            for p, phi in zip(psi_traj, phi_traj)
-        ])
-        return {"t": t_vals, "psi": psi_traj, "dpsi": states[:, self._dim:], "phi": phi_traj, "imp": imp_traj}
+        imp_traj = np.array(
+            [
+                np.dot(weights, p) * (1 - gamma) * (1 + self.config.k_phi * phi)
+                for p, phi in zip(psi_traj, phi_traj, strict=False)
+            ]
+        )
+        return {
+            "t": t_vals,
+            "psi": psi_traj,
+            "dpsi": states[:, self._dim :],
+            "phi": phi_traj,
+            "imp": imp_traj,
+        }
 
     def plot_trajectory(self, trajectory: dict, title: str = "5D Bewusstseinsdynamik") -> None:
         if not HAS_MATPLOTLIB:
@@ -153,12 +158,21 @@ class LagrangeSimulator:
         fig.suptitle(title, fontsize=14)
         for i, name in enumerate(names):
             axes[0].plot(t, psi[:, i], label=f"psi_{i+1} ({name})")
-        axes[0].set_ylabel("psi"); axes[0].legend(fontsize=7); axes[0].grid(True, alpha=0.3); axes[0].set_ylim(0, 1)
+        axes[0].set_ylabel("psi")
+        axes[0].legend(fontsize=7)
+        axes[0].grid(True, alpha=0.3)
+        axes[0].set_ylim(0, 1)
         axes[1].plot(t, phi, color="purple", label="Phi (IIT)")
-        axes[1].set_ylabel("Phi"); axes[1].legend(); axes[1].grid(True, alpha=0.3)
+        axes[1].set_ylabel("Phi")
+        axes[1].legend()
+        axes[1].grid(True, alpha=0.3)
         axes[2].plot(t, imp, color="green", label="IMP v2.0")
-        axes[2].set_xlabel("Zeit"); axes[2].set_ylabel("IMP"); axes[2].legend(); axes[2].grid(True, alpha=0.3)
-        plt.tight_layout(); plt.show()
+        axes[2].set_xlabel("Zeit")
+        axes[2].set_ylabel("IMP")
+        axes[2].legend()
+        axes[2].grid(True, alpha=0.3)
+        plt.tight_layout()
+        plt.show()
 
 
 if __name__ == "__main__":

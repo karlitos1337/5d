@@ -11,13 +11,13 @@ Theoretische Basis:
 
 from __future__ import annotations
 
-import numpy as np
 from dataclasses import dataclass
-from typing import Optional, List, Tuple
+
+import numpy as np
 
 try:
     import matplotlib.pyplot as plt
-    import matplotlib.colors as mcolors
+
     HAS_MATPLOTLIB = True
 except ImportError:
     HAS_MATPLOTLIB = False
@@ -26,21 +26,22 @@ except ImportError:
 @dataclass
 class PerkolationConfig:
     """Konfiguration fuer das Perkolationsmodell."""
-    grid_size: int = 50          # Netzwerkgroesse
-    n_dimensions: int = 5        # 5D Bewusstseinsdimensionen
-    pc_default: float = 0.593    # Kritische Perkolationsschwelle (2D square lattice)
-    beta: float = 0.139          # Kritischer Exponent (2D Ising universality class)
-    n_simulations: int = 100     # Anzahl Monte-Carlo Durchlaeufe
+
+    grid_size: int = 50  # Netzwerkgroesse
+    n_dimensions: int = 5  # 5D Bewusstseinsdimensionen
+    pc_default: float = 0.593  # Kritische Perkolationsschwelle (2D square lattice)
+    beta: float = 0.139  # Kritischer Exponent (2D Ising universality class)
+    n_simulations: int = 100  # Anzahl Monte-Carlo Durchlaeufe
 
 
 class PerkolationsNetzwerk:
     """5D Bewusstseinsnetzwerk mit Perkolations-Dynamik."""
 
-    def __init__(self, config: Optional[PerkolationConfig] = None):
+    def __init__(self, config: PerkolationConfig | None = None):
         self.config = config or PerkolationConfig()
         self.N = self.config.grid_size
 
-    def verbindungsgrad(self, psi: np.ndarray, weights: Optional[np.ndarray] = None) -> float:
+    def verbindungsgrad(self, psi: np.ndarray, weights: np.ndarray | None = None) -> float:
         """Berechnet den lokalen Verbindungsgrad p aus 5D Zustandsvektor.
 
         Args:
@@ -93,8 +94,8 @@ class PerkolationsNetzwerk:
         return float(min(epsilon ** (-nu), self.N))
 
     def simuliere_gitter(
-        self, p: float, grid_size: Optional[int] = None
-    ) -> Tuple[np.ndarray, float, int]:
+        self, p: float, grid_size: int | None = None
+    ) -> tuple[np.ndarray, float, int]:
         """Simuliert ein 2D Perkolationsgitter (Proxy fuer 5D Netzwerk).
 
         Args:
@@ -129,10 +130,10 @@ class PerkolationsNetzwerk:
                 if gitter[i, j]:
                     # Nachbarn pruefen
                     neighbors = []
-                    if i > 0 and gitter[i-1, j]:
-                        neighbors.append(labels[i-1, j])
-                    if j > 0 and gitter[i, j-1]:
-                        neighbors.append(labels[i, j-1])
+                    if i > 0 and gitter[i - 1, j]:
+                        neighbors.append(labels[i - 1, j])
+                    if j > 0 and gitter[i, j - 1]:
+                        neighbors.append(labels[i, j - 1])
 
                     if not neighbors:
                         label_counter += 1
@@ -179,7 +180,7 @@ class PerkolationsNetzwerk:
             "pc": self.config.pc_default,
         }
 
-    def plot_phasendiagramm(self, diagramm: Optional[dict] = None) -> None:
+    def plot_phasendiagramm(self, diagramm: dict | None = None) -> None:
         """Visualisiert das Perkolations-Phasendiagramm."""
         if not HAS_MATPLOTLIB:
             print("Installiere matplotlib: pip install matplotlib")
@@ -210,7 +211,7 @@ class PerkolationsNetzwerk:
         plt.show()
 
 
-def bewusstseins_perkolation(psi: np.ndarray, config: Optional[PerkolationConfig] = None) -> dict:
+def bewusstseins_perkolation(psi: np.ndarray, config: PerkolationConfig | None = None) -> dict:
     """Berechnet alle Perkolations-Metriken fuer einen 5D Bewusstseinszustand.
 
     Args:
@@ -227,11 +228,11 @@ def bewusstseins_perkolation(psi: np.ndarray, config: Optional[PerkolationConfig
     pc = netz.config.pc_default
 
     if p < pc - 0.05:
-        status = "fragmentiert"    # Unterhalb kritischer Schwelle
+        status = "fragmentiert"  # Unterhalb kritischer Schwelle
     elif p < pc + 0.05:
-        status = "kritisch"        # Kritischer Uebergangsbereich
+        status = "kritisch"  # Kritischer Uebergangsbereich
     else:
-        status = "koharent"        # Makroskopisch kohaerentes Bewusstsein
+        status = "koharent"  # Makroskopisch kohaerentes Bewusstsein
 
     return {
         "p": p,
@@ -251,10 +252,10 @@ if __name__ == "__main__":
     print("=" * 55)
 
     states = {
-        "Stresszustand":  np.array([0.4, 0.3, 0.35, 0.25, 0.2]),
+        "Stresszustand": np.array([0.4, 0.3, 0.35, 0.25, 0.2]),
         "Normaler Alltag": np.array([0.55, 0.6, 0.5, 0.5, 0.4]),
-        "Flow-Zustand":   np.array([0.8, 0.75, 0.7, 0.65, 0.6]),
-        "Meditation":     np.array([0.75, 0.85, 0.8, 0.7, 0.9]),
+        "Flow-Zustand": np.array([0.8, 0.75, 0.7, 0.65, 0.6]),
+        "Meditation": np.array([0.75, 0.85, 0.8, 0.7, 0.9]),
     }
 
     for name, psi in states.items():
