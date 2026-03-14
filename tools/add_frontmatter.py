@@ -105,6 +105,8 @@ def main():
 
     try:
         _added = add_frontmatter_to_file(
+        _ = add_frontmatter_to_file(
+        add_frontmatter_to_file(
             filepath=args.file,
             title=args.title,
             domain=args.domain,

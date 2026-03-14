@@ -19,7 +19,7 @@ from models.imp import calculate_imp_verified
 
 
 class TestIMPCalculation:
-    """
+    r"""
     Test IMP calculation against scientifically validated formulas.
 
     Scientific Basis:
@@ -32,14 +32,14 @@ class TestIMPCalculation:
       title={Intrinsic motivation and self-determination in human behavior},
       author={Deci, Edward L and Ryan, Richard M},
       year={1985},
-      publisher={Springer Science \& Business Media}
+      publisher={Springer Science \\& Business Media}
     }
 
     @book{csikszentmihalyi1990flow,
       title={Flow: The psychology of optimal experience},
       author={Csíkszentmihályi, Mihaly},
       year={1990},
-      publisher={Harper \& Row}
+      publisher={Harper \\& Row}
     }
     """
 
