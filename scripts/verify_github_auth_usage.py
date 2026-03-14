@@ -35,6 +35,7 @@ def check_github_auth_usage(directory):
 
 
 
+
 if __name__ == "__main__":
     if check_github_auth_usage("."):
         print("Github Auth usage detected.")

@@ -5,6 +5,11 @@ extend-exclude = '''
 /(
   | 99_unsortiert
   | external
+  | docs
+  | web
+  | private-gpt-main
+  | dist
+  | node_modules
   | outputs
   | private-gpt-main
   | 5d
@@ -26,6 +31,13 @@ line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "docs/",
+    "web/",
+]
 exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "venv/"]
 exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "5d/", "node_modules/", "dist/", "docs/", "simulations/", "venv/"]
 

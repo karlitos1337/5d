@@ -43,6 +43,7 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
+      if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
       // For non-image elements, check textContent. For images, we just need the data-ref.
       if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
 
@@ -63,6 +64,7 @@ const App = () => {
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
       if (el.tagName === 'IMG') {
+        el.parentNode.insertBefore(btn, el.nextSibling);
         // Create a wrapper for image citations or insert after
         const wrapper = document.createElement('div');
         wrapper.style.position = 'relative';
@@ -111,6 +113,7 @@ const App = () => {
 
     const handleScroll = () => {
     const handleScroll = () => {
+    const handleScroll = () => {
       if (!ticking.current) {
       if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -138,6 +141,7 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus-visible:ring-2 focus-visible:outline-none absolute top-0 left-0 z-50 p-4 bg-white text-black font-bold">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold"
@@ -172,6 +176,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded-sm px-2 py-1 ${
                   className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded px-2 py-1 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
@@ -186,6 +191,8 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
+                aria-label={darkMode ? "Zum hellen Modus wechseln" : "Zum dunklen Modus wechseln"}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
@@ -197,6 +204,9 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Menü"
+                aria-expanded={mobileMenuOpen}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
@@ -237,6 +247,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
+      <main id="main-content" className="pt-16 focus-visible:ring-2 focus-visible:outline-none" tabIndex="-1">
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
       <main id="main-content" className="pt-16">
         {/* Hero Section */}
@@ -306,7 +317,7 @@ const App = () => {
                 <img
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
-                    className="w-full rounded-xl shadow-lg"
+                    className="w-full rounded-xl shadow-lg inline-block"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
               </div>
@@ -428,7 +439,7 @@ const App = () => {
               <img
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
-                  className="w-full rounded-xl shadow-lg"
+                  className="w-full rounded-xl shadow-lg inline-block"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
             </div>
