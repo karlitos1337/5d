@@ -15,3 +15,9 @@
 ## 2024-05-24 - React Scroll Event Throttling
 **Learning:** Frequent scroll events in React can block the main thread and cause layout thrashing if not throttled, leading to performance degradation. Creating arrays/objects inside the component body can trigger unnecessary re-renders when passed as dependencies.
 **Action:** Always throttle scroll event listeners using `requestAnimationFrame` with a ticking lock boolean, add `{ passive: true }` to the event listener to avoid main-thread blocking, and move static arrays/objects outside the component or use `useMemo`.
+## 2024-05-28 - React Scroll Handlers
+**Learning:** Unthrottled scroll event handlers in React applications can cause main-thread blocking and layout thrashing, leading to poor scrolling performance. Missing `useMemo` on complex objects in dependencies can cause infinite loop regressions.
+**Action:** Throttled scroll event handlers using `requestAnimationFrame` with a boolean tracking flag, and event listeners should include `{ passive: true }`. Complex objects like array literals inside a component body that are used in `useEffect` dependency arrays must be memoized using `useMemo` or moved outside the component context.
+## 2024-03-24 - Parallel Fetching & localStorage Concurrency
+**Learning:** When parallelizing `fetchWithCache` logic that relies on `localStorage` (read-modify-write), standard JS concurrency (Promise.all) causes race conditions where updates are lost because the "read" happens before other "writes" complete.
+**Action:** Always re-read the latest state from `localStorage` immediately before writing the update in async functions, or use a mutex if strict transactional integrity is needed.
