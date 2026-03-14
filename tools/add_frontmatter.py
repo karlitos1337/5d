@@ -32,7 +32,7 @@ def create_frontmatter(
     """Generate a YAML frontmatter block."""
     if file_date is None:
         file_date = date.today().isoformat()
-    return f'''---
+    return f"""---
 title: "{title}"
 author: "{author}"
 date: "{file_date}"
@@ -41,7 +41,7 @@ license: "{license_type}"
 evidence: "{evidence}"
 ---
 
-'''
+"""
 
 
 def add_frontmatter_to_file(
@@ -59,7 +59,7 @@ def add_frontmatter_to_file(
 
     Returns True if frontmatter was added, False if already present.
     """
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8") as f:
         content = f.read()
 
     if has_frontmatter(content):
@@ -89,9 +89,7 @@ def add_frontmatter_to_file(
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Add YAML frontmatter to markdown files"
-    )
+    parser = argparse.ArgumentParser(description="Add YAML frontmatter to markdown files")
     parser.add_argument("file", help="Path to the markdown file")
     parser.add_argument("--title", required=True, help="Document title")
     parser.add_argument("--domain", required=True, help="Domain/folder name")
@@ -106,7 +104,9 @@ def main():
     args = parser.parse_args()
 
     try:
-        added = add_frontmatter_to_file(
+        _added = add_frontmatter_to_file(
+        _ = add_frontmatter_to_file(
+        add_frontmatter_to_file(
             filepath=args.file,
             title=args.title,
             domain=args.domain,

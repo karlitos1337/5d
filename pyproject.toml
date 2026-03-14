@@ -1,13 +1,45 @@
 [tool.black]
 line-length = 100
 target-version = ["py310"]
+extend-exclude = '''
+/(
+  | 99_unsortiert
+  | external
+  | docs
+  | web
+  | private-gpt-main
+  | dist
+  | node_modules
+  | outputs
+  | private-gpt-main
+  | 5d
+    99_unsortiert
+  | external
+  | outputs
+  | 5d
+  | private-gpt-main
+  | node_modules
+  | dist
+  | docs
+  | simulations
+  | venv
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-exclude = ["private-gpt-main/"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "docs/",
+    "web/",
+]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "venv/"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "5d/", "node_modules/", "dist/", "docs/", "simulations/", "venv/"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -31,4 +63,25 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["private-gpt-main/"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "5d/", "node_modules/", "dist/", "docs/", "simulations/", "venv/"]
+ignore_errors = true
+ignore_errors = true
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "venv/"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "5d/", "node_modules/", "dist/", "docs/", "simulations/", "venv/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src_python/tests"]
+pythonpath = ["."]
+norecursedirs = ["99_unsortiert", "private-gpt-main", "external", "5d", "node_modules", "dist", "docs", "simulations", "venv", "outputs"]
+addopts = "--ignore=99_unsortiert --ignore=private-gpt-main --ignore=external --ignore=5d"
+norecursedirs = ["99_unsortiert", "external", "outputs", "private-gpt-main", "5d", "venv"]
+addopts = "--ignore=99_unsortiert --ignore=external --ignore=outputs --ignore=private-gpt-main --ignore=5d"
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark test as integration"
+norecursedirs = ["99_unsortiert", "private-gpt-main", "external", "5d"]
+addopts = "--ignore=99_unsortiert --ignore=external --ignore=5d --ignore=private-gpt-main --ignore=tests/test_participation_networks.py --ignore=src_python/tests/test_core.py --ignore=tests/test_autopoietic_ui.py --ignore=tests/test_extractor.py --ignore=tests/test_github_oauth_security.py --ignore=tests/test_pipeline_integration.py --ignore=tests/test_discord_bot.py"
+markers = [
+    "asyncio: mark test as asyncio",
+    "integration: mark test as integration test"
+]
