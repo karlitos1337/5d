@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
@@ -89,6 +90,17 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
+  const sections = React.useMemo(() => [
+    { id: 'einleitung', label: 'Einleitung' },
+    { id: 'framework', label: '5D-Intelligence Framework' },
+    { id: 'methodologie', label: 'Methodik' },
+    { id: 'ergebnisse', label: 'Ergebnisse' },
+    { id: 'validierung', label: 'Validierung' },
+    { id: 'implikationen', label: 'Implikationen' },
+    { id: 'zukunft', label: 'Zukunftsperspektiven' },
+    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
+  ], []);
+
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
@@ -120,10 +132,13 @@ const App = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sections]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold"
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-blue-600 text-white px-4 py-2 rounded focus-visible:ring-2 focus-visible:outline-none">
       {/* Skip to main content link for accessibility */}
       <a
