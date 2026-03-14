@@ -5,6 +5,7 @@ import os
 def check_github_auth_usage(directory):
     usage_found = False
     for root, _dirs, files in os.walk(directory):
+        if "99_unsortiert" in root:  # Skip the unsorted/backup directory
         if "99_unsortiert" in root: # Skip the unsorted/backup directory
             continue
         for file in files:
@@ -30,6 +31,7 @@ def check_github_auth_usage(directory):
                 except Exception as e:
                     print(f"Could not parse {filepath}: {e}")
     return usage_found
+
 
 
 

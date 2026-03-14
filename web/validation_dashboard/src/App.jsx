@@ -108,6 +108,8 @@ const App = () => {
 
   useEffect(() => {
     let ticking = false;
+
+    const handleScroll = () => {
     const handleScroll = () => {
       if (!ticking.current) {
       if (!ticking) {
