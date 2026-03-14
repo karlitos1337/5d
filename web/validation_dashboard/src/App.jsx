@@ -43,6 +43,8 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
+      const isImage = el.tagName.toLowerCase() === 'img';
+      if (!isImage && !el.textContent?.trim()) return;
       if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
       // For non-image elements, check textContent. For images, we just need the data-ref.
       if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
@@ -63,6 +65,8 @@ const App = () => {
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
+      if (isImage) {
+        el.parentNode.insertBefore(btn, el.nextSibling);
       if (el.tagName === 'IMG') {
         el.parentNode.insertBefore(btn, el.nextSibling);
         // Create a wrapper for image citations or insert after
@@ -111,6 +115,15 @@ const App = () => {
   useEffect(() => {
     let ticking = false;
 
+    const updateSection = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i].id);
+        if (section && scrollPosition >= section.offsetTop) {
+          setActiveSection(sections[i].id);
+          break;
+        }
     const handleScroll = () => {
     const handleScroll = () => {
     const handleScroll = () => {
@@ -133,6 +146,14 @@ const App = () => {
         });
         ticking = true;
       }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateSection);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -141,6 +162,7 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white z-50">
       <a href="#main-content" className="sr-only focus:not-sr-only focus-visible:ring-2 focus-visible:outline-none absolute top-0 left-0 z-50 p-4 bg-white text-black font-bold">
       <a
         href="#main-content"
@@ -176,6 +198,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 rounded-sm ${
                   className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded-sm px-2 py-1 ${
                   className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded px-2 py-1 ${
                     activeSection === section.id
@@ -191,6 +214,7 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
+                aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
                 aria-label={darkMode ? "Zum hellen Modus wechseln" : "Zum dunklen Modus wechseln"}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
@@ -232,6 +256,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
@@ -247,6 +272,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
+      <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
       <main id="main-content" className="pt-16 focus-visible:ring-2 focus-visible:outline-none" tabIndex="-1">
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
       <main id="main-content" className="pt-16">
