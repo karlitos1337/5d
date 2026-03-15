@@ -64,6 +64,7 @@
       }
     ],
     "timestamp": "2026-03-11T11:53:30.674115"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -134,6 +135,37 @@
       }
     ],
     "timestamp": "2026-03-11T11:53:33.788717"
+        "title": "Sustaining Home Medical Care in a Mountainous Rural Region: A Qualitative Study of Physician Motivation, Burden, and Nighttime Care Systems.",
+        "authors": [
+          "Maeda K",
+          "Hase R",
+          "Horinishi Y"
+        ],
+        "published": "2026 Feb",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41815631/"
+      },
+      {
+        "title": "Learning flow in educational contexts: A meta-analysis of its antecedents and outcomes.",
+        "authors": [
+          "Xie M",
+          "Milani A",
+          "Wang S"
+        ],
+        "published": "2026 Mar 12",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41815075/"
+      },
+      {
+        "title": "Effects of interactivity, immersion, and physical discomfort on learning in VR nursing education.",
+        "authors": [
+          "Chang YC",
+          "Lo YT",
+          "Yang CC"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41811902/"
+      }
+    ],
+    "timestamp": "2026-03-12T11:58:06.901126"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -200,6 +232,36 @@
       }
     ],
     "timestamp": "2026-03-11T11:53:35.660559"
+        "title": "Narrative review of the ethics of artificial intelligence: are we ready for artificial intelligence in surgery?",
+        "authors": [
+          "Yu E",
+          "Rosenberg GM",
+          "Udelsman BV"
+        ],
+        "published": "2026 Feb 28",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41816458/"
+      },
+      {
+        "title": "The relationship between adolescents' self-regulated learning and academic achievement: an interrelated mediation model of academic emotions: evidence from a nationwide sample in China.",
+        "authors": [
+          "Sun R",
+          "Zhang S"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41815258/"
+      },
+      {
+        "title": "Effectiveness of elastic resistance training in frail older adults on muscle strength and functionality levels: A systematic review.",
+        "authors": [
+          "Puelles-Diaz A",
+          "Bousellet-Laflor N",
+          "Pizarro-Torres S"
+        ],
+        "published": "2026 Mar 10",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41812594/"
+      }
+    ],
+    "timestamp": "2026-03-12T11:58:09.000810"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -266,6 +328,7 @@
       }
     ],
     "timestamp": "2026-03-11T11:53:38.698374"
+    "timestamp": "2026-03-12T11:58:11.957291"
   },
   "democratic schools": {
     "arxiv": [
@@ -344,6 +407,37 @@
       }
     ],
     "timestamp": "2026-03-11T11:53:39.659271"
+        "title": "Total Hip Arthroplasty in Lubumbashi (DR Congo), Outcomes in a Resource-Limited Setting.",
+        "authors": [
+          "Milindi CS",
+          "Yuma Y",
+          "Tshisuz C"
+        ],
+        "published": "2026 Mar",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41815673/"
+      },
+      {
+        "title": "Salpingo-oophorectomy for twisted ovarian dysgerminoma in a prestigious pregnancy: challenges and outcomes. A case report.",
+        "authors": [
+          "Constantin MM",
+          "Baruti D",
+          "Mapunda B"
+        ],
+        "published": "2026 Feb",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41815478/"
+      },
+      {
+        "title": "Assessing the Role of Sex and Gender Norms in Peer Violence Trends During Adolescence: A Longitudinal Study From Kinshasa, Democratic Republic of Congo.",
+        "authors": [
+          "Ramaiya A",
+          "Malhotra G",
+          "Lulebo A"
+        ],
+        "published": "2026 Mar 11",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41814631/"
+      }
+    ],
+    "timestamp": "2026-03-12T11:58:12.890292"
   },
   "student agency": {
     "arxiv": [
@@ -418,6 +512,40 @@
   "who_mental_health": {
     "data": {},
     "timestamp": "2026-03-11T11:53:40.653658",
+        "title": "Mapping differentiated cognitive landscapes of university students in China via fuzzy comprehensive evaluation.",
+        "authors": [
+          "Liu M",
+          "Lu Y",
+          "Zhang K"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41815252/"
+      },
+      {
+        "title": "The value of health literacy for Global Health and One Health: nurturing the socioecological environment of schools.",
+        "authors": [
+          "Okan O",
+          "Winkler AS"
+        ],
+        "published": "2026 Mar 2",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41810887/"
+      },
+      {
+        "title": "Making sense together: participatory sensemaking, learning cycles, and group roles.",
+        "authors": [
+          "Kronsted C",
+          "Henley M",
+          "Giguere M"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41809740/"
+      }
+    ],
+    "timestamp": "2026-03-12T11:58:13.990303"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-12T11:58:13.992395",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -540,6 +668,7 @@
       }
     },
     "timestamp": "2026-03-11T11:54:48.570455",
+    "timestamp": "2026-03-12T11:58:17.169065",
     "source": "World Bank EdStats API"
   }
 }

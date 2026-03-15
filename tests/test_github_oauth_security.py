@@ -1,8 +1,8 @@
-import unittest
-from unittest.mock import patch, MagicMock
 import os
-import secrets
+import unittest
+from unittest.mock import patch
 from urllib.parse import parse_qs, urlparse
+
 from auth.github_oauth import GitHubAuth
 
 

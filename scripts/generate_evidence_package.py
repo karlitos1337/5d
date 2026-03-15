@@ -4,10 +4,10 @@
 Orchestrates validation, scraping, and packaging.
 """
 
-import os
-import glob
-import shutil
 import datetime
+import glob
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -37,7 +37,7 @@ def main():
     env = os.environ.copy()
     env["PYTHONPATH"] = os.getcwd()
 
-    print(f"\n🚀 Running IMP Validation Study...")
+    print("\n🚀 Running IMP Validation Study...")
     try:
         # Running validation study
         result = subprocess.run(
@@ -51,7 +51,7 @@ def main():
 
         # Copy Analysis Script
         shutil.copy("validation/imp_validation_study.py", package_dir / "imp_validation_study.py")
-        print(f"  -> Copied Analysis Script: validation/imp_validation_study.py")
+        print("  -> Copied Analysis Script: validation/imp_validation_study.py")
 
         # Move artifacts
         moved_count = 0
@@ -74,7 +74,7 @@ def main():
         print(e.stderr)
 
     # 2. Run Research Scraper
-    print(f"\n🚀 Running Research Scraper...")
+    print("\n🚀 Running Research Scraper...")
     try:
         result = subprocess.run(
             [sys.executable, "5d_research_scraper.py"],
@@ -88,7 +88,7 @@ def main():
         # Copy artifacts (Keep original in root as master DB)
         if os.path.exists("5d_research_data.json"):
             shutil.copy("5d_research_data.json", package_dir / "5d_research_data.json")
-            print(f"  -> Copied 5d_research_data.json")
+            print("  -> Copied 5d_research_data.json")
         else:
             print("⚠️  5d_research_data.json not found.")
 
