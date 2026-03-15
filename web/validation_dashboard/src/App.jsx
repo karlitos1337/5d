@@ -26,8 +26,6 @@ const App = () => {
 
   const ticking = useRef(false);
 
-  // Move sections outside component to avoid missing dependency warnings
-  // or recreate memory reference issues if added to dependency array
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
@@ -43,9 +41,6 @@ const App = () => {
 
       const isImage = el.tagName.toLowerCase() === 'img';
       if (!isImage && !el.textContent?.trim()) return;
-      if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
-      // For non-image elements, check textContent. For images, we just need the data-ref.
-      if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -69,14 +64,22 @@ const App = () => {
 
       if (isImage) {
         // Create a wrapper for image citations or insert after
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+        if (newWindow) {
+          newWindow.opener = null;
+        }
+      };
+
+      if (isImage) {
         const wrapper = document.createElement('div');
         wrapper.style.position = 'relative';
         wrapper.style.display = 'inline-block';
         wrapper.style.width = '100%';
-        el.parentNode.insertBefore(wrapper, el);
+        if (el.parentNode) {
+            el.parentNode.insertBefore(wrapper, el);
+        }
         wrapper.appendChild(el);
 
-        // Adjust btn style for image overlay
         Object.assign(btn.style, {
           position: 'absolute',
           top: '10px',
@@ -134,6 +137,7 @@ const App = () => {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Zum Hauptinhalt springen
       </a>
 

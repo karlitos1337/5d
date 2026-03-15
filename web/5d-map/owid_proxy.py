@@ -25,11 +25,49 @@ class ProxyHandler(BaseHTTPRequestHandler):
             if not url:
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.send_security_headers()
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
+                with urllib.request.urlopen(url, timeout=15) as resp:
+                    # MAX_RESPONSE_SIZE = 10MB
+                    MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+                    chunks = []
+                    total_size = 0
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        chunks.append(chunk)
+                        total_size += len(chunk)
+                        if total_size > MAX_RESPONSE_SIZE:
+                            self.send_response(502)
+                            self.send_header("Content-Type", "text/plain; charset=utf-8")
+                            self.send_header("Access-Control-Allow-Origin", "*")
+                            self.send_header("X-Content-Type-Options", "nosniff")
+                            self.end_headers()
+                            self.wfile.write(b"Response too large")
+                            return
+
+                    content = b"".join(chunks)
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/csv; charset=utf-8")
+                    self.send_header("Content-Length", str(len(content)))
+                    # CORS
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
+                    self.end_headers()
+                    self.wfile.write(content)
+            except Exception:
+                # Log error securely (not exposing to user)
+                msg = b"Fetch error: Upstream Service Error"
+                self.send_response(502)
+                self.send_header("Content-Type", "text/plain; charset=utf-8")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 req = urllib.request.Request(url, headers={"User-Agent": "OWID-Proxy/1.0"})
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = resp.read()
@@ -50,6 +88,8 @@ class ProxyHandler(BaseHTTPRequestHandler):
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("X-Content-Type-Options", "nosniff")
             self.send_security_headers()
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")

@@ -12,6 +12,9 @@
 **Learning:** Redis connections can fail. Hard dependencies on Redis for caching can bring down the application.
 **Action:** Implement fallback mechanisms. If Redis is down, bypass cache or use local memory, but don't crash. Use a wrapper class to handle connection errors gracefully.
 
+## 2024-05-24 - Async Waterfall
+**Learning:** Sequential `await` calls for independent IO operations (like API fetches) create unnecessary bottlenecks (waterfalls).
+**Action:** Identify independent async operations and group them using `Promise.all()` to execute concurrently.
 ## 2024-05-24 - React Scroll Event Throttling
 **Learning:** Frequent scroll events in React can block the main thread and cause layout thrashing if not throttled, leading to performance degradation. Creating arrays/objects inside the component body can trigger unnecessary re-renders when passed as dependencies.
 **Action:** Always throttle scroll event listeners using `requestAnimationFrame` with a ticking lock boolean, add `{ passive: true }` to the event listener to avoid main-thread blocking, and move static arrays/objects outside the component or use `useMemo`.

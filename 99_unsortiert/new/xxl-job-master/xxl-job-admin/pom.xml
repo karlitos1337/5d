@@ -95,6 +95,16 @@
 			<version>${xxl-sso.version}</version>
 		</dependency>
 
+		<!-- Azure Key Vault dependencies for secure credential management -->
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-security-keyvault-secrets</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-identity</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
