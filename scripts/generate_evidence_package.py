@@ -140,13 +140,13 @@ def plot_radar_chart(scores, title="5D Profile"):
     plt.show()
 
 if __name__ == "__main__":
-    # Example Data
+    # Example Data (canonical 5D dimension names)
     data = {
-        "Autonomy": 4.2,
-        "Intrinsic Motivation": 3.8,
-        "Resilience": 4.5,
-        "Social Participation": 3.2,
-        "Authenticity": 4.0
+        "Autonomie": 4.2,
+        "Intrinsische Motivation": 3.8,
+        "Resilienz": 4.5,
+        "Sympoietische Partizipation": 3.2,
+        "Authentizität": 4.0
     }
     plot_radar_chart(data)
 """
@@ -169,10 +169,10 @@ Based on the zero-impact principle, any dimension < 0.7 requires immediate inter
 Refer to `validation_results_*.png` for visual distribution.
 
 [PUSH TO DOWNLOAD]
-- Analysis Script (Python): imp_validation_study.py
-- Metric Mapping Table: METRIC_MAPPING.md
-- Visualization Template: VISUALIZATION_TEMPLATE.py
-- Literature-Backed Interpretation: INTERPRETATION.md
+- Analysis Script (Python): ./imp_validation_study.py
+- Metric Mapping Table: ./METRIC_MAPPING.md
+- Visualization Template: ./VISUALIZATION_TEMPLATE.py
+- Literature-Backed Interpretation: ./INTERPRETATION.md
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)
