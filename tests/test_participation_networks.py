@@ -12,15 +12,11 @@ References:
 - Rogers, E. M. (2003). Diffusion of Innovations (5th ed.). Free Press.
 """
 
-import os
-import sys
 from pathlib import Path
 
 import networkx as nx
 import numpy as np
 import pytest
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # ==================== Network Topology Tests ====================
 

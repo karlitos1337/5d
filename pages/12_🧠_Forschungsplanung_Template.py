@@ -3,10 +3,8 @@
 Streamlit-Seite: Forschungsplanung (Template) im 5D-Style
 - Betten das bereitgestellte Homepage-Design inkl. Charts via st.components.html ein
 """
-
-import json
 from pathlib import Path
-
+import json
 import streamlit as st
 
 st.set_page_config(
@@ -55,11 +53,7 @@ def main():
         with open("5d_solutions.json", encoding="utf-8") as f:
             sols = json.load(f)
             total_projects = len(sols.get("projects", []))
-            dims = [
-                d.get("score")
-                for d in sols.get("dimension_scores", [])
-                if isinstance(d.get("score"), (int, float))
-            ]
+            dims = [d.get("score") for d in sols.get("dimension_scores", []) if isinstance(d.get("score"), (int, float))]
             if dims:
                 avg_dimension = round(sum(dims) / len(dims), 2)
     except Exception:
@@ -84,9 +78,7 @@ def main():
     # Höhe großzügig wählen (kann per Slider angepasst werden)
     height = st.slider("Höhe (px)", min_value=1000, max_value=4000, value=2200, step=100)
     st.components.v1.html(html, height=height, scrolling=True)
-    st.caption(
-        "Evidence-Label: ⚠️ Hypothese – KPI-Zahlen im Template sind Platzhalter und nicht an Artefakte gebunden. Live-KPIs siehe oben."
-    )
+    st.caption("Evidence-Label: ⚠️ Hypothese – KPI-Zahlen im Template sind Platzhalter und nicht an Artefakte gebunden. Live-KPIs siehe oben.")
 
 
 if __name__ == "__main__":

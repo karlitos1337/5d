@@ -96,7 +96,7 @@ def load_research_institutions_data():
             "lon": -71.0942,
             "papers_count": 28,
             "domains": ["AI/ML", "Education Tech", "Complexity"],
-            "key_papers": ["Heckman (2006)", "Saxenian (1994)"],
+            "key_papers": ["Heckman (2006)", "Saxenian (1994)"]
         },
         {
             "name": "Stanford University",
@@ -105,7 +105,7 @@ def load_research_institutions_data():
             "lon": -122.1697,
             "papers_count": 22,
             "domains": ["Self-Determination", "Economics"],
-            "key_papers": ["Deci & Ryan (2000)"],
+            "key_papers": ["Deci & Ryan (2000)"]
         },
         # UK - Oxford/Cambridge
         {
@@ -115,7 +115,7 @@ def load_research_institutions_data():
             "lon": 0.1218,
             "papers_count": 19,
             "domains": ["Neuroscience", "Philosophy"],
-            "key_papers": ["Baron-Cohen (2003)"],
+            "key_papers": ["Baron-Cohen (2003)"]
         },
         {
             "name": "University of Oxford",
@@ -124,7 +124,7 @@ def load_research_institutions_data():
             "lon": -1.2544,
             "papers_count": 17,
             "domains": ["Psychology", "Ethics"],
-            "key_papers": ["Dennett (1991)"],
+            "key_papers": ["Dennett (1991)"]
         },
         # Germany - Max Planck
         {
@@ -134,7 +134,7 @@ def load_research_institutions_data():
             "lon": 11.5820,
             "papers_count": 15,
             "domains": ["Cognitive Science", "Neurobiology"],
-            "key_papers": ["Frith (2007)", "Singer (2004)"],
+            "key_papers": ["Frith (2007)", "Singer (2004)"]
         },
         # Switzerland - ETH Zurich
         {
@@ -144,7 +144,7 @@ def load_research_institutions_data():
             "lon": 8.5417,
             "papers_count": 12,
             "domains": ["Complex Systems", "Network Science"],
-            "key_papers": ["Schweitzer (2003)"],
+            "key_papers": ["Schweitzer (2003)"]
         },
         # Denmark - Aarhus (Folk High Schools)
         {
@@ -154,7 +154,7 @@ def load_research_institutions_data():
             "lon": 10.2039,
             "papers_count": 14,
             "domains": ["Alternative Education", "Democratic Governance"],
-            "key_papers": ["Korsgaard (2012)", "Gundemose (2021)"],
+            "key_papers": ["Korsgaard (2012)", "Gundemose (2021)"]
         },
         # Norway - Oslo (Governance)
         {
@@ -164,7 +164,7 @@ def load_research_institutions_data():
             "lon": 10.7217,
             "papers_count": 10,
             "domains": ["Governance", "Social Participation"],
-            "key_papers": ["Ostrom (1990)"],
+            "key_papers": ["Ostrom (1990)"]
         },
         # Japan - Tokyo (Tokkatsu)
         {
@@ -174,7 +174,7 @@ def load_research_institutions_data():
             "lon": 139.7624,
             "papers_count": 18,
             "domains": ["Cooperative Learning", "Education Psychology"],
-            "key_papers": ["Tokuhama-Espinosa (2019)", "Lewis (1995)"],
+            "key_papers": ["Tokuhama-Espinosa (2019)", "Lewis (1995)"]
         },
         # Australia - Melbourne (Mental Health)
         {
@@ -184,7 +184,7 @@ def load_research_institutions_data():
             "lon": 144.9612,
             "papers_count": 13,
             "domains": ["Mental Health", "Youth Psychology"],
-            "key_papers": ["Twenge (2019)", "Haidt (2023)"],
+            "key_papers": ["Twenge (2019)", "Haidt (2023)"]
         },
         # Brazil - São Paulo (Inequality)
         {
@@ -194,7 +194,7 @@ def load_research_institutions_data():
             "lon": -46.7294,
             "papers_count": 8,
             "domains": ["Economic Inequality", "Social Policy"],
-            "key_papers": ["Acemoglu & Robinson (2012)"],
+            "key_papers": ["Acemoglu & Robinson (2012)"]
         },
         # WHO - Geneva (Global Health)
         {
@@ -204,8 +204,8 @@ def load_research_institutions_data():
             "lon": 6.1325,
             "papers_count": 24,
             "domains": ["Global Health", "Mental Health Policy"],
-            "key_papers": ["WHO (2023)", "Patel (2018)"],
-        },
+            "key_papers": ["WHO (2023)", "Patel (2018)"]
+        }
     ]
     return institutions
 
@@ -221,18 +221,24 @@ def create_research_institutions_map(institutions_data):
         folium.Map: Interactive map with institution markers
     """
     # Create base map centered on Europe
-    m = folium.Map(location=[45, 10], zoom_start=2, tiles="OpenStreetMap", width="100%", height=400)
+    m = folium.Map(
+        location=[45, 10],
+        zoom_start=2,
+        tiles="OpenStreetMap",
+        width="100%",
+        height=400
+    )
 
     for inst in institutions_data:
         papers_count = inst.get("papers_count", 0)
 
         # Marker color by paper count
         if papers_count >= 20:
-            icon_color = "red"  # Major hub (20+ papers)
+            icon_color = "red"         # Major hub (20+ papers)
         elif papers_count >= 10:
-            icon_color = "orange"  # Medium hub (10-19 papers)
+            icon_color = "orange"      # Medium hub (10-19 papers)
         else:
-            icon_color = "blue"  # Emerging hub (<10 papers)
+            icon_color = "blue"        # Emerging hub (<10 papers)
 
         # Circle size by paper count
         radius = 8 + (papers_count * 0.3)
@@ -261,7 +267,7 @@ def create_research_institutions_map(institutions_data):
             fill=True,
             fillColor=icon_color,
             fillOpacity=0.5,
-            weight=2,
+            weight=2
         ).add_to(m)
 
         # Add standard marker on top
@@ -269,7 +275,7 @@ def create_research_institutions_map(institutions_data):
             location=[inst["lat"], inst["lon"]],
             popup=folium.Popup(popup_html, max_width=280),
             icon=folium.Icon(color=icon_color, icon="university", prefix="fa"),
-            tooltip=f"{inst['name']} ({papers_count} papers)",
+            tooltip=f"{inst['name']} ({papers_count} papers)"
         ).add_to(m)
 
     # Add legend
@@ -297,7 +303,8 @@ def main():
         st.divider()
 
         st.markdown("### 🔬 Scientific Basis")
-        st.markdown("""
+        st.markdown(
+            """
         **Datenquellen:**
         - arXiv (Physics, CS, Math)
         - PubMed (Medicine, Psychology)
@@ -305,7 +312,8 @@ def main():
         - World Bank (Education Data)
         
         **Status:** ✅ Peer-Reviewed
-        """)
+        """
+        )
 
         st.divider()
 
@@ -351,13 +359,15 @@ def main():
 
     # World Map: Research Institutions
     st.header("🗺️ Leading Research Institutions")
-    st.markdown("""
+    st.markdown(
+        """
         Interactive map showing major research hubs contributing to 5D Framework domains 
         (Alternative Education, Mental Health, Governance, Complexity Science). 
         Paper counts derived from **5d-relevant-sources.bib**.
         
         📊 **Legend:** Red = Major Hub (≥20 papers), Orange = Medium (10-19), Blue = Emerging (<10)
-        """)
+        """
+    )
 
     institutions_data = load_research_institutions_data()
     institutions_map = create_research_institutions_map(institutions_data)
@@ -377,14 +387,16 @@ def main():
         st.header("🔍 Papers nach Thema")
 
         if not research_data:
-            st.warning("""
+            st.warning(
+                """
             **Keine Research-Daten verfügbar.**
             
             Führe den Research Scraper aus:
             ```bash
             python 5d_research_scraper.py
             ```
-            """)
+            """
+            )
         else:
             # Keyword Filter
             keywords = list(research_data.keys())
@@ -466,7 +478,8 @@ def main():
 
         # Relevance Score Info
         st.subheader("🎯 Relevanz-Score")
-        st.markdown("""
+        st.markdown(
+            """
         **Eigene Gewichtung:**
         
         ```python
@@ -485,7 +498,8 @@ def main():
         - Zeitliche Relevanz
         - Keyword-Übereinstimmung
         - H-Index der Autoren
-        """)
+        """
+        )
 
     st.divider()
 
@@ -499,7 +513,8 @@ def main():
 
         st.latex(r"R_{score} = w_1 \cdot C + w_2 \cdot T + w_3 \cdot K + w_4 \cdot A")
 
-        st.markdown("""
+        st.markdown(
+            """
         **Komponenten:**
         - **C (Citations):** Anzahl Zitationen (normalisiert)
         - **T (Timeliness):** Zeitliche Relevanz (exponentieller Decay)
@@ -511,12 +526,14 @@ def main():
         **Quelle:** Eigene Modellierung (nicht peer-reviewed)
         
         **Validierung:** Vergleich mit Google Scholar Ranking (Korrelation: r=0.72)
-        """)
+        """
+        )
 
     with tab2:
         st.subheader("Datenquellen")
 
-        st.markdown("""
+        st.markdown(
+            """
         | Quelle | API | Update-Frequenz | Coverage |
         |--------|-----|-----------------|----------|
         | arXiv | REST API | Daily | Physics, CS, Math, Quantitative Finance |
@@ -531,12 +548,14 @@ def main():
         - World Bank: 500 requests/hour
         
         **Implementation:** `5d_research_scraper.py`
-        """)
+        """
+        )
 
     with tab3:
         st.subheader("Qualitätsmetriken")
 
-        st.markdown("""
+        st.markdown(
+            """
         **Data Quality Assessment:**
         
         1. **Completeness:** % Papers mit vollständigen Metadaten
@@ -554,7 +573,8 @@ def main():
         - Random Sample Testing
         - Cross-Reference mit Scopus
         - Manual Spot-Checks (monatlich)
-        """)
+        """
+        )
 
     st.divider()
 
@@ -562,7 +582,8 @@ def main():
     st.header("📚 Wissenschaftliche Referenzen")
 
     with st.expander("🔬 Peer-Reviewed Sources (expandable)"):
-        st.markdown("""
+        st.markdown(
+            """
         ### Relevante Publikationen zu 5D-Dimensionen
         
         **Autonomie (A):**
@@ -588,7 +609,8 @@ def main():
         ---
         
         **BibTeX:** Alle Referenzen verfügbar in `07_daten_analysen/5d-relevant-sources.bib`
-        """)
+        """
+        )
 
         # Show BibTeX count
         if bibtex_sources:

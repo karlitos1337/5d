@@ -16,11 +16,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements_extended.txt
-          pip install pytest pytest-cov pydantic pyaml fuzzywuzzy python-Levenshtein PyPDF2 networkx
+          pip install pytest pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2
       - name: Run Tests
-        run: |
-          export PYTHONPATH=.
-          pytest -v --cov=. --cov-report=xml
+        run: pytest -v --cov=. --cov-report=xml
       - name: Validate JSON Schema (optional)
         run: |
           python - << 'PY'
@@ -33,4 +31,3 @@ jobs:
           except FileNotFoundError:
             print('No 5d_solutions.json present; skipping validation.')
           PY
-        run: pytest tests/ -v --cov=tests/ --cov-report=xml --ignore=tests/test_anonymization.py --ignore=tests/test_extractor.py --ignore=tests/test_participation_networks.py --ignore=tests/test_discord_bot.py -p no:warnings
