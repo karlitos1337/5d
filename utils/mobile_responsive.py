@@ -19,24 +19,17 @@ def get_device_type():
         str: 'mobile', 'tablet', or 'desktop'
     """
     # Inject JavaScript to detect screen width
-    _js_code = """
+    js_code = """
     <script>
         const width = window.innerWidth;
         const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
         window.parent.postMessage({type: 'streamlit:setComponentValue', value: deviceType}, '*');
     </script>
     """
-    # js_code = """
-    # <script>
-    #     const width = window.innerWidth;
-    #     const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
-    #     window.parent.postMessage({type: 'streamlit:setComponentValue', value: deviceType}, '*');
-    # </script>
-    # """
 
     # Use st.components for device detection (simplified)
     # In practice, we use CSS media queries instead
-    return "desktop"  # Default fallback
+    return 'desktop'  # Default fallback
 
 
 def responsive_columns(num_cols, mobile_cols=1):
@@ -216,17 +209,17 @@ def mobile_friendly_chart_config():
         dict: Plotly config with mobile optimizations
     """
     return {
-        "displayModeBar": True,
-        "displaylogo": False,
-        "modeBarButtonsToRemove": ["lasso2d", "select2d"],
-        "responsive": True,
-        "toImageButtonOptions": {
-            "format": "png",
-            "filename": "5d_chart",
-            "height": 800,
-            "width": 1200,
-            "scale": 2,
-        },
+        'displayModeBar': True,
+        'displaylogo': False,
+        'modeBarButtonsToRemove': ['lasso2d', 'select2d'],
+        'responsive': True,
+        'toImageButtonOptions': {
+            'format': 'png',
+            'filename': '5d_chart',
+            'height': 800,
+            'width': 1200,
+            'scale': 2
+        }
     }
 
 

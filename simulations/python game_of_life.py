@@ -307,9 +307,7 @@ def main():
 
     if args.animate:
         if not HAS_MPL:
-            print(
-                "⚠️  Matplotlib fehlt – starte Textmodus. Installiere mit: pip install matplotlib"
-            )
+            print("⚠️  Matplotlib fehlt – starte Textmodus. Installiere mit: pip install matplotlib")
             _, stats = simulate(grid, steps=min(args.steps, 20))
         else:
             animate(

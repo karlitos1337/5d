@@ -1,7 +1,6 @@
-from typing import Any
 
 import networkx as nx
-
+from typing import List, Dict, Any
 
 
 class CognitiveGraph:
@@ -26,11 +25,10 @@ class CognitiveGraph:
             return 0.0
         return nx.density(subgraph)
 
-    def suggest_connections(self, concept_id: str, limit: int = 5) -> list[str]:
+    def suggest_connections(self, concept_id: str, limit: int = 5) -> List[str]:
         if concept_id not in self.graph:
             return []
         return list(self.graph.neighbors(concept_id))[:limit]
-
 
 def main():
     print("Initializing 5D Cognitive Graph...")
@@ -40,7 +38,6 @@ def main():
     kg.link_concepts("Quantum", "Consciousness", weight=0.8)
     score = kg.calculate_serendipity_score(["Quantum", "Consciousness"])
     print(f"Serendipity Score: {score}")
-
 
 if __name__ == "__main__":
     main()
