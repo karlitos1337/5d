@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -89,13 +89,6 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-      >
-        Skip to content
-      </a>
-
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
@@ -132,7 +125,6 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -142,8 +134,6 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -181,7 +171,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main id="main-content" className="pt-16">
+      <main className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">

@@ -1,18 +1,22 @@
-import unittest
-from unittest.mock import patch, MagicMock
 import os
-import secrets
+import unittest
+from unittest.mock import patch
 from urllib.parse import parse_qs, urlparse
+
 from auth.github_oauth import GitHubAuth
+
 
 class TestGitHubOAuthSecurity(unittest.TestCase):
     def setUp(self):
         # Setup environment variables
-        self.env_patcher = patch.dict(os.environ, {
-            "GITHUB_CLIENT_ID": "test_client_id",
-            "GITHUB_CLIENT_SECRET": "test_client_secret",
-            "GITHUB_REDIRECT_URI": "http://localhost:8000/callback"
-        })
+        self.env_patcher = patch.dict(
+            os.environ,
+            {
+                "GITHUB_CLIENT_ID": "test_client_id",
+                "GITHUB_CLIENT_SECRET": "test_client_secret",
+                "GITHUB_REDIRECT_URI": "http://localhost:8000/callback",
+            },
+        )
         self.env_patcher.start()
         self.auth = GitHubAuth()
 
@@ -74,12 +78,14 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
                 "redirect_uri": "http://localhost:8000/callback",
             },
             headers={"Accept": "application/json"},
-            timeout=10  # Security check: timeout must be present
+            timeout=10,  # Security check: timeout must be present
         )
 
     def test_authenticate_csrf_mismatch(self):
         """Test that authentication fails when states do not match."""
-        result = self.auth.authenticate("code", received_state="bad_state", expected_state="good_state")
+        result = self.auth.authenticate(
+            "code", received_state="bad_state", expected_state="good_state"
+        )
         self.assertIsNone(result)
 
     def test_authenticate_missing_state(self):
@@ -89,6 +95,7 @@ class TestGitHubOAuthSecurity(unittest.TestCase):
 
         result = self.auth.authenticate("code", received_state="good_state", expected_state=None)
         self.assertIsNone(result)
+
 
 if __name__ == "__main__":
     unittest.main()
