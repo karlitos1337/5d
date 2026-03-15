@@ -10,7 +10,6 @@ class CognitiveGraph:
     def __init__(self):
         self.graph = nx.DiGraph()
 
-    def add_concept(self, concept_id: str, metadata: Dict[str, Any]) -> None:
     def add_concept(self, concept_id: str, metadata: dict[str, Any]) -> None:
         self.graph.add_node(concept_id, **metadata)
 
