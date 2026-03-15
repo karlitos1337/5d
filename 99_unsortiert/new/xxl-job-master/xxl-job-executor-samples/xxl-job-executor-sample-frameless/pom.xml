@@ -54,6 +54,17 @@
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-jdbc-mysql</artifactId>
         </dependency>
+        
+        <!-- Azure Key Vault dependencies for secure credential management -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-security-keyvault-secrets</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-identity</artifactId>
+        </dependency>
+        
         <!-- xxl-job-core -->
         <dependency>
             <groupId>com.xuxueli</groupId>
