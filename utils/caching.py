@@ -12,6 +12,12 @@ Provides:
 import os
 import json
 import logging
+import os
+from pathlib import Path
+from typing import Any, Dict
+from typing import Any
+
+import redis
 import streamlit as st
 import redis
 from pathlib import Path
@@ -357,6 +363,9 @@ redis_cache = RedisCache()
 # ============================================================================
 
 def get_cache_stats() -> Dict[str, Any]:
+
+def get_cache_stats() -> Dict[str, Any]:
+def get_cache_stats() -> dict[str, Any]:
     """
     Get cache statistics.
 

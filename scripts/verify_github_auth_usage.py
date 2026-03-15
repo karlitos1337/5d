@@ -5,6 +5,8 @@ def check_github_auth_usage(directory):
     usage_found = False
     for root, dirs, files in os.walk(directory):
         if "99_unsortiert" in root: # Skip the unsorted/backup directory
+    for root, _dirs, files in os.walk(directory):
+        if "99_unsortiert" in root:  # Skip the unsorted/backup directory
             continue
         for file in files:
             if file.endswith(".py"):
@@ -30,6 +32,7 @@ def check_github_auth_usage(directory):
         print("No usage of GitHubAuth found in the codebase (excluding definition and test).")
     else:
         print("WARNING: GitHubAuth usage detected!")
+
 
 if __name__ == "__main__":
     check_github_auth_usage(".")
