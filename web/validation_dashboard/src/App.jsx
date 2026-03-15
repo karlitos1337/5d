@@ -59,6 +59,11 @@ const App = () => {
       btn.onclick = e => {
         e.stopPropagation();
         e.preventDefault();
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
+
+      if (isImage) {
+        // Create a wrapper for image citations or insert after
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
         if (newWindow) {
           newWindow.opener = null;
@@ -99,18 +104,22 @@ const App = () => {
   };
 
   useEffect(() => {
+    const updateSection = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i].id);
+        if (section && scrollPosition >= section.offsetTop) {
+          setActiveSection(sections[i].id);
+          break;
+        }
+      }
+    };
+
     const handleScroll = () => {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY + 200;
-
-          for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i].id);
-            if (section && scrollPosition >= section.offsetTop) {
-              setActiveSection(sections[i].id);
-              break;
-            }
-          }
+          updateSection();
           ticking.current = false;
         });
         ticking.current = true;
@@ -123,6 +132,11 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Zum Hauptinhalt springen
       </a>
