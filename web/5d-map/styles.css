@@ -18,6 +18,7 @@ body {
   background: var(--color-bg);
 }
 
+/* Focus Styles for Accessibility */
 :focus-visible {
   outline: 3px solid var(--color-warning);
   outline-offset: 2px;
@@ -66,6 +67,10 @@ body {
 .btn:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transform: translateY(-1px);
+}
+.btn:active {
+  transform: none;
+  box-shadow: none;
 }
 .btn--primary {
   background: var(--color-primary);

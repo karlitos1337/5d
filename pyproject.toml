@@ -1,6 +1,23 @@
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+norecursedirs = [
+    "99_unsortiert",
+    ".git",
+    "__pycache__",
+    "node_modules",
+    "external",
+]
+
+[tool.ruff]
+extend-exclude = [
+    "99_unsortiert",
+    "external",
+]
 [tool.black]
-line-length = 100
-target-version = ["py310"]
 extend-exclude = '''
 /(
   | 99_unsortiert
@@ -14,12 +31,28 @@ extend-exclude = '''
   | docs
   | web
   | private-gpt-main
-  | dist
+  | 5d
   | node_modules
   | outputs
-  | 5d
-  | simulations
   | venv
+)/
+'''
+line-length = 100
+target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | 99_unsortiert
+  | external
+  | private-gpt-main
 )/
 '''
 
@@ -29,6 +62,9 @@ target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
 exclude = ["99_unsortiert", "external", "outputs", "5d", "private-gpt-main", "node_modules", "dist", "docs", "simulations", "venv"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/"]
+exclude = ["private-gpt-main/"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "5d/", "node_modules/", "outputs/", "venv/", "docs/analysis/verify_app.py", "scripts/", "tools/add_frontmatter.py", "utils/", "src_python/knowledge_graph/", "tests/", "src/universal_system_genesis_5d/"]
 exclude = [
     "private-gpt-main/",
     "99_unsortiert/",
@@ -46,16 +82,6 @@ exclude = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-[tool.pytest.ini_options]
-pythonpath = ["."]
-testpaths = ["tests", "src_python/tests"]
-norecursedirs = ["99_unsortiert", "private-gpt-main", "external", "5d", "node_modules", "dist", "docs", "simulations", "venv", "outputs"]
-addopts = "--ignore=99_unsortiert --ignore=private-gpt-main --ignore=external --ignore=5d --ignore=tests/test_participation_networks.py --ignore=src_python/tests/test_core.py --ignore=tests/test_autopoietic_ui.py --ignore=tests/test_extractor.py --ignore=tests/test_github_oauth_security.py --ignore=tests/test_pipeline_integration.py --ignore=tests/test_discord_bot.py"
-markers = [
-    "asyncio: mark a test as an asyncio test",
-    "integration: mark a test as an integration test",
-]
 
 [tool.mypy]
 python_version = "3.10"
@@ -76,5 +102,17 @@ markers = [
     "asyncio: mark a test as asyncio",
     "integration: mark a test as an integration test",
 ]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/"]
+
+[tool.pytest.ini_options]
+norecursedirs = ["99_unsortiert", "external", "private-gpt-main", "node_modules", ".git"]
+exclude = ["private-gpt-main/"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "5d/", "node_modules/", "outputs/", "venv/", "docs/analysis/verify_app.py", "scripts/", "tools/add_frontmatter.py", "utils/", "src_python/knowledge_graph/", "tests/", "src/universal_system_genesis_5d/"]
+
+[tool.pytest.ini_options]
+
+
+
+norecursedirs = [".git", "node_modules", "99_unsortiert", "private-gpt-main", "external", "5d"]
 exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "5d/", "node_modules/", "dist/", "docs/", "simulations/", "venv/"]
 ignore_errors = true
