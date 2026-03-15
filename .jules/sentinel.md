@@ -13,6 +13,10 @@
 **Learning:** Always verify if external APIs support HTTPS and enforce it. Even for public data, integrity is crucial.
 **Prevention:** Changed the URL to `https://export.arxiv.org`. Added a test case to verify HTTPS usage for API endpoints.
 
+## 2026-01-27 - [Unbounded Read in Proxy Handler]
+**Vulnerability:** The `owid_proxy.py` script used `resp.read()` on an external URL without a size limit. This allows a malicious or misconfigured upstream server to cause a Denial of Service (DoS) via memory exhaustion (OOM) by sending a very large response.
+**Learning:** Never trust the size of a response from an external source. Standard libraries like `urllib` often default to reading the entire stream into memory.
+**Prevention:** Implemented a chunked read loop with a strict `MAX_RESPONSE_SIZE` (10MB) limit. Also enforced `X-Content-Type-Options: nosniff` and sanitized error messages to prevent information leakage.
 ## 2026-02-22 - [Information Leakage in Proxy Service]
 **Vulnerability:** The `web/5d-map/owid_proxy.py` script (and its documentation counterpart) leaked detailed exception messages in HTTP responses, potentially exposing internal configuration or network details. It also lacked essential security headers and bound to `0.0.0.0` by default.
 **Learning:** Simple proxy scripts often overlook security headers and error sanitization, becoming an easy target for reconnaissance.
