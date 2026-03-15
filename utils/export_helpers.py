@@ -235,12 +235,10 @@ def display_export_section(
         st.markdown("**Save locally:**")
         create_save_button(data, filename_base)
 
-    st.caption(
-        """
+    st.caption("""
     💡 **Tip:** JSON files include complete simulation state and can be re-loaded.
     CSV files are best for analysis in Excel/Python/R.
-    """
-    )
+    """)
 
 
 # Example usage
