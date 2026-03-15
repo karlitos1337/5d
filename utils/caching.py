@@ -362,6 +362,7 @@ redis_cache = RedisCache()
 # ============================================================================
 
 
+def get_cache_stats() -> Dict[str, Any]:
 def get_cache_stats() -> dict[str, Any]:
     """
     Get cache statistics.
