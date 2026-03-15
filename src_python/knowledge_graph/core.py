@@ -10,14 +10,12 @@ class CognitiveGraph:
     def __init__(self):
         self.graph = nx.DiGraph()
 
-    def add_concept(self, concept_id: str, metadata: Dict[str, Any]) -> None:
     def add_concept(self, concept_id: str, metadata: dict[str, Any]) -> None:
         self.graph.add_node(concept_id, **metadata)
 
     def link_concepts(self, source_id: str, target_id: str, weight: float = 1.0) -> None:
         self.graph.add_edge(source_id, target_id, weight=weight)
 
-    def calculate_serendipity_score(self, context_nodes: List[str]) -> float:
     def calculate_serendipity_score(self, context_nodes: list[str]) -> float:
         if not context_nodes:
             return 0.0
