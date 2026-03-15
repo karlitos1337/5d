@@ -61,7 +61,11 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      btn.onclick = e => {
+        e.stopPropagation();
+        e.preventDefault();
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
 
       if (isImage) {
         // Create a wrapper for image citations or insert after
