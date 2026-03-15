@@ -43,15 +43,14 @@ import java.util.function.Consumer;
 public class IndexController {
     private static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-
     @RequestMapping("/")
     @ResponseBody
     String index() {
         return "xxl job ai executor running.";
     }
 
-
-    // --------------------------------- ollama chat ---------------------------------
+    // --------------------------------- ollama chat
+    // ---------------------------------
 
     @Resource
     private OllamaChatModel ollamaChatModel;
@@ -68,9 +67,10 @@ public class IndexController {
         // build chat-client
         ChatClient ollamaChatClient = ChatClient
                 .builder(ollamaChatModel)
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build())       // add memory
-                .defaultAdvisors(SimpleLoggerAdvisor.builder().build())                                                     // add logger
-                .defaultOptions(OllamaChatOptions.builder().model(modle).build())                                           // assign model
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build()) // add
+                                                                                                                      // memory
+                .defaultAdvisors(SimpleLoggerAdvisor.builder().build()) // add logger
+                .defaultOptions(OllamaChatOptions.builder().model(modle).build()) // assign model
                 .build();
 
         // call ollama
@@ -88,7 +88,8 @@ public class IndexController {
      * ChatClient 流式调用
      */
     @GetMapping("/chat/stream")
-    public Flux<String> streamChat(HttpServletResponse response, @RequestParam(value = "input", required = false, defaultValue = "介绍你自己") String input) {
+    public Flux<String> streamChat(HttpServletResponse response,
+            @RequestParam(value = "input", required = false, defaultValue = "介绍你自己") String input) {
         response.setCharacterEncoding("UTF-8");
 
         // build chat-client
@@ -107,8 +108,8 @@ public class IndexController {
                 .content();
     }
 
-
-    // --------------------------------- dify workflow ---------------------------------
+    // --------------------------------- dify workflow
+    // ---------------------------------
 
     // Azure Key Vault configuration
     @Value("${azure.keyvault.uri:}")
@@ -117,7 +118,7 @@ public class IndexController {
     // API key retrieved from Azure Key Vault for secure credential management
     // Original hardcoded value (REDACTED): app-46gHBiqUb5jqAHl9TDWwnRZ8
     private String apiKey;
-    
+
     private final String baseUrl = "http://localhost/v1";
 
     /**
@@ -128,16 +129,17 @@ public class IndexController {
     public void initializeApiKey() {
         try {
             if (keyVaultUri == null || keyVaultUri.trim().isEmpty()) {
-                logger.warn("Azure Key Vault URI not configured. Please set azure.keyvault.uri in application.properties");
+                logger.warn(
+                        "Azure Key Vault URI not configured. Please set azure.keyvault.uri in application.properties");
                 this.apiKey = null;
                 return;
             }
-            
+
             SecretClient secretClient = new SecretClientBuilder()
-                .vaultUrl(keyVaultUri)
-                .credential(new DefaultAzureCredentialBuilder().build())
-                .buildClient();
-            
+                    .vaultUrl(keyVaultUri)
+                    .credential(new DefaultAzureCredentialBuilder().build())
+                    .buildClient();
+
             KeyVaultSecret secret = secretClient.getSecret("dify-api-key");
             this.apiKey = secret.getValue();
             logger.info("Successfully retrieved API key from Azure Key Vault");
@@ -187,7 +189,7 @@ public class IndexController {
         }
     }
 
-    @GetMapping( "/dify/stream")
+    @GetMapping("/dify/stream")
     public Flux<String> difyStream(@RequestParam(required = false, value = "input") String input) {
 
         // Validate API key is loaded from Key Vault
