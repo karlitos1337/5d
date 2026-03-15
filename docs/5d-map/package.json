@@ -24,8 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@playwright/test": "^1.40.0",
-    "@vitest/ui": "^1.0.0",
-    "vitest": "^1.0.0"
+    "@vitest/ui": "^1.6.1",
+    "vitest": "^1.6.1"
   },
   "repository": {
     "type": "git",

@@ -12,13 +12,13 @@ importers:
         specifier: ^1.40.0
         version: 1.57.0
       '@vitest/ui':
-        specifier: ^1.0.0
+        specifier: ^1.6.1
         version: 1.6.1(vitest@1.6.1)
       jsdom:
         specifier: ^27.3.0
         version: 27.3.0
       vitest:
-        specifier: ^1.0.0
+        specifier: ^1.6.1
         version: 1.6.1(@vitest/ui@1.6.1)(jsdom@27.3.0)
 
 packages:
