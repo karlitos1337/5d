@@ -1,7 +1,7 @@
 # Vision – 5D Intelligence Framework
 
-**Status:** Living Document  
-**Last Updated:** 2025-12-03, 03:31 CET  
+**Status:** Living Document
+**Last Updated:** 2025-12-03, 03:31 CET
 **Purpose:** Zentrale Definition, Abgrenzung, Kernprinzipien
 
 ---
@@ -24,8 +24,8 @@ Das **5D-Intelligence Framework** ist ein **interdisziplinäres Forschungsmodell
 IMP = A × IM × R × SP × Au
 ```
 
-**Multiplikatives Prinzip:** Fehlt eine Dimension (= 0), kollabiert das gesamte Potenzial.  
-**Wertebereich:** [0, 1] (normalisiert)  
+**Multiplikatives Prinzip:** Fehlt eine Dimension (= 0), kollabiert das gesamte Potenzial.
+**Wertebereich:** [0, 1] (normalisiert)
 **Wissenschaftliche Basis:** Selbstbestimmungstheorie (Deci & Ryan 1985), Polyvagale Theorie (Porges 2011), Flow-Forschung (Csíkszentmihályi 1990)
 
 ---
@@ -64,60 +64,60 @@ IMP = A × IM × R × SP × Au
 **Wichtig:** "5D" in unserem Framework bezieht sich NICHT auf räumliche Dimensionen, sondern auf **Komplexitätsebenen sozialer Systeme**.
 
 ### **1D – Monokausale Erklärung (Linear)**
-**Definition:** Ein Faktor erklärt alles  
-**Formel:** `Outcome = f(X)`  
+**Definition:** Ein Faktor erklärt alles
+**Formel:** `Outcome = f(X)`
 **Beispiele:**
 - **Bildung:** "Geld löst alles" (mehr Funding → bessere Bildung)
 - **Mental Health:** "Depression = Serotonin-Mangel" (rein biochemisch)
 - **Governance:** "Demokratie = Freiheit" (ein Faktor)
 
-**Problem:** Übersimplifikation, ignoriert Kontext, Kultur, Dynamik  
+**Problem:** Übersimplifikation, ignoriert Kontext, Kultur, Dynamik
 **Evidenz:** Scheitert empirisch (z.B. PISA: Finland high scores, low funding)
 
 ---
 
 ### **2D – Duale Faktoren (Trade-Offs)**
-**Definition:** Zwei konkurrierende Faktoren, Balance nötig  
-**Formel:** `Outcome = f(X, Y)` mit X ⊥ Y (unabhängig oder negativ korreliert)  
+**Definition:** Zwei konkurrierende Faktoren, Balance nötig
+**Formel:** `Outcome = f(X, Y)` mit X ⊥ Y (unabhängig oder negativ korreliert)
 **Beispiele:**
 - **Bildung:** Autonomie vs. Struktur (Sudbury vs. Mainstream)
 - **Mental Health:** Arousal vs. Valence (Stress vs. Wohlbefinden)
 - **Governance:** Freiheit vs. Sicherheit (Liberalismus vs. Autoritarismus)
 
-**Problem:** Reduziert auf Dichotomien, übersieht Synergie  
+**Problem:** Reduziert auf Dichotomien, übersieht Synergie
 **Evidenz:** Oft falsche Dilemmas (z.B. Autonomy + Structure = synergistisch, nicht trade-off)
 
 ---
 
 ### **3D – Trianguläre Modelle (Multiperspektivisch)**
-**Definition:** Drei Faktoren, oft hierarchisch oder orthogonal  
-**Formel:** `Outcome = f(X, Y, Z)`  
+**Definition:** Drei Faktoren, oft hierarchisch oder orthogonal
+**Formel:** `Outcome = f(X, Y, Z)`
 **Beispiele:**
 - **Bildung:** SDT (Autonomie, Kompetenz, Verbundenheit)
 - **Mental Health:** Bio-Psycho-Social Model (Biologie, Psychologie, Sozial)
 - **Governance:** Ostrom's CPR Framework (Resource, Users, Rules)
 
-**Problem:** Statisch, keine zeitliche Dynamik, keine Emergenz  
+**Problem:** Statisch, keine zeitliche Dynamik, keine Emergenz
 **Evidenz:** Stark (SDT 1000+ Studien), aber kulturabhängig (siehe Week 1 Research)
 
 ---
 
 ### **4D – Raum-Zeit-Dynamik (Prozesse)**
-**Definition:** 3D + Zeit, Entwicklung über Zeit  
-**Formel:** `Outcome(t) = f(X(t), Y(t), Z(t), t)`  
+**Definition:** 3D + Zeit, Entwicklung über Zeit
+**Formel:** `Outcome(t) = f(X(t), Y(t), Z(t), t)`
 **Beispiele:**
 - **Bildung:** Entwicklungspsychologie (Piaget Stages, Vygotsky ZPD)
 - **Mental Health:** Polyvagal Theory (Ventral Vagal ↔ Sympathetic ↔ Dorsal Vagal over time)
 - **Governance:** Adaptive Cycles (Holling: Growth → Conservation → Release → Reorganization)
 
-**Problem:** Linear-temporal, keine Netzwerk-Effekte, keine Feedback-Loops  
+**Problem:** Linear-temporal, keine Netzwerk-Effekte, keine Feedback-Loops
 **Evidenz:** Gut für longitudinale Studien, aber übersieht Interdependenzen
 
 ---
 
 ### **5D – Netzwerk-Komplexität (Emergenz)**
-**Definition:** 4D + Relationale Struktur (Wer ist mit wem verbunden?)  
-**Formel:** `Outcome = f(X, Y, Z, t, G)` wobei G = Graph (Knoten + Kanten)  
+**Definition:** 4D + Relationale Struktur (Wer ist mit wem verbunden?)
+**Formel:** `Outcome = f(X, Y, Z, t, G)` wobei G = Graph (Knoten + Kanten)
 **Konzeptuell:**
 - **Knoten:** Individuen, Schulen, Gemeinden, Neuronen
 - **Kanten:** Interaktionen, Kommunikation, Ressourcenflüsse
@@ -129,7 +129,7 @@ IMP = A × IM × R × SP × Au
 - **Mental Health:** Connectome (neuronale Netzwerke, DMN, Salience Network)
 - **Governance:** Polycentric Governance (Ostrom: Multiple Zentren, kein Single Hub)
 
-**Problem:** Hohe Komplexität, schwer zu messen, braucht n>400 (Power)  
+**Problem:** Hohe Komplexität, schwer zu messen, braucht n>400 (Power)
 **Evidenz:** Emerging (Perkolation 6000+ Zit., aber auf Bewusstsein spekulativ 🔮)
 
 ---
@@ -177,7 +177,7 @@ h(G) = Netzwerk-Funktion (Clustering, Weak Ties, Betweenness)
 - ⚠️ **Orthogonal:** Andere Domäne, wissenschaftlich, aber kein Überschneidung
 - ❌ **Inkompatibel:** Esoterik, metaphysisch, oder nicht falsifizierbar
 
-**Klarstellung:**  
+**Klarstellung:**
 Unser **5D-Framework** ist **NICHT**:
 - 🚫 New-Age-Bewusstsein (kein Lichtkörper, keine Dimensionsaufstieg)
 - 🚫 5. physikalische Dimension (kein Kaluza-Klein, keine String-Theorie)
@@ -261,6 +261,6 @@ Unser **5D-Framework** ist **NICHT**:
 
 ---
 
-**Last Updated:** 2025-12-03, 03:31 CET  
-**Maintainer:** Siehe [CONTRIBUTING.md](CONTRIBUTING.md)  
+**Last Updated:** 2025-12-03, 03:31 CET
+**Maintainer:** Siehe [CONTRIBUTING.md](CONTRIBUTING.md)
 **License:** CC BY 4.0 (Inhalte), MIT (Code)

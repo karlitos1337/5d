@@ -1,3 +1,4 @@
+import pytest
 import os
 import sys
 from unittest.mock import MagicMock
@@ -54,5 +55,8 @@ def test_autopoietic_simulation_metrics():
 
 def test_syntax():
     """Simple syntax check for the file."""
+    with open('pages/9_🧪_Autopoietic_Class.py', 'r') as f:
+        compile(f.read(), 'pages/9_🧪_Autopoietic_Class.py', 'exec')
+    with open("pages/9_🧪_Autopoietic_Class.py", "r") as f:
     with open("pages/9_🧪_Autopoietic_Class.py") as f:
         compile(f.read(), "pages/9_🧪_Autopoietic_Class.py", "exec")

@@ -1,8 +1,8 @@
 # 5D: Zwanglose Potenzialentwicklung
 **Ein wissenschaftlich fundiertes System zur Transformation von Bildung, Arbeit und Gesellschaft**
 
-ðŸŒ **Repository:** [github.com/karlitos1337/5d](https://github.com/karlitos1337/5d)  
-ðŸ“Š **Status:** ðŸš€ Live & Growing | Phase 1: Foundation  
+ðŸŒ **Repository:** [github.com/karlitos1337/5d](https://github.com/karlitos1337/5d)
+ðŸ“Š **Status:** ðŸš€ Live & Growing | Phase 1: Foundation
 âš–ï¸ **Lizenz:** CC-BY-SA 4.0 (Open Source, Non-Profit frei nutzbar)
 
 ---
@@ -239,9 +239,9 @@ Die optimale Bahn folgt dem Weg **minimaler innerer StÃ¶rung**.
 
 **Creative Commons Attribution Share Alike 4.0 (CC-BY-SA)**
 
-âœ… Schulen dÃ¼rfen frei nutzen + remixen  
-âœ… MÃ¼ssen Quelle nennen  
-âœ… Abwandlungen mÃ¼ssen auch offen sein  
+âœ… Schulen dÃ¼rfen frei nutzen + remixen
+âœ… MÃ¼ssen Quelle nennen
+âœ… Abwandlungen mÃ¼ssen auch offen sein
 âœ… Kommerziell nutzbar mit Anerkennung
 
 ---

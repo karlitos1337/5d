@@ -22,22 +22,38 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
+                # Security: chunked read with size limit to prevent DoS
+                MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10MB
+                CHUNK_SIZE = 8192
+
                 with urllib.request.urlopen(url, timeout=15) as resp:
-                    data = resp.read()
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
-                    self.send_header("Content-Length", str(len(data)))
-                    # CORS
                     self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
-                    self.wfile.write(data)
+
+                    total_read = 0
+                    while True:
+                        chunk = resp.read(CHUNK_SIZE)
+                        if not chunk:
+                            break
+                        total_read += len(chunk)
+                        if total_read > MAX_RESPONSE_SIZE:
+                            # Log internally, don't leak to client
+                            print(f"Error: Response exceeded {MAX_RESPONSE_SIZE} bytes for {key}")
+                            return
+                        self.wfile.write(chunk)
+
             except Exception as e:
-                msg = f"Fetch error: {e}".encode()
+                # Security: Log error internally, return generic message to user
+                # print(f"Fetch error for {key}: {e}")  # Internal logging
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
-                self.wfile.write(msg)
+                self.wfile.write(b"Upstream fetch error")
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
