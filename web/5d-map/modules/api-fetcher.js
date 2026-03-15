@@ -55,6 +55,7 @@ export async function fetchWithCache(key, fetcher) {
 export async function fetchAllData() {
   const result = {};
 
+  // WGI‑Proxies Helper
   // WGI‑Proxies (World Bank Governance Indicators) Fetcher Helper
   const wgiFetch = async (code) => {
     const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&per_page=20000`;
@@ -72,6 +73,90 @@ export async function fetchAllData() {
     for (const [k, v] of Object.entries(latest)) map[k] = v.value;
     return map;
   };
+
+  // Start all fetches in parallel
+  // ⚡ Bolt Optimization: Parallelize all independent fetches
+  const [
+    schools,
+    countries,
+    validation,
+    baseline,
+    depressionMap,
+    depressionSeries,
+    dropoutMap,
+    dropoutSeries,
+    wgi_rl_raw,
+    wgi_va_raw,
+    wgi_ge_raw,
+    worldGeoJSON
+  ] = await Promise.all([
+    // Schools (statisch, lokal)
+    fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
+    // Länder-Zentroiddaten (lokal)
+    fetchWithCache('countries', () => fetchJSON('./data/countries.json')).catch(() => []),
+    // Validierungsdaten (lokal)
+    fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
+    // Baseline Snapshot (feste Ausgangswerte)
+    fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null),
+
+    // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
+    fetchWithCache('owid_depression', async () => {
+      const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
+      const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+      try {
+        // Erst lokaler Proxy (CORS-frei), dann Remote
+        let res = await fetch(proxyUrl, { cache: 'no-store' });
+        if (!res.ok) {
+          res = await fetch(remoteUrl, { cache: 'no-store' });
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+        const text = await res.text();
+        const rows = parseCSV(text);
+        return reduceLatestByCode(rows, 'Code');
+      } catch (e) {
+        console.warn('Depression remote fetch fehlgeschlagen, nutze lokalen Fallback:', e.message);
+        // Lokaler Fallback (Sample CSV im Repo)
+        const localRes = await fetch('./data/depression_sample.csv');
+        const localText = await localRes.text();
+        const localRows = parseCSV(localText);
+        return reduceLatestByCode(localRows, 'Code');
+      }
+    }).catch(() => ({})),
+
+    // Depression Jahres‑Serien (iso3 -> {year: value})
+    fetchWithCache('owid_depression_series', async () => {
+      const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
+      const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+      const buildSeries = (rows) => {
+        const series = {};
+        for (const r of rows) {
+          const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
+          const val = r[valueKey];
+          if (!code || !year || val == null || Number.isNaN(val)) continue;
+          if (!series[code]) series[code] = {};
+          series[code][year] = val;
+        }
+        return series;
+      };
+      try {
+        let res = await fetch(proxyUrl, { cache: 'no-store' });
+        if (!res.ok) {
+          res = await fetch(remoteUrl, { cache: 'no-store' });
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+        const text = await res.text();
+        const rows = parseCSV(text);
+        return buildSeries(rows);
+      } catch (e) {
+        console.warn('Depression series remote fetch fehlgeschlagen, Fallback lokal:', e.message);
+        const localRes = await fetch('./data/depression_sample.csv');
+        const localText = await localRes.text();
+        const localRows = parseCSV(localText);
+        return buildSeries(localRows);
+      }
+    }).catch(() => ({})),
+
+    // Dropout: World Bank JSON (alle Länder, neuerster Wert)
 
   // Start all independent fetches in parallel using Promise.all
   // This drastically reduces load time by overlapping network requests
@@ -153,6 +238,7 @@ export async function fetchAllData() {
     fetchWithCache('wb_dropout', async () => {
       const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
       const data = await fetchJSON(url);
+      // data = [meta, rows]
       const rows = Array.isArray(data) ? data[1] || [] : [];
       const latest = {};
       for (const r of rows) {
@@ -304,6 +390,16 @@ export async function fetchAllData() {
     fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({})),
     fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({})),
     fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({})),
+
+    // Welt-GeoJSON laden (für Choropleth); CORS-freundliche Quelle
+    fetchWithCache('world_geojson', async () => {
+      const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
+      return fetchJSON(url);
+    }).catch(() => null)
+  ]);
+
+  result.schools = schools;
+  result.worldGeoJSON = worldGeoJSON;
     // Welt-GeoJSON laden (für Choropleth); CORS-freundliche Quelle
     fetchWithCache('world_geojson', async () => {
       const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
@@ -324,7 +420,7 @@ export async function fetchAllData() {
 
   const wgi_rl = normalizeWGI(wgi_rl_raw); // R
   const wgi_va = normalizeWGI(wgi_va_raw); // SP
-  const wgi_ge = normalizeWGI(wgi_ge_raw); // Au
+  const wgi_ge = normalizeWGI(wgi_ge_raw);
 
   // Baseline-Merge: Fehlende Werte aus Baseline einpflegen (nur Latest-Level, nicht Serien)
   function mergeMissing(target, baseSection) {
@@ -364,6 +460,14 @@ export async function fetchAllData() {
     result.heatmapPoints.push([lat, lng, intensity]);
   }
 
+  // IMP-Berechnung (Proxy-basiert) pro ISO3, nutzt Depression & Dropout
+  // Dimensionen in [0,1]:
+  // A  = 1 - clamp(dropout/100)         (Zugang)
+  // IM = 1 - clamp(depression/100)      (Mental Health, invertiert)
+  // R  = WGI Rule of Law (RL.EST)       → (x+2.5)/5
+  // SP = WGI Voice & Accountability (VA.EST) → (x+2.5)/5
+  // Au = WGI Gov. Effectiveness (GE.EST)→ (x+2.5)/5
+  // IMP_raw = A * IM * R * SP * Au; clamp auf [0,1]
   // Welt-GeoJSON
   result.worldGeoJSON = worldGeoJSON;
 
