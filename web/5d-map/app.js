@@ -1,6 +1,7 @@
 import { fetchAllData, clearCache } from './modules/api-fetcher.js';
 import { initMap, addLayer, removeLayer } from './modules/map-renderer.js';
 import { createHeatmapLayer, createSchoolMarkers, createIMPLayer, createIMPLegendControl, createTimeHeatmapLayer, createValidationRingLayer, createSourcesLayer, createValidationLegendControl } from './modules/layers.js';
+import { debounce } from './modules/utils.js';
 
 let map;
 let activeLayer = null;
@@ -40,9 +41,17 @@ function activateLayer(layerName) {
     infoTextEl.textContent = txt;
     infoEl.style.display = 'block';
   }
-  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.classList.remove('btn--primary');
+    if (btn.id.startsWith('layer-')) {
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  });
   const btn = document.getElementById(`layer-${layerName}`);
-  if (btn) btn.classList.add('btn--primary');
+  if (btn) {
+    btn.classList.add('btn--primary');
+    btn.setAttribute('aria-pressed', 'true');
+  }
 
   switch (layerName) {
     case 'status-quo':
@@ -131,15 +140,19 @@ async function init() {
   document.getElementById('layer-time')?.addEventListener('click', () => activateLayer('time'));
 
   const yearSlider = document.getElementById('year-slider');
+  const updateTimeLayer = debounce((year) => {
+    if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
+      if (activeLayer) removeLayer(map, activeLayer);
+      activeLayer = createTimeHeatmapLayer(cachedData, year);
+      if (activeLayer) addLayer(map, activeLayer);
+    }
+  }, 50);
+
   yearSlider?.addEventListener('input', (e) => {
     selectedYear = Number(e.target.value);
     const label = document.getElementById('year-label');
     if (label) label.textContent = String(selectedYear);
-    if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
-      if (activeLayer) removeLayer(map, activeLayer);
-      activeLayer = createTimeHeatmapLayer(cachedData, selectedYear);
-      if (activeLayer) addLayer(map, activeLayer);
-    }
+    updateTimeLayer(selectedYear);
   });
 
   // Auto-Refresh jede Stunde

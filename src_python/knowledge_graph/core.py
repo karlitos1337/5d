@@ -1,3 +1,4 @@
+from typing import Any
 
 from typing import Any
 
@@ -29,6 +30,7 @@ class CognitiveGraph:
             return []
         return list(self.graph.neighbors(concept_id))[:limit]
 
+
 def main():
     print("Initializing 5D Cognitive Graph...")
     kg = CognitiveGraph()
@@ -37,6 +39,7 @@ def main():
     kg.link_concepts("Quantum", "Consciousness", weight=0.8)
     score = kg.calculate_serendipity_score(["Quantum", "Consciousness"])
     print(f"Serendipity Score: {score}")
+
 
 if __name__ == "__main__":
     main()
