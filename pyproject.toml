@@ -31,12 +31,29 @@ extend-exclude = '''
 '''
 line-length = 100
 target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | 99_unsortiert
+  | external
+  | private-gpt-main
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/"]
 exclude = ["private-gpt-main/"]
 exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "5d/", "node_modules/", "outputs/", "venv/", "docs/analysis/verify_app.py", "scripts/", "tools/add_frontmatter.py", "utils/", "src_python/knowledge_graph/", "tests/", "src/universal_system_genesis_5d/"]
 exclude = [
@@ -65,6 +82,10 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/"]
+
+[tool.pytest.ini_options]
+norecursedirs = ["99_unsortiert", "external", "private-gpt-main", "node_modules", ".git"]
 exclude = ["private-gpt-main/"]
 exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "5d/", "node_modules/", "outputs/", "venv/", "docs/analysis/verify_app.py", "scripts/", "tools/add_frontmatter.py", "utils/", "src_python/knowledge_graph/", "tests/", "src/universal_system_genesis_5d/"]
 

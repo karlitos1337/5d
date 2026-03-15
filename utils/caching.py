@@ -9,7 +9,6 @@ Provides:
 - Redis backend for persistent caching
 """
 
-import os
 import json
 import logging
 import os
@@ -21,7 +20,10 @@ import redis
 import streamlit as st
 import redis
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
+
+import redis
+import streamlit as st
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -30,6 +32,7 @@ logger = logging.getLogger(__name__)
 # ============================================================================
 # Cache TTL Configuration
 # ============================================================================
+
 
 class CacheTTL:
     """
@@ -41,18 +44,20 @@ class CacheTTL:
     - BASELINE: 3600s (1 hour) - World map baseline data (from 5d-map)
     - REALTIME: 300s (5 minutes) - Frequently updated (user inputs, live metrics)
     """
-    STATIC = 3600      # 1 hour - Static reference data
-    DYNAMIC = 1800     # 30 minutes - API data, scraped content
-    BASELINE = 3600    # 1 hour - Map baseline (rarely changes)
-    REALTIME = 300     # 5 minutes - Frequent updates
+
+    STATIC = 3600  # 1 hour - Static reference data
+    DYNAMIC = 1800  # 30 minutes - API data, scraped content
+    BASELINE = 3600  # 1 hour - Map baseline (rarely changes)
+    REALTIME = 300  # 5 minutes - Frequent updates
 
 
 # ============================================================================
 # Preload Critical Data
 # ============================================================================
 
+
 @st.cache_data(ttl=CacheTTL.STATIC)
-def preload_solutions_data() -> Dict[str, Any]:
+def preload_solutions_data() -> dict[str, Any]:
     """
     Preload 5d_solutions.json on app startup.
 
@@ -70,7 +75,7 @@ def preload_solutions_data() -> Dict[str, Any]:
 
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
-def preload_research_data() -> Dict[str, Any]:
+def preload_research_data() -> dict[str, Any]:
     """
     Preload 5d_research_data.json on app startup.
 
@@ -88,7 +93,7 @@ def preload_research_data() -> Dict[str, Any]:
 
 
 @st.cache_data(ttl=CacheTTL.DYNAMIC)
-def preload_github_data() -> Dict[str, Any]:
+def preload_github_data() -> dict[str, Any]:
     """
     Preload 5d_github_data.json on app startup.
 
@@ -106,7 +111,7 @@ def preload_github_data() -> Dict[str, Any]:
 
 
 @st.cache_data(ttl=CacheTTL.BASELINE)
-def preload_map_baseline() -> Dict[str, Any]:
+def preload_map_baseline() -> dict[str, Any]:
     """
     Preload web/5d-map/data/baseline.json for World Map.
 
@@ -147,6 +152,7 @@ def preload_all_critical_data():
 # Cache Invalidation
 # ============================================================================
 
+
 def invalidate_cache(cache_key: str = None):
     """
     Invalidate Streamlit cache.
@@ -164,16 +170,16 @@ def invalidate_cache(cache_key: str = None):
     if cache_key:
         # Streamlit doesn't support selective invalidation in @st.cache_data
         # Use st.cache_data.clear() for all or rely on TTL
-        st.warning(f"⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
+        st.warning("⚠️ Selective cache invalidation not supported. Use TTL or restart app.")
     else:
         st.cache_data.clear()
         st.success("✅ All caches cleared")
 
     # Also invalidate Redis cache if enabled
-    if 'redis_cache' in globals() and redis_cache._enabled:
+    if "redis_cache" in globals() and redis_cache._enabled:
         redis_cache.invalidate(cache_key)
         if not cache_key:
-             logger.info("Redis cache cleared")
+            logger.info("Redis cache cleared")
 
 
 def force_refresh_on_schema_update():
@@ -209,18 +215,21 @@ def force_refresh_on_schema_update():
 # Redis Integration
 # ============================================================================
 
+
 class RedisCache:
     """
     Redis backend for persistent caching across sessions.
     Handles connection pooling, serialization, and namespacing.
     """
 
-    def __init__(self,
-                 host: str = None,
-                 port: int = None,
-                 db: int = 0,
-                 password: str = None,
-                 socket_connect_timeout: int = 5):
+    def __init__(
+        self,
+        host: str = None,
+        port: int = None,
+        db: int = 0,
+        password: str = None,
+        socket_connect_timeout: int = 5,
+    ):
         """
         Initialize Redis connection with pooling.
 
@@ -241,7 +250,7 @@ class RedisCache:
             db=self.db,
             password=self.password,
             decode_responses=True,
-            socket_connect_timeout=socket_connect_timeout
+            socket_connect_timeout=socket_connect_timeout,
         )
         self.client = redis.Redis(connection_pool=self.pool)
         self.namespace = "5d"
@@ -296,11 +305,7 @@ class RedisCache:
 
         try:
             serialized = json.dumps(value)
-            return self.client.setex(
-                self._get_key(key),
-                ttl,
-                serialized
-            )
+            return self.client.setex(self._get_key(key), ttl, serialized)
         except (redis.RedisError, TypeError) as e:
             logger.error(f"Redis set error: {e}")
             return False
@@ -354,6 +359,7 @@ class RedisCache:
 
         logger.info("Redis cache warm-up complete.")
 
+
 # Global instance
 redis_cache = RedisCache()
 
@@ -361,6 +367,7 @@ redis_cache = RedisCache()
 # ============================================================================
 # Memory Monitoring
 # ============================================================================
+
 
 def get_cache_stats() -> Dict[str, Any]:
 
@@ -379,7 +386,7 @@ def get_cache_stats() -> dict[str, Any]:
             "dynamic": CacheTTL.DYNAMIC,
             "baseline": CacheTTL.BASELINE,
             "realtime": CacheTTL.REALTIME,
-        }
+        },
     }
 
     if redis_cache._enabled:
@@ -391,7 +398,7 @@ def get_cache_stats() -> dict[str, Any]:
                 "used_memory_human": info.get("used_memory_human"),
                 "total_connections_received": info.get("total_connections_received"),
                 "total_commands_processed": info.get("total_commands_processed"),
-                "keys": info.get("db0", {}).get("keys", 0) if "db0" in info else 0
+                "keys": info.get("db0", {}).get("keys", 0) if "db0" in info else 0,
             }
             stats["redis"] = redis_stats
             stats["cache_backend"] = "streamlit + redis"

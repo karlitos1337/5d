@@ -21,7 +21,7 @@ class TestMapDataStructures:
             "imp_proxy": 0.85,
             "year_founded": 1919,
             "students": 650,
-            "source": "Test Source"
+            "source": "Test Source",
         }
 
         # Validate structure
@@ -46,7 +46,7 @@ class TestMapDataStructures:
             "lon": -71.0942,
             "papers_count": 28,
             "domains": ["AI/ML", "Education Tech"],
-            "key_papers": ["Heckman (2006)"]
+            "key_papers": ["Heckman (2006)"],
         }
 
         # Validate structure
@@ -68,7 +68,7 @@ class TestMapDataStructures:
             "active_repos": 450,
             "active_developers": 3200,
             "key_projects": ["Khan Academy"],
-            "tech_stack": ["React", "Python"]
+            "tech_stack": ["React", "Python"],
         }
 
         # Validate structure
@@ -91,7 +91,7 @@ class TestMapDataStructures:
             "lon": 7.4474,
             "cooperation_score": 0.92,
             "key_features": ["Referendums", "Autonomy"],
-            "source": "Ostrom (2000)"
+            "source": "Ostrom (2000)",
         }
 
         # Validate structure
@@ -113,7 +113,7 @@ class TestMapDataStructures:
             "adoption_2030": 0.45,
             "readiness_score": 0.88,
             "scenario": "Optimistic",
-            "key_drivers": ["Folk High Schools legacy"]
+            "key_drivers": ["Folk High Schools legacy"],
         }
 
         # Validate structure
