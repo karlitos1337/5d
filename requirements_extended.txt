@@ -16,3 +16,7 @@ ruff
 black
 mypy
 pytest
+networkx
+httpx
+keyring
+discord.py
