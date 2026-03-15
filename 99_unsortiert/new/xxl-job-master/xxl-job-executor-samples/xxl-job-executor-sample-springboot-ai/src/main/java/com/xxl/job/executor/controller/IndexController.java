@@ -1,5 +1,9 @@
 package com.xxl.job.executor.controller;//package com.xxl.job.executor.mvc.controller;
 
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
+import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.imfangs.dify.client.DifyClientFactory;
@@ -104,8 +108,19 @@ public class IndexController {
 
     // --------------------------------- dify workflow ---------------------------------
 
-    // dify config sample
-    private final String apiKey = "app-46gHBiqUb5jqAHl9TDWwnRZ8";
+    // API key retrieved from Azure Key Vault for secure credential management
+    // Original hardcoded value (REDACTED): app-46gHBiqUb5jqAHl9TDWwnRZ8
+    private final String apiKey;
+    {
+        // Replace <your-key-vault-url> with your actual Azure Key Vault URI
+        SecretClient secretClient = new SecretClientBuilder()
+            .vaultUrl("<your-key-vault-url>")
+            .credential(new DefaultAzureCredentialBuilder().build())
+            .buildClient();
+        
+        KeyVaultSecret secret = secretClient.getSecret("dify-api-key");
+        this.apiKey = secret.getValue();
+    }
     private final String baseUrl = "http://localhost/v1";
 
     @GetMapping("/dify/simple")
