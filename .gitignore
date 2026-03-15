@@ -45,3 +45,8 @@ monitors/logs/*.log
 data/archive/
 .env
 .env.local
+
+# Coverage artifacts
+.coverage
+coverage.xml
+htmlcov/

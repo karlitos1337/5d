@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useState, useEffect, useRef } from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -26,10 +24,8 @@ const App = () => {
     restDelta: 0.001
   });
 
-  const ticking = useRef(false);
+  const tickingRef = useRef(false);
 
-  // Move sections outside component to avoid missing dependency warnings
-  // or recreate memory reference issues if added to dependency array
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
@@ -43,10 +39,6 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      const isImage = el.tagName.toLowerCase() === 'img';
-      if (!isImage && !el.textContent?.trim()) return;
-      if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
-      // For non-image elements, check textContent. For images, we just need the data-ref.
       if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
@@ -65,24 +57,14 @@ const App = () => {
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
-      if (isImage) {
-        el.parentNode.insertBefore(btn, el.nextSibling);
       if (el.tagName === 'IMG') {
-        el.parentNode.insertBefore(btn, el.nextSibling);
-        // Create a wrapper for image citations or insert after
         const wrapper = document.createElement('div');
         wrapper.style.position = 'relative';
         wrapper.style.display = 'inline-block';
         wrapper.style.width = '100%';
         el.parentNode.insertBefore(wrapper, el);
         wrapper.appendChild(el);
-
-        // Adjust btn style for image overlay
-        Object.assign(btn.style, {
-          position: 'absolute',
-          top: '10px',
-          right: '10px'
-        });
+        Object.assign(btn.style, { position: 'absolute', top: '10px', right: '10px' });
         wrapper.appendChild(btn);
       } else {
         el.appendChild(btn);
@@ -96,82 +78,41 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  const sections = React.useMemo(() => [
-    { id: 'einleitung', label: 'Einleitung' },
-    { id: 'framework', label: '5D-Intelligence Framework' },
-    { id: 'methodologie', label: 'Methodik' },
-    { id: 'ergebnisse', label: 'Ergebnisse' },
-    { id: 'validierung', label: 'Validierung' },
-    { id: 'implikationen', label: 'Implikationen' },
-    { id: 'zukunft', label: 'Zukunftsperspektiven' },
-    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-  ], []);
-
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
   };
 
   useEffect(() => {
-    let ticking = false;
-
     const updateSection = () => {
       const scrollPosition = window.scrollY + 200;
-
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
         if (section && scrollPosition >= section.offsetTop) {
           setActiveSection(sections[i].id);
           break;
         }
-    const handleScroll = () => {
-    const handleScroll = () => {
-    const handleScroll = () => {
-      if (!ticking.current) {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY + 200;
-
-          for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i].id);
-            if (section && scrollPosition >= section.offsetTop) {
-              setActiveSection(sections[i].id);
-              break;
-            }
-          }
-          ticking.current = false;
-        });
-        ticking.current = true;
-          ticking = false;
-        });
-        ticking = true;
       }
-      ticking = false;
+      tickingRef.current = false;
     };
 
     const handleScroll = () => {
-      if (!ticking) {
+      if (!tickingRef.current) {
         window.requestAnimationFrame(updateSection);
-        ticking = true;
+        tickingRef.current = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, []);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white z-50">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus-visible:ring-2 focus-visible:outline-none absolute top-0 left-0 z-50 p-4 bg-white text-black font-bold">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold"
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-blue-600 text-white px-4 py-2 rounded focus-visible:ring-2 focus-visible:outline-none">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         Zum Hauptinhalt springen
       </a>
@@ -198,9 +139,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 rounded-sm ${
-                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded-sm px-2 py-1 ${
-                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded px-2 py-1 ${
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 rounded px-2 py-1 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -215,10 +154,6 @@ const App = () => {
               <button
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
-                aria-label={darkMode ? "Zum hellen Modus wechseln" : "Zum dunklen Modus wechseln"}
-                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
-                aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
-                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -228,12 +163,8 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Menü"
-                aria-expanded={mobileMenuOpen}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -257,7 +188,6 @@ const App = () => {
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
@@ -273,9 +203,6 @@ const App = () => {
 
       {/* Main Content */}
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
-      <main id="main-content" className="pt-16 focus-visible:ring-2 focus-visible:outline-none" tabIndex="-1">
-      <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
-      <main id="main-content" className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -342,7 +269,7 @@ const App = () => {
               <div>
                 <img
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
-                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
+                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
                     className="w-full rounded-xl shadow-lg inline-block"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
@@ -352,10 +279,10 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
               <h3 className="text-xl font-semibold mb-4">Theoretische Grundlagen</h3>
               <p className="mb-4" data-ref="https://selfdeterminationtheory.org/theory/|6">
-                Das Framework basiert auf der Selbstbestimmungstheorie (Self-Determination Theory) von Richard Ryan und Edward Deci, die drei grundlegende psychologische Bedürfnisse identifiziert: Autonomie, Kompetenz und Beziehung. Diese Theorie wurde in den 1970er- und 1980er-Jahren an der University of Rochester als humanistische Alternative zu behavioristischen Motivationstheorien entwickelt und betont angeborene menschliche Neigungen zum Lernen, zur Neugier und zur Autonomie.
+                Das Framework basiert auf der Selbstbestimmungstheorie (Self-Determination Theory) von Richard Ryan und Edward Deci, die drei grundlegende psychologische Bedürfnisse identifiziert: Autonomie, Kompetenz und Beziehung.
               </p>
               <p data-ref="https://www.apa.org/research-practice/conduct-research/self-determination-theory|7">
-                SDT umfasst sechs empirisch fundierte Mini-Theorien: Kognitive Evaluationstheorie, Organismische Integrationstheorie, Kausalitätsorientierungstheorie, Theorie der grundlegenden psychologischen Bedürfnisse, Zielinhalts-Theorie und Beziehungsmotivationstheorie. Diese Theorien haben praktische Effektivität in Bildung, Elternschaft, Arbeitsplätzen, Gesundheit und Medizin nachgewiesen.
+                SDT umfasst sechs empirisch fundierte Mini-Theorien: Kognitive Evaluationstheorie, Organismische Integrationstheorie, Kausalitätsorientierungstheorie, Theorie der grundlegenden psychologischen Bedürfnisse, Zielinhalts-Theorie und Beziehungsmotivationstheorie.
               </p>
             </div>
           </div>
@@ -373,13 +300,13 @@ const App = () => {
                   <div>
                     <h4 className="font-medium mb-2">Worldwide Governance Indicators (WGI)</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC10700357/|2">
-                      Enthält sechs Governance-Dimensionen: Stimme und Rechenschaftspflicht, politische Stabilität, Regierungseffektivität, Regulierungsqualität, Rechtsstaatlichkeit und Korruptionskontrolle. Basiert auf über 30 individuellen Datenquellen und umfasst 1996–Gegenwart für bis zu 215 Volkswirtschaften.
+                      Enthält sechs Governance-Dimensionen: Stimme und Rechenschaftspflicht, politische Stabilität, Regierungseffektivität, Regulierungsqualität, Rechtsstaatlichkeit und Korruptionskontrolle.
                     </p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2">Human Development Index (HDI)</h4>
                     <p className="text-sm" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                      Hochoptionale HDI-Schätzungen für zweitebene administrative Einheiten (z.B. Gemeinden/Kreise, N = 61.591) und ein 0,1 × 0,1 Grad Raster (N = 806.361), entwickelt unter Verwendung von Satellitenbildern und maschinellem Lernen.
+                      Hochauflösende HDI-Schätzungen für zweitebene administrative Einheiten, entwickelt unter Verwendung von Satellitenbildern und maschinellem Lernen.
                     </p>
                   </div>
                 </div>
@@ -391,7 +318,7 @@ const App = () => {
                   <div>
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                      Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit.
                     </p>
                   </div>
                   <div>
@@ -433,7 +360,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Korrelationsanalysen</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu &amp; Robinson (2012).
+                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -446,7 +373,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Validitätsprüfungen</h3>
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
+                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -464,7 +391,7 @@ const App = () => {
             <div className="mb-8">
               <img
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
-                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
+                  alt="Ein wissenschaftliches Diagramm, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
                   className="w-full rounded-xl shadow-lg inline-block"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
@@ -496,16 +423,16 @@ const App = () => {
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Unreliability (α)</span>
-                    <span className="font-semibold">.80</span>
+                    <span>Autonomie (α)</span>
+                    <span className="font-semibold">.82</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Gullibility (α)</span>
+                    <span>Motivation (α)</span>
                     <span className="font-semibold">.79</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Irrationality (α)</span>
-                    <span className="font-semibold">.78</span>
+                    <span>Resilienz (α)</span>
+                    <span className="font-semibold">.81</span>
                   </div>
                 </div>
               </div>
@@ -513,7 +440,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Konstruktvalidität</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/46526334_What_Do_the_Worldwide_Governance_Indicators_Measure|4">
-                  Prüfung der Frage, ob die Indikatoren tatsächlich das messen, was sie vorgeben zu messen. Kritische Betrachtung der Konstruktdefinition und Messung.
+                  Prüfung der Frage, ob die Indikatoren tatsächlich das messen, was sie vorgeben zu messen.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -534,7 +461,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Diskriminantvalidität</h3>
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                  Bestätigung, dass die verschiedenen Dimensionen tatsächlich unterschiedliche Konstrukte messen und nicht hoch miteinander korrelieren.
+                  Bestätigung, dass die verschiedenen Dimensionen tatsächlich unterschiedliche Konstrukte messen.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -555,7 +482,7 @@ const App = () => {
                 Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci &amp; Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
               </p>
               <p data-ref="https://doi.org/10.3390/challe13020058|13">
-                Die sieben Kernelemente des Flourish-Modells - Sicherheit, Beziehung, Unabhängigkeit, Engagement, Erfüllung, Beitrag und Wachstum - werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
+                Die sieben Kernelemente des Flourish-Modells werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
               </p>
             </div>
           </div>
@@ -569,10 +496,10 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg mb-8`}>
               <h3 className="text-xl font-semibold mb-4">Praktische Anwendbarkeit</h3>
               <p className="mb-4" data-ref="https://positivepsychology.com/self-determination-theory/|8">
-                Das Framework soll letztlich automatisierte, motivationsorientierte Reviews für persönliche Softwareprojekte ermöglichen, wobei Visualisierungen mit minimalem Benutzungsaufwand generiert werden sollen.
+                Das Framework soll letztlich automatisierte, motivationsorientierte Reviews für persönliche Softwareprojekte ermöglichen.
               </p>
               <p data-ref="https://www.apa.org/research-practice/conduct-research/self-determination-theory|7">
-                Die praktische Effektivität der Selbstbestimmungstheorie wurde bereits in verschiedenen Bereichen wie Bildung, Elternschaft, Arbeitsplätze, Gesundheit und Medizin nachgewiesen, was die Anwendbarkeit des Autonomiedimension im 5D-Intelligence Framework unterstützt.
+                Die praktische Effektivität der Selbstbestimmungstheorie wurde bereits in verschiedenen Bereichen wie Bildung, Elternschaft, Arbeitsplätze, Gesundheit und Medizin nachgewiesen.
               </p>
             </div>
 
@@ -580,14 +507,14 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Persönliche Entwicklung</h3>
                 <p data-ref="https://www.tandfonline.com/doi/abs/10.1080/00185868.2024.2427641|10">
-                  Insbesondere im Kontext persönlicher Entwicklungsprojekte wie privater Git-Repositories soll das Framework Anwendung finden. Ähnliche Frameworks wie das AIR-5D für KI-Bereitschaft wurden erfolgreich mit AHP-Gewichten und Expertenvalidierung entwickelt.
+                  Insbesondere im Kontext persönlicher Entwicklungsprojekte wie privater Git-Repositories soll das Framework Anwendung finden.
                 </p>
               </div>
 
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Organisationale Anwendung</h3>
                 <p data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                  Die Dimensionen des Frameworks können zur Bewertung von Arbeitsplatzmotivation und Mitarbeiterzufriedenheit eingesetzt werden, insbesondere in Bezug auf die drei grundlegenden psychologischen Bedürfnisse: Autonomie, Kompetenz und Beziehung.
+                  Die Dimensionen des Frameworks können zur Bewertung von Arbeitsplatzmotivation und Mitarbeiterzufriedenheit eingesetzt werden.
                 </p>
               </div>
             </div>
@@ -602,7 +529,7 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg mb-8`}>
               <h3 className="text-xl font-semibold mb-4">Geplante Erweiterungen</h3>
               <p className="mb-4">
-                Zukünftige Schritte umfassen die Ausweitung auf über 150 Länder unter Einbeziehung von WGI- und HDI-Daten (1996–2023), Kontrollvariablen und Instrumentalvariablen zur Kausalitätsanalyse.
+                Zukünftige Schritte umfassen die Ausweitung auf über 150 Länder unter Einbeziehung von WGI- und HDI-Daten (1996–2023).
               </p>
               <ul className="list-disc list-inside space-y-2">
                 <li>Ausweitung auf über 150 Länder</li>
@@ -617,14 +544,14 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Technische Weiterentwicklung</h3>
                 <p data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Entwicklung von automatisierten Bewertungsalgorithmen, die auf den fünf Dimensionen basieren und in bestehende Entwicklungsworkflows integriert werden können. Dies könnte Ähnlichkeiten mit bestehenden Skalen wie der Cognitive Outsourcing Behavior Toward Artificial Intelligence Scale aufweisen.
+                  Entwicklung von automatisierten Bewertungsalgorithmen, die auf den fünf Dimensionen basieren und in bestehende Entwicklungsworkflows integriert werden können.
                 </p>
               </div>
 
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Forschungsfortschritt</h3>
                 <p data-ref="https://www.worldbank.org/en/publication/worldwide-governance-indicators/documentation|3">
-                  Verbesserung der Datengrundlage durch Nutzung hochauflösender HDI-Daten und Korrektur von Aggregationseffekten, die bei niedriger Auflösung (Länderebene, N = 191) auftreten können.
+                  Verbesserung der Datengrundlage durch Nutzung hochauflösender HDI-Daten und Korrektur von Aggregationseffekten.
                 </p>
               </div>
             </div>
