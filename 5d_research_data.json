@@ -66,9 +66,8 @@
         ],
         "published": "2026 Jan 28",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41593576/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:50:51.931136"
+      },
+      {
         "title": "Panoramic Landmarks: Comparing LLM-Assisted, Manual Tracing, and Self-Directed Learning in Dental Education.",
         "authors": [
           "Goldman SA",
@@ -98,9 +97,6 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41610841/"
       }
     ],
-    "timestamp": "2026-01-31T11:40:15.289996"
-    "timestamp": "2025-12-21T11:33:05.150148"
-    "timestamp": "2026-03-11T11:53:30.674115"
     "timestamp": "2026-03-12T11:58:03.896588"
   },
   "intrinsic motivation education": {
@@ -170,9 +166,8 @@
         ],
         "published": "2025 Dec 29",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41590944/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:50:54.889796"
+      },
+      {
         "title": "From external rewards to intrinsic drive: A self-determination theory analysis of paramedic motivations for postgraduate education.",
         "authors": [
           "Abdullah N",
@@ -201,9 +196,8 @@
         ],
         "published": "2026 Jan-Dec",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41804334/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:33.788717"
+      },
+      {
         "title": "The double-edged sword of laissez-faire leadership: How gender and trust shape faculty motivation.",
         "authors": [
           "Elhassan YH",
@@ -234,7 +228,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41610829/"
       }
     ],
-    "timestamp": "2026-01-31T11:40:18.279094"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -299,9 +293,8 @@
         ],
         "published": "2026 Jan 19",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41595918/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:50:56.887710"
+      },
+      {
         "title": "Understanding how emotional intelligence shapes teachers' reflective and creative teaching: the moderating role of teacher autonomy.",
         "authors": [
           "Orakci Ş",
@@ -330,10 +323,7 @@
         ],
         "published": "2026 Mar",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41808281/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:35.660559"
-        "title": "Organisational variation in Recovery College implementation: 31-college qualitative study.",
+      }, { "title": "Organisational variation in Recovery College implementation: 31-college qualitative study.",
         "authors": [
           "Takhi SK",
           "Jebara T",
@@ -359,10 +349,7 @@
         ],
         "published": "2026 Jan 24",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41580667/"
-      }
-    ],
-    "timestamp": "2026-01-28T11:55:14.273452"
-        "title": "Narrative review of the ethics of artificial intelligence: are we ready for artificial intelligence in surgery?",
+      }, { "title": "Narrative review of the ethics of artificial intelligence: are we ready for artificial intelligence in surgery?",
         "authors": [
           "Mohammad Hussin N",
           "Nik Jaafar NR",
@@ -392,7 +379,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41613074/"
       }
     ],
-    "timestamp": "2026-01-31T11:40:20.377768"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -458,12 +445,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-01-31T11:40:22.296328"
-    "timestamp": "2025-12-21T11:33:14.101425"
-    "timestamp": "2026-01-29T11:50:59.891846"
-    "timestamp": "2026-03-11T11:53:38.698374"
-    "timestamp": "2026-01-28T11:55:17.275575"
-    "timestamp": "2026-03-12T11:58:11.957291"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "democratic schools": {
     "arxiv": [
@@ -540,10 +522,7 @@
         ],
         "published": "2025",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41601496/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:51:00.898412"
-        "title": "Multicentre field evaluation of Xpert MTB/XDR in sub-Saharan Africa.",
+      }, { "title": "Multicentre field evaluation of Xpert MTB/XDR in sub-Saharan Africa.",
         "authors": [
           "Massou F",
           "Diarra B",
@@ -571,10 +550,7 @@
         ],
         "published": "2026",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41808905/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:39.659271"
-        "title": "The hidden crisis: a multinational analysis of neurosurgical residency training in Latin America.",
+      }, { "title": "The hidden crisis: a multinational analysis of neurosurgical residency training in Latin America.",
         "authors": [
           "Qian PF",
           "Shi BF"
@@ -603,7 +579,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41612465/"
       }
     ],
-    "timestamp": "2026-01-31T11:40:24.297038"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "student agency": {
     "arxiv": [
@@ -675,11 +651,15 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41603042/"
       }
     ],
-    "timestamp": "2026-01-29T11:51:01.891765"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2026-01-29T11:51:01.893338",
+    "timestamp": "2026-01-29T11:51:01.893338"
+  },
+  "who_mental_health_arxiv": {
+    "arxiv": [
+      {
         "title": "Making sense together: participatory sensemaking, learning cycles, and group roles.",
         "authors": [
           "Kronsted C",
@@ -710,11 +690,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41802380/"
       }
     ],
-    "timestamp": "2026-03-11T11:53:40.651711"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-03-11T11:53:40.653658",
+  "who_mental_health_2": {
+    "arxiv": [
+      {
         "title": "Medication adherence tools and measures in chronic kidney disease: a systematic review.",
         "authors": [
           "Roohi E",
@@ -745,11 +725,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41575624/"
       }
     ],
-    "timestamp": "2026-01-28T11:55:19.293825"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-01-28T11:55:19.296058",
+  "who_mental_health_3": {
+    "arxiv": [
+      {
         "title": "Mapping differentiated cognitive landscapes of university students in China via fuzzy comprehensive evaluation.",
         "authors": [
           "Welsh AM",
@@ -779,7 +759,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41614429/"
       }
     ],
-    "timestamp": "2026-01-31T11:40:25.283040"
+    "timestamp": "2026-03-12T11:58:03.896588"
   },
   "who_mental_health": {
     "data": {},
