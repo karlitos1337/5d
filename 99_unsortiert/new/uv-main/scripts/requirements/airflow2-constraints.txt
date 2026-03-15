@@ -10,14 +10,14 @@ apache-airflow-providers-common-sql==1.24.1
 apache-airflow-providers-docker==3.1.0
 apache-airflow-providers-elasticsearch==4.2.0
 apache-airflow-providers-ftp==3.7.0
-apache-airflow-providers-google==8.3.0
+apache-airflow-providers-google==20.0.0
 apache-airflow-providers-grpc==3.0.0
 apache-airflow-providers-hashicorp==3.1.0
 apache-airflow-providers-http==6.0.0
 apache-airflow-providers-imap==3.3.0
 apache-airflow-providers-microsoft-azure==4.2.0
 apache-airflow-providers-mysql==6.2.0
-apache-airflow-providers-odbc==3.1.1
+apache-airflow-providers-odbc==4.0.0
 apache-airflow-providers-postgres==5.2.0
 apache-airflow-providers-redis==3.0.0
 apache-airflow-providers-sendgrid==3.0.0
@@ -187,7 +187,7 @@ looker-sdk==22.10.0
 lxml==4.9.1
 Mako==1.2.1
 Markdown==3.4.1
-markdown-it-py==2.1.0
+markdown-it-py==4.0.0
 MarkupSafe==2.1.1
 marshmallow==3.26.2
 marshmallow-enum==1.5.1
