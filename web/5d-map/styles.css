@@ -18,6 +18,11 @@ body {
   background: var(--color-bg);
 }
 
+:focus-visible {
+  outline: 3px solid var(--color-warning);
+  outline-offset: 2px;
+}
+
 /* Skip Link für Barrierefreiheit */
 .skip-link {
   position: absolute;
