@@ -1,3 +1,22 @@
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+norecursedirs = [
+    "99_unsortiert",
+    ".git",
+    "__pycache__",
+    "node_modules",
+    "external",
+]
+
+[tool.ruff]
+extend-exclude = [
+    "99_unsortiert",
+    "external",
+]
 [tool.black]
 extend-exclude = '''
 /(
