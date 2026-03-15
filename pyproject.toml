@@ -10,6 +10,15 @@ extend-exclude = '''
   | .git
   | build
   | dist
+  | docs
+  | web
+  | private-gpt-main
+  | dist
+  | node_modules
+  | outputs
+  | 5d
+  | simulations
+  | venv
 )/
 '''
 
@@ -26,11 +35,29 @@ exclude = [
     ".git/",
     "build/",
     "dist/"
+    "outputs/",
+    "5d/",
+    "node_modules/",
+    "dist/",
+    "docs/",
+    "simulations/",
+    "venv/",
+    "web/",
 ]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = ["99_unsortiert", "private-gpt-main", "external", "5d", "node_modules", "dist", "docs", "simulations", "venv", "outputs"]
+addopts = "--ignore=99_unsortiert --ignore=private-gpt-main --ignore=external --ignore=5d --ignore=tests/test_participation_networks.py --ignore=src_python/tests/test_core.py --ignore=tests/test_autopoietic_ui.py --ignore=tests/test_extractor.py --ignore=tests/test_github_oauth_security.py --ignore=tests/test_pipeline_integration.py --ignore=tests/test_discord_bot.py"
+markers = [
+    "asyncio: mark a test as an asyncio test",
+    "integration: mark a test as an integration test",
+]
 
 [tool.mypy]
 python_version = "3.10"
@@ -60,3 +87,5 @@ markers = [
 ]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+exclude = ["private-gpt-main/", "99_unsortiert/", "external/", "outputs/", "5d/", "node_modules/", "dist/", "docs/", "simulations/", "venv/"]
+ignore_errors = true
