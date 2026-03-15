@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -28,8 +26,6 @@ const App = () => {
 
   const ticking = useRef(false);
 
-  // Move sections outside component to avoid missing dependency warnings
-  // or recreate memory reference issues if added to dependency array
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
@@ -45,9 +41,6 @@ const App = () => {
 
       const isImage = el.tagName.toLowerCase() === 'img';
       if (!isImage && !el.textContent?.trim()) return;
-      if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
-      // For non-image elements, check textContent. For images, we just need the data-ref.
-      if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -63,21 +56,25 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      btn.onclick = e => {
+        e.stopPropagation();
+        e.preventDefault();
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+        if (newWindow) {
+          newWindow.opener = null;
+        }
+      };
 
       if (isImage) {
-        el.parentNode.insertBefore(btn, el.nextSibling);
-      if (el.tagName === 'IMG') {
-        el.parentNode.insertBefore(btn, el.nextSibling);
-        // Create a wrapper for image citations or insert after
         const wrapper = document.createElement('div');
         wrapper.style.position = 'relative';
         wrapper.style.display = 'inline-block';
         wrapper.style.width = '100%';
-        el.parentNode.insertBefore(wrapper, el);
+        if (el.parentNode) {
+            el.parentNode.insertBefore(wrapper, el);
+        }
         wrapper.appendChild(el);
 
-        // Adjust btn style for image overlay
         Object.assign(btn.style, {
           position: 'absolute',
           top: '10px',
@@ -96,39 +93,14 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  const sections = React.useMemo(() => [
-    { id: 'einleitung', label: 'Einleitung' },
-    { id: 'framework', label: '5D-Intelligence Framework' },
-    { id: 'methodologie', label: 'Methodik' },
-    { id: 'ergebnisse', label: 'Ergebnisse' },
-    { id: 'validierung', label: 'Validierung' },
-    { id: 'implikationen', label: 'Implikationen' },
-    { id: 'zukunft', label: 'Zukunftsperspektiven' },
-    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-  ], []);
-
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
   };
 
   useEffect(() => {
-    let ticking = false;
-
-    const updateSection = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
-    const handleScroll = () => {
-    const handleScroll = () => {
     const handleScroll = () => {
       if (!ticking.current) {
-      if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
@@ -142,37 +114,16 @@ const App = () => {
           ticking.current = false;
         });
         ticking.current = true;
-          ticking = false;
-        });
-        ticking = true;
-      }
-      ticking = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateSection);
-        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, []);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white z-50">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus-visible:ring-2 focus-visible:outline-none absolute top-0 left-0 z-50 p-4 bg-white text-black font-bold">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold"
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-blue-600 text-white px-4 py-2 rounded focus-visible:ring-2 focus-visible:outline-none">
-      {/* Skip to main content link for accessibility */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Zum Hauptinhalt springen
       </a>
 
@@ -198,9 +149,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 rounded-sm ${
-                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded-sm px-2 py-1 ${
-                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none rounded px-2 py-1 ${
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 rounded px-2 py-1 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -215,10 +164,6 @@ const App = () => {
               <button
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
-                aria-label={darkMode ? "Zum hellen Modus wechseln" : "Zum dunklen Modus wechseln"}
-                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
-                aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
-                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -228,12 +173,8 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Menü"
-                aria-expanded={mobileMenuOpen}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -257,7 +198,6 @@ const App = () => {
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
@@ -273,9 +213,6 @@ const App = () => {
 
       {/* Main Content */}
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
-      <main id="main-content" className="pt-16 focus-visible:ring-2 focus-visible:outline-none" tabIndex="-1">
-      <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
-      <main id="main-content" className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
