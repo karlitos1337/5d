@@ -1,13 +1,14 @@
 # 5D: Zwanglose Potenzialentwicklung
+
 **Ein wissenschaftlich fundiertes System zur Transformation von Bildung, Arbeit und Gesellschaft**
 
-ðŸŒ **Repository:** [github.com/karlitos1337/5d](https://github.com/karlitos1337/5d)  
-ðŸ“Š **Status:** ðŸš€ Live & Growing | Phase 1: Foundation  
-âš–ï¸ **Lizenz:** CC-BY-SA 4.0 (Open Source, Non-Profit frei nutzbar)
+🌐 **Repository:** [github.com/karlitos1337/5d](https://github.com/karlitos1337/5d)  
+📊 **Status:** 🚀 Live & Growing | Phase 1: Foundation  
+⚖️ **Lizenz:** CC-BY-SA 4.0 (Open Source, Non-Profit frei nutzbar)
 
 ---
 
-## ðŸŽ¯ WHAT IS 5D?
+## 🎯 WHAT IS 5D?
 
 **5D** ist ein System, das zeigt: **Wenn du die 5 Kernprinzipien implementierst, entwickelt sich menschliches Potenzial von selbst.**
 
@@ -19,194 +20,204 @@ Nicht durch Druck. Nicht durch Kontrolle. **Durch intelligente Systemgestaltung.
 |---|---------|--------------|--------|
 | **1** | **Minimales negatives Feld** | Weniger Angst = Gehirn aus 1D-Modus | Kann denken statt reagieren |
 | **2** | **Autonomie** | Freie Wahl = Dopamin + Motivation | Intrinsische Antriebskraft |
-| **3** | **Fehler als Signal** | Nicht Schuld, sondern Information | Adaptive Intelligenz wÃ¤chst |
-| **4** | **AuthentizitÃ¤t** | Kongruenz Innen â†” AuÃŸen | 3D-Systemintelligenz mÃ¶glich |
+| **3** | **Fehler als Signal** | Nicht Schuld, sondern Information | Adaptive Intelligenz wächst |
+| **4** | **Authentizität** | Kongruenz Innen ↔ Außen | 3D-Systemintelligenz möglich |
 | **5** | **Partizipation** | Mitgestaltung = 4D aktiviert | Netzwerk-Intelligenz entsteht |
 
 ---
 
-## ðŸ“Š EVIDENCE: ES FUNKTIONIERT
+## 📊 EVIDENCE: ES FUNKTIONIERT
 
 ### Schulen, die das schon machen:
+
 - **Sudbury Schools:** 87-90% College-Ready, 82% hohe Zufriedenheit
 - **Montessori:** Weltweit erfolgreich, selbstbestimmtes Lernen
-- **Waldorf:** Rhythmen + AuthentizitÃ¤t respektieren
-- **Freinet:** KinderrÃ¤te, echte Partizipation
+- **Waldorf:** Rhythmen + Authentizität respektieren
+- **Freinet:** Kinderräte, echte Partizipation
 
 ### Gesellschaftliche Erfolgsbeispiele:
-- **Kooperativen:** 3 Millionen weltweit, 70 Jahre StabilitÃ¤t vs. GroÃŸbanken
+
+- **Kooperativen:** 3 Millionen weltweit, 70 Jahre Stabilität vs. Großbanken
 - **Citizens Assemblies:** Partizipatives Design funktioniert (OECD 2020)
 - **Permakultur:** Dezentralisierte Natur-Intelligenz
 
 ### Neurobiologische Evidenz:
-- **Porges (Polyvagal):** Sichere Verbindung aktiviert hÃ¶here Hirnfunktionen
+
+- **Porges (Polyvagal):** Sichere Verbindung aktiviert höhere Hirnfunktionen
 - **Friston (Predictive Processing):** Fehler sind Lernmechanismus, nicht Schuld
-- **van der Kolk:** Chronischer Stress = Regression zu 1D-Ãœberlebensmodus
-- **Deci & Ryan:** Autonomie = GrundbedÃ¼rfnis, nicht Luxus
+- **van der Kolk:** Chronischer Stress = Regression zu 1D-Überlebensmodus
+- **Deci & Ryan:** Autonomie = Grundbedürfnis, nicht Luxus
 
 ---
 
-## ðŸ—ï¸ REPOSITORY STRUKTUR
+## 🗂️ REPOSITORY STRUKTUR
 
 ```
 5d/
-â”‚
-â”œâ”€â”€ README.md                         â† Du bist hier
-â”œâ”€â”€ VISION.md                         â† Die 5 Prinzipien im Detail
-â”œâ”€â”€ CONTRIBUTING.md                   â† Wie man beitrÃ¤gt
-â”œâ”€â”€ LICENSE                           â† CC-BY-SA 4.0
-â”‚
-â”œâ”€â”€ docs/                             â† Wissenschaftliche Fundierung
-â”‚   â”œâ”€â”€ 01-the-five-principles.md
-â”‚   â”œâ”€â”€ 02-neurobiological-basis.md
-â”‚   â”œâ”€â”€ 03-lagrange-formalism.md
-â”‚   â”œâ”€â”€ 04-implementation-guide.md
-â”‚   â””â”€â”€ 05-case-studies.md
-â”‚
-â”œâ”€â”€ frameworks/                       â† Praktische Implementierung
-â”‚   â”œâ”€â”€ kindergarten/
-â”‚   â”‚   â”œâ”€â”€ curriculum.md
-â”‚   â”‚   â”œâ”€â”€ rituals.md
-â”‚   â”‚   â”œâ”€â”€ conflict-resolution.md
-â”‚   â”‚   â””â”€â”€ authenticity-spaces.md
-â”‚   â”‚
-â”‚   â”œâ”€â”€ elementary/
-â”‚   â”‚   â”œâ”€â”€ curriculum.md
-â”‚   â”‚   â”œâ”€â”€ autonomy-structures.md
-â”‚   â”‚   â”œâ”€â”€ error-culture.md
-â”‚   â”‚   â””â”€â”€ participation-council.md
-â”‚   â”‚
-â”‚   â””â”€â”€ secondary/
-â”‚       â”œâ”€â”€ curriculum.md
-â”‚       â”œâ”€â”€ specialization.md
-â”‚       â”œâ”€â”€ youth-governance.md
-â”‚       â””â”€â”€ 4d-network-design.md
-â”‚
-â”œâ”€â”€ tools/                            â† Code & Messung
-â”‚   â”œâ”€â”€ assessment-tool/
-â”‚   â”‚   â””â”€â”€ measure-5d.py
-â”‚   â”œâ”€â”€ curriculum-generator/
-â”‚   â”‚   â””â”€â”€ generate-lessons.py
-â”‚   â””â”€â”€ data-dashboard/
-â”‚       â””â”€â”€ index.html
-â”‚
-â”œâ”€â”€ case-studies/                     â† Echte Schulen & Systeme
-â”‚   â”œâ”€â”€ sudbury-school-analysis/
-â”‚   â”œâ”€â”€ montessori-integration/
-â”‚   â”œâ”€â”€ german-waldorf-case/
-â”‚   â””â”€â”€ costa-rica-experiment/
-â”‚
-â””â”€â”€ community/                        â† Schulen berichten
-    â”œâ”€â”€ examples-from-schools/
-    â”œâ”€â”€ teacher-testimonies/
-    â””â”€â”€ parent-perspectives/
+│
+├── README.md                         → Du bist hier
+├── VISION.md                         → Die 5 Prinzipien im Detail
+├── CONTRIBUTING.md                   → Wie man beiträgt
+├── LICENSE                           → CC-BY-SA 4.0
+│
+├── docs/                             → Wissenschaftliche Fundierung
+│   ├── 01-the-five-principles.md
+│   ├── 02-neurobiological-basis.md
+│   ├── 03-lagrange-formalism.md
+│   ├── 04-implementation-guide.md
+│   └── 05-case-studies.md
+│
+├── frameworks/                       → Praktische Implementierung
+│   ├── kindergarten/
+│   │   ├── curriculum.md
+│   │   ├── rituals.md
+│   │   ├── conflict-resolution.md
+│   │   └── authenticity-spaces.md
+│   │
+│   ├── elementary/
+│   │   ├── curriculum.md
+│   │   ├── autonomy-structures.md
+│   │   ├── error-culture.md
+│   │   └── participation-council.md
+│   │
+│   └── secondary/
+│       ├── curriculum.md
+│       ├── specialization.md
+│       ├── youth-governance.md
+│       └── 4d-network-design.md
+│
+├── tools/                            → Code & Messung
+│   ├── assessment-tool/
+│   │   └── measure-5d.py
+│   ├── curriculum-generator/
+│   │   └── generate-lessons.py
+│   └── data-dashboard/
+│       └── index.html
+│
+├── case-studies/                     → Echte Schulen & Systeme
+│   ├── sudbury-school-analysis/
+│   ├── montessori-integration/
+│   ├── german-waldorf-case/
+│   └── costa-rica-experiment/
+│
+└── community/                        → Schulen berichten
+    ├── examples-from-schools/
+    ├── teacher-testimonies/
+    └── parent-perspectives/
 ```
 
 ---
 
-## ðŸš€ QUICK START
+## 🚀 QUICK START
 
-### FÃ¼r Schulen (30 Minuten zum Start):
-1. Lies `VISION.md` (Ãœberblick)
-2. WÃ¤hle deine Altersgruppe: `frameworks/kindergarten`, `elementary`, oder `secondary`
+### Für Schulen (30 Minuten zum Start):
+
+1. Lies `VISION.md` (Überblick)
+2. Wähle deine Altersgruppe: `frameworks/kindergarten`, `elementary`, oder `secondary`
 3. Lese das entsprechende `curriculum.md`
 4. Starte einen Pilot mit einer Klasse
 5. Teile deine Erfahrungen in `community/examples-from-schools`
 
-### FÃ¼r Lehrer (45 Minuten Setup):
+### Für Lehrer (45 Minuten Setup):
+
 1. Klone dieses Repo
-2. WÃ¤hle dein Alter: `frameworks/[age]/`
+2. Wähle dein Alter: `frameworks/[age]/`
 3. Nutze `curriculum.md` als Template
 4. Passe an deine Klasse an
 5. Implementiere die 5 Prinzipien schrittweise
 
-### FÃ¼r Forscher (Wissenschaftlicher Weg):
+### Für Forscher (Wissenschaftlicher Weg):
+
 1. Lese `docs/02-neurobiological-basis.md`
 2. Nutze `tools/assessment-tool/measure-5d.py` zur Messung
 3. Starte eine Studie in einer Schule
 4. Publiziere deine Findings
 5. Erstelle einen Pull Request mit deinen Daten
 
-### FÃ¼r Community-Beitragende:
+### Für Community-Beitragende:
+
 1. `CONTRIBUTING.md` lesen
 2. Ein Issue erstellen (Fragen, Ideen, Probleme)
-3. Einen Pull Request fÃ¼r deine Erfahrungen
+3. Einen Pull Request für deine Erfahrungen
 4. Mit anderen Schulen in Discussions networken
 
 ---
 
-## ðŸ’¡ DIE KERNIDEE: LAGRANGE-MECHANIK FÃœR POTENZIAL
+## 💡 DIE KERNIDEE: LAGRANGE-MECHANIK FÜR POTENZIAL
 
-\[
-S[x] = \int_{t_1}^{t_2} \left[ T(x, \dot{x}) - V(x) \right] dt = \text{minimal}
-\]
+\\[ S[x] = \\int_{t_1}^{t_2} \\left[ T(x, \\dot{x}) - V(x) \\right] dt = \\text{minimal} \\]
 
 **T (Kinetische Energie):** Sinnvolle Arbeit, Lernen, Partizipation  
 **V (Potenzialenergie):** Leid, Zwang, Angst, Entfremdung
 
-Die optimale Bahn folgt dem Weg **minimaler innerer StÃ¶rung**.
+Die optimale Bahn folgt dem Weg **minimaler innerer Störung**.
 
 ### Die 4 Dimensionen der Intelligenz
 
-| Dimension | Neurobiologische Basis | FÃ¤higkeiten | Entwickelt durch |
-|-----------|----------------------|------------|------------------|
-| **1D** | Reptiliengehirn, Urinstinkte | Ãœberlebensmechanismen, Reflexe | Sicherheit |
-| **2D** | Limbisches System + PrÃ¤frontaler | Selbstregulation, Planung, Impulskontrolle | Autonomie + Sicherheit |
-| **3D** | Integrierter PrÃ¤frontalkortex, Polyvagal | Systemintelligenz, Empathie, Multiperspektivismus | AuthentizitÃ¤t + Partizipation |
+| Dimension | Neurobiologische Basis | Fähigkeiten | Entwickelt durch |
+|-----------|----------------------|-------------|------------------|
+| **1D** | Reptiliengehirn, Urinstinkte | Überlebensmechanismen, Reflexe | Sicherheit |
+| **2D** | Limbisches System + Präfrontaler | Selbstregulation, Planung, Impulskontrolle | Autonomie + Sicherheit |
+| **3D** | Integrierter Präfrontalkortex, Polyvagal | Systemintelligenz, Empathie, Multiperspektivismus | Authentizität + Partizipation |
 | **4D** | Dezentrales Netzwerk, Kollektiv | Collective Intelligence, Emergenz, Netzwerk-Effekte | Dezentralisierte Zusammenarbeit |
 
 **Das Problem:** Schulen blockieren 2D, 3D, 4D durch konstante Angst (1D-Regression).  
-**Die LÃ¶sung:** Systeme, die die 5 Prinzipien implementieren, aktivieren diese Dimensionen automatisch.
+**Die Lösung:** Systeme, die die 5 Prinzipien implementieren, aktivieren diese Dimensionen automatisch.
 
 ---
 
-## ðŸŽ¯ WHY THIS MATTERS
+## 🎯 WHY THIS MATTERS
 
 ### Standard-Schulen erzeugen:
-- âŒ **Konstante Angst** (Noten, Tests, Ranking) â†’ 1D-Regression
-- âŒ **Zentrale Kontrolle** â†’ Keine Autonomie
-- âŒ **Fehler = Schuld** â†’ Keine Lernkultur
-- âŒ **Masken-Zwang** â†’ Keine AuthentizitÃ¤t
-- âŒ **Keine Partizipation** â†’ Keine 4D-Intelligenz
 
-**Resultat:** Burnout, Depression, Suizid (51% Stress, 37% Burnout bei deutschen SchÃ¼lern)
+- ❌ **Konstante Angst** (Noten, Tests, Ranking) → 1D-Regression
+- ❌ **Zentrale Kontrolle** → Keine Autonomie
+- ❌ **Fehler = Schuld** → Keine Lernkultur
+- ❌ **Masken-Zwang** → Keine Authentizität
+- ❌ **Keine Partizipation** → Keine 4D-Intelligenz
+
+**Resultat:** Burnout, Depression, Suizid (51% Stress, 37% Burnout bei deutschen Schülern)
 
 ### 5D-Systeme aktivieren:
-- âœ… **Minimales negatives Feld** â†’ Gehirn kann denken
-- âœ… **Autonomie** â†’ Intrinsische Motivation wÃ¤chst
-- âœ… **Fehler als Signal** â†’ Adaptive Intelligenz entwickelt sich
-- âœ… **AuthentizitÃ¤t** â†’ Inneres + Ã„uÃŸeres in Alignment
-- âœ… **Partizipation** â†’ Netzwerk-Intelligenz entsteht
 
-**Resultat:** Entwicklung, KreativitÃ¤t, Zufriedenheit, echtes Potenzial
+- ✅ **Minimales negatives Feld** → Gehirn kann denken
+- ✅ **Autonomie** → Intrinsische Motivation wächst
+- ✅ **Fehler als Signal** → Adaptive Intelligenz entwickelt sich
+- ✅ **Authentizität** → Inneres + Äußeres in Alignment
+- ✅ **Partizipation** → Netzwerk-Intelligenz entsteht
+
+**Resultat:** Entwicklung, Kreativität, Zufriedenheit, echtes Potenzial
 
 ---
 
-## ðŸ“ˆ ROADMAP 2025-2030
+## 📈 ROADMAP 2025-2030
 
 | Phase | Zeitraum | Ziele | Status |
-|-------|----------|--------|--------|
-| **1: Foundation** | Jan-Mar 2025 | Repo komplett dokumentiert, 3 Case Studies, 10 Schulen Pilot | ðŸŸ¢ In Progress |
-| **2: Tools** | Apr-Jun 2025 | Curriculum-Generator, Teacher Training, 50+ Schulen | ðŸŸ¡ Geplant |
-| **3: Scale** | Jul-Dec 2025 | Live Data Dashboard, Publikationen, 200+ Schulen | ðŸŸ¡ Geplant |
-| **4: Global** | 2026+ | 500+ Schulen, Int. Conference, Regierungs-Ã„nderungen | ðŸŸ¡ Vision |
+|-------|----------|-------|--------|
+| **1: Foundation** | Jan-Mar 2025 | Repo komplett dokumentiert, 3 Case Studies, 10 Schulen Pilot | 🟢 In Progress |
+| **2: Tools** | Apr-Jun 2025 | Curriculum-Generator, Teacher Training, 50+ Schulen | 🟡 Geplant |
+| **3: Scale** | Jul-Dec 2025 | Live Data Dashboard, Publikationen, 200+ Schulen | 🟡 Geplant |
+| **4: Global** | 2026+ | 500+ Schulen, Int. Conference, Regierungs-Änderungen | 🟡 Vision |
 
 ---
 
-## ðŸ¤ HOW TO CONTRIBUTE
+## 🤝 HOW TO CONTRIBUTE
 
 ### Issues
-- **Fragen stellen** Ã¼ber einzelne Prinzipien
-- **Probleme berichten** bei der Umsetzung
-- **Ideen vorschlagen** fÃ¼r neue Schulbeispiele
+
+- Fragen stellen über einzelne Prinzipien
+- Probleme berichten bei der Umsetzung
+- Ideen vorschlagen für neue Schulbeispiele
 
 ### Pull Requests
-- Neue Case Studies hinzufÃ¼gen
-- LehrplÃ¤ne verbessern
-- Code-BeitrÃ¤ge (Tools erweitern)
-- Ãœbersetzungen (Englisch, Spanisch, etc.)
+
+- Neue Case Studies hinzufügen
+- Lehrpläne verbessern
+- Code-Beiträge (Tools erweitern)
+- Übersetzungen (Englisch, Spanisch, etc.)
 
 ### Discussions
+
 - Deine Schulerfahrungen teilen
 - Von anderen lernen
 - Globales Netzwerk aufbauen
@@ -214,39 +225,42 @@ Die optimale Bahn folgt dem Weg **minimaler innerer StÃ¶rung**.
 
 ---
 
-## ðŸ“š WEITERE RESSOURCEN
+## 📚 WEITERE RESSOURCEN
 
 ### Wissenschaftliche Grundlagen
+
 - **Porges (2011):** Polyvagal Theory - Sichere Verbindung
 - **Friston (2010):** Predictive Processing - Fehler & Lernen
 - **van der Kolk (2014):** The Body Keeps the Score - Trauma & Hirnregression
 - **Deci & Ryan (1985):** Self-Determination Theory - Autonomie
 
 ### Praktische Inspiration
-- **Sudbury Valley School** (USA) - Radikale SchÃ¼lerwahl
+
+- **Sudbury Valley School** (USA) - Radikale Schülerwahl
 - **Montessori International** - Selbstbestimmtes Lernen
-- **Waldorf Education** - Rhythmen + AuthentizitÃ¤t
-- **Freinet PÃ¤dagogik** - KinderrÃ¤te & Partizipation
+- **Waldorf Education** - Rhythmen + Authentizität
+- **Freinet Pädagogik** - Kinderräte & Partizipation
 
 ### Aktuelle Evidenz
+
 - **OECD (2020):** Citizens Assemblies funktionieren
 - **ICA (2024):** Kooperativen-Netzwerk Studie
 - **UNESCO:** Alternative Education Models
 
 ---
 
-## âš–ï¸ LICENSE
+## ⚖️ LICENSE
 
 **Creative Commons Attribution Share Alike 4.0 (CC-BY-SA)**
 
-âœ… Schulen dÃ¼rfen frei nutzen + remixen  
-âœ… MÃ¼ssen Quelle nennen  
-âœ… Abwandlungen mÃ¼ssen auch offen sein  
-âœ… Kommerziell nutzbar mit Anerkennung
+✅ Schulen dürfen frei nutzen + remixen  
+✅ Müssen Quelle nennen  
+✅ Abwandlungen müssen auch offen sein  
+✅ Kommerziell nutzbar mit Anerkennung
 
 ---
 
-## ðŸ“ž CONTACT & COMMUNITY
+## 📞 CONTACT & COMMUNITY
 
 - **Projekt-Lead:** Patrick (karlitos1337)
 - **Email:** patrick@5d-education.org
@@ -256,32 +270,86 @@ Die optimale Bahn folgt dem Weg **minimaler innerer StÃ¶rung**.
 
 ---
 
-## ðŸŽ¬ NEXT STEPS
+## 🎬 NEXT STEPS
 
 ### Schritt 1: Orientieren
-Lese **VISION.md** fÃ¼r die 5 Prinzipien im Detail.
 
-### Schritt 2: Deine Rolle wÃ¤hlen
+Lese **VISION.md** für die 5 Prinzipien im Detail.
+
+### Schritt 2: Deine Rolle wählen
+
 - **Schule:** Gehe zu `frameworks/[your-age]/`
 - **Lehrer:** Nutze `curriculum.md` als Template
 - **Forscher:** Starte mit `docs/02-neurobiological-basis.md`
 - **Community:** Gehe zu `community/` oder starte ein Issue
 
 ### Schritt 3: Aktion
+
 Implementiere einen Pilot. Teile deine Erfahrungen. **Baue die Zukunft mit.**
 
 ---
 
-## ðŸŒ THE VISION
+## 🌍 THE VISION
 
 **Bis 2030:** Ein globales Netzwerk von 500+ Schulen, die die 5 Prinzipien implementieren. Nicht aus Mode. Sondern weil sie **funktionieren**.
 
 Nicht weil Experten es sagen. Sondern weil **Lehrer, Eltern und Kinder es erleben**.
 
----
-
 **Das ist nicht utopisch. Das ist angewandte Mechanik menschlichen Potenzials.**
 
-**Bereit?** ðŸš€
+**Bereit?** 🚀
 
-*Starten Sie mit VISION.md â†’*
+→ Starten Sie mit VISION.md
+
+---
+
+## Wissenschaftliches Modell v2.0 - IMP & Lagrange
+
+> **Neu (2025):** Das 5D-System wurde um ein formales mathematisches Fundament erweitert.
+
+### IMP v2.0 - Integriertes Manifestations-Potential
+
+Die erweiterte IMP-Formel integriert drei theoretische Frameworks:
+
+```
+IMP = (w^T * psi) * (1 - gamma(HRV)) * (1 + k_Phi * Phi) * P_perc
+```
+
+| Komponente | Theorie | Beschreibung |
+|-----------|---------|-------------|
+| `w^T * psi` | 5D-Basismodell | Gewichtete Summe der 5 Dimensionen |
+| `gamma(HRV)` | Polyvagal (Porges) | HRV-basierte Daempfung |
+| `Phi` | IIT (Tononi) | Integrierte Information |
+| `P_perc` | Perkolation (Stauffer) | Emergenz-Ordnungsparameter |
+
+### Neue Dateien
+
+| Datei | Inhalt |
+|-------|--------|
+| `models/imp_v2.py` | IMP v2.0 Python-Implementierung |
+| `models/lagrange_simulator.py` | Numerischer Lagrange-Dynamik-Simulator |
+| `models/perkolation.py` | Perkolationsmodell fuer Bewusstseins-Emergenz |
+| `docs/02-integration-polyvagal.md` | Polyvagal-Theorie Integration (HRV, Trauma, SES) |
+| `docs/03-lagrange-formalism.md` | Lagrange-Formalismus (Variationsprinzip, Euler-Lagrange) |
+| `ethik/bewusstseinsmessung.md` | Ethische Richtlinien fuer Bewusstseinsmessung |
+
+### Schnellstart IMP v2.0
+
+```python
+from models.imp_v2 import State5D, imp_v2
+
+state = State5D(
+    psi_1=0.8, psi_2=0.75, psi_3=0.7, psi_4=0.65, psi_5=0.6,
+    hrv_rmssd=60.0  # Polyvagaler Zustand: ventral-vagal
+)
+
+result = imp_v2(state, verbose=True)
+print(f"IMP = {result['imp']:.4f}")
+```
+
+### Theoretische Referenzen
+
+- Tononi, G. et al. (2016). IIT: integrated information theory. *Nature Reviews Neuroscience*
+- Porges, S. W. (2011). *The Polyvagal Theory*. Norton
+- Friston, K. (2010). The free-energy principle. *Nature Reviews Neuroscience*
+- Stauffer, D. & Aharony, A. (1994). *Introduction to Percolation Theory*
