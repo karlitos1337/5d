@@ -13,6 +13,7 @@ import io.github.imfangs.dify.client.enums.ResponseMode;
 import io.github.imfangs.dify.client.event.*;
 import io.github.imfangs.dify.client.model.workflow.WorkflowRunRequest;
 import io.github.imfangs.dify.client.model.workflow.WorkflowRunResponse;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaChatOptions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -108,24 +110,53 @@ public class IndexController {
 
     // --------------------------------- dify workflow ---------------------------------
 
+    // Azure Key Vault configuration
+    @Value("${azure.keyvault.uri:}")
+    private String keyVaultUri;
+
     // API key retrieved from Azure Key Vault for secure credential management
     // Original hardcoded value (REDACTED): app-46gHBiqUb5jqAHl9TDWwnRZ8
-    private final String apiKey;
-    {
-        // Replace <your-key-vault-url> with your actual Azure Key Vault URI
-        SecretClient secretClient = new SecretClientBuilder()
-            .vaultUrl("<your-key-vault-url>")
-            .credential(new DefaultAzureCredentialBuilder().build())
-            .buildClient();
-        
-        KeyVaultSecret secret = secretClient.getSecret("dify-api-key");
-        this.apiKey = secret.getValue();
-    }
+    private String apiKey;
+    
     private final String baseUrl = "http://localhost/v1";
+
+    /**
+     * Initialize API key from Azure Key Vault after bean construction
+     * Falls back to error message if Key Vault is not configured
+     */
+    @PostConstruct
+    public void initializeApiKey() {
+        try {
+            if (keyVaultUri == null || keyVaultUri.trim().isEmpty()) {
+                logger.warn("Azure Key Vault URI not configured. Please set azure.keyvault.uri in application.properties");
+                this.apiKey = null;
+                return;
+            }
+            
+            SecretClient secretClient = new SecretClientBuilder()
+                .vaultUrl(keyVaultUri)
+                .credential(new DefaultAzureCredentialBuilder().build())
+                .buildClient();
+            
+            KeyVaultSecret secret = secretClient.getSecret("dify-api-key");
+            this.apiKey = secret.getValue();
+            logger.info("Successfully retrieved API key from Azure Key Vault");
+        } catch (Exception e) {
+            logger.error("Failed to retrieve API key from Azure Key Vault: {}", e.getMessage(), e);
+            this.apiKey = null;
+        }
+    }
 
     @GetMapping("/dify/simple")
     @ResponseBody
     public String difySimple(@RequestParam(required = false, value = "input") String input) throws Exception {
+
+        // Validate API key is loaded from Key Vault
+        if (apiKey == null) {
+            String errorMessage = "API key not available. Please ensure Azure Key Vault is properly configured with azure.keyvault.uri in application.properties";
+            logger.error(errorMessage);
+            return "{\"error\": \"" + errorMessage + "\"}";
+        }
 
         Map<String, Object> inputs = new HashMap<>();
         inputs.put("input", input);
@@ -158,6 +189,13 @@ public class IndexController {
 
     @GetMapping( "/dify/stream")
     public Flux<String> difyStream(@RequestParam(required = false, value = "input") String input) {
+
+        // Validate API key is loaded from Key Vault
+        if (apiKey == null) {
+            String errorMessage = "API key not available. Please ensure Azure Key Vault is properly configured with azure.keyvault.uri in application.properties";
+            logger.error(errorMessage);
+            return Flux.error(new IllegalStateException(errorMessage));
+        }
 
         Map<String, Object> inputs = new HashMap<>();
         inputs.put("input", input);
