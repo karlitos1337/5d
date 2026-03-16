@@ -27,3 +27,7 @@
 ## 2024-03-24 - Parallel Fetching & localStorage Concurrency
 **Learning:** When parallelizing `fetchWithCache` logic that relies on `localStorage` (read-modify-write), standard JS concurrency (Promise.all) causes race conditions where updates are lost because the "read" happens before other "writes" complete.
 **Action:** Always re-read the latest state from `localStorage` immediately before writing the update in async functions, or use a mutex if strict transactional integrity is needed.
+
+## 2026-03-16 - Validation Dashboard Syntax Errors
+**Learning:** There were duplicated/conflicting syntaxes from previous poorly merged attempts in `web/validation_dashboard/src/App.jsx` related to `import React` statements, `const sections =` duplication, unescaped single quotes, and malformed nested `if(!ticking)` logic for scroll handling, which prevented linting from passing.
+**Action:** When optimizing a component, ensure that the baseline code is syntactically valid by fixing broken syntax and removing duplicated statements, and explicitly escaping quotes like `&apos;` in JSX.
