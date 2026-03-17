@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -76,11 +76,11 @@ const App = () => {
     setMobileMenuOpen(false);
   };
 
-  useEffect(() => {
-    let ticking = false;
+  const ticking = useRef(false);
 
+  useEffect(() => {
     const handleScroll = () => {
-      if (!ticking) {
+      if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
@@ -91,9 +91,9 @@ const App = () => {
               break;
             }
           }
-          ticking = false;
+          ticking.current = false;
         });
-        ticking = true;
+        ticking.current = true;
       }
     };
 
