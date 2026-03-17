@@ -24,6 +24,7 @@ def run_step(command, description):
         print(e.stderr)
         return False
 
+
 def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     package_dir = Path(f"outputs/evidence_package/pkg_{timestamp}")
@@ -44,7 +45,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -54,7 +55,12 @@ def main():
 
         # Move artifacts
         moved_count = 0
-        for pattern in ["questionnaire_*.json", "example_responses_*.csv", "validation_results_*.png", "validation_report_*.json"]:
+        for pattern in [
+            "questionnaire_*.json",
+            "example_responses_*.csv",
+            "validation_results_*.png",
+            "validation_report_*.json",
+        ]:
             for f in glob.glob(pattern):
                 shutil.move(f, package_dir / os.path.basename(f))
                 print(f"  -> Moved {f}")
@@ -75,7 +81,7 @@ def main():
             check=True,
             text=True,
             capture_output=True,
-            env=env
+            env=env,
         )
         print(result.stdout)
 
@@ -103,7 +109,58 @@ def main():
     with open(package_dir / "METRIC_MAPPING.md", "w") as f:
         f.write(mapping_content)
 
-    # 4. Create Interpretation
+    # 4. Create Visualization Template
+    visualization_template_content = """
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_radar_chart(scores, title="5D Profile"):
+    labels = list(scores.keys())
+    values = list(scores.values())
+
+    # Number of variables
+    N = len(labels)
+
+    # What will be the angle of each axis in the plot? (we divide the plot / number of variable)
+    angles = [n / float(N) * 2 * np.pi for n in range(N)]
+    angles += [angles[0]]
+
+    values += [values[0]]
+
+    ax = plt.subplot(111, polar=True)
+
+    # Draw one axe per variable + add labels
+    plt.xticks(angles[:-1], labels)
+
+    # Draw ylabels
+    ax.set_rlabel_position(0)
+    plt.yticks([1,2,3,4,5], ["1","2","3","4","5"], color="grey", size=7)
+    plt.ylim(0,5)
+
+    # Plot data
+    ax.plot(angles, values, linewidth=1, linestyle='solid')
+
+    # Fill area
+    ax.fill(angles, values, 'b', alpha=0.1)
+
+    plt.title(title)
+    plt.show()
+
+if __name__ == "__main__":
+    # Example Data
+    data = {
+        "Autonomy": 4.2,
+        "Intrinsic Motivation": 3.8,
+        "Resilience": 4.5,
+        "Social Participation": 3.2,
+        "Authenticity": 4.0
+    }
+    plot_radar_chart(data)
+"""
+    with open(package_dir / "VISUALIZATION_TEMPLATE.py", "w") as f:
+        f.write(visualization_template_content)
+
+    # 5. Create Interpretation
     interpretation_content = f"""
 # Scientific Interpretation
 **Generated via Professor Dr. A. I. Nexus Protocol**
@@ -111,7 +168,7 @@ def main():
 
 ## Empirical Status
 - **Validation Study:** Completed (N=30 Pilot). Cronbach's Alpha analysis included in report.
-- **External Data:** World Bank Education data fetched.
+- **External Data:** World Bank Education and WGI (Voice & Accountability) data fetched.
 - **Literature:** arXiv/PubMed papers scraped for context.
 
 ## Hypothesis & Next Steps
@@ -119,14 +176,15 @@ Based on the zero-impact principle, any dimension < 0.7 requires immediate inter
 Refer to `validation_results_*.png` for visual distribution.
 
 [PUSH TO DOWNLOAD]
-- Analysis Script: validation/imp_validation_study.py
-- Metric Mapping: METRIC_MAPPING.md
-- Visualization: validation_results_*.png
+- Analysis Script (Python): imp_validation_study.py
+- Metric Mapping Table: METRIC_MAPPING.md
+- Visualization Template: VISUALIZATION_TEMPLATE.py
+- Literature-Backed Interpretation: INTERPRETATION.md
     """
     with open(package_dir / "INTERPRETATION.md", "w") as f:
         f.write(interpretation_content)
 
-    # 5. Manifest
+    # 6. Manifest
     manifest_content = f"""
 # Evidence Package Manifest
 Generated: {timestamp}
@@ -147,6 +205,7 @@ Generated: {timestamp}
     print(f"\n✅ Evidence Package Generated: {package_dir}")
     # Print the command to list files, but don't execute it, leave it to the user or agent to verify
     # print(f"   Run `ls -R {package_dir}` to view contents.")
+
 
 if __name__ == "__main__":
     main()

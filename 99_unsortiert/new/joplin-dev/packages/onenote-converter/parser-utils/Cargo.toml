@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 paste = "1.0"
-bytes = "1.2.0"
+bytes = "1.11.1"
 thiserror = "1.0"
 widestring = "1.0.2"
 uuid = "1.1.2"

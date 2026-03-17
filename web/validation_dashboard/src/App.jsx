@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
@@ -13,6 +15,7 @@ const App = () => {
     restDelta: 0.001
   });
 
+  const sections = React.useMemo(() => [
   const sections = [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
@@ -22,6 +25,8 @@ const App = () => {
     { id: 'implikationen', label: 'Implikationen' },
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
+  ], []);
+  const ticking = useRef(false);
   ];
 
   useEffect(() => {
@@ -71,7 +76,31 @@ const App = () => {
   };
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
+      if (!ticking) {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 200;
+
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sections[i].id);
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Use passive listener for better scroll performance
+          ticking.current = false;
+        });
+        ticking.current = true;
       const scrollPosition = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -85,7 +114,7 @@ const App = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sections]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
