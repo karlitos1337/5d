@@ -26,8 +26,15 @@ class ProxyHandler(BaseHTTPRequestHandler):
             try:
                 with urllib.request.urlopen(url, timeout=15) as resp:
                     content_len = resp.getheader("Content-Length")
-                    if content_len and int(content_len) > MAX_RESPONSE_SIZE:
-                        raise ValueError("Response too large")
+                    if content_len:
+                        try:
+                            if int(content_len) > MAX_RESPONSE_SIZE:
+                                raise ValueError("Response too large")
+                        except (TypeError, ValueError):
+                            # Invalid Content-Length from upstream; log and fall back to streamed size check
+                            sys.stderr.write(
+                                f"Invalid Content-Length header from upstream for {key}: {content_len}\n"
+                            )
 
                     data = b""
                     while True:
