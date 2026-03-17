@@ -118,6 +118,13 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a
+        href="#einleitung"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:rounded-br-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      >
+        Zum Hauptinhalt springen
+      </a>
+
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
@@ -154,7 +161,8 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors duration-200 ${
+                aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -163,7 +171,9 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
