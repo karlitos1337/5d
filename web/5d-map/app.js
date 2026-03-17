@@ -164,7 +164,15 @@ function updateValidationCount() {
     ? items.filter(it => String(it.status) === String(validationFilter))
     : items;
   const label = validationFilter === 'all' ? 'alle' : validationFilter;
-  validationCountEl.innerHTML = `Filter: <strong>${label}</strong> · Einträge: <strong>${filtered.length}</strong>`;
+  validationCountEl.textContent = '';
+  validationCountEl.appendChild(document.createTextNode('Filter: '));
+  const strong1 = document.createElement('strong');
+  strong1.textContent = label;
+  validationCountEl.appendChild(strong1);
+  validationCountEl.appendChild(document.createTextNode(' · Einträge: '));
+  const strong2 = document.createElement('strong');
+  strong2.textContent = filtered.length;
+  validationCountEl.appendChild(strong2);
 }
 
 function exportValidationCSV() {
