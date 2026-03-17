@@ -1,8 +1,12 @@
-import { describe, it, expect, vi } from 'vitest';
-import { debounce } from '../modules/utils';
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { debounce } from '../modules/utils.js';
 
 describe('utils', () => {
   describe('debounce', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
     it('should delay execution', () => {
       vi.useFakeTimers();
       const fn = vi.fn();
