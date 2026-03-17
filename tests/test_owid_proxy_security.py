@@ -11,10 +11,11 @@ owid_proxy = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(owid_proxy)
 
 class MockStreamResponse:
-    def __init__(self, data=b""):
+    def __init__(self, data=b"", headers=None):
         self.data = data
         self.position = 0
         self.closed = False
+        self._headers = {k.lower(): v for k, v in (headers or {}).items()}
 
     def read(self, size=-1):
         if self.closed:
@@ -33,7 +34,7 @@ class MockStreamResponse:
         self.closed = True
 
     def getheader(self, name):
-        return None
+        return self._headers.get(name.lower())
 
     def __enter__(self):
         return self
@@ -106,6 +107,31 @@ class TestOWIDProxySecurity(unittest.TestCase):
         # We expect it to fail with 502 and specific message
         self.assertTrue("502" in output, "Expected 502 response")
         self.assertIn("Response too large", output)
+
+    def test_content_length_header_too_large(self):
+        """Content-Length header exceeding MAX_RESPONSE_SIZE must fail fast (no body read)."""
+        handler = self.handler_class()
+
+        oversized = owid_proxy.MAX_RESPONSE_SIZE + 1
+        # Provide a minimal body so we can detect whether it was actually read
+        minimal_body = b"should not be read"
+        mock_resp = MockStreamResponse(
+            data=minimal_body,
+            headers={"Content-Length": str(oversized)},
+        )
+
+        with patch('urllib.request.urlopen') as mock_urlopen:
+            mock_urlopen.return_value = mock_resp
+            handler.do_GET()
+
+        output = handler.wfile.getvalue().decode('utf-8', errors='ignore')
+
+        # Must return 502 with the "Response too large" message
+        self.assertIn("502", output, "Expected 502 response for oversized Content-Length")
+        self.assertIn("Response too large", output)
+
+        # The body should NOT have been read (fail-fast before streaming)
+        self.assertEqual(mock_resp.position, 0, "Response body should not have been read")
 
 if __name__ == '__main__':
     unittest.main()
