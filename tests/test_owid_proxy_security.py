@@ -107,18 +107,6 @@ class TestOWIDProxySecurity(unittest.TestCase):
         self.assertTrue("502" in output, "Expected 502 response")
         self.assertIn("Response too large", output)
 
-if __name__ == '__main__':
-import sys
-import unittest
-from unittest.mock import MagicMock, patch
-
-# Load the owid_proxy module dynamically
-PROXY_PATH = "web/5d-map/owid_proxy.py"
-spec = importlib.util.spec_from_file_location("owid_proxy", PROXY_PATH)
-owid_proxy = importlib.util.module_from_spec(spec)
-sys.modules["owid_proxy"] = owid_proxy
-spec.loader.exec_module(owid_proxy)
-
 class TestHandler(owid_proxy.ProxyHandler):
     """Subclass to bypass BaseHTTPRequestHandler.__init__ and capture output."""
     def __init__(self):
