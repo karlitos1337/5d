@@ -107,19 +107,17 @@ class TestOWIDProxySecurity(unittest.TestCase):
         self.assertTrue("502" in output, "Expected 502 response")
         self.assertIn("Response too large", output)
 
-if __name__ == '__main__':
 import sys
-import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
-# Load the owid_proxy module dynamically
-PROXY_PATH = "web/5d-map/owid_proxy.py"
-spec = importlib.util.spec_from_file_location("owid_proxy", PROXY_PATH)
-owid_proxy = importlib.util.module_from_spec(spec)
-sys.modules["owid_proxy"] = owid_proxy
-spec.loader.exec_module(owid_proxy)
+# Reset dynamic import of owid_proxy
+PROXY_PATH2 = "web/5d-map/owid_proxy.py"
+spec2 = importlib.util.spec_from_file_location("owid_proxy_2", PROXY_PATH2)
+owid_proxy_2 = importlib.util.module_from_spec(spec2)
+sys.modules["owid_proxy_2"] = owid_proxy_2
+spec2.loader.exec_module(owid_proxy_2)
 
-class TestHandler(owid_proxy.ProxyHandler):
+class TestHandler(owid_proxy_2.ProxyHandler):
     """Subclass to bypass BaseHTTPRequestHandler.__init__ and capture output."""
     def __init__(self):
         self.path = ""
@@ -154,7 +152,9 @@ class TestOWIDProxySecurity(unittest.TestCase):
         mock_resp = MagicMock()
         mock_resp.__enter__.return_value = mock_resp
         mock_resp.__exit__.return_value = None
-        mock_resp.read.side_effect = [b"Code,Year,Val\nABC,2020,10", b""] # Chunked
+        mock_resp.getheader.return_value = "25"
+        # owid_proxy reads chunk by chunk, so we need to provide chunks that don't fail `chunk = resp.read(64 * 1024)` and `chunk = resp.read(CHUNK_SIZE)`
+        mock_resp.read.side_effect = [b"Code,Year,Val\nABC,2020,10", b"", b"Code,Year,Val\nABC,2020,10", b""]
         mock_urlopen.return_value = mock_resp
 
         self.handler.do_GET()
