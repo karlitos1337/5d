@@ -107,9 +107,7 @@ class TestOWIDProxySecurity(unittest.TestCase):
         self.assertTrue("502" in output, "Expected 502 response")
         self.assertIn("Response too large", output)
 
-if __name__ == '__main__':
 import sys
-import unittest
 from unittest.mock import MagicMock, patch
 
 # Load the owid_proxy module dynamically
