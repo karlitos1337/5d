@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useState, useEffect, useRef } from 'react';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -15,8 +13,7 @@ const App = () => {
     restDelta: 0.001
   });
 
-  const sections = React.useMemo(() => [
-  const sections = [
+  const sections = useMemo(() => [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -26,8 +23,8 @@ const App = () => {
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
+
   const ticking = useRef(false);
-  ];
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -42,7 +39,7 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -60,7 +57,23 @@ const App = () => {
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
-      el.appendChild(btn);
+      if (el.tagName === 'IMG') {
+          if (el.parentNode) {
+              const wrapper = document.createElement('div');
+              wrapper.style.position = 'relative';
+              wrapper.style.display = 'inline-block';
+              el.parentNode.insertBefore(wrapper, el);
+              wrapper.appendChild(el);
+
+              btn.style.position = 'absolute';
+              btn.style.top = '10px';
+              btn.style.right = '10px';
+              btn.style.zIndex = '10';
+              wrapper.appendChild(btn);
+          }
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
@@ -76,10 +89,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    let ticking = false;
+    ticking.current = false;
 
     const handleScroll = () => {
-      if (!ticking) {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
@@ -91,28 +103,13 @@ const App = () => {
               break;
             }
           }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    // Use passive listener for better scroll performance
           ticking.current = false;
         });
         ticking.current = true;
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
 
@@ -210,7 +207,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 focus-visible:outline-none outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -326,7 +323,7 @@ const App = () => {
                   <div>
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                      Nachweis hoher interner Konsistenz (Cronbach’s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -344,7 +341,7 @@ const App = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
-                  <p className="text-sm">Interne Konsistenz (Cronbach’s α &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -368,7 +365,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Korrelationsanalysen</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu & Robinson (2012).
+                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu &amp; Robinson (2012).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -381,7 +378,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Validitätsprüfungen</h3>
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
+                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (&ge;0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -427,7 +424,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach's Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -487,7 +484,7 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
               <h3 className="text-xl font-semibold mb-4">Theoretische Fundierung</h3>
               <p className="mb-4" data-ref="https://www.tandfonline.com/doi/full/10.1080/10447318.2025.2542881?src=|12">
-                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci & Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
+                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci &amp; Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
               </p>
               <p data-ref="https://doi.org/10.3390/challe13020058|13">
                 Die sieben Kernelemente des Flourish-Modells - Sicherheit, Beziehung, Unabhängigkeit, Engagement, Erfüllung, Beitrag und Wachstum - werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
