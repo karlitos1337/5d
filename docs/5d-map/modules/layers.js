@@ -118,18 +118,29 @@ export function createIMPLegendControl() {
   const control = L.control({ position: 'bottomright' });
   control.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
-    div.innerHTML = '<strong>IMP‑Score</strong><br>';
+    const title = document.createElement('strong');
+    title.textContent = 'IMP‑Score';
+    div.appendChild(title);
+    div.appendChild(document.createElement('br'));
+
     for (let i = 0; i < grades.length - 1; i++) {
       const from = grades[i], to = grades[i + 1];
       const color = getColor((from + to) / 2);
       const label = `${Math.round(from * 100)}–${Math.round(to * 100)}%`;
       const row = document.createElement('div');
-      row.innerHTML = `<i style="background:${color}"></i> ${label}`;
+
+      const icon = document.createElement('i');
+      icon.style.background = color;
+      row.appendChild(icon);
+      row.appendChild(document.createTextNode(` ${label}`));
+
       div.appendChild(row);
     }
     const note = document.createElement('div');
     note.className = 'legend-note';
-    note.innerHTML = '<small>WGI normalisiert, höher ist besser.</small>';
+    const small = document.createElement('small');
+    small.textContent = 'WGI normalisiert, höher ist besser.';
+    note.appendChild(small);
     div.appendChild(note);
     return div;
   };
@@ -140,7 +151,11 @@ export function createValidationLegendControl() {
   const control = L.control({ position: 'bottomright' });
   control.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
-    div.innerHTML = '<strong>Validierung</strong><br>';
+    const title = document.createElement('strong');
+    title.textContent = 'Validierung';
+    div.appendChild(title);
+    div.appendChild(document.createElement('br'));
+
     const rows = [
       { color: '#22C55E', label: 'Grün: extern validiert', status: 'green' },
       { color: '#E8B84A', label: 'Gelb: Community/Wikipedia', status: 'yellow' },
@@ -149,7 +164,12 @@ export function createValidationLegendControl() {
     ];
     rows.forEach(r => {
       const row = document.createElement('div');
-      row.innerHTML = `<i style="background:${r.color}"></i> ${r.label}`;
+
+      const icon = document.createElement('i');
+      icon.style.background = r.color;
+      row.appendChild(icon);
+      row.appendChild(document.createTextNode(` ${r.label}`));
+
       row.style.cursor = 'pointer';
       row.title = 'Klicken zum Filtern';
       row.addEventListener('click', () => {
@@ -160,7 +180,9 @@ export function createValidationLegendControl() {
     });
     const note = document.createElement('div');
     note.className = 'legend-note';
-    note.innerHTML = '<small>Daten: validation.json</small>';
+    const small = document.createElement('small');
+    small.textContent = 'Daten: validation.json';
+    note.appendChild(small);
     div.appendChild(note);
     return div;
   };
