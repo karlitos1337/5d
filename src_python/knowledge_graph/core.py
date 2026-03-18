@@ -1,9 +1,6 @@
-from typing import Any
-
-from typing import Any
+from typing import Any, List
 
 import networkx as nx
-
 
 
 class CognitiveGraph:
@@ -21,7 +18,6 @@ class CognitiveGraph:
         
 
     def calculate_serendipity_score(self, context_nodes: List[str]) -> float:
-    def calculate_serendipity_score(self, context_nodes: list[str]) -> float:
         if not context_nodes:
             return 0.0
         subgraph = self.graph.subgraph(context_nodes)
