@@ -93,33 +93,6 @@ exclude = '''
 )/
 '''
 
-[tool.ruff]
-line-length = 100
-target-version = "py310"
-lint.select = ["E", "F", "I", "B", "UP"]
-lint.ignore = ["E203", "E501"]
-extend-exclude = [
-    "99_unsortiert",
-    "external",
-]
-exclude = [
-    "private-gpt-main/",
-    "99_unsortiert/",
-    "external/",
-    "outputs/",
-    "5d/",
-    "node_modules/",
-    "dist/",
-    "docs/",
-    "simulations/",
-    "venv/",
-    "web/",
-]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-
 [tool.mypy]
 python_version = "3.10"
 check_untyped_defs = true
