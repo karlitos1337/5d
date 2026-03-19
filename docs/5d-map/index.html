@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <a href="#main-content" class="sr-only focus:not-sr-only">Zum Hauptinhalt springen</a>
   <header class="app-header">
     <h1>🌍 5D‑Intelligenz Global</h1>
     <div class="controls">
@@ -97,7 +98,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <div id="map"></div>
     <div id="layer-info" style="display:none;padding:0.5rem 1rem;max-width:640px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
       <strong>Layer‑Info:</strong> <span id="layer-info-text">—</span>
