@@ -44,7 +44,7 @@
     "@joplin/lib": "~3.5",
     "@joplin/renderer": "~3.5",
     "@joplin/utils": "~3.5",
-    "aws-sdk": "2.1340.0",
+    "aws-sdk": "2.1693.0",
     "chalk": "4.1.2",
     "compare-version": "0.1.2",
     "file-type": "21.3.2",
