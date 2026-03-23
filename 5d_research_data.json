@@ -1,7 +1,9 @@
 {
   "self-directed learning": {
+    "arxiv": [],
     "arxiv": [
       {
+        "title": "Active learning for data streams: a surv...3"
         "title": "Active learning for data streams: a survey",
         "authors": [
           "\nDavide Cacciarelli\n",
@@ -36,36 +38,728 @@
     ],
     "pubmed": [
       {
-        "title": "Enhancing Trainee Knowledge and Competence in Addiction Medicine: Outcomes of an Interprofessional Addiction Consult Service Rotation.",
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
-        "title": "Teaching beyond the binary: A qualitative descriptive study of nurse educators' perceptions on including gender diversity in undergraduate education.",
+        "title": "ChatGPT versus UpToDate in Preclinical Medical Education: Cross-Sectional Analysis Using Term Frequency-Inverse Document Frequency Cosine Similarity.",
         "authors": [
-          "Collingburn JD",
-          "Bourke SL",
-          "Copnell B"
+          "Thiru SS",
+          "Aksu NE",
+          "Chiang M"
         ],
-        "published": "2026 Jan 23",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41604731/"
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861392/"
       },
       {
-        "title": "Artificial Intelligence in Medical Education: Promoting Active Learning With a Customized Chatbot Tool.",
+        "title": "Pharmaceutical competency among physicians: a multidimensional assessment incorporating self-perceived and objective measures.",
         "authors": [
-          "Bogenschutz K",
-          "Demeter J",
-          "Knoderer CA"
+          "Liu C",
+          "Guo H",
+          "Li B"
         ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41603621/"
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849096/"
       },
       {
-        "title": "The effect of cooperative learning approach with concept maps on nursing students' knowledge acquisition on symptom management in cancer patients: a randomized controlled trial.",
+        "title": "Cognitive and emotional dynamics of artificial intelligence-assisted English learning: A mixed-methods study in a dual instructional context.",
         "authors": [
-          "Kahraman BB",
-          "Acun A",
-          "Bilgiç S"
+          "Zimik HR",
+          "Aujirapongpan S",
+          "Waluyo B"
         ],
         "published": "2026 Jan 28",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41593576/"
+        "title": "ChatGPT versus UpToDate in Preclinical Medical Education: Cross-Sectional Analysis Using Term Frequency-Inverse Document Frequency Cosine Similarity.",
+        "authors": [
+          "Thiru SS",
+          "Aksu NE",
+          "Chiang M"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861392/"
+      },
+      {
+        "title": "Pharmaceutical competency among physicians: a multidimensional assessment incorporating self-perceived and objective measures.",
+        "authors": [
+          "Liu C",
+          "Guo H",
+          "Li B"
+        ],
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849096/"
+      },
+      {
+        "title": "Cognitive and emotional dynamics of artificial intelligence-assisted English learning: A mixed-methods study in a dual instructional context.",
+        "authors": [
+          "Zimik HR",
+          "Aujirapongpan S",
+          "Waluyo B"
+        ],
+        "published": "2026 Mar 16",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41844123/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:02.350911"
+    "timestamp": "2026-03-22T11:43:19.324152"
+    "timestamp": "2026-03-22T11:57:05.423573"
+  },
+  "intrinsic motivation education": {
+    "arxiv": [],
+    "pubmed": [
+      {
+        "title": "Exploring the Concept of Nurses' Healthcare Policy Competence: A Systematic Review and Qualitative Meta-Synthesis.",
+        "authors": [
+          "Han NK",
+          "Kim JG"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41860586/"
+      },
+      {
+        "title": "Understanding How Nurse Faculty Advisors Perceive Voluntary Attrition Among 4-Year Baccalaureate Degree Nursing Students: A Qualitative Descriptive Study.",
+        "authors": [
+          "Shaver DE",
+          "Viveiros JD",
+          "Hunter Revell S"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41860450/"
+      },
+      {
+        "title": "Influencing factors of physical exercise motivation among military academy cadets: a social ecological model analysis.",
+        "authors": [
+          "Wang W",
+          "Xu C",
+          "Gao G"
+        ],
+      },
+      {
+        "title": "Understanding How Nurse Faculty Advisors Perceive Voluntary Attrition Among 4-Year Baccalaureate Degree Nursing Students: A Qualitative Descriptive Study.",
+        "authors": [
+          "Shaver DE",
+          "Viveiros JD",
+          "Hunter Revell S"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41860450/"
+      },
+      {
+        "title": "Influencing factors of physical exercise motivation among military academy cadets: a social ecological model analysis.",
+        "authors": [
+          "Wang W",
+          "Xu C",
+          "Gao G"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41853079/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:05.025953"
+    "timestamp": "2026-03-22T11:43:22.315974"
+    "timestamp": "2026-03-22T11:57:08.447818"
+  },
+  "autonomy supportive teaching": {
+    "arxiv": [],
+    "pubmed": [
+      {
+        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "authors": [
+          "Li Z",
+          "Wang Z"
+        ],
+        "published": "2026 Mar 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+      },
+      {
+        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "authors": [
+          "Gilbert M",
+          "Montanez J",
+          "Fry ZD"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+      },
+      {
+        "title": "Intervention for minimizing the risk of drop-out in music school pupils-an exploratory study.",
+        "authors": [
+          "Kavčič Pucihar A",
+          "Zadnik K",
+          "Zamrnik B"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41858461/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:07.039925"
+        "title": "Ethical issues in nursing care for older adults in community settings: A scoping review.",
+        "authors": [
+          "Huang L",
+          "Peng X",
+          "Zhao Y"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41863287/"
+      },
+      {
+        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "authors": [
+          "Li Z",
+          "Wang Z"
+        ],
+        "published": "2026 Mar 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+      },
+      {
+        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "authors": [
+          "Gilbert M",
+          "Montanez J",
+          "Fry ZD"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+      }
+    ],
+    "timestamp": "2026-03-22T11:43:24.316502"
+        "authors": [
+          "Huang L",
+          "Peng X",
+          "Zhao Y"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41863287/"
+      },
+      {
+        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "authors": [
+          "Li Z",
+          "Wang Z"
+        ],
+        "published": "2026 Mar 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+      },
+      {
+        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "authors": [
+          "Gilbert M",
+          "Montanez J",
+          "Fry ZD"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+      }
+    ],
+    "timestamp": "2026-03-22T11:57:10.413794"
+  },
+  "democratic schools": {
+    "arxiv": [
+      {
+        "title": "Democratic Policy Development using Collective Dialogues and AI",
+        "authors": [
+          "\nAndrew Konya\n",
+          "\nLisa Schirch\n",
+          "\nColin Irwin\n",
+          "\nAviv Ovadya\n"
+        ],
+        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
+        "published": "2023-11-03T21:12:57Z",
+        "link": "http://arxiv.org/abs/2311.02242v1"
+      },
+      {
+        "title": "The robustness of democratic consensus",
+        "authors": [
+          "\nFabio Fagnani\n",
+          "\nJean-Charles Delvenne\n"
+        ],
+        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
+        "published": "2015-02-15T01:02:01Z",
+        "link": "http://arxiv.org/abs/1502.04264v1"
+      },
+      {
+        "title": "Can AI mediation improve democratic deliberation?",
+        "authors": [
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
+        ],
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
+      }
+    ],
+    "pubmed": [],
+    "timestamp": "2026-03-22T11:57:11.390642"
+  },
+  "polyvagal theory education": {
+    "arxiv": [],
+    "pubmed": [
+      {
+        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
+        "authors": [
+          "Liu Y"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+      },
+      {
+        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
+        "authors": [
+          "Porges SW"
+        ],
+        "published": "2025 Jun",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+      },
+      {
+        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
+        "authors": [
+          "Goffi F",
+          "Maggioni E",
+          "Bianchi AM"
+        ],
+        "published": "2025 Jul 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:10.036030"
+    "timestamp": "2026-03-22T11:43:27.316690"
+  },
+  "democratic schools": {
+    "arxiv": [],
+    "pubmed": [
+      {
+        "title": "A multivariate decomposition analysis of urban-rural disparities in contraceptive use among women in Ethiopia.",
+        "authors": [
+          "Asmare L",
+          "Lakew G",
+          "Yirsaw AN"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41865114/"
+      },
+      {
+        "title": "Spatial distribution, integration and determinants of family planning service provision in Lubumbashi, DRC: a cross-sectional analysis from a health facility census.",
+        "authors": [
+          "Mosuse MA",
+          "Mpoyi TI",
+          "Libertini L"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41864903/"
+      },
+      {
+        "title": "Women's perceptions of person-centered comprehensive abortion care and associated factors in Northern Ethiopia: a facility-based cross-sectional study in a humanitarian setting.",
+        "authors": [
+          "Amare NS",
+          "Seyoum T",
+          "Tariku A"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862995/"
+      },
+      {
+        "title": "Clinical outcomes and survival of HIV exposed children at 18 months in post-conflict region: insight from the Panzi Interdisciplinary PMTCT cohort (Panzi IPC) study.",
+        "authors": [
+          "Ntakwinja BM",
+          "Katoto PDMC",
+          "Mukanga LO"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862836/"
+      },
+      {
+        "title": "African Representation in Randomized Controlled Trials Published in Leading Medical and Cardiovascular Journals, 2019-2024.",
+        "authors": [
+          "Gaye B",
+          "Morsy MI",
+          "Kitara DL"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41860521/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:11.042556"
+  },
+  "student agency": {
+    "arxiv": [],
+    "pubmed": [
+      {
+        "title": "A Service-Learning Program Based on Comprehensive Geriatric Assessment and Health Promotion in Older Adults: Protocol for the GEROS Project.",
+        "authors": [
+          "Casacuberta-Roca J",
+          "Minobes-Molina E",
+          "Terradas-Monllor M"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862814/"
+      },
+      {
+        "title": "PTCMIL: multiple instance learning via prompt token clustering for whole slide image analysis.",
+        "authors": [
+          "Zhao B",
+          "Kim S",
+          "Chen H"
+        ],
+        "published": "2026 Mar 10",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849941/"
+      },
+      {
+        "title": "A Modern Approach for Constructing Decision Analytic Models in Microsoft Excel.",
+        "authors": [
+          "Paulden M"
+        ],
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849113/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:12.032019"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-21T11:55:12.034326",
+      }
+    ],
+    "timestamp": "2026-03-22T11:43:28.317634"
+    "timestamp": "2026-03-22T11:57:13.418551"
+  },
+  "student agency": {
+    "arxiv": [
+      {
+        "title": "Active Inference as a Model of Agency",
+        "authors": [
+          "\nLancelot Da Costa\n",
+          "\nSamuel Tenka\n",
+          "\nDominic Zhao\n",
+          "\nNoor Sajid\n"
+        ],
+        "summary": "Is there a canonical way to think of agency beyond reward maximisation? In this paper, we show that any type of behaviour complying with physically sound assumptions about how macroscopic biological a",
+        "published": "2024-01-23T17:09:25Z",
+        "link": "http://arxiv.org/abs/2401.12917v1"
+      },
+      {
+        "title": "Sense of agency, gender, and students' perception in open-ended physics labs",
+        "authors": [
+          "\nZ. Yasemin Kalender\n",
+          "\nMartin Stein\n",
+          "\nN. G. Holmes\n"
+        ],
+        "summary": "Instructional physics labs are critical junctures for many STEM majors to develop an understanding of experimentation in the sciences. Students can acquire useful experimental skills and grow their id",
+        "published": "2020-07-15T01:47:21Z",
+        "link": "http://arxiv.org/abs/2007.07427v1"
+      },
+      {
+        "title": "A Theoretical Framework of Student Agency in AI- Assisted Learning: A Grounded Theory Approach",
+        "authors": [
+          "\nYun Dai\n",
+          "\nSichen Lai\n"
+        ],
+        "summary": "Generative AI(GenAI) is a kind of AI model capable of producing human-like content in various modalities, including text, image, audio, video, and computer programming. Although GenAI offers great pot",
+        "published": "2025-12-08T03:51:24Z",
+        "link": "http://arxiv.org/abs/2512.07143v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "The experiences of nursing and midwifery students with end-of-life care in Neonatal Intensive Care Units: A qualitative descriptive exploratory study.",
+        "authors": [
+          "Vermeulen J",
+          "Fobelets M",
+          "Van Heymbeeck I"
+        ],
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41863992/"
+      },
+      {
+        "title": "Return to Work Following Osteochondral Allograft Transplantation in the Knee.",
+        "authors": [
+          "Rucinski K",
+          "Crecelius CR",
+          "Nuelle CW"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41863744/"
+      },
+      {
+        "title": "A Service-Learning Program Based on Comprehensive Geriatric Assessment and Health Promotion in Older Adults: Protocol for the GEROS Project.",
+        "authors": [
+          "Casacuberta-Roca J",
+          "Minobes-Molina E",
+          "Terradas-Monllor M"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862814/"
+      }
+    ],
+    "timestamp": "2026-03-22T11:43:29.318492"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-22T11:43:29.320409",
+    "timestamp": "2026-03-22T11:57:14.421329"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-22T11:57:14.423257",
+    "source": "WHO Global Health Observatory (Disabled)"
+  },
+  "world_bank_education": {
+    "data": {
+      "AUS": {
+        "Secondary education duration (years)": {
+          "value": 6,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 5.05916023254395,
+          "year": "2022"
+        }
+      },
+      "BRA": {
+        "Secondary education duration (years)": {
+          "value": 7,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 5.61922979354858,
+          "year": "2022"
+        }
+      },
+      "CAN": {
+        "Secondary education duration (years)": {
+          "value": 6,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 4.88021993637085,
+          "year": "2022"
+        }
+      },
+      "CHN": {
+        "Secondary education duration (years)": {
+          "value": 6,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 4.00127983093262,
+          "year": "2023"
+        }
+      },
+      "DEU": {
+        "Secondary education duration (years)": {
+          "value": 9,
+          "year": "2023"
+        },
+        "Primary completion rate (%)": {
+          "value": 99.2837371826172,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 5.23916006088257,
+          "year": "2022"
+        }
+      },
+      "FRA": {
+        "Secondary education duration (years)": {
+          "value": 7,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 5.32435989379883,
+          "year": "2022"
+        }
+      },
+      "GBR": {
+        "Secondary education duration (years)": {
+          "value": 7,
+          "year": "2023"
+        },
+        "Primary completion rate (%)": {
+          "value": 101.423362731934,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 5.90682983398438,
+          "year": "2021"
+        }
+      },
+      "IND": {
+        "Secondary education duration (years)": {
+          "value": 7,
+          "year": "2023"
+        },
+        "Primary completion rate (%)": {
+          "value": 93.8187311671038,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 4.09865814174589,
+          "year": "2022"
+        }
+      },
+      "JPN": {
+        "Secondary education duration (years)": {
+          "value": 6,
+          "year": "2023"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 3.33563995361328,
+          "year": "2021"
+        }
+      },
+      "USA": {
+        "Secondary education duration (years)": {
+          "value": 6,
+          "year": "2023"
+        },
+        "Primary completion rate (%)": {
+          "value": 95.743522644043,
+          "year": "2022"
+        },
+        "Government education expenditure (% of GDP)": {
+          "value": 5.42038011550903,
+          "year": "2021"
+        }
+      }
+    },
+    "timestamp": "2026-03-21T11:55:15.495642",
+    "timestamp": "2026-03-22T11:43:32.956628",
+    "timestamp": "2026-03-22T11:57:17.579663",
+    "source": "World Bank EdStats API"
+  },
+  "world_bank_wgi": {
+    "data": {
+      "AUS": {
+        "Voice & Accountability": {
+          "value": 1.50660192966461,
+          "year": "2023"
+        }
+      },
+      "BRA": {
+        "Voice & Accountability": {
+          "value": 0.382853865623474,
+          "year": "2023"
+        }
+      },
+      "CAN": {
+        "Voice & Accountability": {
+          "value": 1.4796462059021,
+          "year": "2023"
+        }
+      },
+      "CHN": {
+        "Voice & Accountability": {
+          "value": -1.50455415248871,
+          "year": "2023"
+        }
+      },
+      "DEU": {
+        "Voice & Accountability": {
+          "value": 1.46138572692871,
+          "year": "2023"
+        }
+      },
+      "FRA": {
+        "Voice & Accountability": {
+          "value": 1.15460133552551,
+          "year": "2023"
+        }
+      },
+      "GBR": {
+        "Voice & Accountability": {
+          "value": 1.26162397861481,
+          "year": "2023"
+        }
+      },
+      "IND": {
+        "Voice & Accountability": {
+          "value": 0.0944044888019562,
+          "year": "2023"
+        }
+      },
+      "JPN": {
+        "Voice & Accountability": {
+          "value": 1.10550534725189,
+          "year": "2023"
+        }
+      },
+      "USA": {
+        "Voice & Accountability": {
+          "value": 0.877519071102142,
+          "year": "2023"
+        }
+      },
+      "CHE": {
+        "Voice & Accountability": {
+          "value": 1.66502690315247,
+          "year": "2023"
+        }
+      },
+      "DNK": {
+        "Voice & Accountability": {
+          "value": 1.66469931602478,
+          "year": "2023"
+        }
+      },
+      "ESP": {
+        "Voice & Accountability": {
+          "value": 1.19472968578339,
+          "year": "2023"
+        }
+      },
+      "FIN": {
+        "Voice & Accountability": {
+          "value": 1.63263607025146,
+          "year": "2023"
+        }
+      },
+      "ITA": {
+        "Voice & Accountability": {
+          "value": 1.11553084850311,
+          "year": "2023"
+        }
+      },
+      "KOR": {
+        "Voice & Accountability": {
+          "value": 0.8595951795578,
+          "year": "2023"
+        }
+      },
+      "NLD": {
+        "Voice & Accountability": {
+          "value": 1.55626440048218,
+          "year": "2023"
+        }
+      },
+      "NOR": {
+        "Voice & Accountability": {
+          "value": 1.77725434303284,
+          "year": "2023"
+        }
+      },
+      "NZL": {
+        "Voice & Accountability": {
+          "value": 1.68778347969055,
+          "year": "2023"
+        }
+      },
+      "SWE": {
+        "Voice & Accountability": {
+          "value": 1.57483160495758,
+          "year": "2023"
+        }
+      }
+    },
+    "timestamp": "2026-03-21T11:55:18.093777",
+    "timestamp": "2026-03-22T11:43:34.770298",
+    "timestamp": "2026-03-22T11:57:19.578696",
+    "source": "World Bank WGI"
+  }
+        "title": "Enhancing Trainee Knowledge and Competence in Addiction Medicine: Outcomes of an Interprofessional Addiction Consult Service Rotation."
       }
     ],
     "timestamp": "2026-01-29T11:50:51.931136"
@@ -511,471 +1205,9 @@
     ],
     "pubmed": [
       {
-        "title": "Enantioselective C-H functionalization: logic and applications in the total synthesis of natural products.",
-        "title": "Factors associated with unsuppressed HIV viral load among children under 15 years in sub-Saharan africa: a systematic review.",
-        "title": "Accumulation of toxic metals in sediments and oligochaetes around urban uncontrolled landfills in Kinshasa, DR Congo.",
-        "authors": [
-          "Akonga MO",
-          "Gizanga RV",
-          "Musibono DE"
-        ],
-        "published": "2026 Jan 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41606109/"
-      },
-      {
-        "title": "Empathy and citizen's social-political attitude: age as a moderator.",
-        "authors": [
-          "Liu Y",
-          "Lu L",
-          "Kaviani H"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41602651/"
-      },
-      {
-        "title": "Political grief and ambiguous loss in a threatened democracy: psychological distress and civic responses during Israel's judicial reform.",
-        "authors": [
-          "Yehene E",
-          "Ohayon S"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41601496/"
+        "title": "Some pubmed title"
       }
     ],
-    "timestamp": "2026-01-29T11:51:00.898412"
-        "title": "Multicentre field evaluation of Xpert MTB/XDR in sub-Saharan Africa.",
-        "authors": [
-          "Massou F",
-          "Diarra B",
-          "Ba Diallo A"
-        ],
-        "published": "2026 Mar",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41809859/"
-      },
-      {
-        "title": "The COVID-19 vaccine procurement and supply chain in the Democratic Republic of Congo.",
-        "authors": [
-          "Lobukulu Lolimo G",
-          "Kabadi YM",
-          "Beshah SA"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41809243/"
-      },
-      {
-        "title": "Community-based prevalence and factors associated with hypertension in adults in the rural Nyiragongo Health Zone, North Kivu Province, Democratic Republic of the Congo: a cross-sectional study.",
-        "authors": [
-          "Bahizire CM",
-          "Ngadjole HC",
-          "Kikangala EB"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41808905/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:39.659271"
-        "title": "The hidden crisis: a multinational analysis of neurosurgical residency training in Latin America.",
-        "authors": [
-          "Qian PF",
-          "Shi BF"
-        ],
-        "published": "2026 Jan 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41613967/"
-      },
-      {
-        "title": "Denis Mukwege: Advocacy Within and Beyond the Operating Room.",
-        "authors": [
-          "Ojinnaka AA",
-          "Odaka F",
-          "Kashyap R"
-        ],
-        "published": "2025 Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41613734/"
-      },
-      {
-        "title": "Prevalence and determinants of unmet need for family planning among married women on Idjwi Island, Democratic Republic of the congo.",
-        "authors": [
-          "Masoda MN",
-          "Mukuku O",
-          "Mishika PL"
-        ],
-        "published": "2026 Jan 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41612465/"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:24.297038"
-  },
-  "student agency": {
-    "arxiv": [
-      {
-        "title": "Active Inference as a Model of Agency",
-        "authors": [
-          "\nLancelot Da Costa\n",
-          "\nSamuel Tenka\n",
-          "\nDominic Zhao\n",
-          "\nNoor Sajid\n"
-        ],
-        "summary": "Is there a canonical way to think of agency beyond reward maximisation? In this paper, we show that any type of behaviour complying with physically sound assumptions about how macroscopic biological a",
-        "published": "2024-01-23T17:09:25Z",
-        "link": "http://arxiv.org/abs/2401.12917v1"
-      },
-      {
-        "title": "Sense of agency, gender, and students' perception in open-ended physics labs",
-        "authors": [
-          "\nZ. Yasemin Kalender\n",
-          "\nMartin Stein\n",
-          "\nN. G. Holmes\n"
-        ],
-        "summary": "Instructional physics labs are critical junctures for many STEM majors to develop an understanding of experimentation in the sciences. Students can acquire useful experimental skills and grow their id",
-        "published": "2020-07-15T01:47:21Z",
-        "link": "http://arxiv.org/abs/2007.07427v1"
-      },
-      {
-        "title": "A Theoretical Framework of Student Agency in AI- Assisted Learning: A Grounded Theory Approach",
-        "authors": [
-          "\nYun Dai\n",
-          "\nSichen Lai\n"
-        ],
-        "summary": "Generative AI(GenAI) is a kind of AI model capable of producing human-like content in various modalities, including text, image, audio, video, and computer programming. Although GenAI offers great pot",
-        "published": "2025-12-08T03:51:24Z",
-        "link": "http://arxiv.org/abs/2512.07143v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Perspectives of Undergraduate Nursing Students Taking Combined and Separate Maternity and Pediatric Courses.",
-        "title": "Beliefs, practices, and awareness of written corrective feedback among EFL teachers: a mixed-methods study.",
-        "title": "The sensitivity of TANDEM - A new measure of trauma competence.",
-        "authors": [
-          "Gjestad R",
-          "Nordanger DØ",
-          "Coman A"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41604376/"
-      },
-      {
-        "title": "Assessing Vulnerable and Antagonistic Traits Using the Five-Factor Model Measures.",
-        "authors": [
-          "Bonfá-Araujo B",
-          "Rose L",
-          "Miller JD"
-        ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41603471/"
-      },
-      {
-        "title": "Empowering Adolescents for Sustainable and Inclusive Careers: A Quasi-Experimental Evaluation of a Life Design-Based Intervention.",
-        "authors": [
-          "Santilli S",
-          "Zucchini D",
-          "Valbusa I"
-        ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41603042/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:51:01.891765"
-  },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-01-29T11:51:01.893338",
-        "title": "Making sense together: participatory sensemaking, learning cycles, and group roles.",
-        "authors": [
-          "Kronsted C",
-          "Henley M",
-          "Giguere M"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41809740/"
-      },
-      {
-        "title": "Dental Students' Readiness to Use Silver Diamine Fluoride in Older Adults: Knowledge, Perceptions, and Challenges.",
-        "authors": [
-          "León S",
-          "Gambetta-Tessini K",
-          "Corbett F"
-        ],
-        "published": "2026 Mar-Apr",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41804071/"
-      },
-      {
-        "title": "A survey to evaluate the use of the erector spinae plane block (ESPB) in small animal practice.",
-        "authors": [
-          "Cabellos Clemente C",
-          "Pawson P",
-          "Robertson J"
-        ],
-        "published": "2026 Mar 3",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41802380/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:40.651711"
-  },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-03-11T11:53:40.653658",
-        "title": "Medication adherence tools and measures in chronic kidney disease: a systematic review.",
-        "authors": [
-          "Roohi E",
-          "Rahmatian D",
-          "Borkum M"
-        ],
-        "published": "2026 Jan 24",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41580739/"
-      },
-      {
-        "title": "Evaluating Field Placement Competencies and Workforce Readiness in Region IV Public Health Training Center.",
-        "authors": [
-          "Fifolt M",
-          "Kidwell EL",
-          "McCormick LC"
-        ],
-        "published": "2026 Mar-Apr 01",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41576405/"
-      },
-      {
-        "title": "Evaluation of the Efficacy of Low-Concentration Gaseous Chlorine Dioxide in Inactivating Airborne H5 High Pathogenicity Avian Influenza Virus in Vivo Model.",
-        "authors": [
-          "Hew YL",
-          "Isoda N",
-          "Miura T"
-        ],
-        "published": "2026 Jan 23",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41575624/"
-      }
-    ],
-    "timestamp": "2026-01-28T11:55:19.293825"
-  },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-01-28T11:55:19.296058",
-        "title": "Mapping differentiated cognitive landscapes of university students in China via fuzzy comprehensive evaluation.",
-        "authors": [
-          "Welsh AM",
-          "Brown-O'Hara P"
-        ],
-        "published": "2026 Jan 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41617177/"
-      },
-      {
-        "title": "Three pain points of medical schools - time for change.",
-        "authors": [
-          "Pospíšilová K",
-          "Vošmik J",
-          "Volejníčková RM"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41615793/"
-      },
-      {
-        "title": "A qualitative exploration of first-in-family medical students' decisions to partake in noncurricular activities.",
-        "authors": [
-          "Garrett A",
-          "Griffith M",
-          "Amssalu M"
-        ],
-        "published": "2026 Jan 30",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41614429/"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:25.283040"
-  },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-01-31T11:40:25.284849",
-    "source": "WHO Global Health Observatory (Disabled)"
-  },
-  "world_bank_education": {
-    "data": {
-      "AUS": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.05916023254395,
-          "year": "2022"
-        }
-      },
-      "BRA": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.61922979354858,
-          "year": "2022"
-        }
-      },
-      "CAN": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.88021993637085,
-          "year": "2022"
-        }
-      },
-      "CHN": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.00127983093262,
-          "year": "2023"
-        }
-      },
-      "DEU": {
-        "Secondary education duration (years)": {
-          "value": 9,
-          "year": "2023"
-        },
-        "Primary completion rate (%)": {
-          "value": 99.2837371826172,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.23916006088257,
-          "year": "2022"
-        }
-      },
-      "FRA": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.32435989379883,
-          "year": "2022"
-        }
-      },
-      "GBR": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
-        "Primary completion rate (%)": {
-          "value": 101.423362731934,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.90682983398438,
-          "year": "2021"
-        }
-      },
-      "IND": {
-        "Secondary education duration (years)": {
-          "value": 7,
-          "year": "2023"
-        },
-        "Primary completion rate (%)": {
-          "value": 93.8187311671038,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 4.09865814174589,
-          "year": "2022"
-        }
-      },
-      "JPN": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 3.33563995361328,
-          "year": "2021"
-        }
-      },
-      "USA": {
-        "Secondary education duration (years)": {
-          "value": 6,
-          "year": "2023"
-        },
-        "Primary completion rate (%)": {
-          "value": 95.743522644043,
-          "year": "2022"
-        },
-        "Government education expenditure (% of GDP)": {
-          "value": 5.42038011550903,
-          "year": "2021"
-        }
-      }
-    },
-    "timestamp": "2026-01-31T11:40:31.647078",
-    "timestamp": "2025-12-21T11:33:40.499254",
-    "timestamp": "2026-01-29T11:51:22.370757",
-    "timestamp": "2026-03-11T11:54:48.570455",
-    "timestamp": "2026-01-28T11:55:22.807455",
-    "timestamp": "2026-03-12T11:58:17.169065",
-    "source": "World Bank EdStats API"
-  },
-  "world_bank_wgi": {
-    "data": {
-      "AUS": {
-        "Voice & Accountability": {
-          "value": 1.50660192966461,
-          "year": "2023"
-        }
-      },
-      "BRA": {
-        "Voice & Accountability": {
-          "value": 0.382853865623474,
-          "year": "2023"
-        }
-      },
-      "CAN": {
-        "Voice & Accountability": {
-          "value": 1.4796462059021,
-          "year": "2023"
-        }
-      },
-      "CHN": {
-        "Voice & Accountability": {
-          "value": -1.50455415248871,
-          "year": "2023"
-        }
-      },
-      "DEU": {
-        "Voice & Accountability": {
-          "value": 1.46138572692871,
-          "year": "2023"
-        }
-      },
-      "FRA": {
-        "Voice & Accountability": {
-          "value": 1.15460133552551,
-          "year": "2023"
-        }
-      },
-      "GBR": {
-        "Voice & Accountability": {
-          "value": 1.26162397861481,
-          "year": "2023"
-        }
-      },
-      "IND": {
-        "Voice & Accountability": {
-          "value": 0.0944044888019562,
-          "year": "2023"
-        }
-      },
-      "JPN": {
-        "Voice & Accountability": {
-          "value": 1.10550534725189,
-          "year": "2023"
-        }
-      },
-      "USA": {
-        "Voice & Accountability": {
-          "value": 0.877519071102142,
-          "year": "2023"
-        }
-      }
-    },
     "timestamp": "2026-01-31T11:40:33.479921",
     "source": "World Bank WGI"
   }

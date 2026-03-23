@@ -2,7 +2,7 @@ import importlib.util
 import io
 import os
 import unittest
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 # Load owid_proxy dynamically
 PROXY_PATH = os.path.join(os.getcwd(), 'web/5d-map/owid_proxy.py')
@@ -108,9 +108,6 @@ class TestOWIDProxySecurity(unittest.TestCase):
         self.assertIn("Response too large", output)
 
 import sys
-import unittest
-from unittest.mock import MagicMock, patch
-
 # Load the owid_proxy module dynamically
 PROXY_PATH = "web/5d-map/owid_proxy.py"
 spec = importlib.util.spec_from_file_location("owid_proxy", PROXY_PATH)
