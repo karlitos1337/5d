@@ -982,15 +982,10 @@
             const container = document.getElementById('metricSliders');
             const selectedDim = selector.value;
             
-            // Use textContent and appendChild to prevent DOM-based XSS
-            container.textContent = '';
+            container.innerHTML = '';
             
             if (selectedDim === 'all') {
-                const p = document.createElement('p');
-                p.style.opacity = '0.7';
-                p.style.textAlign = 'center';
-                p.textContent = 'Wähle eine Dimension zum Anpassen';
-                container.appendChild(p);
+                container.innerHTML = '<p style="opacity: 0.7; text-align: center;">Wähle eine Dimension zum Anpassen</p>';
                 return;
             }
             
@@ -1001,16 +996,21 @@
                 const sliderDiv = document.createElement('div');
                 sliderDiv.className = 'slider-control';
                 
+                // Create label
                 const labelEl = document.createElement('label');
-                labelEl.textContent = label + " ";
                 
+                // Label text
+                labelEl.appendChild(document.createTextNode(label));
+
+                // Value span
                 const spanEl = document.createElement('span');
                 spanEl.className = 'slider-value';
                 spanEl.id = `value_${selectedDim}_${idx}`;
                 spanEl.textContent = data[idx];
-
+                labelEl.appendChild(document.createTextNode(' ')); // spacing
                 labelEl.appendChild(spanEl);
                 
+                // Input
                 const inputEl = document.createElement('input');
                 inputEl.type = 'range';
                 inputEl.min = '1';
@@ -1020,6 +1020,7 @@
                     updateMetric(selectedDim, idx, this.value);
                 };
                 
+                // Append elements
                 sliderDiv.appendChild(labelEl);
                 sliderDiv.appendChild(inputEl);
                 
@@ -1040,29 +1041,14 @@
         function updateFutureExplanation(years) {
             const list = document.getElementById('explanationText');
             const yearLabel = 2025 + years;
-            // Use textContent and appendChild to prevent DOM-based XSS
-            list.textContent = '';
-
-            const projections = [
-                `Projektion für ${yearLabel} (+${years} Jahre):`,
-                `1D: ${calculateWeightedScore(customFutureData['1d'], metricWeights['1d'], '1d')}/99 - Grundlegende Verbesserung bei Umweltbewusstsein`,
-                `2D: ${calculateWeightedScore(customFutureData['2d'], metricWeights['2d'], '2d')}/99 - Bewussterer Konsum nimmt zu`,
-                `3D: ${calculateWeightedScore(customFutureData['3d'], metricWeights['3d'], '3d')}/99 - Mehr Menschen handeln konsequent`,
-                `4D: ${calculateWeightedScore(customFutureData['4d'], metricWeights['4d'], '4d')}/99 - Empathie wird gesellschaftliche Norm`,
-                `5D: ${calculateWeightedScore(customFutureData['5d'], metricWeights['5d'], '5d')}/99 - Spirituelles Bewusstsein wächst stark`
-            ];
-
-            projections.forEach((text, index) => {
-                const li = document.createElement('li');
-                if (index === 0) {
-                    const strong = document.createElement('strong');
-                    strong.textContent = text;
-                    li.appendChild(strong);
-                } else {
-                    li.textContent = text;
-                }
-                list.appendChild(li);
-            });
+            list.innerHTML = `
+                <li><strong>Projektion für ${yearLabel} (+${years} Jahre):</strong></li>
+                <li>1D: ${calculateWeightedScore(customFutureData['1d'], metricWeights['1d'], '1d')}/99 - Grundlegende Verbesserung bei Umweltbewusstsein</li>
+                <li>2D: ${calculateWeightedScore(customFutureData['2d'], metricWeights['2d'], '2d')}/99 - Bewussterer Konsum nimmt zu</li>
+                <li>3D: ${calculateWeightedScore(customFutureData['3d'], metricWeights['3d'], '3d')}/99 - Mehr Menschen handeln konsequent</li>
+                <li>4D: ${calculateWeightedScore(customFutureData['4d'], metricWeights['4d'], '4d')}/99 - Empathie wird gesellschaftliche Norm</li>
+                <li>5D: ${calculateWeightedScore(customFutureData['5d'], metricWeights['5d'], '5d')}/99 - Spirituelles Bewusstsein wächst stark</li>
+            `;
         }
 
         function calculateWeightedScore(data, weights, dimension) {
@@ -1113,8 +1099,7 @@
 
         function updateExplanation() {
             const list = document.getElementById('explanationText');
-            // Use textContent and appendChild to prevent DOM-based XSS
-            list.textContent = '';
+            list.innerHTML = '';
             explanations[currentScenario].forEach(text => {
                 const li = document.createElement('li');
                 li.textContent = text;
