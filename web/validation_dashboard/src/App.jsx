@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -14,6 +15,7 @@ const App = () => {
   });
 
   const sections = useMemo(() => [
+  const sections = React.useMemo(() => [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -24,6 +26,7 @@ const App = () => {
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
   const ticking = useRef(false);
+
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -38,7 +41,7 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      if (el.tagName !== 'IMG' && el.tagName !== 'BR' && el.tagName !== 'HR' && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -56,7 +59,11 @@ const App = () => {
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
-      el.appendChild(btn);
+      if (el.tagName === 'IMG' || el.tagName === 'BR' || el.tagName === 'HR') {
+        el.parentNode.insertBefore(btn, el.nextSibling);
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
@@ -71,8 +78,12 @@ const App = () => {
     setMobileMenuOpen(false);
   };
 
+  const ticking = useRef(false);
   useEffect(() => {
     // Handle scroll events with requestAnimationFrame for better performance
+    let ticking = { current: false };
+
+  useEffect(() => {
     const handleScroll = () => {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
@@ -92,6 +103,7 @@ const App = () => {
     };
 
     // Use passive listener to avoid blocking the main thread
+    // Use passive listener for better scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
@@ -99,7 +111,7 @@ const App = () => {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
       <a
-        href="#einleitung"
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:rounded-br-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       >
         Zum Hauptinhalt springen
@@ -190,7 +202,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -307,6 +319,7 @@ const App = () => {
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
                       Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -325,6 +338,7 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
                   <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -348,7 +362,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Korrelationsanalysen</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu & Robinson (2012).
+                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu &amp; Robinson (2012).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -361,7 +375,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Validitätsprüfungen</h3>
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
+                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (&ge;0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -408,18 +422,19 @@ const App = () => {
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
                   Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist &alpha; &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Unreliability (α)</span>
+                    <span>Unreliability (&alpha;)</span>
                     <span className="font-semibold">.80</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Gullibility (α)</span>
+                    <span>Gullibility (&alpha;)</span>
                     <span className="font-semibold">.79</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Irrationality (α)</span>
+                    <span>Irrationality (&alpha;)</span>
                     <span className="font-semibold">.78</span>
                   </div>
                 </div>
@@ -467,7 +482,7 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
               <h3 className="text-xl font-semibold mb-4">Theoretische Fundierung</h3>
               <p className="mb-4" data-ref="https://www.tandfonline.com/doi/full/10.1080/10447318.2025.2542881?src=|12">
-                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci & Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
+                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci &amp; Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
               </p>
               <p data-ref="https://doi.org/10.3390/challe13020058|13">
                 Die sieben Kernelemente des Flourish-Modells - Sicherheit, Beziehung, Unabhängigkeit, Engagement, Erfüllung, Beitrag und Wachstum - werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
@@ -567,7 +582,7 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
                   <h4 className="font-semibold text-green-500 mb-2">Zielvorgaben</h4>
                   <p className="text-sm">
-                    α &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
+                    &alpha; &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
                   </p>
                 </div>
               </div>
