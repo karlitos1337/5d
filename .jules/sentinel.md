@@ -18,3 +18,7 @@
 **Vulnerability:** The `owid_proxy.py` script lacked response size limits (DoS risk), leaked exception details in 502 responses (Info Leak), and missed `X-Content-Type-Options` headers.
 **Learning:** Development tools (proxies) often bypass standard security checks but end up in production-like environments.
 **Prevention:** Enforced 10MB limit with chunked reading and sanitized error messages in the proxy handler. Added regression tests `tests/test_owid_proxy_security.py`.
+## 2026-03-24 - [Fix DOM-based XSS vulnerabilities in bewusstsein_evolution]
+**Vulnerability:** The application used `innerHTML` to dynamically generate sliders and lists in `.streamlit/static/bewusstsein_evolution.html` and `web/bewusstsein_evolution.html` (e.g. `updateDimensionSliders`, `updateFutureExplanation`, and `updateExplanation`).
+**Learning:** Using `innerHTML` to generate UI based on dynamic variables or calculations is vulnerable to DOM-based XSS attacks, even if the input seems partially controlled, because it lacks auto-escaping for HTML entities.
+**Prevention:** Avoid `innerHTML` entirely for DOM element creation. Instead, use native DOM manipulation such as `document.createElement`, `textContent`, and `appendChild` which are inherently safer against code injection.
