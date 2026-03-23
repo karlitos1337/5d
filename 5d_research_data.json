@@ -1,5 +1,6 @@
 {
   "self-directed learning": {
+    "arxiv": [],
     "arxiv": [
       {
         "title": "Active learning for data streams: a surv...3"
@@ -37,33 +38,31 @@
     ],
     "pubmed": [
       {
-        "title": "Enhancing Trainee Knowledge and Competence in Addiction Medicine: Outcomes of an Interprofessional Addiction Consult Service Rotation.",
-        "title": "Digital Learning in Motion: Exploring Mobile Device Use in Mexican Residents.",
-        "title": "Teaching beyond the binary: A qualitative descriptive study of nurse educators' perceptions on including gender diversity in undergraduate education.",
+        "title": "ChatGPT versus UpToDate in Preclinical Medical Education: Cross-Sectional Analysis Using Term Frequency-Inverse Document Frequency Cosine Similarity.",
         "authors": [
-          "Collingburn JD",
-          "Bourke SL",
-          "Copnell B"
+          "Thiru SS",
+          "Aksu NE",
+          "Chiang M"
         ],
-        "published": "2026 Jan 23",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41604731/"
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861392/"
       },
       {
-        "title": "Artificial Intelligence in Medical Education: Promoting Active Learning With a Customized Chatbot Tool.",
+        "title": "Pharmaceutical competency among physicians: a multidimensional assessment incorporating self-perceived and objective measures.",
         "authors": [
-          "Bogenschutz K",
-          "Demeter J",
-          "Knoderer CA"
+          "Liu C",
+          "Guo H",
+          "Li B"
         ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41603621/"
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849096/"
       },
       {
-        "title": "The effect of cooperative learning approach with concept maps on nursing students' knowledge acquisition on symptom management in cancer patients: a randomized controlled trial.",
+        "title": "Cognitive and emotional dynamics of artificial intelligence-assisted English learning: A mixed-methods study in a dual instructional context.",
         "authors": [
-          "Kahraman BB",
-          "Acun A",
-          "Bilgiç S"
+          "Zimik HR",
+          "Aujirapongpan S",
+          "Waluyo B"
         ],
         "published": "2026 Jan 28",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41593576/"
@@ -97,45 +96,12 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41844123/"
       }
     ],
+    "timestamp": "2026-03-21T11:55:02.350911"
     "timestamp": "2026-03-22T11:43:19.324152"
     "timestamp": "2026-03-22T11:57:05.423573"
   },
   "intrinsic motivation education": {
-    "arxiv": [
-      {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
-        "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
-        ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
-      },
-      {
-        "title": "Cinema, Fermi Problems, & General Education",
-        "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
-        ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
-      },
-      {
-        "title": "Creating Experience value to build student satisfaction in higher education",
-        "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
-        ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
-      }
-    ],
+    "arxiv": [],
     "pubmed": [
       {
         "title": "Exploring the Concept of Nurses' Healthcare Policy Competence: A Systematic Review and Qualitative Meta-Synthesis.",
@@ -163,47 +129,66 @@
           "Xu C",
           "Gao G"
         ],
+      },
+      {
+        "title": "Understanding How Nurse Faculty Advisors Perceive Voluntary Attrition Among 4-Year Baccalaureate Degree Nursing Students: A Qualitative Descriptive Study.",
+        "authors": [
+          "Shaver DE",
+          "Viveiros JD",
+          "Hunter Revell S"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41860450/"
+      },
+      {
+        "title": "Influencing factors of physical exercise motivation among military academy cadets: a social ecological model analysis.",
+        "authors": [
+          "Wang W",
+          "Xu C",
+          "Gao G"
+        ],
         "published": "2026",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41853079/"
       }
     ],
+    "timestamp": "2026-03-21T11:55:05.025953"
     "timestamp": "2026-03-22T11:43:22.315974"
     "timestamp": "2026-03-22T11:57:08.447818"
   },
   "autonomy supportive teaching": {
-    "arxiv": [
-      {
-        "title": "Closing the Gap between Teaching and Assessment",
-        "authors": [
-          "\nChandralekha Singh\n"
-        ],
-        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
-        "published": "2017-01-09T21:29:02Z",
-        "link": "http://arxiv.org/abs/1701.02356v1"
-      },
-      {
-        "title": "Distribution Matching for Machine Teaching",
-        "authors": [
-          "\nXiaofeng Cao\n",
-          "\nIvor W. Tsang\n"
-        ],
-        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
-        "published": "2021-05-06T09:32:57Z",
-        "link": "http://arxiv.org/abs/2105.13809v1"
-      },
-      {
-        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
-        "authors": [
-          "\nMartin S. Feather\n",
-          "\nAlessandro Pinto\n"
-        ],
-        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
-        "published": "2023-05-16T18:24:12Z",
-        "link": "http://arxiv.org/abs/2305.11902v1"
-      }
-    ],
+    "arxiv": [],
     "pubmed": [
       {
+        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "authors": [
+          "Li Z",
+          "Wang Z"
+        ],
+        "published": "2026 Mar 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+      },
+      {
+        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "authors": [
+          "Gilbert M",
+          "Montanez J",
+          "Fry ZD"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+      },
+      {
+        "title": "Intervention for minimizing the risk of drop-out in music school pupils-an exploratory study.",
+        "authors": [
+          "Kavčič Pucihar A",
+          "Zadnik K",
+          "Zamrnik B"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41858461/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:07.039925"
         "title": "Ethical issues in nursing care for older adults in community settings: A scoping review.",
         "authors": [
           "Huang L",
@@ -312,41 +297,7 @@
     "timestamp": "2026-03-22T11:57:11.390642"
   },
   "polyvagal theory education": {
-    "arxiv": [
-      {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
-        "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
-        ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
-      },
-      {
-        "title": "Cinema, Fermi Problems, & General Education",
-        "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
-        ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
-      },
-      {
-        "title": "Creating Experience value to build student satisfaction in higher education",
-        "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
-        ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
-      }
-    ],
+    "arxiv": [],
     "pubmed": [
       {
         "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
@@ -375,52 +326,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
+    "timestamp": "2026-03-21T11:55:10.036030"
     "timestamp": "2026-03-22T11:43:27.316690"
   },
   "democratic schools": {
-    "arxiv": [
-      {
-        "title": "Democratic Policy Development using Collective Dialogues and AI",
-        "authors": [
-          "\nAndrew Konya\n",
-          "\nLisa Schirch\n",
-          "\nColin Irwin\n",
-          "\nAviv Ovadya\n"
-        ],
-        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
-        "published": "2023-11-03T21:12:57Z",
-        "link": "http://arxiv.org/abs/2311.02242v1"
-      },
-      {
-        "title": "The robustness of democratic consensus",
-        "authors": [
-          "\nFabio Fagnani\n",
-          "\nJean-Charles Delvenne\n"
-        ],
-        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
-        "published": "2015-02-15T01:02:01Z",
-        "link": "http://arxiv.org/abs/1502.04264v1"
-      },
-      {
-        "title": "Can AI mediation improve democratic deliberation?",
-        "authors": [
-          "\nMichael Henry Tessler\n",
-          "\nGeorgina Evans\n",
-          "\nMichiel A. Bakker\n",
-          "\nIason Gabriel\n",
-          "\nSophie Bridgers\n",
-          "\nRishub Jain\n",
-          "\nRaphael Koster\n",
-          "\nVerena Rieser\n",
-          "\nAnca Dragan\n",
-          "\nMatthew Botvinick\n",
-          "\nChristopher Summerfield\n"
-        ],
-        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
-        "published": "2026-01-09T16:22:26Z",
-        "link": "http://arxiv.org/abs/2601.05904v1"
-      }
-    ],
+    "arxiv": [],
     "pubmed": [
       {
         "title": "A multivariate decomposition analysis of urban-rural disparities in contraceptive use among women in Ethiopia.",
@@ -451,6 +361,67 @@
         ],
         "published": "2026 Mar 20",
         "link": "https://pubmed.ncbi.nlm.nih.gov/41862995/"
+      },
+      {
+        "title": "Clinical outcomes and survival of HIV exposed children at 18 months in post-conflict region: insight from the Panzi Interdisciplinary PMTCT cohort (Panzi IPC) study.",
+        "authors": [
+          "Ntakwinja BM",
+          "Katoto PDMC",
+          "Mukanga LO"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862836/"
+      },
+      {
+        "title": "African Representation in Randomized Controlled Trials Published in Leading Medical and Cardiovascular Journals, 2019-2024.",
+        "authors": [
+          "Gaye B",
+          "Morsy MI",
+          "Kitara DL"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41860521/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:11.042556"
+  },
+  "student agency": {
+    "arxiv": [],
+    "pubmed": [
+      {
+        "title": "A Service-Learning Program Based on Comprehensive Geriatric Assessment and Health Promotion in Older Adults: Protocol for the GEROS Project.",
+        "authors": [
+          "Casacuberta-Roca J",
+          "Minobes-Molina E",
+          "Terradas-Monllor M"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862814/"
+      },
+      {
+        "title": "PTCMIL: multiple instance learning via prompt token clustering for whole slide image analysis.",
+        "authors": [
+          "Zhao B",
+          "Kim S",
+          "Chen H"
+        ],
+        "published": "2026 Mar 10",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849941/"
+      },
+      {
+        "title": "A Modern Approach for Constructing Decision Analytic Models in Microsoft Excel.",
+        "authors": [
+          "Paulden M"
+        ],
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41849113/"
+      }
+    ],
+    "timestamp": "2026-03-21T11:55:12.032019"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-21T11:55:12.034326",
       }
     ],
     "timestamp": "2026-03-22T11:43:28.317634"
@@ -655,6 +626,7 @@
         }
       }
     },
+    "timestamp": "2026-03-21T11:55:15.495642",
     "timestamp": "2026-03-22T11:43:32.956628",
     "timestamp": "2026-03-22T11:57:17.579663",
     "source": "World Bank EdStats API"
@@ -782,6 +754,7 @@
         }
       }
     },
+    "timestamp": "2026-03-21T11:55:18.093777",
     "timestamp": "2026-03-22T11:43:34.770298",
     "timestamp": "2026-03-22T11:57:19.578696",
     "source": "World Bank WGI"
