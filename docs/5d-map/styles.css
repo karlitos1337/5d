@@ -196,3 +196,39 @@ body.loading .loading-overlay {
     font-size: 18px;
   }
 }
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.sr-only.focus\:not-sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background-color: var(--color-primary);
+  color: #fff;
+  z-index: 9999;
+  border-bottom-right-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+.sr-only.focus\:not-sr-only:focus-visible {
+  outline: 2px solid var(--color-warning);
+  outline-offset: 2px;
+}
+#main-content:focus {
+  outline: none;
+}

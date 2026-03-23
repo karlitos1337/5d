@@ -42,7 +42,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
                     data = b""
                     while True:
-                        chunk = resp.read(64 * 1024)
+                        chunk = resp.read(CHUNK_SIZE)
                         if not chunk:
                             break
                         data += chunk

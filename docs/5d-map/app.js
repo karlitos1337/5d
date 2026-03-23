@@ -165,15 +165,16 @@ function updateValidationCount() {
     : items;
   const label = validationFilter === 'all' ? 'alle' : validationFilter;
 
-  validationCountEl.textContent = 'Filter: ';
-  const labelStrong = document.createElement('strong');
-  labelStrong.textContent = label;
-  validationCountEl.appendChild(labelStrong);
+  validationCountEl.textContent = '';
+  validationCountEl.appendChild(document.createTextNode('Filter: '));
+  const strongLabel = document.createElement('strong');
+  strongLabel.textContent = label;
+  validationCountEl.appendChild(strongLabel);
 
   validationCountEl.appendChild(document.createTextNode(' · Einträge: '));
-  const countStrong = document.createElement('strong');
-  countStrong.textContent = filtered.length;
-  validationCountEl.appendChild(countStrong);
+  const strongCount = document.createElement('strong');
+  strongCount.textContent = filtered.length;
+  validationCountEl.appendChild(strongCount);
 }
 
 function exportValidationCSV() {

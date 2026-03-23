@@ -118,10 +118,9 @@ export function createIMPLegendControl() {
   const control = L.control({ position: 'bottomright' });
   control.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
-
-    const strong = document.createElement('strong');
-    strong.textContent = 'IMP‑Score';
-    div.appendChild(strong);
+    const title = document.createElement('strong');
+    title.textContent = 'IMP‑Score';
+    div.appendChild(title);
     div.appendChild(document.createElement('br'));
 
     for (let i = 0; i < grades.length - 1; i++) {
@@ -139,11 +138,9 @@ export function createIMPLegendControl() {
     }
     const note = document.createElement('div');
     note.className = 'legend-note';
-
     const small = document.createElement('small');
     small.textContent = 'WGI normalisiert, höher ist besser.';
     note.appendChild(small);
-
     div.appendChild(note);
     return div;
   };
@@ -154,10 +151,9 @@ export function createValidationLegendControl() {
   const control = L.control({ position: 'bottomright' });
   control.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
-
-    const strong = document.createElement('strong');
-    strong.textContent = 'Validierung';
-    div.appendChild(strong);
+    const title = document.createElement('strong');
+    title.textContent = 'Validierung';
+    div.appendChild(title);
     div.appendChild(document.createElement('br'));
 
     const rows = [
@@ -184,11 +180,9 @@ export function createValidationLegendControl() {
     });
     const note = document.createElement('div');
     note.className = 'legend-note';
-
     const small = document.createElement('small');
     small.textContent = 'Daten: validation.json';
     note.appendChild(small);
-
     div.appendChild(note);
     return div;
   };
