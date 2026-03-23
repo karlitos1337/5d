@@ -44,6 +44,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41844123/"
       }
     ],
+    "timestamp": "2026-03-22T11:43:19.324152"
     "timestamp": "2026-03-22T11:57:05.423573"
   },
   "intrinsic motivation education": {
@@ -113,6 +114,7 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41853079/"
       }
     ],
+    "timestamp": "2026-03-22T11:43:22.315974"
     "timestamp": "2026-03-22T11:57:08.447818"
   },
   "autonomy supportive teaching": {
@@ -150,6 +152,35 @@
     "pubmed": [
       {
         "title": "Ethical issues in nursing care for older adults in community settings: A scoping review.",
+        "authors": [
+          "Huang L",
+          "Peng X",
+          "Zhao Y"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41863287/"
+      },
+      {
+        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "authors": [
+          "Li Z",
+          "Wang Z"
+        ],
+        "published": "2026 Mar 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+      },
+      {
+        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "authors": [
+          "Gilbert M",
+          "Montanez J",
+          "Fry ZD"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+      }
+    ],
+    "timestamp": "2026-03-22T11:43:24.316502"
         "authors": [
           "Huang L",
           "Peng X",
@@ -291,6 +322,85 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
+    "timestamp": "2026-03-22T11:43:27.316690"
+  },
+  "democratic schools": {
+    "arxiv": [
+      {
+        "title": "Democratic Policy Development using Collective Dialogues and AI",
+        "authors": [
+          "\nAndrew Konya\n",
+          "\nLisa Schirch\n",
+          "\nColin Irwin\n",
+          "\nAviv Ovadya\n"
+        ],
+        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
+        "published": "2023-11-03T21:12:57Z",
+        "link": "http://arxiv.org/abs/2311.02242v1"
+      },
+      {
+        "title": "The robustness of democratic consensus",
+        "authors": [
+          "\nFabio Fagnani\n",
+          "\nJean-Charles Delvenne\n"
+        ],
+        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
+        "published": "2015-02-15T01:02:01Z",
+        "link": "http://arxiv.org/abs/1502.04264v1"
+      },
+      {
+        "title": "Can AI mediation improve democratic deliberation?",
+        "authors": [
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
+        ],
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "A multivariate decomposition analysis of urban-rural disparities in contraceptive use among women in Ethiopia.",
+        "authors": [
+          "Asmare L",
+          "Lakew G",
+          "Yirsaw AN"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41865114/"
+      },
+      {
+        "title": "Spatial distribution, integration and determinants of family planning service provision in Lubumbashi, DRC: a cross-sectional analysis from a health facility census.",
+        "authors": [
+          "Mosuse MA",
+          "Mpoyi TI",
+          "Libertini L"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41864903/"
+      },
+      {
+        "title": "Women's perceptions of person-centered comprehensive abortion care and associated factors in Northern Ethiopia: a facility-based cross-sectional study in a humanitarian setting.",
+        "authors": [
+          "Amare NS",
+          "Seyoum T",
+          "Tariku A"
+        ],
+        "published": "2026 Mar 20",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41862995/"
+      }
+    ],
+    "timestamp": "2026-03-22T11:43:28.317634"
     "timestamp": "2026-03-22T11:57:13.418551"
   },
   "student agency": {
@@ -361,6 +471,11 @@
         "link": "https://pubmed.ncbi.nlm.nih.gov/41862814/"
       }
     ],
+    "timestamp": "2026-03-22T11:43:29.318492"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-22T11:43:29.320409",
     "timestamp": "2026-03-22T11:57:14.421329"
   },
   "who_mental_health": {
@@ -487,6 +602,7 @@
         }
       }
     },
+    "timestamp": "2026-03-22T11:43:32.956628",
     "timestamp": "2026-03-22T11:57:17.579663",
     "source": "World Bank EdStats API"
   },
@@ -613,6 +729,7 @@
         }
       }
     },
+    "timestamp": "2026-03-22T11:43:34.770298",
     "timestamp": "2026-03-22T11:57:19.578696",
     "source": "World Bank WGI"
   }
