@@ -52,31 +52,15 @@ class ProxyHandler(BaseHTTPRequestHandler):
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
-                    # Security headers
-                    self.send_header("X-Content-Type-Options", "nosniff")
-                    # CORS
-                    self.send_response(200)
-                    self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Access-Control-Allow-Origin", "*")
                     self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
-
-                    total_read = 0
-                    while True:
-                        chunk = resp.read(CHUNK_SIZE)
-                        if not chunk:
-                            break
-                        total_read += len(chunk)
-                        if total_read > MAX_RESPONSE_SIZE:
-                            # Log internally, don't leak to client
-                            print(f"Error: Response exceeded {MAX_RESPONSE_SIZE} bytes for {key}")
-                            return
-                        self.wfile.write(chunk)
+                    self.wfile.write(data)
 
             except Exception as e:
                 # Log to stderr, don't leak to client
                 sys.stderr.write(f"Proxy fetch error for {key}: {e}\n")
-                msg = b"Upstream service unavailable"
+                msg = b"Upstream fetch error"
                 if "Response too large" in str(e):
                     msg = b"Response too large"
 
@@ -84,11 +68,10 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 # print(f"Fetch error for {key}: {e}")  # Internal logging
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_header("X-Content-Type-Options", "nosniff")
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
-                self.wfile.write(b"Upstream fetch error")
+                self.wfile.write(msg)
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
