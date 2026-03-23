@@ -27,3 +27,6 @@
 ## 2024-03-24 - Parallel Fetching & localStorage Concurrency
 **Learning:** When parallelizing `fetchWithCache` logic that relies on `localStorage` (read-modify-write), standard JS concurrency (Promise.all) causes race conditions where updates are lost because the "read" happens before other "writes" complete.
 **Action:** Always re-read the latest state from `localStorage` immediately before writing the update in async functions, or use a mutex if strict transactional integrity is needed.
+## 2024-05-28 - Optimize React Scroll Handlers
+**Learning:** React scroll listeners should use `{ passive: true }` to avoid blocking the main thread, and `requestAnimationFrame` to throttle rapid scroll events. Failing to clean up scroll listeners or handle them natively in React without `useEffect` causes degraded performance, especially when checking offsets of multiple sections on the page.
+**Action:** Always wrap `window.addEventListener('scroll', handler, { passive: true })` inside `useEffect` and throttle heavy DOM reads (like `offsetTop`) using `requestAnimationFrame` with a tracking boolean flag to prevent unnecessary recalculations.

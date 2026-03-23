@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -14,6 +15,7 @@ const App = () => {
   });
 
   const sections = useMemo(() => [
+  const sections = React.useMemo(() => [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -23,6 +25,8 @@ const App = () => {
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
+  const ticking = useRef(false);
+
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -38,6 +42,7 @@ const App = () => {
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
       if (!el.textContent?.trim() && el.tagName.toLowerCase() !== 'img') return;
+      if (el.tagName !== 'IMG' && el.tagName !== 'BR' && el.tagName !== 'HR' && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -59,6 +64,8 @@ const App = () => {
         if (el.parentNode) {
             el.parentNode.insertBefore(btn, el.nextSibling);
         }
+      if (el.tagName === 'IMG' || el.tagName === 'BR' || el.tagName === 'HR') {
+        el.parentNode.insertBefore(btn, el.nextSibling);
       } else {
         el.appendChild(btn);
       }
@@ -77,6 +84,9 @@ const App = () => {
   };
 
   const ticking = useRef(false);
+  useEffect(() => {
+    // Handle scroll events with requestAnimationFrame for better performance
+    let ticking = { current: false };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,6 +107,8 @@ const App = () => {
       }
     };
 
+    // Use passive listener to avoid blocking the main thread
+    // Use passive listener for better scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
@@ -312,6 +324,7 @@ const App = () => {
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
                       Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -330,6 +343,7 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
                   <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -413,18 +427,19 @@ const App = () => {
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
                   Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist &alpha; &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Unreliability (α)</span>
+                    <span>Unreliability (&alpha;)</span>
                     <span className="font-semibold">.80</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Gullibility (α)</span>
+                    <span>Gullibility (&alpha;)</span>
                     <span className="font-semibold">.79</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Irrationality (α)</span>
+                    <span>Irrationality (&alpha;)</span>
                     <span className="font-semibold">.78</span>
                   </div>
                 </div>
@@ -572,7 +587,7 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
                   <h4 className="font-semibold text-green-500 mb-2">Zielvorgaben</h4>
                   <p className="text-sm">
-                    α &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
+                    &alpha; &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
                   </p>
                 </div>
               </div>
