@@ -91,6 +91,7 @@ const App = () => {
 
   const ticking = useRef(false);
   useEffect(() => {
+    ticking.current = false;
     // Handle scroll events with requestAnimationFrame for better performance
     let ticking = { current: false };
 
