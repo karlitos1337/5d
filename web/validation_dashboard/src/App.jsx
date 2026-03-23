@@ -25,6 +25,7 @@ const App = () => {
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
+
   const ticking = useRef(false);
 
 
@@ -41,6 +42,9 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
+      // For void elements like img, textContent might be empty, so we don't return early
+      // but only if it's not an img. Actually, an img has no textContent anyway.
+      if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
       if (!el.textContent?.trim() && el.tagName.toLowerCase() !== 'img') return;
       if (el.tagName !== 'IMG' && el.tagName !== 'BR' && el.tagName !== 'HR' && !el.textContent?.trim()) return;
 
@@ -60,6 +64,8 @@ const App = () => {
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
+      if (el.tagName === 'IMG') {
+        // Fallback for void elements like img
       if (el.tagName.toLowerCase() === 'img') {
         if (el.parentNode) {
             el.parentNode.insertBefore(btn, el.nextSibling);
@@ -274,6 +280,8 @@ const App = () => {
               <div>
                 <img
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
+                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
+                    className="w-full rounded-xl shadow-lg inline-block"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
                     className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
@@ -371,7 +379,7 @@ const App = () => {
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Autonomie ↔ Sozioökonomische Outcomes</span>
+                    <span>Autonomie &harr; Sozioökonomische Outcomes</span>
                     <span className="font-semibold">r = 0.68–0.73</span>
                   </div>
                 </div>
@@ -398,6 +406,8 @@ const App = () => {
             <div className="mb-8">
               <img
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
+                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
+                  className="w-full rounded-xl shadow-lg inline-block"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
@@ -478,7 +488,7 @@ const App = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>AVE-Wurzel &gt; Korrelation</span>
-                    <span className="font-semibold">✓</span>
+                    <span className="font-semibold">&#10003;</span>
                   </div>
                 </div>
               </div>
@@ -580,13 +590,14 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
                   <h4 className="font-semibold text-blue-500 mb-2">Aktueller Status</h4>
                   <p className="text-sm">
-                    Kleine Stichprobe von 9 Ländern • Promisinge Korrelationen r = 0.68–0.73 • Validitätsprüfungen laufen
+                    Kleine Stichprobe von 9 Ländern &bull; Promisinge Korrelationen r = 0.68–0.73 &bull; Validitätsprüfungen laufen
                   </p>
                 </div>
 
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
                   <h4 className="font-semibold text-green-500 mb-2">Zielvorgaben</h4>
                   <p className="text-sm">
+                    &alpha; &gt; 0.8 Reliabilität &bull; Theoretische Unterschiedlichkeit &bull; Praktische Anwendbarkeit &bull; Über 150 Länder
                     &alpha; &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
                   </p>
                 </div>
@@ -604,7 +615,7 @@ const App = () => {
       <footer className={`py-8 ${darkMode ? 'bg-gray-800 border-t border-gray-700' : 'bg-gray-50 border-t border-gray-200'}`}>
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-sm">
-            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks • Alle Angaben ohne Gewähr
+            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks &bull; Alle Angaben ohne Gewähr
           </p>
         </div>
       </footer>
