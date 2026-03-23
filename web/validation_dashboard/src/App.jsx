@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -14,6 +15,7 @@ const App = () => {
   });
 
   const sections = useMemo(() => [
+  const sections = React.useMemo(() => [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -23,6 +25,7 @@ const App = () => {
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
+
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -75,6 +78,8 @@ const App = () => {
   };
 
   const ticking = useRef(false);
+  useEffect(() => {
+    let ticking = { current: false };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,6 +100,7 @@ const App = () => {
       }
     };
 
+    // Use passive listener for better scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
