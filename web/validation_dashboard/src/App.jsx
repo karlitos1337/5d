@@ -1,17 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
-
-const sections = [
-  { id: 'einleitung', label: 'Einleitung' },
-  { id: 'framework', label: '5D-Intelligence Framework' },
-  { id: 'methodologie', label: 'Methodik' },
-  { id: 'ergebnisse', label: 'Ergebnisse' },
-  { id: 'validierung', label: 'Validierung' },
-  { id: 'implikationen', label: 'Implikationen' },
-  { id: 'zukunft', label: 'Zukunftsperspektiven' },
-  { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-];
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -26,6 +17,21 @@ const App = () => {
 
   const tickingRef = useRef(false);
 
+  const sections = useMemo(() => [
+  const sections = React.useMemo(() => [
+    { id: 'einleitung', label: 'Einleitung' },
+    { id: 'framework', label: '5D-Intelligence Framework' },
+    { id: 'methodologie', label: 'Methodik' },
+    { id: 'ergebnisse', label: 'Ergebnisse' },
+    { id: 'validierung', label: 'Validierung' },
+    { id: 'implikationen', label: 'Implikationen' },
+    { id: 'zukunft', label: 'Zukunftsperspektiven' },
+    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
+  ], []);
+
+  const ticking = useRef(false);
+
+
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
@@ -39,7 +45,11 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
+      // For void elements like img, textContent might be empty, so we don't return early
+      // but only if it's not an img. Actually, an img has no textContent anyway.
       if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
+      if (!el.textContent?.trim() && el.tagName.toLowerCase() !== 'img') return;
+      if (el.tagName !== 'IMG' && el.tagName !== 'BR' && el.tagName !== 'HR' && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -66,6 +76,13 @@ const App = () => {
         wrapper.appendChild(el);
         Object.assign(btn.style, { position: 'absolute', top: '10px', right: '10px' });
         wrapper.appendChild(btn);
+        // Fallback for void elements like img
+      if (el.tagName.toLowerCase() === 'img') {
+        if (el.parentNode) {
+            el.parentNode.insertBefore(btn, el.nextSibling);
+        }
+      if (el.tagName === 'IMG' || el.tagName === 'BR' || el.tagName === 'HR') {
+        el.parentNode.insertBefore(btn, el.nextSibling);
       } else {
         el.appendChild(btn);
       }
@@ -83,6 +100,7 @@ const App = () => {
     setMobileMenuOpen(false);
   };
 
+  const ticking = useRef(false);
   useEffect(() => {
     const updateSection = () => {
       const scrollPosition = window.scrollY + 200;
@@ -100,9 +118,30 @@ const App = () => {
       if (!tickingRef.current) {
         window.requestAnimationFrame(updateSection);
         tickingRef.current = true;
+    // Handle scroll events with requestAnimationFrame for better performance
+    let ticking = { current: false };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 200;
+
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sections[i].id);
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+          ticking.current = false;
+        });
+        ticking.current = true;
       }
     };
 
+    // Use passive listener to avoid blocking the main thread
+    // Use passive listener for better scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -113,6 +152,9 @@ const App = () => {
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:rounded-br-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       >
         Zum Hauptinhalt springen
       </a>
@@ -140,6 +182,7 @@ const App = () => {
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
                   className={`text-sm font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 rounded px-2 py-1 ${
+                  className={`text-sm font-medium transition-colors duration-200 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -155,6 +198,7 @@ const App = () => {
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -166,6 +210,7 @@ const App = () => {
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -188,6 +233,7 @@ const App = () => {
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
@@ -203,6 +249,7 @@ const App = () => {
 
       {/* Main Content */}
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -271,6 +318,8 @@ const App = () => {
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
                     className="w-full rounded-xl shadow-lg inline-block"
+                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
+                    className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
               </div>
@@ -319,6 +368,8 @@ const App = () => {
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
                       Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -337,6 +388,7 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
                   <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -364,7 +416,7 @@ const App = () => {
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Autonomie ↔ Sozioökonomische Outcomes</span>
+                    <span>Autonomie &harr; Sozioökonomische Outcomes</span>
                     <span className="font-semibold">r = 0.68–0.73</span>
                   </div>
                 </div>
@@ -374,6 +426,7 @@ const App = () => {
                 <h3 className="text-xl font-semibold mb-4">Validitätsprüfungen</h3>
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
                   Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431.
+                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (&ge;0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -393,6 +446,8 @@ const App = () => {
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                   alt="Ein wissenschaftliches Diagramm, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
                   className="w-full rounded-xl shadow-lg inline-block"
+                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
+                  className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
             </div>
@@ -420,6 +475,7 @@ const App = () => {
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
                   Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist &alpha; &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -433,6 +489,16 @@ const App = () => {
                   <div className="flex justify-between">
                     <span>Resilienz (α)</span>
                     <span className="font-semibold">.81</span>
+                    <span>Unreliability (&alpha;)</span>
+                    <span className="font-semibold">.80</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Gullibility (&alpha;)</span>
+                    <span className="font-semibold">.79</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Irrationality (&alpha;)</span>
+                    <span className="font-semibold">.78</span>
                   </div>
                 </div>
               </div>
@@ -470,7 +536,7 @@ const App = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>AVE-Wurzel &gt; Korrelation</span>
-                    <span className="font-semibold">✓</span>
+                    <span className="font-semibold">&#10003;</span>
                   </div>
                 </div>
               </div>
@@ -572,14 +638,15 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
                   <h4 className="font-semibold text-blue-500 mb-2">Aktueller Status</h4>
                   <p className="text-sm">
-                    Kleine Stichprobe von 9 Ländern • Promisinge Korrelationen r = 0.68–0.73 • Validitätsprüfungen laufen
+                    Kleine Stichprobe von 9 Ländern &bull; Promisinge Korrelationen r = 0.68–0.73 &bull; Validitätsprüfungen laufen
                   </p>
                 </div>
 
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
                   <h4 className="font-semibold text-green-500 mb-2">Zielvorgaben</h4>
                   <p className="text-sm">
-                    α &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
+                    &alpha; &gt; 0.8 Reliabilität &bull; Theoretische Unterschiedlichkeit &bull; Praktische Anwendbarkeit &bull; Über 150 Länder
+                    &alpha; &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
                   </p>
                 </div>
               </div>
@@ -596,7 +663,7 @@ const App = () => {
       <footer className={`py-8 ${darkMode ? 'bg-gray-800 border-t border-gray-700' : 'bg-gray-50 border-t border-gray-200'}`}>
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-sm">
-            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks • Alle Angaben ohne Gewähr
+            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks &bull; Alle Angaben ohne Gewähr
           </p>
         </div>
       </footer>

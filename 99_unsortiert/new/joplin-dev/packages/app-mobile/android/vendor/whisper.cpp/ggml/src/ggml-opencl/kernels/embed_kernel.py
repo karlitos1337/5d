@@ -1,7 +1,8 @@
 #
 
-import sys
 import logging
+import sys
+
 logger = logging.getLogger("opencl-embed-kernel")
 
 
@@ -12,11 +13,11 @@ def main():
         logger.info("Usage: python embed_kernel.py <input_file> <output_file>")
         sys.exit(1)
 
-    ifile = open(sys.argv[1], "r")
+    ifile = open(sys.argv[1])
     ofile = open(sys.argv[2], "w")
 
     for i in ifile:
-        ofile.write('R"({})"\n'.format(i))
+        ofile.write(f'R"({i})"\n')
 
     ifile.close()
     ofile.close()

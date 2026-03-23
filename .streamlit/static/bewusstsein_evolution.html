@@ -1000,7 +1000,7 @@
                         ${label}
                         <span class="slider-value" id="value_${selectedDim}_${idx}">${data[idx]}</span>
                     </label>
-                    <input type="range" min="1" max="99" value="${data[idx]}" 
+                    <input type="range" min="1" max="99" value="${data[idx]}"
                            oninput="updateMetric('${selectedDim}', ${idx}, this.value)">
                 `;
                 container.appendChild(sliderDiv);

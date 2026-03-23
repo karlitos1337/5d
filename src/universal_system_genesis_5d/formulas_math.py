@@ -8,7 +8,7 @@ from collections.abc import Sequence
 
 
 def sigmoid(x: float) -> float:
-    r"""Standard-Sigmoid $\sigma(x)=1/(1+e^{-x})$.
+    """Standard-Sigmoid $\sigma(x)=1/(1+e^{-x})$.
 
     Args:
         x: Eingabewert

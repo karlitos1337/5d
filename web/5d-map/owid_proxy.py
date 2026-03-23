@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import os
 import sys
 import urllib.request
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -8,15 +7,10 @@ OWID_URLS = {
     "depression-prevalence.csv": "https://ourworldindata.org/grapher/depression-prevalence.csv"
 }
 
+MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
+
 
 class ProxyHandler(BaseHTTPRequestHandler):
-    def send_security_headers(self):
-        self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("X-Frame-Options", "DENY")
-        self.send_header("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
-        self.send_header("Referrer-Policy", "no-referrer")
-        self.send_header("Access-Control-Allow-Origin", "*")
-
     def do_GET(self):
         path = self.path.lstrip("/")
         if path.startswith("proxy/"):
@@ -25,32 +19,63 @@ class ProxyHandler(BaseHTTPRequestHandler):
             if not url:
                 self.send_response(404)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_security_headers()
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(b"Unknown proxy key")
                 return
             try:
-                req = urllib.request.Request(url, headers={"User-Agent": "OWID-Proxy/1.0"})
-                with urllib.request.urlopen(req, timeout=15) as resp:
-                    data = resp.read()
+                # Security: chunked read with size limit to prevent DoS
+                MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10MB
+                CHUNK_SIZE = 8192
+
+                with urllib.request.urlopen(url, timeout=15) as resp:
+                    content_len = resp.getheader("Content-Length")
+                    if content_len:
+                        try:
+                            if int(content_len) > MAX_RESPONSE_SIZE:
+                                raise ValueError("Response too large")
+                        except (TypeError, ValueError):
+                            # Invalid Content-Length from upstream; log and fall back to streamed size check
+                            sys.stderr.write(
+                                f"Invalid Content-Length header from upstream for {key}: {content_len}\n"
+                            )
+
+                    data = b""
+                    while True:
+                        chunk = resp.read(64 * 1024)
+                        if not chunk:
+                            break
+                        data += chunk
+                        if len(data) > MAX_RESPONSE_SIZE:
+                            raise ValueError("Response too large")
+
                     self.send_response(200)
                     self.send_header("Content-Type", "text/csv; charset=utf-8")
                     self.send_header("Content-Length", str(len(data)))
-                    self.send_security_headers()
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.send_header("X-Content-Type-Options", "nosniff")
                     self.end_headers()
                     self.wfile.write(data)
-            except Exception:
-                # Log error locally if needed, but don't send to client
+
+            except Exception as e:
+                # Log to stderr, don't leak to client
+                sys.stderr.write(f"Proxy fetch error for {key}: {e}\n")
                 msg = b"Upstream fetch error"
+                if "Response too large" in str(e):
+                    msg = b"Response too large"
+
+                # Security: Log error internally, return generic message to user
+                # print(f"Fetch error for {key}: {e}")  # Internal logging
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
-                self.send_security_headers()
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("X-Content-Type-Options", "nosniff")
                 self.end_headers()
                 self.wfile.write(msg)
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
-            self.send_security_headers()
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(b"Use /proxy/<file>")
 
@@ -66,10 +91,8 @@ def main():
             port = int(sys.argv[1])
         except ValueError:
             pass
-
-    host = os.environ.get("OWID_PROXY_HOST", "127.0.0.1")
-    server = HTTPServer((host, port), ProxyHandler)
-    print(f"OWID proxy listening on http://{host}:{port}/proxy/<file>")
+    server = HTTPServer(("0.0.0.0", port), ProxyHandler)
+    print(f"OWID proxy listening on http://localhost:{port}/proxy/<file>")
     print("Supported keys:", ", ".join(OWID_URLS.keys()))
     try:
         server.serve_forever()

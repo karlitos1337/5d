@@ -50,3 +50,5 @@ data/archive/
 .coverage
 coverage.xml
 htmlcov/
+# Outputs
+outputs/
