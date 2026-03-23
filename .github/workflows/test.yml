@@ -16,8 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements_extended.txt
-          pip install pytest pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2
-          pip install pytest pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2 networkx discord.py httpx keyring pytest-asyncio
+          pip install pytest pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2 networkx discord.py httpx keyring pytest-asyncio requests
       - name: Run Tests
         run: |
           export PYTHONPATH=.
