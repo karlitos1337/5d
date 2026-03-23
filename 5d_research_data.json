@@ -4,34 +4,12 @@
       {
         "title": "Active learning for data streams: a survey",
         "authors": [
-          "\nDavide Cacciarelli\n",
-          "\nMurat Kulahci\n"
+          "Davide Cacciarelli",
+          "Murat Kulahci"
         ],
         "summary": "Online active learning is a paradigm in machine learning that aims to select the most informative data points to label from a data stream. The problem of minimizing the cost associated with collecting",
         "published": "2023-02-17T14:24:13Z",
         "link": "http://arxiv.org/abs/2302.08893v4"
-      },
-      {
-        "title": "On the Similarities of Embeddings in Contrastive Learning",
-        "authors": [
-          "\nChungpa Lee\n",
-          "\nSehee Lim\n",
-          "\nKibok Lee\n",
-          "\nJy-yong Sohn\n"
-        ],
-        "summary": "Contrastive learning operates on a simple yet effective principle: Embeddings of positive pairs are pulled together, while those of negative pairs are pushed apart. In this paper, we propose a unified",
-        "published": "2025-06-11T14:21:05Z",
-        "link": "http://arxiv.org/abs/2506.09781v2"
-      },
-      {
-        "title": "The Dimension of Self-Directed Learning",
-        "authors": [
-          "\nPramith Devulapalli\n",
-          "\nSteve Hanneke\n"
-        ],
-        "summary": "Understanding the self-directed learning complexity has been an important problem that has captured the attention of the online learning theory community since the early 1990s. Within this framework, ",
-        "published": "2024-02-20T21:59:41Z",
-        "link": "http://arxiv.org/abs/2402.13400v1"
       }
     ],
     "pubmed": [
@@ -67,6 +45,7 @@
       }
     ],
     "timestamp": "2026-03-22T11:43:19.324152"
+    "timestamp": "2026-03-22T11:57:05.423573"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -136,6 +115,7 @@
       }
     ],
     "timestamp": "2026-03-22T11:43:22.315974"
+    "timestamp": "2026-03-22T11:57:08.447818"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -201,6 +181,82 @@
       }
     ],
     "timestamp": "2026-03-22T11:43:24.316502"
+        "authors": [
+          "Huang L",
+          "Peng X",
+          "Zhao Y"
+        ],
+        "published": "2026 Mar 21",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41863287/"
+      },
+      {
+        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "authors": [
+          "Li Z",
+          "Wang Z"
+        ],
+        "published": "2026 Mar 19",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+      },
+      {
+        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "authors": [
+          "Gilbert M",
+          "Montanez J",
+          "Fry ZD"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+      }
+    ],
+    "timestamp": "2026-03-22T11:57:10.413794"
+  },
+  "democratic schools": {
+    "arxiv": [
+      {
+        "title": "Democratic Policy Development using Collective Dialogues and AI",
+        "authors": [
+          "\nAndrew Konya\n",
+          "\nLisa Schirch\n",
+          "\nColin Irwin\n",
+          "\nAviv Ovadya\n"
+        ],
+        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
+        "published": "2023-11-03T21:12:57Z",
+        "link": "http://arxiv.org/abs/2311.02242v1"
+      },
+      {
+        "title": "The robustness of democratic consensus",
+        "authors": [
+          "\nFabio Fagnani\n",
+          "\nJean-Charles Delvenne\n"
+        ],
+        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
+        "published": "2015-02-15T01:02:01Z",
+        "link": "http://arxiv.org/abs/1502.04264v1"
+      },
+      {
+        "title": "Can AI mediation improve democratic deliberation?",
+        "authors": [
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
+        ],
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
+      }
+    ],
+    "pubmed": [],
+    "timestamp": "2026-03-22T11:57:11.390642"
   },
   "polyvagal theory education": {
     "arxiv": [
@@ -345,6 +401,7 @@
       }
     ],
     "timestamp": "2026-03-22T11:43:28.317634"
+    "timestamp": "2026-03-22T11:57:13.418551"
   },
   "student agency": {
     "arxiv": [
@@ -419,6 +476,11 @@
   "who_mental_health": {
     "data": {},
     "timestamp": "2026-03-22T11:43:29.320409",
+    "timestamp": "2026-03-22T11:57:14.421329"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-22T11:57:14.423257",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -541,6 +603,7 @@
       }
     },
     "timestamp": "2026-03-22T11:43:32.956628",
+    "timestamp": "2026-03-22T11:57:17.579663",
     "source": "World Bank EdStats API"
   },
   "world_bank_wgi": {
@@ -667,6 +730,12 @@
       }
     },
     "timestamp": "2026-03-22T11:43:34.770298",
+    "timestamp": "2026-03-22T11:57:19.578696",
     "source": "World Bank WGI"
   }
+        "title": "Enhancing Trainee Knowledge and Competence in Addiction Medicine: Outcomes of an Interprofessional Addiction Consult Service Rotation."
+      }
+    ]
+  },
+  "timestamp": "2026-03-22T12:00:00"
 }

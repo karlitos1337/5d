@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useState, useEffect, useRef } from 'react';
-import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -16,7 +14,6 @@ const App = () => {
   });
 
   const sections = React.useMemo(() => [
-  const sections = [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -26,8 +23,7 @@ const App = () => {
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
-  const ticking = useRef(false);
-  ];
+
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -76,10 +72,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    let ticking = false;
+    let ticking = { current: false };
 
     const handleScroll = () => {
-      if (!ticking) {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
@@ -91,35 +86,21 @@ const App = () => {
               break;
             }
           }
-          ticking = false;
+          ticking.current = false;
         });
-        ticking = true;
+        ticking.current = true;
       }
     };
 
     // Use passive listener for better scroll performance
-          ticking.current = false;
-        });
-        ticking.current = true;
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
       <a
-        href="#einleitung"
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:rounded-br-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       >
         Zum Hauptinhalt springen
@@ -210,7 +191,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">

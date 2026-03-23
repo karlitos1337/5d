@@ -982,10 +982,15 @@
             const container = document.getElementById('metricSliders');
             const selectedDim = selector.value;
             
-            container.innerHTML = '';
+            // Use textContent and appendChild to prevent DOM-based XSS
+            container.textContent = '';
             
             if (selectedDim === 'all') {
-                container.innerHTML = '<p style="opacity: 0.7; text-align: center;">Wähle eine Dimension zum Anpassen</p>';
+                const p = document.createElement('p');
+                p.style.opacity = '0.7';
+                p.style.textAlign = 'center';
+                p.textContent = 'Wähle eine Dimension zum Anpassen';
+                container.appendChild(p);
                 return;
             }
             
@@ -995,14 +1000,29 @@
             labels.forEach((label, idx) => {
                 const sliderDiv = document.createElement('div');
                 sliderDiv.className = 'slider-control';
-                sliderDiv.innerHTML = `
-                    <label>
-                        ${label}
-                        <span class="slider-value" id="value_${selectedDim}_${idx}">${data[idx]}</span>
-                    </label>
-                    <input type="range" min="1" max="99" value="${data[idx]}" 
-                           oninput="updateMetric('${selectedDim}', ${idx}, this.value)">
-                `;
+
+                const labelEl = document.createElement('label');
+                labelEl.textContent = label + " ";
+
+                const spanEl = document.createElement('span');
+                spanEl.className = 'slider-value';
+                spanEl.id = `value_${selectedDim}_${idx}`;
+                spanEl.textContent = data[idx];
+
+                labelEl.appendChild(spanEl);
+
+                const inputEl = document.createElement('input');
+                inputEl.type = 'range';
+                inputEl.min = '1';
+                inputEl.max = '99';
+                inputEl.value = data[idx];
+                inputEl.oninput = function() {
+                    updateMetric(selectedDim, idx, this.value);
+                };
+
+                sliderDiv.appendChild(labelEl);
+                sliderDiv.appendChild(inputEl);
+
                 container.appendChild(sliderDiv);
             });
         }
@@ -1020,14 +1040,29 @@
         function updateFutureExplanation(years) {
             const list = document.getElementById('explanationText');
             const yearLabel = 2025 + years;
-            list.innerHTML = `
-                <li><strong>Projektion für ${yearLabel} (+${years} Jahre):</strong></li>
-                <li>1D: ${calculateWeightedScore(customFutureData['1d'], metricWeights['1d'], '1d')}/99 - Grundlegende Verbesserung bei Umweltbewusstsein</li>
-                <li>2D: ${calculateWeightedScore(customFutureData['2d'], metricWeights['2d'], '2d')}/99 - Bewussterer Konsum nimmt zu</li>
-                <li>3D: ${calculateWeightedScore(customFutureData['3d'], metricWeights['3d'], '3d')}/99 - Mehr Menschen handeln konsequent</li>
-                <li>4D: ${calculateWeightedScore(customFutureData['4d'], metricWeights['4d'], '4d')}/99 - Empathie wird gesellschaftliche Norm</li>
-                <li>5D: ${calculateWeightedScore(customFutureData['5d'], metricWeights['5d'], '5d')}/99 - Spirituelles Bewusstsein wächst stark</li>
-            `;
+            // Use textContent and appendChild to prevent DOM-based XSS
+            list.textContent = '';
+
+            const projections = [
+                `Projektion für ${yearLabel} (+${years} Jahre):`,
+                `1D: ${calculateWeightedScore(customFutureData['1d'], metricWeights['1d'], '1d')}/99 - Grundlegende Verbesserung bei Umweltbewusstsein`,
+                `2D: ${calculateWeightedScore(customFutureData['2d'], metricWeights['2d'], '2d')}/99 - Bewussterer Konsum nimmt zu`,
+                `3D: ${calculateWeightedScore(customFutureData['3d'], metricWeights['3d'], '3d')}/99 - Mehr Menschen handeln konsequent`,
+                `4D: ${calculateWeightedScore(customFutureData['4d'], metricWeights['4d'], '4d')}/99 - Empathie wird gesellschaftliche Norm`,
+                `5D: ${calculateWeightedScore(customFutureData['5d'], metricWeights['5d'], '5d')}/99 - Spirituelles Bewusstsein wächst stark`
+            ];
+
+            projections.forEach((text, index) => {
+                const li = document.createElement('li');
+                if (index === 0) {
+                    const strong = document.createElement('strong');
+                    strong.textContent = text;
+                    li.appendChild(strong);
+                } else {
+                    li.textContent = text;
+                }
+                list.appendChild(li);
+            });
         }
 
         function calculateWeightedScore(data, weights, dimension) {
@@ -1078,7 +1113,8 @@
 
         function updateExplanation() {
             const list = document.getElementById('explanationText');
-            list.innerHTML = '';
+            // Use textContent and appendChild to prevent DOM-based XSS
+            list.textContent = '';
             explanations[currentScenario].forEach(text => {
                 const li = document.createElement('li');
                 li.textContent = text;
