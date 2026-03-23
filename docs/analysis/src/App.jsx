@@ -71,19 +71,31 @@ const App = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+    // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
+    // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
+    // blocking during continuous scrolling.
+    let ticking = false;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 200;
+
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sections[i].id);
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Add { passive: true } to allow the browser to scroll immediately without waiting for JS execution.
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

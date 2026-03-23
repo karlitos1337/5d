@@ -73,23 +73,35 @@ const RepositoryAnalysis = () => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+    // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
+    // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
+    // blocking during continuous scrolling.
+    let ticking = false;
 
-      for (const section of sections) {
-        if (section) {
-          const offsetTop = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-            setActiveSection(section.id);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = navItems.map(item => document.getElementById(item.id));
+          const scrollPosition = window.scrollY + 100;
+
+          for (const section of sections) {
+            if (section) {
+              const offsetTop = section.offsetTop;
+              const height = section.offsetHeight;
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+                setActiveSection(section.id);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Add { passive: true } to allow the browser to scroll immediately without waiting for JS execution.
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
