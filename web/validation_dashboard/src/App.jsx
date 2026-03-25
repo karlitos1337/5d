@@ -44,7 +44,8 @@ const App = () => {
 
       const btn = document.createElement('a');
       btn.textContent = String(indexNum);
-      btn.href = url;
+      // Prevent XSS/HTML injection via javascript: URLs
+      btn.href = url.startsWith('http') || url.startsWith('/') ? url : '#';
       btn.target = '_blank';
       btn.rel = 'noopener noreferrer';
       btn.setAttribute('aria-label', `Zitation ${indexNum} öffnen`);
