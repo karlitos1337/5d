@@ -37,10 +37,27 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      const isVoidElement = ['IMG', 'BR', 'HR', 'INPUT', 'META', 'LINK'].includes(el.tagName);
+      if (!isVoidElement && !el.textContent?.trim()) return;
 
-      const btn = document.createElement('sup');
+      const btn = document.createElement('a');
       btn.textContent = String(indexNum);
+
+      let safeUrl = '#';
+      try {
+        const parsedUrl = new URL(url, window.location.origin);
+        // Only allow http/https to break taint from potentially malicious relative URLs that might fool the parser into accepting javascript:
+        if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
+          safeUrl = parsedUrl.href;
+        }
+      } catch (e) {
+        // Ignore invalid URLs
+      }
+
+      btn.href = safeUrl;
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+      btn.setAttribute('aria-label', `Zitation ${indexNum} öffnen`);
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
@@ -48,14 +65,17 @@ const App = () => {
         userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '2px',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
-        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
+        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px', textDecoration: 'none'
       });
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
-      el.appendChild(btn);
+      if (isVoidElement) {
+        el.parentNode.insertBefore(btn, el.nextSibling);
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
@@ -71,6 +91,12 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
@@ -80,6 +106,20 @@ const App = () => {
           setActiveSection(sections[i].id);
           break;
         }
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 200;
+
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const section = cachedSections[i].element;
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(cachedSections[i].id);
+              break;
+            }
+          }
+          ticking.current = false;
+        });
+        ticking.current = true;
       }
     };
 
