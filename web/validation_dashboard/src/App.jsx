@@ -93,15 +93,21 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
+
     const handleScroll = () => {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
-          for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i].id);
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const section = cachedSections[i].element;
             if (section && scrollPosition >= section.offsetTop) {
-              setActiveSection(sections[i].id);
+              setActiveSection(cachedSections[i].id);
               break;
             }
           }
