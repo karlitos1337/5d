@@ -44,8 +44,19 @@ const App = () => {
 
       const btn = document.createElement('a');
       btn.textContent = String(indexNum);
-      // Prevent XSS/HTML injection via javascript: URLs
-      btn.href = url.startsWith('http') || url.startsWith('/') ? url : '#';
+
+      let safeUrl = '#';
+      try {
+        const parsedUrl = new URL(url, window.location.origin);
+        if (['http:', 'https:'].includes(parsedUrl.protocol)) {
+          safeUrl = parsedUrl.href;
+        }
+      } catch (e) {
+        // Fallback for relative paths or invalid URLs
+        if (url.startsWith('/')) safeUrl = url;
+      }
+
+      btn.setAttribute('href', safeUrl);
       btn.target = '_blank';
       btn.rel = 'noopener noreferrer';
       btn.setAttribute('aria-label', `Zitation ${indexNum} öffnen`);
