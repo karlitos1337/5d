@@ -48,15 +48,15 @@ const App = () => {
       let safeUrl = '#';
       try {
         const parsedUrl = new URL(url, window.location.origin);
-        if (['http:', 'https:'].includes(parsedUrl.protocol)) {
+        // Only allow http/https to break taint from potentially malicious relative URLs that might fool the parser into accepting javascript:
+        if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
           safeUrl = parsedUrl.href;
         }
       } catch (e) {
-        // Fallback for relative paths or invalid URLs
-        if (url.startsWith('/')) safeUrl = url;
+        // Ignore invalid URLs
       }
 
-      btn.setAttribute('href', safeUrl);
+      btn.href = safeUrl;
       btn.target = '_blank';
       btn.rel = 'noopener noreferrer';
       btn.setAttribute('aria-label', `Zitation ${indexNum} öffnen`);
