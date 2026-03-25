@@ -39,10 +39,15 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      const isVoidElement = ['IMG', 'BR', 'HR', 'INPUT', 'META', 'LINK'].includes(el.tagName);
+      if (!isVoidElement && !el.textContent?.trim()) return;
 
-      const btn = document.createElement('sup');
+      const btn = document.createElement('a');
       btn.textContent = String(indexNum);
+      btn.href = url;
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+      btn.setAttribute('aria-label', `Zitation ${indexNum} öffnen`);
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
@@ -50,14 +55,17 @@ const App = () => {
         userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '2px',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
-        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
+        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px', textDecoration: 'none'
       });
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
-      el.appendChild(btn);
+      if (isVoidElement) {
+        el.parentNode.insertBefore(btn, el.nextSibling);
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
