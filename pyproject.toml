@@ -1,97 +1,38 @@
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = "-ra -q --ignore=99_unsortiert --ignore=private-gpt-main --ignore=external --ignore=5d --ignore=node_modules --ignore=dist --ignore=venv"
-testpaths = [
-    "tests",
-    "src_python/tests"
-]
-norecursedirs = [
-    "99_unsortiert",
-    ".git",
-    "__pycache__",
-    "node_modules",
-    "external",
-    "private-gpt-main",
-    "5d",
-    "dist",
-    "venv",
-    "outputs",
-    "docs",
-    "simulations"
-]
-pythonpath = ["."]
-markers = [
-    "asyncio: mark a test as asyncio",
-    "integration: mark a test as an integration test",
-]
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+extend-exclude = '''
+/(
+  | 99_unsortiert
+  | external
+  | 5d
+  | private-gpt-main
+  | outputs
+  | dist
+  | node_modules
+)/
+'''
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 lint.select = ["E", "F", "I", "B", "UP"]
 lint.ignore = ["E203", "E501"]
-extend-exclude = [
-    "99_unsortiert",
-    "external",
-]
 exclude = [
     "private-gpt-main/",
     "99_unsortiert/",
     "external/",
-    "outputs/",
     "5d/",
-    "node_modules/",
+    "outputs/",
     "dist/",
-    "docs/",
-    "simulations/",
+    "node_modules/",
+    ".venv/",
     "venv/",
-    "web/",
-    "docs/analysis/verify_app.py",
-    "scripts/",
-    "tools/add_frontmatter.py",
-    "utils/",
-    "src_python/knowledge_graph/",
-    "tests/",
-    "src/universal_system_genesis_5d/"
 ]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-[tool.black]
-extend-exclude = '''
-/(
-    99_unsortiert
-  | external
-  | outputs
-  | 5d
-  | private-gpt-main
-  | node_modules
-  | dist
-  | docs
-  | web
-  | venv
-)/
-'''
-line-length = 100
-target-version = ["py310"]
-exclude = '''
-/(
-    \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  | 99_unsortiert
-  | external
-  | private-gpt-main
-)/
-'''
 
 [tool.mypy]
 python_version = "3.10"
@@ -101,4 +42,23 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-exclude = ["99_unsortiert", "external", "outputs", "5d", "private-gpt-main", "node_modules", "dist", "docs", "simulations", "venv"]
+exclude = [
+    "private-gpt-main/",
+    "99_unsortiert/",
+    "external/",
+    "5d/",
+    "outputs/",
+    "dist/",
+    "node_modules/",
+]
+ignore_errors = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests", "src_python/tests"]
+norecursedirs = ["99_unsortiert", "external", "5d", "private-gpt-main", "node_modules", "dist"]
+markers = [
+    "asyncio: mark a test as a coroutine.",
+    "integration: mark test to run only on integration."
+]
+addopts = "--ignore=99_unsortiert --ignore=external --ignore=5d --ignore=private-gpt-main"

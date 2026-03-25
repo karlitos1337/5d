@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -18,7 +19,6 @@ const App = () => {
   const tickingRef = useRef(false);
 
   const sections = useMemo(() => [
-  const sections = React.useMemo(() => [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -28,9 +28,6 @@ const App = () => {
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
   ], []);
-
-  const ticking = useRef(false);
-
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -45,14 +42,27 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      // For void elements like img, textContent might be empty, so we don't return early
-      // but only if it's not an img. Actually, an img has no textContent anyway.
-      if (el.tagName !== 'IMG' && !el.textContent?.trim()) return;
-      if (!el.textContent?.trim() && el.tagName.toLowerCase() !== 'img') return;
-      if (el.tagName !== 'IMG' && el.tagName !== 'BR' && el.tagName !== 'HR' && !el.textContent?.trim()) return;
+      const isVoidElement = ['IMG', 'BR', 'HR', 'INPUT', 'META', 'LINK'].includes(el.tagName);
+      if (!isVoidElement && !el.textContent?.trim()) return;
 
-      const btn = document.createElement('sup');
+      const btn = document.createElement('a');
       btn.textContent = String(indexNum);
+
+      let safeUrl = '#';
+      try {
+        const parsedUrl = new URL(url, window.location.origin);
+        // Only allow http/https to break taint from potentially malicious relative URLs that might fool the parser into accepting javascript:
+        if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
+          safeUrl = parsedUrl.href;
+        }
+      } catch (e) {
+        // Ignore invalid URLs
+      }
+
+      btn.href = safeUrl;
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+      btn.setAttribute('aria-label', `Zitation ${indexNum} öffnen`);
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
@@ -60,12 +70,11 @@ const App = () => {
         userSelect: 'none', minWidth: '18px', height: '18px', marginLeft: '2px',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
-        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
+        lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px', textDecoration: 'none'
       });
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
 
       if (el.tagName === 'IMG') {
         const wrapper = document.createElement('div');
@@ -82,6 +91,7 @@ const App = () => {
             el.parentNode.insertBefore(btn, el.nextSibling);
         }
       if (el.tagName === 'IMG' || el.tagName === 'BR' || el.tagName === 'HR') {
+      if (isVoidElement) {
         el.parentNode.insertBefore(btn, el.nextSibling);
       } else {
         el.appendChild(btn);
@@ -89,7 +99,7 @@ const App = () => {
 
       el.dataset.citationProcessed = 'true';
     });
-  }, []);
+  }, [sections]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -100,7 +110,6 @@ const App = () => {
     setMobileMenuOpen(false);
   };
 
-  const ticking = useRef(false);
   useEffect(() => {
     const updateSection = () => {
       const scrollPosition = window.scrollY + 200;
@@ -120,17 +129,29 @@ const App = () => {
         tickingRef.current = true;
     // Handle scroll events with requestAnimationFrame for better performance
     let ticking = { current: false };
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
 
-  useEffect(() => {
     const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i].id);
+        if (section && scrollPosition >= section.offsetTop) {
+          setActiveSection(sections[i].id);
+          break;
+        }
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
-          for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i].id);
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const section = cachedSections[i].element;
             if (section && scrollPosition >= section.offsetTop) {
-              setActiveSection(sections[i].id);
+              setActiveSection(cachedSections[i].id);
               break;
             }
           }
@@ -140,9 +161,7 @@ const App = () => {
       }
     };
 
-    // Use passive listener to avoid blocking the main thread
-    // Use passive listener for better scroll performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -199,6 +218,7 @@ const App = () => {
                 aria-label={darkMode ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -211,6 +231,7 @@ const App = () => {
                 aria-expanded={mobileMenuOpen}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-blue-500 ${
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -250,6 +271,7 @@ const App = () => {
       {/* Main Content */}
       <main id="main-content" className="pt-16 outline-none" tabIndex="-1">
       <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
+      <main className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -319,6 +341,7 @@ const App = () => {
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
                     className="w-full rounded-xl shadow-lg inline-block"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
+                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
@@ -370,6 +393,7 @@ const App = () => {
                       Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit.
                       Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                       Nachweis hoher interner Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach’s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -387,8 +411,7 @@ const App = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
-                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
-                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach’s α &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -413,10 +436,11 @@ const App = () => {
                 <h3 className="text-xl font-semibold mb-4">Korrelationsanalysen</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
                   Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes.
+                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu & Robinson (2012).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Autonomie &harr; Sozioökonomische Outcomes</span>
+                    <span>Autonomie ↔ Sozioökonomische Outcomes</span>
                     <span className="font-semibold">r = 0.68–0.73</span>
                   </div>
                 </div>
@@ -427,6 +451,7 @@ const App = () => {
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
                   Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431.
                   Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (&ge;0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
+                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -447,6 +472,7 @@ const App = () => {
                   alt="Ein wissenschaftliches Diagramm, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
                   className="w-full rounded-xl shadow-lg inline-block"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
+                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
@@ -475,7 +501,6 @@ const App = () => {
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
                   Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist &alpha; &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -490,14 +515,15 @@ const App = () => {
                     <span>Resilienz (α)</span>
                     <span className="font-semibold">.81</span>
                     <span>Unreliability (&alpha;)</span>
+                    <span>Unreliability (α)</span>
                     <span className="font-semibold">.80</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Gullibility (&alpha;)</span>
+                    <span>Gullibility (α)</span>
                     <span className="font-semibold">.79</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Irrationality (&alpha;)</span>
+                    <span>Irrationality (α)</span>
                     <span className="font-semibold">.78</span>
                   </div>
                 </div>
@@ -536,7 +562,7 @@ const App = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>AVE-Wurzel &gt; Korrelation</span>
-                    <span className="font-semibold">&#10003;</span>
+                    <span className="font-semibold">✓</span>
                   </div>
                 </div>
               </div>
@@ -545,7 +571,7 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
               <h3 className="text-xl font-semibold mb-4">Theoretische Fundierung</h3>
               <p className="mb-4" data-ref="https://www.tandfonline.com/doi/full/10.1080/10447318.2025.2542881?src=|12">
-                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci &amp; Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
+                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci & Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
               </p>
               <p data-ref="https://doi.org/10.3390/challe13020058|13">
                 Die sieben Kernelemente des Flourish-Modells werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
@@ -638,15 +664,14 @@ const App = () => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
                   <h4 className="font-semibold text-blue-500 mb-2">Aktueller Status</h4>
                   <p className="text-sm">
-                    Kleine Stichprobe von 9 Ländern &bull; Promisinge Korrelationen r = 0.68–0.73 &bull; Validitätsprüfungen laufen
+                    Kleine Stichprobe von 9 Ländern • Promisinge Korrelationen r = 0.68–0.73 • Validitätsprüfungen laufen
                   </p>
                 </div>
 
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
                   <h4 className="font-semibold text-green-500 mb-2">Zielvorgaben</h4>
                   <p className="text-sm">
-                    &alpha; &gt; 0.8 Reliabilität &bull; Theoretische Unterschiedlichkeit &bull; Praktische Anwendbarkeit &bull; Über 150 Länder
-                    &alpha; &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
+                    α &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
                   </p>
                 </div>
               </div>
@@ -663,7 +688,7 @@ const App = () => {
       <footer className={`py-8 ${darkMode ? 'bg-gray-800 border-t border-gray-700' : 'bg-gray-50 border-t border-gray-200'}`}>
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-sm">
-            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks &bull; Alle Angaben ohne Gewähr
+            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks • Alle Angaben ohne Gewähr
           </p>
         </div>
       </footer>

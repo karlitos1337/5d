@@ -1,9 +1,7 @@
 {
   "self-directed learning": {
-    "arxiv": [],
     "arxiv": [
       {
-        "title": "Active learning for data streams: a surv...3"
         "title": "Active learning for data streams: a survey",
         "authors": [
           "\nDavide Cacciarelli\n",
@@ -38,216 +36,235 @@
     ],
     "pubmed": [
       {
-        "title": "ChatGPT versus UpToDate in Preclinical Medical Education: Cross-Sectional Analysis Using Term Frequency-Inverse Document Frequency Cosine Similarity.",
+        "title": "Serious learning through play: a decade of the Self-Directed Learning Playground.",
         "authors": [
-          "Thiru SS",
-          "Aksu NE",
-          "Chiang M"
+          "Sow CF"
         ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41861392/"
+        "published": "2026 Mar",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41802353/"
       },
       {
-        "title": "Pharmaceutical competency among physicians: a multidimensional assessment incorporating self-perceived and objective measures.",
+        "title": "Can Large Language Models Foster Reflective Practice? A Dialogically-Informed Exploration by a Trainee-Educator Dyad.",
         "authors": [
-          "Liu C",
-          "Guo H",
-          "Li B"
+          "Retnam S",
+          "Sadasiv MS"
         ],
-        "published": "2026 Mar 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41849096/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798375/"
       },
       {
-        "title": "Cognitive and emotional dynamics of artificial intelligence-assisted English learning: A mixed-methods study in a dual instructional context.",
+        "title": "A Qualitative Analysis of Letters to Successors to Evaluate Medical Students' Experience of a Mandatory Research Project.",
         "authors": [
-          "Zimik HR",
-          "Aujirapongpan S",
-          "Waluyo B"
+          "Rosborough D",
+          "Kaur R",
+          "Hart J"
         ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41593576/"
-        "title": "ChatGPT versus UpToDate in Preclinical Medical Education: Cross-Sectional Analysis Using Term Frequency-Inverse Document Frequency Cosine Similarity.",
-        "authors": [
-          "Thiru SS",
-          "Aksu NE",
-          "Chiang M"
-        ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41861392/"
-      },
-      {
-        "title": "Pharmaceutical competency among physicians: a multidimensional assessment incorporating self-perceived and objective measures.",
-        "authors": [
-          "Liu C",
-          "Guo H",
-          "Li B"
-        ],
-        "published": "2026 Mar 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41849096/"
-      },
-      {
-        "title": "Cognitive and emotional dynamics of artificial intelligence-assisted English learning: A mixed-methods study in a dual instructional context.",
-        "authors": [
-          "Zimik HR",
-          "Aujirapongpan S",
-          "Waluyo B"
-        ],
-        "published": "2026 Mar 16",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41844123/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798328/"
       }
     ],
-    "timestamp": "2026-03-21T11:55:02.350911"
-    "timestamp": "2026-03-22T11:43:19.324152"
-    "timestamp": "2026-03-22T11:57:05.423573"
+    "timestamp": "2026-03-10T11:54:25.538341"
   },
   "intrinsic motivation education": {
-    "arxiv": [],
-    "pubmed": [
+    "arxiv": [
       {
-        "title": "Exploring the Concept of Nurses' Healthcare Policy Competence: A Systematic Review and Qualitative Meta-Synthesis.",
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
         "authors": [
-          "Han NK",
-          "Kim JG"
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
         ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41860586/"
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
       },
       {
-        "title": "Understanding How Nurse Faculty Advisors Perceive Voluntary Attrition Among 4-Year Baccalaureate Degree Nursing Students: A Qualitative Descriptive Study.",
+        "title": "Cinema, Fermi Problems, & General Education",
         "authors": [
-          "Shaver DE",
-          "Viveiros JD",
-          "Hunter Revell S"
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
         ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41860450/"
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
       },
       {
-        "title": "Influencing factors of physical exercise motivation among military academy cadets: a social ecological model analysis.",
+        "title": "Creating Experience value to build student satisfaction in higher education",
         "authors": [
-          "Wang W",
-          "Xu C",
-          "Gao G"
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
         ],
-      },
-      {
-        "title": "Understanding How Nurse Faculty Advisors Perceive Voluntary Attrition Among 4-Year Baccalaureate Degree Nursing Students: A Qualitative Descriptive Study.",
-        "authors": [
-          "Shaver DE",
-          "Viveiros JD",
-          "Hunter Revell S"
-        ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41860450/"
-      },
-      {
-        "title": "Influencing factors of physical exercise motivation among military academy cadets: a social ecological model analysis.",
-        "authors": [
-          "Wang W",
-          "Xu C",
-          "Gao G"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41853079/"
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
       }
     ],
-    "timestamp": "2026-03-21T11:55:05.025953"
-    "timestamp": "2026-03-22T11:43:22.315974"
-    "timestamp": "2026-03-22T11:57:08.447818"
+    "pubmed": [
+      {
+        "title": "Sources and Changes in Medical Student Motivation: A Longitudinal Self-Determination Theory Analysis.",
+        "authors": [
+          "Jones J",
+          "Fuller J",
+          "Alexander S"
+        ],
+        "published": "2026 Jan-Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41804334/"
+      },
+      {
+        "title": "The impact of quality of information on classroom engagement with GenAI tools: integrating TAM and SOR framework.",
+        "authors": [
+          "Li F",
+          "Chen J",
+          "Shao T"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798005/"
+      },
+      {
+        "title": "Effects of a serious game on undergraduate nursing students' learning motivation, engagement and outcomes in community nursing home visit education: A cluster quasi-experimental study.",
+        "authors": [
+          "Chen X",
+          "Yang Y",
+          "Wang Y"
+        ],
+        "published": "2026 Mar 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41797061/"
+      }
+    ],
+    "timestamp": "2026-03-10T11:54:28.570788"
   },
   "autonomy supportive teaching": {
-    "arxiv": [],
+    "arxiv": [
+      {
+        "title": "Closing the Gap between Teaching and Assessment",
+        "authors": [
+          "\nChandralekha Singh\n"
+        ],
+        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
+        "published": "2017-01-09T21:29:02Z",
+        "link": "http://arxiv.org/abs/1701.02356v1"
+      },
+      {
+        "title": "Distribution Matching for Machine Teaching",
+        "authors": [
+          "\nXiaofeng Cao\n",
+          "\nIvor W. Tsang\n"
+        ],
+        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
+        "published": "2021-05-06T09:32:57Z",
+        "link": "http://arxiv.org/abs/2105.13809v1"
+      },
+      {
+        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
+        "authors": [
+          "\nMartin S. Feather\n",
+          "\nAlessandro Pinto\n"
+        ],
+        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
+        "published": "2023-05-16T18:24:12Z",
+        "link": "http://arxiv.org/abs/2305.11902v1"
+      }
+    ],
     "pubmed": [
       {
-        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "title": "A Quality Improvement Approach to Sustainable Student-Led Leadership Development in Undergraduate Medical Education.",
         "authors": [
-          "Li Z",
-          "Wang Z"
+          "Fisher BJ",
+          "Overton JM"
         ],
-        "published": "2026 Mar 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+        "published": "2026 Feb",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798517/"
       },
       {
-        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "title": "A Qualitative Analysis of Letters to Successors to Evaluate Medical Students' Experience of a Mandatory Research Project.",
         "authors": [
-          "Gilbert M",
-          "Montanez J",
-          "Fry ZD"
+          "Rosborough D",
+          "Kaur R",
+          "Hart J"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798328/"
       },
       {
-        "title": "Intervention for minimizing the risk of drop-out in music school pupils-an exploratory study.",
+        "title": "ICU nurses' moral distress in decisions to implement physical restraints.",
         "authors": [
-          "Kavčič Pucihar A",
-          "Zadnik K",
-          "Zamrnik B"
+          "Sarmadi S",
+          "Zare-Kaseb A",
+          "Sanaie N"
         ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41858461/"
+        "published": "2026 Mar 9",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41797692/"
       }
     ],
-    "timestamp": "2026-03-21T11:55:07.039925"
-        "title": "Ethical issues in nursing care for older adults in community settings: A scoping review.",
+    "timestamp": "2026-03-10T11:54:30.554497"
+  },
+  "polyvagal theory education": {
+    "arxiv": [
+      {
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
         "authors": [
-          "Huang L",
-          "Peng X",
-          "Zhao Y"
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
         ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41863287/"
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
       },
       {
-        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "title": "Cinema, Fermi Problems, & General Education",
         "authors": [
-          "Li Z",
-          "Wang Z"
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
         ],
-        "published": "2026 Mar 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
       },
       {
-        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
+        "title": "Creating Experience value to build student satisfaction in higher education",
         "authors": [
-          "Gilbert M",
-          "Montanez J",
-          "Fry ZD"
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
       }
     ],
-    "timestamp": "2026-03-22T11:43:24.316502"
-        "authors": [
-          "Huang L",
-          "Peng X",
-          "Zhao Y"
-        ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41863287/"
-      },
+    "pubmed": [
       {
-        "title": "Incorporating process drama into the flipped classroom to enhance learner motivation and engagement: A self-determination theory perspective.",
+        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
         "authors": [
-          "Li Z",
-          "Wang Z"
-        ],
-        "published": "2026 Mar 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41861724/"
-      },
-      {
-        "title": "Fostering childhood prosociality and relatedness: the perceived impact of an arts-based philosophical intervention on collaboration, empathy and respect.",
-        "authors": [
-          "Gilbert M",
-          "Montanez J",
-          "Fry ZD"
+          "Liu Y"
         ],
         "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41859563/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+      },
+      {
+        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
+        "authors": [
+          "Porges SW"
+        ],
+        "published": "2025 Jun",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+      },
+      {
+        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
+        "authors": [
+          "Goffi F",
+          "Maggioni E",
+          "Bianchi AM"
+        ],
+        "published": "2025 Jul 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-03-22T11:57:10.413794"
+    "timestamp": "2026-03-10T11:54:33.571974"
   },
   "democratic schools": {
     "arxiv": [
@@ -293,139 +310,38 @@
         "link": "http://arxiv.org/abs/2601.05904v1"
       }
     ],
-    "pubmed": [],
-    "timestamp": "2026-03-22T11:57:11.390642"
-  },
-  "polyvagal theory education": {
-    "arxiv": [],
     "pubmed": [
       {
-        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
+        "title": "How can i think of stroke when i don't even have money to eat?: barriers to primary stroke prevention among Nigerian suburban community-dwelling adults.",
         "authors": [
-          "Liu Y"
+          "Akosile CO",
+          "Onwuakagba IU",
+          "Obiekwe SJ"
         ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+        "published": "2026 Mar 9",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41803780/"
       },
       {
-        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
+        "title": "Leveraging AI to Democratize the Hidden Curriculum in Medical Education: An Implementation Framework.",
         "authors": [
-          "Porges SW"
+          "Martin JK 2nd",
+          "Byrd M"
         ],
-        "published": "2025 Jun",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798349/"
       },
       {
-        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
+        "title": "Generative AI voting: fair collective choice is resilient to LLM biases and inconsistencies.",
         "authors": [
-          "Goffi F",
-          "Maggioni E",
-          "Bianchi AM"
+          "Majumdar S",
+          "Elkind E",
+          "Pournaras E"
         ],
-        "published": "2025 Jul 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41797983/"
       }
     ],
-    "timestamp": "2026-03-21T11:55:10.036030"
-    "timestamp": "2026-03-22T11:43:27.316690"
-  },
-  "democratic schools": {
-    "arxiv": [],
-    "pubmed": [
-      {
-        "title": "A multivariate decomposition analysis of urban-rural disparities in contraceptive use among women in Ethiopia.",
-        "authors": [
-          "Asmare L",
-          "Lakew G",
-          "Yirsaw AN"
-        ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41865114/"
-      },
-      {
-        "title": "Spatial distribution, integration and determinants of family planning service provision in Lubumbashi, DRC: a cross-sectional analysis from a health facility census.",
-        "authors": [
-          "Mosuse MA",
-          "Mpoyi TI",
-          "Libertini L"
-        ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41864903/"
-      },
-      {
-        "title": "Women's perceptions of person-centered comprehensive abortion care and associated factors in Northern Ethiopia: a facility-based cross-sectional study in a humanitarian setting.",
-        "authors": [
-          "Amare NS",
-          "Seyoum T",
-          "Tariku A"
-        ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41862995/"
-      },
-      {
-        "title": "Clinical outcomes and survival of HIV exposed children at 18 months in post-conflict region: insight from the Panzi Interdisciplinary PMTCT cohort (Panzi IPC) study.",
-        "authors": [
-          "Ntakwinja BM",
-          "Katoto PDMC",
-          "Mukanga LO"
-        ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41862836/"
-      },
-      {
-        "title": "African Representation in Randomized Controlled Trials Published in Leading Medical and Cardiovascular Journals, 2019-2024.",
-        "authors": [
-          "Gaye B",
-          "Morsy MI",
-          "Kitara DL"
-        ],
-        "published": "2026 Mar 20",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41860521/"
-      }
-    ],
-    "timestamp": "2026-03-21T11:55:11.042556"
-  },
-  "student agency": {
-    "arxiv": [],
-    "pubmed": [
-      {
-        "title": "A Service-Learning Program Based on Comprehensive Geriatric Assessment and Health Promotion in Older Adults: Protocol for the GEROS Project.",
-        "authors": [
-          "Casacuberta-Roca J",
-          "Minobes-Molina E",
-          "Terradas-Monllor M"
-        ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41862814/"
-      },
-      {
-        "title": "PTCMIL: multiple instance learning via prompt token clustering for whole slide image analysis.",
-        "authors": [
-          "Zhao B",
-          "Kim S",
-          "Chen H"
-        ],
-        "published": "2026 Mar 10",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41849941/"
-      },
-      {
-        "title": "A Modern Approach for Constructing Decision Analytic Models in Microsoft Excel.",
-        "authors": [
-          "Paulden M"
-        ],
-        "published": "2026 Mar 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41849113/"
-      }
-    ],
-    "timestamp": "2026-03-21T11:55:12.032019"
-  },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-03-21T11:55:12.034326",
-      }
-    ],
-    "timestamp": "2026-03-22T11:43:28.317634"
-    "timestamp": "2026-03-22T11:57:13.418551"
+    "timestamp": "2026-03-10T11:54:34.542067"
   },
   "student agency": {
     "arxiv": [
@@ -465,46 +381,39 @@
     ],
     "pubmed": [
       {
-        "title": "The experiences of nursing and midwifery students with end-of-life care in Neonatal Intensive Care Units: A qualitative descriptive exploratory study.",
+        "title": "Dental Students' Readiness to Use Silver Diamine Fluoride in Older Adults: Knowledge, Perceptions, and Challenges.",
         "authors": [
-          "Vermeulen J",
-          "Fobelets M",
-          "Van Heymbeeck I"
+          "León S",
+          "Gambetta-Tessini K",
+          "Corbett F"
         ],
-        "published": "2026 Mar 18",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41863992/"
+        "published": "2026 Mar-Apr",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41804071/"
       },
       {
-        "title": "Return to Work Following Osteochondral Allograft Transplantation in the Knee.",
+        "title": "A survey to evaluate the use of the erector spinae plane block (ESPB) in small animal practice.",
         "authors": [
-          "Rucinski K",
-          "Crecelius CR",
-          "Nuelle CW"
+          "Cabellos Clemente C",
+          "Pawson P",
+          "Robertson J"
         ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41863744/"
+        "published": "2026 Mar 3",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41802380/"
       },
       {
-        "title": "A Service-Learning Program Based on Comprehensive Geriatric Assessment and Health Promotion in Older Adults: Protocol for the GEROS Project.",
+        "title": "What's in a Name? Psychiatric Concept Creep and the Moral Legibility of Student Suffering within the Canadian University Context.",
         "authors": [
-          "Casacuberta-Roca J",
-          "Minobes-Molina E",
-          "Terradas-Monllor M"
+          "Wiley AN"
         ],
-        "published": "2026 Mar 21",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41862814/"
+        "published": "2026 Mar 9",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41802200/"
       }
     ],
-    "timestamp": "2026-03-22T11:43:29.318492"
+    "timestamp": "2026-03-10T11:54:35.535816"
   },
   "who_mental_health": {
     "data": {},
-    "timestamp": "2026-03-22T11:43:29.320409",
-    "timestamp": "2026-03-22T11:57:14.421329"
-  },
-  "who_mental_health": {
-    "data": {},
-    "timestamp": "2026-03-22T11:57:14.423257",
+    "timestamp": "2026-03-10T11:54:35.537341",
     "source": "WHO Global Health Observatory (Disabled)"
   },
   "world_bank_education": {
@@ -626,589 +535,7 @@
         }
       }
     },
-    "timestamp": "2026-03-21T11:55:15.495642",
-    "timestamp": "2026-03-22T11:43:32.956628",
-    "timestamp": "2026-03-22T11:57:17.579663",
+    "timestamp": "2026-03-10T11:54:38.730372",
     "source": "World Bank EdStats API"
-  },
-  "world_bank_wgi": {
-    "data": {
-      "AUS": {
-        "Voice & Accountability": {
-          "value": 1.50660192966461,
-          "year": "2023"
-        }
-      },
-      "BRA": {
-        "Voice & Accountability": {
-          "value": 0.382853865623474,
-          "year": "2023"
-        }
-      },
-      "CAN": {
-        "Voice & Accountability": {
-          "value": 1.4796462059021,
-          "year": "2023"
-        }
-      },
-      "CHN": {
-        "Voice & Accountability": {
-          "value": -1.50455415248871,
-          "year": "2023"
-        }
-      },
-      "DEU": {
-        "Voice & Accountability": {
-          "value": 1.46138572692871,
-          "year": "2023"
-        }
-      },
-      "FRA": {
-        "Voice & Accountability": {
-          "value": 1.15460133552551,
-          "year": "2023"
-        }
-      },
-      "GBR": {
-        "Voice & Accountability": {
-          "value": 1.26162397861481,
-          "year": "2023"
-        }
-      },
-      "IND": {
-        "Voice & Accountability": {
-          "value": 0.0944044888019562,
-          "year": "2023"
-        }
-      },
-      "JPN": {
-        "Voice & Accountability": {
-          "value": 1.10550534725189,
-          "year": "2023"
-        }
-      },
-      "USA": {
-        "Voice & Accountability": {
-          "value": 0.877519071102142,
-          "year": "2023"
-        }
-      },
-      "CHE": {
-        "Voice & Accountability": {
-          "value": 1.66502690315247,
-          "year": "2023"
-        }
-      },
-      "DNK": {
-        "Voice & Accountability": {
-          "value": 1.66469931602478,
-          "year": "2023"
-        }
-      },
-      "ESP": {
-        "Voice & Accountability": {
-          "value": 1.19472968578339,
-          "year": "2023"
-        }
-      },
-      "FIN": {
-        "Voice & Accountability": {
-          "value": 1.63263607025146,
-          "year": "2023"
-        }
-      },
-      "ITA": {
-        "Voice & Accountability": {
-          "value": 1.11553084850311,
-          "year": "2023"
-        }
-      },
-      "KOR": {
-        "Voice & Accountability": {
-          "value": 0.8595951795578,
-          "year": "2023"
-        }
-      },
-      "NLD": {
-        "Voice & Accountability": {
-          "value": 1.55626440048218,
-          "year": "2023"
-        }
-      },
-      "NOR": {
-        "Voice & Accountability": {
-          "value": 1.77725434303284,
-          "year": "2023"
-        }
-      },
-      "NZL": {
-        "Voice & Accountability": {
-          "value": 1.68778347969055,
-          "year": "2023"
-        }
-      },
-      "SWE": {
-        "Voice & Accountability": {
-          "value": 1.57483160495758,
-          "year": "2023"
-        }
-      }
-    },
-    "timestamp": "2026-03-21T11:55:18.093777",
-    "timestamp": "2026-03-22T11:43:34.770298",
-    "timestamp": "2026-03-22T11:57:19.578696",
-    "source": "World Bank WGI"
-  }
-        "title": "Enhancing Trainee Knowledge and Competence in Addiction Medicine: Outcomes of an Interprofessional Addiction Consult Service Rotation."
-      }
-    ],
-    "timestamp": "2026-01-29T11:50:51.931136"
-        "title": "Panoramic Landmarks: Comparing LLM-Assisted, Manual Tracing, and Self-Directed Learning in Dental Education.",
-        "authors": [
-          "Goldman SA",
-          "Wurzburger R",
-          "Sokolski E"
-        ],
-        "published": "2026 Jan 30",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41615525/"
-      },
-      {
-        "title": "The effect of collaborative learning approach on nursing students' knowledge and skill learning for enteral nutrition: a randomized controlled study.",
-        "authors": [
-          "Acun A",
-          "Aksoy Bulgurcu R"
-        ],
-        "published": "2026 Jan 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41612365/"
-      },
-      {
-        "title": "Spontaneous behavior is a succession of self-directed tasks.",
-        "authors": [
-          "Weinreb C",
-          "Kannan LT",
-          "Newman-Boulle A"
-        ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41610841/"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:15.289996"
-    "timestamp": "2025-12-21T11:33:05.150148"
-    "timestamp": "2026-03-11T11:53:30.674115"
-    "timestamp": "2026-03-12T11:58:03.896588"
-  },
-  "intrinsic motivation education": {
-    "arxiv": [
-      {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
-        "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
-        ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
-      },
-      {
-        "title": "Cinema, Fermi Problems, & General Education",
-        "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
-        ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
-      },
-      {
-        "title": "Creating Experience value to build student satisfaction in higher education",
-        "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
-        ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Staged-release problem-based learning revitalizes medical students' intrinsic motivation and clinical reasoning.",
-        "title": "Eurogame escape room of physics in veterinary education: a pilot study.",
-        "title": "From novice to expert: the impact of peer review interaction on authors' academic growth.",
-        "authors": [
-          "Wang X",
-          "Chen M"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41602643/"
-      },
-      {
-        "title": "Sustainability of Positive Body Image Changes One Year After Exercise Interventions in Young Women: A Quasi-Experimental Study.",
-        "authors": [
-          "Jankauskiene R",
-          "Balciuniene V",
-          "Rutkauskaite R"
-        ],
-        "published": "2026 Jan 7",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41595024/"
-      },
-      {
-        "title": "Optimizing Motor Coordination in Children with Developmental Coordination Disorder: Mini-Handball vs. Motor Skills Training.",
-        "authors": [
-          "Bekmanova H",
-          "Saidmamatov O",
-          "Jammatov J"
-        ],
-        "published": "2025 Dec 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41590944/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:50:54.889796"
-        "title": "From external rewards to intrinsic drive: A self-determination theory analysis of paramedic motivations for postgraduate education.",
-        "authors": [
-          "Abdullah N",
-          "McInerney P",
-          "Sobuwa S"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41808759/"
-      },
-      {
-        "title": "Development of Dating Motivations During High School: Contributions of Romantic Experiences.",
-        "authors": [
-          "Kindelberger C",
-          "Mallet P",
-          "Galharret JM"
-        ],
-        "published": "2026 Mar 10",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41806354/"
-      },
-      {
-        "title": "Sources and Changes in Medical Student Motivation: A Longitudinal Self-Determination Theory Analysis.",
-        "authors": [
-          "Jones J",
-          "Fuller J",
-          "Alexander S"
-        ],
-        "published": "2026 Jan-Dec",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41804334/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:33.788717"
-        "title": "The double-edged sword of laissez-faire leadership: How gender and trust shape faculty motivation.",
-        "authors": [
-          "Elhassan YH",
-          "Sieben JM",
-          "Köhler SE"
-        ],
-        "published": "2026 Jan 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41612652/"
-      },
-      {
-        "title": "Factors impacting the delivery of contextualized care in serious illness: a focus group study with healthcare professionals.",
-        "authors": [
-          "Modderkolk L",
-          "Schoon Y",
-          "Touw H"
-        ],
-        "published": "2026 Jan 29",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41612327/"
-      },
-      {
-        "title": "Providing choice boosts immediate force production in adolescents with ADHD.",
-        "authors": [
-          "Gregorio MV",
-          "Abdollahipour R",
-          "Valtr L"
-        ],
-        "published": "2026 Jan 28",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41610829/"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:18.279094"
-  },
-  "autonomy supportive teaching": {
-    "arxiv": [
-      {
-        "title": "Closing the Gap between Teaching and Assessment",
-        "authors": [
-          "\nChandralekha Singh\n"
-        ],
-        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
-        "published": "2017-01-09T21:29:02Z",
-        "link": "http://arxiv.org/abs/1701.02356v1"
-      },
-      {
-        "title": "Distribution Matching for Machine Teaching",
-        "authors": [
-          "\nXiaofeng Cao\n",
-          "\nIvor W. Tsang\n"
-        ],
-        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
-        "published": "2021-05-06T09:32:57Z",
-        "link": "http://arxiv.org/abs/2105.13809v1"
-      },
-      {
-        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
-        "authors": [
-          "\nMartin S. Feather\n",
-          "\nAlessandro Pinto\n"
-        ],
-        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
-        "published": "2023-05-16T18:24:12Z",
-        "link": "http://arxiv.org/abs/2305.11902v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Mental health help-seeking among individuals with breast cancer: A qualitative exploration of women's and healthcare practitioners' perspectives.",
-        "title": "Potential categories and influences on college students' exercise motivation: a latent profile-based analysis.",
-        "title": "The importance of young surgeons in surgical health policy advocacy engagement.",
-        "authors": [
-          "Liepert AE",
-          "Douglas A",
-          "Johns A"
-        ],
-        "published": "2026 Jan 27",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41604833/"
-      },
-      {
-        "title": "Exploring cognitive and motivational impacts of flipped English classrooms: perspectives from teachers in a Chinese art university.",
-        "authors": [
-          "Ling Y",
-          "Jan JM"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41602636/"
-      },
-      {
-        "title": "Exploring Inclusion in Austria's Breast Cancer Screening:A Dual-Perspective Study of Women with Intellectual Disabilities and Their Caregivers.",
-        "authors": [
-          "Wagner T",
-          "Makled N",
-          "Scior K"
-        ],
-        "published": "2026 Jan 19",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41595918/"
-      }
-    ],
-    "timestamp": "2026-01-29T11:50:56.887710"
-        "title": "Understanding how emotional intelligence shapes teachers' reflective and creative teaching: the moderating role of teacher autonomy.",
-        "authors": [
-          "Orakci Ş",
-          "Aktan O",
-          "Çevik H"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41809744/"
-      },
-      {
-        "title": "From external rewards to intrinsic drive: A self-determination theory analysis of paramedic motivations for postgraduate education.",
-        "authors": [
-          "Abdullah N",
-          "McInerney P",
-          "Sobuwa S"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41808759/"
-      },
-      {
-        "title": "Expanded Roles and Competency Gaps of Emergency and ICU Nurses During Armed Conflict in Gaza.",
-        "authors": [
-          "AbuQamar M",
-          "Alkhatib AH",
-          "Dilles T"
-        ],
-        "published": "2026 Mar",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41808281/"
-      }
-    ],
-    "timestamp": "2026-03-11T11:53:35.660559"
-        "title": "Organisational variation in Recovery College implementation: 31-college qualitative study.",
-        "authors": [
-          "Takhi SK",
-          "Jebara T",
-          "McPhilbin M"
-        ],
-        "published": "2026 Jan 26",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41582620/"
-      },
-      {
-        "title": "The double-edged sword of laissez-faire leadership: How gender and trust shape faculty motivation.",
-        "authors": [
-          "Alharthi FB"
-        ],
-        "published": "2026 Jan 24",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41581346/"
-      },
-      {
-        "title": "Tree of peaches: exploring what matters most at the end-of-life among healthy older adults in Taiwan: a qualitative study.",
-        "authors": [
-          "Shen VW",
-          "Shen WV",
-          "Yu EW"
-        ],
-        "published": "2026 Jan 24",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41580667/"
-      }
-    ],
-    "timestamp": "2026-01-28T11:55:14.273452"
-        "title": "Narrative review of the ethics of artificial intelligence: are we ready for artificial intelligence in surgery?",
-        "authors": [
-          "Mohammad Hussin N",
-          "Nik Jaafar NR",
-          "Idris IB"
-        ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41616011/"
-      },
-      {
-        "title": "Why Not Rock the Boat? Deprescribing Anticholinergic Medications That Are No Longer Needed in Persons With Schizophrenia.",
-        "authors": [
-          "Gannon JM",
-          "Chengappa KNR",
-          "Lupu AM"
-        ],
-        "published": "2025 Oct",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41613749/"
-      },
-      {
-        "title": "The Reproductive Autonomy Scale: German validation and application in an Austrian student population.",
-        "authors": [
-          "Böttcher B",
-          "Flatscher-Thoeni M",
-          "Reiser E"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41613074/"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:20.377768"
-  },
-  "polyvagal theory education": {
-    "arxiv": [
-      {
-        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
-        "authors": [
-          "\nLynn Cominsky\n",
-          "\nKevin McLin\n",
-          "\nAurore Simonnet\n",
-          "\nthe Fermi Education\n",
-          "\nPublic Outreach Team\n"
-        ],
-        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
-        "published": "2013-02-28T23:24:41Z",
-        "link": "http://arxiv.org/abs/1303.0042v1"
-      },
-      {
-        "title": "Cinema, Fermi Problems, & General Education",
-        "authors": [
-          "\nC. J. Efthimiou\n",
-          "\nR. Llewellyn\n"
-        ],
-        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
-        "published": "2006-08-05T06:19:58Z",
-        "link": "http://arxiv.org/abs/physics/0608058v2"
-      },
-      {
-        "title": "Creating Experience value to build student satisfaction in higher education",
-        "authors": [
-          "\nMuji Gunarto\n",
-          "\nRatih Hurriyati\n"
-        ],
-        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
-        "published": "2020-06-13T15:29:41Z",
-        "link": "http://arxiv.org/abs/2006.09846v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
-        "authors": [
-          "Liu Y"
-        ],
-        "published": "2025",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
-      },
-      {
-        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
-        "authors": [
-          "Porges SW"
-        ],
-        "published": "2025 Jun",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
-      },
-      {
-        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
-        "authors": [
-          "Goffi F",
-          "Maggioni E",
-          "Bianchi AM"
-        ],
-        "published": "2025 Jul 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:22.296328"
-    "timestamp": "2025-12-21T11:33:14.101425"
-    "timestamp": "2026-01-29T11:50:59.891846"
-    "timestamp": "2026-03-11T11:53:38.698374"
-    "timestamp": "2026-01-28T11:55:17.275575"
-    "timestamp": "2026-03-12T11:58:11.957291"
-  },
-  "democratic schools": {
-    "arxiv": [
-      {
-        "title": "Democratic Policy Development using Collective Dialogues and AI",
-        "authors": [
-          "\nAndrew Konya\n",
-          "\nLisa Schirch\n",
-          "\nColin Irwin\n",
-          "\nAviv Ovadya\n"
-        ],
-        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
-        "published": "2023-11-03T21:12:57Z",
-        "link": "http://arxiv.org/abs/2311.02242v1"
-      },
-      {
-        "title": "The robustness of democratic consensus",
-        "authors": [
-          "\nFabio Fagnani\n",
-          "\nJean-Charles Delvenne\n"
-        ],
-        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
-        "published": "2015-02-15T01:02:01Z",
-        "link": "http://arxiv.org/abs/1502.04264v1"
-      },
-      {
-        "title": "Can AI mediation improve democratic deliberation?",
-        "authors": [
-          "\nMichael Henry Tessler\n",
-          "\nGeorgina Evans\n",
-          "\nMichiel A. Bakker\n",
-          "\nIason Gabriel\n",
-          "\nSophie Bridgers\n",
-          "\nRishub Jain\n",
-          "\nRaphael Koster\n",
-          "\nVerena Rieser\n",
-          "\nAnca Dragan\n",
-          "\nMatthew Botvinick\n",
-          "\nChristopher Summerfield\n"
-        ],
-        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
-        "published": "2026-01-09T16:22:26Z",
-        "link": "http://arxiv.org/abs/2601.05904v1"
-      }
-    ],
-    "pubmed": [
-      {
-        "title": "Some pubmed title"
-      }
-    ],
-    "timestamp": "2026-01-31T11:40:33.479921",
-    "source": "World Bank WGI"
   }
 }
