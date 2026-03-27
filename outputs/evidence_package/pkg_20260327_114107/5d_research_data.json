@@ -1,0 +1,422 @@
+{
+  "self-directed learning": {
+    "arxiv": [
+      {
+        "title": "Active learning for data streams: a survey",
+        "authors": [
+          "\nDavide Cacciarelli\n",
+          "\nMurat Kulahci\n"
+        ],
+        "summary": "Online active learning is a paradigm in machine learning that aims to select the most informative data points to label from a data stream. The problem of minimizing the cost associated with collecting",
+        "published": "2023-02-17T14:24:13Z",
+        "link": "http://arxiv.org/abs/2302.08893v4"
+      },
+      {
+        "title": "On the Similarities of Embeddings in Contrastive Learning",
+        "authors": [
+          "\nChungpa Lee\n",
+          "\nSehee Lim\n",
+          "\nKibok Lee\n",
+          "\nJy-yong Sohn\n"
+        ],
+        "summary": "Contrastive learning operates on a simple yet effective principle: Embeddings of positive pairs are pulled together, while those of negative pairs are pushed apart. In this paper, we propose a unified",
+        "published": "2025-06-11T14:21:05Z",
+        "link": "http://arxiv.org/abs/2506.09781v2"
+      },
+      {
+        "title": "The Dimension of Self-Directed Learning",
+        "authors": [
+          "\nPramith Devulapalli\n",
+          "\nSteve Hanneke\n"
+        ],
+        "summary": "Understanding the self-directed learning complexity has been an important problem that has captured the attention of the online learning theory community since the early 1990s. Within this framework, ",
+        "published": "2024-02-20T21:59:41Z",
+        "link": "http://arxiv.org/abs/2402.13400v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Psychometric validation and measurement invariance of the Arabic version of the problem-solving inventory-20: An instrument validation study in AI-supported learning.",
+        "authors": [
+          "Elzeky MEH",
+          "Alsadaan N",
+          "Shahine NFM"
+        ],
+        "published": "2026 Mar 23",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41887008/"
+      },
+      {
+        "title": "Implementing and evaluating an integrated self-directed learning method for 1(st) phase medical graduate students: A novel interdisciplinary approach in anatomy, physiology, and biochemistry.",
+        "authors": [
+          "Sahasrabuddhe A",
+          "Gade S",
+          "Kamble PH"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41883645/"
+      },
+      {
+        "title": "'Fend for yourself': Nurses' experiences transitioning to Family Care Team practice settings in Newfoundland and Labrador.",
+        "authors": [
+          "Devey-Burry R",
+          "Lukewich J",
+          "Ryan D"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41875204/"
+      }
+    ],
+    "timestamp": "2026-03-27T11:41:15.722394"
+  },
+  "intrinsic motivation education": {
+    "arxiv": [
+      {
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "authors": [
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
+        ],
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
+      },
+      {
+        "title": "Cinema, Fermi Problems, & General Education",
+        "authors": [
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
+        ],
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
+      },
+      {
+        "title": "Creating Experience value to build student satisfaction in higher education",
+        "authors": [
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
+        ],
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "The path to growth resilience: A serial mediation model linking temporal coherence to goal clarity and cognitive curiosity.",
+        "authors": [
+          "He J",
+          "Jin H"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41880336/"
+      },
+      {
+        "title": "Feel it to learn it!-Cognitive and motivational effects of haptic learning materials.",
+        "authors": [
+          "Erdmann HS",
+          "Montag M",
+          "Büscher L"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41878036/"
+      },
+      {
+        "title": "App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students.",
+        "authors": [
+          "Liang X",
+          "Wang Z"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41871105/"
+      }
+    ],
+    "timestamp": "2026-03-27T11:41:18.718101"
+  },
+  "autonomy supportive teaching": {
+    "arxiv": [
+      {
+        "title": "Closing the Gap between Teaching and Assessment",
+        "authors": [
+          "\nChandralekha Singh\n"
+        ],
+        "summary": "Evidence-based teaching is based upon a model of learning in which assessment plays a central role.",
+        "published": "2017-01-09T21:29:02Z",
+        "link": "http://arxiv.org/abs/1701.02356v1"
+      },
+      {
+        "title": "Distribution Matching for Machine Teaching",
+        "authors": [
+          "\nXiaofeng Cao\n",
+          "\nIvor W. Tsang\n"
+        ],
+        "summary": "Machine teaching is an inverse problem of machine learning that aims at steering the student learner towards its target hypothesis, in which the teacher has already known the student's learning parame",
+        "published": "2021-05-06T09:32:57Z",
+        "link": "http://arxiv.org/abs/2105.13809v1"
+      },
+      {
+        "title": "Assurance for Autonomy -- JPL's past research, lessons learned, and future directions",
+        "authors": [
+          "\nMartin S. Feather\n",
+          "\nAlessandro Pinto\n"
+        ],
+        "summary": "Robotic space missions have long depended on automation, defined in the 2015 NASA Technology Roadmaps as \"the automatically-controlled operation of an apparatus, process, or system using a pre-planned",
+        "published": "2023-05-16T18:24:12Z",
+        "link": "http://arxiv.org/abs/2305.11902v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Mobile health technology to promote and support breastfeeding: An explorative interview study of women's experience of antenatal education.",
+        "authors": [
+          "Bergstrand Karlsson S",
+          "Carlsson IM"
+        ],
+        "published": "2026 Mar 18",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41887090/"
+      },
+      {
+        "title": "Integrating HPV vaccination into ART clinics: perspectives from an ethnographic study with girls aged 9-14 years in Ndola District, Zambia.",
+        "authors": [
+          "Hunleth J",
+          "Ngalande T",
+          "Mwanza D"
+        ],
+        "published": "2026 Mar 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41886263/"
+      },
+      {
+        "title": "Challenging score-centered norms in Western classical higher music education: an exploratory qualitative study of instructor-led initiatives in the UK and Europe.",
+        "authors": [
+          "Matei R",
+          "Chiu R"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41884540/"
+      }
+    ],
+    "timestamp": "2026-03-27T11:41:20.728023"
+  },
+  "polyvagal theory education": {
+    "arxiv": [
+      {
+        "title": "Twelve Years of Education and Public Outreach with the Fermi Gamma-ray Space Telescope",
+        "authors": [
+          "\nLynn Cominsky\n",
+          "\nKevin McLin\n",
+          "\nAurore Simonnet\n",
+          "\nthe Fermi Education\n",
+          "\nPublic Outreach Team\n"
+        ],
+        "summary": "During the past twelve years, NASA's Fermi Gamma-ray Space Telescope has supported a wide range of Education and Public Outreach (E/PO) activities, targeting K-14 students and the general public. The ",
+        "published": "2013-02-28T23:24:41Z",
+        "link": "http://arxiv.org/abs/1303.0042v1"
+      },
+      {
+        "title": "Cinema, Fermi Problems, & General Education",
+        "authors": [
+          "\nC. J. Efthimiou\n",
+          "\nR. Llewellyn\n"
+        ],
+        "summary": "During the past several years the authors have developed a new approach to the teaching of Physical Science, a general education course typically found in the curricula of nearly every college and uni",
+        "published": "2006-08-05T06:19:58Z",
+        "link": "http://arxiv.org/abs/physics/0608058v2"
+      },
+      {
+        "title": "Creating Experience value to build student satisfaction in higher education",
+        "authors": [
+          "\nMuji Gunarto\n",
+          "\nRatih Hurriyati\n"
+        ],
+        "summary": "Higher education products or services received by students are experiential values. The purpose of this study is how to create the values of student experience so that student satisfaction arises. Hig",
+        "published": "2020-06-13T15:29:41Z",
+        "link": "http://arxiv.org/abs/2006.09846v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Mindful Embodied Movement: Study Protocol for a 12-Week Modern Dance-Mindfulness Intervention and Mixed-Methods Randomized Controlled Trial in Recreational Adult Dancers.",
+        "authors": [
+          "Zafeiroudi A",
+          "Tsartsapakis I",
+          "Kouthouris C"
+        ],
+        "published": "2026 Mar 3",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41874154/"
+      },
+      {
+        "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
+        "authors": [
+          "Liu Y"
+        ],
+        "published": "2025",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41602656/"
+      },
+      {
+        "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions.",
+        "authors": [
+          "Porges SW"
+        ],
+        "published": "2025 Jun",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+      }
+    ],
+    "timestamp": "2026-03-27T11:41:24.082826"
+  },
+  "democratic schools": {
+    "arxiv": [
+      {
+        "title": "Democratic Policy Development using Collective Dialogues and AI",
+        "authors": [
+          "\nAndrew Konya\n",
+          "\nLisa Schirch\n",
+          "\nColin Irwin\n",
+          "\nAviv Ovadya\n"
+        ],
+        "summary": "We design and test an efficient democratic process for developing policies that reflect informed public will. The process combines AI-enabled collective dialogues that make deliberation democratically",
+        "published": "2023-11-03T21:12:57Z",
+        "link": "http://arxiv.org/abs/2311.02242v1"
+      },
+      {
+        "title": "The robustness of democratic consensus",
+        "authors": [
+          "\nFabio Fagnani\n",
+          "\nJean-Charles Delvenne\n"
+        ],
+        "summary": "In linear models of consensus dynamics, the state of the various agents converges to a value which is a convex combination of the agents' initial states. We call it democratic if in the large scale li",
+        "published": "2015-02-15T01:02:01Z",
+        "link": "http://arxiv.org/abs/1502.04264v1"
+      },
+      {
+        "title": "Can AI mediation improve democratic deliberation?",
+        "authors": [
+          "\nMichael Henry Tessler\n",
+          "\nGeorgina Evans\n",
+          "\nMichiel A. Bakker\n",
+          "\nIason Gabriel\n",
+          "\nSophie Bridgers\n",
+          "\nRishub Jain\n",
+          "\nRaphael Koster\n",
+          "\nVerena Rieser\n",
+          "\nAnca Dragan\n",
+          "\nMatthew Botvinick\n",
+          "\nChristopher Summerfield\n"
+        ],
+        "summary": "The strength of democracy lies in the free and equal exchange of diverse viewpoints. Living up to this ideal at scale faces inherent tensions: broad participation, meaningful deliberation, and politic",
+        "published": "2026-01-09T16:22:26Z",
+        "link": "http://arxiv.org/abs/2601.05904v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Bridging Art and Algorithm: The Evolution of Plastic Surgery Across Eras.",
+        "authors": [
+          "Sharma RK"
+        ],
+        "published": "2026 Feb",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41890648/"
+      },
+      {
+        "title": "Intergenerational hypertension transmission before and after South Africa's democratic transition.",
+        "authors": [
+          "Avogo WA"
+        ],
+        "published": "2026 Mar",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41890417/"
+      },
+      {
+        "title": "Higher education predicts global cultural similarity to WEIRD countries.",
+        "authors": [
+          "White CJM",
+          "Muthukrishna M"
+        ],
+        "published": "2026 Mar 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41888133/"
+      }
+    ],
+    "timestamp": "2026-03-27T11:41:24.721880"
+  },
+  "student agency": {
+    "arxiv": [
+      {
+        "title": "Active Inference as a Model of Agency",
+        "authors": [
+          "\nLancelot Da Costa\n",
+          "\nSamuel Tenka\n",
+          "\nDominic Zhao\n",
+          "\nNoor Sajid\n"
+        ],
+        "summary": "Is there a canonical way to think of agency beyond reward maximisation? In this paper, we show that any type of behaviour complying with physically sound assumptions about how macroscopic biological a",
+        "published": "2024-01-23T17:09:25Z",
+        "link": "http://arxiv.org/abs/2401.12917v1"
+      },
+      {
+        "title": "Sense of agency, gender, and students' perception in open-ended physics labs",
+        "authors": [
+          "\nZ. Yasemin Kalender\n",
+          "\nMartin Stein\n",
+          "\nN. G. Holmes\n"
+        ],
+        "summary": "Instructional physics labs are critical junctures for many STEM majors to develop an understanding of experimentation in the sciences. Students can acquire useful experimental skills and grow their id",
+        "published": "2020-07-15T01:47:21Z",
+        "link": "http://arxiv.org/abs/2007.07427v1"
+      },
+      {
+        "title": "A Theoretical Framework of Student Agency in AI- Assisted Learning: A Grounded Theory Approach",
+        "authors": [
+          "\nYun Dai\n",
+          "\nSichen Lai\n"
+        ],
+        "summary": "Generative AI(GenAI) is a kind of AI model capable of producing human-like content in various modalities, including text, image, audio, video, and computer programming. Although GenAI offers great pot",
+        "published": "2025-12-08T03:51:24Z",
+        "link": "http://arxiv.org/abs/2512.07143v1"
+      }
+    ],
+    "pubmed": [
+      {
+        "title": "Single-step bioconversion of cow rumen-based agroindustrial waste to bioethanol via enzyme-assisted processes.",
+        "authors": [
+          "Bahlawan ZAS",
+          "Megawati",
+          "Desiriani R"
+        ],
+        "published": "2026 Mar 26",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41888220/"
+      },
+      {
+        "title": "Associations between classroom ventilation rates and school characteristics with indoor air in classrooms during wildfire smoke events.",
+        "authors": [
+          "Lamplugh A",
+          "Sones T",
+          "Woodland M"
+        ],
+        "published": "2026 Mar 24",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41887350/"
+      },
+      {
+        "title": "Learner agency in a problem-based learning curriculum: A qualitative study on perspectives of undergraduate dental students.",
+        "authors": [
+          "Gupta N",
+          "Sunil S",
+          "Ali K"
+        ],
+        "published": "2026",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41886493/"
+      }
+    ],
+    "timestamp": "2026-03-27T11:41:25.763543"
+  },
+  "who_mental_health": {
+    "data": {},
+    "timestamp": "2026-03-27T11:41:25.765269",
+    "source": "WHO Global Health Observatory (Disabled)"
+  },
+  "world_bank_education": {
+    "data": {},
+    "timestamp": "2026-03-27T11:44:38.899754",
+    "source": "World Bank EdStats API"
+  }
+}
