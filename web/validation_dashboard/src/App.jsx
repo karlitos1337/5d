@@ -97,16 +97,10 @@ const App = () => {
       element: document.getElementById(sec.id)
     })).filter(sec => sec.element);
 
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+    let ticking = false;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
-      if (!ticking.current) {
+    const handleScroll = () => {
+      if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
@@ -117,18 +111,22 @@ const App = () => {
               break;
             }
           }
-          ticking.current = false;
+          ticking = false;
         });
-        ticking.current = true;
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50">
+        Zum Hauptinhalt springen
+      </a>
+
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
@@ -211,7 +209,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
