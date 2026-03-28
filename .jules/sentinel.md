@@ -10,3 +10,7 @@
 **Vulnerability:** The Gemini API response parsing in `web/templates/5d_forschungsplanung.html` used `marked.parse(text)` directly injected via `innerHTML`. This exposes the application to DOM-based XSS if the AI returns malicious HTML.
 **Learning:** Never trust inputs from external APIs, including LLMs. Always sanitize Markdown output before inserting it into the DOM, especially when using `innerHTML`.
 **Prevention:** Imported `DOMPurify` and wrapped `marked.parse(text)` with `DOMPurify.sanitize()` prior to DOM injection.
+## 2024-05-24 - DOM XSS in Error Handling
+**Vulnerability:** Unsanitized error messages rendered directly to the DOM via innerHTML can lead to XSS if the error message is manipulated (e.g., from network payloads or API failures).
+**Learning:** While API responses were sanitized using DOMPurify, the error handling blocks were overlooked, allowing potential injection via error messages.
+**Prevention:** Always sanitize any dynamically rendered strings (including error messages) when using innerHTML.

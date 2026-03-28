@@ -599,7 +599,7 @@
                 }
             } catch (error) {
                 loadingSpinner.classList.add('hidden');
-                aiResponse.innerHTML = `<p class="text-red-500">Netzwerkfehler: ${error.message}</p>`;
+                aiResponse.innerHTML = DOMPurify.sanitize(`<p class="text-red-500">Netzwerkfehler: ${error.message}</p>`);
             }
         }
     </script>
