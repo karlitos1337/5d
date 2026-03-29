@@ -97,16 +97,9 @@ const App = () => {
       element: document.getElementById(sec.id)
     })).filter(sec => sec.element);
 
+    let ticking = false;
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
-      if (!ticking.current) {
+      if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
@@ -117,13 +110,13 @@ const App = () => {
               break;
             }
           }
-          ticking.current = false;
+          ticking = false;
         });
-        ticking.current = true;
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
 
