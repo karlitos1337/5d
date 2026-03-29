@@ -14,7 +14,7 @@ charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via towncrier
-cryptography==46.0.5
+cryptography==46.0.6
     # via pyopenssl
 docutils==0.19
     # via
