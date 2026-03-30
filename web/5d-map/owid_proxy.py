@@ -25,7 +25,6 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 return
             try:
                 # Security: chunked read with size limit to prevent DoS
-                MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10MB
                 CHUNK_SIZE = 8192
 
                 with urllib.request.urlopen(url, timeout=15) as resp:
@@ -65,7 +64,6 @@ class ProxyHandler(BaseHTTPRequestHandler):
                     msg = b"Response too large"
 
                 # Security: Log error internally, return generic message to user
-                # print(f"Fetch error for {key}: {e}")  # Internal logging
                 self.send_response(502)
                 self.send_header("Content-Type", "text/plain; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
