@@ -5,3 +5,6 @@
 ## 2024-05-23 - [Accessibility] Semantic DOM Insertion for Citations
 **Learning:** When dynamically generating interactive elements in the DOM (like custom citations via `data-ref` attributes) within parsed markdown content, appending children directly to void HTML elements (like `<img>`) causes DOM exceptions. Furthermore, using non-semantic tags like `<sup>` with `onclick` handlers breaks keyboard navigability and screen reader support.
 **Action:** Use sibling insertion (e.g., `el.parentNode.insertBefore(btn, el.nextSibling)`) instead of `appendChild` for custom logic around void elements. Always replace `onclick` spans/sups with semantic HTML tags (e.g., `<a>` with `href`, `target="_blank"`, and `aria-label`) to ensure proper keyboard navigability and accessibility.
+## 2024-05-24 - Accessibility Enhancements in React SPAs
+**Learning:** React SPAs built with Vite often lack native skip-to-content links and accessible icon buttons, severely limiting keyboard and screen reader navigability.
+**Action:** Always implement a localized 'Skip to main content' link targeting a focusable main container (`tabIndex="-1"`, `outline-none`), and ensure icon-only toggle buttons have descriptive, state-aware `aria-label` attributes.
