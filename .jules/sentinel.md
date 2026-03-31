@@ -10,3 +10,7 @@
 **Vulnerability:** The Gemini API response parsing in `web/templates/5d_forschungsplanung.html` used `marked.parse(text)` directly injected via `innerHTML`. This exposes the application to DOM-based XSS if the AI returns malicious HTML.
 **Learning:** Never trust inputs from external APIs, including LLMs. Always sanitize Markdown output before inserting it into the DOM, especially when using `innerHTML`.
 **Prevention:** Imported `DOMPurify` and wrapped `marked.parse(text)` with `DOMPurify.sanitize()` prior to DOM injection.
+## 2025-02-14 - [DoS Risk in OWID Proxy via Unconstrained Response Reads]
+**Vulnerability:** The proxy in `docs/5d-map/owid_proxy.py` read upstream responses into memory using `resp.read()` without any limit, exposing the server to Denial-of-Service (DoS) via OOM errors. It also leaked upstream exception details.
+**Learning:** Python's `urllib` defaults to reading the whole response into memory if size limits are not explicitly enforced. Error details should also not be sent in the response body.
+**Prevention:** Implemented a chunked read approach with a 10MB `MAX_RESPONSE_SIZE` limit and scrubbed error messages.
