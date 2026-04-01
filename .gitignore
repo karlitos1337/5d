@@ -1,3 +1,10 @@
+# Security - Secrets & Keys
+secrets.yaml
+*.key
+*.pem
+.env
+.env.*
+
 # Python Artefakte
 __pycache__/
 *.pyc
