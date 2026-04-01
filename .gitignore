@@ -60,3 +60,8 @@ htmlcov/
 
 # Outputs
 outputs/
+
+# Large binary data
+simulations/data/MNIST/
+*.gz
+*.ubyte
