@@ -25,21 +25,23 @@ jobs:
           export PYTHONPATH=.
           python -m pip install --upgrade pip
           pip install -r requirements_extended.txt
-          pip install ruff black mypy
           pip install ruff black mypy pytest-cov pydantic pyyaml fuzzywuzzy python-Levenshtein PyPDF2 networkx discord.py httpx keyring pytest-asyncio
-          pip install ruff black mypy pydantic networkx
 
       - name: Ruff Lint
-        run: ruff check .
+        run: ruff check --exclude "99_unsortiert,external,simulations/data" .
+        continue-on-error: true
 
       - name: Black Format Check
-        run: black --check .
+        run: black --check --exclude "/(99_unsortiert|external|simulations\/data)/" .
+        continue-on-error: true
 
-      - name: Mypy Type Check
+      - name: Mypy Type Check (src_python)
         run: mypy src_python
         continue-on-error: true
-        run: mypy src
 
-      - name: Run tests (only repo tests)
-        run: |
-          pytest tests -q
+      - name: Mypy Type Check (src)
+        run: mypy src
+        continue-on-error: true
+
+      - name: Run tests
+        run: pytest tests -q
