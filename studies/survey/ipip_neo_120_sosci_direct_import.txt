@@ -1,0 +1,1320 @@
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mache mir oft Sorgen [NEU1]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich gewinne leicht Freunde [EXT2]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe eine blühende Fantasie [OFF3]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich vertraue anderen [AGR4]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich erledige Aufgaben erfolgreich [CON5]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin schnell verärgert [NEU6]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich gehe gern auf große Parties [EXT7]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich glaube, dass Kunst wichtig ist [OFF8]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich benutze und manipuliere andere, um meine Ziele zu erreichen [R] [AGR9]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag keine Unordnung - Ich räume gern auf [CON10]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin oft betrübt [NEU11]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich übernehme in Situationen und bei Ereignissen gern die Führung [EXT12]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Meine Gefühlswelt ist sehr intensiv [OFF13]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich helfe gern anderen [AGR14]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich halte, was ich verspreche [CON15]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Es fällt mir schwer, auf andere zuzugehen [NEU16]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin ständig beschäftigt – bin immer auf dem Sprung [EXT17]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag Abwechslung lieber als Routine [OFF18]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag lebhafte Diskussionen – gute Streitgespräche [R] [AGR19]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich arbeite hart [CON20]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mache gerne einen drauf [NEU21]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag es lebhaft und aufregend [EXT22]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich lese gern anspruchsvolle Bücher und Artikel [OFF23]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich glaube, dass ich besser als andere bin [R] [AGR24]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin immer vorbereitet [CON25]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich gerate leicht in Panik [NEU26]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin ein wirklich fröhlicher Mensch [EXT27]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich tendiere dazu, politische Kandidaten zu unterstützen, die Fortschritt und Reformen zum Ziel haben [OFF28]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe Mitleid mit Obdachlosen [AGR29]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich handle oft spontan, ohne nachzudenken [R] [CON30]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich befürchte immer das Schlimmste [NEU31]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich fühle mich wohl, wenn ich unter Menschen bin [EXT32]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich genieße es, meiner Phantasie freien Lauf zu lassen [OFF33]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich glaube, dass Menschen grundsätzlich gute Absichten haben [AGR34]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Was ich mache, mache ich immer gut [CON35]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin schnell gereizt [NEU36]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich unterhalte mich auf Partys immer mit vielen unterschiedlichen Leuten [EXT37]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich sehe die Schönheit in Dingen, die anderen vielleicht gar nicht auffallen [OFF38]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich scheue mich nicht zu betrügen, um voranzukommen [R] [AGR39]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich vergesse oft, Dinge wieder an ihren Platz zurückzustellen [R] [CON40]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag mich selbst nicht [NEU41]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich übernehme gerne die Führung von anderen [EXT42]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin ein sehr einfühlsamer Mensch und ich spüre die Gefühle anderer [OFF43]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin besorgt um andere [AGR44]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich sage die Wahrheit [CON45]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag es nicht, Aufmerksamkeit auf mich zu ziehen [NEU46]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich sitze nie still – Ich bin immer auf dem Sprung [EXT47]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich halte mich gern an das, was ich kenne [R] [OFF48]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich schreie andere an [R] [AGR49]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich leiste mehr, als man von mir erwartet [CON50]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich betreibe selten Völlerei [R] [NEU51]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich suche das Abenteuer [EXT52]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich vermeide philosophische Diskussionen [R] [OFF53]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich halte sehr viel von mir [R] [AGR54]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich erledige meine Arbeit und führe meine Pläne aus [CON55]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich werde von Ereignissen überwältigt [NEU56]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe viel Spaß [EXT57]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich glaube, dass es kein „absolut richtig“ oder „absolut falsch“ gibt [OFF58]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe Mitleid mit Leuten, denen es schlechter geht als mir [AGR59]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich treffe voreilige Entscheidungen [R] [CON60]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe vor vielen Dingen Angst [NEU61]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich vermeide, wenn möglich, bewusst den Kontakt mit anderen Menschen [R] [EXT62]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag tagträumen [OFF63]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich glaube, was Leute sagen [AGR64]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich erledige Aufgaben reibungslos [CON65]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich verliere häufig meine Beherrschung [NEU66]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich ziehe es vor, allein zu sein [R] [EXT67]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag keine Poesie [R] [OFF68]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich nutze andere für meine Zwecke aus [R] [AGR69]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich lasse immer Unordnung zurück [R] [CON70]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin oft niedergeschlagen [NEU71]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich kontrolliere Situationen [EXT72]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich nehme meine emotionalen Reaktionen kaum wahr [R] [OFF73]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Mich interessieren die Gefühle anderer nicht [R] [AGR74]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich verstoße häufig gegen Spielregeln [R] [CON75]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich fühle mich nur unter Freunden wirklich wohl [NEU76]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich unternehme viel in meiner Freizeit [EXT77]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag keine Veränderungen [R] [OFF78]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich beleidige Leute [R] [AGR79]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich arbeite nur so viel, wie ich muss [R] [CON80]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich kann Versuchungen leicht widerstehen [R] [NEU81]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin gerne waghalsig und unbesonnen [EXT82]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe Schwierigkeiten, abstrakte Ideen zu verstehen [R] [OFF83]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe von mir selbst eine hohe Meinung [R] [AGR84]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich vergeude meine Zeit [R] [CON85]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich merke, wenn ich Dingen nicht gewachsen bin [NEU86]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich liebe das Leben [EXT87]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich tendiere dazu, politische Kandidaten zu unterstützen, die konservative Ansichten vertreten [R] [OFF88]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich interessiere mich nicht für die Probleme anderer [R] [AGR89]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich handle oft vorschnell [R] [CON90]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin ziemlich schnell gestresst [NEU91]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich halte andere auf Abstand [R] [EXT92]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag es, mich in Gedanken zu verlieren [OFF93]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich misstraue Menschen [R] [AGR94]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich weiß, wie ich Dinge geregelt bekomme [CON95]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin nicht schnell verägert [R] [NEU96]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich meide Menschenmengen [R] [EXT97]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich gehe nicht gern zu (Kunst-)Ausstellungen [R] [OFF98]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin nicht kooperativ – Ich blockiere Pläne anderer [R] [AGR99]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich lasse meinen Krimskrams herumliegen [R] [CON100]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich komme gut mit mir selbst aus [R] [NEU101]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich warte darauf, dass andere Verantwortung übernehmen [R] [EXT102]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich habe kein Verständnis für Menschen, die emotional werden [R] [OFF103]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Für andere nehme ich mir keine Zeit [R] [AGR104]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich halte meine Versprechen nicht ein [R] [CON105]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich gehe schwierigen sozialen Situationen nicht aus dem Weg [R] [NEU106]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich mag es gern relaxed [R] [EXT107]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bediene mich gerne konventioneller Methoden [R] [OFF108]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich zahle es anderen heim [R] [AGR109]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich stecke wenig Zeit und Aufwand in meine Arbeit [R] [CON110]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich bin in der Lage, heftiges Verlangen und Gelüste gut zu kontrollieren [R] [NEU111]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich verhalte mich ungestüm und unkontrolliert [EXT112]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Theoretische Diskussionen interessieren mich nicht [R] [OFF113]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich brüste mich mit meinen Tugenden [R] [AGR114]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Mir fällt es schwer, mit den mir übertragenen Aufgaben zu beginnen [R] [CON115]
+
+=== Neurotizismus (N) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+In Stresssituationen bleibe ich ruhig [R] [NEU116]
+
+=== Extraversion (E) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich betrachte das Leben von seiner Sonnenseite [EXT117]
+
+=== Offenheit (O) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Meiner Meinung nach müssen wir sehr hart gegen Verbrechen vorgehen [R] [OFF118]
+
+=== Verträglichkeit (A) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich versuche, mir über Bedürftige keine Gedanken zu machen [R] [AGR119]
+
+=== Gewissenhaftigkeit (C) ===
+--- Fragetyp: Skala (Likert 1-5) ---
+--- Verbale Verankerung: ---
+1=Stimme überhaupt nicht zu
+2=Stimme eher nicht zu
+3=Weder noch
+4=Stimme eher zu
+5=Stimme voll zu
+--- Items (Direct Import): ---
+Ich handle, ohne nachzudenken [R] [CON120]

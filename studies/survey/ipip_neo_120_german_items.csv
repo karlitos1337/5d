@@ -1,0 +1,121 @@
+Item_Nr,Domain,Domain_DE,Facet_Nr,Facet_DE,Text_DE,Text_EN,Keyed,IPIP_ID,SoSci_Variable
+1,N,Neurotizismus,1,Ängstlichkeit,Ich mache mir oft Sorgen,Worry about things,+,"['H1157', 'X5']",NEU1
+2,E,Extraversion,1,Freundlichkeit,Ich gewinne leicht Freunde,Make friends easily,+,['H29'],EXT2
+3,O,Offenheit,1,Fantasie,Ich habe eine blühende Fantasie,Have a vivid imagination,+,['X14'],OFF3
+4,A,Verträglichkeit,1,Vertrauen,Ich vertraue anderen,Trust others,+,"['H113', 'X6']",AGR4
+5,C,Gewissenhaftigkeit,1,Kompetenz,Ich erledige Aufgaben erfolgreich,Complete tasks successfully,+,['H1285'],CON5
+6,N,Neurotizismus,2,Reizbarkeit,Ich bin schnell verärgert,Get angry easily,+,"['H754', 'X18']",NEU6
+7,E,Extraversion,2,Geselligkeit,Ich gehe gern auf große Parties,Love large parties,+,"['H78', 'X17']",EXT7
+8,O,Offenheit,2,Ästhetik,"Ich glaube, dass Kunst wichtig ist",Believe in the importance of art,+,['X123'],OFF8
+9,A,Verträglichkeit,2,Moral,"Ich benutze und manipuliere andere, um meine Ziele zu erreichen",Use others for my own ends,-,"['H416', 'X24']",AGR9
+10,C,Gewissenhaftigkeit,2,Ordnung,Ich mag keine Unordnung - Ich räume gern auf,Like to tidy up,+,"['H244', 'X21']",CON10
+11,N,Neurotizismus,3,Depression,Ich bin oft betrübt,Often feel blue,+,['X74'],NEU11
+12,E,Extraversion,3,Durchsetzungsfähigkeit,Ich übernehme in Situationen und bei Ereignissen gern die Führung,Take charge,+,"['H334', 'X27']",EXT12
+13,O,Offenheit,3,Gefühle,Meine Gefühlswelt ist sehr intensiv,Experience my emotions intensely,+,['X92'],OFF13
+14,A,Verträglichkeit,3,Altruismus,Ich helfe gern anderen,Love to help others,+,['H1108'],AGR14
+15,C,Gewissenhaftigkeit,3,Pflichtbewusstsein,"Ich halte, was ich verspreche",Keep my promises,+,"['H149', 'X33', 'V14']",CON15
+16,N,Neurotizismus,4,Befangenheit,"Es fällt mir schwer, auf andere zuzugehen",Find it difficult to approach others,+,['H592'],NEU16
+17,E,Extraversion,4,Aktivität,Ich bin ständig beschäftigt – bin immer auf dem Sprung,Am always busy,+,['H58'],EXT17
+18,O,Offenheit,4,Abenteuerbereitschaft,Ich mag Abwechslung lieber als Routine,Prefer variety to routine,+,['X204'],OFF18
+19,A,Verträglichkeit,4,Kooperation,Ich mag lebhafte Diskussionen – gute Streitgespräche,Love a good fight,-,['H453'],AGR19
+20,C,Gewissenhaftigkeit,4,Leistungsstreben,Ich arbeite hart,Work hard,+,"['H1206', 'X44']",CON20
+21,N,Neurotizismus,5,Maßlosigkeit,Ich mache gerne einen drauf,Go on binges,+,['X133'],NEU21
+22,E,Extraversion,5,Erlebnishunger,Ich mag es lebhaft und aufregend,Love excitement,+,"['H438', 'X50']",EXT22
+23,O,Offenheit,5,Intellekt,Ich lese gern anspruchsvolle Bücher und Artikel,Love to read challenging material,+,['X211'],OFF23
+24,A,Verträglichkeit,5,Bescheidenheit,"Ich glaube, dass ich besser als andere bin",Believe that I am better than others,-,"['H736', 'X61']",AGR24
+25,C,Gewissenhaftigkeit,5,Selbstdisziplin,Ich bin immer vorbereitet,Am always prepared,+,['X87'],CON25
+26,N,Neurotizismus,6,Verletzlichkeit,Ich gerate leicht in Panik,Panic easily,+,"['H948', 'X64']",NEU26
+27,E,Extraversion,6,Frohsinn,Ich bin ein wirklich fröhlicher Mensch,Radiate joy,+,"['H32', 'X63']",EXT27
+28,O,Offenheit,6,Liberalismus,"Ich tendiere dazu, politische Kandidaten zu unterstützen, die Fortschritt und Reformen zum Ziel haben",Tend to vote for liberal political candidates,+,['X218'],OFF28
+29,A,Verträglichkeit,6,Mitgefühl,Ich habe Mitleid mit Obdachlosen,Sympathize with the homeless,+,['X259'],AGR29
+30,C,Gewissenhaftigkeit,6,Besonnenheit,"Ich handle oft spontan, ohne nachzudenken",Jump into things without thinking,-,['E46'],CON30
+31,N,Neurotizismus,1,Ängstlichkeit,Ich befürchte immer das Schlimmste,Fear for the worst,+,['H999'],NEU31
+32,E,Extraversion,1,Freundlichkeit,"Ich fühle mich wohl, wenn ich unter Menschen bin",Feel comfortable around people,+,['X112'],EXT32
+33,O,Offenheit,1,Fantasie,"Ich genieße es, meiner Phantasie freien Lauf zu lassen",Enjoy wild flights of fantasy,+,['X238'],OFF33
+34,A,Verträglichkeit,1,Vertrauen,"Ich glaube, dass Menschen grundsätzlich gute Absichten haben",Believe that others have good intentions,+,['H549'],AGR34
+35,C,Gewissenhaftigkeit,1,Kompetenz,"Was ich mache, mache ich immer gut",Excel in what I do,+,"['H1174', 'X8']",CON35
+36,N,Neurotizismus,2,Reizbarkeit,Ich bin schnell gereizt,Get irritated easily,+,['H761'],NEU36
+37,E,Extraversion,2,Geselligkeit,Ich unterhalte mich auf Partys immer mit vielen unterschiedlichen Leuten,Talk to a lot of different people at parties,+,['X83'],EXT37
+38,O,Offenheit,2,Ästhetik,"Ich sehe die Schönheit in Dingen, die anderen vielleicht gar nicht auffallen",See beauty in things that others might not notice,+,['E105'],OFF38
+39,A,Verträglichkeit,2,Moral,"Ich scheue mich nicht zu betrügen, um voranzukommen",Cheat to get ahead,-,['X198'],AGR39
+40,C,Gewissenhaftigkeit,2,Ordnung,"Ich vergesse oft, Dinge wieder an ihren Platz zurückzustellen",Often forget to put things back in their proper place,-,['X82'],CON40
+41,N,Neurotizismus,3,Depression,Ich mag mich selbst nicht,Dislike myself,+,['X15'],NEU41
+42,E,Extraversion,3,Durchsetzungsfähigkeit,Ich übernehme gerne die Führung von anderen,Try to lead others,+,['H524'],EXT42
+43,O,Offenheit,3,Gefühle,Ich bin ein sehr einfühlsamer Mensch und ich spüre die Gefühle anderer,Feel others' emotions,+,['E136'],OFF43
+44,A,Verträglichkeit,3,Altruismus,Ich bin besorgt um andere,Am concerned about others,+,"['H1100', 'X31']",AGR44
+45,C,Gewissenhaftigkeit,3,Pflichtbewusstsein,Ich sage die Wahrheit,Tell the truth,+,['H145'],CON45
+46,N,Neurotizismus,4,Befangenheit,"Ich mag es nicht, Aufmerksamkeit auf mich zu ziehen",Am afraid to draw attention to myself,+,['H655'],NEU46
+47,E,Extraversion,4,Aktivität,Ich sitze nie still – Ich bin immer auf dem Sprung,Am always on the go,+,"['H54', 'X40']",EXT47
+48,O,Offenheit,4,Abenteuerbereitschaft,"Ich halte mich gern an das, was ich kenne",Prefer to stick with things that I know,-,['X30'],OFF48
+49,A,Verträglichkeit,4,Kooperation,Ich schreie andere an,Yell at people,-,['H809'],AGR49
+50,C,Gewissenhaftigkeit,4,Leistungsstreben,"Ich leiste mehr, als man von mir erwartet",Do more than what's expected of me,+,['H2014'],CON50
+51,N,Neurotizismus,5,Maßlosigkeit,Ich betreibe selten Völlerei,Rarely overindulge,-,['X181'],NEU51
+52,E,Extraversion,5,Erlebnishunger,Ich suche das Abenteuer,Seek adventure,+,['H446'],EXT52
+53,O,Offenheit,5,Intellekt,Ich vermeide philosophische Diskussionen,Avoid philosophical discussions,-,['X248'],OFF53
+54,A,Verträglichkeit,5,Bescheidenheit,Ich halte sehr viel von mir,Think highly of myself,-,['H2043'],AGR54
+55,C,Gewissenhaftigkeit,5,Selbstdisziplin,Ich erledige meine Arbeit und führe meine Pläne aus,Carry out my plans,+,['H258'],CON55
+56,N,Neurotizismus,6,Verletzlichkeit,Ich werde von Ereignissen überwältigt,Become overwhelmed by events,+,['H959'],NEU56
+57,E,Extraversion,6,Frohsinn,Ich habe viel Spaß,Have a lot of fun,+,['H1094'],EXT57
+58,O,Offenheit,6,Liberalismus,"Ich glaube, dass es kein „absolut richtig“ oder „absolut falsch“ gibt",Believe that there is no absolute right and wrong,+,['X184'],OFF58
+59,A,Verträglichkeit,6,Mitgefühl,"Ich habe Mitleid mit Leuten, denen es schlechter geht als mir",Feel sympathy for those who are worse off than myself,+,['E115'],AGR59
+60,C,Gewissenhaftigkeit,6,Besonnenheit,Ich treffe voreilige Entscheidungen,Make rash decisions,-,['H853'],CON60
+61,N,Neurotizismus,1,Ängstlichkeit,Ich habe vor vielen Dingen Angst,Am afraid of many things,+,['H968'],NEU61
+62,E,Extraversion,1,Freundlichkeit,"Ich vermeide, wenn möglich, bewusst den Kontakt mit anderen Menschen",Avoid contacts with others,-,['H648'],EXT62
+63,O,Offenheit,1,Fantasie,Ich mag tagträumen,Love to daydream,+,['X71'],OFF63
+64,A,Verträglichkeit,1,Vertrauen,"Ich glaube, was Leute sagen",Trust what people say,+,['E157'],AGR64
+65,C,Gewissenhaftigkeit,1,Kompetenz,Ich erledige Aufgaben reibungslos,Handle tasks smoothly,+,['H1354'],CON65
+66,N,Neurotizismus,2,Reizbarkeit,Ich verliere häufig meine Beherrschung,Lose my temper,+,['H755'],NEU66
+67,E,Extraversion,2,Geselligkeit,"Ich ziehe es vor, allein zu sein",Prefer to be alone,-,['H587'],EXT67
+68,O,Offenheit,2,Ästhetik,Ich mag keine Poesie,Do not like poetry,-,['X45'],OFF68
+69,A,Verträglichkeit,2,Moral,Ich nutze andere für meine Zwecke aus,Take advantage of others,-,"['H427', 'V109']",AGR69
+70,C,Gewissenhaftigkeit,2,Ordnung,Ich lasse immer Unordnung zurück,Leave a mess in my room,-,"['H822', 'X16']",CON70
+71,N,Neurotizismus,3,Depression,Ich bin oft niedergeschlagen,Am often down in the dumps,+,['H640'],NEU71
+72,E,Extraversion,3,Durchsetzungsfähigkeit,Ich kontrolliere Situationen,Take control of things,+,['H325'],EXT72
+73,O,Offenheit,3,Gefühle,Ich nehme meine emotionalen Reaktionen kaum wahr,Rarely notice my emotional reactions,-,['X10'],OFF73
+74,A,Verträglichkeit,3,Altruismus,Mich interessieren die Gefühle anderer nicht,Am indifferent to the feelings of others,-,['X203'],AGR74
+75,C,Gewissenhaftigkeit,3,Pflichtbewusstsein,Ich verstoße häufig gegen Spielregeln,Break rules,-,['H1346'],CON75
+76,N,Neurotizismus,4,Befangenheit,Ich fühle mich nur unter Freunden wirklich wohl,Only feel comfortable with friends,+,['H656'],NEU76
+77,E,Extraversion,4,Aktivität,Ich unternehme viel in meiner Freizeit,Do a lot in my spare time,+,['H79'],EXT77
+78,O,Offenheit,4,Abenteuerbereitschaft,Ich mag keine Veränderungen,Dislike changes,-,"['H1063', 'X43']",OFF78
+79,A,Verträglichkeit,4,Kooperation,Ich beleidige Leute,Insult people,-,['H1103'],AGR79
+80,C,Gewissenhaftigkeit,4,Leistungsstreben,"Ich arbeite nur so viel, wie ich muss",Do just enough work to get by,-,['X115'],CON80
+81,N,Neurotizismus,5,Maßlosigkeit,Ich kann Versuchungen leicht widerstehen,Easily resist temptations,-,['X274'],NEU81
+82,E,Extraversion,5,Erlebnishunger,Ich bin gerne waghalsig und unbesonnen,Enjoy being reckless,+,['E35'],EXT82
+83,O,Offenheit,5,Intellekt,"Ich habe Schwierigkeiten, abstrakte Ideen zu verstehen",Have difficulty understanding abstract ideas,-,['X176'],OFF83
+84,A,Verträglichkeit,5,Bescheidenheit,Ich habe von mir selbst eine hohe Meinung,Have a high opinion of myself,-,['H738'],AGR84
+85,C,Gewissenhaftigkeit,5,Selbstdisziplin,Ich vergeude meine Zeit,Waste my time,-,"['H1186', 'X49']",CON85
+86,N,Neurotizismus,6,Verletzlichkeit,"Ich merke, wenn ich Dingen nicht gewachsen bin",Feel that I'm unable to deal with things,+,['H954'],NEU86
+87,E,Extraversion,6,Frohsinn,Ich liebe das Leben,Love life,+,['H33'],EXT87
+88,O,Offenheit,6,Liberalismus,"Ich tendiere dazu, politische Kandidaten zu unterstützen, die konservative Ansichten vertreten",Tend to vote for conservative political candidates,-,['X126'],OFF88
+89,A,Verträglichkeit,6,Mitgefühl,Ich interessiere mich nicht für die Probleme anderer,Am not interested in other people's problems,-,['X227'],AGR89
+90,C,Gewissenhaftigkeit,6,Besonnenheit,Ich handle oft vorschnell,Rush into things,-,"['H862', 'X101']",CON90
+91,N,Neurotizismus,1,Ängstlichkeit,Ich bin ziemlich schnell gestresst,Get stressed out easily,+,['X107'],NEU91
+92,E,Extraversion,1,Freundlichkeit,Ich halte andere auf Abstand,Keep others at a distance,-,['H704'],EXT92
+93,O,Offenheit,1,Fantasie,"Ich mag es, mich in Gedanken zu verlieren",Like to get lost in thought,+,['E163'],OFF93
+94,A,Verträglichkeit,1,Vertrauen,Ich misstraue Menschen,Distrust people,-,"['H1195', 'X12']",AGR94
+95,C,Gewissenhaftigkeit,1,Kompetenz,"Ich weiß, wie ich Dinge geregelt bekomme",Know how to get things done,+,['H1333'],CON95
+96,N,Neurotizismus,2,Reizbarkeit,Ich bin nicht schnell verägert,Am not easily annoyed,-,['X23'],NEU96
+97,E,Extraversion,2,Geselligkeit,Ich meide Menschenmengen,Avoid crowds,-,"['H650', 'X22']",EXT97
+98,O,Offenheit,2,Ästhetik,Ich gehe nicht gern zu (Kunst-)Ausstellungen,Do not enjoy going to art museums,-,['X235'],OFF98
+99,A,Verträglichkeit,2,Moral,Ich bin nicht kooperativ – Ich blockiere Pläne anderer,Obstruct others' plans,-,['H494'],AGR99
+100,C,Gewissenhaftigkeit,2,Ordnung,Ich lasse meinen Krimskrams herumliegen,Leave my belongings around,-,['H823'],CON100
+101,N,Neurotizismus,3,Depression,Ich komme gut mit mir selbst aus,Feel comfortable with myself,-,['X129'],NEU101
+102,E,Extraversion,3,Durchsetzungsfähigkeit,"Ich warte darauf, dass andere Verantwortung übernehmen",Wait for others to lead the way,-,['H976'],EXT102
+103,O,Offenheit,3,Gefühle,"Ich habe kein Verständnis für Menschen, die emotional werden",Don't understand people who get emotional,-,['E156'],OFF103
+104,A,Verträglichkeit,3,Altruismus,Für andere nehme ich mir keine Zeit,Take no time for others,-,"['H918', 'X170']",AGR104
+105,C,Gewissenhaftigkeit,3,Pflichtbewusstsein,Ich halte meine Versprechen nicht ein,Break my promises,-,"['H1018', 'X51']",CON105
+106,N,Neurotizismus,4,Befangenheit,Ich gehe schwierigen sozialen Situationen nicht aus dem Weg,Am not bothered by difficult social situations,-,['X209'],NEU106
+107,E,Extraversion,4,Aktivität,Ich mag es gern relaxed,Like to take it easy,-,['E113'],EXT107
+108,O,Offenheit,4,Abenteuerbereitschaft,Ich bediene mich gerne konventioneller Methoden,Am attached to conventional ways,-,['H312'],OFF108
+109,A,Verträglichkeit,4,Kooperation,Ich zahle es anderen heim,Get back at others,-,['H699'],AGR109
+110,C,Gewissenhaftigkeit,4,Leistungsstreben,Ich stecke wenig Zeit und Aufwand in meine Arbeit,Put little time and effort into my work,-,['X167'],CON110
+111,N,Neurotizismus,5,Maßlosigkeit,"Ich bin in der Lage, heftiges Verlangen und Gelüste gut zu kontrollieren",Am able to control my cravings,-,['X251'],NEU111
+112,E,Extraversion,5,Erlebnishunger,Ich verhalte mich ungestüm und unkontrolliert,Act wild and crazy,+,['H871'],EXT112
+113,O,Offenheit,5,Intellekt,Theoretische Diskussionen interessieren mich nicht,Am not interested in theoretical discussions,-,['X239'],OFF113
+114,A,Verträglichkeit,5,Bescheidenheit,Ich brüste mich mit meinen Tugenden,Boast about my virtues,-,['H746'],AGR114
+115,C,Gewissenhaftigkeit,5,Selbstdisziplin,"Mir fällt es schwer, mit den mir übertragenen Aufgaben zu beginnen",Have difficulty starting tasks,-,['H621'],CON115
+116,N,Neurotizismus,6,Verletzlichkeit,In Stresssituationen bleibe ich ruhig,Remain calm under pressure,-,['X79'],NEU116
+117,E,Extraversion,6,Frohsinn,Ich betrachte das Leben von seiner Sonnenseite,Look at the bright side of life,+,['H42'],EXT117
+118,O,Offenheit,6,Liberalismus,Meiner Meinung nach müssen wir sehr hart gegen Verbrechen vorgehen,Believe that we should be tough on crime,-,['X157'],OFF118
+119,A,Verträglichkeit,6,Mitgefühl,"Ich versuche, mir über Bedürftige keine Gedanken zu machen",Try not to think about the needy,-,['E166'],AGR119
+120,C,Gewissenhaftigkeit,6,Besonnenheit,"Ich handle, ohne nachzudenken",Act without thinking,-,['H846'],CON120
