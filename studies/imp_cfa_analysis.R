@@ -164,6 +164,46 @@ cat("  Total excluded:     ", n_raw - n_final, "\n\n")
 # Save cleaned-but-pre-imputed data for audit
 write.csv(df, "results/tables/01_sample_after_exclusions.csv", row.names = FALSE)
 
+# --- 1e. Person-Mean Imputation (within-scale, <= 20% items missing) ---
+# Preregistered: within-scale person-mean imputation before composite scoring.
+# If a respondent answered >= 4 of 5 items in a subscale, replace the missing
+# item with their mean on the remaining items of that subscale.
+imp_dimensions <- list(
+  A  = c("A1_1D", "A2_2D", "A3_3D", "A4_4D", "A5_5D"),
+  C  = c("C1_1D", "C2_2D", "C3_3D", "C4_4D", "C5_5D"),
+  R  = c("R1_1D", "R2_2D", "R3_3D", "R4_4D", "R5_5D"),
+  P  = c("P1_1D", "P2_2D", "P3_3D", "P4_4D", "P5_5D"),
+  Au = c("Au1_1D", "Au2_2D", "Au3_3D", "Au4_4D", "Au5_5D")
+)
+
+for (dim_name in names(imp_dimensions)) {
+  dim_items <- imp_dimensions[[dim_name]]
+  dim_items <- dim_items[dim_items %in% names(df)]
+  if (length(dim_items) > 0) {
+    n_missing_before <- sum(is.na(df[, dim_items]))
+    for (i in seq_len(nrow(df))) {
+      vals <- df[i, dim_items]
+      n_answered <- sum(!is.na(vals))
+      if (n_answered >= 4 & n_answered < length(dim_items)) {
+        person_mean <- mean(as.numeric(vals), na.rm = TRUE)
+        df[i, dim_items][is.na(df[i, dim_items])] <- person_mean
+      }
+    }
+    n_missing_after <- sum(is.na(df[, dim_items]))
+    if (n_missing_before > n_missing_after) {
+      cat(sprintf("Person-mean imputation [%s]: %d -> %d missing values\n",
+                  dim_name, n_missing_before, n_missing_after))
+    }
+  }
+}
+
+# --- 1f. Outlier Flagging (|z| > 3.29 on composites) ---
+# Preregistered: outliers inspected but retained unless clear data error.
+# Robustness checks with outlier exclusion reported if results materially change.
+# Note: applied AFTER reverse coding and composite scoring (in Section 7).
+# Flag is created here as placeholder; actual flagging in Section 7 after composites exist.
+cat("Outlier flagging: will be applied in Section 7 after composite scoring.\n\n")
+
 
 # ============================================================================
 # 2. REVERSE CODING
@@ -579,7 +619,12 @@ df$IMP_add_5D <- (df$A_score + df$C_score + df$R_score + df$P_score + df$Au_scor
 
 # Multiplicative 5D (geometric mean — the 5D-Framework's core predictive claim)
 # Geometric mean penalizes low scores on any single dimension (weak-link logic)
-df$IMP_mult_5D <- (df$A_score * df$C_score * df$R_score * df$P_score * df$Au_score)^(1/5)
+# Zero-inflation protection: add small constant (0.01) if any dimension == 0
+# (preregistered in OSF Section E: Transformations)
+eps <- 0.01
+df$IMP_mult_5D <- (pmax(df$A_score, eps) * pmax(df$C_score, eps) *
+                   pmax(df$R_score, eps) * pmax(df$P_score, eps) *
+                   pmax(df$Au_score, eps))^(1/5)
 
 # Weak-link composite: minimum dimension score (bottleneck/constraint perspective)
 df$IMP_min <- pmin(df$A_score, df$C_score, df$R_score, df$P_score, df$Au_score)
@@ -593,7 +638,26 @@ cat("--- Descriptives: Dimension and Composite Scores ---\n")
 print(round(composites_desc, 3))
 write.csv(composites_desc, "results/tables/07_composite_descriptives.csv")
 
-# --- 7.4 Hierarchical Regression Models ---
+# --- 7.4 Outlier Flagging (|z| > 3.29 on key composites) ---
+# Preregistered: outliers inspected but retained unless clear data error.
+outlier_vars <- c("IMP_add_5D", "IMP_mult_5D", "SWLS_total")
+df$outlier_flag <- 0
+for (ov in outlier_vars) {
+  if (ov %in% names(df)) {
+    z_scores <- scale(df[[ov]])
+    n_outliers <- sum(abs(z_scores) > 3.29, na.rm = TRUE)
+    df$outlier_flag <- ifelse(abs(z_scores) > 3.29, 1, df$outlier_flag)
+    if (n_outliers > 0) {
+      cat(sprintf("Outlier flag [%s]: %d cases with |z| > 3.29\n", ov, n_outliers))
+    }
+  }
+}
+cat(sprintf("Total unique outlier-flagged cases: %d (%.1f%%) — RETAINED for main analysis\n",
+            sum(df$outlier_flag > 0, na.rm = TRUE),
+            100 * mean(df$outlier_flag > 0, na.rm = TRUE)))
+cat("Robustness check: re-run H2 without outliers reported below if material difference.\n\n")
+
+# --- 7.5 Hierarchical Regression Models ---
 cat("\n--- Regression Models: SWLS ~ IMP composites ---\n")
 
 # Remove rows with missing values on key variables for comparable model samples

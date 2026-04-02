@@ -45,11 +45,13 @@ The present study pursues three pre-specified research hypotheses. **H1** tests 
 
 ### Study Type
 
-Observational study (cross-sectional online survey). No experimental manipulation is administered.
+Non-randomized study: Does not include random assignment of subjects to treatments or conditions. This includes correlational studies, observational studies, surveys, and descriptive studies.
+
+**Intention for causal interpretation:** Indirect inference on causal relationship(s): This study is intended to examine a potential causal relationship, but is not designed to isolate the specific causal effect. This work may inform causal inference indirectly or advance insight toward future estimation of a causal relationship.
 
 ### Blinding
 
-No blinding is employed. This is not an intervention study; all participants respond to the same questionnaire battery.
+No blinding is involved. This study is a non-randomized, cross-sectional online survey without experimental treatments or blinding procedures. Analyses are planned to evaluate construct and criterion validity of the IMP scale (factor structure, reliability, and associations with external measures) and may indirectly inform causal theories of intrinsic motivation potential, but are not designed for causal identification. Any exploratory analyses beyond the preregistered plan will be clearly labeled as exploratory in subsequent reports.
 
 ### Study Design
 
@@ -200,7 +202,7 @@ This tests whether the two novel dimensions (Participation, Authenticity) add in
 
 > **IMP_Multiplicative_5D** = (Score_A × Score_C × Score_R × Score_P × Score_Au)^(1/5)
 
-The geometric mean is employed rather than the raw product to correct for scale magnitude differences and to maintain interpretability on the original 1–5 metric. This operationalizes the core theoretical postulate of the 5D-Framework (Φ_5D ∝ A·C·R·P·Au) while avoiding the statistical issues of unbounded products. Serves as Model 3 in H2.
+The geometric mean is employed rather than the raw product to correct for scale magnitude differences and to maintain interpretability on the original 1–5 metric. This operationalizes the core theoretical postulate of the 5D-Framework (Φ_5D ∝ A·C·R·P·Au) while avoiding the statistical issues of unbounded products. A small constant of 0.01 will be added to any dimension score of exactly zero before computing the geometric mean, to prevent undefined values while preserving the weak-link penalty. Serves as Model 3 in H2.
 
 *Rationale for geometric mean:* The geometric mean is mathematically equivalent to the arithmetic mean of log-transformed scores, which is the appropriate central tendency measure when the theoretical model is multiplicative (Aitchison, 1986). It produces a value of 1 (minimum) when any dimension approaches 1, and 5 (maximum) when all dimensions equal 5—identical bounds to the additive mean, facilitating direct comparison.
 
@@ -313,7 +315,7 @@ Pearson correlations are computed between all five IMP subscale scores and all f
 
 1. **Reverse-coding:** Applied before any analysis. Items A2, A3, A5, C2, C5, R2, R5, P4, P5, Au4 are recoded as: Score_reversed = 6 − Score_original.
 
-2. **Log-transformation:** Not planned a priori. If any dimension score or composite exhibits |skewness| > 2 or |kurtosis| > 7 (Curran et al., 2002), the MLR estimator in CFA inherently provides robust corrections. For regression analyses, log-transformation of the criterion will be implemented as a sensitivity analysis if residuals show marked non-normality.
+2. **Log-transformation:** Not planned a priori. If any dimension score or composite exhibits |skewness| > 2 or |kurtosis| > 7 (Curran et al., 2002), the MLR estimator in CFA inherently provides robust corrections. For regression analyses, log-transformation of the criterion will be implemented as a sensitivity analysis if residuals show marked non-normality. Categorical variables (e.g., gender, employment status) will be dummy-coded as needed for exploratory analyses; no centering or standardization is planned for the primary analyses.
 
 3. **Standardization:** All regression predictors and outcomes will be reported as standardized (z-scored) coefficients in addition to unstandardized B coefficients.
 
@@ -328,10 +330,11 @@ Pearson correlations are computed between all five IMP subscale scores and all f
 
 Participants are excluded from all analyses if any of the following criteria are met (applied sequentially):
 
-1. **Response time < 3 minutes** (< 180 seconds for the complete survey as recorded by Qualtrics)
-2. **Straight-lining:** Standard deviation of the 25 IMP items = 0 (no variation in responding)
+1. **Response time < 3 minutes** (< 180 seconds for the complete survey as recorded by SoSci Survey)
+2. **Straight-lining:** Standard deviation of the 25 IMP items = 0 (no variation in responding), combined with unrealistically short completion times
 3. **Missing data > 20%** of the full item pool (> 29 items missing across the entire battery)
 4. **Attention check failure:** Incorrect response to the embedded instructed-response item
+5. **Outliers:** Cases with |z| > 3.29 on key composites will be inspected; unless they reflect clear data errors, they will remain in the main analyses, with robustness checks reported where exclusion materially changes results
 
 The number of participants excluded by each criterion will be reported in a CONSORT-style flowchart.
 
@@ -339,13 +342,15 @@ The number of participants excluded by each criterion will be reported in a CONS
 
 Missing data handling depends on the proportion of missingness:
 
-- **< 5% missing** (at the item level, within the analytic sample after exclusions): **Multiple Imputation by Chained Equations (MICE)** using the `mice` package (van Buuren & Groothuis-Oudshoorn, 2011), with m = 20 imputed datasets, predictive mean matching for Likert items.
+- **Within-scale missingness (≤ 20% of items in that scale):** Person-mean imputation will be used (i.e., the missing item is replaced by the respondent's mean on the remaining items of that subscale).
 
-- **5–20% missing** (within the analytic sample): **Full Information Maximum Likelihood (FIML)** within the lavaan CFA framework (which handles item-level missingness directly under MLR). For regression analyses, MICE with m = 20 will be applied.
+- **CFA and regression models:** Full Information Maximum Likelihood (FIML) under a missing-at-random (MAR) assumption within the lavaan framework (which handles item-level missingness directly under MLR).
 
-- **> 20% missing:** Participant excluded (see Data Exclusion criterion 3).
+- **> 20% missing on core variables:** Participant excluded from confirmatory analyses and described in the report (see Data Exclusion criterion 3).
 
-A **sensitivity analysis** comparing listwise deletion vs. MICE/FIML results will be reported for the primary H1 and H2 models if any missingness is observed.
+- **Supplementary:** Multiple Imputation by Chained Equations (MICE) using the `mice` package (van Buuren & Groothuis-Oudshoorn, 2011), with m = 20 imputed datasets, will be applied as a sensitivity analysis if missingness patterns suggest FIML may be insufficient.
+
+A **sensitivity analysis** comparing listwise deletion vs. FIML/MICE results will be reported for the primary H1 and H2 models if any missingness is observed.
 
 ### Exploratory Analyses
 
