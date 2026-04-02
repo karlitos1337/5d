@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE surveyContent SYSTEM "https://www.soscisurvey.de/templates/doctype.survey.dtd">
+<surveyContent version="2.4" type="project">
+  <program>oFb</program>
+  <version>3.6.04</version>
+
+  <!-- ================================================================
+       5D-IMP-STUDIE — SoSci Survey Projekt-XML
+       Erstellt: 2026-04-02
+       Enthält: IMP-Skala (5 Dimensionen), SWLS, Demographische Daten, Attention Check
+       ================================================================ -->
+
+  <!-- ================================================================
+       RUBRIK 1: IMP-Skala — Autonomie
+       ================================================================ -->
+  <section id="IMP_AUT" title="IMP - Autonomie">
+    <question type="scale" id="IA">
+      <title>IMP Autonomie</title>
+      <text>Die folgenden Aussagen beschreiben verschiedene Aspekte Ihres alltäglichen Erlebens. Bitte geben Sie an, inwieweit jede Aussage auf Sie zutrifft.</text>
+      <instruction>Bitte wählen Sie für jede Aussage die zutreffende Antwort.</instruction>
+      <scale>
+        <option value="1">Trifft gar nicht zu</option>
+        <option value="2">Trifft eher nicht zu</option>
+        <option value="3">Teils/teils</option>
+        <option value="4">Trifft eher zu</option>
+        <option value="5">Trifft voll zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="AUT1"><text>Ich bestimme weitgehend selbst, wie ich meine Ziele verfolge.</text></item>
+        <item id="2" variable="AUT2"><text>Externe Regeln und Sanktionen bestimmen meinen Alltag stark.</text></item>
+        <item id="3" variable="AUT3"><text>Ich fühle mich durch Bewertungssysteme (Noten/KPIs) eingeschränkt.</text></item>
+        <item id="4" variable="AUT4"><text>Meine Motivation kommt hauptsächlich von innen, nicht von außen.</text></item>
+        <item id="5" variable="AUT5"><text>Ich habe Angst vor Konsequenzen bei Abweichung von Vorgaben.</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 2: IMP-Skala — Kompetenz
+       ================================================================ -->
+  <section id="IMP_KOM" title="IMP - Kompetenz">
+    <question type="scale" id="IK">
+      <title>IMP Kompetenz</title>
+      <text>Die folgenden Aussagen beschreiben verschiedene Aspekte Ihres alltäglichen Erlebens. Bitte geben Sie an, inwieweit jede Aussage auf Sie zutrifft.</text>
+      <instruction>Bitte wählen Sie für jede Aussage die zutreffende Antwort.</instruction>
+      <scale>
+        <option value="1">Trifft gar nicht zu</option>
+        <option value="2">Trifft eher nicht zu</option>
+        <option value="3">Teils/teils</option>
+        <option value="4">Trifft eher zu</option>
+        <option value="5">Trifft voll zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="KOM1"><text>Ich kann meine Impulse gut regulieren und fokussieren.</text></item>
+        <item id="2" variable="KOM2"><text>Chronischer Stress beeinträchtigt meine Konzentration stark.</text></item>
+        <item id="3" variable="KOM3"><text>Mein Körper fühlt sich energiegeladen und ausgeglichen an.</text></item>
+        <item id="4" variable="KOM4"><text>Ich erhole mich schnell von Rückschlägen.</text></item>
+        <item id="5" variable="KOM5"><text>Ich spüre oft Erschöpfung durch innere Konflikte.</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 3: IMP-Skala — Resonanz
+       ================================================================ -->
+  <section id="IMP_RES" title="IMP - Resonanz">
+    <question type="scale" id="IR">
+      <title>IMP Resonanz</title>
+      <text>Die folgenden Aussagen beschreiben verschiedene Aspekte Ihres alltäglichen Erlebens. Bitte geben Sie an, inwieweit jede Aussage auf Sie zutrifft.</text>
+      <instruction>Bitte wählen Sie für jede Aussage die zutreffende Antwort.</instruction>
+      <scale>
+        <option value="1">Trifft gar nicht zu</option>
+        <option value="2">Trifft eher nicht zu</option>
+        <option value="3">Teils/teils</option>
+        <option value="4">Trifft eher zu</option>
+        <option value="5">Trifft voll zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="RES1"><text>Ich kann mich bewusst in andere Perspektiven versetzen.</text></item>
+        <item id="2" variable="RES2"><text>Ich bin oft in festen Rollen/Überzeugungen gefangen.</text></item>
+        <item id="3" variable="RES3"><text>Ich reflektiere regelmäßig meine eigenen Narrative.</text></item>
+        <item id="4" variable="RES4"><text>Konflikte löse ich durch Perspektivenwechsel.</text></item>
+        <item id="5" variable="RES5"><text>Emotionale Reaktionen überlagern oft mein rationales Denken.</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 4: IMP-Skala — Partizipation
+       ================================================================ -->
+  <section id="IMP_PAR" title="IMP - Partizipation">
+    <question type="scale" id="IP">
+      <title>IMP Partizipation</title>
+      <text>Die folgenden Aussagen beschreiben verschiedene Aspekte Ihres alltäglichen Erlebens. Bitte geben Sie an, inwieweit jede Aussage auf Sie zutrifft.</text>
+      <instruction>Bitte wählen Sie für jede Aussage die zutreffende Antwort.</instruction>
+      <scale>
+        <option value="1">Trifft gar nicht zu</option>
+        <option value="2">Trifft eher nicht zu</option>
+        <option value="3">Teils/teils</option>
+        <option value="4">Trifft eher zu</option>
+        <option value="5">Trifft voll zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="PAR1"><text>Ich kooperiere horizontal mit anderen ohne Hierarchie.</text></item>
+        <item id="2" variable="PAR2"><text>Mein Netzwerk besteht aus vertrauensvollen, authentischen Beziehungen.</text></item>
+        <item id="3" variable="PAR3"><text>Ideen entstehen emergent aus Gruppeninteraktionen.</text></item>
+        <item id="4" variable="PAR4"><text>Zentrale Entscheidungen blockieren oft unseren Fortschritt.</text></item>
+        <item id="5" variable="PAR5"><text>Ich fühle mich isoliert von potenziellen Verbündeten.</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 5: IMP-Skala — Authentizität
+       ================================================================ -->
+  <section id="IMP_AUTH" title="IMP - Authentizität">
+    <question type="scale" id="IU">
+      <title>IMP Authentizität</title>
+      <text>Die folgenden Aussagen beschreiben verschiedene Aspekte Ihres alltäglichen Erlebens. Bitte geben Sie an, inwieweit jede Aussage auf Sie zutrifft.</text>
+      <instruction>Bitte wählen Sie für jede Aussage die zutreffende Antwort.</instruction>
+      <scale>
+        <option value="1">Trifft gar nicht zu</option>
+        <option value="2">Trifft eher nicht zu</option>
+        <option value="3">Teils/teils</option>
+        <option value="4">Trifft eher zu</option>
+        <option value="5">Trifft voll zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="AUTH1"><text>Meine Handlungen fühlen sich kongruent mit meiner Identität an.</text></item>
+        <item id="2" variable="AUTH2"><text>Ich erlebe oft Flow-Zustände ohne innere Reibung.</text></item>
+        <item id="3" variable="AUTH3"><text>Mein Leben hat eine klare, innere Sinnstiftung.</text></item>
+        <item id="4" variable="AUTH4"><text>Ich maskiere Teile meiner Persönlichkeit, um zu passen.</text></item>
+        <item id="5" variable="AUTH5"><text>Ich kann mit meinen Entscheidungen "selbst schlafen".</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 6: Attention Check
+       ================================================================ -->
+  <section id="ATTN" title="Aufmerksamkeitskontrolle">
+    <question type="scale" id="AC">
+      <title>Attention Check</title>
+      <text>Bitte lesen Sie die folgende Aussage sorgfältig.</text>
+      <instruction>Wählen Sie die angegebene Antwortoption.</instruction>
+      <scale>
+        <option value="1">Trifft gar nicht zu</option>
+        <option value="2">Trifft eher nicht zu</option>
+        <option value="3">Teils/teils</option>
+        <option value="4">Trifft eher zu</option>
+        <option value="5">Trifft voll zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="ATTN1"><text>Dies ist eine Kontrollfrage. Bitte wählen Sie "Teils/teils" (3).</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 7: SWLS — Satisfaction with Life Scale
+       ================================================================ -->
+  <section id="SWLS_SEC" title="Lebenszufriedenheit (SWLS)">
+    <question type="scale" id="SW">
+      <title>SWLS - Lebenszufriedenheit</title>
+      <text>Die folgenden fünf Aussagen beziehen sich auf Ihre allgemeine Lebenszufriedenheit. Bitte geben Sie an, inwieweit Sie jeder Aussage zustimmen.</text>
+      <instruction>Bitte wählen Sie für jede Aussage die zutreffende Antwort.</instruction>
+      <scale>
+        <option value="1">Stimme überhaupt nicht zu</option>
+        <option value="2">Stimme nicht zu</option>
+        <option value="3">Stimme eher nicht zu</option>
+        <option value="4">Weder noch</option>
+        <option value="5">Stimme eher zu</option>
+        <option value="6">Stimme zu</option>
+        <option value="7">Stimme voll und ganz zu</option>
+      </scale>
+      <items>
+        <item id="1" variable="SWLS1"><text>In den meisten Bereichen entspricht mein Leben meinen Idealvorstellungen.</text></item>
+        <item id="2" variable="SWLS2"><text>Meine Lebensbedingungen sind ausgezeichnet.</text></item>
+        <item id="3" variable="SWLS3"><text>Ich bin mit meinem Leben zufrieden.</text></item>
+        <item id="4" variable="SWLS4"><text>Bisher habe ich die wesentlichen Dinge erreicht, die ich mir im Leben wünsche.</text></item>
+        <item id="5" variable="SWLS5"><text>Wenn ich mein Leben noch einmal leben könnte, würde ich kaum etwas ändern.</text></item>
+      </items>
+    </question>
+  </section>
+
+  <!-- ================================================================
+       RUBRIK 8: Demographische Daten
+       ================================================================ -->
+  <section id="DEMO" title="Demographische Angaben">
+
+    <!-- Frage 1: Alter (offene Eingabe) -->
+    <question type="open" id="DA" subtype="number">
+      <title>Alter</title>
+      <text>Bitte machen Sie einige Angaben zu Ihrer Person.</text>
+      <instruction>Wie alt sind Sie?</instruction>
+      <items>
+        <item id="1" variable="ALTER"><text>Ihr Alter (in Jahren):</text></item>
+      </items>
+    </question>
+
+    <!-- Frage 2: Geschlecht (Single Choice) -->
+    <question type="choice" id="DG" subtype="dropdown">
+      <title>Geschlecht</title>
+      <text></text>
+      <instruction>Was ist Ihr Geschlecht?</instruction>
+      <options>
+        <option value="1">Männlich</option>
+        <option value="2">Weiblich</option>
+        <option value="3">Non-binär</option>
+        <option value="4">Keine Angabe</option>
+      </options>
+      <items>
+        <item id="1" variable="GESCHL"><text>Geschlecht:</text></item>
+      </items>
+    </question>
+
+    <!-- Frage 3: Bildungsniveau (Dropdown) -->
+    <question type="choice" id="DB" subtype="dropdown">
+      <title>Bildungsniveau</title>
+      <text></text>
+      <instruction>Was ist Ihr höchster Bildungsabschluss?</instruction>
+      <options>
+        <option value="1">Kein Abschluss</option>
+        <option value="2">Hauptschulabschluss</option>
+        <option value="3">Mittlere Reife</option>
+        <option value="4">Fachabitur</option>
+        <option value="5">Abitur</option>
+        <option value="6">Berufsausbildung</option>
+        <option value="7">Bachelor</option>
+        <option value="8">Master</option>
+        <option value="9">Promotion</option>
+      </options>
+      <items>
+        <item id="1" variable="BILDUNG"><text>Bildungsabschluss:</text></item>
+      </items>
+    </question>
+
+    <!-- Frage 4: Berufliche Situation (Dropdown) -->
+    <question type="choice" id="DJ" subtype="dropdown">
+      <title>Berufliche Situation</title>
+      <text></text>
+      <instruction>Was beschreibt Ihre aktuelle berufliche Situation am besten?</instruction>
+      <options>
+        <option value="1">Vollzeit beschäftigt</option>
+        <option value="2">Teilzeit beschäftigt</option>
+        <option value="3">Selbständig</option>
+        <option value="4">Student:in</option>
+        <option value="5">Arbeitssuchend</option>
+        <option value="6">Rente/Pension</option>
+        <option value="7">Sonstiges</option>
+      </options>
+      <items>
+        <item id="1" variable="BERUF"><text>Berufliche Situation:</text></item>
+      </items>
+    </question>
+
+  </section>
+
+</surveyContent>
