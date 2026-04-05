@@ -15,20 +15,20 @@ Vielen Dank für dein Interesse am 5D-Projekt! Wir freuen uns über Beiträge je
 - [Pull Requests](#pull-requests)
 - [Issue Guidelines](#issue-guidelines)
 
-## 🤝 Code of Conduct
+## 🤝 Code of Conduct {#code-of-conduct}
 
 - **Respektvoll:** Konstruktive Kritik, keine persönlichen Angriffe
 - **Wissenschaftlich:** Behauptungen mit Quellen belegen
 - **Inklusiv:** Alle Perspektiven sind willkommen
 - **Open Source:** Teile dein Wissen
 
-## 🚀 Erste Schritte
+## 🚀 Erste Schritte {#erste-schritte}
 
 ### 1. Repository forken
 
 ```bash
 # Fork auf GitHub erstellen, dann:
-git clone https://github.com/DEIN-USERNAME/5d.git
+git clone https://github.com/karlitos1337/5d.git
 cd 5d
 git remote add upstream https://github.com/karlitos1337/5d.git
 ```
@@ -53,12 +53,14 @@ python 5d_github_api.py
 
 # Tests ausführen
 pytest tests/ -v
+# Alternativ empfohlen: 
+make test
 
 # Dashboard starten
 streamlit run 5d_dashboard.py
 ```
 
-## 🛠️ Entwicklungsumgebung
+## 🛠️ Entwicklungsumgebung {#entwicklungsumgebung}
 
 ### Erforderlich
 
@@ -88,28 +90,37 @@ pip install -r requirements_extended.txt
 
 ## 📁 Projektstruktur
 
+pytest tests/ -v
+
+### Alternativ empfohlen
+
+make test
+
+### Dashboard starten
+
+streamlit run 5d_dashboard.py
+
 ```
-5d/
-├── manifest/               # Human-curated knowledge base
-├── formeln/                # Scientific formulas (001-157)
-├── config/                 # Configuration (default.yaml)
-├── models/                 # Pydantic schemas + IMP calculation
-├── analysis/               # Data analysis scripts
-├── surveys/                # Survey questions with citations
-├── storage/                # Anonymization (GDPR)
-├── web/5d-map/             # Interactive world map
-├── tests/                  # Pytest test suite
-├── docs/                   # Documentation
-├── 5d_extractor.py         # Stage 1: Manifest extraction
-├── 5d_research_scraper.py  # Stage 2: Academic papers
-├── 5d_github_api.py        # Stage 3: GitHub repos
-└── 5d_dashboard.py         # Main Streamlit dashboard
+```
+
+# Tests ausführen
+
+pytest tests/ -v
+
+# Alternativ empfohlen
+
+make test
+
+# Dashboard starten
+
+streamlit run 5d_dashboard.py
+
 ```
 
 ### Wichtige Dateien
 
 | Datei | Zweck | Ändern wenn... |
-|-------|-------|---------------|
+| ------- | ------- | --------------- |
 | `models/schemas.py` | Pydantic validation | JSON-Schema ändert sich |
 | `models/imp.py` | IMP calculation | Formel angepasst wird |
 | `config/default.yaml` | Configuration | Neue Parameter hinzukommen |
@@ -130,7 +141,7 @@ git checkout -b fix/bug-beschreibung
 git checkout -b docs/update-readme
 ```
 
-### Commit Messages
+## Commit Messages
 
 Wir folgen [Conventional Commits](https://www.conventionalcommits.org/):
 
@@ -147,6 +158,7 @@ git commit -m "chore(deps): update plotly to 5.18.0"
 ```
 
 **Types:**
+
 - `feat`: Neues Feature
 - `fix`: Bugfix
 - `docs`: Dokumentation
@@ -162,7 +174,7 @@ git fetch upstream
 git rebase upstream/main
 ```
 
-## 💻 Code-Standards
+## 💻 Code-Standards {#code-standards}
 
 ### Python (PEP 8)
 
@@ -227,9 +239,9 @@ class APIScraper:
         return requests.get(url)
 ```
 
-## 🧪 Testing
+## 🧪 Testing {#testing}
 
-### Tests ausführen
+### Tests im Workflow
 
 ```bash
 # Alle Tests
@@ -280,7 +292,7 @@ Tests laufen automatisch vor jedem Commit:
 pytest tests/
 ```
 
-## 📝 Dokumentation
+## 📝 Dokumentation {#dokumentation}
 
 ### Docstrings
 
@@ -328,7 +340,7 @@ QUESTIONS = [{
 }]
 ```
 
-## 🔀 Pull Requests
+## 🔀 Pull Requests {#pull-requests}
 
 ### Vor dem PR
 
@@ -369,7 +381,7 @@ Falls UI-Änderungen.
 2. **Code Review:** Mindestens 1 Approval
 3. **Merge:** Squash & Merge bevorzugt
 
-## 🐛 Issue Guidelines
+## 🐛 Issue Guidelines {#issue-guidelines}
 
 ### Bug Report
 
@@ -455,7 +467,7 @@ class NewField(BaseModel):
 - **Diskussionen:** GitHub Discussions
 - **Website:** [reflexionsfabrik.de](https://reflexionsfabrik.de)
 
-## 🙏 Danke!
+## 🙏 Danke
 
 Jeder Beitrag zählt – ob Code, Dokumentation, Bug Reports oder Ideen. Vielen Dank, dass du Teil der 5D-Community bist!
 

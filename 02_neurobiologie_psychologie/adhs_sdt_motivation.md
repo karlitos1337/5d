@@ -1,3 +1,4 @@
+
 # ADHS und Intrinsische Motivation: Self-Determination Theory als Rahmenwerk
 
 **Thema:** T1 | Neurobiologie + ADHS + Intrinsische Motivation
@@ -20,13 +21,15 @@
 ## Kernaussagen
 
 ### 1. Das Problem
+
 ADHS-Forschung zu Motivation fokussiert fast ausschließlich auf **externe Belohnung und Bestrafung** — wie Individuen auf Verstärker reagieren (Delay Aversion, Reward Sensitivity). Dabei wird die Rolle **innerer Motive** (warum jemand etwas tun will, nicht nur wie er auf Anreize reagiert) systematisch übersehen.
 
 ### 2. SDT als Brücke
+
 Die Self-Determination Theory (Deci & Ryan, 1985) definiert Motivation als Kontinuum:
 
 | Motivationsqualität | Beschreibung | ADHS-Relevanz |
-|---------------------|-------------|---------------|
+| --------------------- | ------------- | --------------- |
 | **A-Motivation** | Kein Antrieb | Häufig bei ADHS bei langweiligen Aufgaben |
 | **Externe Regulation** | Handeln wegen Belohnung/Strafe | Standard-ADHS-Interventionsmodell |
 | **Introjizierte Regulation** | Handeln aus Schuld/Pflicht | Häufig bei ADHS + Masking |
@@ -34,6 +37,7 @@ Die Self-Determination Theory (Deci & Ryan, 1985) definiert Motivation als Konti
 | **Intrinsische Motivation** | Handeln aus Freude/Interesse | Kernstärke bei ADHS (Hyperfokus) |
 
 ### 3. Die drei Grundbedürfnisse bei ADHS
+
 SDT postuliert drei Grundbedürfnisse, die Motivation speisen:
 
 - **Autonomie** — Selbstbestimmtes Handeln
@@ -43,6 +47,7 @@ SDT postuliert drei Grundbedürfnisse, die Motivation speisen:
 **Entscheidender Befund:** In qualitativen Interviews benennen Kinder/Jugendliche mit ADHS **spontan genau diese drei Bedürfnisse**, wenn sie gefragt werden, was sie motiviert (Morsink et al., 2017). Die Bedürfnisse sind identisch — die Umgebung frustriert sie nur häufiger.
 
 ### 4. Der Untergrabungseffekt
+
 Externe Belohnungen können intrinsische Motivation **untergraben** (Deci et al., 1999). Bei ADHS ist das besonders problematisch: Token-Systeme, Verhaltensverträge und leistungsabhängige Belohnungen sind Standard-Interventionen — aber sie könnten langfristig genau die intrinsische Motivation zerstören, die ADHS-Betroffene bei interessanten Aufgaben zeigen.
 
 ---
@@ -50,15 +55,18 @@ Externe Belohnungen können intrinsische Motivation **untergraben** (Deci et al.
 ## 5D-System-Verknüpfungen
 
 ### IMP-Formel
+
 - **A (Autonomie):** SDT definiert Autonomie als Grundbedürfnis, nicht als Freiheit von Regeln → bestätigt die 5D-Definition
 - **IM (Intrinsische Motivation):** SDT zeigt, dass IM bei ADHS nicht fehlt, sondern kontextabhängig ist → IM sollte als dynamische, nicht als statische Variable modelliert werden
 
 ### Interdisziplinäre Links
+
 - **T1↔T4:** Autonomie-unterstützende Lernumgebungen (Bildungspsychologie) verbessern Motivation bei ADHS
 - **T1↔T5:** Radikale Eigenverantwortung = internalisierte Regulation im SDT-Sinn
 - **T1↔T6:** Externe Belohnung als ethisch fragwürdige Intervention, wenn sie intrinsische Motivation untergräbt
 
 ### Offene Fragen für 5D
+
 1. Wie verändert sich der IMP-Score, wenn IM als Kontinuum (statt binär) modelliert wird?
 2. Ist der Untergrabungseffekt bei ADHS stärker als bei Neurotypischen?
 3. Kann die 5D-Formel den SDT-Internalisierungsprozess abbilden?
@@ -75,6 +83,7 @@ Externe Belohnungen können intrinsische Motivation **untergraben** (Deci et al.
 ---
 
 **Querverweise im Repo:**
+
 - `08_experimente_validierung/counter_evidence/SDT_META_ANALYSIS.md`
 - `08_experimente_validierung/counter_evidence/SDT_critique.md`
 - `ETHIK_MANIFEST.md` (Abschnitt: Forschungsethik)
