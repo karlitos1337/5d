@@ -13,6 +13,10 @@
 ## 2024-12-21 - React Dashboard Accessibility
 **Learning:** React Single Page Applications (SPAs) often miss basic accessibility features like "Skip to content" links and ARIA labels on icon-only buttons, which are critical for keyboard and screen reader users. Adding these is a low-effort, high-impact improvement.
 **Action:** When auditing React apps, immediately check for skip links and ensure all icon-only buttons (like dark mode toggles) have descriptive `aria-label` attributes.
+
+## 2024-05-24 - [Accessibility] Enhanced Icon-Only Buttons
+**Learning:** When using custom dark mode implementations in React, standard `focus-visible` styles can lack contrast. Additionally, icon-only buttons need `title` attributes alongside `aria-label`s to assist mouse users with native tooltips.
+**Action:** Always complement `aria-label` with a matching `title` on icon-only buttons. For focus rings in custom dark mode applications, conditionally apply offset colors (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`).
 ## 2024-05-24 - Dynamic Focus Rings in Dark Mode
 **Learning:** When improving keyboard accessibility in React applications that manage dark mode via state variables (like `darkMode`) rather than Tailwind's native `dark:` classes, static focus-visible offsets can cause contrast issues.
 **Action:** Dynamically apply the appropriate focus ring offset colors using conditional template literals (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) to ensure proper contrast in both light and dark themes.
