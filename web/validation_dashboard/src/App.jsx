@@ -153,6 +153,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                   className={`text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                     darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'
                   } ${
@@ -171,6 +172,7 @@ const App = () => {
                 aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 onClick={toggleDarkMode}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 aria-label={darkMode ? "Zum hellen Modus wechseln" : "Zum dunklen Modus wechseln"}
@@ -186,6 +188,7 @@ const App = () => {
                 title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 aria-label={mobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
@@ -211,6 +214,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
