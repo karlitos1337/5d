@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -13,7 +13,7 @@ const App = () => {
     restDelta: 0.001
   });
 
-  const sections = [
+  const sections = useMemo(() => [
     { id: 'einleitung', label: 'Einleitung' },
     { id: 'framework', label: '5D-Intelligence Framework' },
     { id: 'methodologie', label: 'Methodik' },
@@ -22,7 +22,7 @@ const App = () => {
     { id: 'implikationen', label: 'Implikationen' },
     { id: 'zukunft', label: 'Zukunftsperspektiven' },
     { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-  ];
+  ], []);
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -37,7 +37,8 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      const isVoidElement = ['IMG', 'BR', 'HR', 'INPUT', 'META', 'LINK'].includes(el.tagName);
+      if (!isVoidElement && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -53,9 +54,20 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      btn.onclick = e => {
+        e.stopPropagation();
+        e.preventDefault();
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+        if (newWindow) {
+          newWindow.opener = null;
+        }
+      };
 
-      el.appendChild(btn);
+      if (isVoidElement) {
+        el.parentNode.insertBefore(btn, el.nextSibling);
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
@@ -97,7 +109,7 @@ const App = () => {
     // ⚡ Bolt: Add { passive: true } to allow the browser to scroll immediately without waiting for JS execution.
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sections]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
