@@ -173,8 +173,6 @@ const App = () => {
                 aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
-                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
@@ -191,8 +189,6 @@ const App = () => {
                 title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none ${
-                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
