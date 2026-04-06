@@ -248,7 +248,8 @@ const App = () => {
               </div>
 
               <div>
-                <img
+                {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
+                <img loading="lazy"
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
@@ -372,7 +373,8 @@ const App = () => {
             </div>
 
             <div className="mb-8">
-              <img
+              {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
+                <img loading="lazy"
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
