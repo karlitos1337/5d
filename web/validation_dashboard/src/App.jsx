@@ -91,12 +91,14 @@ const App = () => {
   };
 
   useEffect(() => {
+    // Cache DOM elements to avoid getElementById during scroll
 // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
     const cachedSections = sections.map(sec => ({
       id: sec.id,
       element: document.getElementById(sec.id)
     })).filter(sec => sec.element);
 
+    // Use requestAnimationFrame to throttle scroll events and prevent layout thrashing
         // ⚡ Bolt Optimization: Use requestAnimationFrame to throttle scroll events and prevent layout thrashing
     let ticking = false;
 
@@ -118,7 +120,7 @@ const App = () => {
 }
     };
 
-    // ⚡ Bolt Optimization: passive: true allows the browser to scroll immediately without waiting for JS
+    // passive: true allows the browser to scroll immediately without waiting for JS
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
@@ -289,7 +291,7 @@ const App = () => {
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                     loading="lazy"
                 />
-                {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
+
               </div>
             </div>
 
@@ -414,7 +416,7 @@ const App = () => {
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
                   loading="lazy"
               />
-              {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
+
             </div>
 
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
