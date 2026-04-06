@@ -91,31 +91,13 @@ const App = () => {
   };
 
   useEffect(() => {
-<<<<<<< jules-17906317245013164805-3c252b20
-=======
-    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+// ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
     const cachedSections = sections.map(sec => ({
       id: sec.id,
       element: document.getElementById(sec.id)
     })).filter(sec => sec.element);
 
-    const ticking = { current: false };
-
->>>>>>> main
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
-<<<<<<< jules-17906317245013164805-3c252b20
-=======
-      }
-      if (!ticking.current) {
-    // ⚡ Bolt Optimization: Use requestAnimationFrame to throttle scroll events and prevent layout thrashing
+        // ⚡ Bolt Optimization: Use requestAnimationFrame to throttle scroll events and prevent layout thrashing
     let ticking = false;
 
     const handleScroll = () => {
@@ -133,8 +115,7 @@ const App = () => {
           ticking = false;
         });
         ticking = true;
->>>>>>> main
-      }
+}
     };
 
     // ⚡ Bolt Optimization: passive: true allows the browser to scroll immediately without waiting for JS
