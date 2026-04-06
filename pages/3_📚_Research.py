@@ -5,6 +5,7 @@ Academic papers from arXiv, PubMed, WHO, World Bank
 """
 
 import json
+import logging
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -30,7 +31,42 @@ inject_mobile_css()
 
 @st.cache_data(ttl=1800)
 def load_research_data():
-    """Loads research data with caching (TTL: 30 minutes)"""
+    """
+    Loads research data with caching (TTL: 30 minutes).
+
+    Preference order:
+    1. SQLite database (5d_research.db) – fast SQL queries
+    2. JSON fallback (5d_research_data.json) – legacy compatibility
+    """
+    db_path = Path("5d_research.db")
+    if db_path.exists():
+        try:
+            from models.research import ResearchPaper, get_engine  # noqa: E402
+
+            engine = get_engine(db_path)
+            from sqlalchemy.orm import Session  # noqa: E402
+
+            result: dict = {}
+            with Session(engine) as session:
+                papers = session.query(ResearchPaper).all()
+                for paper in papers:
+                    kw = paper.keyword
+                    src = paper.source
+                    if kw not in result:
+                        result[kw] = {"arxiv": [], "pubmed": []}
+                    entry = {
+                        "title": paper.title,
+                        "authors": paper.authors or [],
+                        "published": paper.published.isoformat() if paper.published else None,
+                        "link": paper.link,
+                        "summary": paper.summary,
+                    }
+                    if src in result[kw]:
+                        result[kw][src].append(entry)
+            return result
+        except Exception as exc:
+            logging.warning("SQLite load failed, falling back to JSON: %s", exc)
+
     try:
         with open("5d_research_data.json", encoding="utf-8") as f:
             return json.load(f)
