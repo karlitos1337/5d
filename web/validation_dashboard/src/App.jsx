@@ -97,16 +97,11 @@ const App = () => {
       element: document.getElementById(sec.id)
     })).filter(sec => sec.element);
 
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+    // ⚡ Bolt Optimization: Use requestAnimationFrame to throttle scroll events and prevent layout thrashing
+    let ticking = false;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
-      if (!ticking.current) {
+    const handleScroll = () => {
+      if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
@@ -117,18 +112,22 @@ const App = () => {
               break;
             }
           }
-          ticking.current = false;
+          ticking = false;
         });
-        ticking.current = true;
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt Optimization: passive: true allows the browser to scroll immediately without waiting for JS
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white focus:z-50 focus:top-0 focus:left-0">
+        Zum Hauptinhalt springen
+      </a>
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
@@ -164,6 +163,7 @@ const App = () => {
 
             <div className="flex items-center space-x-4">
               <button
+                aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 onClick={toggleDarkMode}
                 className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
@@ -173,6 +173,8 @@ const App = () => {
               </button>
 
               <button
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
@@ -211,7 +213,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -281,7 +283,9 @@ const App = () => {
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
+                    loading="lazy"
                 />
+                {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
               </div>
             </div>
 
@@ -403,7 +407,9 @@ const App = () => {
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
+                  loading="lazy"
               />
+              {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
             </div>
 
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
