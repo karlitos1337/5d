@@ -36,37 +36,34 @@
     ],
     "pubmed": [
       {
-        "title": "EXPRESS: Does orthography mitigate the impact of background noise on word learning?",
+        "title": "Serious learning through play: a decade of the Self-Directed Learning Playground.",
         "authors": [
-          "Salins AO",
-          "Hooton C",
-          "Ricketts J"
+          "Sow CF"
         ],
-        "published": "2026 Apr 3",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41930691/"
+        "published": "2026 Mar",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41802353/"
       },
       {
-        "title": "PunctVR: VR Training for Image-Guided Needle Puncture with a Scaffolded, Self-Directed Framework.",
+        "title": "Can Large Language Models Foster Reflective Practice? A Dialogically-Informed Exploration by a Trainee-Educator Dyad.",
         "authors": [
-          "Liu W",
-          "Liu C",
-          "Wang J"
+          "Retnam S",
+          "Sadasiv MS"
         ],
-        "published": "2026 Apr 2",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41926409/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798375/"
       },
       {
-        "title": "Mapping scholarly continuing professional development publications in the South African Family Practice journal (2020-2025): Trends, gaps, and a call for contributions.",
+        "title": "A Qualitative Analysis of Letters to Successors to Evaluate Medical Students' Experience of a Mandatory Research Project.",
         "authors": [
-          "Rabe M",
-          "Kaswa R",
-          "Von Pressentin KB"
+          "Rosborough D",
+          "Kaur R",
+          "Hart J"
         ],
-        "published": "2026 Mar 31",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41925598/"
+        "published": "2025 Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798328/"
       }
     ],
-    "timestamp": "2026-04-05T10:42:48.324563"
+    "timestamp": "2026-03-10T11:54:25.538341"
   },
   "intrinsic motivation education": {
     "arxiv": [
@@ -106,35 +103,37 @@
     ],
     "pubmed": [
       {
-        "title": "In transit: Cross-cultural differences in international students' constructively aligned learning experience.",
+        "title": "Sources and Changes in Medical Student Motivation: A Longitudinal Self-Determination Theory Analysis.",
         "authors": [
-          "Roßnagel CS"
+          "Jones J",
+          "Fuller J",
+          "Alexander S"
         ],
-        "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41926353/"
+        "published": "2026 Jan-Dec",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41804334/"
       },
       {
-        "title": "Factors Influencing Nursing Career Choice and Stress Among Generation Z Nursing Students in New Brunswick: A Cross-Sectional Study.",
+        "title": "The impact of quality of information on classroom engagement with GenAI tools: integrating TAM and SOR framework.",
         "authors": [
-          "Yasin YM",
-          "Al-Hamad A",
-          "Metersky K"
-        ],
-        "published": "2026 Apr 1",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41919626/"
-      },
-      {
-        "title": "The impact of university students' AI attitudes on AI-assisted creativity: the mediating role of AI usage motivation and the moderating role of AI dependency.",
-        "authors": [
-          "Yin J",
-          "Yuan T",
-          "Zhang Y"
+          "Li F",
+          "Chen J",
+          "Shao T"
         ],
         "published": "2026",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41919114/"
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41798005/"
+      },
+      {
+        "title": "Effects of a serious game on undergraduate nursing students' learning motivation, engagement and outcomes in community nursing home visit education: A cluster quasi-experimental study.",
+        "authors": [
+          "Chen X",
+          "Yang Y",
+          "Wang Y"
+        ],
+        "published": "2026 Mar 5",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/41797061/"
       }
     ],
-    "timestamp": "2026-04-05T10:42:51.056617"
+    "timestamp": "2026-03-10T11:54:28.570788"
   },
   "autonomy supportive teaching": {
     "arxiv": [
@@ -239,16 +238,6 @@
     ],
     "pubmed": [
       {
-        "title": "Mindful Embodied Movement: Study Protocol for a 12-Week Modern Dance-Mindfulness Intervention and Mixed-Methods Randomized Controlled Trial in Recreational Adult Dancers.",
-        "authors": [
-          "Zafeiroudi A",
-          "Tsartsapakis I",
-          "Kouthouris C"
-        ],
-        "published": "2026 Mar 3",
-        "link": "https://pubmed.ncbi.nlm.nih.gov/41874154/"
-      },
-      {
         "title": "Resonance in recovery: group singing as a mechanism for collective narrative repair, emotional integration, and post-traumatic growth.",
         "authors": [
           "Liu Y"
@@ -263,9 +252,19 @@
         ],
         "published": "2025 Jun",
         "link": "https://pubmed.ncbi.nlm.nih.gov/40735382/"
+      },
+      {
+        "title": "Is cardiac autonomic control affected in major depressive disorder? A systematic review of heart rate variability studies.",
+        "authors": [
+          "Goffi F",
+          "Maggioni E",
+          "Bianchi AM"
+        ],
+        "published": "2025 Jul 1",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/40595479/"
       }
     ],
-    "timestamp": "2026-04-05T10:42:47.031900"
+    "timestamp": "2026-03-10T11:54:33.571974"
   },
   "democratic schools": {
     "arxiv": [

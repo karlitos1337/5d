@@ -13,7 +13,7 @@ sys.modules["owid_proxy"] = owid_proxy
 spec.loader.exec_module(owid_proxy)
 
 
-class TestHandler(owid_proxy.ProxyHandler):
+class MockHandler(owid_proxy.ProxyHandler):
     """Subclass to bypass BaseHTTPRequestHandler.__init__ and capture output."""
 
     def __init__(self):
@@ -38,7 +38,7 @@ class TestHandler(owid_proxy.ProxyHandler):
 
 class TestOWIDProxySecurity(unittest.TestCase):
     def setUp(self):
-        self.handler = TestHandler()
+        self.handler = MockHandler()
 
     @patch("urllib.request.urlopen")
     def test_security_headers_present(self, mock_urlopen):

@@ -22,14 +22,11 @@ import warnings
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
 from scipy import stats
 from scipy.stats import entropy as shannon_entropy
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
@@ -67,8 +64,8 @@ class ClusterState:
     cluster: int
     # IMP wird nachträglich angereichert
     imp_scores: dict[str, float] = field(default_factory=dict)
-    e_mask: Optional[float] = None      # maskierte Entropie (nur Cluster 0)
-    parasitic_load: Optional[float] = None  # Energiebilanz 1D-Parasit
+    e_mask: float | None = None      # maskierte Entropie (nur Cluster 0)
+    parasitic_load: float | None = None  # Energiebilanz 1D-Parasit
 
 
 # ─────────────────────────────────────────────────────────────

@@ -56,6 +56,7 @@ import warnings
 from collections import defaultdict
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -499,8 +500,8 @@ def plot_rho_c_vs_manipulation(ergebnisse: dict, pfad: str) -> None:
     # ±1σ Konfidenzband
     ax.fill_between(
         m_werte,
-        [max(0.0, r - s) for r, s in zip(rho_c_means, rho_c_stds)],
-        [min(1.0, r + s) for r, s in zip(rho_c_means, rho_c_stds)],
+        [max(0.0, r - s) for r, s in zip(rho_c_means, rho_c_stds, strict=False)],
+        [min(1.0, r + s) for r, s in zip(rho_c_means, rho_c_stds, strict=False)],
         alpha=0.18, color="#457B9D",
         label=r"$\pm 1\sigma$ (N=50 Simulationen)"
     )
@@ -574,8 +575,8 @@ def plot_keimzellen_count_vs_manipulation(ergebnisse: dict, pfad: str) -> None:
 
     ax.fill_between(
         m_werte,
-        [max(0.0, k - s) for k, s in zip(k_means, k_stds)],
-        [k + s for k, s in zip(k_means, k_stds)],
+        [max(0.0, k - s) for k, s in zip(k_means, k_stds, strict=False)],
+        [k + s for k, s in zip(k_means, k_stds, strict=False)],
         alpha=0.18, color="#2A9D8F"
     )
     ax.plot(
@@ -642,7 +643,7 @@ def plot_dimension_distribution(ergebnisse: dict, pfad: str) -> None:
             dim_labels, anteile,
             color=farben, edgecolor="white", linewidth=1.5, width=0.65
         )
-        for b, a in zip(balken, anteile):
+        for b, a in zip(balken, anteile, strict=False):
             ax.text(
                 b.get_x() + b.get_width() / 2,
                 b.get_height() + 0.8,
@@ -692,7 +693,7 @@ def drucke_zusammenfassung(ergebnisse: dict) -> None:
     m_sortiert  = sorted(ergebnisse.keys())
     rho_c_liste = [ergebnisse[m]["rho_c_mean"] for m in m_sortiert]
 
-    for m, rho_c in zip(m_sortiert, rho_c_liste):
+    for m, rho_c in zip(m_sortiert, rho_c_liste, strict=False):
         r = ergebnisse[m]
         if m == 0.0:
             einordnung = "natürlich (Referenz)"
