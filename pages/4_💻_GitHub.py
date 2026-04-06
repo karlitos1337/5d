@@ -5,6 +5,7 @@ EdTech repositories, activity metrics, developer community
 """
 
 import json
+import logging
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -30,7 +31,34 @@ inject_mobile_css()
 
 @st.cache_data(ttl=1800)
 def load_github_data():
-    """Loads GitHub data with caching (TTL: 30 minutes)"""
+    """
+    Loads GitHub data with caching (TTL: 30 minutes).
+
+    Preference order:
+    1. SQLite database (5d_research.db) – fast SQL queries
+    2. JSON fallback (5d_github_data.json) – legacy compatibility
+    """
+    db_path = Path("5d_research.db")
+    if db_path.exists():
+        try:
+            from models.research import GitHubRepository, get_engine  # noqa: E402
+
+            engine = get_engine(db_path)
+            from sqlalchemy.orm import Session  # noqa: E402
+
+            repositories: dict = {}
+            with Session(engine) as session:
+                repos = session.query(GitHubRepository).all()
+                for repo in repos:
+                    cat = repo.category
+                    if cat not in repositories:
+                        repositories[cat] = []
+                    repositories[cat].append(repo.to_dict())
+            if repositories:
+                return {"repositories": repositories, "trending": [], "timestamp": None}
+        except Exception as exc:
+            logging.warning("SQLite load failed, falling back to JSON: %s", exc)
+
     try:
         with open("5d_github_data.json", encoding="utf-8") as f:
             return json.load(f)

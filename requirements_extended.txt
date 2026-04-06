@@ -25,3 +25,4 @@ PyPDF2
 keyring
 discord.py
 pytest-asyncio
+sqlalchemy>=2.0
