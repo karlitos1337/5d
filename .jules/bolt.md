@@ -31,6 +31,9 @@
 ## 2026-03-16 - Validation Dashboard Syntax Errors
 **Learning:** There were duplicated/conflicting syntaxes from previous poorly merged attempts in `web/validation_dashboard/src/App.jsx` related to `import React` statements, `const sections =` duplication, unescaped single quotes, and malformed nested `if(!ticking)` logic for scroll handling, which prevented linting from passing.
 **Action:** When optimizing a component, ensure that the baseline code is syntactically valid by fixing broken syntax and removing duplicated statements, and explicitly escaping quotes like `&apos;` in JSX.
+## 2024-04-04 - Optimize Image Loading in React Apps
+**Learning:** Deferring the loading of below-the-fold images by adding the `loading="lazy"` attribute to `<img>` tags is a simple yet effective way to improve initial load times without adding complex libraries or breaking existing functionality.
+**Action:** Always consider adding `loading="lazy"` to off-screen images in React applications, especially for large infographics or charts.
 
 ## 2024-05-30 - Lazy Loading Images in React/HTML
 **Learning:** A successful and low-risk performance optimization pattern for frontend applications in this repository is to defer the loading of below-the-fold images by adding the `loading="lazy"` attribute to `<img />` tags, which improves initial load times and adheres to the <50 lines constraint.
