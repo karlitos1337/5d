@@ -64,7 +64,7 @@ const App = () => {
 
       el.dataset.citationProcessed = 'true';
     });
-  }, [sections]);
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
