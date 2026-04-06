@@ -35,3 +35,6 @@
 ## 2024-05-30 - Lazy Loading Images in React/HTML
 **Learning:** A successful and low-risk performance optimization pattern for frontend applications in this repository is to defer the loading of below-the-fold images by adding the `loading="lazy"` attribute to `<img />` tags, which improves initial load times and adheres to the <50 lines constraint.
 **Action:** Proactively check for and add `loading="lazy"` to below-the-fold images across all new and existing frontend components.
+## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
+**Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
+**Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
