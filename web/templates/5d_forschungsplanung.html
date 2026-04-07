@@ -8,8 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Chart.js Plugin for annotations -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
-    <!-- CryptoJS for client-side encryption of the API key -->
-    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -519,26 +517,10 @@
 
     <script>
         // --- GEMINI AI INTEGRATION ---
-        // --- ENCRYPTION SETUP ---
-        // Use a passphrase for encryption. For demo, hardcoding. Use something stronger in production.
-        const apiKeyPassphrase = "changeme-strong-passphrase";
-        function encryptApiKey(key) {
-            return CryptoJS.AES.encrypt(key, apiKeyPassphrase).toString();
-        }
-        function decryptApiKey(cipherText) {
-            try {
-                const bytes = CryptoJS.AES.decrypt(cipherText, apiKeyPassphrase);
-                return bytes.toString(CryptoJS.enc.Utf8);
-            } catch (e) {
-                return '';
-            }
-        }
-        // Retrieve and decrypt API key from local storage
-        let apiKey = '';
-        const storedKey = localStorage.getItem('geminiApiKey');
-        if (storedKey) {
-            apiKey = decryptApiKey(storedKey) || '';
-        }
+
+        // Retrieve API key from local storage
+        let apiKey = localStorage.getItem('geminiApiKey') || '';
+
         function updateApiStatus() {
             const statusDot = document.getElementById('apiKeyStatus');
             const statusText = document.getElementById('apiKeyText');
@@ -564,8 +546,7 @@
             const input = document.getElementById('apiKeyInput').value.trim();
             if (input) { 
                 apiKey = input; 
-                // Encrypt before saving to localStorage
-                localStorage.setItem('geminiApiKey', encryptApiKey(apiKey)); 
+                localStorage.setItem('geminiApiKey', apiKey);
                 updateApiStatus(); 
                 closeModal(); 
             }
