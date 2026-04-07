@@ -41,8 +41,9 @@ async function fetchWithCache(key, fetcher) {
   }
   try {
     const data = await fetcher();
-    cache[key] = { data, timestamp: now };
-    saveCache(cache);
+    const updatedCache = loadCache();
+    updatedCache[key] = { data, timestamp: now };
+    saveCache(updatedCache);
     return data;
   } catch (e) {
     if (entry) return entry.data; // Fallback auf alten Cache
@@ -178,9 +179,11 @@ export async function fetchAllData() {
     return map;
   };
 
-  const wgi_rl_raw = await fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({}));
-  const wgi_va_raw = await fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({}));
-  const wgi_ge_raw = await fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}));
+  const [wgi_rl_raw, wgi_va_raw, wgi_ge_raw] = await Promise.all([
+    fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({})),
+    fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({})),
+    fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}))
+  ]);
 
   const normalizeWGI = (m) => {
     const out = {};
