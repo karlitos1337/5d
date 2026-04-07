@@ -23,3 +23,6 @@
 ## 2025-04-03 - [Accessibility] Conditional Focus Ring Offsets
 **Learning:** When adding `focus-visible` ring styles to interactive elements in a React application that manually manages dark mode via state (e.g., `const [darkMode, setDarkMode] = useState(false)`), using standard Tailwind `ring-offset` classes can cause contrast issues. Standard `dark:` prefixes do not work if the application does not utilize the standard class-based dark mode implementation.
 **Action:** Always verify the dark mode implementation strategy of the application. If it relies on a manual state variable, dynamically apply the appropriate `focus-visible:ring-offset-*` color using conditional template literals (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) to ensure proper contrast and accessibility for keyboard navigation.
+## 2024-04-07 - Dynamic Focus Rings for Dark Mode
+**Learning:** When managing dark mode via React state (e.g., `darkMode` variable) instead of Tailwind's native `dark:` classes, focus rings (`focus-visible:ring-offset-*`) must be dynamically applied using conditional template literals to ensure proper contrast.
+**Action:** Always use conditional expressions for focus ring offset colors (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) in such components.
