@@ -23,3 +23,6 @@
 ## 2025-04-03 - [Accessibility] Conditional Focus Ring Offsets
 **Learning:** When adding `focus-visible` ring styles to interactive elements in a React application that manually manages dark mode via state (e.g., `const [darkMode, setDarkMode] = useState(false)`), using standard Tailwind `ring-offset` classes can cause contrast issues. Standard `dark:` prefixes do not work if the application does not utilize the standard class-based dark mode implementation.
 **Action:** Always verify the dark mode implementation strategy of the application. If it relies on a manual state variable, dynamically apply the appropriate `focus-visible:ring-offset-*` color using conditional template literals (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) to ensure proper contrast and accessibility for keyboard navigation.
+## 2024-04-08 - Match HTML lang attribute with content language
+**Learning:** React scaffolds like Vite default to `lang="en"`, but if the content is in another language (e.g., German), it severely impacts screen reader pronunciation, breaking basic accessibility.
+**Action:** Always verify that the `<html lang="...">` attribute matches the actual localization of the application content.
