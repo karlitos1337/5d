@@ -44,3 +44,7 @@
 ## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
 **Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
 **Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
+
+## 2024-03-24 - Parallel Fetching & localStorage Concurrency
+**Learning:** When parallelizing `fetchWithCache` logic that relies on `localStorage` (read-modify-write), standard JS concurrency (Promise.all) causes race conditions where updates are lost because the "read" happens before other "writes" complete.
+**Action:** Always re-read the latest state from `localStorage` immediately before writing the update in async functions, or use a mutex if strict transactional integrity is needed.
