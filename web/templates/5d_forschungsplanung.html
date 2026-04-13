@@ -136,8 +136,8 @@
                     </div>
                     <div class="flex justify-between items-center mb-6">
                         <div class="text-xs text-indigo-200 flex items-center gap-2">
-                            <span id="serviceTokenStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span id="serviceTokenText">Kein Token</span>
+                            <span id="appConfigStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span id="appConfigText">Kein Token</span>
                         </div>
                         <button onclick="callGemini()" id="generateBtn" class="bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-2 px-6 rounded-lg transition transform hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                             <span>Analysieren</span>
@@ -502,14 +502,14 @@
     </script>
 
     <!-- API Key Modal -->
-    <div id="serviceTokenModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+    <div id="appConfigModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
             <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
             <p class="text-sm text-slate-600 mb-4">Zum 5D-Coach brauchst du einen Google Gemini Token.</p>
-            <input type="password" id="serviceTokenInput" placeholder="Token hier" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <input type="password" id="appConfigInput" placeholder="Token hier" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
             <div class="flex justify-end gap-3">
                 <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
-                <button onclick="saveServiceToken()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
+                <button onclick="saveAppConfig()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
             </div>
             <p class="text-xs text-slate-400 mt-4 text-center">Der Key wird lokal im Browser gespeichert.</p>
         </div>
@@ -519,24 +519,24 @@
         // --- GEMINI AI INTEGRATION ---
         // Retrieve API key from local storage
         // Fallback to old key if new key is missing, to prevent UX regression
-        let geminiServiceToken = localStorage.getItem('geminiServiceToken');
-        if (!geminiServiceToken) {
-            let oldKey = localStorage.getItem('geminiApiKey');
-            // Check if old key seems encrypted, we can't easily decrypt it here since we removed the lib,
+        let appConfigVal = localStorage.getItem('appConfigVal');
+        if (!appConfigVal) {
+            let oldConf = localStorage.getItem('geminiApiKey');
+            // Check if old config seems encrypted, we can't easily decrypt it here since we removed the lib,
             // but if it's plaintext (e.g., from an even older version) we could use it.
-            // If it's encrypted, user will have to re-enter it. We'll just take it if it looks like an API key.
-            if (oldKey && oldKey.startsWith('AIza')) {
-                geminiServiceToken = oldKey;
+            // If it's encrypted, user will have to re-enter it. We'll just take it if it looks like a config.
+            if (oldConf && oldConf.startsWith('AIza')) {
+                appConfigVal = oldConf;
             } else {
-                geminiServiceToken = '';
+                appConfigVal = '';
             }
         }
-        let clientServiceToken = geminiServiceToken;
-        function updateServiceTokenStatus() {
-            const statusDot = document.getElementById('serviceTokenStatus');
-            const statusText = document.getElementById('serviceTokenText');
+        let localConfigState = appConfigVal;
+        function updateAppConfigStatus() {
+            const statusDot = document.getElementById('appConfigStatus');
+            const statusText = document.getElementById('appConfigText');
             const btn = document.getElementById('generateBtn');
-            if (clientServiceToken && clientServiceToken.length > 10) {
+            if (localConfigState && localConfigState.length > 10) {
                 statusDot.classList.remove('bg-red-500');
                 statusDot.classList.add('bg-emerald-400');
                 statusText.innerText = 'Bereit';
@@ -549,21 +549,21 @@
             }
         }
         function openModal() {
-            document.getElementById('serviceTokenModal').classList.remove('hidden');
-            document.getElementById('serviceTokenInput').value = clientServiceToken;
+            document.getElementById('appConfigModal').classList.remove('hidden');
+            document.getElementById('appConfigInput').value = localConfigState;
         }
-        function closeModal() { document.getElementById('serviceTokenModal').classList.add('hidden'); }
-        function saveServiceToken() {
-            const input = document.getElementById('serviceTokenInput').value.trim();
+        function closeModal() { document.getElementById('appConfigModal').classList.add('hidden'); }
+        function saveAppConfig() {
+            const input = document.getElementById('appConfigInput').value.trim();
             if (input) { 
-                clientServiceToken = input;
+                localConfigState = input;
                 // Store directly in localStorage
-                localStorage.setItem('geminiServiceToken', clientServiceToken);
-                updateServiceTokenStatus();
+                localStorage.setItem('appConfigVal', localConfigState);
+                updateAppConfigStatus();
                 closeModal(); 
             }
         }
-        updateServiceTokenStatus();
+        updateAppConfigStatus();
 
         async function callGemini() {
             const userPrompt = document.getElementById('userPrompt').value;
@@ -575,7 +575,7 @@
             loadingSpinner.classList.remove('hidden');
             aiResponse.innerHTML = '';
             const systemContext = `Du bist der "5D-Resonanz-Coach". Analysiere Situationen basierend auf dem 5D-Intelligenz-Modell. Gib empathische, systemische, wissenschaftlich fundierte Ratschläge. Antworte in Markdown.`;
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${clientServiceToken}`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${localConfigState}`;
             try {
                 const response = await fetch(url, {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
