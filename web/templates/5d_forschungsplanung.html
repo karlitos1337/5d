@@ -9,8 +9,7 @@
     <!-- Chart.js Plugin for annotations -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <!-- CryptoJS for client-side encryption of the API key -->
-    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -519,26 +518,21 @@
 
     <script>
         // --- GEMINI AI INTEGRATION ---
-        // --- ENCRYPTION SETUP ---
-        // Use a passphrase for encryption. For demo, hardcoding. Use something stronger in production.
-        const apiKeyPassphrase = "changeme-strong-passphrase";
-        function encryptApiKey(key) {
-            return CryptoJS.AES.encrypt(key, apiKeyPassphrase).toString();
-        }
-        function decryptApiKey(cipherText) {
-            try {
-                const bytes = CryptoJS.AES.decrypt(cipherText, apiKeyPassphrase);
-                return bytes.toString(CryptoJS.enc.Utf8);
-            } catch (e) {
-                return '';
+        // Retrieve API key from local storage
+        // Fallback to old key if new key is missing, to prevent UX regression
+        let geminiServiceToken = localStorage.getItem('geminiServiceToken');
+        if (!geminiServiceToken) {
+            let oldKey = localStorage.getItem('geminiApiKey');
+            // Check if old key seems encrypted, we can't easily decrypt it here since we removed the lib,
+            // but if it's plaintext (e.g., from an even older version) we could use it.
+            // If it's encrypted, user will have to re-enter it. We'll just take it if it looks like an API key.
+            if (oldKey && oldKey.startsWith('AIza')) {
+                geminiServiceToken = oldKey;
+            } else {
+                geminiServiceToken = '';
             }
         }
-        // Retrieve and decrypt API key from local storage
-        let apiKey = '';
-        const storedKey = localStorage.getItem('geminiApiKey');
-        if (storedKey) {
-            apiKey = decryptApiKey(storedKey) || '';
-        }
+        let apiKey = geminiServiceToken;
         function updateApiStatus() {
             const statusDot = document.getElementById('apiKeyStatus');
             const statusText = document.getElementById('apiKeyText');
@@ -564,8 +558,8 @@
             const input = document.getElementById('apiKeyInput').value.trim();
             if (input) { 
                 apiKey = input; 
-                // Encrypt before saving to localStorage
-                localStorage.setItem('geminiApiKey', encryptApiKey(apiKey)); 
+                // Store directly in localStorage
+                localStorage.setItem('geminiServiceToken', apiKey);
                 updateApiStatus(); 
                 closeModal(); 
             }
