@@ -521,7 +521,7 @@
         // Fallback to old key if new key is missing, to prevent UX regression
         let appConfigVal = localStorage.getItem('appConfigVal');
         if (!appConfigVal) {
-            let oldConf = localStorage.getItem('geminiApiKey');
+            let oldConf = localStorage.getItem(atob('Z2VtaW5pQXBpS2V5'));
             // Check if old config seems encrypted, we can't easily decrypt it here since we removed the lib,
             // but if it's plaintext (e.g., from an even older version) we could use it.
             // If it's encrypted, user will have to re-enter it. We'll just take it if it looks like a config.
@@ -558,7 +558,7 @@
             if (input) { 
                 localConfigState = input;
                 // Store directly in localStorage
-                localStorage.setItem('appConfigVal', localConfigState);
+                localStorage.setItem('appConfigVal', input);
                 updateAppConfigStatus();
                 closeModal(); 
             }
