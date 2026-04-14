@@ -23,3 +23,7 @@
 ## 2025-04-03 - [Accessibility] Conditional Focus Ring Offsets
 **Learning:** When adding `focus-visible` ring styles to interactive elements in a React application that manually manages dark mode via state (e.g., `const [darkMode, setDarkMode] = useState(false)`), using standard Tailwind `ring-offset` classes can cause contrast issues. Standard `dark:` prefixes do not work if the application does not utilize the standard class-based dark mode implementation.
 **Action:** Always verify the dark mode implementation strategy of the application. If it relies on a manual state variable, dynamically apply the appropriate `focus-visible:ring-offset-*` color using conditional template literals (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) to ensure proper contrast and accessibility for keyboard navigation.
+
+## 2025-04-14 - [Accessibility] Improve Keyboard Nav and Screen Reader Support
+**Learning:** React Single Page Applications often miss basic accessibility features like "Skip to content" links, ARIA labels on icon-only buttons, and sufficient focus ring contrast when dark mode is managed via state.
+**Action:** Added `aria-label` and `title` to icon buttons, ensured the `<main>` tag had the correct `id` and `tabIndex="-1"`, and implemented dynamic focus ring offsets (`focus-visible:ring-offset-*`) for better contrast in both light and dark modes.
