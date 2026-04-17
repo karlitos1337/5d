@@ -44,3 +44,11 @@
 ## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
 **Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
 **Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
+
+## 2024-06-03 - React Array Memoization
+**Learning:** Hardcoding objects or arrays like `navItems` directly within a React component's body without memoization causes the array reference to be re-created on every render, which triggers unnecessary `useEffect` runs and exhaustive-deps lint warnings.
+**Action:** Always wrap static component-scoped arrays and objects in `useMemo(() => [...], [])` or move them completely outside the component definition.
+
+## 2024-06-03 - Component Loading
+**Learning:** Accidentally removing `loading="lazy"` attributes from off-screen images within an optimization patch actively degrades rendering performance.
+**Action:** Always maintain the exact attributes unless explicitly instructed to change them in optimization contexts.

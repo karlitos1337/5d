@@ -63,33 +63,39 @@ const RepositoryAnalysis = () => {
     }));
   };
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'overview', label: 'Übersicht' },
     { id: 'methodology', label: 'Methodik' },
     { id: 'findings', label: 'Ergebnisse' },
     { id: 'improvements', label: 'Verbesserungen' },
     { id: 'architecture', label: 'Architektur' },
     { id: 'conclusion', label: 'Fazit' }
-  ];
+  ], []);
 
   useEffect(() => {
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
+    // ⚡ Bolt: Cache DOM elements to avoid continuous getElementById lookups during scroll
+    const cachedSections = navItems.map(item => ({
+      id: item.id,
+      element: document.getElementById(item.id)
+    })).filter(sec => sec.element);
+
     let ticking = false;
 
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const sections = navItems.map(item => document.getElementById(item.id));
           const scrollPosition = window.scrollY + 100;
 
-          for (const section of sections) {
-            if (section) {
-              const offsetTop = section.offsetTop;
-              const height = section.offsetHeight;
+          for (const section of cachedSections) {
+            const { id, element } = section;
+            if (element) {
+              const offsetTop = element.offsetTop;
+              const height = element.offsetHeight;
               if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                setActiveSection(section.id);
+                setActiveSection(id);
                 break;
               }
             }
@@ -103,7 +109,7 @@ const RepositoryAnalysis = () => {
     // ⚡ Bolt: Add { passive: true } to allow the browser to scroll immediately without waiting for JS execution.
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
