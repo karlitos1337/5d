@@ -73,6 +73,12 @@ const RepositoryAnalysis = () => {
   ];
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = navItems.map(item => ({
+      id: item.id,
+      element: document.getElementById(item.id)
+    })).filter(sec => sec.element);
+
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
@@ -81,17 +87,13 @@ const RepositoryAnalysis = () => {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const sections = navItems.map(item => document.getElementById(item.id));
           const scrollPosition = window.scrollY + 100;
 
-          for (const section of sections) {
-            if (section) {
-              const offsetTop = section.offsetTop;
-              const height = section.offsetHeight;
-              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                setActiveSection(section.id);
-                break;
-              }
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const section = cachedSections[i].element;
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(cachedSections[i].id);
+              break;
             }
           }
           ticking = false;
