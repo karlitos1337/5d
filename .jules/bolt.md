@@ -44,3 +44,7 @@
 ## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
 **Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
 **Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
+
+## 2024-04-19 - Scroll Handler DOM Query Bottleneck
+**Learning:** React scroll event handlers triggering `document.getElementById` continuously within a `requestAnimationFrame` loop cause measurable main-thread blocking and layout thrashing, even if throttled.
+**Action:** Always map and cache required DOM elements outside the scroll handler (e.g., in a `useEffect` closure) so the scroll loop only performs fast object lookups instead of live DOM queries.
