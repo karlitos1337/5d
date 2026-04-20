@@ -15,3 +15,7 @@
 **Vulnerability:** The `ProxyHandler` in `docs/5d-map/owid_proxy.py` read the entire upstream response into memory at once without any size limits, opening the server to DoS attacks. It also leaked raw exception strings to the client in the 502 error response.
 **Learning:** Always use chunked reading and enforce `MAX_RESPONSE_SIZE` when proxying external data. Never expose raw internal exceptions or stack traces to the client, as they may leak sensitive information. Always add security headers like `X-Content-Type-Options: nosniff`.
 **Prevention:** Implemented chunked reading with a 10MB limit and generic error messages in `docs/5d-map/owid_proxy.py`. Added the `X-Content-Type-Options: nosniff` header.
+## 2025-05-18 - [Command Injection via shell=True]
+**Vulnerability:** `subprocess.check_output` was used with `shell=True` and string arguments, which introduces a critical command injection vulnerability if the input is influenced by malicious data.
+**Learning:** Always use `subprocess` functions with a list of arguments and `shell=False` (or omit it) to prevent command injection.
+**Prevention:** Replaced `shell=True` with a list of arguments for `subprocess.check_output`.
