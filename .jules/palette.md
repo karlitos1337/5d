@@ -23,3 +23,7 @@
 ## 2025-04-03 - [Accessibility] Conditional Focus Ring Offsets
 **Learning:** When adding `focus-visible` ring styles to interactive elements in a React application that manually manages dark mode via state (e.g., `const [darkMode, setDarkMode] = useState(false)`), using standard Tailwind `ring-offset` classes can cause contrast issues. Standard `dark:` prefixes do not work if the application does not utilize the standard class-based dark mode implementation.
 **Action:** Always verify the dark mode implementation strategy of the application. If it relies on a manual state variable, dynamically apply the appropriate `focus-visible:ring-offset-*` color using conditional template literals (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) to ensure proper contrast and accessibility for keyboard navigation.
+
+## 2024-05-25 - [Accessibility] Consistent Skip Links in React Apps
+**Learning:** `docs/analysis` lacked a "skip to main content" link entirely, despite its `<main>` tag being updated with `id="main-content"` previously.
+**Action:** When auditing React SPA dashboards, explicitly verify both parts: the `<main id="main-content" tabIndex="-1" ...>` target exists AND the `<a href="#main-content" ...>` skip link is actually present at the beginning of the application's layout.
