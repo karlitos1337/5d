@@ -78,6 +78,12 @@ const AppComponent = () => {
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
+
     let ticking = false;
 
     const handleScroll = () => {
@@ -85,14 +91,14 @@ const AppComponent = () => {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
           
-          for (const section of sections) {
-            const element = document.getElementById(section.id);
+          for (const cached of cachedSections) {
+            const element = cached.element;
             if (element) {
               const offsetTop = element.offsetTop;
               const height = element.offsetHeight;
 
               if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                setActiveSection(section.id);
+                setActiveSection(cached.id);
                 break;
               }
             }
