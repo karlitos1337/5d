@@ -41,6 +41,7 @@ async function fetchWithCache(key, fetcher) {
   }
   try {
     const data = await fetcher();
+    const currentCache = loadCache(); // Re-read to avoid race conditions
     const currentCache = loadCache(); // Re-read to prevent race condition during parallel fetches
     currentCache[key] = { data, timestamp: now };
     saveCache(currentCache);
@@ -54,6 +55,7 @@ async function fetchWithCache(key, fetcher) {
 export async function fetchAllData() {
   const result = {};
 
+  // Parallele Abfrage statischer Dateien (⚡ Bolt Optimization)
   // Parallelize independent static/local data fetches
   const [schools, countries, validation, baseline] = await Promise.all([
     fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
