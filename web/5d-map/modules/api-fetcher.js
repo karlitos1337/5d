@@ -42,6 +42,7 @@ async function fetchWithCache(key, fetcher) {
   try {
     const data = await fetcher();
     const currentCache = loadCache(); // Re-read to avoid race conditions
+    const currentCache = loadCache(); // Re-read to prevent race condition during parallel fetches
     currentCache[key] = { data, timestamp: now };
     saveCache(currentCache);
     return data;
@@ -55,12 +56,14 @@ export async function fetchAllData() {
   const result = {};
 
   // Parallele Abfrage statischer Dateien (⚡ Bolt Optimization)
+  // Parallelize independent static/local data fetches
   const [schools, countries, validation, baseline] = await Promise.all([
     fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
     fetchWithCache('countries', () => fetchJSON('./data/countries.json')).catch(() => []),
     fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
     fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null)
   ]);
+
   result.schools = schools;
 
   // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
@@ -176,9 +179,12 @@ export async function fetchAllData() {
     return map;
   };
 
-  const wgi_rl_raw = await fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({}));
-  const wgi_va_raw = await fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({}));
-  const wgi_ge_raw = await fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}));
+  // Parallelize WGI Proxies fetching
+  const [wgi_rl_raw, wgi_va_raw, wgi_ge_raw] = await Promise.all([
+    fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({})),
+    fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({})),
+    fetchWithCache('wgi_ge_est', () => wgiFetch('GE.EST')).catch(() => ({}))
+  ]);
 
   const normalizeWGI = (m) => {
     const out = {};
