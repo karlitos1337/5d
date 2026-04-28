@@ -83,6 +83,8 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
+    // to avoid continuous document.getElementById calls inside requestAnimationFrame.
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
