@@ -48,3 +48,6 @@
 ## 2024-05-24 - Async Waterfall in 5d-map initialization
 **Learning:** Sequential `fetchWithCache` calls in `web/5d-map/modules/api-fetcher.js` (like fetching schools, countries, validation, etc.) created an async waterfall, delaying map rendering. However, simply using `Promise.all` causes `localStorage` race conditions because `fetchWithCache` reads the cache at start, then awaits network, then writes. If multiple run in parallel, earlier writes are overwritten.
 **Action:** Group independent API fetches using `Promise.all` but fix the race condition in the read-modify-write cache utility by re-reading the cache from `localStorage` immediately before writing the updated data.
+## 2026-04-03 - React Scroll Event Throttling Cache
+**Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
+**Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
