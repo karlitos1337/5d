@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Chart.js Plugin for annotations -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
@@ -540,6 +541,8 @@
 
     <script>
         // --- GEMINI AI INTEGRATION ---
+
+        // Retrieve API key from local storage
         // Retrieve auth token from local storage
         let geminiAuth = '';
         const storedToken = localStorage.getItem('geminiAuthToken');
@@ -623,6 +626,7 @@
             const input = document.getElementById('serviceTokenInput').value.trim();
             if (input) { 
                 serviceToken = input;
+                // Store directly to localStorage without security theater encryption
                 // Save to localStorage
                 localStorage.setItem('geminiServiceToken', serviceToken);
                 updateApiStatus(); 
