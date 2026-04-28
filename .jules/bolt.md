@@ -48,6 +48,9 @@
 **Learning:** Continuously querying the DOM with document.getElementById inside a scroll event handler's requestAnimationFrame loop causes unnecessary overhead and layout thrashing.
 **Action:** Map and cache DOM elements outside the scroll handler and use the cached references inside the requestAnimationFrame callback to optimize scroll tracking.
 
+## 2024-06-03 - Promise.all and localStorage Race Conditions
+**Learning:** Using `Promise.all` to fetch multiple items concurrently that are then cached in `localStorage` can lead to race conditions where one concurrent process overwrites the cache of another if the cache object is read at the start of the promise but written at the end.
+**Action:** Always re-read the `localStorage` cache immediately before updating it inside concurrent async functions (e.g., `fetchWithCache`).
 ## 2024-05-24 - Async Waterfall in 5d-map initialization
 **Learning:** Sequential `fetchWithCache` calls in `web/5d-map/modules/api-fetcher.js` (like fetching schools, countries, validation, etc.) created an async waterfall, delaying map rendering. However, simply using `Promise.all` causes `localStorage` race conditions because `fetchWithCache` reads the cache at start, then awaits network, then writes. If multiple run in parallel, earlier writes are overwritten.
 **Action:** Group independent API fetches using `Promise.all` but fix the race condition in the read-modify-write cache utility by re-reading the cache from `localStorage` immediately before writing the updated data.

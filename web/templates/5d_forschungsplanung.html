@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Chart.js Plugin for annotations -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
@@ -138,6 +139,8 @@
                     </div>
                     <div class="flex justify-between items-center mb-6">
                         <div class="text-xs text-indigo-200 flex items-center gap-2">
+                            <span id="geminiAuthStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span id="geminiAuthText">Kein Token</span>
                             <span id="appConfigStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
                             <span id="appConfigText">Kein Token</span>
                             <span id="serviceTokenStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
@@ -505,6 +508,15 @@
 
     </script>
 
+    <!-- Auth Modal -->
+    <div id="geminiAuthModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
+            <p class="text-sm text-slate-600 mb-4">Zum 5D-Coach brauchst du ein Google Gemini Token.</p>
+            <input type="password" id="geminiAuthInput" placeholder="Token hier" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
+                <button onclick="saveAuthToken()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
     <!-- API Key Modal -->
     <div id="appConfigModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
@@ -523,12 +535,25 @@
                 <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
                 <button onclick="saveServiceToken()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
             </div>
-            <p class="text-xs text-slate-400 mt-4 text-center">Der Key wird lokal im Browser gespeichert.</p>
+            <p class="text-xs text-slate-400 mt-4 text-center">Das Token wird lokal im Browser gespeichert.</p>
         </div>
     </div>
 
     <script>
         // --- GEMINI AI INTEGRATION ---
+
+        // Retrieve API key from local storage
+        // Retrieve auth token from local storage
+        let geminiAuth = '';
+        const storedToken = localStorage.getItem('geminiAuthToken');
+        if (storedToken) {
+            geminiAuth = storedToken || '';
+        }
+        function updateApiStatus() {
+            const statusDot = document.getElementById('geminiAuthStatus');
+            const statusText = document.getElementById('geminiAuthText');
+            const btn = document.getElementById('generateBtn');
+            if (geminiAuth && geminiAuth.length > 10) {
         // Retrieve API key from local storage
         // Fallback to old key if new key is missing, to prevent UX regression
         let appConfigVal = localStorage.getItem('appConfigVal');
@@ -567,11 +592,21 @@
             } else {
                 statusDot.classList.add('bg-red-500');
                 statusDot.classList.remove('bg-emerald-400');
-                statusText.innerText = 'Key fehlt';
+                statusText.innerText = 'Token fehlt';
                 btn.disabled = true;
             }
         }
         function openModal() {
+            document.getElementById('geminiAuthModal').classList.remove('hidden');
+            document.getElementById('geminiAuthInput').value = geminiAuth;
+        }
+        function closeModal() { document.getElementById('geminiAuthModal').classList.add('hidden'); }
+        function saveAuthToken() {
+            const input = document.getElementById('geminiAuthInput').value.trim();
+            if (input) { 
+                geminiAuth = input;
+                // Store directly in local storage
+                localStorage.setItem('geminiAuthToken', geminiAuth);
             document.getElementById('appConfigModal').classList.remove('hidden');
             document.getElementById('appConfigInput').value = localConfigState;
         }
@@ -591,6 +626,7 @@
             const input = document.getElementById('serviceTokenInput').value.trim();
             if (input) { 
                 serviceToken = input;
+                // Store directly to localStorage without security theater encryption
                 // Save to localStorage
                 localStorage.setItem('geminiServiceToken', serviceToken);
                 updateApiStatus(); 
@@ -609,6 +645,7 @@
             loadingSpinner.classList.remove('hidden');
             aiResponse.innerHTML = '';
             const systemContext = `Du bist der "5D-Resonanz-Coach". Analysiere Situationen basierend auf dem 5D-Intelligenz-Modell. Gib empathische, systemische, wissenschaftlich fundierte Ratschläge. Antworte in Markdown.`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiAuth}`;
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${localConfigState}`;
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${serviceToken}`;
             try {
