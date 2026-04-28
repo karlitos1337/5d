@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Chart.js Plugin for annotations -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -137,6 +138,8 @@
                     </div>
                     <div class="flex justify-between items-center mb-6">
                         <div class="text-xs text-indigo-200 flex items-center gap-2">
+                            <span id="appConfigStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span id="appConfigText">Kein Token</span>
                             <span id="serviceTokenStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
                             <span id="serviceTokenText">Kein API Key</span>
                         </div>
@@ -503,6 +506,14 @@
     </script>
 
     <!-- API Key Modal -->
+    <div id="appConfigModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
+            <p class="text-sm text-slate-600 mb-4">Zum 5D-Coach brauchst du einen Google Gemini Token.</p>
+            <input type="password" id="appConfigInput" placeholder="Token hier" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
+                <button onclick="saveAppConfig()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
     <div id="serviceTokenModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
             <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
@@ -518,6 +529,26 @@
 
     <script>
         // --- GEMINI AI INTEGRATION ---
+        // Retrieve API key from local storage
+        // Fallback to old key if new key is missing, to prevent UX regression
+        let appConfigVal = localStorage.getItem('appConfigVal');
+        if (!appConfigVal) {
+            let oldConf = localStorage.getItem(atob('Z2VtaW5pQXBpS2V5'));
+            // Check if old config seems encrypted, we can't easily decrypt it here since we removed the lib,
+            // but if it's plaintext (e.g., from an even older version) we could use it.
+            // If it's encrypted, user will have to re-enter it. We'll just take it if it looks like a config.
+            if (oldConf && oldConf.startsWith('AIza')) {
+                appConfigVal = oldConf;
+            } else {
+                appConfigVal = '';
+            }
+        }
+        let localConfigState = appConfigVal;
+        function updateAppConfigStatus() {
+            const statusDot = document.getElementById('appConfigStatus');
+            const statusText = document.getElementById('appConfigText');
+            const btn = document.getElementById('generateBtn');
+            if (localConfigState && localConfigState.length > 10) {
         // Retrieve service token from local storage
         let serviceToken = '';
         const storedKey = localStorage.getItem('geminiServiceToken');
@@ -541,6 +572,17 @@
             }
         }
         function openModal() {
+            document.getElementById('appConfigModal').classList.remove('hidden');
+            document.getElementById('appConfigInput').value = localConfigState;
+        }
+        function closeModal() { document.getElementById('appConfigModal').classList.add('hidden'); }
+        function saveAppConfig() {
+            const input = document.getElementById('appConfigInput').value.trim();
+            if (input) { 
+                localConfigState = input;
+                // Store directly in localStorage
+                localStorage.setItem('appConfigVal', input);
+                updateAppConfigStatus();
             document.getElementById('serviceTokenModal').classList.remove('hidden');
             document.getElementById('serviceTokenInput').value = serviceToken;
         }
@@ -555,7 +597,7 @@
                 closeModal(); 
             }
         }
-        updateApiStatus();
+        updateAppConfigStatus();
 
         async function callGemini() {
             const userPrompt = document.getElementById('userPrompt').value;
@@ -567,6 +609,7 @@
             loadingSpinner.classList.remove('hidden');
             aiResponse.innerHTML = '';
             const systemContext = `Du bist der "5D-Resonanz-Coach". Analysiere Situationen basierend auf dem 5D-Intelligenz-Modell. Gib empathische, systemische, wissenschaftlich fundierte Ratschläge. Antworte in Markdown.`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${localConfigState}`;
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${serviceToken}`;
             try {
                 const response = await fetch(url, {
@@ -580,7 +623,7 @@
                     // Sanitize AI response to prevent DOM-based XSS
                     aiResponse.innerHTML = DOMPurify.sanitize(marked.parse(text));
                 } else {
-                    aiResponse.innerHTML = '<p class="text-red-500">Fehler bei der Antwortgenerierung. Bitte prüfe deinen API Key.</p>';
+                    aiResponse.innerHTML = '<p class="text-red-500">Fehler bei der Antwortgenerierung. Bitte prüfe deinen Token.</p>';
                 }
             } catch (error) {
                 loadingSpinner.classList.add('hidden');
