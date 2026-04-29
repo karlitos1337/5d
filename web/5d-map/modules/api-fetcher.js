@@ -41,10 +41,7 @@ async function fetchWithCache(key, fetcher) {
   }
   try {
     const data = await fetcher();
-    const updatedCache = loadCache();
-    updatedCache[key] = { data, timestamp: now };
-    saveCache(updatedCache);
-    const currentCache = loadCache(); // Re-read to avoid race conditions
+    // ⚡ Bolt Optimization: Removed redundant cache read/write pair here to halve synchronous localStorage overhead.
     const currentCache = loadCache(); // Re-read to prevent race condition during parallel fetches
     currentCache[key] = { data, timestamp: now };
     saveCache(currentCache);

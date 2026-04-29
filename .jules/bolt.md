@@ -57,3 +57,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-18 - Missing Performance Comments
+**Learning:** During code review, it was noted that while the code optimization itself (removing redundant localStorage writes) was fully implemented, the explicit persona constraint to "Add comments explaining the optimization" within the source code was initially missed.
+**Action:** Always ensure that source code comments explicitly documenting the optimization ("⚡ Bolt Optimization: ...") are included in the diff alongside the actual logic change before requesting review or submitting.
