@@ -136,7 +136,17 @@ const App = () => {
         style={{ scaleX }}
       />
 
+
+      {/* Skip Link for Accessibility */}
+      <a
+        href="#main-content"
+        className={`absolute -top-10 left-0 bg-blue-500 text-white p-2 z-[60] focus:top-0 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200 rounded-br-lg`}
+      >
+        Zum Inhalt springen
+      </a>
+
       {/* Floating Header */}
+
       <header className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b transition-colors duration-300 ${
         darkMode ? 'bg-gray-900/80 border-gray-700' : 'bg-white/80 border-gray-200'
       }`}>
