@@ -24,6 +24,10 @@ body {
   outline-offset: 2px;
 }
 
+#main-content:focus {
+  outline: none;
+}
+
 /* Skip Link für Barrierefreiheit */
 .skip-link {
   position: absolute;
