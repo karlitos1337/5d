@@ -57,3 +57,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2024-05-01 - Redundant Synchronous JSON Parsing in fetchWithCache
+**Learning:** In `web/5d-map/modules/api-fetcher.js`, `loadCache()` reads from localStorage and synchronously calls `JSON.parse`. When updating the cache after an API call, `loadCache` and `saveCache` were mistakenly called three times. For large caches (like MBs of datasets), this blocks the main thread severely and unnecessarily.
+**Action:** Always inspect caching functions for redundant read/write operations, especially if they execute synchronous expensive parsing, and consolidate them into a single read-modify-write operation right before the actual update.
