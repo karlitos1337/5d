@@ -53,6 +53,9 @@ async function fetchWithCache(key, fetcher) {
     saveCache(currentCache);
     return data;
   } catch (e) {
+    const latestCache = loadCache();
+    const latestEntry = latestCache[key];
+    if (latestEntry) return latestEntry.data;
     if (entry) return entry.data;
     throw e;
   }
