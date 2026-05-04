@@ -140,6 +140,7 @@
                     <div class="flex justify-between items-center mb-6">
                         <div class="text-xs text-indigo-200 flex items-center gap-2">
                             <span id="geminiAuthStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span id="geminiAuthText">Kein API Key</span>
                             <span id="geminiAuthText">Kein Token</span>
                             <span id="appConfigStatus" class="w-2 h-2 rounded-full bg-red-500"></span>
                             <span id="appConfigText">Kein Token</span>
@@ -518,6 +519,14 @@
                 <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
                 <button onclick="saveAuthToken()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
     <!-- API Key Modal -->
+    <div id="geminiAuthModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
+            <p class="text-sm text-slate-600 mb-4">Zum 5D-Coach brauchst du einen Google Gemini API Key.</p>
+            <input type="password" id="geminiAuthInput" placeholder="API Key hier" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 text-slate-500 hover:text-slate-700">Abbrechen</button>
+                <button onclick="saveAuthToken()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold">Speichern</button>
     <div id="appConfigModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
             <h3 class="text-xl font-bold text-slate-900 mb-4">✨ Aktiviere die 5D-KI</h3>
@@ -543,6 +552,13 @@
         // --- GEMINI AI INTEGRATION ---
 
         // Retrieve API key from local storage
+        let geminiAuth = localStorage.getItem('geminiAuthToken') || '';
+
+        function updateApiStatus() {
+            const statusDot = document.getElementById('geminiAuthStatus');
+            const statusText = document.getElementById('geminiAuthText');
+            const btn = document.getElementById('generateBtn');
+            if (geminiAuth && geminiAuth.length > 10) {
         // Retrieve auth token from local storage
         let geminiAuth = '';
         const storedToken = localStorage.getItem('geminiAuthToken');
@@ -599,6 +615,13 @@
         function openModal() {
             document.getElementById('geminiAuthModal').classList.remove('hidden');
             document.getElementById('geminiAuthInput').value = geminiAuth;
+        }
+        function closeModal() { document.getElementById('geminiAuthModal').classList.add('hidden'); }
+        function saveAuthToken() {
+            const input = document.getElementById('geminiAuthInput').value.trim();
+            if (input) { 
+                geminiAuth = input;
+                localStorage.setItem('geminiAuthToken', geminiAuth);
         }
         function closeModal() { document.getElementById('geminiAuthModal').classList.add('hidden'); }
         function saveAuthToken() {
