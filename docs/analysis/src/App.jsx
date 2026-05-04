@@ -221,7 +221,13 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
+      <main
+        id="main-content"
+        tabIndex="-1"
+        className={`pt-16 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+          darkMode ? 'focus:ring-offset-gray-900' : 'focus:ring-offset-white'
+        }`}
+      >
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
