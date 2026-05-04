@@ -122,6 +122,13 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className={`absolute -top-40 left-0 bg-blue-600 text-white px-4 py-2 z-[60] font-bold transition-all focus:top-0 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded-br-lg ${
+          darkMode ? 'focus:ring-offset-gray-900' : 'focus:ring-offset-white'
+        }`}
+      >
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-0 focus:left-0 focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold">
         Zum Hauptinhalt springen
       </a>
