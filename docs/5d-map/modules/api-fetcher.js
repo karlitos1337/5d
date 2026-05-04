@@ -44,6 +44,9 @@ async function fetchWithCache(key, fetcher) {
     cache = loadCache();
     cache[key] = { data, timestamp: now };
     saveCache(cache);
+    const currentCache = loadCache(); // Re-read to avoid race conditions
+    currentCache[key] = { data, timestamp: now };
+    saveCache(currentCache);
     return data;
   } catch (e) {
     if (entry) return entry.data;
@@ -53,18 +56,15 @@ async function fetchWithCache(key, fetcher) {
 
 export async function fetchAllData() {
   const result = {};
-  // Schulen (statisch, lokal)
-  result.schools = await fetchWithCache('schools', () => fetchJSON('./data/schools.json'))
-    .catch(() => []);
-  // Länder-Zentroiddaten (lokal)
-  const countries = await fetchWithCache('countries', () => fetchJSON('./data/countries.json'))
-    .catch(() => []);
-  // Validierungsdaten (lokal)
-  const validation = await fetchWithCache('validation', () => fetchJSON('./data/validation.json'))
-    .catch(() => ({ validatedISO3: [], items: [] }));
-  // Baseline Snapshot (feste Ausgangswerte)
-  const baseline = await fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json'))
-    .catch(() => null);
+
+  // Parallele Abfrage statischer Dateien (⚡ Bolt Optimization)
+  const [schools, countries, validation, baseline] = await Promise.all([
+    fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
+    fetchWithCache('countries', () => fetchJSON('./data/countries.json')).catch(() => []),
+    fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
+    fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null)
+  ]);
+  result.schools = schools;
 
   // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
   const depressionMap = await fetchWithCache('owid_depression', async () => {
