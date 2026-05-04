@@ -33,9 +33,9 @@ async function fetchJSON(url) {
 }
 
 async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
+  let cache = loadCache();
   const now = Date.now();
-  const entry = cache[key];
+  let entry = cache[key];
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
     return entry.data;
   }
@@ -45,9 +45,19 @@ async function fetchWithCache(key, fetcher) {
     cache = loadCache();
     cache[key] = { data, timestamp: now };
     saveCache(cache);
+    const updatedCache = loadCache();
+    updatedCache[key] = { data, timestamp: now };
+    saveCache(updatedCache);
+    const currentCache = loadCache(); // Re-read to avoid race conditions
+    const currentCache = loadCache(); // Re-read to prevent race condition during parallel fetches
+    currentCache[key] = { data, timestamp: now };
+    saveCache(currentCache);
     return data;
   } catch (e) {
-    if (entry) return entry.data; // Fallback auf alten Cache
+    const latestCache = loadCache();
+    const latestEntry = latestCache[key];
+    if (latestEntry) return latestEntry.data;
+    if (entry) return entry.data;
     throw e;
   }
 }
@@ -56,12 +66,18 @@ export async function fetchAllData() {
   const result = {};
   // ⚡ Bolt Optimization: Batch local data fetches to reduce load time
   const [schoolsData, countries, validation, baseline] = await Promise.all([
+
+  // Parallele Abfrage statischer Dateien (⚡ Bolt Optimization)
+  // Parallelize independent static/local data fetches
+  const [schools, countries, validation, baseline] = await Promise.all([
     fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
     fetchWithCache('countries', () => fetchJSON('./data/countries.json')).catch(() => []),
     fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
     fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null)
   ]);
   result.schools = schoolsData;
+
+  result.schools = schools;
 
   // ⚡ Bolt Optimization: Batch heavy API requests
   const [depressionMap, depressionSeries, dropoutMap, dropoutSeries] = await Promise.all([
@@ -173,6 +189,7 @@ export async function fetchAllData() {
   };
 
   // ⚡ Bolt Optimization: Batch WGI requests
+  // Parallelize WGI Proxies fetching
   const [wgi_rl_raw, wgi_va_raw, wgi_ge_raw] = await Promise.all([
     fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({})),
     fetchWithCache('wgi_va_est', () => wgiFetch('VA.EST')).catch(() => ({})),
