@@ -586,7 +586,15 @@
             try {
                 const response = await fetch(url, {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: systemContext + "\n\nUSER EINGABE:\n\"\"\"\n" + userPrompt + "\n\"\"\"" }] }] })
+                    body: JSON.stringify({
+                        systemInstruction: {
+                            parts: [{ text: systemContext }]
+                        },
+                        contents: [{
+                            role: 'user',
+                            parts: [{ text: userPrompt }]
+                        }]
+                    })
                 });
                 const data = await response.json();
                 loadingSpinner.classList.add('hidden');
