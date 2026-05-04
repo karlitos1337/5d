@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 
@@ -63,35 +63,36 @@ const RepositoryAnalysis = () => {
     }));
   };
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'overview', label: 'Übersicht' },
     { id: 'methodology', label: 'Methodik' },
     { id: 'findings', label: 'Ergebnisse' },
     { id: 'improvements', label: 'Verbesserungen' },
     { id: 'architecture', label: 'Architektur' },
     { id: 'conclusion', label: 'Fazit' }
-  ];
+  ], []);
 
   useEffect(() => {
-    // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
-    // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
-    // blocking during continuous scrolling.
+    // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
+    // to avoid continuous document.getElementById calls inside requestAnimationFrame.
+    const cachedSections = navItems.map(item => ({
+      id: item.id,
+      element: document.getElementById(item.id)
+    })).filter(item => item.element);
+
     let ticking = false;
 
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const sections = navItems.map(item => document.getElementById(item.id));
           const scrollPosition = window.scrollY + 100;
 
-          for (const section of sections) {
-            if (section) {
-              const offsetTop = section.offsetTop;
-              const height = section.offsetHeight;
-              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                setActiveSection(section.id);
-                break;
-              }
+          for (const section of cachedSections) {
+            const offsetTop = section.element.offsetTop;
+            const height = section.element.offsetHeight;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+              setActiveSection(section.id);
+              break;
             }
           }
           ticking = false;
@@ -100,10 +101,9 @@ const RepositoryAnalysis = () => {
       }
     };
 
-    // ⚡ Bolt: Add { passive: true } to allow the browser to scroll immediately without waiting for JS execution.
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
