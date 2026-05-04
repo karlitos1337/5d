@@ -33,14 +33,17 @@ async function fetchJSON(url) {
 }
 
 async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
+  let cache = loadCache();
   const now = Date.now();
-  const entry = cache[key];
+  let entry = cache[key];
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
     return entry.data;
   }
   try {
     const data = await fetcher();
+    cache = loadCache();
+    cache[key] = { data, timestamp: now };
+    saveCache(cache);
     const updatedCache = loadCache();
     updatedCache[key] = { data, timestamp: now };
     saveCache(updatedCache);
@@ -50,7 +53,10 @@ async function fetchWithCache(key, fetcher) {
     saveCache(currentCache);
     return data;
   } catch (e) {
-    if (entry) return entry.data; // Fallback auf alten Cache
+    const latestCache = loadCache();
+    const latestEntry = latestCache[key];
+    if (latestEntry) return latestEntry.data;
+    if (entry) return entry.data;
     throw e;
   }
 }
