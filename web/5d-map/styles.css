@@ -82,6 +82,7 @@ body {
 }
 
 main { height: calc(100vh - 132px); }
+#main-content:focus { outline: none; }
 #map { width: 100%; height: 100%; }
 
 .app-footer {
