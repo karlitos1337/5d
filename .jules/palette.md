@@ -25,5 +25,5 @@
 **Action:** Always verify the dark mode implementation strategy of the application. If it relies on a manual state variable, dynamically apply the appropriate `focus-visible:ring-offset-*` color using conditional template literals (e.g., `${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'}`) to ensure proper contrast and accessibility for keyboard navigation.
 
 ## 2024-05-25 - [Accessibility] Consistent Skip Links in React Apps
-**Learning:** `docs/analysis` lacked a "skip to main content" link entirely, despite its `<main>` tag being updated with `id="main-content"` previously.
-**Action:** When auditing React SPA dashboards, explicitly verify both parts: the `<main id="main-content" tabIndex="-1" ...>` target exists AND the `<a href="#main-content" ...>` skip link is actually present at the beginning of the application's layout.
+**Learning:** `docs/analysis` lacked a complete "skip to main content" implementation: the `<a href="#main-content" ...>` skip link was missing, and the corresponding `<main id="main-content" tabIndex="-1" ...>` target also had to be added so the interaction would work correctly for keyboard and assistive technology users.
+**Action:** When auditing React SPA dashboards, explicitly verify both parts are implemented together: the `<main id="main-content" tabIndex="-1" ...>` target exists AND the `<a href="#main-content" ...>` skip link is present at the beginning of the application's layout.
