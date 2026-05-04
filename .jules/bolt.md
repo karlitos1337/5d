@@ -44,3 +44,16 @@
 ## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
 **Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
 **Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
+## 2026-04-14 - Scroll Event Handler Performance
+**Learning:** Continuously querying the DOM with document.getElementById inside a scroll event handler's requestAnimationFrame loop causes unnecessary overhead and layout thrashing.
+**Action:** Map and cache DOM elements outside the scroll handler and use the cached references inside the requestAnimationFrame callback to optimize scroll tracking.
+
+## 2024-06-03 - Promise.all and localStorage Race Conditions
+**Learning:** Using `Promise.all` to fetch multiple items concurrently that are then cached in `localStorage` can lead to race conditions where one concurrent process overwrites the cache of another if the cache object is read at the start of the promise but written at the end.
+**Action:** Always re-read the `localStorage` cache immediately before updating it inside concurrent async functions (e.g., `fetchWithCache`).
+## 2024-05-24 - Async Waterfall in 5d-map initialization
+**Learning:** Sequential `fetchWithCache` calls in `web/5d-map/modules/api-fetcher.js` (like fetching schools, countries, validation, etc.) created an async waterfall, delaying map rendering. However, simply using `Promise.all` causes `localStorage` race conditions because `fetchWithCache` reads the cache at start, then awaits network, then writes. If multiple run in parallel, earlier writes are overwritten.
+**Action:** Group independent API fetches using `Promise.all` but fix the race condition in the read-modify-write cache utility by re-reading the cache from `localStorage` immediately before writing the updated data.
+## 2026-04-03 - React Scroll Event Throttling Cache
+**Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
+**Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.

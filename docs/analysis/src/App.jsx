@@ -83,9 +83,18 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
+    // to avoid continuous document.getElementById calls inside requestAnimationFrame.
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
+
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
+
     let ticking = false;
 
     const handleScroll = () => {
@@ -93,10 +102,10 @@ const App = () => {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
 
-          for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i].id);
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const section = cachedSections[i].element;
             if (section && scrollPosition >= section.offsetTop) {
-              setActiveSection(sections[i].id);
+              setActiveSection(cachedSections[i].id);
               break;
             }
           }
@@ -113,6 +122,9 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-0 focus:left-0 focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold">
+        Zum Hauptinhalt springen
+      </a>
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
@@ -120,6 +132,7 @@ const App = () => {
       />
 
       {/* Floating Header */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-blue-600 focus:font-semibold">Zum Hauptinhalt springen</a>
       <header className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b transition-colors duration-300 ${
         darkMode ? 'bg-gray-900/80 border-gray-700' : 'bg-white/80 border-gray-200'
       }`}>
@@ -135,7 +148,8 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium transition-colors duration-200 ${
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -148,18 +162,28 @@ const App = () => {
 
             <div className="flex items-center space-x-4">
               <button
+                aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 }`}
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
 
               <button
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 }`}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -180,7 +204,7 @@ const App = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
@@ -195,7 +219,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -261,12 +285,12 @@ const App = () => {
 
               <div>
                 {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
-                <img loading="lazy"
+                <img
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
-                    loading="lazy"
+
                 />
                 {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
               </div>
@@ -386,12 +410,12 @@ const App = () => {
 
             <div className="mb-8">
               {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
-                <img loading="lazy"
+                <img
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
-                  loading="lazy"
+
               />
               {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
             </div>
