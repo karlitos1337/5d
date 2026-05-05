@@ -119,7 +119,7 @@ if aArguments.ubb:
 
     from tldextract import extract
 
-    sOutput = subprocess.check_output("bbrecon get programs --type web -o json", shell=True)
+    sOutput = subprocess.check_output(["bbrecon", "get", "programs", "--type", "web", "-o", "json"])
     fCsvInScope = open(
         os.path.dirname(os.path.realpath(sys.argv[0])) + "/sitedorks-bbrecon-inscope.csv",
         "w",
