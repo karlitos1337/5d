@@ -95,6 +95,7 @@ const App = () => {
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
+    // ⚡ Bolt: Cache DOM elements to avoid continuous getElementById lookups during scroll
 
     // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
     const cachedSections = sections.map(sec => ({
