@@ -73,6 +73,11 @@ const RepositoryAnalysis = () => {
   ];
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = navItems.map(item => ({
+      id: item.id,
+      element: document.getElementById(item.id)
+    })).filter(sec => sec.element);
     // ⚡ Bolt: Cache DOM elements to avoid getElementById during scroll
     const cachedSections = navItems.map(item => ({
       id: item.id,
@@ -89,6 +94,10 @@ const RepositoryAnalysis = () => {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 100;
 
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const section = cachedSections[i].element;
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(cachedSections[i].id);
           for (const sectionObj of cachedSections) {
             const section = sectionObj.element;
             const offsetTop = section.offsetTop;

@@ -83,6 +83,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
     // ⚡ Bolt: Cache DOM elements to avoid getElementById during scroll
     const cachedSections = sections.map(sec => ({
       id: sec.id,
