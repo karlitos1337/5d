@@ -78,6 +78,11 @@ const RepositoryAnalysis = () => {
       id: item.id,
       element: document.getElementById(item.id)
     })).filter(sec => sec.element);
+    // ⚡ Bolt: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = navItems.map(item => ({
+      id: item.id,
+      element: document.getElementById(item.id)
+    })).filter(item => item.element);
 
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
@@ -93,6 +98,12 @@ const RepositoryAnalysis = () => {
             const section = cachedSections[i].element;
             if (section && scrollPosition >= section.offsetTop) {
               setActiveSection(cachedSections[i].id);
+          for (const sectionObj of cachedSections) {
+            const section = sectionObj.element;
+            const offsetTop = section.offsetTop;
+            const height = section.offsetHeight;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+              setActiveSection(sectionObj.id);
               break;
             }
           }
@@ -117,6 +128,9 @@ const RepositoryAnalysis = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-0 focus:left-0 focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold">
+        Zum Hauptinhalt springen
+      </a>
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
         style={{ scaleX }}
@@ -138,7 +152,7 @@ const RepositoryAnalysis = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium transition-colors duration-200 ${
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                     activeSection === item.id 
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -151,18 +165,23 @@ const RepositoryAnalysis = () => {
             
             <div className="flex items-center space-x-4">
               <button
+                aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                  darkMode ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600 focus-visible:ring-offset-gray-900' : 'bg-gray-200 text-gray-700 hover:bg-gray-300 focus-visible:ring-offset-white'
                 }`}
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               
               <button
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                  darkMode ? 'bg-gray-700 text-white hover:bg-gray-600 focus-visible:ring-offset-gray-900' : 'bg-gray-200 text-gray-700 hover:bg-gray-300 focus-visible:ring-offset-white'
                 }`}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -178,7 +197,7 @@ const RepositoryAnalysis = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block px-3 py-2 text-base font-medium w-full text-left rounded-md transition-colors duration-200 ${
+                  className={`block px-3 py-2 text-base font-medium w-full text-left rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                     activeSection === item.id 
                       ? (darkMode ? 'text-blue-400 bg-gray-700' : 'text-blue-600 bg-gray-200')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200')
@@ -192,7 +211,7 @@ const RepositoryAnalysis = () => {
         )}
       </header>
 
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Part 1 of Component - First sections */}
         {/* Continue in next file... */}
       </main>

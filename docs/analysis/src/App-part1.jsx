@@ -76,6 +76,8 @@ const AppComponent = () => {
 
   useEffect(() => {
     // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
+    // to avoid continuous document.getElementById calls inside requestAnimationFrame.
     const cachedSections = sections.map(sec => ({
       id: sec.id,
       element: document.getElementById(sec.id)
@@ -96,6 +98,15 @@ const AppComponent = () => {
             if (element && scrollPosition >= element.offsetTop) {
               setActiveSection(cachedSections[i].id);
               break;
+          for (const section of cachedSections) {
+            if (section.element) {
+              const offsetTop = section.element.offsetTop;
+              const height = section.element.offsetHeight;
+
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+                setActiveSection(section.id);
+                break;
+              }
             }
           }
           ticking = false;
