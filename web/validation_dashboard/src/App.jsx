@@ -2,6 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
+const sections = [
+  { id: 'einleitung', label: 'Einleitung' },
+  { id: 'framework', label: '5D-Intelligence Framework' },
+  { id: 'methodologie', label: 'Methodik' },
+  { id: 'ergebnisse', label: 'Ergebnisse' },
+  { id: 'validierung', label: 'Validierung' },
+  { id: 'implikationen', label: 'Implikationen' },
+  { id: 'zukunft', label: 'Zukunftsperspektiven' },
+  { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
+];
+
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -71,6 +82,15 @@ const App = () => {
   };
 
   useEffect(() => {
+    const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sectionElements.length - 1; i >= 0; i--) {
+        const section = sectionElements[i];
+        if (section && scrollPosition >= section.offsetTop) {
+          setActiveSection(section.id);
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
