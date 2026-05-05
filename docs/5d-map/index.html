@@ -80,7 +80,7 @@
         aria-label="Validierung als JSON exportieren">
         Export (JSON)
       </button>
-      <span id="validation-count" style="margin-left:.5rem;font-size:.9rem;color:#444;" title="Anzahl der Validierungs‑Einträge im aktuellen Filter">Filter: <strong>alle</strong> · Einträge: <strong>0</strong></span>
+      <span id="validation-count" aria-live="polite" aria-atomic="true" style="margin-left:.5rem;font-size:.9rem;color:#444;" title="Anzahl der Validierungs‑Einträge im aktuellen Filter">Filter: <strong>alle</strong> · Einträge: <strong>0</strong></span>
       <button 
         id="layer-sources" 
         class="btn"
@@ -100,7 +100,7 @@
 
   <main id="main-content" tabindex="-1">
     <div id="map"></div>
-    <div id="layer-info" style="display:none;padding:0.5rem 1rem;max-width:640px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
+    <div id="layer-info" aria-live="polite" style="display:none;padding:0.5rem 1rem;max-width:640px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
       <strong>Layer‑Info:</strong> <span id="layer-info-text">—</span>
     </div>
     <div id="time-controls" style="display:none;padding:0.5rem 1rem;max-width:480px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
