@@ -324,14 +324,19 @@ function parseCSV(text) {
   if (!lines.length) return [];
   const headers = splitCSVLine(lines[0]);
   const rows = [];
+  const hlen = headers.length;
+  const valueKey = headers[hlen - 1];
   for (let i = 1; i < lines.length; i++) {
-    const cols = splitCSVLine(lines[i]);
+    const line = lines[i];
+    // ⚡ Bolt Optimization: Fast path for unquoted lines
+    const cols = line.indexOf('"') === -1 ? line.split(',') : splitCSVLine(line);
     if (!cols.length) continue;
     const obj = {};
-    headers.forEach((h, idx) => obj[h] = cols[idx]);
+    for (let j = 0; j < hlen; j++) {
+      obj[headers[j]] = cols[j];
+    }
     // normalize numeric
     if (obj.Year) obj.Year = Number(obj.Year);
-    const valueKey = headers[headers.length - 1];
     if (obj[valueKey] != null) obj[valueKey] = Number(obj[valueKey]);
     rows.push(obj);
   }

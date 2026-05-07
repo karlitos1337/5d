@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2024-05-07 - CSV Parsing Performance Bottleneck
+**Learning:** Character-by-character CSV parsing for large datasets (e.g. World Bank data) blocks the main thread. Most data rows don't contain quotes.
+**Action:** Add a fast-path fallback (`line.indexOf('"') === -1 ? line.split(',') : splitCSVLine(line)`) to significantly speed up client-side data processing.
