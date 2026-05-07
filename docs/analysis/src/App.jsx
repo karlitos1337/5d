@@ -83,11 +83,19 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    // ⚡ Bolt: Cache DOM elements to avoid getElementById during scroll
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
+
     // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
     // to avoid continuous document.getElementById calls inside requestAnimationFrame.
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
+    // ⚡ Bolt: Cache DOM elements to avoid continuous getElementById lookups during scroll
 
     // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
     const cachedSections = sections.map(sec => ({
@@ -122,6 +130,13 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className={`absolute -top-40 left-0 bg-blue-600 text-white px-4 py-2 z-[60] font-bold transition-all focus:top-0 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 rounded-br-lg ${
+          darkMode ? 'focus:ring-offset-gray-900' : 'focus:ring-offset-white'
+        }`}
+      >
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-0 focus:left-0 focus:p-4 focus:bg-blue-600 focus:text-white focus:font-bold">
         Zum Hauptinhalt springen
       </a>
@@ -165,6 +180,7 @@ const App = () => {
                 aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 onClick={toggleDarkMode}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'}`}
                 aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
@@ -179,6 +195,7 @@ const App = () => {
                 title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'}`}
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
@@ -220,6 +237,13 @@ const App = () => {
 
       {/* Main Content */}
       <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
+      <main
+        id="main-content"
+        tabIndex="-1"
+        className={`pt-16 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+          darkMode ? 'focus:ring-offset-gray-900' : 'focus:ring-offset-white'
+        }`}
+      >
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -291,6 +315,7 @@ const App = () => {
                     className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
 
+                     />
                 />
                 {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
               </div>
@@ -416,6 +441,9 @@ const App = () => {
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
 
+                   />
+                  loading="lazy"
+                />
               />
               {/* ⚡ Bolt Optimization: Defer loading off-screen image */}
             </div>
