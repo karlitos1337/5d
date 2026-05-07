@@ -44,3 +44,41 @@
 ## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
 **Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
 **Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
+## 2026-04-25 - Optimize Scroll Event Handling
+
+**Learning:** Continuous scroll events paired with expensive DOM queries (like `document.getElementById` and `offsetTop`) within the `requestAnimationFrame` callback can block the main thread and degrade scrolling performance.
+**Action:** Instead of repeatedly mapping over IDs and querying the DOM during the scroll loop, cache the DOM elements outside the scroll handler (e.g., in a `useMemo` or variable initialized beforehand) and use passive event listeners (`{ passive: true }`). Avoid duplicate HTML attributes (like `loading="lazy"`) which will cause Vite builds to fail.
+
+## 2024-06-03 - React Array Memoization
+**Learning:** Hardcoding objects or arrays like `navItems` directly within a React component's body without memoization causes the array reference to be re-created on every render, which triggers unnecessary `useEffect` runs and exhaustive-deps lint warnings.
+**Action:** Always wrap static component-scoped arrays and objects in `useMemo(() => [...], [])` or move them completely outside the component definition.
+
+## 2024-06-03 - Component Loading
+**Learning:** Accidentally removing `loading="lazy"` attributes from off-screen images within an optimization patch actively degrades rendering performance.
+**Action:** Always maintain the exact attributes unless explicitly instructed to change them in optimization contexts.
+## 2026-04-18 - Caching DOM Elements in React Scroll Event Listeners
+**Learning:** Calling `document.getElementById` continuously within a `requestAnimationFrame` loop in a scroll event listener, even when throttled, can cause measurable layout thrashing and unnecessary DOM queries.
+**Action:** When working with static sections in React applications, cache the DOM elements outside the scroll handler (e.g., in a `useEffect` using `document.getElementById`) to avoid repeated expensive lookups during scrolling.
+
+## 2024-04-19 - Scroll Handler DOM Query Bottleneck
+**Learning:** React scroll event handlers triggering `document.getElementById` continuously within a `requestAnimationFrame` loop cause measurable main-thread blocking and layout thrashing, even if throttled.
+**Action:** Always map and cache required DOM elements outside the scroll handler (e.g., in a `useEffect` closure) so the scroll loop only performs fast object lookups instead of live DOM queries.
+## 2026-04-27 - Cache DOM references in React Scroll Handlers
+**Learning:** In continuous event loops like `requestAnimationFrame` for scroll tracking, repeated queries using `document.getElementById` introduce significant layout and query thrashing overhead.
+**Action:** Always map and cache the necessary DOM elements once outside the handler (e.g. within a `useEffect`) instead of repeatedly querying the DOM during the scroll sequence.
+## 2024-03-24 - Parallel Fetching & localStorage Concurrency
+**Learning:** When parallelizing `fetchWithCache` logic that relies on `localStorage` (read-modify-write), standard JS concurrency (Promise.all) causes race conditions where updates are lost because the "read" happens before other "writes" complete.
+**Action:** Always re-read the latest state from `localStorage` immediately before writing the update in async functions, or use a mutex if strict transactional integrity is needed.
+## 2026-04-14 - Scroll Event Handler Performance
+**Learning:** Continuously querying the DOM with document.getElementById inside a scroll event handler's requestAnimationFrame loop causes unnecessary overhead and layout thrashing.
+**Action:** Map and cache DOM elements outside the scroll handler and use the cached references inside the requestAnimationFrame callback to optimize scroll tracking.
+
+## 2024-06-03 - Promise.all and localStorage Race Conditions
+**Learning:** Using `Promise.all` to fetch multiple items concurrently that are then cached in `localStorage` can lead to race conditions where one concurrent process overwrites the cache of another if the cache object is read at the start of the promise but written at the end.
+**Action:** Always re-read the `localStorage` cache immediately before updating it inside concurrent async functions (e.g., `fetchWithCache`).
+## 2024-05-24 - Async Waterfall in 5d-map initialization
+**Learning:** Sequential `fetchWithCache` calls in `web/5d-map/modules/api-fetcher.js` (like fetching schools, countries, validation, etc.) created an async waterfall, delaying map rendering. However, simply using `Promise.all` causes `localStorage` race conditions because `fetchWithCache` reads the cache at start, then awaits network, then writes. If multiple run in parallel, earlier writes are overwritten.
+**Action:** Group independent API fetches using `Promise.all` but fix the race condition in the read-modify-write cache utility by re-reading the cache from `localStorage` immediately before writing the updated data.
+## 2026-04-03 - React Scroll Event Throttling Cache
+**Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
+**Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
