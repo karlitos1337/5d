@@ -51,7 +51,7 @@ const AppComponent = () => {
       el.appendChild(btn);
       el.dataset.citationProcessed = 'true';
     });
-  }, []);
+  }, [sections]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -75,10 +75,19 @@ const AppComponent = () => {
   ];
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
+    // to avoid continuous document.getElementById calls inside requestAnimationFrame.
+    const cachedSections = sections.map(sec => ({
+      id: sec.id,
+      element: document.getElementById(sec.id)
+    })).filter(sec => sec.element);
+
     // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
     // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
     // blocking during continuous scrolling.
     // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
+    // ⚡ Bolt: Cache DOM elements to avoid continuous getElementById lookups during scroll
     const cachedSections = sections.map(sec => ({
       id: sec.id,
       element: document.getElementById(sec.id)
@@ -93,12 +102,24 @@ const AppComponent = () => {
           
           for (const cached of cachedSections) {
             const element = cached.element;
+          for (const section of cachedSections) {
+            const { id, element } = section;
             if (element) {
               const offsetTop = element.offsetTop;
               const height = element.offsetHeight;
+          for (let i = cachedSections.length - 1; i >= 0; i--) {
+            const element = cachedSections[i].element;
+            if (element && scrollPosition >= element.offsetTop) {
+              setActiveSection(cachedSections[i].id);
+              break;
+          for (const section of cachedSections) {
+            if (section.element) {
+              const offsetTop = section.element.offsetTop;
+              const height = section.element.offsetHeight;
 
               if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
                 setActiveSection(cached.id);
+                setActiveSection(id);
                 break;
               }
             }
@@ -112,7 +133,7 @@ const AppComponent = () => {
     // ⚡ Bolt: Add { passive: true } to allow the browser to scroll immediately without waiting for JS execution.
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sections]);
 
   return { darkMode, setDarkMode, mobileMenuOpen, setMobileMenuOpen, activeSection, expandedSections, toggleDarkMode, toggleSection, sections, scaleX };
 };
