@@ -44,6 +44,10 @@
 ## 2026-04-02 - Refactoring Scroll Listeners with requestAnimationFrame
 **Learning:** Attempting to throttle scroll event listeners using `requestAnimationFrame` and a ticking flag must be done extremely carefully to ensure the core logic (e.g., active section highlighting via `setActiveSection`) is preserved within the animation frame callback. Botching the structural refactoring will result in functional regressions where scroll tracking breaks completely, even if the application builds successfully.
 **Action:** When implementing requestAnimationFrame throttling, prioritize keeping the exact logic block intact within the callback. If a refactoring is deemed too risky or complex given constraints, opt for safer, isolated optimizations like adding `loading="lazy"` to below-the-fold images to achieve a measurable performance win without risking core application functionality.
+## 2026-04-25 - Optimize Scroll Event Handling
+
+**Learning:** Continuous scroll events paired with expensive DOM queries (like `document.getElementById` and `offsetTop`) within the `requestAnimationFrame` callback can block the main thread and degrade scrolling performance.
+**Action:** Instead of repeatedly mapping over IDs and querying the DOM during the scroll loop, cache the DOM elements outside the scroll handler (e.g., in a `useMemo` or variable initialized beforehand) and use passive event listeners (`{ passive: true }`). Avoid duplicate HTML attributes (like `loading="lazy"`) which will cause Vite builds to fail.
 
 ## 2024-06-03 - React Array Memoization
 **Learning:** Hardcoding objects or arrays like `navItems` directly within a React component's body without memoization causes the array reference to be re-created on every render, which triggers unnecessary `useEffect` runs and exhaustive-deps lint warnings.
