@@ -693,11 +693,19 @@
                     // Sanitize AI response to prevent DOM-based XSS
                     aiResponse.innerHTML = DOMPurify.sanitize(marked.parse(text));
                 } else {
-                    aiResponse.innerHTML = '<p class="text-red-500">Fehler bei der Antwortgenerierung. Bitte prüfe deinen Token.</p>';
+                    aiResponse.innerHTML = '';
+                    const p = document.createElement('p');
+                    p.className = 'text-red-500';
+                    p.textContent = 'Fehler bei der Antwortgenerierung. Bitte prüfe deinen Token.';
+                    aiResponse.appendChild(p);
                 }
             } catch (error) {
                 loadingSpinner.classList.add('hidden');
-                aiResponse.innerHTML = `<p class="text-red-500">Netzwerkfehler: ${error.message}</p>`;
+                aiResponse.innerHTML = '';
+                const p = document.createElement('p');
+                p.className = 'text-red-500';
+                p.textContent = `Netzwerkfehler: ${error.message}`;
+                aiResponse.appendChild(p);
             }
         }
     </script>
