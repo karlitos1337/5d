@@ -83,27 +83,27 @@ const App = () => {
 
   useEffect(() => {
     const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
+    let ticking = false;
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 200;
 
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(section.id);
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
-          break;
-        }
+          for (let i = sectionElements.length - 1; i >= 0; i--) {
+            const section = sectionElements[i];
+            if (section && scrollPosition >= section.offsetTop) {
+              setActiveSection(section.id);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
