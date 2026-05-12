@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-12 - Missing Streamlit Cache on Repeated File Parse
+**Learning:** Repeatedly parsing files without caching (e.g., BibTeX files) becomes a major bottleneck in Streamlit applications because functions are re-executed continuously.
+**Action:** Always add `@st.cache_data` (or similar) to file loading/parsing functions that are called frequently in Streamlit loops or multiple components.

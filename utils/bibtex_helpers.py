@@ -12,6 +12,8 @@ from pathlib import Path
 import streamlit as st
 
 
+# Cache file parsing to prevent bottleneck on frequent Streamlit rerenders
+@st.cache_data
 def load_bibtex_entries():
     """
     Load all BibTeX entries from the central file.
