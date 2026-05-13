@@ -55,3 +55,6 @@
 ## 2025-04-04 - [Accessibility] Missing semantic ARIA and dynamic focus labels
 **Learning:** When dealing with interactive icon buttons in React SPAs, a common anti-pattern is leaving them unlabelled for screen readers, meaning only their visual presence provides context. Additionally, applying standard tailwind focus styles to fixed headers over dynamic dark mode backgrounds can result in poor contrast for keyboard focus rings. Adding semantic labels (`aria-label`, `title`) and state-aware focus styles vastly improves accessibility with minimal code changes.
 **Action:** Ensure icon-only buttons always include `aria-label` and `title` tags corresponding to their function and state. Use dynamic template literals to adjust `focus-visible` classes based on the current background state, ensuring high contrast visibility for keyboard users.
+## 2026-05-13 - Navigation Button Accessibility
+**Learning:** Custom icon-only navigation buttons in React dashboards frequently lack aria-labels, title attributes, and clear keyboard focus states, hindering accessibility and navigation for screen readers and keyboard users.
+**Action:** Always ensure interactive elements without visible text include `aria-label` and `title` attributes, and utilize styles like `focus-visible:ring` to provide clear keyboard focus indicators.
