@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-14 - Vectorizing Grid Computations
+**Learning:** Computing neighborhood calculations over grids with nested O(n^2) Python loops is an anti-pattern. While pure python/numpy logic can be translated, using vectorized operations like `scipy.signal.convolve2d` decreases execution time exponentially and keeps logic within <50 lines.
+**Action:** For cellular automata or grid matrix computations, always opt for vectorized operations over iterative element processing.

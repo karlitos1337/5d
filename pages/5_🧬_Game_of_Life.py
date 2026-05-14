@@ -7,6 +7,7 @@ Cellular Automaton Simulation (1970)
 from datetime import datetime
 
 import numpy as np
+import scipy.signal
 import streamlit as st
 
 from utils.mobile_responsive import inject_mobile_css
@@ -42,41 +43,19 @@ PATTERNS = {
 }
 
 
-def count_neighbors(grid, x, y):
-    """Count alive neighbors (8-connectivity)"""
-    height, width = grid.shape
-    count = 0
-
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            if i == 0 and j == 0:
-                continue
-
-            nx, ny = (x + i) % height, (y + j) % width
-            count += grid[nx, ny]
-
-    return count
-
-
 def update_grid(grid):
-    """Apply Conway's Rules for next generation"""
-    new_grid = grid.copy()
-    height, width = grid.shape
+    """Apply Conway's Rules for next generation using scipy.signal.convolve2d for performance"""
+    # 3x3 kernel for 8-connectivity Moore neighborhood
+    kernel = np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]])
+    # Use mode='same' and boundary='wrap' for toriodal boundary conditions
+    neighbors = scipy.signal.convolve2d(grid, kernel, mode="same", boundary="wrap")
 
-    for i in range(height):
-        for j in range(width):
-            neighbors = count_neighbors(grid, i, j)
-
-            # Conway's Rules
-            if grid[i, j] == 1:
-                # Alive cell
-                if neighbors < 2 or neighbors > 3:
-                    new_grid[i, j] = 0  # Dies
-            else:
-                # Dead cell
-                if neighbors == 3:
-                    new_grid[i, j] = 1  # Becomes alive
-
+    # Apply Conway's rules vectorized
+    new_grid = np.where(
+        (grid == 1) & ((neighbors == 2) | (neighbors == 3)),
+        1,
+        np.where((grid == 0) & (neighbors == 3), 1, 0),
+    )
     return new_grid
 
 
@@ -105,15 +84,15 @@ def main():
         st.markdown("### 🔬 Scientific Basis")
         st.markdown("""
         **Cellular Automaton:**
-        
+
         Conway, J. (1970)
-        
+
         **Regeln:**
         1. **Underpopulation:** <2 Nachbarn → stirbt
         2. **Survival:** 2-3 Nachbarn → lebt
         3. **Overpopulation:** >3 Nachbarn → stirbt
         4. **Reproduction:** Tot + 3 Nachbarn → lebt
-        
+
         **Status:** ✅ Peer-Reviewed
         """)
 
@@ -227,22 +206,22 @@ def main():
 
         st.markdown("""
         **Klassen:**
-        
+
         🔄 **Oscillators:**
         - Blinker (Period 2)
         - Toad (Period 2)
         - Beacon (Period 2)
         - Pulsar (Period 3)
-        
+
         🚀 **Spaceships:**
         - Glider (Diagonal)
         - Lightweight Spaceship
-        
+
         🔳 **Still Lifes:**
         - Block (2×2)
         - Beehive
         - Loaf
-        
+
         🌀 **Guns:**
         - Gosper Glider Gun (Period 30)
         """)
@@ -253,14 +232,14 @@ def main():
 
         st.markdown("""
         **Emergence & Self-Organization:**
-        
+
         Game of Life zeigt:
         - **Autonomy:** Keine externe Kontrolle
         - **Intrinsic Rules:** Lokale Interaktion
         - **Resilience:** Pattern überleben
         - **Social Participation:** Zell-Nachbarschaft
         - **Authenticity:** Deterministisch
-        
+
         **Parallelen zu Bildungssystemen:**
         - Emergente Ordnung ohne zentrale Planung
         - Lokale Regeln → globale Muster
@@ -276,7 +255,7 @@ def main():
         - NumPy (Grid)
         - Streamlit (UI)
         - Toroidal Topology (Edges wrap)
-        
+
         **Performance:**
         - Grid: 30×30 = 900 cells
         - Update: O(n²) per generation
@@ -295,31 +274,31 @@ def main():
 
         st.markdown("""
         **Für jede Zelle in jeder Generation:**
-        
+
         1️⃣ **Underpopulation (Tod durch Einsamkeit):**
         ```
         if alive and neighbors < 2:
             cell dies
         ```
-        
+
         2️⃣ **Survival (Überleben):**
         ```
         if alive and neighbors in [2, 3]:
             cell survives
         ```
-        
+
         3️⃣ **Overpopulation (Tod durch Überbevölkerung):**
         ```
         if alive and neighbors > 3:
             cell dies
         ```
-        
+
         4️⃣ **Reproduction (Geburt):**
         ```
         if dead and neighbors == 3:
             cell becomes alive
         ```
-        
+
         **Notation:** B3/S23 (Born with 3, Survives with 2-3)
         """)
 
@@ -337,14 +316,14 @@ def main():
 
         st.markdown("""
         **Formale Definition:**
-        
+
         Game of Life ist ein **2D Cellular Automaton** mit:
-        
+
         - **Zustandsraum:** {0, 1} (tot, lebendig)
         - **Nachbarschaft:** Moore (8 Zellen)
         - **Zeitdiskret:** t ∈ ℕ
         - **Determinismus:** Nächster Zustand eindeutig
-        
+
         **Update-Funktion:**
         """)
 
@@ -358,7 +337,7 @@ def main():
         - **Unentscheidbar:** Halte-Problem nicht lösbar
         - **Deterministisch:** Gleicher Start → gleiches Ergebnis
         - **Reversibel:** Mit zusätzlicher Information
-        
+
         **Entropie:** Tendiert zu stabilen Strukturen oder zyklischem Verhalten
         """)
 
@@ -367,30 +346,30 @@ def main():
 
         st.markdown("""
         **Beweis-Konstruktion:**
-        
+
         Game of Life kann **jeden Computer simulieren**:
-        
+
         1. **Logische Gatter:**
            - AND, OR, NOT gates aus Gliders
            - Gosper Glider Gun (1970)
-        
+
         2. **Speicher:**
            - Still Lifes als Bits
            - Glider als Signale
-        
+
         3. **Berechnung:**
            - Pattern als Programme
            - Universal Turing Machine implementierbar
-        
+
         **Erste Implementation:**
         - Paul Rendell (2000): Turing Machine in Game of Life
         - [LifeWiki](https://conwaylife.com/wiki/Turing_machine)
-        
+
         **Implikation:**
         - Game of Life = vollständige Programmiersprache
         - Kann jeden Algorithmus ausführen
         - Emergent Computation
-        
+
         **Philosophisch:**
         - Komplexität aus Einfachheit
         - Emergence: Mehr als die Summe der Teile
@@ -405,49 +384,49 @@ def main():
     with st.expander("🔬 References (expandable)"):
         st.markdown("""
         ### Primärquellen
-        
+
         **1. Conway, J. H. (1970)**
         - *Game of Life*
         - Publiziert in: Gardner, M. *Scientific American* (Oktober 1970)
         - [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
-        
+
         **2. Gardner, M. (1970)**
         - *Mathematical Games: The fantastic combinations of John Conway's new solitaire game "life"*
         - *Scientific American* 223: 120-123
-        
+
         **3. Wolfram, S. (2002)**
         - *A New Kind of Science*
         - Wolfram Media
         - ISBN: 1-57955-008-8
         - [Website](https://www.wolframscience.com)
-        
+
         **4. Rendell, P. (2016)**
         - *Turing Machine Universality of the Game of Life*
         - Springer
         - DOI: 10.1007/978-3-319-19842-2
-        
+
         ---
-        
+
         ### Cellular Automata (Allgemein)
-        
+
         **5. von Neumann, J. (1966)**
         - *Theory of Self-Reproducing Automata*
         - Herausgegeben von Burks, A. W.
         - University of Illinois Press
-        
+
         **6. Langton, C. G. (1990)**
         - *Computation at the edge of chaos*
         - *Physica D* 42: 12-37
         - DOI: 10.1016/0167-2789(90)90064-V
-        
+
         ---
-        
+
         ### Implementation & Anwendungen
-        
+
         **LifeWiki:** [conwaylife.com](https://conwaylife.com)
         - Umfassende Pattern-Bibliothek
         - Community-gepflegt seit 2006
-        
+
         **Code:** Siehe `gol_streamlit.py` für standalone App
         """)
 
