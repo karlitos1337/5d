@@ -44,3 +44,8 @@
 **Vulnerability:** Client-side encryption of an API key using a hardcoded passphrase before storing it in `localStorage` provides no actual security (security theater) and gives a false sense of protection, while a heuristic scanner could flag it.
 **Learning:** Avoid security theater practices. Store user-provided keys directly in `localStorage` and rename variables/DOM IDs to generic terms (like `serviceToken`) to avoid false positives from CodeQL's clear-text storage rules.
 **Prevention:** Removed `CryptoJS` encryption, directly stored the key in `localStorage`, and renamed `apiKey` references to `serviceToken` across the file.
+
+## 2026-05-16 - [XSS via Third-Party Markdown Parsing]
+**Vulnerability:** External HTML pages like `awesome-piracy-main/index.html` parsed unsanitized markdown into `innerHTML`. This exposes the application to DOM-based XSS if the external content contains malicious HTML.
+**Learning:** Never trust inputs from external APIs or markdown sources. Always sanitize Markdown output before inserting it into the DOM, especially when using `innerHTML`.
+**Prevention:** Imported `DOMPurify` and wrapped `marked.parse(text)` with `DOMPurify.sanitize()` prior to DOM injection.
