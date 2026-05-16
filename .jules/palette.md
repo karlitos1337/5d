@@ -55,3 +55,15 @@
 ## 2025-04-04 - [Accessibility] Missing semantic ARIA and dynamic focus labels
 **Learning:** When dealing with interactive icon buttons in React SPAs, a common anti-pattern is leaving them unlabelled for screen readers, meaning only their visual presence provides context. Additionally, applying standard tailwind focus styles to fixed headers over dynamic dark mode backgrounds can result in poor contrast for keyboard focus rings. Adding semantic labels (`aria-label`, `title`) and state-aware focus styles vastly improves accessibility with minimal code changes.
 **Action:** Ensure icon-only buttons always include `aria-label` and `title` tags corresponding to their function and state. Use dynamic template literals to adjust `focus-visible` classes based on the current background state, ensuring high contrast visibility for keyboard users.
+
+## 2026-05-16 - [Accessibility] Skip Links, ARIA labels, and Dynamic Focus Rings in Validation Dashboard
+**Learning:** React Dashboards often miss critical accessibility features like "Skip to content" links and ARIA labels on icon-only buttons. Furthermore, standard Tailwind focus classes may lack contrast when dark mode is managed via manual state variables.
+**Action:** Add "Skip to content" links with proper \<main\> element targeting (uid=1001(jules) gid=1001(jules) groups=1001(jules),27(sudo),103(docker), , ). Always ensure icon-only buttons have  and . For manually managed dark mode, apply  dynamically via template literals to guarantee contrast.
+
+## 2026-05-16 - [Accessibility] Skip Links, ARIA labels, and Dynamic Focus Rings in Validation Dashboard
+**Learning:** React Dashboards often miss critical accessibility features like "Skip to content" links and ARIA labels on icon-only buttons. Furthermore, standard Tailwind focus classes may lack contrast when dark mode is managed via manual state variables.
+**Action:** Add "Skip to content" links with proper \<main\> element targeting (`id`, `tabIndex="-1"`, `outline-none`). Always ensure icon-only buttons have `aria-label` and `title`. For manually managed dark mode, apply `focus-visible:ring-offset-*` dynamically via template literals to guarantee contrast.
+
+## 2026-05-16 - [Accessibility] Skip Links, ARIA labels, and Dynamic Focus Rings in Validation Dashboard
+**Learning:** React Dashboards often miss critical accessibility features like "Skip to content" links and ARIA labels on icon-only buttons. Furthermore, standard Tailwind focus classes may lack contrast when dark mode is managed via manual state variables.
+**Action:** Add "Skip to content" links with proper `<main>` element targeting (`id`, `tabIndex="-1"`, `outline-none`). Always ensure icon-only buttons have `aria-label` and `title`. For manually managed dark mode, apply `focus-visible:ring-offset-*` dynamically via template literals to guarantee contrast.
