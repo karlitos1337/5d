@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-18 - Scroll Handler Syntax Errors & Throttle Lock
+**Learning:** There was broken syntax from a duplicate inner scroll handling assignment, unescaped JSX quotes causing lint errors, and an unthrottled loop blocking the main thread.
+**Action:** When fixing scroll handlers to use requestAnimationFrame, ensure the inner code logic doesn't have duplicate declarations and always use ticking booleans with passive event listeners to protect the main thread and avoid lint failures.
