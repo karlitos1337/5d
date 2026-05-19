@@ -2,17 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
-const sections = [
-  { id: 'einleitung', label: 'Einleitung' },
-  { id: 'framework', label: '5D-Intelligence Framework' },
-  { id: 'methodologie', label: 'Methodik' },
-  { id: 'ergebnisse', label: 'Ergebnisse' },
-  { id: 'validierung', label: 'Validierung' },
-  { id: 'implikationen', label: 'Implikationen' },
-  { id: 'zukunft', label: 'Zukunftsperspektiven' },
-  { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-];
-
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -82,15 +71,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(section.id);
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
@@ -307,7 +287,7 @@ const App = () => {
                   <div>
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                      Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach’s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -325,7 +305,7 @@ const App = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
-                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach’s α &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -349,7 +329,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Korrelationsanalysen</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu &amp; Robinson (2012).
+                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu & Robinson (2012).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -380,7 +360,7 @@ const App = () => {
             <div className="mb-8">
               <img
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
-                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit &apos;Autonomie-Score (0-100)&apos; und die y-Achse mit &apos;Sozioökonomische Ergebnisse (0-100)&apos;. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel &apos;Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)&apos; in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
+                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
@@ -468,7 +448,7 @@ const App = () => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
               <h3 className="text-xl font-semibold mb-4">Theoretische Fundierung</h3>
               <p className="mb-4" data-ref="https://www.tandfonline.com/doi/full/10.1080/10447318.2025.2542881?src=|12">
-                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci &amp; Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
+                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci & Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
               </p>
               <p data-ref="https://doi.org/10.3390/challe13020058|13">
                 Die sieben Kernelemente des Flourish-Modells - Sicherheit, Beziehung, Unabhängigkeit, Engagement, Erfüllung, Beitrag und Wachstum - werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
