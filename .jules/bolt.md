@@ -82,3 +82,7 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+
+## 2026-05-20 - [Optimize Scroll Event Listener with requestAnimationFrame]
+**Learning:** Attaching continuous, unthrottled event listeners (like scroll) directly to `window.addEventListener` causes a high number of function calls per second, blocking the main thread and leading to janky scrolling/layout thrashing.
+**Action:** Use `window.requestAnimationFrame` with a `ticking` flag to throttle the scroll handler logic so it only runs once per animation frame (approx. 60 FPS). Also mark the event listener as `{ passive: true }` to tell the browser the listener will not call `preventDefault()`, allowing it to optimize scrolling performance.
