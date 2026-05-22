@@ -263,7 +263,14 @@ export async function fetchAllData() {
   // IMP_raw = A * IM * R * SP * Au; clamp auf [0,1]
   result.impByISO3 = {};
   const clamp01 = (x) => Math.max(0, Math.min(1, x));
-  for (const iso3 of Object.keys({ ...depressionMap, ...dropoutMap, ...wgi_rl_full, ...wgi_va_full, ...wgi_ge_full })) {
+  const allIso3Keys = new Set([
+    ...Object.keys(depressionMap),
+    ...Object.keys(dropoutMap),
+    ...Object.keys(wgi_rl_full),
+    ...Object.keys(wgi_va_full),
+    ...Object.keys(wgi_ge_full)
+  ]);
+  for (const iso3 of allIso3Keys) {
     const dep = depressionMap[iso3]; // %
     const drp = dropoutMap[iso3]; // %
     const A = drp == null ? 0.5 : (1 - clamp01(Number(drp) / 100));
