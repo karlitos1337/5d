@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-22 - Optimize ISO3 Key Aggregation
+**Learning:** Using object spread `{ ...a, ...b }` solely to extract a unique list of keys via `Object.keys()` is highly inefficient because it allocates and populates a completely new, potentially large object in memory just to discard its values.
+**Action:** When aggregating unique keys across multiple objects, use `new Set([...Object.keys(a), ...Object.keys(b)])` to avoid allocating an intermediate object with all values.
