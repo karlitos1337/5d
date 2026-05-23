@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-23 - Refactoring Scroll Handlers with requestAnimationFrame
+**Learning:** When refactoring scroll event listeners to use requestAnimationFrame for throttling, it is crucial to use passive event listeners (`passive: true`) and properly encapsulate the active section tracking logic. Broken syntax during such optimizations, or omitting the memoization/outside declaration of static arrays like `sections`, can cause functional regressions and linting errors. It is also important to escape single quotes like `&apos;` in JSX to pass linting.
+**Action:** When implementing requestAnimationFrame throttling in React, ensure the logic block inside the callback is intact, use `passive: true` on the scroll event listener, move static arrays/objects outside the component definition, and verify the component compiles and passes linting.

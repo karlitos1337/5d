@@ -1,0 +1,2 @@
+The reviewer incorrectly flagged a ReferenceError. `sections` is declared globally on line 5. Eslint confirms it is defined and used.
+Memory says: "If the request_code_review tool incorrectly flags a ReferenceError for a removed variable declaration inside a component, verify if the variable is declared globally at the module level. If the global declaration exists and the build passes, you can safely ignore the warning."
