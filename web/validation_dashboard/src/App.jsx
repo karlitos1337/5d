@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const sections = [
-  { id: 'einleitung', label: 'Einleitung' },
-  { id: 'framework', label: '5D-Intelligence Framework' },
-  { id: 'methodologie', label: 'Methodik' },
-  { id: 'ergebnisse', label: 'Ergebnisse' },
-  { id: 'validierung', label: 'Validierung' },
-  { id: 'implikationen', label: 'Implikationen' },
-  { id: 'zukunft', label: 'Zukunftsperspektiven' },
-  { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-];
+    { id: 'einleitung', label: 'Einleitung' },
+    { id: 'framework', label: '5D-Intelligence Framework' },
+    { id: 'methodologie', label: 'Methodik' },
+    { id: 'ergebnisse', label: 'Ergebnisse' },
+    { id: 'validierung', label: 'Validierung' },
+    { id: 'implikationen', label: 'Implikationen' },
+    { id: 'zukunft', label: 'Zukunftsperspektiven' },
+    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
+  ];
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,16 +24,6 @@ const App = () => {
     restDelta: 0.001
   });
 
-  const sections = [
-    { id: 'einleitung', label: 'Einleitung' },
-    { id: 'framework', label: '5D-Intelligence Framework' },
-    { id: 'methodologie', label: 'Methodik' },
-    { id: 'ergebnisse', label: 'Ergebnisse' },
-    { id: 'validierung', label: 'Validierung' },
-    { id: 'implikationen', label: 'Implikationen' },
-    { id: 'zukunft', label: 'Zukunftsperspektiven' },
-    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-  ];
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -82,15 +72,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(section.id);
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
@@ -408,7 +389,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach's Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
