@@ -82,3 +82,7 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+
+## 2026-05-30 - Cache DOM Elements for scroll event listeners
+**Learning:** Querying the DOM inside continuous scroll event listeners causes layout thrashing and main-thread blocking, significantly degrading performance.
+**Action:** Map and cache necessary DOM elements once outside the scroll handler (such as in a useEffect closure) and use passive event listeners when adding scroll event listeners to improve scrolling performance.
