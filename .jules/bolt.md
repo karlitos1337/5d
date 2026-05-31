@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-05-25 - Validation Dashboard Duplicate Attributes
+**Learning:** When optimizing React code by injecting cache optimizations, ensure you dont remove the image loading lazy attributes which was causing the issue before, or duplicate any imports. ESLint and vite build commands are necessary to find bugs.
+**Action:** Add optimizations carefully and always run pnpm build/lint after.
