@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2026-06-02 - Optimize Scroll Listeners and Static Arrays
+**Learning:** Scroll event listeners can block the main thread and cause jank. Also, defining static arrays within a React component forces unnecessary re-allocations on every render, and causes exhaustive-deps issues in useEffect.
+**Action:** Always add { passive: true } to scroll event listeners that don't need to prevent default behavior. Hoist static arrays/objects out of component scope or use useMemo to prevent re-allocation.
