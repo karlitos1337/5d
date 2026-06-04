@@ -105,7 +105,7 @@
     </div>
     <div id="time-controls" style="display:none;padding:0.5rem 1rem;max-width:480px;margin:0.5rem;background:#fffffe;border:1px solid #e0e0e0;border-radius:0.5rem;">
       <label for="year-slider"><strong>Jahr: <span id="year-label">—</span></strong></label>
-      <input type="range" id="year-slider" min="2000" max="2025" value="2025" step="1" style="width:100%;" />
+      <input type="range" id="year-slider" min="2000" max="2025" value="2025" step="1" style="width:100%;" aria-valuemin="2000" aria-valuemax="2025" aria-valuenow="2025" aria-label="Jahresauswahl" />
       <small>Zeigt Heatmap für ausgewähltes Jahr (Depression/Dropout). Fallback: Nur vorhandene Werte.</small>
     </div>
   </main>
