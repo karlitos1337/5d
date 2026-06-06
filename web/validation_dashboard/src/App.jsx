@@ -1,17 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
-
-const sections = [
-  { id: 'einleitung', label: 'Einleitung' },
-  { id: 'framework', label: '5D-Intelligence Framework' },
-  { id: 'methodologie', label: 'Methodik' },
-  { id: 'ergebnisse', label: 'Ergebnisse' },
-  { id: 'validierung', label: 'Validierung' },
-  { id: 'implikationen', label: 'Implikationen' },
-  { id: 'zukunft', label: 'Zukunftsperspektiven' },
-  { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-];
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -82,15 +71,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(section.id);
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
@@ -105,6 +85,7 @@ const App = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -258,7 +239,7 @@ const App = () => {
               <div>
                 <img
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
-                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
+                    alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt."
                     className="w-full rounded-xl shadow-lg"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
@@ -362,7 +343,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Validitätsprüfungen</h3>
                 <p className="mb-4" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (&ge;0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
+                  Konvergente Validität wurde über Composite Reliability (CR) und Average Variance Extracted (AVE) bewertet: Work motivation CR = 0.744 (≥0.7 Schwellenwert), AVE = 0.431 (&lt;0.5 Schwellenwert).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -380,7 +361,7 @@ const App = () => {
             <div className="mb-8">
               <img
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
-                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit &apos;Autonomie-Score (0-100)&apos; und die y-Achse mit &apos;Sozioökonomische Ergebnisse (0-100)&apos;. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel &apos;Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)&apos; in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
+                  alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert."
                   className="w-full rounded-xl shadow-lg"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
@@ -408,7 +389,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach's Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
