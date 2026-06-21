@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2024-06-21 - [Optimize Scroll Event Listener]
+**Learning:** React state updates (`setActiveSection`) inside high-frequency scroll event listeners cause jank, even if React batches them or bails out if the value is unchanged. In this codebase's architecture, calculating `window.scrollY` and looping over DOM node `offsetTop` on every synchronous scroll tick is an unoptimized pattern.
+**Action:** Always wrap scroll event listeners in `requestAnimationFrame` (throttling) and use `{ passive: true }` to decouple DOM reading from the browser's scrolling main thread, preventing render blocking during rapid scrolling.
