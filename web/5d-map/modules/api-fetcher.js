@@ -45,13 +45,6 @@ async function fetchWithCache(key, fetcher) {
     cache = loadCache();
     cache[key] = { data, timestamp: now };
     saveCache(cache);
-    const updatedCache = loadCache();
-    updatedCache[key] = { data, timestamp: now };
-    saveCache(updatedCache);
-    const currentCache = loadCache(); // Re-read to avoid race conditions
-    const currentCache = loadCache(); // Re-read to prevent race condition during parallel fetches
-    currentCache[key] = { data, timestamp: now };
-    saveCache(currentCache);
     return data;
   } catch (e) {
     const latestCache = loadCache();
@@ -65,17 +58,12 @@ async function fetchWithCache(key, fetcher) {
 export async function fetchAllData() {
   const result = {};
   // ⚡ Bolt Optimization: Batch local data fetches to reduce load time
-  const [schoolsData, countries, validation, baseline] = await Promise.all([
-
-  // Parallele Abfrage statischer Dateien (⚡ Bolt Optimization)
-  // Parallelize independent static/local data fetches
   const [schools, countries, validation, baseline] = await Promise.all([
     fetchWithCache('schools', () => fetchJSON('./data/schools.json')).catch(() => []),
     fetchWithCache('countries', () => fetchJSON('./data/countries.json')).catch(() => []),
     fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
     fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null)
   ]);
-  result.schools = schoolsData;
 
   result.schools = schools;
 
