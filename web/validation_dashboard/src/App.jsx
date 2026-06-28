@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
@@ -23,17 +23,6 @@ const App = () => {
     damping: 30,
     restDelta: 0.001
   });
-
-  const sections = [
-    { id: 'einleitung', label: 'Einleitung' },
-    { id: 'framework', label: '5D-Intelligence Framework' },
-    { id: 'methodologie', label: 'Methodik' },
-    { id: 'ergebnisse', label: 'Ergebnisse' },
-    { id: 'validierung', label: 'Validierung' },
-    { id: 'implikationen', label: 'Implikationen' },
-    { id: 'zukunft', label: 'Zukunftsperspektiven' },
-    { id: 'schlussfolgerung', label: 'Schlussfolgerung' }
-  ];
 
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
@@ -91,13 +80,6 @@ const App = () => {
         const section = sectionElements[i];
         if (section && scrollPosition >= section.offsetTop) {
           setActiveSection(section.id);
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i].id);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i].id);
           break;
         }
       }
@@ -109,6 +91,12 @@ const App = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-blue-600 focus:text-white focus:outline-none"
+      >
+        Zum Hauptinhalt springen
+      </a>
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 transform-origin-left z-50"
@@ -145,8 +133,10 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                title={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white'
                 }`}
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -154,8 +144,11 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                title={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white'
                 }`}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -191,7 +184,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex="-1" className="pt-16 outline-none">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -408,7 +401,7 @@ const App = () => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach's Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
