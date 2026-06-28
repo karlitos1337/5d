@@ -55,3 +55,7 @@
 ## 2025-04-04 - [Accessibility] Missing semantic ARIA and dynamic focus labels
 **Learning:** When dealing with interactive icon buttons in React SPAs, a common anti-pattern is leaving them unlabelled for screen readers, meaning only their visual presence provides context. Additionally, applying standard tailwind focus styles to fixed headers over dynamic dark mode backgrounds can result in poor contrast for keyboard focus rings. Adding semantic labels (`aria-label`, `title`) and state-aware focus styles vastly improves accessibility with minimal code changes.
 **Action:** Ensure icon-only buttons always include `aria-label` and `title` tags corresponding to their function and state. Use dynamic template literals to adjust `focus-visible` classes based on the current background state, ensuring high contrast visibility for keyboard users.
+
+## 2024-06-28 - [Accessibility] Fix validation dashboard ARIA and skip link
+**Learning:** React Single Page Applications often miss basic accessibility features like "Skip to content" links, ARIA labels on icon-only buttons, and sufficient focus ring contrast when dark mode is managed via state.
+**Action:** Added `aria-label` and `title` to icon buttons, ensured the `<main>` tag had the correct `id` and `tabIndex="-1"`, and implemented dynamic focus ring offsets (`focus-visible:ring-offset-*`) for better contrast in both light and dark modes in `web/validation_dashboard/src/App.jsx`.
