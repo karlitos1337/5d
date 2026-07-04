@@ -82,3 +82,6 @@
 ## 2026-04-03 - React Scroll Event Throttling Cache
 **Learning:** Even when using `requestAnimationFrame`, continuously calling `document.getElementById` inside a throttled scroll handler loop causes measurable main-thread blocking.
 **Action:** Cache DOM elements corresponding to static sections outside the scroll handler loop so they are only queried once, significantly reducing the overhead of each scroll event tick.
+## 2024-07-04 - Unescaped HTML Entities in JSX
+**Learning:** Having unescaped quotes like `'` inside JSX text without curly braces or explicit entity encoding (`&apos;`) causes Vite ESLint checks to fail with `react/no-unescaped-entities`.
+**Action:** Always escape single quotes in JSX text content as `&apos;` or by wrapping strings in curly braces.
