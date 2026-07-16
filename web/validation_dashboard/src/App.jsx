@@ -27,21 +27,15 @@ const App = () => {
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
-
       const refData = el.getAttribute('data-ref');
       if (!refData?.trim()) return;
-
       const separatorIndex = refData.indexOf('|');
       if (separatorIndex === -1) return;
-
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
-
       if (!el.textContent?.trim()) return;
-
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
-
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
         backgroundColor: '#0284c7', borderRadius: '50%', transition: 'all .2s',
@@ -50,13 +44,10 @@ const App = () => {
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
         lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
       });
-
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
-
       el.appendChild(btn);
-
       el.dataset.citationProcessed = 'true';
     });
   }, []);
@@ -71,21 +62,17 @@ const App = () => {
   };
 
   useEffect(() => {
-    const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i].id);
         if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(section.id);
+          setActiveSection(sections[i].id);
           break;
         }
       }
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
