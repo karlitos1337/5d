@@ -128,7 +128,7 @@ const App = () => {
               <button
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
-                className={`p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
