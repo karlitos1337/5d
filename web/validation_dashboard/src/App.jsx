@@ -45,11 +45,23 @@ const App = () => {
       }
       if (!['http:', 'https:'].includes(parsedUrl.protocol)) return;
 
-      const btn = document.createElement('button');
+      const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
-      btn.type = 'button';
+      btn.setAttribute('role', 'link');
+      btn.setAttribute('tabindex', '0');
       btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
       btn.title = `Quelle ${indexNum} öffnen`;
+
+      btn.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
+        }
+      };
+
+      btn.onfocus = () => Object.assign(btn.style, { outline: '2px solid #3b82f6', outlineOffset: '2px' });
+      btn.onblur = () => Object.assign(btn.style, { outline: 'none' });
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
