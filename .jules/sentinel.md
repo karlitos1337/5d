@@ -44,3 +44,7 @@
 **Vulnerability:** Client-side encryption of an API key using a hardcoded passphrase before storing it in `localStorage` provides no actual security (security theater) and gives a false sense of protection, while a heuristic scanner could flag it.
 **Learning:** Avoid security theater practices. Store user-provided keys directly in `localStorage` and rename variables/DOM IDs to generic terms (like `serviceToken`) to avoid false positives from CodeQL's clear-text storage rules.
 **Prevention:** Removed `CryptoJS` encryption, directly stored the key in `localStorage`, and renamed `apiKey` references to `serviceToken` across the file.
+## 2026-05-25 - [DOM-based XSS via innerHTML in Error Handler]
+**Vulnerability:** The error handler for the Gemini API call in `web/templates/5d_forschungsplanung.html` directly injected the unescaped `error.message` into the DOM using `aiResponse.innerHTML`, making it vulnerable to DOM-based XSS if the error message contains malicious HTML.
+**Learning:** Never trust or directly inject unescaped error messages into the DOM using `innerHTML`, even inside a catch block, as error messages can sometimes be controlled by user input or external responses.
+**Prevention:** Replaced `innerHTML` injection with native DOM element creation (`document.createElement`) and set the text safely using `textContent`.
