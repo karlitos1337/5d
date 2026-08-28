@@ -37,10 +37,19 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      let parsedUrl;
+      try {
+        parsedUrl = new URL(url);
+      } catch {
+        return;
+      }
+      if (!['http:', 'https:'].includes(parsedUrl.protocol)) return;
 
-      const btn = document.createElement('sup');
+      const btn = document.createElement('button');
       btn.textContent = String(indexNum);
+      btn.type = 'button';
+      btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
+      btn.title = `Quelle ${indexNum} öffnen`;
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
@@ -53,9 +62,14 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      btn.onclick = e => {
+        e.stopPropagation();
+        e.preventDefault();
+        window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
+      };
 
-      el.appendChild(btn);
+      const citationTarget = el.tagName === 'IMG' ? el.parentElement : el;
+      citationTarget?.appendChild(btn);
 
       el.dataset.citationProcessed = 'true';
     });
@@ -72,8 +86,9 @@ const App = () => {
 
   useEffect(() => {
     const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
+    let frameId;
 
-    const handleScroll = () => {
+    const updateActiveSection = () => {
       const scrollPosition = window.scrollY + 200;
 
       for (let i = sectionElements.length - 1; i >= 0; i--) {
@@ -85,8 +100,19 @@ const App = () => {
       }
     };
 
+    const handleScroll = () => {
+      if (frameId) return;
+      frameId = requestAnimationFrame(() => {
+        frameId = undefined;
+        updateActiveSection();
+      });
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId) cancelAnimationFrame(frameId);
+    };
   }, []);
 
   return (
@@ -129,6 +155,7 @@ const App = () => {
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
                 aria-pressed={darkMode}
+                title={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -179,7 +206,10 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:p-3">
+        Zum Hauptinhalt springen
+      </a>
+      <main id="main-content" tabIndex={-1} className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -248,6 +278,7 @@ const App = () => {
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
+                    decoding="async"
                     loading="lazy"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
@@ -371,6 +402,8 @@ const App = () => {
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
+                  loading="lazy"
+                  decoding="async"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
             </div>
