@@ -85,3 +85,6 @@
 ## 2026-05-18 - Missing Performance Comments
 **Learning:** During code review, it was noted that while the code optimization itself (removing redundant localStorage writes) was fully implemented, the explicit persona constraint to "Add comments explaining the optimization" within the source code was initially missed.
 **Action:** Always ensure that source code comments explicitly documenting the optimization ("⚡ Bolt Optimization: ...") are included in the diff alongside the actual logic change before requesting review or submitting.
+## 2024-06-12 - Passive Event Listeners for Scroll Performance
+**Learning:** In continuous event loops like `scroll`, attaching `{ passive: true }` to `window.addEventListener` prevents the main thread from blocking, significantly improving React rendering performance during scrolling.
+**Action:** Always add `{ passive: true }` when attaching scroll event listeners, and ensure any necessary DOM caching (like `getElementById`) happens outside the continuous scroll handler loop (e.g., within the `useEffect` closure instead).
