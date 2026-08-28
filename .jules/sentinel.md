@@ -44,3 +44,7 @@
 **Vulnerability:** Client-side encryption of an API key using a hardcoded passphrase before storing it in `localStorage` provides no actual security (security theater) and gives a false sense of protection, while a heuristic scanner could flag it.
 **Learning:** Avoid security theater practices. Store user-provided keys directly in `localStorage` and rename variables/DOM IDs to generic terms (like `serviceToken`) to avoid false positives from CodeQL's clear-text storage rules.
 **Prevention:** Removed `CryptoJS` encryption, directly stored the key in `localStorage`, and renamed `apiKey` references to `serviceToken` across the file.
+## 2024-05-30 - [DOM-based XSS in Error Handling]
+**Vulnerability:** The error handler in `web/templates/5d_forschungsplanung.html` injected `error.message` directly into `innerHTML`, leading to a DOM-based XSS vulnerability if a network error was maliciously crafted.
+**Learning:** Even error messages must be sanitized before being injected into the DOM via `innerHTML`.
+**Prevention:** Replaced `innerHTML` injection with `textContent` property by creating a native DOM element, which inherently prevents XSS by treating the input as raw text.
