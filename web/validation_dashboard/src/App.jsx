@@ -128,6 +128,7 @@ const App = () => {
               <button
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
+                aria-pressed={darkMode}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -138,6 +139,8 @@ const App = () => {
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation"
                 className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
@@ -151,6 +154,7 @@ const App = () => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className={`md:hidden border-t ${darkMode ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'}`}
