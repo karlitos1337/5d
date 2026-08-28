@@ -281,6 +281,7 @@ const App = () => {
                     decoding="async"
                     loading="lazy"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
+                    loading="lazy" /* ⚡ Bolt Optimization: Defer loading off-screen image */
                 />
               </div>
             </div>
@@ -405,6 +406,7 @@ const App = () => {
                   loading="lazy"
                   decoding="async"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
+                  loading="lazy" /* ⚡ Bolt Optimization: Defer loading off-screen image */
               />
             </div>
 
