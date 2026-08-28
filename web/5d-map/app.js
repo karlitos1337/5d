@@ -144,6 +144,7 @@ async function init() {
     selectedYear = Number(e.target.value);
     const label = document.getElementById('year-label');
     if (label) label.textContent = String(selectedYear);
+    e.target.setAttribute('aria-valuenow', selectedYear);
     updateTimeLayer(selectedYear);
   });
 
