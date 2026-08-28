@@ -33,14 +33,18 @@ async function fetchJSON(url) {
 }
 
 async function fetchWithCache(key, fetcher) {
-  const cache = loadCache();
+  let cache = loadCache();
   const now = Date.now();
-  const entry = cache[key];
+  let entry = cache[key];
   if (entry && (now - entry.timestamp) < CACHE_TTL) {
     return entry.data;
   }
   try {
     const data = await fetcher();
+    // ⚡ Bolt Optimization: Re-read cache to avoid race conditions in concurrent Promise.all fetches
+    cache = loadCache();
+    cache[key] = { data, timestamp: now };
+    saveCache(cache);
     const updatedCache = loadCache();
     updatedCache[key] = { data, timestamp: now };
     saveCache(updatedCache);
@@ -50,13 +54,18 @@ async function fetchWithCache(key, fetcher) {
     saveCache(currentCache);
     return data;
   } catch (e) {
-    if (entry) return entry.data; // Fallback auf alten Cache
+    const latestCache = loadCache();
+    const latestEntry = latestCache[key];
+    if (latestEntry) return latestEntry.data;
+    if (entry) return entry.data;
     throw e;
   }
 }
 
 export async function fetchAllData() {
   const result = {};
+  // ⚡ Bolt Optimization: Batch local data fetches to reduce load time
+  const [schoolsData, countries, validation, baseline] = await Promise.all([
 
   // Parallele Abfrage statischer Dateien (⚡ Bolt Optimization)
   // Parallelize independent static/local data fetches
@@ -66,101 +75,98 @@ export async function fetchAllData() {
     fetchWithCache('validation', () => fetchJSON('./data/validation.json')).catch(() => ({ validatedISO3: [], items: [] })),
     fetchWithCache('baseline_snapshot', () => fetchJSON('./data/baseline.json')).catch(() => null)
   ]);
+  result.schools = schoolsData;
 
   result.schools = schools;
 
-  // Depression: Our World in Data CSV (letzter Jahrgang pro ISO3)
-  const depressionMap = await fetchWithCache('owid_depression', async () => {
-    const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
-    const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
-    try {
-      // Erst lokaler Proxy (CORS-frei), dann Remote
-      let res = await fetch(proxyUrl, { cache: 'no-store' });
-      if (!res.ok) {
-        res = await fetch(remoteUrl, { cache: 'no-store' });
+  // ⚡ Bolt Optimization: Batch heavy API requests
+  const [depressionMap, depressionSeries, dropoutMap, dropoutSeries] = await Promise.all([
+    fetchWithCache('owid_depression', async () => {
+      const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
+      const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+      try {
+        let res = await fetch(proxyUrl, { cache: 'no-store' });
+        if (!res.ok) {
+          res = await fetch(remoteUrl, { cache: 'no-store' });
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+        const text = await res.text();
+        const rows = parseCSV(text);
+        return reduceLatestByCode(rows, 'Code');
+      } catch (e) {
+        console.warn('Depression remote fetch fehlgeschlagen, nutze lokalen Fallback:', e.message);
+        const localRes = await fetch('./data/depression_sample.csv');
+        const localText = await localRes.text();
+        const localRows = parseCSV(localText);
+        return reduceLatestByCode(localRows, 'Code');
       }
-      if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
-      const text = await res.text();
-      const rows = parseCSV(text);
-      return reduceLatestByCode(rows, 'Code');
-    } catch (e) {
-      console.warn('Depression remote fetch fehlgeschlagen, nutze lokalen Fallback:', e.message);
-      // Lokaler Fallback (Sample CSV im Repo)
-      const localRes = await fetch('./data/depression_sample.csv');
-      const localText = await localRes.text();
-      const localRows = parseCSV(localText);
-      return reduceLatestByCode(localRows, 'Code');
-    }
-  }).catch(() => ({}));
+    }).catch(() => ({})),
 
-  // Depression Jahres‑Serien (iso3 -> {year: value})
-  const depressionSeries = await fetchWithCache('owid_depression_series', async () => {
-    const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
-    const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
-    const buildSeries = (rows) => {
-      const series = {};
-      for (const r of rows) {
-        const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
-        const val = r[valueKey];
-        if (!code || !year || val == null || Number.isNaN(val)) continue;
-        if (!series[code]) series[code] = {};
-        series[code][year] = val;
+    fetchWithCache('owid_depression_series', async () => {
+      const proxyUrl = 'http://localhost:5510/proxy/depression-prevalence.csv';
+      const remoteUrl = 'https://ourworldindata.org/grapher/depression-prevalence.csv';
+      const buildSeries = (rows) => {
+        const series = {};
+        for (const r of rows) {
+          const code = r.Code; const year = r.Year; const valueKey = Object.keys(r).slice(-1)[0];
+          const val = r[valueKey];
+          if (!code || !year || val == null || Number.isNaN(val)) continue;
+          if (!series[code]) series[code] = {};
+          series[code][year] = val;
+        }
+        return series;
+      };
+      try {
+        let res = await fetch(proxyUrl, { cache: 'no-store' });
+        if (!res.ok) {
+          res = await fetch(remoteUrl, { cache: 'no-store' });
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
+        const text = await res.text();
+        const rows = parseCSV(text);
+        return buildSeries(rows);
+      } catch (e) {
+        console.warn('Depression series remote fetch fehlgeschlagen, Fallback lokal:', e.message);
+        const localRes = await fetch('./data/depression_sample.csv');
+        const localText = await localRes.text();
+        const localRows = parseCSV(localText);
+        return buildSeries(localRows);
       }
-      return series;
-    };
-    try {
-      let res = await fetch(proxyUrl, { cache: 'no-store' });
-      if (!res.ok) {
-        res = await fetch(remoteUrl, { cache: 'no-store' });
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`);
-      const text = await res.text();
-      const rows = parseCSV(text);
-      return buildSeries(rows);
-    } catch (e) {
-      console.warn('Depression series remote fetch fehlgeschlagen, Fallback lokal:', e.message);
-      const localRes = await fetch('./data/depression_sample.csv');
-      const localText = await localRes.text();
-      const localRows = parseCSV(localText);
-      return buildSeries(localRows);
-    }
-  }).catch(() => ({}));
+    }).catch(() => ({})),
 
-  // Dropout: World Bank JSON (alle Länder, neuerster Wert)
-  const dropoutMap = await fetchWithCache('wb_dropout', async () => {
-    const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
-    const data = await fetchJSON(url);
-    // data = [meta, rows]
-    const rows = Array.isArray(data) ? data[1] || [] : [];
-    const latest = {};
-    for (const r of rows) {
-      const iso3 = r?.countryiso3code; const year = Number(r?.date);
-      const val = r?.value == null ? null : Number(r.value);
-      if (!iso3 || val == null || Number.isNaN(val)) continue;
-      const prev = latest[iso3];
-      if (!prev || year > prev.year) latest[iso3] = { value: val, year };
-    }
-    const map = {};
-    for (const [k, v] of Object.entries(latest)) map[k] = v.value;
-    return map;
-  }).catch(() => ({}));
-
-  // Dropout Jahres‑Serien
-  const dropoutSeries = await fetchWithCache('wb_dropout_series', async () => {
-    try {
+    fetchWithCache('wb_dropout', async () => {
       const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
       const data = await fetchJSON(url);
       const rows = Array.isArray(data) ? data[1] || [] : [];
-      const series = {};
+      const latest = {};
       for (const r of rows) {
-        const iso3 = r?.countryiso3code; const year = Number(r?.date); const val = r?.value == null ? null : Number(r.value);
-        if (!iso3 || !year || val == null || Number.isNaN(val)) continue;
-        if (!series[iso3]) series[iso3] = {};
-        series[iso3][year] = val;
+        const iso3 = r?.countryiso3code; const year = Number(r?.date);
+        const val = r?.value == null ? null : Number(r.value);
+        if (!iso3 || val == null || Number.isNaN(val)) continue;
+        const prev = latest[iso3];
+        if (!prev || year > prev.year) latest[iso3] = { value: val, year };
       }
-      return series;
-    } catch { return {}; }
-  }).catch(() => ({}));
+      const map = {};
+      for (const [k, v] of Object.entries(latest)) map[k] = v.value;
+      return map;
+    }).catch(() => ({})),
+
+    fetchWithCache('wb_dropout_series', async () => {
+      try {
+        const url = 'https://api.worldbank.org/v2/country/all/indicator/SE.PRM.DROPOUT.ZS?format=json&per_page=20000';
+        const data = await fetchJSON(url);
+        const rows = Array.isArray(data) ? data[1] || [] : [];
+        const series = {};
+        for (const r of rows) {
+          const iso3 = r?.countryiso3code; const year = Number(r?.date); const val = r?.value == null ? null : Number(r.value);
+          if (!iso3 || !year || val == null || Number.isNaN(val)) continue;
+          if (!series[iso3]) series[iso3] = {};
+          series[iso3][year] = val;
+        }
+        return series;
+      } catch { return {}; }
+    }).catch(() => ({}))
+  ]);
 
   // WGI‑Proxies (World Bank Governance Indicators), Werte in [-2.5, 2.5]
   // RL.EST (Rule of Law) -> R, VA.EST (Voice & Accountability) -> SP, GE.EST (Gov. Effectiveness) -> Au
@@ -182,6 +188,7 @@ export async function fetchAllData() {
     return map;
   };
 
+  // ⚡ Bolt Optimization: Batch WGI requests
   // Parallelize WGI Proxies fetching
   const [wgi_rl_raw, wgi_va_raw, wgi_ge_raw] = await Promise.all([
     fetchWithCache('wgi_rl_est', () => wgiFetch('RL.EST')).catch(() => ({})),
