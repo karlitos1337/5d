@@ -41,7 +41,9 @@ function activateLayer(layerName) {
     infoTextEl.textContent = txt;
     infoEl.style.display = 'block';
   }
-  document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('btn--primary'));
+  // ⚡ Bolt Optimization: Replace querySelectorAll with generic class mutation
+  const currentBtn = document.querySelector('.btn.btn--primary');
+  if (currentBtn) currentBtn.classList.remove('btn--primary');
   const btn = document.getElementById(`layer-${layerName}`);
   if (btn) btn.classList.add('btn--primary');
 
@@ -121,15 +123,17 @@ async function init() {
   activateLayer('status-quo');
   updateValidationCount();
 
-  document.getElementById('layer-status-quo')?.addEventListener('click', () => activateLayer('status-quo'));
-  document.getElementById('reset-cache')?.addEventListener('click', () => { clearCache(); refreshData(); });
-  document.getElementById('layer-schools')?.addEventListener('click', () => activateLayer('schools'));
-  document.getElementById('layer-imp')?.addEventListener('click', () => activateLayer('imp'));
-  document.getElementById('layer-validation')?.addEventListener('click', () => activateLayer('validation'));
-  document.getElementById('export-validation-csv')?.addEventListener('click', () => exportValidationCSV());
-  document.getElementById('export-validation-json')?.addEventListener('click', () => exportValidationJSON());
-  document.getElementById('layer-sources')?.addEventListener('click', () => activateLayer('sources'));
-  document.getElementById('layer-time')?.addEventListener('click', () => activateLayer('time'));
+  // ⚡ Bolt Optimization: DRY event binding lookup
+  const bindClick = (id, fn) => document.getElementById(id)?.addEventListener('click', fn);
+  bindClick('layer-status-quo', () => activateLayer('status-quo'));
+  bindClick('reset-cache', () => { clearCache(); refreshData(); });
+  bindClick('layer-schools', () => activateLayer('schools'));
+  bindClick('layer-imp', () => activateLayer('imp'));
+  bindClick('layer-validation', () => activateLayer('validation'));
+  bindClick('export-validation-csv', () => exportValidationCSV());
+  bindClick('export-validation-json', () => exportValidationJSON());
+  bindClick('layer-sources', () => activateLayer('sources'));
+  bindClick('layer-time', () => activateLayer('time'));
 
   const updateTimeLayer = debounce((year) => {
     if (document.getElementById('layer-time')?.classList.contains('btn--primary')) {
