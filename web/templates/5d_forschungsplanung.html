@@ -697,7 +697,11 @@
                 }
             } catch (error) {
                 loadingSpinner.classList.add('hidden');
-                aiResponse.innerHTML = `<p class="text-red-500">Netzwerkfehler: ${error.message}</p>`;
+                aiResponse.innerHTML = '';
+                const p = document.createElement('p');
+                p.className = 'text-red-500';
+                p.textContent = `Netzwerkfehler: ${error.message}`;
+                aiResponse.appendChild(p);
             }
         }
     </script>
