@@ -90,11 +90,14 @@ const App = () => {
     // calculations via offsetTop inside requestAnimationFrame.
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        const intersecting = entries.filter((entry) => entry.isIntersecting);
+        if (intersecting.length === 0) return;
+
+        // Deterministically pick the section closest to the top of the viewport.
+        const best = intersecting.reduce((a, b) =>
+          a.boundingClientRect.top <= b.boundingClientRect.top ? a : b
+        );
+        setActiveSection(best.target.id);
       },
       {
         rootMargin: '-20% 0px -79% 0px', // Roughly triggers when section is near the top
