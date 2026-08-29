@@ -58,3 +58,6 @@
 ## 2026-08-28 - Dynamic Citation Keyboard Accessibility
 **Learning:** Injected citation markers (e.g., dynamically created sup elements in React) require manual implementation of keyboard event handlers (onkeydown), role (link), and tabindex to be accessible since they bypass standard React accessibility flows.
 **Action:** Always manually configure ARIA roles, tabindex, and keyboard events for DOM elements injected outside of the React lifecycle.
+## 2026-08-29 - Skip Link Dark Mode Contrast
+**Learning:** When defining a fixed background color like focus:bg-white for accessibility elements such as skip links, the text color must also be explicitly set (e.g., focus:text-gray-900) because elements may inherit a light text color from a dark mode parent component (e.g., text-gray-100), leading to invisible text against the white background.
+**Action:** Always explicitly pair text colors with background colors for interactive state classes, especially when overriding a parent's dark mode styling.
