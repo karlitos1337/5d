@@ -85,34 +85,30 @@ const App = () => {
   };
 
   useEffect(() => {
-    const sectionElements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
-    let frameId;
+    // ⚡ Bolt Optimization: Replace continuous scroll event listener with IntersectionObserver
+    // This completely eliminates main-thread blocking scroll events and avoids repetitive layout
+    // calculations via offsetTop inside requestAnimationFrame.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const intersecting = entries.filter((entry) => entry.isIntersecting);
+        if (intersecting.length === 0) return;
 
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(section.id);
-          break;
-        }
+        // Deterministically pick the section closest to the top of the viewport.
+        const best = intersecting.reduce((a, b) =>
+          a.boundingClientRect.top <= b.boundingClientRect.top ? a : b
+        );
+        setActiveSection(best.target.id);
+      },
+      {
+        rootMargin: '-20% 0px -79% 0px', // Roughly triggers when section is near the top
+        threshold: 0
       }
-    };
+    );
 
-    const handleScroll = () => {
-      if (frameId) return;
-      frameId = requestAnimationFrame(() => {
-        frameId = undefined;
-        updateActiveSection();
-      });
-    };
+    const elements = sections.map(s => document.getElementById(s.id)).filter(Boolean);
+    elements.forEach(el => observer.observe(el));
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (frameId) cancelAnimationFrame(frameId);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
