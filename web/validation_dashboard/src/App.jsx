@@ -216,7 +216,7 @@ btn.onkeydown = (e) => {
       </header>
 
       {/* Main Content */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:p-3">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3">
         Zum Hauptinhalt springen
       </a>
       <main id="main-content" tabIndex={-1} className="pt-16">
