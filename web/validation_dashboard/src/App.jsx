@@ -52,13 +52,15 @@ const App = () => {
       btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
       btn.title = `Quelle ${indexNum} öffnen`;
 
-      btn.onkeydown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          e.stopPropagation();
-          window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
-        }
-      };
+btn.onkeydown = (e) => {
+  if (e.repeat) return;
+  const isSpace = e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
+  if (e.key === 'Enter' || isSpace) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
+  }
+};
 
       btn.onfocus = () => Object.assign(btn.style, { outline: '2px solid #3b82f6', outlineOffset: '2px' });
       btn.onblur = () => Object.assign(btn.style, { outline: 'none' });
