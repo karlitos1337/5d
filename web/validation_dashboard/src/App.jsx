@@ -149,7 +149,8 @@ btn.onkeydown = (e) => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium transition-colors duration-200 ${
+                  aria-current={activeSection === section.id ? 'page' : undefined}
+                  className={`text-sm font-medium rounded transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'} ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -201,7 +202,8 @@ btn.onkeydown = (e) => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                  aria-current={activeSection === section.id ? 'page' : undefined}
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')

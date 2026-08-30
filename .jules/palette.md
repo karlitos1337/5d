@@ -61,3 +61,6 @@
 ## 2026-08-29 - Skip Link Dark Mode Contrast
 **Learning:** When defining a fixed background color like focus:bg-white for accessibility elements such as skip links, the text color must also be explicitly set (e.g., focus:text-gray-900) because elements may inherit a light text color from a dark mode parent component (e.g., text-gray-100), leading to invisible text against the white background.
 **Action:** Always explicitly pair text colors with background colors for interactive state classes, especially when overriding a parent's dark mode styling.
+## 2026-08-30 - Enhanced Navigation Accessibility
+**Learning:** In a single-page app using scroll spy for section highlighting, native focus management is important. Adding `aria-current='page'` provides crucial semantic context for screen readers about the active section, and explicit `focus-visible` styles prevent keyboard users from losing track of their position without compromising mouse users' experience.
+**Action:** Always include `aria-current` and robust `focus-visible` indicators on dynamic navigation components.
