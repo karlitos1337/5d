@@ -280,6 +280,37 @@ $$
 | $\varepsilon_{exo}$ | Exogene Belastungsterme | Nährstoffstatus, chronische Erkrankungen | $[0, 1]$ normiert |
 | $\Phi_{5D}$ | Gesamtsystemkapazität | IMP-Gesamtscore | $\mathbb{R}_{+}$ |
 
+### 8.1.1 Axiom der Multiplikativität („0 = Tod" für den Triage-Kern)
+
+Der Triage-Kern $(A \cdot C \cdot R \cdot P \cdot Au)^{1/5}$ hat eine definierende Eigenschaft: Geht *ein* Faktor gegen null, geht der gesamte Kern gegen null — unabhängig von den übrigen vier:
+
+$$
+\lim_{A \to 0} (A \cdot C \cdot R \cdot P \cdot Au)^{1/5} = 0 .
+$$
+
+Innerhalb des Kerns gibt es **keine additive Kompensation**: Ein hoher Kompetenzwert kann eine kollabierte Autonomie nicht aufwiegen. Das ist keine Wertung, sondern eine algebraische Eigenschaft des geometrischen Mittels (und ebenso des reinen Produkts in `FORMEL_UPDATE_v2.md`).
+
+**Präzisierung gegenüber der Kurzform „0 = Tod".** In der vollständigen Formel (Appendix B.1) wird vom Kern noch $[\varepsilon_{mask} + \varepsilon_{exo}]$ *subtrahiert*. Streng genommen strebt $\Phi_{5D}$ bei $A \to 0$ also gegen $-[\varepsilon_{mask} + \varepsilon_{exo}] \le 0$, nicht exakt gegen 0. Die Aussage „0 = Tod" ist daher präzise so zu lesen: Der *multiplikative Kern* — die Kapazität des Systems, als handlungsfähiges, autonomes Ganzes zu operieren — kollabiert. Das biologische Substrat kann darunter weiter bestehen; das beschreiben die Asymptotik in 2.3 ($\Phi_{5D} \to \varepsilon_{min} > 0$ auf reiner Überlebensfunktion) und der Puffermechanismus in Abschnitt 3 (Sickness Behavior / Freeze).
+
+**Zwei verschiedene $\varepsilon$ — nicht verwechseln:**
+
+| Term | Ort | Rolle | Vorzeichen-Wirkung |
+|---|---|---|---|
+| $\varepsilon_{min}$ | Abschnitt 2.3 | untere Schranke der Überlebensfunktion — der Körper schaltet nicht ab | hält am Leben |
+| $\varepsilon_{mask},\ \varepsilon_{exo}$ | Appendix B.1 | Suppressionsterme — drücken die Systemkapazität zusätzlich nach unten | zehren aus |
+
+### 8.1.2 Kausalbeispiel: schweres somatisches Trauma und Autonomie-Kollaps
+
+*Illustrative Kausalkette (Modell, keine klinische Kohortenevidenz):*
+
+1. **Trigger:** akute Existenzbedrohung (z. B. Herzinfarkt).
+2. **Akutreaktion:** allostatisches Notprogramm; bei überwältigender Bedrohung eine Freeze-/Hilflosigkeitskomponente (dorsovagal nach Porges 2011 — als Arbeitshypothese, siehe Limitationen).
+3. **Autonomie-Einbruch:** Im Notfallsystem wird über die Person entschieden, nicht mit ihr; die erlebte Selbstbestimmung $A$ fällt stark ab.
+4. **Formale Konsequenz:** Ein niedriges $A$ zieht den Triage-Kern mit sich nach unten — das geometrische Mittel ist gegenüber dem Minimum am empfindlichsten (8.2, Achse 1). Bei $A \to 0$ kollabiert der Kern (8.1.1).
+5. **Puffer:** Resignation/Rückzug senkt den akuten Energieverbrauch und hält das biologische System oberhalb $\varepsilon_{min}$ (2.3) — um den Preis, dass das System als *autonomes* Ganzes vorübergehend aussetzt.
+
+**Schlussfolgerung (Modell-Implikation, nicht empirischer Befund):** Wenn erlebte Autonomie ein multiplikativer Faktor ist, folgt ihr Schutz — auch in Akutsettings, soweit medizinisch vertretbar — direkt aus der Modellstruktur und nicht erst aus einer ethischen Zusatzforderung. Diese Aussage steht und fällt mit der empirischen Prüfung der multiplikativen Verknüpfung (H2, OSF-Studie).
+
 ### 8.2 Mapping der sechs Evidenzachsen auf die 5D-Variablen
 
 **Achse 1 — Mathematik (Schwellenwert / Allee-Effekt / Asymptotik):**
@@ -325,6 +356,16 @@ $$
 
 Das System kann nur durch die Maskierungskosten und exogene Belastungen weiter gedrückt werden — ein Zustand, der dem klinischen Burnout-Phänomen entspricht. Die Vorhersage ist statistisch prüfbar: In der OSF-Studie (N = 400) wird H2 getestet, indem das geometrische Mittel mit dem arithmetischen Mittel als Prädiktor verglichen wird. Falls Triage-Logik gilt, sollte das geometrische Mittel — sensitiver gegenüber dem Minimum — besser prädizieren.
 
+### 8.5 Patch M6 — Vom statischen zum dynamischen Modell (Forschungsagenda)
+
+Die bisherige Darstellung ist ein *Momentaufnahme-Modell*: feste Faktoren, ein Zeitpunkt. Eine dynamische Erweiterung — hier als Agenda, nicht als ausgearbeitetes Modell — hätte drei Bausteine:
+
+1. **Adaptive Topologie.** Die fünf Dimensionen stehen nicht isoliert; ihre Kopplungsstärken ändern sich mit dem Zustand (vgl. Allee-Effekt, 2.2: unter Schwellenwert wird Koregulation ineffizienter). Ein Netzwerkmodell mit zustandsabhängigen Kanten wäre der nächste Schritt.
+2. **Kausale Validierung.** Die sechs Evidenzachsen (8.2) implizieren gerichtete Zusammenhänge. Diese als strukturelles Kausalmodell (SCM/DAG) zu explizieren, würde erlauben, bei neuer Evidenz einzelne Pfeile zu revidieren statt das ganze Modell.
+3. **Stabilität statt Kontrolle.** Ein „sicherer Betriebsbereich" (Analogie zu planetaren Grenzen, Rockström et al. 2009) lässt sich als Region beschreiben, aus der das System nach Störung zurückkehrt (Lyapunov-Stabilität als formales Bild, nicht als bewiesene Eigenschaft). These: Dieser Bereich wird eher durch Exploration und Redundanz erhalten als durch starre Regelung — dieselbe Logik wie das Trilemma im Resilienz-Kapitel (§4).
+
+*Status: Keiner der drei Bausteine ist derzeit implementiert oder empirisch geprüft.*
+
 ---
 
 ## 9. Limitationen und Ausblick
@@ -340,6 +381,8 @@ Das System kann nur durch die Maskierungskosten und exogene Belastungen weiter g
 **Korzybski als philosophische Basis:** Die Allgemeine Semantik (Korzybski, 1933; Bourland, 1991) ist eine philosophisch-linguistische Schule, keine empirische Wissenschaft im naturwissenschaftlichen Sinn. Axiom 0 (Qualia als primäre Messeinheit) ist eine metatheoretische Setzung, nicht eine empirisch ableitbare These.
 
 **Wong & Bartlett (2022) als Zivilisations-Analogie:** Das zitierte Modell des asymptotischen Burnouts (Wong & Bartlett, 2022) bezieht sich auf Städte und Zivilisationen, nicht auf biologische Organismen. Die Übertragung der mathematischen Analogie auf bioenergetische Systemdynamik ist als formale Analogie, nicht als direkte Evidenz zu verstehen.
+
+**Polyvagaltheorie als umstrittene Grundlage:** Der exponentielle vagale Term $\exp(\sigma_{vagal})$ ist von der Polyvagaltheorie (Porges, 2011) inspiriert, deren evolutionär-neuroanatomische Kernannahmen erheblicher Kritik ausgesetzt sind (Grossman & Taylor, 2007). Der empirisch tragfähige Kern ist der Zusammenhang zwischen kardialer vagaler Aktivität (RMSSD/HF-HRV) und Selbstregulationskapazität; nur dieser wird für $\sigma_{vagal}$ beansprucht. Die funktionale Form (exponentiell vs. linear) ist eine Modellannahme, die in der OSF-Studie nicht direkt getestet wird.
 
 **Godil et al. (2011) — Grenzen des Belegs:** Die Behauptungen über kortikale Säulen als Fuzzy-Mengen und Bayes'sche Inferenz als Fuzzy-Implementierung lassen sich aus Godil et al. (2011) nicht ableiten; Friston (2010) liefert die substanzielle Grundlage für die Bayes-Verbindung.
 
@@ -363,7 +406,7 @@ Das 5D-Framework modelliert menschliches Wohlbefinden und Handlungsvermögen als
 
 Sechs unabhängige Evidenzachsen stützen die Plausibilität dieser multiplikativen Architektur. Das Allostatische Triage-Modell der Psychopathologie (Kelley et al., 2025) beschreibt, wie Stress Energie von langfristiger Optimierung (CEN, DMN) zu kurzfristigem Überleben (SN) umleitet — eine direkte neurobiologische Entsprechung der 5D-Triage-Formel. Ames' molekulare Triage-Theorie (Ames, 2006, 2018) belegt denselben Mechanismus auf Protein-Ebene: Überlebensproteine verdrängen Langlebigkeitsproteine, wenn Mikronährstoffe knapp sind. Die Psychoneuroimmunologie (Slavich & Irwin, 2014; Bobba-Alves et al., 2022) quantifiziert die metabolischen und immunologischen Kosten dieser Priorisierung.
 
-Die Formalisierung der 5D-Formel als Φ_5D = (A · C · R · P · Au)^(1/5) · exp(σ_vagal) − [ε_mask + ε_exo] integriert diese Evidenzlinien in eine mathematisch kohärente Beschreibung. Vagaler Tonus (σ_vagal) amplifiziert die Systemkapazität; Maskierungskosten (ε_mask) und exogene Belastungen (ε_exo) degradieren sie. Die exponentiell multiplizierte vagale Regulation reflektiert die Polyvagaltheorie (Porges, 2011) und die mitochondrial-neuroendokrine Kopplung (Picard et al., 2014).
+Die Formalisierung der 5D-Formel als Φ_5D = (A · C · R · P · Au)^(1/5) · exp(σ_vagal) − [ε_mask + ε_exo] integriert diese Evidenzlinien in eine mathematisch kohärente Beschreibung. Vagaler Tonus (σ_vagal) amplifiziert die Systemkapazität; Maskierungskosten (ε_mask) und exogene Belastungen (ε_exo) degradieren sie. Die exponentiell multiplizierte vagale Regulation lehnt sich begrifflich an die Polyvagaltheorie (Porges, 2011) an, deren neuroanatomische Kernannahmen wissenschaftlich umstritten sind (Grossman & Taylor, 2007); $\sigma_{vagal}$ wird daher konservativ als HRV-gestützter Proxy (RMSSD) geführt, nicht als Bestätigung der Theorie. Die mitochondrial-neuroendokrine Kopplung (Picard et al., 2014) ist davon unabhängig belegt.
 
 Das vorliegende Whitepaper deklariert seine Limitationen explizit: Es sind keine eigenen empirischen Daten vorhanden; zentrale Verbindungen sind theoretische Extrapolationen; philosophische Argumente (Korzybski, Bourland) werden als solche ausgewiesen. Die Stärke des Frameworks liegt in der Konvergenz: Sechs unabhängige Forschungslinien, aus je unterschiedlichen Disziplinen, konvergieren auf dieselbe strukturelle Logik — dass biologische Systeme unter finitem Energiebudget Triage betreiben, multiplikativ, mit asymptotischem Minimum. Die empirische Prüfung dieser Logik ist die Aufgabe der präregistrierten OSF-Studie (H2; https://osf.io/qe6vp).
 
@@ -389,6 +432,8 @@ Friston, K. (2010). The free-energy principle: A unified brain theory? *Nature R
 
 Godil, S. S., Shamim, M. S., Enam, S. A., & Qidwai, U. (2011). Fuzzy logic: A "simple" solution for complexities in neurosciences? *Surgical Neurology International*, *2*, 24. https://doi.org/10.4103/2152-7806.77177
 
+Grossman, P., & Taylor, E. W. (2007). Toward understanding respiratory sinus arrhythmia: Relations to cardiac vagal tone, evolution and biobehavioral functions. *Biological Psychology*, *74*(2), 263–285. https://doi.org/10.1016/j.biopsycho.2005.11.014
+
 Kelley, D. P., Singleton, S. P., Venable, K., Strum, G., Skovgaard, A., Francis, J., Neylan, T. C., Bradley, E. R., Woolley, J., Picard, M., & O'Donovan, A. (2025). The allostatic triage model of psychopathology (ATP Model): How reallocation of brain energetic resources under stress elicits psychiatric symptoms. *Neuroscience & Biobehavioral Reviews*, *179*, 106419. https://doi.org/10.1016/j.neubiorev.2025.106419
 
 Klein, J. P., & Moeschberger, M. L. (2003). *Survival analysis: Techniques for censored and truncated data* (2nd ed.). Springer. https://doi.org/10.1007/b97377
@@ -398,6 +443,8 @@ Korzybski, A. (1933). *Science and sanity: An introduction to non-Aristotelian s
 Picard, M., Juster, R.-P., & McEwen, B. S. (2014). Mitochondrial allostatic load puts the 'gluc' back in glucocorticoids. *Nature Reviews Endocrinology*, *10*(5), 303–310. https://doi.org/10.1038/nrendo.2014.22
 
 Porges, S. W. (2011). *The polyvagal theory: Neurophysiological foundations of emotions, attachment, communication, and self-regulation*. W. W. Norton & Company.
+
+Rockström, J., Steffen, W., Noone, K., Persson, Å., Chapin, F. S., Lambin, E. F., … Foley, J. A. (2009). A safe operating space for humanity. *Nature*, *461*(7263), 472–475. https://doi.org/10.1038/461472a
 
 Slavich, G. M., & Irwin, M. R. (2014). From stress to inflammation and major depressive disorder: A social signal transduction theory of depression. *Psychological Bulletin*, *140*(3), 774–815. https://doi.org/10.1037/a0035302
 
@@ -475,7 +522,7 @@ $$
 \Phi_{5D} = \underbrace{(A \cdot C \cdot R \cdot P \cdot Au)^{1/5}}_{\text{Triage-Kern}} \cdot \underbrace{\exp(\sigma_{vagal})}_{\text{Vagaler Verstärker}} - \underbrace{[\varepsilon_{mask} + \varepsilon_{exo}]}_{\text{Suppressionsterme}}
 $$
 
-**Interpretation:** Das geometrische Mittel der fünf Dimensionen bildet den Triage-Kern — sensitiv gegenüber dem Minimum. Der vagale Tonus multipliziert exponentiell, sodass niedrige HRV die Systemkapazität nicht additiv, sondern multiplikativ reduziert. Maskierungs- und Exogenlasten subtrahieren vom Gesamtergebnis.
+**Interpretation:** Das geometrische Mittel der fünf Dimensionen bildet den Triage-Kern — sensitiv gegenüber dem Minimum. Der vagale Tonus multipliziert exponentiell, sodass niedrige HRV die Systemkapazität nicht additiv, sondern multiplikativ reduziert. Maskierungs- und Exogenlasten subtrahieren vom Gesamtergebnis. Zum Verhalten des Kerns bei $A \to 0$ und zur Abgrenzung von $\varepsilon_{min}$ (Überlebensschranke) gegen $\varepsilon_{mask}, \varepsilon_{exo}$ (Suppressionsterme) siehe 8.1.1.
 
 ### B.2 Fuzzy-Formalisierung
 
@@ -523,4 +570,4 @@ bei Energieknappheit, was formal der Weak-Link-Vorhersage des 5D-Frameworks ents
 
 *Ende des Whitepapers*
 
-*Version: 1.0 | Datum: April 2026 | Repository: https://github.com/karlitos1337/5d | OSF: https://osf.io/qe6vp*
+*Version: 1.1 | Datum: April 2026 (rev. September 2026 — Patches M4–M6: Multiplikations-Axiom, Trauma-Kausalkette, dynamisches Modell; Polyvagal-Downgrade) | Repository: https://github.com/karlitos1337/5d | OSF: https://osf.io/qe6vp*
