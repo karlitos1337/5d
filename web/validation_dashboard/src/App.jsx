@@ -151,8 +151,10 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
+                aria-pressed={darkMode}
+                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 }`}
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -160,8 +162,9 @@ const App = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                aria-label={mobileMenuOpen ? 'Navigationsmenü schließen' : 'Navigationsmenü öffnen'}
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 }`}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
