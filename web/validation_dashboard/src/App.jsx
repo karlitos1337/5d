@@ -55,11 +55,21 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
+      const openCitation = () => {
+        let parsedUrl;
+        try {
+          parsedUrl = new URL(url);
+        } catch {
+          return;
+        }
+        if (!['http:', 'https:'].includes(parsedUrl.protocol)) return;
+        window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
+      };
+      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); openCitation(); };
       btn.onkeydown = e => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (!e.repeat && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault();
-          window.open(url, '_blank');
+          openCitation();
         }
       };
 
