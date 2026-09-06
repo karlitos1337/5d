@@ -37,10 +37,33 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      let parsedUrl;
+      try {
+        parsedUrl = new URL(url);
+      } catch {
+        return;
+      }
+      if (!['http:', 'https:'].includes(parsedUrl.protocol)) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
+      btn.setAttribute('role', 'link');
+      btn.setAttribute('tabindex', '0');
+      btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
+      btn.title = `Quelle ${indexNum} öffnen`;
+
+btn.onkeydown = (e) => {
+  if (e.repeat) return;
+  const isSpace = e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
+  if (e.key === 'Enter' || isSpace) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
+  }
+};
+
+      btn.onfocus = () => Object.assign(btn.style, { outline: '2px solid #3b82f6', outlineOffset: '2px' });
+      btn.onblur = () => Object.assign(btn.style, { outline: 'none' });
 
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
@@ -53,27 +76,14 @@ const App = () => {
 
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
-
-      btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank', 'noopener,noreferrer'); };
-
-      btn.setAttribute('role', 'link');
-      btn.setAttribute('tabindex', '0');
-      btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
-      btn.title = `Quelle ${indexNum} öffnen`;
-      btn.onfocus = () => Object.assign(btn.style, { outline: '2px solid #3b82f6', outlineOffset: '2px' });
-      btn.onblur = () => Object.assign(btn.style, { outline: 'none' });
-
-      btn.onkeydown = e => {
-        if (e.repeat) return;
-        const isSpace = e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
-        if (e.key === 'Enter' || isSpace) {
-          e.preventDefault();
-          e.stopPropagation();
-          window.open(url, '_blank', 'noopener,noreferrer');
-        }
+      btn.onclick = e => {
+        e.stopPropagation();
+        e.preventDefault();
+        window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
       };
 
-      el.appendChild(btn);
+      const citationTarget = el.tagName === 'IMG' ? el.parentElement : el;
+      citationTarget?.appendChild(btn);
 
       el.dataset.citationProcessed = 'true';
     });
@@ -89,18 +99,22 @@ const App = () => {
   };
 
   useEffect(() => {
+    // ⚡ Bolt Optimization: Replace continuous scroll event listener with IntersectionObserver
+    // This completely eliminates main-thread blocking scroll events and avoids repetitive layout
+    // calculations via offsetTop inside requestAnimationFrame.
     const observer = new IntersectionObserver(
       (entries) => {
         const intersecting = entries.filter((entry) => entry.isIntersecting);
         if (intersecting.length === 0) return;
 
+        // Deterministically pick the section closest to the top of the viewport.
         const best = intersecting.reduce((a, b) =>
           a.boundingClientRect.top <= b.boundingClientRect.top ? a : b
         );
         setActiveSection(best.target.id);
       },
       {
-        rootMargin: '-20% 0px -79% 0px',
+        rootMargin: '-20% 0px -79% 0px', // Roughly triggers when section is near the top
         threshold: 0
       }
     );
@@ -274,8 +288,8 @@ const App = () => {
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
-                    loading="lazy"
                     decoding="async"
+                    loading="lazy"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
               </div>
