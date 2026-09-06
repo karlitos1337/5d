@@ -166,11 +166,11 @@ if aArguments.ubb:
 
         for sOutScope in sLine["out_scope"]:
                     # Parse the value to extract the hostname if needed
-                    parsed_url = urllib.parse.urlparse(sOutScopeValue)
-                    sHost = parsed_url.hostname if parsed_url.hostname else sOutScopeValue
             if sOutScope["type"] == "web":
                 lOutScopeValues = sOutScope["value"].lower().split(",")
                 for sOutScopeValue in lOutScopeValues:
+                    parsed_url = urllib.parse.urlparse(sOutScopeValue)
+                    sHost = parsed_url.hostname if parsed_url.hostname else sOutScopeValue
                     if (
                         (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "amazonaws.com"
                         or (lambda ex: ex.domain + '.' + ex.suffix)(extract(sHost)) == "cloudfront.net"
