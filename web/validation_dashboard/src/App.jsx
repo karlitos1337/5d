@@ -37,7 +37,8 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
-      if (!el.textContent?.trim()) return;
+      const isImageElement = el.tagName === 'IMG';
+      if (!isImageElement && !el.textContent?.trim()) return;
 
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
@@ -73,7 +74,11 @@ const App = () => {
         }
       };
 
-      el.appendChild(btn);
+      if (isImageElement) {
+        el.parentElement?.appendChild(btn);
+      } else {
+        el.appendChild(btn);
+      }
 
       el.dataset.citationProcessed = 'true';
     });
