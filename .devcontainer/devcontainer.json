@@ -1,6 +1,8 @@
 {
   "name": "5D Global System Monitor",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12-bullseye",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers/features/python:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}

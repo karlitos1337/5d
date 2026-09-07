@@ -39,19 +39,6 @@ class ProxyHandler(BaseHTTPRequestHandler):
                             )
                             content_size = -1
                         if content_size > MAX_RESPONSE_SIZE:
-                MAX_RESPONSE_SIZE = 10 * 1024 * 1024  # 10 MB
-                CHUNK_SIZE = 8192
-                with urllib.request.urlopen(url, timeout=15) as resp:
-                    content_len = resp.getheader("Content-Length")
-                    if content_len:
-                        parsed_len = None
-                        try:
-                            parsed_len = int(content_len)
-                        except (TypeError, ValueError):
-                            sys.stderr.write(
-                                f"Invalid Content-Length header from upstream for {key}: {content_len}\n"
-                            )
-                        if parsed_len is not None and parsed_len > MAX_RESPONSE_SIZE:
                             raise ValueError("Response too large")
 
                     data = b""

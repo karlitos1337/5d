@@ -20,21 +20,18 @@ const AppComponent = () => {
   useEffect(() => {
     document.querySelectorAll('[data-ref]').forEach(el => {
       if (el.dataset.citationProcessed) return;
-      
+
       const refData = el.getAttribute('data-ref');
       if (!refData?.trim()) return;
-
       const separatorIndex = refData.indexOf('|');
       if (separatorIndex === -1) return;
-      
+
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
-
       if (!el.textContent?.trim()) return;
-
       const btn = document.createElement('sup');
       btn.textContent = String(indexNum);
-      
+
       Object.assign(btn.style, {
         fontSize: '8px', top: '1%', color: '#fff', cursor: 'pointer', fontWeight: 'bold',
         backgroundColor: '#0284c7', borderRadius: '50%', transition: 'all .2s',
@@ -43,11 +40,9 @@ const AppComponent = () => {
         boxShadow: '0 1px 3px rgba(0,0,0,.2)', fontFamily: 'system-ui,-apple-system,sans-serif',
         lineHeight: '1', verticalAlign: 'baseline', padding: '0 2px'
       });
-
       btn.onmouseenter = () => Object.assign(btn.style, { backgroundColor: '#0369a1', transform: 'scale(1.15)', boxShadow: '0 2px 6px rgba(0,0,0,.3)' });
       btn.onmouseleave = () => Object.assign(btn.style, { backgroundColor: '#0284c7', transform: 'scale(1)', boxShadow: '0 1px 3px rgba(0,0,0,.2)' });
       btn.onclick = e => { e.stopPropagation(); e.preventDefault(); window.open(url, '_blank'); };
-
       el.appendChild(btn);
       el.dataset.citationProcessed = 'true';
     });
@@ -75,18 +70,6 @@ const AppComponent = () => {
   ];
 
   useEffect(() => {
-    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
-    // ⚡ Bolt: Optimize scroll performance by caching DOM elements outside the scroll handler
-    // to avoid continuous document.getElementById calls inside requestAnimationFrame.
-    const cachedSections = sections.map(sec => ({
-      id: sec.id,
-      element: document.getElementById(sec.id)
-    })).filter(sec => sec.element);
-
-    // ⚡ Bolt: Optimize scroll performance by using requestAnimationFrame and a ticking flag
-    // to throttle expensive DOM queries (offsetTop) and state updates, preventing main-thread
-    // blocking during continuous scrolling.
-    // ⚡ Bolt Optimization: Cache DOM elements to avoid getElementById during scroll
     // ⚡ Bolt: Cache DOM elements to avoid continuous getElementById lookups during scroll
     const cachedSections = sections.map(sec => ({
       id: sec.id,
@@ -94,34 +77,16 @@ const AppComponent = () => {
     })).filter(sec => sec.element);
 
     let ticking = false;
-
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY + 200;
-          
-          for (const cached of cachedSections) {
-            const element = cached.element;
-          for (const section of cachedSections) {
-            const { id, element } = section;
-            if (element) {
-              const offsetTop = element.offsetTop;
-              const height = element.offsetHeight;
+
           for (let i = cachedSections.length - 1; i >= 0; i--) {
             const element = cachedSections[i].element;
             if (element && scrollPosition >= element.offsetTop) {
               setActiveSection(cachedSections[i].id);
               break;
-          for (const section of cachedSections) {
-            if (section.element) {
-              const offsetTop = section.element.offsetTop;
-              const height = section.element.offsetHeight;
-
-              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                setActiveSection(cached.id);
-                setActiveSection(id);
-                break;
-              }
             }
           }
           ticking = false;
