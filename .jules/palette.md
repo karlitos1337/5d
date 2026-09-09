@@ -61,3 +61,6 @@
 ## 2026-08-29 - Skip Link Dark Mode Contrast
 **Learning:** When defining a fixed background color like focus:bg-white for accessibility elements such as skip links, the text color must also be explicitly set (e.g., focus:text-gray-900) because elements may inherit a light text color from a dark mode parent component (e.g., text-gray-100), leading to invisible text against the white background.
 **Action:** Always explicitly pair text colors with background colors for interactive state classes, especially when overriding a parent's dark mode styling.
+## 2026-09-09 - [Accessibility] Dynamic Focus Rings on Desktop Navigation
+**Learning:** When applying dynamic focus rings to buttons in dark mode toggle structures, the focus-visible outlines should also be applied to all interactive elements such as desktop navigation links for a consistent keyboard accessibility experience.
+**Action:** Extend dynamic focus ring offsets to all interactive navigational elements, not just icon-only buttons, ensuring uniform contrast across all states.
