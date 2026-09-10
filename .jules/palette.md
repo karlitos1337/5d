@@ -61,3 +61,6 @@
 ## 2026-08-29 - Skip Link Dark Mode Contrast
 **Learning:** When defining a fixed background color like focus:bg-white for accessibility elements such as skip links, the text color must also be explicitly set (e.g., focus:text-gray-900) because elements may inherit a light text color from a dark mode parent component (e.g., text-gray-100), leading to invisible text against the white background.
 **Action:** Always explicitly pair text colors with background colors for interactive state classes, especially when overriding a parent's dark mode styling.
+## 2024-09-10 - Semantic Navigation Landmarks
+**Learning:** Custom navigation menus built with div/nav tags and buttons need explicit ARIA labels and roles (`aria-label`, `role="navigation"`) to be properly identified by screen readers, and the currently active section should be indicated using `aria-current="true"`.
+**Action:** Always add semantic ARIA attributes to custom navigation components.
