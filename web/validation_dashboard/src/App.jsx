@@ -149,7 +149,10 @@ btn.onkeydown = (e) => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium transition-colors duration-200 ${
+                  aria-current={activeSection === section.id ? 'true' : undefined}
+                  className={`text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-2 py-1 ${
+                    darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'
+                  } ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400' : 'text-blue-600')
                       : (darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900')
@@ -167,7 +170,7 @@ btn.onkeydown = (e) => {
                 aria-pressed={darkMode}
                 title={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
                 className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 }`}
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -178,8 +181,8 @@ btn.onkeydown = (e) => {
                 aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={mobileMenuOpen}
                 aria-controls={mobileMenuOpen ? 'mobile-navigation' : undefined}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
-                  darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  darkMode ? 'hover:bg-gray-700 focus-visible:ring-offset-gray-900' : 'hover:bg-gray-100 focus-visible:ring-offset-white'
                 }`}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -201,7 +204,10 @@ btn.onkeydown = (e) => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                  aria-current={activeSection === section.id ? 'true' : undefined}
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                    darkMode ? 'focus-visible:ring-offset-gray-900' : 'focus-visible:ring-offset-white'
+                  } ${
                     activeSection === section.id
                       ? (darkMode ? 'text-blue-400 bg-gray-800' : 'text-blue-600 bg-gray-100')
                       : (darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
