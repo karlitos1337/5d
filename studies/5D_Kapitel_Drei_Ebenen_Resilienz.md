@@ -19,6 +19,53 @@ Alle Zahlenwerte in diesem Kapitel (z. B. p = 0,4) sind **Platzhalter zur Illust
 
 ---
 
+## 4. Kontroll-Kosten: Das Trilemma als Bias-Varianz-Trade-off
+
+### 4.1 Ausgangslage (Patch M3)
+
+Status des gesamten Abschnitts: `[Analogie]`. Die Schätztheorie liefert eine **Struktur**, mit der sich das Trilemma *Aktualisieren / Kontrollieren / Loslassen* präzise beschreiben lässt. Dass Gesellschaften tatsächlich so funktionieren, ist damit nicht gezeigt.
+
+Die Umwelt ist nicht-stationär: Der wahre Zustand μ(t) driftet `[Modellannahme]`. Ein Kollektiv führt einen Schätzer μ̂(t) nach, z. B. als exponentiell gleitenden Mittelwert mit Lernrate α ∈ (0, 1]:
+
+μ̂(t) = α · y(t) + (1 − α) · μ̂(t − 1),  mit Beobachtung y(t) = μ(t) + Rauschen (Varianz r)
+
+### 4.2 Der Fehler eines nachführenden Schätzers
+
+Für eine lineare Drift μ(t) = μ_0 + d·t gilt im eingeschwungenen Zustand `[Satz]`:
+
+- Nachlauf-Bias: Bias(α) = d · (1 − α) / α
+- Rausch-Varianz: Var(α) = α · r / (2 − α)
+- Gesamtfehler: MSE(α) = Bias(α)² + Var(α)
+
+Kleines α (träge) → kleine Varianz, großer Bias. Großes α (sprunghaft) → kleiner Bias, große Varianz. Für d > 0 hat MSE(α) ein Minimum bei einer **mittleren** Lernrate `[Satz]`.
+
+Rechenbeispiel (Illustration: d = 0,1, r = 1):
+
+| α | Bias² | Varianz | MSE |
+|---|---|---|---|
+| 0,05 (starr) | 3,61 | 0,03 | 3,64 |
+| 0,20 | 0,16 | 0,11 | 0,27 |
+| ≈ 0,28 (Optimum) | – | – | ≈ 0,23 |
+| 0,50 | 0,01 | 0,33 | 0,34 |
+| 0,90 (sprunghaft) | < 0,001 | 0,82 | 0,82 |
+
+> **Annahmen-Box M3**
+> - **Muss gelten:** (1) Drift-Modell (hier: linear mit Rate d). (2) Beobachtungsrauschen unabhängig über die Zeit, Varianz r. (3) Eingeschwungener Zustand (lange genug beobachtet).
+> - **Wenn (1) nicht gilt:** Bei Sprüngen oder Zufallsdrift verschiebt sich das optimale α, die Struktur „Minimum bei mittlerer Lernrate“ bleibt aber typischerweise erhalten (Standardergebnis für Kalman-Filter mit Random-Walk-Zustand).
+> - **Wenn d = 0 (stationäre Umwelt):** Dann ist α → 0 optimal. Starre Kontrolle ist im Modell also **nur in einer stabilen Umwelt** günstig.
+
+### 4.3 Zuordnung der drei Trilemma-Pole `[Analogie]`
+
+| Pol | Entspricht im Modell | Fehlerprofil |
+|---|---|---|
+| **Kontrollieren** (Gleichschaltung) | α → 0: Schätzer wird eingefroren, alle folgen derselben Vorgabe | Niedrige Varianz, **wachsender Bias**. Das ist eher **Underfitting** bzw. „Anpassung an die Vergangenheit“, nicht Overfitting. |
+| **Aktualisieren** (Exploration) | Mittleres α: neue Beobachtungen fließen dosiert ein | Bias bleibt klein, Varianz und Energieaufwand steigen moderat. Im Modell nahe am MSE-Minimum. |
+| **Loslassen** (Dezentralisieren) | Mehrere lokale Schätzer statt eines zentralen; Aggregation wie in Sektion 6 | Senkt Varianz über Response-Diversity, sofern die lokalen Schätzer gering korreliert sind. |
+
+**Lesart:** Im Modell ist Aktualisieren mit moderater Lernrate in einer driftenden Umwelt **günstiger** als starre Kontrolle. Das stützt sich auf die MSE-Zerlegung, **nicht** auf Chebyshev, und es ist **nicht** „die einzige Strategie“: Loslassen (Dezentralisieren) und Aktualisieren lassen sich kombinieren. Die Übertragung auf reale Governance bleibt `[Hypothese]`.
+
+---
+
 ## 5. Bunker-Mathematik: Eskapismus als Konjunktion
 
 ### 5.1 Statistische Modellierung des Eskapismus (Patch M2)
