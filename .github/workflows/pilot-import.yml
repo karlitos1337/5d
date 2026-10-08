@@ -1,0 +1,61 @@
+name: Pilotdaten einpflegen
+
+# Freigabe einer Datenspende von der Teilnahme-Seite (web/5d-map/teilnahme/).
+# Nur Personen mit Schreibrechten am Repository können diesen Workflow starten.
+# Das Starten mit einem Code ist die Freigabe.
+
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: "Spenden-Code (beginnt mit 5DP1.) oder bei 'entfernen' der Teilnahme-Code"
+        required: true
+        type: string
+      aktion:
+        description: "Was soll passieren?"
+        required: true
+        default: einpflegen
+        type: choice
+        options:
+          - einpflegen
+          - entfernen
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pilot-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Code prüfen und eintragen
+        env:
+          CODE: ${{ inputs.code }}
+          AKTION: ${{ inputs.aktion }}
+        run: |
+          if [ "$AKTION" = "entfernen" ]; then
+            python scripts/pilot_import.py "$CODE" --remove
+          else
+            python scripts/pilot_import.py "$CODE"
+          fi
+
+      - name: Commit
+        env:
+          AKTION: ${{ inputs.aktion }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 08_experimente_validierung/data/pilot_responses.csv
+          git commit -m "data(pilot): Datenspende ${AKTION} (freigegeben über workflow_dispatch)"
+          git push

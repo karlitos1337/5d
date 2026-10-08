@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5D Pilotstudie</title>
+<meta name="description" content="Freiwillige Pilotstudie zum 5D-Denkmodell: Fragebogen mit sofortiger persönlicher Auswertung im Browser.">
+<style>
+  :root {
+    --bg: #fbfaf7; --surface: #ffffff; --text: #1f2328; --muted: #5b636e;
+    --line: #dcd8cf; --accent: #2f6f5e; --accent-soft: #e3efe9; --warn: #8a5a00; --warn-soft: #fbf1dc;
+    --bar: #2f6f5e; --bar-weak: #b5562f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15181b; --surface: #1d2125; --text: #e7e9ec; --muted: #a2a9b1;
+      --line: #343a40; --accent: #7cc4ad; --accent-soft: #1f3a32; --warn: #f0c060; --warn-soft: #3a2f17;
+      --bar: #7cc4ad; --bar-weak: #f09a72;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15181b; --surface: #1d2125; --text: #e7e9ec; --muted: #a2a9b1;
+    --line: #343a40; --accent: #7cc4ad; --accent-soft: #1f3a32; --warn: #f0c060; --warn-soft: #3a2f17;
+    --bar: #7cc4ad; --bar-weak: #f09a72;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.3rem; margin: 40px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 24px 0 8px; }
+  p, li { color: var(--text); }
+  .lead { color: var(--muted); font-size: 1.05rem; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .note { background: var(--warn-soft); border-left: 4px solid var(--warn); padding: 12px 16px; border-radius: 8px; }
+  details { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 8px 0; background: var(--surface); }
+  summary { cursor: pointer; font-weight: 600; }
+  fieldset { border: 0; margin: 0; padding: 14px 0; border-top: 1px solid var(--line); }
+  legend { font-weight: 500; padding: 0; margin-bottom: 8px; }
+  .scale { display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 6px; }
+  .scale label { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: .78rem;
+    color: var(--muted); text-align: center; padding: 6px 2px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+  .scale input { width: 20px; height: 20px; accent-color: var(--accent); margin: 0; }
+  .scale label:has(input:checked) { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+  .check { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0; }
+  .check input { width: 20px; height: 20px; margin-top: 4px; accent-color: var(--accent); flex: none; }
+  select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+  button { font: inherit; font-weight: 600; padding: 12px 20px; border-radius: 10px; border: 0; cursor: pointer;
+    background: var(--accent); color: var(--bg); }
+  button.secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .error { color: var(--bar-weak); font-weight: 600; }
+  .bars { display: grid; gap: 10px; }
+  .bar-row { display: grid; grid-template-columns: 9.5rem 1fr 2.6rem; gap: 10px; align-items: center; }
+  .bar-track { height: 14px; background: var(--line); border-radius: 7px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--bar); border-radius: 7px; }
+  .weak .bar-fill { background: var(--bar-weak); }
+  .weak .bar-label { font-weight: 700; }
+  .value { text-align: right; font-variant-numeric: tabular-nums; }
+  code.donate { display: block; word-break: break-all; padding: 10px; border-radius: 8px; background: var(--accent-soft); font-size: .8rem; }
+  .muted { color: var(--muted); font-size: .92rem; }
+  [hidden] { display: none !important; }
+  @media (max-width: 520px) {
+    .scale label span { font-size: .68rem; }
+    .bar-row { grid-template-columns: 7rem 1fr 2.4rem; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>5D-Pilotstudie: Wie offen sind deine fünf Schalter?</h1>
+  <p class="lead">Ein Fragebogen mit rund 10 Minuten Dauer. Am Ende siehst du sofort deine persönliche 5D-Auswertung. Die Auswertung passiert nur in deinem Browser, es wird nichts automatisch gesendet.</p>
+
+  <h2>1. Worum es geht (Zweck)</h2>
+  <div class="card">
+    <p>Das 5D-Framework beschreibt Handlungsfähigkeit mit fünf Bereichen: <strong>Autonomie</strong>, <strong>Kompetenz</strong>, <strong>Resonanz</strong>, <strong>Teilhabe</strong> und <strong>Authentizität</strong>. Die zentrale Vermutung lautet: Der schwächste Bereich bestimmt das Ganze stärker als der Durchschnitt.</p>
+    <p>Diese Pilotstudie soll zwei Dinge klären:</p>
+    <ul>
+      <li>Messen die 25 Fragen wirklich fünf getrennte Bereiche? (Prüfung der Fragebogen-Struktur)</li>
+      <li>Hängt Lebenszufriedenheit eher am schwächsten Bereich oder am Durchschnitt? (Hypothese H2 der <a href="https://osf.io/qe6vp">OSF-Präregistrierung</a>)</li>
+    </ul>
+    <p>Die Studie ist ein unabhängiges, nicht-kommerzielles Forschungsprojekt. Das Denkmodell ist <strong>nicht wissenschaftlich bestätigt</strong>, genau das soll geprüft werden. <a href="https://github.com/karlitos1337/5d/blob/main/studies/5D_Denkmodell_Birkenbihl.md">Zum Denkmodell</a>.</p>
+  </div>
+
+  <h2>2. Rechtliches und Datenschutz</h2>
+  <details open>
+    <summary>Was passiert mit meinen Antworten?</summary>
+    <ul>
+      <li><strong>Standard: nichts.</strong> Deine Antworten werden nur in diesem Browserfenster ausgewertet. Es gibt keine Cookies, kein Tracking und keine Speicherung. Schließt du die Seite, sind die Antworten weg.</li>
+      <li><strong>Nur wenn du willst: Datenspende.</strong> Am Ende kannst du deine Antworten freiwillig spenden. Dafür öffnet sich dein eigenes E-Mail-Programm mit einem fertigen Code. Du entscheidest, ob du die E-Mail abschickst.</li>
+    </ul>
+  </details>
+  <details>
+    <summary>Welche Daten enthält eine Spende?</summary>
+    <ul>
+      <li>deine 30 Antworten als Zahlen (25 Fragen zu den fünf Bereichen, 5 Fragen zur Lebenszufriedenheit)</li>
+      <li>das Ergebnis einer Aufmerksamkeitsfrage</li>
+      <li>freiwillig deine Altersgruppe, sonst nichts dazu</li>
+      <li>den Monat der Teilnahme und einen zufälligen Teilnahme-Code</li>
+    </ul>
+    <p><strong>Nicht enthalten:</strong> Name, E-Mail-Adresse, IP-Adresse, Freitext oder Uhrzeit.</p>
+  </details>
+  <details>
+    <summary>Wer ist verantwortlich, und was passiert mit der E-Mail?</summary>
+    <p>Verantwortlich im Sinne der DSGVO ist <span data-contact-name></span>, erreichbar unter <a data-contact-mail></a>.</p>
+    <p>Die E-Mail selbst enthält deine Absenderadresse. Sie wird nur gelesen, um den Code zu prüfen. Danach wird sie gelöscht, spätestens nach 30 Tagen, und nicht weitergegeben.</p>
+    <p>Rechtsgrundlage ist deine ausdrückliche Einwilligung (Art. 6 Abs. 1 a und Art. 9 Abs. 2 a DSGVO), weil die Fragen Rückschlüsse auf das seelische Befinden zulassen.</p>
+  </details>
+  <details>
+    <summary>Wird etwas veröffentlicht?</summary>
+    <p>Ja, aber nur anonym. Freigegebene Spenden kommen als Zahlenreihe in einen öffentlichen Datensatz im <a href="https://github.com/karlitos1337/5d">GitHub-Repository</a>. So kann jede Person die Auswertung nachprüfen (offene Wissenschaft). Ohne E-Mail-Adresse und mit grober Altersgruppe lässt sich eine Zeile keiner Person zuordnen.</p>
+  </details>
+  <details>
+    <summary>Meine Rechte und Widerruf</summary>
+    <ul>
+      <li>Die Teilnahme ist freiwillig. Du kannst jederzeit abbrechen, ohne Nachteile.</li>
+      <li>Du kannst deine Einwilligung jederzeit widerrufen. Schreib dazu eine E-Mail mit deinem Teilnahme-Code. Dein Datensatz wird dann aus dem Datensatz entfernt. Hinweis: In der Versionsgeschichte von GitHub bleibt eine frühere Fassung technisch erhalten, ist dort aber ebenfalls nicht mit dir verknüpfbar.</li>
+      <li>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung sowie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde.</li>
+    </ul>
+  </details>
+  <div class="note">
+    <strong>Wichtig:</strong> Die Auswertung ist keine Diagnose und kein Test im medizinischen oder psychologischen Sinn. Wenn es dir gerade nicht gut geht, wende dich an eine Ärztin, einen Arzt oder die Telefonseelsorge (0800 111 0 111, kostenlos, rund um die Uhr). Teilnahme ab 18 Jahren.
+  </div>
+
+  <h2>3. Einverständnis</h2>
+  <form id="survey" novalidate>
+    <div class="card">
+      <label class="check"><input type="checkbox" id="c-age" required> <span>Ich bin mindestens 18 Jahre alt.</span></label>
+      <label class="check"><input type="checkbox" id="c-read" required> <span>Ich habe Zweck und Datenschutzhinweise gelesen und nehme freiwillig teil.</span></label>
+      <p class="muted">Ob du deine Antworten spendest, entscheidest du erst am Ende, nachdem du deine Auswertung gesehen hast.</p>
+    </div>
+
+    <div id="questions" hidden>
+      <h2>4. Fragebogen</h2>
+      <p class="muted">Antworte spontan. Es gibt keine richtigen oder falschen Antworten.</p>
+      <div id="imp-block"></div>
+      <h3>Lebenszufriedenheit</h3>
+      <div id="swls-block"></div>
+      <h3>Angaben zur Person (freiwillig)</h3>
+      <fieldset>
+        <legend><label for="age">Altersgruppe</label></legend>
+        <select id="age">
+          <option value="">keine Angabe</option>
+          <option>18-24</option><option>25-34</option><option>35-44</option>
+          <option>45-54</option><option>55-64</option><option>65+</option>
+        </select>
+      </fieldset>
+      <p id="form-error" class="error" role="alert" hidden></p>
+      <button type="submit">Auswertung anzeigen</button>
+    </div>
+  </form>
+
+  <section id="result" hidden aria-live="polite">
+    <h2>5. Deine 5D-Auswertung</h2>
+    <div class="card">
+      <div class="bars" id="bars"></div>
+      <p class="muted">Werte von 1 (trifft gar nicht zu) bis 5 (trifft voll zu), Mittelwert je Bereich. Rot markiert ist dein derzeit schwächster Bereich.</p>
+    </div>
+    <div class="card" id="weakest"></div>
+    <div class="card" id="swls-result"></div>
+    <p class="muted">Diese Werte zeigen eine Momentaufnahme, kein festes Merkmal. Das Denkmodell dahinter wird mit dieser Studie gerade erst geprüft.</p>
+
+    <h2>6. Freiwillige Datenspende</h2>
+    <div class="card">
+      <p>Mit deiner Spende hilfst du zu prüfen, ob das Modell stimmt oder verworfen werden muss. Beides ist ein wertvolles Ergebnis.</p>
+      <label class="check"><input type="checkbox" id="c-donate"> <span>Ich willige ausdrücklich ein, dass meine Antworten wie oben beschrieben anonym gespeichert und veröffentlicht werden. Mir ist bewusst, dass sie Rückschlüsse auf mein seelisches Befinden zulassen.</span></label>
+      <p><button type="button" id="donate" disabled>Antworten per E-Mail spenden</button></p>
+      <p class="muted">Dein Teilnahme-Code für einen späteren Widerruf: <strong id="pid"></strong>. Notiere ihn dir.</p>
+      <details>
+        <summary>E-Mail-Programm öffnet sich nicht?</summary>
+        <p>Schicke diesen Code per E-Mail an <a data-contact-mail></a>:</p>
+        <code class="donate" id="code"></code>
+      </details>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  // Kontakt der verantwortlichen Person. Vor Veröffentlichung prüfen.
+  const CONTACT_NAME = "Patrick Karletz";
+  const CONTACT_MAIL = "pkarletz@gmail.com";
+
+  const IMP = [
+    ["A",  "Autonomie", [
+      ["A1", "Ich bestimme weitgehend selbst, wie ich meine Ziele verfolge.", false],
+      ["A2", "Externe Regeln und Sanktionen bestimmen meinen Alltag stark.", true],
+      ["A3", "Ich fühle mich durch Bewertungssysteme (Noten/KPIs) eingeschränkt.", true],
+      ["A4", "Meine Motivation kommt hauptsächlich von innen, nicht von außen.", false],
+      ["A5", "Ich habe Angst vor Konsequenzen bei Abweichung von Vorgaben.", true]]],
+    ["C",  "Kompetenz", [
+      ["C1", "Ich kann meine Impulse gut regulieren und fokussieren.", false],
+      ["C2", "Chronischer Stress beeinträchtigt meine Konzentration stark.", true],
+      ["C3", "Mein Körper fühlt sich energiegeladen und ausgeglichen an.", false],
+      ["C4", "Ich erhole mich schnell von Rückschlägen.", false],
+      ["C5", "Ich spüre oft Erschöpfung durch innere Konflikte.", true]]],
+    ["R",  "Resonanz", [
+      ["R1", "Ich kann mich bewusst in andere Perspektiven versetzen.", false],
+      ["R2", "Ich bin oft in festen Rollen/Überzeugungen gefangen.", true],
+      ["R3", "Ich reflektiere regelmäßig meine eigenen Narrative.", false],
+      ["R4", "Konflikte löse ich durch Perspektivenwechsel.", false],
+      ["R5", "Emotionale Reaktionen überlagern oft mein rationales Denken.", true]]],
+    ["P",  "Teilhabe", [
+      ["P1", "Ich kooperiere horizontal mit anderen ohne Hierarchie.", false],
+      ["P2", "Mein Netzwerk besteht aus vertrauensvollen, authentischen Beziehungen.", false],
+      ["P3", "Ideen entstehen emergent aus Gruppeninteraktionen.", false],
+      ["P4", "Zentrale Entscheidungen blockieren oft unseren Fortschritt.", true],
+      ["P5", "Ich fühle mich isoliert von potenziellen Verbündeten.", true]]],
+    ["Au", "Authentizität", [
+      ["Au1", "Meine Handlungen fühlen sich kongruent mit meiner Identität an.", false],
+      ["Au2", "Ich erlebe oft Flow-Zustände ohne innere Reibung.", false],
+      ["Au3", "Mein Leben hat eine klare, innere Sinnstiftung.", false],
+      ["Au4", "Ich maskiere Teile meiner Persönlichkeit, um zu passen.", true],
+      ["Au5", "Ich kann mit meinen Entscheidungen „selbst schlafen“.", false]]],
+  ];
+  const IMP_LABELS = ["trifft gar nicht zu", "trifft kaum zu", "trifft teilweise zu", "trifft überwiegend zu", "trifft voll zu"];
+  const ATTENTION = ["ATT", "Bitte wähle bei dieser Frage „trifft überwiegend zu“.", false];
+
+  const SWLS = [
+    ["SWLS1", "In den meisten Dingen ist mein Leben nahezu ideal."],
+    ["SWLS2", "Meine Lebensbedingungen sind ausgezeichnet."],
+    ["SWLS3", "Ich bin mit meinem Leben zufrieden."],
+    ["SWLS4", "Bisher habe ich die wesentlichen Dinge erreicht, die ich mir für mein Leben wünsche."],
+    ["SWLS5", "Wenn ich mein Leben noch einmal leben könnte, würde ich kaum etwas ändern."],
+  ];
+  const SWLS_LABELS = ["stimme überhaupt nicht zu", "stimme nicht zu", "stimme eher nicht zu", "weder noch", "stimme eher zu", "stimme zu", "stimme völlig zu"];
+
+  const QUESTIONS = {
+    A:  "Wo bestimme ich selbst, und wo bestimmen andere über mich?",
+    C:  "Was gelingt mir gerade, auch im Kleinen?",
+    R:  "Wer antwortet mir wirklich, und wem höre ich wirklich zu?",
+    P:  "Mit wem arbeite ich auf Augenhöhe zusammen?",
+    Au: "Wo spiele ich eine Rolle, die mich Kraft kostet?",
+  };
+
+  document.querySelectorAll("[data-contact-name]").forEach(el => el.textContent = CONTACT_NAME);
+  document.querySelectorAll("[data-contact-mail]").forEach(el => { el.textContent = CONTACT_MAIL; el.href = "mailto:" + CONTACT_MAIL; });
+
+  const shuffle = arr => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  const scale = (name, text, labels) => {
+    const fs = document.createElement("fieldset");
+    const lg = document.createElement("legend");
+    lg.textContent = text;
+    fs.appendChild(lg);
+    const row = document.createElement("div");
+    row.className = "scale";
+    row.style.setProperty("--n", labels.length);
+    labels.forEach((label, i) => {
+      const l = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio"; input.name = name; input.value = i + 1;
+      const span = document.createElement("span");
+      span.textContent = label;
+      l.append(input, span);
+      row.appendChild(l);
+    });
+    fs.appendChild(row);
+    return fs;
+  };
+
+  // Reihenfolge innerhalb jedes Bereichs zufällig, Bereiche bleiben getrennt (wie in der Präregistrierung).
+  const impBlock = document.getElementById("imp-block");
+  IMP.forEach(([key, , items], index) => {
+    const block = index === 2 ? shuffle([...items, ATTENTION]) : shuffle(items);
+    block.forEach(([id, text]) => impBlock.appendChild(scale(id, text, IMP_LABELS)));
+  });
+  const swlsBlock = document.getElementById("swls-block");
+  SWLS.forEach(([id, text]) => swlsBlock.appendChild(scale(id, text, SWLS_LABELS)));
+
+  const consent = [document.getElementById("c-age"), document.getElementById("c-read")];
+  const questions = document.getElementById("questions");
+  consent.forEach(c => c.addEventListener("change", () => { questions.hidden = !consent.every(x => x.checked); }));
+
+  const value = name => {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    return checked ? Number(checked.value) : null;
+  };
+
+  const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const randomId = () => {
+    const bytes = crypto.getRandomValues(new Uint8Array(8));
+    const chars = Array.from(bytes, b => ALPHABET[b % ALPHABET.length]);
+    return chars.slice(0, 4).join("") + "-" + chars.slice(4).join("");
+  };
+
+  let payload = null;
+
+  document.getElementById("survey").addEventListener("submit", event => {
+    event.preventDefault();
+    const error = document.getElementById("form-error");
+    const allIds = [...IMP.flatMap(([, , items]) => items.map(([id]) => id)), ATTENTION[0], ...SWLS.map(([id]) => id)];
+    const missing = allIds.filter(id => value(id) === null).length;
+    if (missing) {
+      error.textContent = `Es fehlen noch ${missing} Antworten.`;
+      error.hidden = false;
+      return;
+    }
+    error.hidden = true;
+
+    const imp = IMP.flatMap(([, , items]) => items.map(([id]) => value(id)));
+    const swls = SWLS.map(([id]) => value(id));
+    payload = {
+      v: 1,
+      id: randomId(),
+      m: new Date().toISOString().slice(0, 7),
+      age: document.getElementById("age").value,
+      att: value(ATTENTION[0]) === 4,
+      imp, swls,
+    };
+    showResult();
+  });
+
+  function showResult() {
+    const scores = IMP.map(([key, label, items]) => {
+      const vals = items.map(([id, , reverse]) => reverse ? 6 - value(id) : value(id));
+      return { key, label, score: vals.reduce((a, b) => a + b, 0) / vals.length };
+    });
+    const weakest = scores.reduce((a, b) => (b.score < a.score ? b : a));
+
+    const bars = document.getElementById("bars");
+    bars.innerHTML = "";
+    scores.forEach(s => {
+      const row = document.createElement("div");
+      row.className = "bar-row" + (s === weakest ? " weak" : "");
+      row.innerHTML = `<span class="bar-label"></span><div class="bar-track"><div class="bar-fill"></div></div><span class="value"></span>`;
+      row.querySelector(".bar-label").textContent = `${s.label} (${s.key})`;
+      row.querySelector(".bar-fill").style.width = `${((s.score - 1) / 4) * 100}%`;
+      row.querySelector(".value").textContent = s.score.toFixed(1).replace(".", ",");
+      bars.appendChild(row);
+    });
+
+    const geo = Math.pow(scores.reduce((a, s) => a * s.score, 1), 1 / scores.length);
+    const avg = scores.reduce((a, s) => a + s.score, 0) / scores.length;
+    const w = document.getElementById("weakest");
+    w.innerHTML = `<h3>Dein schwächster Schalter: <span></span></h3>
+      <p>Im 5D-Denkmodell hängt das Licht an fünf Schaltern in Reihe. Hilfe wirkt dort am stärksten, wo ein Schalter am weitesten zu ist. Eine Frage zum Mitnehmen:</p>
+      <p><strong></strong></p>
+      <p class="muted">Durchschnitt aller Bereiche: <b data-avg></b> · Wert, wenn der schwächste Bereich stärker zählt (geometrisches Mittel): <b data-geo></b>. Welcher der beiden Werte Lebenszufriedenheit besser vorhersagt, prüft diese Studie.</p>`;
+    w.querySelector("h3 span").textContent = weakest.label;
+    w.querySelector("p strong").textContent = QUESTIONS[weakest.key];
+    w.querySelector("[data-avg]").textContent = avg.toFixed(2).replace(".", ",");
+    w.querySelector("[data-geo]").textContent = geo.toFixed(2).replace(".", ",");
+
+    const swlsSum = payload.swls.reduce((a, b) => a + b, 0);
+    const band = swlsSum >= 31 ? "sehr zufrieden" : swlsSum >= 26 ? "zufrieden" : swlsSum >= 21 ? "eher zufrieden"
+      : swlsSum === 20 ? "neutral" : swlsSum >= 15 ? "eher unzufrieden" : swlsSum >= 10 ? "unzufrieden" : "sehr unzufrieden";
+    const sr = document.getElementById("swls-result");
+    sr.innerHTML = `<h3>Lebenszufriedenheit</h3><p>Summe: <strong></strong> von 35 (Bereich <span></span>)</p>
+      <p class="muted">Skala nach Diener et al. (1985), Einordnung nach Pavot und Diener (2008).</p>`;
+    sr.querySelector("strong").textContent = swlsSum;
+    sr.querySelector("span").textContent = band;
+
+    const json = JSON.stringify(payload);
+    const code = "5DP1." + btoa(json).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    document.getElementById("code").textContent = code;
+    document.getElementById("pid").textContent = payload.id;
+
+    document.getElementById("survey").hidden = true;
+    document.getElementById("result").hidden = false;
+    document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+  }
+
+  const donateBox = document.getElementById("c-donate");
+  const donateBtn = document.getElementById("donate");
+  donateBox.addEventListener("change", () => { donateBtn.disabled = !donateBox.checked; });
+  donateBtn.addEventListener("click", () => {
+    if (!donateBox.checked || !payload) return;
+    const code = document.getElementById("code").textContent;
+    const subject = `5D-Pilotstudie: Datenspende ${payload.id}`;
+    const body = `Ich willige ein, dass meine anonymen Antworten wie auf der Teilnahme-Seite beschrieben gespeichert und veröffentlicht werden.\n\nSpenden-Code:\n${code}\n\n(Bitte den Code nicht verändern.)`;
+    window.location.href = `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+})();
+</script>
+</body>
+</html>
