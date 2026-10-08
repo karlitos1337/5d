@@ -266,6 +266,8 @@ $$
 \boxed{\Phi_{5D} = (A \cdot C \cdot R \cdot P \cdot Au)^{1/5} \cdot \exp(\sigma_{vagal}) - [\varepsilon_{mask} + \varepsilon_{exo}]}
 $$
 
+> **Hinweis (Epistemic Upgrade, M4):** Der subtraktive Term $-[\varepsilon_{mask} + \varepsilon_{exo}]$ weicht vom Modellpostulat der Multiplikativität ab und kann $\Phi_{5D}$ negativ machen (siehe 8.4), obwohl der Wertebereich als $\mathbb{R}_{+}$ angegeben ist. Die konsistente, rein multiplikative Fassung mit einheitlich definiertem Floor $\varepsilon_{min}$ steht in Abschnitt 8.5. Bis zur Entscheidung zwischen beiden Fassungen gilt 8.5 als Referenz für die Weak-Link-Logik.
+
 **Variablendefinitionen:**
 
 | Symbol | Bedeutung | Operationalisierung (IMP-Skala) | Wertebereich |
@@ -324,6 +326,64 @@ $$
 $$
 
 Das System kann nur durch die Maskierungskosten und exogene Belastungen weiter gedrückt werden — ein Zustand, der dem klinischen Burnout-Phänomen entspricht. Die Vorhersage ist statistisch prüfbar: In der OSF-Studie (N = 400) wird H2 getestet, indem das geometrische Mittel mit dem arithmetischen Mittel als Prädiktor verglichen wird. Falls Triage-Logik gilt, sollte das geometrische Mittel — sensitiver gegenüber dem Minimum — besser prädizieren.
+
+### 8.5 Modellpostulat der Multiplikativität („0 = Tod“)
+
+Status: `[Modellannahme]`. Die Multiplikation ist eine **Gestaltungsentscheidung** des Modells, keine bewiesene Naturtatsache. Ob sie empirisch trägt, prüft H2 der OSF-Studie.
+
+**Skala:** Jeder Faktor $x_i \in \{A, C, R, P, Au\}$ liegt in $[0, 1]$ und wird über die jeweilige normierte IMP-Subskala gemessen (Tabelle 8.1). $g(\sigma) > 0$ ist der Regulationsfaktor, z. B. $g(\sigma) = \exp(\sigma_{vagal})$ wie in 8.1. Maskierungs- und Belastungskosten gehen multiplikativ als $(1 - \varepsilon_{mask})(1 - \varepsilon_{exo})$ ein, mit $\varepsilon_{mask}, \varepsilon_{exo} \in [0, 1]$.
+
+**Rein multiplikative Fassung:**
+
+$$
+\Pi_{5D} = A \cdot C \cdot R \cdot P \cdot Au \cdot g(\sigma) \cdot (1 - \varepsilon_{mask}) \cdot (1 - \varepsilon_{exo})
+$$
+
+$$
+\Phi_{5D} = \max\left(\varepsilon_{min},\; \Pi_{5D}\right), \qquad \varepsilon_{min} > 0
+$$
+
+(Die Fassung mit geometrischem Mittel $(A \cdot C \cdot R \cdot P \cdot Au)^{1/5}$ aus 8.1 hat dieselbe Null-Eigenschaft: Das geometrische Mittel ist genau dann null, wenn ein Faktor null ist `[Satz]`. Sie unterscheidet sich nur in der Skalierung.)
+
+**Postulat (Nicht-Substituierbarkeit):** Das Modell unterstellt, dass ein niedriger Faktor nicht durch hohe andere Faktoren ausgeglichen werden kann. Formal `[Satz]`: Ist ein Faktor $= 0$, dann gilt $\Pi_{5D} = 0$ und $\Phi_{5D} = \varepsilon_{min}$, unabhängig von allen anderen Faktoren.
+
+**Lesart von „0 = Tod“ und $\varepsilon_{min}$:**
+- $\Pi_{5D} = 0$ bedeutet im Modell: Das System hat seine Handlungsfähigkeit **als autonomes 5D-System** verloren. Es bedeutet **nicht** biologischen Tod.
+- $\varepsilon_{min}$ ist der **einzige** Floor im Modell. Er steht für die biologische Minimalfunktion (Resignation/Shutdown-Zustand, Sickness Behavior; vgl. 2.3 und 8.2), die den Organismus am Leben hält, aber keine autonome Gestaltung mehr erlaubt. $\varepsilon_{mask}$ und $\varepsilon_{exo}$ sind Kostenterme, **kein** Floor.
+- Damit ist der frühere Widerspruch aufgelöst: „Faktor = 0 → Φ = 0“ gilt für das Produkt $\Pi_{5D}$; der beobachtbare Systemzustand $\Phi_{5D}$ sinkt auf $\varepsilon_{min}$, nicht darunter.
+
+> **Annahmen-Box M4**
+> - **Muss gelten:** (1) Alle Faktoren auf derselben Skala $[0, 1]$, gleiche Messrichtung (hoch = gut). (2) Nicht-Substituierbarkeit zwischen den Dimensionen. (3) Gleiches Zeitfenster der Messung. (4) $\varepsilon_{min}$ ist eine feste, vorab definierte Konstante.
+> - **Wenn (2) nicht gilt:** Ist teilweise Kompensation möglich, beschreibt ein additives oder ein CES-Modell (siehe unten) die Daten besser. Genau das testet H2.
+> - **Wenn (1) nicht gilt:** Likert-Rohwerte ohne Normierung (z. B. Skala 1–7) können nie 0 werden; die Null-Eigenschaft hängt dann an der Normierungsentscheidung.
+
+**Offen benannte Alternativen** (alle `[Modellannahme]`):
+
+| Modell | Formel | Kompensation | Null-Eigenschaft |
+|---|---|---|---|
+| Minimumgesetz (Liebig/Sprengel) | $\Phi = \min_i x_i$ | keine | ja |
+| Gewichtetes geometrisches Mittel | $\Phi = \prod_i x_i^{w_i}$, $\sum w_i = 1$ | teilweise, gewichtsabhängig | ja |
+| Produkt (dieses Postulat) | $\Phi = \prod_i x_i$ | teilweise | ja |
+| CES-Aggregat | $\Phi = \left(\sum_i w_i x_i^{\rho}\right)^{1/\rho}$ | frei über $\rho$ wählbar | ja für $\rho \le 0$ |
+| Additiv (arithm. Mittel) | $\Phi = \sum_i w_i x_i$ | vollständig | nein |
+
+Die CES-Familie enthält die anderen als Grenzfälle ($\rho \to -\infty$: Minimum; $\rho \to 0$: geometrisches Mittel; $\rho = 1$: additiv) `[Satz]`. Eine Schätzung von $\rho$ aus den OSF-Daten wäre ein feinerer Test als der binäre Vergleich in H2 `[Hypothese]`.
+
+### 8.6 Illustratives Fallbeispiel: Herzinfarkt und Autonomieverlust
+
+Status: **illustratives Fallbeispiel**. Ein Beispiel kann das Postulat aus 8.5 nicht beweisen, das wäre zirkulär. Es zeigt nur, wie das Postulat einen realen Verlauf beschreiben **würde**.
+
+| Schritt | Aussage | Evidenzstufe |
+|---|---|---|
+| 1. Auslöser | Ein Herzinfarkt wird häufig als Existenzbedrohung erlebt; klinisch relevante PTBS-Symptome treten nach akutem Koronarsyndrom bei einem substanziellen Anteil auf (Metaanalyse: ca. 12 %; Edmondson et al., 2012). | `[empirisch belegt]` |
+| 2. Notprogramm | Akute Bedrohung kann Defensivreaktionen bis zur tonischen Immobilität („Freeze“) auslösen (Kozlowska et al., 2015). Die Deutung als vagal gesteuerter Shutdown folgt der Polyvagal-Theorie (Porges, 2011), deren Kernannahmen umstritten sind (Grossman, 2023). | Defensivkaskade: `[empirisch belegt]` (allgemein, nicht spezifisch für Herzinfarkt); vagale Deutung: `[Hypothese]`, heruntergestuft (Action-Pack A1) |
+| 3. Autonomieverlust | Intensivstation, Monitoring, Medikationspläne und Fremdbestimmung im Versorgungsalltag lassen A **stark sinken**. Völlige Autonomielosigkeit (A = 0) ist selten. | `[Hypothese]` (plausibel, für A nicht gemessen) |
+| 4. Modellfolge | Im Modell gilt: Sinkt A stark, sinkt $\Pi_{5D}$ proportional mit, unabhängig davon, wie hoch C, R, P, Au sind. Bei A → 0 erreicht $\Phi_{5D}$ den Floor $\varepsilon_{min}$. | `[Satz]` (innerhalb des Modells) |
+| 5. Resignation als Puffer | Resignation entspricht im Modell dem Zustand $\Phi_{5D} = \varepsilon_{min}$: Biologische Minimalfunktion bleibt, autonome Gestaltung fehlt. Post-Infarkt-Depression ist häufig (ca. 20 % Major Depression; Thombs et al., 2006). | Depressionsprävalenz: `[empirisch belegt]`; Gleichsetzung mit $\varepsilon_{min}$: `[Analogie]` |
+
+**Mögliche Störfaktoren** (müssten in einer Prüfung kontrolliert werden): vorbestehende Depression oder Angststörung, Schwere des Infarkts und Komorbidität, Versorgungssetting (Intensivstation vs. Normalstation, Reha), Alter, soziale Unterstützung, sozioökonomischer Status, Medikation (z. B. Betablocker mit Einfluss auf HRV).
+
+**Fazit (im Modell):** Wenn das Postulat aus 8.5 gilt, ist der Schutz der Autonomie keine nachrangige Komfortfrage, sondern Voraussetzung dafür, dass $\Pi_{5D}$ nicht auf den Floor fällt. Daraus folgt die prüfbare `[Hypothese]`: Patientinnen und Patienten mit erhaltener Entscheidungsbeteiligung (Shared Decision Making) sollten nach Kontrolle der Störfaktoren bessere psychische Outcomes zeigen.
 
 ---
 
@@ -385,9 +445,13 @@ Courchamp, F., Clutton-Brock, T., & Grenfell, B. (1999). Inverse density depende
 
 Deci, E. L., & Ryan, R. M. (2000). The "what" and "why" of goal pursuits: Human needs and the self-determination of behavior. *Psychological Inquiry*, *11*(4), 227–268. https://doi.org/10.1207/S15327965PLI1104_01
 
+Edmondson, D., Richardson, S., Falzon, L., Davidson, K. W., Mills, M. A., & Neria, Y. (2012). Posttraumatic stress disorder prevalence and risk of recurrence in acute coronary syndrome patients: A meta-analytic review. *PLoS ONE*, *7*(6), e38915.
+
 Friston, K. (2010). The free-energy principle: A unified brain theory? *Nature Reviews Neuroscience*, *11*(2), 127–138. https://doi.org/10.1038/nrn2787
 
 Godil, S. S., Shamim, M. S., Enam, S. A., & Qidwai, U. (2011). Fuzzy logic: A "simple" solution for complexities in neurosciences? *Surgical Neurology International*, *2*, 24. https://doi.org/10.4103/2152-7806.77177
+
+Grossman, P. (2023). Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory. *Biological Psychology*, *180*, 108589.
 
 Kelley, D. P., Singleton, S. P., Venable, K., Strum, G., Skovgaard, A., Francis, J., Neylan, T. C., Bradley, E. R., Woolley, J., Picard, M., & O'Donovan, A. (2025). The allostatic triage model of psychopathology (ATP Model): How reallocation of brain energetic resources under stress elicits psychiatric symptoms. *Neuroscience & Biobehavioral Reviews*, *179*, 106419. https://doi.org/10.1016/j.neubiorev.2025.106419
 
@@ -395,11 +459,15 @@ Klein, J. P., & Moeschberger, M. L. (2003). *Survival analysis: Techniques for c
 
 Korzybski, A. (1933). *Science and sanity: An introduction to non-Aristotelian systems and general semantics*. Institute of General Semantics.
 
+Kozlowska, K., Walker, P., McLean, L., & Carrive, P. (2015). Fear and the defense cascade: Clinical implications and management. *Harvard Review of Psychiatry*, *23*(4), 263–287.
+
 Picard, M., Juster, R.-P., & McEwen, B. S. (2014). Mitochondrial allostatic load puts the 'gluc' back in glucocorticoids. *Nature Reviews Endocrinology*, *10*(5), 303–310. https://doi.org/10.1038/nrendo.2014.22
 
 Porges, S. W. (2011). *The polyvagal theory: Neurophysiological foundations of emotions, attachment, communication, and self-regulation*. W. W. Norton & Company.
 
 Slavich, G. M., & Irwin, M. R. (2014). From stress to inflammation and major depressive disorder: A social signal transduction theory of depression. *Psychological Bulletin*, *140*(3), 774–815. https://doi.org/10.1037/a0035302
+
+Thombs, B. D., Bass, E. B., Ford, D. E., Stewart, K. J., Tsilidis, K. K., Patel, U., Fauerbach, J. A., Bush, D. E., & Ziegelstein, R. C. (2006). Prevalence of depression in survivors of acute myocardial infarction. *Journal of General Internal Medicine*, *21*(1), 30–38.
 
 Wong, M. L., & Bartlett, S. (2022). Asymptotic burnout and homeostatic awakening: A possible solution to the Fermi paradox? *Journal of the Royal Society Interface*, *19*(190), 20220029. https://doi.org/10.1098/rsif.2022.0029
 
