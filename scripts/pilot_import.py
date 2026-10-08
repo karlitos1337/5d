@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Import freigegebener Pilot-Datenspenden in den öffentlichen, anonymen Datensatz.
+Gemeinsame Prüfregeln für Pilot-Datenspenden und lokaler Import alter Spenden-Codes.
 
-Ablauf:
-1. Teilnehmende füllen web/5d-map/teilnahme/ aus und spenden ihre Antworten
-   (nur mit ausdrücklicher Zustimmung) als Code per E-Mail.
-2. Der Projektverantwortliche prüft die E-Mail und gibt den Code frei, indem er
-   die GitHub Action "Pilotdaten einpflegen" mit dem Code startet
-   (oder lokal: python scripts/pilot_import.py "5DP1.…").
-3. Dieses Skript prüft den Code streng und hängt eine Zeile an die CSV an.
+Die Spende läuft inzwischen über Supabase (siehe docs/PILOT_TEILNAHME.md und
+scripts/pilot_export.py). Dieses Modul enthält die Spalten, Wertebereiche und
+Prüffunktionen, die der Export mitbenutzt. Lokal lassen sich damit weiterhin
+einzelne Codes im alten Format einlesen:
 
-Der Code enthält keine Namen, E-Mail-Adressen oder Freitexte.
+    python scripts/pilot_import.py "5DP1.…"
+    python scripts/pilot_import.py K7Q2-9XPA --remove
+
+Ein Code enthält keine Namen, E-Mail-Adressen oder Freitexte.
 """
 
 from __future__ import annotations
