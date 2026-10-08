@@ -2,6 +2,8 @@
 
 So kommen Antworten von der Teilnahme-Seite in den Datensatz, und nur mit deiner Freigabe.
 
+> **Stand:** Die Datenspende per E-Mail ist **abgeschaltet**. Eine E-Mail bringt Absenderadresse und Antworten zusammen und hebt damit die Pseudonymisierung auf. Die Seite wertet derzeit nur im Browser aus und sendet nichts. Wie gespendet wird, entscheidet sich mit der Wahl des Backends (z. B. Supabase in der EU-Region oder Tally). Erst danach werden Spende, Datenschutztext und Import wieder eingeschaltet. Die Abschnitte 1–3 beschreiben den alten E-Mail-Weg. `scripts/pilot_import.py` und der Workflow bleiben als Prüf- und Importwerkzeug erhalten.
+
 ## 1. Teilnehmende
 
 Die Teilnahme-Seite liegt unter `web/5d-map/teilnahme/index.html`. Sie wird mit der 5D-Karte über GitHub Pages veröffentlicht (Workflow `deploy-map.yml`), zum Beispiel unter `https://karlitos1337.github.io/5d/teilnahme/`.
