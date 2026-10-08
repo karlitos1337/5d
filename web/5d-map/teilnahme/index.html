@@ -285,7 +285,7 @@
     return checked ? Number(checked.value) : null;
   };
 
-  const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // pragma: allowlist secret (Zeichenvorrat, kein Geheimnis)
   const randomId = () => {
     const bytes = crypto.getRandomValues(new Uint8Array(8));
     const chars = Array.from(bytes, b => ALPHABET[b % ALPHABET.length]);
