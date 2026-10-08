@@ -60,7 +60,13 @@
   .value { text-align: right; font-variant-numeric: tabular-nums; }
   code.donate { display: block; word-break: break-all; padding: 10px; border-radius: 8px; background: var(--accent-soft); font-size: .8rem; }
   .muted { color: var(--muted); font-size: .92rem; }
-  [hidden] { display: none !important; }
+.request { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 14px; padding: 22px 22px 18px; margin: 20px 0 28px; }
+  .request h2 { margin: 0 0 10px; font-size: 1.45rem; }
+  .request p, .request li { font-size: 1.12rem; }
+  .request ul { padding-left: 1.2rem; margin: 10px 0; }
+  .request li { margin: 6px 0; }
+  .request .sign { text-align: right; font-style: italic; margin: 8px 0 0; }
+    [hidden] { display: none !important; }
   @media (max-width: 520px) {
     .scale label span { font-size: .68rem; }
     .bar-row { grid-template-columns: 7rem 1fr 2.4rem; }
@@ -70,6 +76,18 @@
 <body>
 <main>
   <h1>5D-Pilotstudie: Wie offen sind deine fünf Schalter?</h1>
+  <section class="request" aria-labelledby="bitte">
+    <h2 id="bitte">Danke, dass du mitmachst, und eine Bitte</h2>
+    <p>Ich bin dir dankbar für deine Zeit. Ganz anspruchslos bin ich trotzdem nicht. Deshalb eine Bitte:</p>
+    <ul>
+      <li><strong>Nimm dir Zeit.</strong> Zehn Minuten in Ruhe sind besser als fünf in Eile.</li>
+      <li><strong>Denk nicht nur an einen Bereich.</strong> Bezieh Arbeit oder Ausbildung, Familie, Freundschaften und Freizeit mit ein, nicht nur das, was dich gerade am meisten beschäftigt.</li>
+      <li><strong>Wäge selbstständig ab.</strong> Antworte so, wie es ist, nicht wie es sein sollte oder wie andere es sehen.</li>
+    </ul>
+    <p><strong>Warum?</strong> Du erlebst dabei, wie gut ein nüchterner, ehrlicher Blick auf dich selbst tut. Und vielleicht nimmst du etwas mit: Die Fähigkeit, dich selbst klar einzuschätzen, ist eine Stärke, die du überall nutzen kannst.</p>
+    <p class="sign">Patrick</p>
+  </section>
+
   <p class="lead">Ein Fragebogen mit rund 10 Minuten Dauer. Am Ende siehst du sofort deine persönliche 5D-Auswertung. Die Auswertung passiert nur in deinem Browser, es wird nichts automatisch gesendet.</p>
 
   <h2>1. Worum es geht (Zweck)</h2>
@@ -133,7 +151,7 @@
 
     <div id="questions" hidden>
       <h2>4. Fragebogen</h2>
-      <p class="muted">Antworte spontan. Es gibt keine richtigen oder falschen Antworten.</p>
+      <p class="muted">Nimm dir für jede Aussage einen Moment und denk an dein Leben insgesamt, nicht nur an einen Bereich. Es gibt keine richtigen oder falschen Antworten.</p>
       <div id="imp-block"></div>
       <h3>Lebenszufriedenheit</h3>
       <div id="swls-block"></div>
