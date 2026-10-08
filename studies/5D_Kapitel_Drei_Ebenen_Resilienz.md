@@ -228,6 +228,6 @@ Sicherer Raum: K = { x : Π_5D(x) ≥ ε_min + δ }, mit Sicherheitsabstand δ >
 - Aubin, J.-P. (1991). *Viability theory*. Birkhäuser.
 - Duncker, K. (1945). On problem-solving. *Psychological Monographs*, 58(5), i–113.
 - Elmqvist, T., Folke, C., Nyström, M., Peterson, G., Bengtsson, J., Walker, B., & Norberg, J. (2003). Response diversity, ecosystem change, and resilience. *Frontiers in Ecology and the Environment*, 1(9), 488–494.
-- Kruglanski, A. W., & Webster, D. M. (1996). Motivated closing of the mind: "Seizing" and "freezing". *Psychological Review*, 103(2), 263–283.
+- Kruglanski, A. W., & Webster, D. M. (1996). Motivated closing of the mind: "Seizing" and "freezing". *Psychological Review*, 103(2), 263–283. https://doi.org/10.1037/0033-295X.103.2.263
 - Pearl, J. (2009). *Causality: Models, reasoning, and inference* (2nd ed.). Cambridge University Press.
-- Poldrack, R. A. (2006). Can cognitive processes be inferred from neuroimaging data? *Trends in Cognitive Sciences*, 10(2), 59–63.
+- Poldrack, R. A. (2006). Can cognitive processes be inferred from neuroimaging data? *Trends in Cognitive Sciences*, 10(2), 59–63. https://doi.org/10.1016/j.tics.2005.12.004
