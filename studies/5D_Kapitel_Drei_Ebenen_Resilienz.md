@@ -64,6 +64,24 @@ Rechenbeispiel (Illustration: d = 0,1, r = 1):
 
 **Lesart:** Im Modell ist Aktualisieren mit moderater Lernrate in einer driftenden Umwelt **günstiger** als starre Kontrolle. Das stützt sich auf die MSE-Zerlegung, **nicht** auf Chebyshev, und es ist **nicht** „die einzige Strategie“: Loslassen (Dezentralisieren) und Aktualisieren lassen sich kombinieren. Die Übertragung auf reale Governance bleibt `[Hypothese]`.
 
+### 4.4 Das PFC-Paradoxon: Die Falle der kopierbaren Lösung (Patch M7)
+
+**Psychologische Ebene** `[empirisch belegt]`: Menschen unterscheiden sich im *Need for Cognitive Closure*, dem Bedürfnis nach einer festen Antwort statt Unsicherheit. Unter Zeitdruck und Stress steigt dieses Bedürfnis. Es führt zu „Seizing and Freezing“: früh auf eine Antwort festlegen, dann an ihr festhalten (Kruglanski & Webster, 1996). Verwandt ist die *funktionale Gebundenheit*: Ein bekanntes Lösungsschema blockiert das Erkennen neuer Lösungen (Duncker, 1945).
+
+**Keine Hirnlokalisierung:** Die Aussage braucht keinen Satz wie „der präfrontale Kortex liebt Regeln“. Aus Aktivität in einer Hirnregion auf einen psychischen Vorgang zu schließen, ist eine Reverse-Inference-Falle (Poldrack, 2006). Der Name „PFC-Paradoxon“ bleibt als Etikett, ist aber `[Analogie]`.
+
+**Kybernetische Ebene** `[Satz]` (unter Ashbys Voraussetzungen): Das Gesetz der erforderlichen Varietät (Ashby, 1956) besagt, dass ein Regler die Vielfalt der Ergebnisse nur so weit einschränken kann, wie seine eigene Varietät reicht. In Entropie-Schreibweise: H(Ergebnis) ≥ H(Störung) − H(Regler). Ein zentraler Controller braucht also **mindestens** so viel Varietät wie die Störungen, die er ausgleichen soll. Das ist nicht „nie genug“, aber in einer Polykrise mit vielen gleichzeitigen, neuartigen Störungen ist diese Bedingung für eine einzelne Stelle schwer zu erfüllen `[Hypothese]`.
+
+**Folgerung im Modell:**
+- Starre, kopierbare Regeln entsprechen α → 0 aus 4.2: Anpassung an die Vergangenheit, wachsender Bias.
+- Die nüchterne Konsequenz: Zentrale Steuerung muss einen Teil der Regelung **abgeben** (Loslassen, 4.3) und dezentralen Einheiten Spielraum lassen, damit dort zusätzliche Varietät entstehen kann. Das ist eine Aufgabe der Metakognition: erkennen, wann das eigene Regelwerk nicht mehr passt.
+- „Bürokratie ist Overfitting“ wird ersetzt durch: Bürokratie kann wirken wie **Anpassung an die Vergangenheit** `[Analogie]`. Im Sinne von 4.3 ist das eher Underfitting gegenüber der aktuellen Lage als Overfitting.
+
+> **Annahmen-Box M7**
+> - **Muss gelten:** (1) Störungen und Reglerantworten lassen sich als Zustandsmengen mit definierter Varietät beschreiben (Ashby). (2) Need for Closure steigt unter Stress auch bei Entscheidungsträgern in Organisationen.
+> - **Wenn (1) nicht gilt:** Ashby liefert dann nur eine qualitative Leitlinie, keine quantitative Aussage.
+> - **Offene Frage:** Dezentralisierung erhöht Varietät, aber auch Koordinationskosten. Wo das Optimum liegt, sagt dieses Modell nicht.
+
 ---
 
 ## 5. Bunker-Mathematik: Eskapismus als Konjunktion
@@ -168,6 +186,48 @@ Beispiel (Illustration, n = 3, ε = σ, Bias = 0): Bei ρ = 1 ist die Schranke 1
 
 ---
 
+## 7. Synthese: Das dynamische 5D-Modell (Patch M6)
+
+Status des gesamten Abschnitts: `[Forschungsprogramm]`. Die Sektionen 4–6 sind statisch. Ein dynamisches Modell existiert noch nicht. Dieser Abschnitt legt fest, was es bräuchte.
+
+### 7.1 Drei Bausteine
+
+| Baustein | Was es bedeutet | Was fehlt |
+|---|---|---|
+| **Adaptive Topologie** | Das Netzwerk der Ebenen (wer reagiert auf wen) kann sich ändern, z. B. neue Verbindungen bei Ausfall einer Ebene. | Eine Regel, wie sich die Netzwerkstruktur in Abhängigkeit vom Zustand ändert. |
+| **Kausale Validierung** | Kausale Annahmen werden als DAG / strukturelles Kausalmodell (SCM; Pearl, 2009) aufgeschrieben und bei neuer Evidenz überarbeitet. | Daten (siehe 7.3). Ein SCM-Update ist ein **Verfahren**, kein Ergebnis. |
+| **Viabilität statt Stabilitäts-Etikett** | Ziel ist, im „sicheren Raum“ zu bleiben, nicht einen Gleichgewichtspunkt zu erreichen. | Zustandsgleichungen und eine Definition des sicheren Raums. |
+
+### 7.2 Minimale Formalisierung (Skizze)
+
+Zustand x(t) = (A, C, R, P, Au) ∈ [0, 1]⁵, Steuerung u(t) (z. B. Aktualisierungsrate α, Dezentralisierungsgrad), Störung d(t):
+
+ẋ = f(x, u, d)
+
+Sicherer Raum: K = { x : Π_5D(x) ≥ ε_min + δ }, mit Sicherheitsabstand δ > 0 (Π_5D und ε_min wie im Triage-Whitepaper, Abschnitt 8.5).
+
+- **Viabilitätstheorie** (Aubin, 1991) fragt: Für welche Anfangszustände gibt es eine Steuerung u(t), die x(t) dauerhaft in K hält? Diese Menge heißt Viabilitätskern. Die Frage passt zu „im sicheren Raum bleiben“ besser als Lyapunov-Stabilität.
+- **Lyapunov-Stabilität** setzt einen Gleichgewichtspunkt und ein bekanntes f voraus. Ohne f ist der Begriff hier nur ein Etikett und wird deshalb nicht verwendet.
+
+> **Annahmen-Box M6**
+> - **Muss gelten:** (1) Die fünf Dimensionen sind über die Zeit wiederholt messbar. (2) f ist zumindest qualitativ spezifizierbar (Vorzeichen der Wechselwirkungen). (3) ε_min ist dieselbe Konstante wie in der statischen Formel.
+> - **Wenn (2) nicht gilt:** Dann bleibt nur eine deskriptive Zeitreihenanalyse ohne Viabilitätsaussage.
+
+### 7.3 Welche Daten ein kausales Modell bräuchte
+
+- **Längsschnitt:** wiederholte IMP-Messungen derselben Personen (mehrere Messzeitpunkte, z. B. Experience Sampling), damit zeitliche Reihenfolge prüfbar wird.
+- **Interventionen:** randomisierte oder quasi-experimentelle Veränderung einer Dimension (z. B. Autonomie-Förderung), um Pfeile im DAG zu testen statt nur Korrelationen zu sehen.
+- **Kontextvariablen:** gemeinsame Ursachen (Gesundheit, Einkommen, soziales Netz), damit Confounding modelliert werden kann.
+- **Netzwerkdaten:** wer mit wem interagiert, falls adaptive Topologie geprüft werden soll.
+
+---
+
 ## Referenzen
 
+- Ashby, W. R. (1956). *An introduction to cybernetics*. Chapman & Hall.
+- Aubin, J.-P. (1991). *Viability theory*. Birkhäuser.
+- Duncker, K. (1945). On problem-solving. *Psychological Monographs*, 58(5), i–113.
 - Elmqvist, T., Folke, C., Nyström, M., Peterson, G., Bengtsson, J., Walker, B., & Norberg, J. (2003). Response diversity, ecosystem change, and resilience. *Frontiers in Ecology and the Environment*, 1(9), 488–494.
+- Kruglanski, A. W., & Webster, D. M. (1996). Motivated closing of the mind: "Seizing" and "freezing". *Psychological Review*, 103(2), 263–283.
+- Pearl, J. (2009). *Causality: Models, reasoning, and inference* (2nd ed.). Cambridge University Press.
+- Poldrack, R. A. (2006). Can cognitive processes be inferred from neuroimaging data? *Trends in Cognitive Sciences*, 10(2), 59–63.

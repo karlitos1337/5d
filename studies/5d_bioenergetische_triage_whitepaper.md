@@ -355,7 +355,7 @@ $$
 > **Annahmen-Box M4**
 > - **Muss gelten:** (1) Alle Faktoren auf derselben Skala $[0, 1]$, gleiche Messrichtung (hoch = gut). (2) Nicht-Substituierbarkeit zwischen den Dimensionen. (3) Gleiches Zeitfenster der Messung. (4) $\varepsilon_{min}$ ist eine feste, vorab definierte Konstante.
 > - **Wenn (2) nicht gilt:** Ist teilweise Kompensation möglich, beschreibt ein additives oder ein CES-Modell (siehe unten) die Daten besser. Genau das testet H2.
-> - **Wenn (1) nicht gilt:** Likert-Rohwerte ohne Normierung (z. B. Skala 1–7) können nie 0 werden; die Null-Eigenschaft hängt dann an der Normierungsentscheidung.
+> - **Wenn (1) nicht gilt:** Likert-Rohwerte ohne Normierung (z. B. Skala 1–7) erreichen den Wert 0 gar nicht; die Null-Eigenschaft hängt dann an der Normierungsentscheidung.
 
 **Offen benannte Alternativen** (alle `[Modellannahme]`):
 
