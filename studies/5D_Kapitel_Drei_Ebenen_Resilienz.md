@@ -2,6 +2,8 @@
 
 **Status des Dokuments:** formal-heuristisches Denkmodell zur Veranschaulichung der ungefähren Funktionsweise. Es ist **kein** kausal validiertes Systemmodell und enthält **keine** Beweise empirischer Sachverhalte. Mathematisch bewiesen sind nur „Wenn-dann“-Aussagen: Gelten die Annahmen, folgt die Folgerung.
 
+> **Bildhafte Fassung:** Die Kernideen dieses Kapitels stehen ohne Formeln im [5D-Denkmodell](5D_Denkmodell_Birkenbihl.md) (Bunker oder Netz, drei Brücken, alte Landkarte, Kochrezept-Paradox).
+
 > **Hinweis zum Umfang:** Dieses Dokument wurde im Zuge des Epistemic Upgrades (Patches M1–M7) neu angelegt. Es enthält die Sektionen 4–7. Die Sektionen 1–3 existieren im Repository noch nicht und sind hier nicht rekonstruiert.
 
 ## Legende: Status-Tags
@@ -204,13 +206,13 @@ Zustand x(t) = (A, C, R, P, Au) ∈ [0, 1]⁵, Steuerung u(t) (z. B. Aktualisier
 
 ẋ = f(x, u, d)
 
-Sicherer Raum: K = { x : Π_5D(x) ≥ ε_min + δ }, mit Sicherheitsabstand δ > 0 (Π_5D und ε_min wie im Triage-Whitepaper, Abschnitt 8.5).
+Sicherer Raum: K = { x : x_i ≥ x_{i,min} + δ für alle i }, also kein Schalter unter seiner kritischen Schwelle (Schwellen wie im Triage-Whitepaper, Abschnitt 2.1), mit Sicherheitsabstand δ > 0. Eine 5D-Gesamtformel wird dafür nicht benötigt.
 
 - **Viabilitätstheorie** (Aubin, 1991) fragt: Für welche Anfangszustände gibt es eine Steuerung u(t), die x(t) dauerhaft in K hält? Diese Menge heißt Viabilitätskern. Die Frage passt zu „im sicheren Raum bleiben“ besser als Lyapunov-Stabilität.
 - **Lyapunov-Stabilität** setzt einen Gleichgewichtspunkt und ein bekanntes f voraus. Ohne f ist der Begriff hier nur ein Etikett und wird deshalb nicht verwendet.
 
 > **Annahmen-Box M6**
-> - **Muss gelten:** (1) Die fünf Dimensionen sind über die Zeit wiederholt messbar. (2) f ist zumindest qualitativ spezifizierbar (Vorzeichen der Wechselwirkungen). (3) ε_min ist dieselbe Konstante wie in der statischen Formel.
+> - **Muss gelten:** (1) Die fünf Dimensionen sind über die Zeit wiederholt messbar. (2) f ist zumindest qualitativ spezifizierbar (Vorzeichen der Wechselwirkungen). (3) Die Schwellen x_{i,min} sind vorab festgelegt.
 > - **Wenn (2) nicht gilt:** Dann bleibt nur eine deskriptive Zeitreihenanalyse ohne Viabilitätsaussage.
 
 ### 7.3 Welche Daten ein kausales Modell bräuchte
