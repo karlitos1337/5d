@@ -58,9 +58,14 @@
   .weak .bar-fill { background: var(--bar-weak); }
   .weak .bar-label { font-weight: 700; }
   .value { text-align: right; font-variant-numeric: tabular-nums; }
-  code.donate { display: block; word-break: break-all; padding: 10px; border-radius: 8px; background: var(--accent-soft); font-size: .8rem; }
   .muted { color: var(--muted); font-size: .92rem; }
-  [hidden] { display: none !important; }
+.request { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 14px; padding: 22px 22px 18px; margin: 20px 0 28px; }
+  .request h2 { margin: 0 0 10px; font-size: 1.45rem; }
+  .request p, .request li { font-size: 1.12rem; }
+  .request ul { padding-left: 1.2rem; margin: 10px 0; }
+  .request li { margin: 6px 0; }
+  .request .sign { text-align: right; font-style: italic; margin: 8px 0 0; }
+    [hidden] { display: none !important; }
   @media (max-width: 520px) {
     .scale label span { font-size: .68rem; }
     .bar-row { grid-template-columns: 7rem 1fr 2.4rem; }
@@ -70,7 +75,19 @@
 <body>
 <main>
   <h1>5D-Pilotstudie: Wie offen sind deine fünf Schalter?</h1>
-  <p class="lead">Ein Fragebogen mit rund 10 Minuten Dauer. Am Ende siehst du sofort deine persönliche 5D-Auswertung. Die Auswertung passiert nur in deinem Browser, es wird nichts automatisch gesendet.</p>
+  <section class="request" aria-labelledby="bitte">
+    <h2 id="bitte">Danke, dass du mitmachst, und eine Bitte</h2>
+    <p>Ich bin dir dankbar für deine Zeit. Ganz anspruchslos bin ich trotzdem nicht. Deshalb eine Bitte:</p>
+    <ul>
+      <li><strong>Antworte ehrlich und aus dem Gefühl heraus.</strong> So, wie es ist, nicht wie es sein sollte oder wie andere es sehen.</li>
+      <li><strong>Aber überleg kurz, ob es auf dich insgesamt zutrifft, nicht nur auf heute.</strong> Denk dabei an mehrere Bereiche: Arbeit oder Ausbildung, Familie, Freundschaften, Freizeit.</li>
+      <li><strong>Kein Grübeln, kein Zeitdruck.</strong> Ein, zwei Sekunden pro Aussage reichen meist. Es gibt kein Richtig oder Falsch.</li>
+    </ul>
+    <p><strong>Warum?</strong> Du erlebst dabei, wie gut ein nüchterner, ehrlicher Blick auf dich selbst tut. Und vielleicht nimmst du etwas mit: Die Fähigkeit, dich selbst klar einzuschätzen, ist eine Stärke, die du überall nutzen kannst.</p>
+    <p class="sign">Patrick</p>
+  </section>
+
+  <p class="lead">25 Aussagen zu den fünf Bereichen und 5 zur Lebenszufriedenheit, etwa 10 Minuten. Am Ende siehst du sofort deine persönliche 5D-Auswertung. Sie wird nur in deinem Browser berechnet, es wird nichts gesendet.</p>
 
   <h2>1. Worum es geht (Zweck)</h2>
   <div class="card">
@@ -87,35 +104,18 @@
   <details open>
     <summary>Was passiert mit meinen Antworten?</summary>
     <ul>
-      <li><strong>Standard: nichts.</strong> Deine Antworten werden nur in diesem Browserfenster ausgewertet. Es gibt keine Cookies, kein Tracking und keine Speicherung. Schließt du die Seite, sind die Antworten weg.</li>
-      <li><strong>Nur wenn du willst: Datenspende.</strong> Am Ende kannst du deine Antworten freiwillig spenden. Dafür öffnet sich dein eigenes E-Mail-Programm mit einem fertigen Code. Du entscheidest, ob du die E-Mail abschickst.</li>
+      <li><strong>Nichts.</strong> Deine Antworten werden nur in diesem Browserfenster ausgewertet. Es gibt keine Cookies, kein Tracking und keine Speicherung. Schließt du die Seite, sind die Antworten weg.</li>
+      <li><strong>Datenspende: in Vorbereitung.</strong> Später sollst du deine Antworten am Ende freiwillig und pseudonym spenden können, nur als Zahlen und ohne E-Mail-Adresse. Bevor das freigeschaltet wird, steht hier genau, welcher Dienst die Daten speichert, wo die Server stehen und wann gelöscht wird.</li>
     </ul>
   </details>
   <details>
-    <summary>Welche Daten enthält eine Spende?</summary>
-    <ul>
-      <li>deine 30 Antworten als Zahlen (25 Fragen zu den fünf Bereichen, 5 Fragen zur Lebenszufriedenheit)</li>
-      <li>das Ergebnis einer Aufmerksamkeitsfrage</li>
-      <li>freiwillig deine Altersgruppe, sonst nichts dazu</li>
-      <li>den Monat der Teilnahme und einen zufälligen Teilnahme-Code</li>
-    </ul>
-    <p><strong>Nicht enthalten:</strong> Name, E-Mail-Adresse, IP-Adresse, Freitext oder Uhrzeit.</p>
-  </details>
-  <details>
-    <summary>Wer ist verantwortlich, und was passiert mit der E-Mail?</summary>
-    <p>Verantwortlich im Sinne der DSGVO ist <span data-contact-name></span>, erreichbar unter <a data-contact-mail></a>.</p>
-    <p>Die E-Mail selbst enthält deine Absenderadresse. Sie wird nur gelesen, um den Code zu prüfen. Danach wird sie gelöscht, spätestens nach 30 Tagen, und nicht weitergegeben.</p>
-    <p>Rechtsgrundlage ist deine ausdrückliche Einwilligung (Art. 6 Abs. 1 a und Art. 9 Abs. 2 a DSGVO), weil die Fragen Rückschlüsse auf das seelische Befinden zulassen.</p>
-  </details>
-  <details>
-    <summary>Wird etwas veröffentlicht?</summary>
-    <p>Ja, aber nur anonym. Freigegebene Spenden kommen als Zahlenreihe in einen öffentlichen Datensatz im <a href="https://github.com/karlitos1337/5d">GitHub-Repository</a>. So kann jede Person die Auswertung nachprüfen (offene Wissenschaft). Ohne E-Mail-Adresse und mit grober Altersgruppe lässt sich eine Zeile keiner Person zuordnen.</p>
+    <summary>Wer ist verantwortlich?</summary>
+    <p>Verantwortlich für diese Seite ist <span data-contact-name></span>, erreichbar unter <a data-contact-mail></a>.</p>
   </details>
   <details>
     <summary>Meine Rechte und Widerruf</summary>
     <ul>
       <li>Die Teilnahme ist freiwillig. Du kannst jederzeit abbrechen, ohne Nachteile.</li>
-      <li>Du kannst deine Einwilligung jederzeit widerrufen. Schreib dazu eine E-Mail mit deinem Teilnahme-Code. Dein Datensatz wird dann aus dem Datensatz entfernt. Hinweis: In der Versionsgeschichte von GitHub bleibt eine frühere Fassung technisch erhalten, ist dort aber ebenfalls nicht mit dir verknüpfbar.</li>
       <li>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung sowie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde.</li>
     </ul>
   </details>
@@ -128,12 +128,12 @@
     <div class="card">
       <label class="check"><input type="checkbox" id="c-age" required> <span>Ich bin mindestens 18 Jahre alt.</span></label>
       <label class="check"><input type="checkbox" id="c-read" required> <span>Ich habe Zweck und Datenschutzhinweise gelesen und nehme freiwillig teil.</span></label>
-      <p class="muted">Ob du deine Antworten spendest, entscheidest du erst am Ende, nachdem du deine Auswertung gesehen hast.</p>
+      <p class="muted">Es werden keine Antworten gesendet oder gespeichert.</p>
     </div>
 
     <div id="questions" hidden>
       <h2>4. Fragebogen</h2>
-      <p class="muted">Antworte spontan. Es gibt keine richtigen oder falschen Antworten.</p>
+      <p class="muted">Antworte ehrlich und aus dem Gefühl heraus, aber überleg kurz, ob es auf dich insgesamt zutrifft, nicht nur auf heute. Es gibt kein Richtig oder Falsch.</p>
       <div id="imp-block"></div>
       <h3>Lebenszufriedenheit</h3>
       <div id="swls-block"></div>
@@ -161,17 +161,9 @@
     <div class="card" id="swls-result"></div>
     <p class="muted">Diese Werte zeigen eine Momentaufnahme, kein festes Merkmal. Das Denkmodell dahinter wird mit dieser Studie gerade erst geprüft.</p>
 
-    <h2>6. Freiwillige Datenspende</h2>
+    <h2>6. Datenspende</h2>
     <div class="card">
-      <p>Mit deiner Spende hilfst du zu prüfen, ob das Modell stimmt oder verworfen werden muss. Beides ist ein wertvolles Ergebnis.</p>
-      <label class="check"><input type="checkbox" id="c-donate"> <span>Ich willige ausdrücklich ein, dass meine Antworten wie oben beschrieben anonym gespeichert und veröffentlicht werden. Mir ist bewusst, dass sie Rückschlüsse auf mein seelisches Befinden zulassen.</span></label>
-      <p><button type="button" id="donate" disabled>Antworten per E-Mail spenden</button></p>
-      <p class="muted">Dein Teilnahme-Code für einen späteren Widerruf: <strong id="pid"></strong>. Notiere ihn dir.</p>
-      <details>
-        <summary>E-Mail-Programm öffnet sich nicht?</summary>
-        <p>Schicke diesen Code per E-Mail an <a data-contact-mail></a>:</p>
-        <code class="donate" id="code"></code>
-      </details>
+      <p>Die freiwillige Datenspende wird gerade auf ein Verfahren ohne E-Mail umgestellt, damit deine Antworten nicht mit deiner Adresse zusammenkommen. Bis dahin bleibt alles bei dir. Danke, dass du mitgemacht hast!</p>
     </div>
   </section>
 </main>
@@ -366,26 +358,11 @@
     sr.querySelector("strong").textContent = swlsSum;
     sr.querySelector("span").textContent = band;
 
-    const json = JSON.stringify(payload);
-    const code = "5DP1." + btoa(json).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-    document.getElementById("code").textContent = code;
-    document.getElementById("pid").textContent = payload.id;
-
     document.getElementById("survey").hidden = true;
     document.getElementById("result").hidden = false;
     document.getElementById("result").scrollIntoView({ behavior: "smooth" });
   }
 
-  const donateBox = document.getElementById("c-donate");
-  const donateBtn = document.getElementById("donate");
-  donateBox.addEventListener("change", () => { donateBtn.disabled = !donateBox.checked; });
-  donateBtn.addEventListener("click", () => {
-    if (!donateBox.checked || !payload) return;
-    const code = document.getElementById("code").textContent;
-    const subject = `5D-Pilotstudie: Datenspende ${payload.id}`;
-    const body = `Ich willige ein, dass meine anonymen Antworten wie auf der Teilnahme-Seite beschrieben gespeichert und veröffentlicht werden.\n\nSpenden-Code:\n${code}\n\n(Bitte den Code nicht verändern.)`;
-    window.location.href = `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  });
 })();
 </script>
 </body>
