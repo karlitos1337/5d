@@ -88,3 +88,7 @@
 ## 2024-06-12 - Passive Event Listeners for Scroll Performance
 **Learning:** In continuous event loops like `scroll`, attaching `{ passive: true }` to `window.addEventListener` prevents the main thread from blocking, significantly improving React rendering performance during scrolling.
 **Action:** Always add `{ passive: true }` when attaching scroll event listeners, and ensure any necessary DOM caching (like `getElementById`) happens outside the continuous scroll handler loop (e.g., within the `useEffect` closure instead).
+
+## 2026-09-10 - Redundant localStorage Operations in fetchWithCache
+**Learning:** Duplicating localStorage read/write sequences (loadCache/saveCache) inside an async cache utility degrades performance through synchronous blocking without adding any extra race-condition protection.
+**Action:** Ensure read-modify-write operations on localStorage are performed exactly once per cache update.

@@ -41,16 +41,8 @@ async function fetchWithCache(key, fetcher) {
   }
   try {
     const data = await fetcher();
-    // ⚡ Bolt Optimization: Removed redundant cache read/write pair here to halve synchronous localStorage overhead.
-    // ⚡ Bolt Optimization: Re-read cache to avoid race conditions in concurrent Promise.all fetches
-    cache = loadCache();
-    cache[key] = { data, timestamp: now };
-    saveCache(cache);
-    const updatedCache = loadCache();
-    updatedCache[key] = { data, timestamp: now };
-    saveCache(updatedCache);
-    const currentCache = loadCache(); // Re-read to avoid race conditions
-    const currentCache = loadCache(); // Re-read to prevent race condition during parallel fetches
+    // ⚡ Bolt Optimization: Re-read cache to avoid race conditions in concurrent Promise.all fetches, and removed redundant read/writes to eliminate synchronous localStorage overhead.
+    const currentCache = loadCache();
     currentCache[key] = { data, timestamp: now };
     saveCache(currentCache);
     return data;
