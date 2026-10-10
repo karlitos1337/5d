@@ -40,6 +40,9 @@
 	<!-- Marked plugin to add heading ID's -->
 	<script src="https://cdn.jsdelivr.net/npm/marked-gfm-heading-id/lib/index.umd.js"></script>
 
+	<!-- DOMPurify to sanitize HTML -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+
 	<script>
 		// ============================================================================
 		// Theme Configuration - Centralized settings for BootsWatch theme management
@@ -76,7 +79,7 @@
 			.then( response => response.text() )
 			.then( data => {
 				data = data.replaceAll( ':star2:', '<img src="https://github.githubassets.com/images/icons/emoji/unicode/1f31f.png?v8" width="20">' );
-				document.querySelector( 'main' ).innerHTML = marked.parse( data );
+				document.querySelector( 'main' ).innerHTML = DOMPurify.sanitize( marked.parse( data ) );
 			})
 			.catch( error => console.error( 'Error:', error ) );
 
