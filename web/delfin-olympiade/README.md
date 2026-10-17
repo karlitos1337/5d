@@ -1,0 +1,29 @@
+# Delfin-Olympiade
+
+Ein Delfin-Sprungspiel im Stil von *Dolphin Olympics*, komplett in einer HTML-Datei
+(Canvas 2D + WebAudio, keine Abhängigkeiten außer Google Fonts).
+
+**Starten:** `index.html` im Browser öffnen. Läuft auch, wenn man den Inhalt in einen
+Online-Playground (z. B. Google AI Studio „Build“, CodePen, JSFiddle) einfügt.
+
+## Steuerung
+| Taste | Aktion |
+|---|---|
+| ↑ / W | Schwimmen |
+| ← → / A D | Lenken, in der Luft Salto |
+| ↓ / S | Schraube in der Luft |
+| Leertaste | Turbo (verbraucht Energie) |
+| P / Esc, M | Pause, Ton an/aus |
+
+Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unterstützt.
+
+## Features
+- 3 Modi: Wettkampf (2 min), Ring-Jagd (15 Ringe auf Zeit), Freies Spiel
+- Tricks: Saltos vorwärts/rückwärts (bis Mehrfach), Schrauben, Kombis; Bewertung der Landung
+  (Perfekt / Sauber / Bauchklatscher) und Kombo-Multiplikator bis ×10
+- Ringe (Gold-Ringe hoch oben), Möwen-Stups, Himmelssterne, Fischschwärme, Perlenmuscheln, Quallen
+- 6 Power-ups: Turbo, Doppelte Punkte, Magnet, Zeitlupe, Leichtflug, Rakete
+- Tag-Nacht-Zyklus mit Sonne, Mond, Sternen, Leuchtturm und Biolumineszenz bei Nacht
+- Grafik: Parallax-Hügel, Wolken, Lichtstrahlen unter Wasser, Wellen mit Ripples, Spritz- und
+  Blasenpartikel, Bewegungsspur, Kamera-Zoom bei hohen Sprüngen
+- 14 Erfolge, 5 Delfin-Skins (Gold und Neon freischaltbar), Rekorde im `localStorage`
