@@ -605,7 +605,7 @@ let skinId = store.get('skin', 'classic');
 const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
-  state: 'menu', mode: 'contest', time: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
+  state: 'menu', mode: 'contest', time: 0, playTime: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
   ringsHit: 0, ringGoal: 15, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
 };
 const cam = { x: 900, y: 200, z: 1 };
@@ -615,7 +615,7 @@ const input = { left: false, right: false, up: false, down: false, turbo: false 
 
 let d = null;
 function newDolphin() {
-  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1,
+  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1,
     energy: 100, tail: 0, invuln: 0, stun: 0, jRings: 0, jGulls: 0, jStars: 0, trail: [], chirpT: 3, turboOn: false, rocket: false };
 }
 
@@ -704,6 +704,7 @@ const KEYMAP = { ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'ri
 window.addEventListener('keydown', e => {
   initAudio();
   if (KEYMAP[e.code]) { keys[KEYMAP[e.code]] = true; if (game.state === 'play') e.preventDefault(); }
+  if (e.repeat) return;
   if (e.code === 'KeyP' || e.code === 'Escape') { if (game.state === 'play') pauseGame(); else if (game.state === 'pause') resumeGame(); }
   if (e.code === 'KeyM') setSound(!soundOn);
 });
@@ -807,7 +808,7 @@ function updateDolphin(dt, rdt, ctl) {
     d.x += d.vx * dt; d.y += d.vy * dt;
     // Absprung
     if (d.y < surf && d.vy < 0) {
-      d.airborne = true; d.rot = 0; d.twist = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
+      d.airborne = true; d.rot = 0; d.twist = 0; d.twistTarget = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
       d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0;
       if (d.rocket) { d.vx *= 1.25; d.vy *= 1.65; d.rocket = false; banner('Raketenstart!', '', POWER.rocket.col); for (let i = 0; i < 40; i++) addP({ t: 'spark', x: d.x, y: d.y, vx: rnd(-200, 200), vy: rnd(50, 300), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: '#ffb070' }); }
       if (Math.abs(d.vy) > 300) { splash(d.x, Math.abs(d.vy) * 0.7, false); sfx.jump(); }
@@ -817,8 +818,10 @@ function updateDolphin(dt, rdt, ctl) {
     const spin = 6.6;
     if (ctl.left) { d.a -= spin * rdt; d.rot -= spin * rdt; }
     if (ctl.right) { d.a += spin * rdt; d.rot += spin * rdt; }
-    const frac = d.twist % TAU;
-    if (ctl.down || (frac > 0.05 && frac < TAU - 0.05)) d.twist += 9.5 * rdt;
+    // Schraube läuft nach dem Loslassen bis zur nächsten vollen Umdrehung weiter
+    const tstep = 9.5 * rdt;
+    if (ctl.down) { d.twist += tstep; d.twistTarget = Math.ceil(d.twist / TAU) * TAU; }
+    else if (d.twist < d.twistTarget) d.twist = Math.min(d.twistTarget, d.twist + tstep);
     const gr = G * (p.feather > 0 ? 0.55 : 1);
     d.vy += gr * dt;
     d.vx -= d.vx * 0.05 * dt;
@@ -1559,8 +1562,8 @@ function updateHUD() {
     hud.timer.classList.toggle('warn', s <= 10);
   } else if (game.mode === 'rings') {
     hud.timerLabel.textContent = 'Ringe ' + game.ringsHit + ' / ' + game.ringGoal;
-    hud.timer.textContent = game.time.toFixed(1).replace('.', ',') + ' s';
-  } else { hud.timer.textContent = Math.floor(game.time / 60) + ':' + String(Math.floor(game.time % 60)).padStart(2, '0'); }
+    hud.timer.textContent = game.playTime.toFixed(1).replace('.', ',') + ' s';
+  } else { hud.timer.textContent = Math.floor(game.playTime / 60) + ':' + String(Math.floor(game.playTime % 60)).padStart(2, '0'); }
   const active = POWER_TYPES.filter(k => game.power[k] > 0 || (k === 'rocket' && d.rocket));
   const sig = active.map(k => k + (k === 'rocket' ? '' : Math.ceil(game.power[k]))).join(',');
   if (sig !== chipState) {
@@ -1580,10 +1583,10 @@ function updateHUD() {
 // ====================================================================
 function startGame(mode) {
   initAudio();
-  game.mode = mode; game.state = 'play'; game.time = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
+  game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
   game.ringsHit = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
   game.stats = { jumps: 0, maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
-  resetWorld(); d = newDolphin(); chipState = '';
+  resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
   hud.timerLabel.textContent = mode === 'contest' ? 'Zeit' : mode === 'rings' ? 'Ringe 0 / 15' : 'Freies Spiel';
   $('menu').hidden = true; $('result').hidden = true; $('pause').hidden = true; $('hud').hidden = false;
@@ -1603,7 +1606,7 @@ function endGame() {
   const st = game.stats, mode = game.mode;
   let value, label, isBest = false;
   if (mode === 'rings') {
-    value = game.time; label = value.toFixed(1).replace('.', ',') + ' s';
+    value = game.playTime; label = value.toFixed(1).replace('.', ',') + ' s';
     if (!best.rings || value < best.rings) { best.rings = value; isBest = true; }
   } else {
     value = game.score; label = fmt(value);
@@ -1680,6 +1683,7 @@ function frame(now) {
     updateWorld(dt);
     updateCamera(rdt);
     if (game.state === 'play') {
+      game.playTime += rdt;
       for (const k in game.power) if (game.power[k] > 0) game.power[k] -= rdt;
       if (game.mode === 'contest') {
         const before = Math.ceil(game.timeLeft);
