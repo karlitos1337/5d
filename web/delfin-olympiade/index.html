@@ -70,6 +70,7 @@ body {
 }
 .timer.warn { color: var(--coral); animation: pulse .5s ease-in-out infinite alternate; }
 @keyframes pulse { to { transform: scale(1.08); } }
+.boost { font-size: 13px; font-weight: 700; color: var(--kelp); font-variant-numeric: tabular-nums; text-shadow: 0 1px 0 rgba(0,0,0,.4); }
 .energy { width: min(200px, 34vw); }
 .energy-track { height: 12px; border-radius: 6px; background: rgba(0,0,0,.35); border: 1px solid var(--glass-line); overflow: hidden; }
 .energy-track i { display: block; height: 100%; width: 50%; background: linear-gradient(90deg, #3ad6ff, #7dffcf); box-shadow: 0 0 12px #3ad6ff; transition: width .08s linear; }
@@ -210,6 +211,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <span class="label">Punkte</span>
       <div class="score" id="score">0</div>
       <div class="mult"><span id="mult">×1</span><div class="mult-bar"><i id="multBar"></i></div></div>
+      <div class="boost" id="boost" hidden>Schwarm-Bonus +0 %</div>
     </div>
     <div class="hud-center">
       <span class="label" id="timerLabel">Zeit</span>
@@ -242,7 +244,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <div>
         <h1 class="title">Delfin-<br>Olympiade</h1>
       </div>
-      <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Ringe, Möwen, Himmelssterne und Perlen geben Extrapunkte.</p>
+      <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Schwimm durch Fischschwärme für 5.000 Punkte und einen Bonus auf alle Punkte. Ringe, Möwen, Himmelssterne und Perlen geben Extrapunkte.</p>
       <div class="modes">
         <button class="mode" type="button" data-mode="contest"><b>Wettkampf</b><span>2 Minuten, so viele Punkte wie möglich.</span><em id="best-contest">Rekord: –</em></button>
         <button class="mode" type="button" data-mode="rings"><b>Ring-Jagd</b><span>Flieg durch 15 Ringe, so schnell du kannst.</span><em id="best-rings">Rekord: –</em></button>
@@ -332,6 +334,9 @@ const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), pars
 const mix = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
 const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
 const fmt = n => Math.round(n).toLocaleString('de-DE');
+const pct = v => (v * 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) + ' %';
+// Fischschwarm: Punkte und Bonusverstärker, jedes weitere Mal 1 % weniger als das Mal davor
+const SCHOOL_PTS = 5000, SCHOOL_BOOST = 0.01, SCHOOL_DECAY = 0.99;
 
 const store = {
   get(k, d) { try { const v = localStorage.getItem('delfin-olympiade:' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -601,7 +606,7 @@ const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
   state: 'menu', mode: 'contest', time: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
-  ringsHit: 0, ringGoal: 15, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
+  ringsHit: 0, ringGoal: 15, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
 };
 const cam = { x: 900, y: 200, z: 1 };
 const keys = {};
@@ -684,8 +689,9 @@ function unlock(id) {
   const a = ACH.find(a => a.id === id); toast('Erfolg: ' + a.name);
   tone(988, 0.12, 'triangle', 0.08); tone(1318, 0.2, 'triangle', 0.08, 0, 0.1);
 }
+function breakCombo() { game.mult = 1; game.comboSchools = 0; }
 function addScore(pts, x, y, col) {
-  const p = Math.round(pts * (game.power.x2 > 0 ? 2 : 1));
+  const p = Math.round(pts * (game.power.x2 > 0 ? 2 : 1) * (1 + game.boost));
   game.score += p;
   if (x !== undefined) floatText(x, y, '+' + fmt(p), col || '#ffd166', 20);
   return p;
@@ -787,7 +793,7 @@ function updateDolphin(dt, rdt, ctl) {
     // Rollen: Bauch immer nach unten
     const targetRoll = Math.cos(d.a) >= 0 ? 1 : -1;
     d.roll = lerp(d.roll, targetRoll, Math.min(1, 7 * dt));
-    if (game.multTimer > 0) { game.multTimer -= dt; if (game.multTimer <= 0 && game.mult > 1) { floatText(d.x, d.y - 60, 'Kombo verloren', '#ff9a8a', 18); game.mult = 1; } }
+    if (game.multTimer > 0) { game.multTimer -= dt; if (game.multTimer <= 0 && game.mult > 1) { floatText(d.x, d.y - 60, 'Kombo verloren', '#ff9a8a', 18); breakCombo(); } }
     // Blasenspur
     if (Math.random() < (turbo ? 0.9 : 0.25)) addP({ t: 'bubble', x: d.x - Math.cos(d.a) * 55, y: d.y - Math.sin(d.a) * 55, vx: rnd(-20, 20), vy: rnd(-60, -20), life: rnd(0.8, 2), max: 2, r: rnd(1.2, 3.5) });
     if (nightness() > 0.4 && sp > 300 && Math.random() < 0.8) addP({ t: 'glow', x: d.x - Math.cos(d.a) * 50 + rnd(-10, 10), y: d.y - Math.sin(d.a) * 50 + rnd(-10, 10), vx: rnd(-15, 15), vy: rnd(-15, 15), life: rnd(0.6, 1.4), max: 1.4, r: rnd(1, 2.6) });
@@ -875,7 +881,7 @@ function land() {
     const pts = addScore(base * 0.25);
     banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', pts > 0 ? '+' + fmt(pts) : '', '#ff8a7a');
     if (game.mult > 1) floatText(d.x, -80, 'Kombo verloren', '#ff9a8a', 18);
-    game.mult = 1; game.multTimer = 0; game.perfectRun = 0;
+    breakCombo(); game.multTimer = 0; game.perfectRun = 0;
     return;
   }
   splash(d.x, speed * 0.55, false);
@@ -951,6 +957,19 @@ function updateWorld(dt) {
     // Flucht vor dem Delfin
     const fx = s.x - d.x, fy = s.y - d.y, fd = Math.hypot(fx, fy);
     if (fd < 260 && !magnet) { s.x += fx / fd * 120 * dt; s.y += fy / fd * 120 * dt; }
+    // Schwarm durchkreuzen
+    const inSchool = !d.airborne && Math.abs(d.x - s.x) < 95 && Math.abs(d.y - s.y) < 55;
+    if (inSchool && !s.inside && playing) {
+      const pts = SCHOOL_PTS * Math.pow(SCHOOL_DECAY, game.comboSchools);
+      const gain = SCHOOL_BOOST * Math.pow(SCHOOL_DECAY, game.schoolRuns);
+      const got = addScore(pts);
+      game.boost += gain; game.comboSchools++; game.schoolRuns++; game.stats.schools++;
+      floatText(s.x, s.y - 64, 'Schwarm! +' + fmt(got), '#7dffcf', 24);
+      floatText(s.x, s.y - 34, 'Bonus +' + pct(gain), '#bdf0ff', 18);
+      sfx.ring(false);
+      for (let i = 0; i < 24; i++) { const a = rnd(0, TAU); addP({ t: 'spark', x: s.x, y: s.y, vx: Math.cos(a) * rnd(60, 220), vy: Math.sin(a) * rnd(60, 220), life: rnd(0.5, 1), max: 1, r: rnd(1.5, 3), col: `hsl(${s.hue},90%,70%)` }); }
+    }
+    s.inside = inSchool;
     for (const f of s.fish) {
       f.ph += dt * 3;
       if (!f.alive) { f.re -= dt; if (f.re <= 0) f.alive = true; continue; }
@@ -1525,12 +1544,14 @@ function drawOverlayHUD() {
 //  HUD (DOM)
 // ====================================================================
 const $ = id => document.getElementById(id);
-const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips') };
+const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost') };
 let chipState = '';
 function updateHUD() {
   hud.score.textContent = fmt(game.score);
   hud.mult.textContent = '×' + game.mult;
   hud.multBar.style.transform = `scaleX(${game.mult > 1 ? clamp(game.multTimer / 6, 0, 1) : 0})`;
+  hud.boost.hidden = game.boost <= 0;
+  hud.boost.textContent = 'Schwarm-Bonus +' + pct(game.boost);
   hud.energy.style.width = (game.power.turbo > 0 ? 100 : d.energy) + '%';
   if (game.mode === 'contest') {
     const s = Math.max(0, Math.ceil(game.timeLeft));
@@ -1560,8 +1581,8 @@ function updateHUD() {
 function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
-  game.ringsHit = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
-  game.stats = { jumps: 0, maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
+  game.ringsHit = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
+  game.stats = { jumps: 0, maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = '';
   cam.x = d.x; cam.y = d.y;
   hud.timerLabel.textContent = mode === 'contest' ? 'Zeit' : mode === 'rings' ? 'Ringe 0 / 15' : 'Freies Spiel';
@@ -1595,7 +1616,7 @@ function endGame() {
   $('resBest').innerHTML = isBest ? '<span class="newbest">Neuer Rekord!</span>' : 'Rekord: ' + (mode === 'rings' ? best.rings.toFixed(1).replace('.', ',') + ' s' : fmt(best[mode]));
   const items = [
     ['Höchster Sprung', st.maxH.toFixed(1).replace('.', ',') + ' m'], ['Beste Kombo', '×' + st.maxMult], ['Sprünge', st.jumps],
-    ['Perfekte Landungen', st.perfects], ['Ringe', st.rings], ['Fische', st.fish]
+    ['Perfekte Landungen', st.perfects], ['Ringe', st.rings], ['Schwärme · Bonus', st.schools + ' · +' + pct(game.boost)]
   ];
   $('resStats').innerHTML = items.map(([k, v]) => `<div class="stat"><span class="label">${k}</span><b>${v}</b></div>`).join('') +
     `<div class="stat" style="grid-column:1/-1"><span class="label">Bester Sprung</span><b style="font-size:18px">${st.bestJump ? st.bestTrick + ' · ' + fmt(st.bestJump) : 'Noch kein sauber gelandeter Sprung'}</b></div>`;
@@ -1679,7 +1700,8 @@ function frame(now) {
 requestAnimationFrame(frame);
 
 // Testhaken für automatisierte Prüfungen
-window.__delfin = { game, get d() { return d; }, startGame, endGame, keys };
+window.__delfin = { game, get d() { return d; }, startGame, endGame, keys,
+  hitSchool() { const s = fishSchools[0]; d.x = s.x; d.y = s.y; d.vx = 0; d.vy = 0; } };
 })();
 </script>
 </body>

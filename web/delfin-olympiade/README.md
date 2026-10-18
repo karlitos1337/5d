@@ -21,6 +21,8 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - 3 Modi: Wettkampf (2 min), Ring-Jagd (15 Ringe auf Zeit), Freies Spiel
 - Tricks: Saltos vorwärts/rückwärts (bis Mehrfach), Schrauben, Kombis; Bewertung der Landung
   (Perfekt / Sauber / Bauchklatscher) und Kombo-Multiplikator bis ×10
+- Fischschwärme durchkreuzen: 5.000 Punkte (in derselben Kombo jedes weitere Mal 1 % weniger) und
+  ein Bonusverstärker auf alle Punkte (+1 %, jedes weitere Mal 1 % weniger als zuvor)
 - Ringe (Gold-Ringe hoch oben), Möwen-Stups, Himmelssterne, Fischschwärme, Perlenmuscheln, Quallen
 - 6 Power-ups: Turbo, Doppelte Punkte, Magnet, Zeitlupe, Leichtflug, Rakete
 - Tag-Nacht-Zyklus mit Sonne, Mond, Sternen, Leuchtturm und Biolumineszenz bei Nacht
