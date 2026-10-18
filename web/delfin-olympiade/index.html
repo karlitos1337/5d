@@ -327,6 +327,8 @@ const DEPTH = 1500;            // mittlere Wassertiefe
 const G = 1000;                // Schwerkraft in der Luft
 const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
 const lerp = (a, b, t) => a + (b - a) * t;
+// Lagune als Rundkurs: kürzester Abstand über die Nahtstelle hinweg
+const wrapD = v => v - WORLD_W * Math.round(v / WORLD_W);
 const angDiff = (a, b) => { let d = (b - a) % TAU; if (d > Math.PI) d -= TAU; if (d < -Math.PI) d += TAU; return d; };
 const rnd = (a, b) => a + Math.random() * (b - a);
 function mulberry(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -439,7 +441,9 @@ function drawDolphin(c, x, y, ang, sy, tail, skin, scale, glow) {
 //  Welt erzeugen
 // ====================================================================
 const R = mulberry(1337);
-const floorY = x => DEPTH + 80 * Math.sin(x * 0.0013) + 40 * Math.sin(x * 0.0041 + 1) + 18 * Math.sin(x * 0.013);
+// Frequenzen sind ganzzahlige Vielfache von 2π/WORLD_W, damit Boden und Wellen nahtlos umlaufen
+const KW = TAU / WORLD_W;
+const floorY = x => DEPTH + 80 * Math.sin(x * KW * 2) + 40 * Math.sin(x * KW * 5 + 1) + 18 * Math.sin(x * KW * 15);
 const plants = [], corals = [], rocks = [];
 for (let x = 120; x < WORLD_W - 100; x += 60 + R() * 110) plants.push({ x, h: 110 + R() * 240, ph: R() * TAU, hue: 95 + R() * 60, w: 3 + R() * 4 });
 for (let x = 200; x < WORLD_W - 150; x += 140 + R() * 260) {
@@ -651,9 +655,9 @@ function spawnPower(p) {
 //  Wellen
 // ====================================================================
 function waveY(x, t) {
-  let y = 6 * Math.sin(x * 0.004 + t * 1.3) + 4 * Math.sin(x * 0.011 - t * 1.9) + 2 * Math.sin(x * 0.027 + t * 3.1);
+  let y = 6 * Math.sin(x * KW * 5 + t * 1.3) + 4 * Math.sin(x * KW * 13 - t * 1.9) + 2 * Math.sin(x * KW * 31 + t * 3.1);
   for (const r of ripples) {
-    const age = t - r.t0, dx = Math.abs(x - r.x), front = age * 380;
+    const age = t - r.t0, dx = Math.abs(wrapD(x - r.x)), front = age * 380;
     if (dx < front + 60) y += r.amp * Math.exp(-age * 1.4) * Math.sin(dx * 0.045 - age * 9) * Math.exp(-dx / (160 + age * 200));
   }
   return y;
@@ -743,7 +747,7 @@ const auto = { phase: 'dive', flipDir: -1, plan: 1 };
 function autopilot() {
   const o = { left: false, right: false, up: false, down: false, turbo: false };
   const steer = target => { const df = angDiff(d.a, target); if (df > 0.06) o.right = true; else if (df < -0.06) o.left = true; };
-  const dir = d.x < 1500 ? 1 : d.x > WORLD_W - 1500 ? -1 : (d.vx >= 0 ? 1 : -1);
+  const dir = d.vx >= 0 ? 1 : -1;
   if (!d.airborne) {
     if (auto.phase === 'dive') { steer(Math.atan2(1, dir * 1.4)); o.up = true; if (d.y > 650) auto.phase = 'rise'; }
     else { steer(Math.atan2(-2.4, dir)); o.up = true; o.turbo = d.y < 520 && d.energy > 20; }
@@ -803,8 +807,6 @@ function updateDolphin(dt, rdt, ctl) {
     // Grenzen
     const fy = floorY(d.x) - 34;
     if (d.y > fy) { d.y = fy; d.vy = -Math.abs(d.vy) * 0.3; if (Math.sin(d.a) > 0) d.a = -d.a * 0.6; }
-    if (d.x < 80) { d.x = 80; d.vx = Math.abs(d.vx) * 0.5; d.a = Math.PI - d.a; }
-    if (d.x > WORLD_W - 80) { d.x = WORLD_W - 80; d.vx = -Math.abs(d.vx) * 0.5; d.a = Math.PI - d.a; }
     d.x += d.vx * dt; d.y += d.vy * dt;
     // Absprung
     if (d.y < surf && d.vy < 0) {
@@ -826,8 +828,6 @@ function updateDolphin(dt, rdt, ctl) {
     d.vy += gr * dt;
     d.vx -= d.vx * 0.05 * dt;
     d.x += d.vx * dt; d.y += d.vy * dt;
-    if (d.x < 60) { d.x = 60; d.vx = Math.abs(d.vx) * 0.4; }
-    if (d.x > WORLD_W - 60) { d.x = WORLD_W - 60; d.vx = -Math.abs(d.vx) * 0.4; }
     d.airT += dt; d.maxH = Math.max(d.maxH, -d.y);
     d.trail.push({ x: d.x, y: d.y, a: d.a, s: d.roll * Math.cos(d.twist) });
     if (d.trail.length > 14) d.trail.shift();
@@ -911,15 +911,15 @@ function land() {
 function updateWorld(dt) {
   const t = game.time, p = game.power;
   const magnet = p.magnet > 0;
-  const near = (x, y, r) => (x - d.x) ** 2 + (y - d.y) ** 2 < r * r;
-  const pull = o => { if (!magnet) return; const dx = d.x - o.x, dy = d.y - o.y, dist = Math.hypot(dx, dy); if (dist < 520 && dist > 1) { o.x += dx / dist * 520 * dt; o.y += dy / dist * 520 * dt; } };
+  const near = (x, y, r) => wrapD(x - d.x) ** 2 + (y - d.y) ** 2 < r * r;
+  const pull = o => { if (!magnet) return; const dx = wrapD(d.x - o.x), dy = d.y - o.y, dist = Math.hypot(dx, dy); if (dist < 520 && dist > 1) { o.x += dx / dist * 520 * dt; o.y += dy / dist * 520 * dt; } };
   const playing = game.state === 'play';
 
   // Ringe
   for (const r of rings) {
     if (r.cool > 0) { r.cool -= dt; if (r.cool <= 0) placeRing(r); continue; }
     const prevX = d.x - d.vx * dt;
-    if (d.airborne && Math.abs(d.y - r.y) < r.rad * 0.8 && (prevX - r.x) * (d.x - r.x) <= 0) {
+    if (d.airborne && Math.abs(d.y - r.y) < r.rad * 0.8 && wrapD(prevX - r.x) * wrapD(d.x - r.x) <= 0 && Math.abs(wrapD(d.x - r.x)) < 200) {
       r.cool = 8; d.jRings++;
       if (playing) {
         game.ringsHit++; game.stats.rings++; lifetime.rings++; store.set('life', lifetime);
@@ -934,7 +934,7 @@ function updateWorld(dt) {
   // Möwen
   for (const g of gulls) {
     g.x += g.v * dt; g.ph += dt * 7; if (g.hit > 0) g.hit -= dt;
-    if (g.x < -200) g.x = WORLD_W + 200; if (g.x > WORLD_W + 200) g.x = -200;
+    g.x = (g.x % WORLD_W + WORLD_W) % WORLD_W;
     if (d.airborne && g.hit <= 0 && near(g.x, g.y, 70)) {
       g.hit = 3; d.jGulls++; sfx.gull(); g.v *= -1.4;
       if (playing) { game.stats.gulls++; unlock('gull'); addScore(400 * game.mult, g.x, g.y - 40, '#fff'); }
@@ -958,10 +958,10 @@ function updateWorld(dt) {
     const dx = s.tx - s.x, dy = s.ty - s.y, dist = Math.hypot(dx, dy) || 1;
     s.x += dx / dist * 70 * dt; s.y += dy / dist * 70 * dt; s.dir = dx >= 0 ? 1 : -1;
     // Flucht vor dem Delfin
-    const fx = s.x - d.x, fy = s.y - d.y, fd = Math.hypot(fx, fy);
+    const fx = wrapD(s.x - d.x), fy = s.y - d.y, fd = Math.hypot(fx, fy);
     if (fd < 260 && !magnet) { s.x += fx / fd * 120 * dt; s.y += fy / fd * 120 * dt; }
     // Schwarm durchkreuzen
-    const inSchool = !d.airborne && Math.abs(d.x - s.x) < 95 && Math.abs(d.y - s.y) < 55;
+    const inSchool = !d.airborne && Math.abs(wrapD(d.x - s.x)) < 95 && Math.abs(d.y - s.y) < 55;
     if (inSchool && !s.inside && playing) {
       const pts = SCHOOL_PTS * Math.pow(SCHOOL_DECAY, game.comboSchools);
       const gain = SCHOOL_BOOST * Math.pow(SCHOOL_DECAY, game.schoolRuns);
@@ -977,7 +977,7 @@ function updateWorld(dt) {
       f.ph += dt * 3;
       if (!f.alive) { f.re -= dt; if (f.re <= 0) f.alive = true; continue; }
       const fx2 = s.x + f.ox + Math.sin(f.ph) * 10, fy2 = s.y + f.oy + Math.cos(f.ph * 0.8) * 6;
-      if (magnet) { const mx = d.x - fx2, my = d.y - fy2, md = Math.hypot(mx, my); if (md < 420) { f.ox += mx / md * 360 * dt; f.oy += my / md * 360 * dt; } }
+      if (magnet) { const mx = wrapD(d.x - fx2), my = d.y - fy2, md = Math.hypot(mx, my); if (md < 420) { f.ox += mx / md * 360 * dt; f.oy += my / md * 360 * dt; } }
       else { f.ox = lerp(f.ox, clamp(f.ox, -70, 70), dt); f.oy = lerp(f.oy, clamp(f.oy, -35, 35), dt); }
       if (!d.airborne && near(fx2, fy2, 46)) {
         f.alive = false; f.re = 14; f.ox = rnd(-60, 60); f.oy = rnd(-30, 30);
@@ -991,7 +991,7 @@ function updateWorld(dt) {
     j.ph += dt; j.y = j.by + Math.sin(j.ph * 0.35) * 90; j.x += Math.sin(j.ph * 0.2) * 12 * dt;
     if (!d.airborne && d.invuln <= 0 && near(j.x, j.y, 48)) {
       d.invuln = 1.6; d.stun = 0.45; d.energy = Math.max(0, d.energy - 25);
-      d.vx = (d.x - j.x) * 6; d.vy = (d.y - j.y) * 6;
+      d.vx = wrapD(d.x - j.x) * 6; d.vy = (d.y - j.y) * 6;
       sfx.sting(); game.flash = 0.3; game.flashCol = '#d78cff'; game.shake = 8;
       if (playing) { game.stats.stings++; floatText(d.x, d.y - 50, 'Autsch!', '#e7b0ff', 22); }
     }
@@ -1033,7 +1033,7 @@ function updateWorld(dt) {
   }
   for (let i = texts.length - 1; i >= 0; i--) { const x = texts[i]; x.life -= dt; x.y -= 50 * dt; if (x.life <= 0) texts.splice(i, 1); }
   while (ripples.length && t - ripples[0].t0 > 4) ripples.shift();
-  for (const c of clouds) { c.x += c.v * dt; if (c.x > WORLD_W + 600) c.x = -600; }
+  for (const c of clouds) { c.x = ((c.x + c.v * dt) % WORLD_W + WORLD_W) % WORLD_W; }
 }
 
 // ====================================================================
@@ -1051,8 +1051,6 @@ function updateCamera(dt) {
   cam.x = lerp(cam.x, tx, k); cam.y = lerp(cam.y, ty, k);
   // schnell herauszoomen, langsam wieder heran
   cam.z = lerp(cam.z, tz, 1 - Math.exp(-dt * (tz < cam.z ? 6 : 2.5)));
-  const halfW = W / 2 / cam.z;
-  cam.x = clamp(cam.x, halfW - 400, WORLD_W - halfW + 400);
   // Delfin bleibt immer sichtbar
   const m = 110, mt = Math.max(150, H * 0.3);
   if (SY(d.y) < mt) cam.y = d.y + (H / 2 - mt) / cam.z;
@@ -1060,7 +1058,9 @@ function updateCamera(dt) {
   if (SX(d.x) < m) cam.x = d.x + (W / 2 - m) / cam.z;
   if (SX(d.x) > W - m) cam.x = d.x - (W / 2 - m) / cam.z;
 }
-const SX = x => (x - cam.x) * cam.z + W / 2;
+// Jedes Weltobjekt wird an seiner zur Kamera nächsten Kopie gezeichnet
+const SX = x => wrapD(x - cam.x) * cam.z + W / 2;
+const offX = (x, m) => { const s = SX(x); return s < -m || s > W + m; };
 const SY = y => (y - cam.y) * cam.z + H / 2;
 const WX = sx => (sx - W / 2) / cam.z + cam.x;
 
@@ -1155,7 +1155,7 @@ function drawClouds(pal, nt) {
   ctx.save();
   ctx.globalAlpha = 0.85 - nt * 0.55;
   for (const c of clouds) {
-    const sx = (c.x - cam.x) * par * z + W / 2, sy = (c.y - cam.y) * par * z + H / 2 + (SY(0) - H / 2) * (1 - par);
+    const sx = wrapD(c.x - cam.x * par) * z + W / 2, sy = (c.y - cam.y) * par * z + H / 2 + (SY(0) - H / 2) * (1 - par);
     const w = 360 * c.s * z, h = 160 * c.s * z;
     if (sx + w / 2 < 0 || sx - w / 2 > W || sy + h < 0 || sy - h > H) continue;
     ctx.drawImage(cloudSprites[c.spr], sx - w / 2, sy - h / 2, w, h);
@@ -1227,10 +1227,9 @@ function drawPowerIcon(c, type, r) {
 
 function drawUnderwater(pal, nt) {
   const t = game.time;
-  const x0 = WX(-120), x1 = WX(W + 120);
   // Felsen
   for (const r of rocks) {
-    if (r.x < x0 - 150 || r.x > x1 + 150) continue;
+    if (offX(r.x, 270)) continue;
     const x = SX(r.x), y = SY(floorY(r.x)), z = cam.z;
     const g = ctx.createRadialGradient(x - r.r * 0.3 * z, y - r.r * 0.6 * z, 5, x, y, r.r * 1.2 * z);
     g.addColorStop(0, rgb(mix(pal.sand, [90, 100, 110], 0.5))); g.addColorStop(1, rgb(mix(pal.sand, [20, 25, 35], 0.7)));
@@ -1239,7 +1238,7 @@ function drawUnderwater(pal, nt) {
   // Seegras
   ctx.lineCap = 'round';
   for (const p of plants) {
-    if (p.x < x0 || p.x > x1) continue;
+    if (offX(p.x, 120)) continue;
     const bx = SX(p.x), by = SY(floorY(p.x) + 6), z = cam.z;
     const sway = Math.sin(t * 1.1 + p.ph) * 22 + Math.sin(t * 0.6 + p.x) * 10;
     ctx.strokeStyle = `hsl(${p.hue},55%,${30 + pal.light * 12}%)`; ctx.lineWidth = p.w * z;
@@ -1253,7 +1252,7 @@ function drawUnderwater(pal, nt) {
   }
   // Korallen
   for (const c of corals) {
-    if (c.x < x0 - 60 || c.x > x1 + 60) continue;
+    if (offX(c.x, 180)) continue;
     const bx = SX(c.x), by = SY(floorY(c.x) + 4), z = cam.z * c.size;
     const light = 42 + pal.light * 18, glowN = nt > 0.5;
     if (c.type === 'brain') {
@@ -1275,7 +1274,7 @@ function drawUnderwater(pal, nt) {
   }
   // Muscheln
   for (const s of shells) {
-    if (s.x < x0 || s.x > x1) continue;
+    if (offX(s.x, 120)) continue;
     const x = SX(s.x), y = SY(s.y), z = cam.z, open = s.open * 0.6;
     ctx.fillStyle = '#e8d6c8'; ctx.beginPath(); ctx.ellipse(x, y + 4 * z, 22 * z, 9 * z, 0, 0, Math.PI); ctx.fill();
     if (!s.taken && s.open > 0.2) {
@@ -1292,7 +1291,7 @@ function drawUnderwater(pal, nt) {
   }
   // Fische
   for (const s of fishSchools) {
-    if (s.x < x0 - 200 || s.x > x1 + 200) continue;
+    if (offX(s.x, 320)) continue;
     for (const f of s.fish) {
       if (!f.alive) continue;
       const fx = s.x + f.ox + Math.sin(f.ph) * 10, fy = s.y + f.oy + Math.cos(f.ph * 0.8) * 6;
@@ -1308,7 +1307,7 @@ function drawUnderwater(pal, nt) {
   }
   // Quallen
   for (const j of jellies) {
-    if (j.x < x0 - 80 || j.x > x1 + 80) continue;
+    if (offX(j.x, 200)) continue;
     const x = SX(j.x), y = SY(j.y), z = cam.z, pulse = 1 + Math.sin(j.ph * 3) * 0.12;
     ctx.save(); ctx.translate(x, y);
     ctx.globalCompositeOperation = nt > 0.4 ? 'lighter' : 'source-over';
@@ -1325,7 +1324,7 @@ function drawUnderwater(pal, nt) {
   }
   // Power-up-Blasen
   for (const pu of powerUps) {
-    if (pu.x < x0 - 60 || pu.x > x1 + 60) continue;
+    if (offX(pu.x, 180)) continue;
     const x = SX(pu.x), y = SY(pu.y), z = cam.z, r = 26 * z * (1 + Math.sin(pu.ph * 3) * 0.06), col = POWER[pu.type].col;
     ctx.save(); ctx.translate(x, y);
     ctx.globalCompositeOperation = 'lighter';
@@ -1530,7 +1529,7 @@ function drawOverlayHUD() {
   // Ziel-Pfeil zum nächsten Ring (Ring-Jagd)
   if (game.mode === 'rings') {
     let bestR = null, bd = 1e9;
-    for (const r of rings) { if (r.cool > 0) continue; const dd = Math.abs(r.x - d.x) + Math.abs(r.y - d.y) * 0.5; if (dd < bd) { bd = dd; bestR = r; } }
+    for (const r of rings) { if (r.cool > 0) continue; const dd = Math.abs(wrapD(r.x - d.x)) + Math.abs(r.y - d.y) * 0.5; if (dd < bd) { bd = dd; bestR = r; } }
     if (bestR) {
       const sx = SX(bestR.x), sy = SY(bestR.y);
       if (sx < 0 || sx > W || sy < 0 || sy > H) {
