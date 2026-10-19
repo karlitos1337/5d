@@ -277,6 +277,11 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
             <button type="button" data-scn="1" aria-pressed="true">An</button>
             <button type="button" data-scn="0">Aus</button>
           </div>
+          <h2>Hardcore</h2>
+          <div class="seg" id="hc">
+            <button type="button" data-hc="0" aria-pressed="true">Aus</button>
+            <button type="button" data-hc="1">An</button>
+          </div>
         </div>
         <div>
           <h2>Steuerung</h2>
@@ -310,6 +315,13 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
         <div class="seg" id="scnp" style="margin-top:6px">
           <button type="button" data-scnp="1" aria-pressed="true">An</button>
           <button type="button" data-scnp="0">Aus</button>
+        </div>
+      </div>
+      <div>
+        <span class="label">Hardcore: Schwung leer = Wurmloch nach Hause, Wegmarken ×2 Punkte</span>
+        <div class="seg" id="hcp" style="margin-top:6px">
+          <button type="button" data-hcp="0" aria-pressed="true">Aus</button>
+          <button type="button" data-hcp="1">An</button>
         </div>
       </div>
     </div>
@@ -668,6 +680,7 @@ let achieved = store.get('ach', {});
 let lifetime = store.get('life', { rings: 0, pearls: 0 });
 let skinId = store.get('skin', 'classic');
 let scenesOn = store.get('scenes', true);
+let hardcore = store.get('hardcore', false);
 const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
@@ -894,9 +907,18 @@ function updateDolphin(dt, rdt, ctl) {
     else if (d.twist < d.twistTarget) d.twist = Math.min(d.twistTarget, d.twist + tstep);
     if (inSpace) updateSpace(dt, ctl);
     else {
-      const gr = G * (p.feather > 0 ? 0.55 : 1);
+      const falling = d.space === 'fall' && -d.y > PX_KARMAN;
+      const gr = falling ? 5000 : G * (p.feather > 0 ? 0.55 : 1);
       d.vy += gr * dt;
-      d.vx -= d.vx * 0.05 * dt;
+      if (falling) d.vy = Math.min(d.vy, 6000);
+      d.vx -= d.vx * (falling ? 1.5 : 0.05) * dt;
+      if (d.space === 'fall' && !d.reentry && -d.y <= PX_KARMAN) {
+        // Wiedereintritt in die Atmosphäre bremst den Rückfall
+        d.reentry = true; d.vy = Math.min(d.vy, 2500);
+        banner('Wiedereintritt!', 'Gleich wieder in der Lagune', '#ffb070');
+        game.flash = 0.4; game.flashCol = '#ff8a3d'; sfx.whoosh();
+        for (let i = 0; i < 50; i++) addP({ t: 'spark', x: d.x + rnd(-40, 40), y: d.y + rnd(-40, 40), vx: rnd(-220, 220), vy: rnd(-300, 0), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: i % 2 ? '#ff8a3d' : '#ffe39a' });
+      }
       d.x += d.vx * dt; d.y += d.vy * dt;
       if (!d.space && -d.y > PX_KARMAN && d.vy < 0) enterSpace();
     }
@@ -958,7 +980,7 @@ function land() {
     const pts = addScore(base * d.cosmo);
     banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', pts > 0 ? '+' + fmt(pts) : '', '#ff8a7a');
     game.perfectRun = 0;
-    if (speed >= RAM_SPEED * 0.5 || d.space === 'done') shockwave(d.x, 200);
+    if (speed >= RAM_SPEED * 0.5 || d.space === 'done' || d.space === 'fall') shockwave(d.x, 200);
     return;
   }
   splash(d.x, speed * 0.55, false);
@@ -1270,7 +1292,7 @@ function reachLandmark(l) {
     game.lmPasses[i] = n + 1;
     d.cosmo = Math.max(d.cosmo, l.x * Math.pow(COSMO_DECAY, n));
   }
-  const got = addScore(l.pts * d.cosmo);
+  const got = addScore(l.pts * d.cosmo * (hardcore ? 2 : 1));
   banner(l.name, (l.x ? 'Kombo ×' + fmtX(d.cosmo) + ' · ' : '') + l.sub + '  +' + fmt(got), l.ach || l.x ? '#d9c2ff' : '#bdf0ff');
   if (l.ach) unlock(l.ach);
   if (l.kind === 'moon') {
@@ -1310,7 +1332,7 @@ function updateSpace(dt, ctl) {
   d.vx -= d.vx * 1.5 * dt;
   d.a += angDiff(d.a, Math.atan2(d.vy, d.vx)) * Math.min(1, dt * 8);
   d.x += d.vx * dt; d.y += d.vy * dt;
-  d.schwung -= Math.abs(d.vy) * dt / SCHWUNG_PX * (p.feather > 0 ? 0.6 : 1);
+  d.schwung -= Math.abs(d.vy) * dt / SCHWUNG_PX * (p.feather > 0 ? 0.6 : 1) * (hardcore ? 1 : 0.5);
   for (const s of d.dust) {
     if (s.hit) continue;
     const ly = -s.px;
@@ -1326,8 +1348,13 @@ function updateSpace(dt, ctl) {
     }
   }
   if (game.state === 'play' && realSpeed() / 2.998e8 >= 1e6) unlock('lichtjahre');
-  if (d.schwung <= 0) cosmicReturn('Der Sternenstaub ist alle');
-  else if (hpx > PX_END) cosmicReturn('Am Ende aller Universen angekommen');
+  // Hardcore: per Wurmloch nach Hause; normal: Rückfall zur Erde mit Wiedereintritt
+  if (d.schwung <= 0) (hardcore ? cosmicReturn : startFall)('Der Sternenstaub ist alle');
+  else if (hpx > PX_END) (hardcore ? cosmicReturn : startFall)('Am Ende aller Universen angekommen');
+}
+function startFall(why) {
+  d.space = 'fall'; d.reentry = false;
+  floatText(d.x, d.y - 80, why + ' – Rückfall!', '#d9c2ff', 22);
 }
 function cosmicReturn(why) {
   d.space = 'done';
@@ -2503,7 +2530,7 @@ function drawOverlayHUD() {
       const g = ctx.createLinearGradient(W / 2 - bw / 2, 0, W / 2 + bw / 2, 0); g.addColorStop(0, '#bff4ff'); g.addColorStop(1, '#ffb3f0');
       ctx.fillStyle = g; ctx.fillRect(W / 2 - bw / 2, by, bw * fill, 10);
       ctx.font = '700 11px "Atkinson Hyperlegible", sans-serif'; ctx.fillStyle = 'rgba(234,248,255,.85)';
-      ctx.fillText('KOSMOS-SCHWUNG ' + Math.round(d.schwung * 100) + ' %', W / 2, by - 9);
+      ctx.fillText((hardcore ? 'HARDCORE · ' : '') + 'KOSMOS-SCHWUNG ' + Math.round(d.schwung * 100) + ' %', W / 2, by - 9);
     }
     ctx.font = '700 13px "Atkinson Hyperlegible", sans-serif'; ctx.fillStyle = '#ffe39a';
     ctx.fillText('Tempo: ' + fmtSpeed(realSpeed()), W / 2, by + 26);
@@ -2663,10 +2690,13 @@ function buildMenu() {
     b.addEventListener('click', () => { skinId = s.id; store.set('skin', skinId); buildMenu(); sfx.chirp(); });
     sk.appendChild(b);
   }
-  syncSeg('tod', todMode); syncSeg('snd', soundOn ? '1' : '0'); syncSeg('scn', scenesOn ? '1' : '0'); syncSeg('scnp', scenesOn ? '1' : '0');
+  syncSeg('tod', todMode); syncSeg('snd', soundOn ? '1' : '0'); syncSeg('scn', scenesOn ? '1' : '0'); syncSeg('scnp', scenesOn ? '1' : '0'); syncSeg('hc', hardcore ? '1' : '0'); syncSeg('hcp', hardcore ? '1' : '0');
 }
 document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => startGame(b.dataset.mode)));
 document.querySelectorAll('#tod button').forEach(b => b.addEventListener('click', () => { todMode = b.dataset.tod; store.set('tod', todMode); if (todMode !== 'auto') dayT = TOD_FIXED[todMode]; syncSeg('tod', todMode); }));
+function setHardcore(on) { hardcore = on; store.set('hardcore', on); syncSeg('hc', on ? '1' : '0'); syncSeg('hcp', on ? '1' : '0'); }
+document.querySelectorAll('#hc button').forEach(b => b.addEventListener('click', () => setHardcore(b.dataset.hc === '1')));
+document.querySelectorAll('#hcp button').forEach(b => b.addEventListener('click', () => setHardcore(b.dataset.hcp === '1')));
 function setScenes(on) { scenesOn = on; store.set('scenes', on); syncSeg('scn', on ? '1' : '0'); syncSeg('scnp', on ? '1' : '0'); }
 document.querySelectorAll('#scn button').forEach(b => b.addEventListener('click', () => setScenes(b.dataset.scn === '1')));
 document.querySelectorAll('#scnp button').forEach(b => b.addEventListener('click', () => setScenes(b.dataset.scnp === '1')));

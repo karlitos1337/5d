@@ -29,7 +29,8 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
   Fliege und Sonnenbrille, danach friert das Bild als Magazin-Cover „Killer-Shot“ ein (+5.000)
 - Weltraum-Modus ab der Kármán-Linie: keine Erd-Schwerkraft, je höher desto schneller (Tempo-Anzeige bis zur
   vielfachen Lichtgeschwindigkeit), lenken mit ← →; ab dem Mond Sternenstaub-Wellen zum Surfen mit immer größeren
-  Abständen, sie füllen den Kosmos-Schwung auf; ist er alle, geht es per Wurmloch zurück in die Lagune
+  Abständen, sie füllen den Kosmos-Schwung auf; ist er alle, fällt der Delfin zur Erde zurück (Wiedereintritt).
+  Hardcore-Modus (Menü/Pause): Schwung läuft doppelt so schnell leer, leer = Wurmloch nach Hause, Wegmarken ×2 Punkte
 - Kosmos-Kombo: Wegmarken multiplizieren die Punkte des laufenden Sprungs (Flugzeug ×2, Mond ×5, Mars ×10, Jupiter ×25,
   Saturn ×50, Neptun ×100 … bis Urdelfin ×100.000); es zählt der höchste im Sprung, jede Wiederholung derselben
   Wegmarke in einer Runde 1 % weniger; nur bei sauberer Landung zählt er auch für die Sprungpunkte
