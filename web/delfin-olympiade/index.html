@@ -429,8 +429,8 @@ function drawDolphin(c, x, y, ang, sy, tail, skin, scale, glow, suit) {
   gl.addColorStop(0, skin.shine ? 'rgba(255,255,220,.75)' : 'rgba(255,255,255,.45)'); gl.addColorStop(1, 'rgba(255,255,255,0)');
   c.fillStyle = gl; c.beginPath(); c.ellipse(5, -15, 48, 6, -0.06, 0, TAU); c.fill();
   c.restore();
-  // Anzug fürs Fotoshooting
-  if (suit) {
+  // Anzug fürs Fotoshooting (suit === true), 'shades' zeigt nur die Sonnenbrille
+  if (suit === true) {
     c.save(); bodyPath(c); c.clip();
     c.fillStyle = '#15171f'; c.fillRect(-34, -30, 72, 60);
     c.fillStyle = '#f4f6fa'; c.beginPath(); c.moveTo(38, -4); c.lineTo(24, 18); c.lineTo(44, 18); c.closePath(); c.fill();
@@ -440,7 +440,7 @@ function drawDolphin(c, x, y, ang, sy, tail, skin, scale, glow, suit) {
     c.moveTo(37, 6); c.lineTo(31, 2); c.lineTo(31, 10); c.closePath(); c.moveTo(37, 6); c.lineTo(43, 2); c.lineTo(43, 10); c.closePath(); c.fill();
   }
   // Brustflosse
-  c.fillStyle = suit ? '#15171f' : skin.back;
+  c.fillStyle = suit === true ? '#15171f' : skin.back;
   c.beginPath(); c.moveTo(27, 9); c.bezierCurveTo(19, 21, 9, 27, 1, 30); c.bezierCurveTo(8, 21, 12, 15, 12, 9); c.closePath(); c.fill();
   // Auge, Maul
   c.fillStyle = neon ? neon : '#0b1320'; c.beginPath(); c.arc(44, -3, 2.6, 0, TAU); c.fill();
@@ -589,6 +589,9 @@ const sfx = {
   star: () => [0, 5, 9, 12, 17, 21].forEach((s, i) => tone(784 * Math.pow(2, s / 12), 0.35, 'sine', 0.07, 0, i * 0.04)),
   tick: () => tone(1000, 0.05, 'square', 0.04),
   turbo: () => noise(0.3, 900, 0.06, 2, 'bandpass'),
+  whistle: () => [0, 4, 7, 4, 9].forEach((st, i) => tone(1400 * Math.pow(2, st / 12), 0.14, 'sine', 0.06, 40, i * 0.13)),
+  whoosh: () => noise(0.45, 1800, 0.2, 1.2, 'bandpass'),
+  thump: () => { tone(90, 0.25, 'sine', 0.14, -40); noise(0.2, 500, 0.15, 0.7); },
   shutter: () => { noise(0.05, 7000, 0.22, 1, 'highpass'); tone(2200, 0.03, 'square', 0.04, 0, 0.04); },
   ink: () => { noise(0.5, 500, 0.25, 0.7); tone(110, 0.3, 'sine', 0.08, -50); },
   bite: () => { tone(180, 0.12, 'sawtooth', 0.1, -90); noise(0.08, 2500, 0.15, 2, 'bandpass'); }
@@ -627,7 +630,9 @@ const ACH = [
   { id: 'galaxy', name: 'Intergalaktisch', desc: 'Verlass die Milchstraße' },
   { id: 'universe', name: 'Raus hier!', desc: 'Verlass das beobachtbare Universum' },
   { id: 'urdelfin', name: 'Urdelfin', desc: 'Triff den Urdelfin jenseits des Universums' },
-  { id: 'model', name: 'Supermodel', desc: 'Lass dich am Flugzeug fotografieren (Wettkampf)' }
+  { id: 'model', name: 'Supermodel', desc: 'Lass dich am Flugzeug fotografieren (Wettkampf)' },
+  { id: 'flag', name: 'Delfine United', desc: 'Tausch die Flagge auf dem Mond' },
+  { id: 'sunbath', name: 'Marsurlaub', desc: 'Sonn dich auf dem Mars' }
 ];
 let achieved = store.get('ach', {});
 let lifetime = store.get('life', { rings: 0, pearls: 0 });
@@ -636,7 +641,7 @@ const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
   state: 'menu', mode: 'contest', time: 0, playTime: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
-  ringsHit: 0, ringGoal: 15, shoot: null, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
+  ringsHit: 0, ringGoal: 15, shoot: null, scene: null, sceneQueue: [], seen: {}, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
 };
 const cam = { x: 900, y: 200, z: 1 };
 const keys = {};
@@ -737,9 +742,11 @@ window.addEventListener('keydown', e => {
   initAudio();
   if (KEYMAP[e.code]) { keys[KEYMAP[e.code]] = true; if (game.state === 'play') e.preventDefault(); }
   if (e.repeat) return;
+  if (game.scene && game.scene.t > 0.5 && (e.code === 'Space' || e.code === 'Enter')) { endScene(); return; }
   if (e.code === 'KeyP' || e.code === 'Escape') { if (game.state === 'play') pauseGame(); else if (game.state === 'pause') resumeGame(); }
   if (e.code === 'KeyM') setSound(!soundOn);
 });
+cv.addEventListener('pointerdown', () => { if (game.scene && game.scene.t > 0.5) endScene(); });
 window.addEventListener('keyup', e => { if (KEYMAP[e.code]) keys[KEYMAP[e.code]] = false; });
 window.addEventListener('blur', () => { for (const k in keys) keys[k] = false; if (game.state === 'play') pauseGame(); });
 
@@ -1151,11 +1158,11 @@ const LANDMARKS = [
   { m: 11000, name: 'Reiseflughöhe', sub: 'Ein Flugzeug winkt dir zu', pts: 1500, kind: 'plane' },
   { m: 1e5, name: 'Weltraum!', sub: 'Kármán-Linie · 100 km', pts: 3000, ach: 'space', kind: 'karman' },
   { m: 4.08e5, name: 'ISS', sub: 'Die Raumstation · 408 km', pts: 4000, kind: 'iss' },
-  { m: 3.844e8, name: 'Am Mond vorbei!', sub: '384.400 km', pts: 10000, ach: 'mondflug', kind: 'moon' },
-  { m: 5.46e10, name: 'Mars', sub: '54,6 Mio. km', pts: 15000, kind: 'planet', r: 0.55, c: ['#ffc39e', '#c1440e', '#4a1505'] },
+  { m: 3.844e8, name: 'Am Mond vorbei!', sub: '384.400 km', pts: 10000, ach: 'mondflug', kind: 'moon', scene: 'moon' },
+  { m: 5.46e10, name: 'Mars', sub: '54,6 Mio. km', pts: 15000, scene: 'mars', kind: 'planet', r: 0.55, c: ['#ffc39e', '#c1440e', '#4a1505'] },
   { m: 1.496e11, name: '1 Astronomische Einheit', sub: 'So weit ist die Sonne von der Erde', pts: 20000, kind: 'sun' },
   { m: 6.28e11, name: 'Jupiter', sub: '628 Mio. km', pts: 25000, kind: 'jupiter' },
-  { m: 1.28e12, name: 'Saturn', sub: '1,3 Mrd. km', pts: 30000, kind: 'saturn' },
+  { m: 1.28e12, name: 'Saturn', sub: '1,3 Mrd. km', pts: 30000, kind: 'saturn', scene: 'saturn' },
   { m: 4.35e12, name: 'Neptun', sub: '4,3 Mrd. km', pts: 35000, kind: 'planet', r: 0.7, c: ['#bfe3ff', '#3a6df0', '#0b1a5e'] },
   { m: 2.5e13, name: 'Voyager 1 überholt', sub: '25 Mrd. km', pts: 40000, kind: 'voyager' },
   { m: 4.01e16, name: 'Proxima Centauri', sub: 'Der nächste Stern · 4,24 Lichtjahre', pts: 60000, kind: 'star' },
@@ -1176,6 +1183,7 @@ function reachLandmark(l) {
   banner(l.name, l.sub + '  +' + fmt(got), l.ach ? '#d9c2ff' : '#bdf0ff');
   if (l.ach) unlock(l.ach);
   if (l.kind === 'plane') startShoot();
+  if (l.scene) startScene(l.scene);
   if (l.px > game.stats.farPx) { game.stats.farPx = l.px; game.stats.farName = l.name; }
   sfx.star();
 }
@@ -1503,6 +1511,271 @@ function drawShoot() {
     ctx.font = `${sh * 0.62}px "Lilita One", sans-serif`; ctx.fillText('KILLER-SHOT!', 0, 2);
     ctx.restore();
   }
+  ctx.restore();
+}
+
+// ====================================================================
+//  Zwischen-Szenen im All: Mond, Mars, Saturn (einmal pro Runde)
+// ====================================================================
+const SCENES = {
+  moon: { dur: 7.8, pts: 5000, ach: 'flag', title: 'Flaggen-Tausch' },
+  mars: { dur: 5.8, pts: 3000, ach: 'sunbath', title: 'Marsurlaub' },
+  saturn: { dur: 4.8, pts: 3000, title: 'Ringe-Surfen' }
+};
+function startScene(id) {
+  if (game.seen[id] || game.state !== 'play') return;
+  game.seen[id] = true;
+  if (game.scene) { game.sceneQueue.push(id); return; }
+  game.scene = { id, t: 0, fired: {}, notes: [], dust: [], flash: 0 };
+}
+function endScene() {
+  const info = SCENES[game.scene.id];
+  game.scene = null;
+  const got = addScore(info.pts);
+  floatText(d.x, d.y - 90, info.title + ' +' + fmt(got), '#ffd166', 24);
+  if (info.ach) unlock(info.ach);
+  const next = game.sceneQueue.shift();
+  if (next) game.scene = { id: next, t: 0, fired: {}, notes: [], dust: [], flash: 0 };
+}
+const sceneSkin = () => SKINS.find(s => s.id === skinId) || SKINS[0];
+function moonDolphin(t, S) {
+  const g = H * 0.7, fx = W * 0.62;
+  let x, look = 1, hide = false, spin = 0;
+  if (t < 1.0) x = lerp(-140 * S, W * 0.3, t);
+  else if (t < 1.8) { x = W * 0.3; hide = true; look = (t < 1.25 || t > 1.55) ? 1 : -1; }
+  else if (t < 2.7) x = lerp(W * 0.3, fx - 120 * S, (t - 1.8) / 0.9);
+  else x = fx - 120 * S;
+  if (t >= 3.3 && t < 3.8) spin = (t - 3.3) / 0.5 * TAU;
+  const hopping = (t < 2.7 && !hide) || t > 5.1;
+  const hop = hopping ? Math.abs(Math.sin(t * (t > 5.1 ? 9 : 6.5))) * 18 * S : 0;
+  return { x, y: g - 28 * S - hop + (hide ? 12 * S : 0), look, spin, hide };
+}
+function updateScene(rdt) {
+  const sc = game.scene;
+  sc.t += rdt;
+  const t = sc.t, S = Math.min(W, H) / 800;
+  const once = (k, at, fn) => { if (!sc.fired[k] && t >= at) { sc.fired[k] = true; fn(); } };
+  for (const n of sc.notes) { n.life -= rdt; n.y -= 45 * S * rdt; n.x += Math.sin(n.life * 6) * 20 * S * rdt; }
+  sc.notes = sc.notes.filter(n => n.life > 0);
+  for (const q of sc.dust) { q.life -= rdt; q.vy += (q.g || 0) * rdt; q.x += q.vx * rdt; q.y += q.vy * rdt; }
+  sc.dust = sc.dust.filter(q => q.life > 0);
+  sc.flash = Math.max(0, sc.flash - rdt * 2);
+  if (sc.id === 'moon') {
+    once('w1', 0.15, sfx.whistle); once('w2', 1.3, sfx.whistle); once('w3', 2.0, sfx.whistle);
+    if (t < 2.7 && Math.floor(t / 0.3) !== Math.floor((t - rdt) / 0.3)) {
+      const m = moonDolphin(t, S);
+      sc.notes.push({ x: m.x + 70 * S * m.look, y: m.y - 30 * S, life: 1.4 });
+    }
+    once('throw', 3.3, sfx.whoosh);
+    once('plant', 4.9, () => {
+      sfx.thump();
+      for (let i = 0; i < 26; i++) sc.dust.push({ x: W * 0.62 + rnd(-30, 30) * S, y: H * 0.7, vx: rnd(-120, 120) * S, vy: rnd(-160, -40) * S, g: 160 * S, life: rnd(0.8, 1.6), r: rnd(3, 8) * S, col: '200,200,205' });
+    });
+    once('fan', 5.2, sfx.perfect);
+  } else if (sc.id === 'mars') {
+    once('flop', 0.8, sfx.thump);
+    once('ahh', 1.0, () => tone(520, 0.6, 'sine', 0.06, -220));
+    once('snap', 3.6, () => { sfx.shutter(); sc.flash = 1; });
+  } else if (sc.id === 'saturn') {
+    once('surf', 0.2, sfx.whoosh); once('hop', 2.0, sfx.whoosh); once('yeah', 3.8, sfx.perfect);
+    if (Math.random() < 0.8) {
+      const p = clamp((t - 0.3) / 3.8, 0, 1), sp = saturnPos(p, S);
+      sc.dust.push({ x: sp.x - Math.cos(sp.ang) * 40 * S, y: sp.y + 20 * S, vx: -Math.cos(sp.ang) * rnd(60, 200) * S, vy: rnd(-120, -20) * S, g: 120 * S, life: rnd(0.4, 0.9), r: rnd(2, 4.5) * S, col: '220,240,255' });
+    }
+  }
+  if (t >= SCENES[sc.id].dur) endScene();
+}
+function sceneSpace(S) {
+  ctx.fillStyle = '#03050d'; ctx.fillRect(0, 0, W, H);
+  for (const s of skyStars) { ctx.fillStyle = `rgba(255,255,245,${0.5 + 0.5 * Math.sin(game.time * 2 + s.tw)})`; ctx.fillRect(s.x * W, s.y * H, s.r * 1.4, s.r * 1.4); }
+}
+function sceneCaption(text, sub) {
+  ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const fs = Math.min(40, W / 15), y = H * 0.24;
+  ctx.font = `${fs}px "Lilita One", sans-serif`; ctx.lineWidth = 7; ctx.strokeStyle = 'rgba(0,15,35,.75)';
+  ctx.strokeText(text, W / 2, y); ctx.fillStyle = '#ffffff'; ctx.fillText(text, W / 2, y);
+  if (sub) {
+    const f2 = Math.min(20, W / 26);
+    ctx.font = `${f2}px "Lilita One", sans-serif`; ctx.lineWidth = 4;
+    let lines = [sub];
+    if (ctx.measureText(sub).width > W * 0.9) { const mid = sub.lastIndexOf(' ', Math.floor(sub.length / 2)); lines = [sub.slice(0, mid), sub.slice(mid + 1)]; }
+    lines.forEach((l, i) => { const ly = y + fs * 0.85 + i * f2 * 1.25; ctx.strokeText(l, W / 2, ly); ctx.fillStyle = '#ffe39a'; ctx.fillText(l, W / 2, ly); });
+  }
+  ctx.restore();
+}
+function drawNote(x, y, s, a) {
+  ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2 * s;
+  ctx.beginPath(); ctx.ellipse(x, y, 6 * s, 4.5 * s, -0.4, 0, TAU); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(x + 5 * s, y - 1 * s); ctx.lineTo(x + 5 * s, y - 22 * s); ctx.quadraticCurveTo(x + 14 * s, y - 16 * s, x + 12 * s, y - 8 * s); ctx.stroke();
+  ctx.restore();
+}
+function drawFlag(x, gy, S, kind, t, rot = 0, sc = 1) {
+  ctx.save(); ctx.translate(x, gy); ctx.rotate(rot); ctx.scale(sc, sc);
+  const ph = 150 * S, fw = 108 * S, fh = 68 * S;
+  ctx.fillStyle = '#d9dde3'; ctx.fillRect(-2 * S, -ph, 4 * S, ph); ctx.fillRect(0, -ph, fw + 2 * S, 3 * S);
+  ctx.beginPath(); ctx.moveTo(0, -ph);
+  for (let i = 0; i <= 10; i++) ctx.lineTo(fw * i / 10, -ph + 2 * S + Math.sin(i * 0.8 + t * 5) * 3 * S * i / 10);
+  for (let i = 10; i >= 0; i--) ctx.lineTo(fw * i / 10, -ph + fh + Math.sin(i * 0.8 + t * 5) * 3 * S * i / 10);
+  ctx.closePath();
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `700 ${9.5 * S}px "Atkinson Hyperlegible", sans-serif`;
+  if (kind === 'human') {
+    ctx.fillStyle = '#f5f6f8'; ctx.fill();
+    const ex = fw * 0.5, ey = -ph + fh * 0.42, er = fh * 0.24;
+    const eg = ctx.createRadialGradient(ex - er * 0.3, ey - er * 0.3, 1, ex, ey, er);
+    eg.addColorStop(0, '#8fd0ff'); eg.addColorStop(1, '#1d5fb0'); ctx.fillStyle = eg;
+    ctx.beginPath(); ctx.arc(ex, ey, er, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#4caf6a'; ctx.beginPath(); ctx.ellipse(ex - er * 0.25, ey - er * 0.1, er * 0.35, er * 0.25, 0.5, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#2a3a5a'; ctx.fillText('MENSCHEN', fw / 2, -ph + fh * 0.84);
+  } else {
+    const fg = ctx.createLinearGradient(0, -ph, fw, -ph + fh); fg.addColorStop(0, '#19c3cc'); fg.addColorStop(1, '#0a5fa6');
+    ctx.fillStyle = fg; ctx.fill();
+    drawDolphin(ctx, fw * 0.5, -ph + fh * 0.4, -0.2, 1, t * 3, { back: '#ffffff', mid: '#ffffff', belly: '#dff7ff' }, 0.36 * S);
+    ctx.fillStyle = '#ffffff'; ctx.fillText('DELFINE UNITED', fw / 2, -ph + fh * 0.84);
+  }
+  ctx.restore();
+}
+function drawMoonScene(sc, t, S) {
+  sceneSpace(S);
+  const g = H * 0.7, fx = W * 0.62;
+  drawPlanet(W * 0.82, H * 0.17, 48 * S, ['#9fd8ff', '#2a6fd1', '#0a2550']);
+  ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.beginPath(); ctx.ellipse(W * 0.81, H * 0.16, 22 * S, 5 * S, 0.3, 0, TAU); ctx.fill();
+  const gg = ctx.createLinearGradient(0, g - 40 * S, 0, H);
+  gg.addColorStop(0, '#c9cbd1'); gg.addColorStop(1, '#5c6070');
+  ctx.fillStyle = gg; ctx.beginPath(); ctx.moveTo(0, g); ctx.quadraticCurveTo(W / 2, g - 40 * S, W, g); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+  ctx.fillStyle = 'rgba(70,74,88,.35)';
+  [[0.12, 0.85, 60], [0.45, 0.92, 90], [0.8, 0.82, 50], [0.92, 0.95, 70]].forEach(([a, b, r]) => { ctx.beginPath(); ctx.ellipse(W * a, H * b, r * S, r * 0.3 * S, 0, 0, TAU); ctx.fill(); });
+  // Flossenabdrücke
+  const m = moonDolphin(t, S);
+  ctx.fillStyle = 'rgba(80,84,96,.45)';
+  for (let px = 20 * S, i = 0; px < Math.min(m.x - 60 * S, fx - 160 * S); px += 46 * S, i++) { ctx.beginPath(); ctx.ellipse(px, g + 8 * S + (i % 2) * 8 * S, 9 * S, 4 * S, 0, 0, TAU); ctx.fill(); }
+  // Flagge der Menschen: herausziehen und wegschmeißen
+  if (t < 3.3) {
+    const lift = t > 2.7 ? (t - 2.7) / 0.6 * 40 * S : 0;
+    drawFlag(fx, g - lift, S, 'human', t, t > 2.7 ? -0.25 * (t - 2.7) / 0.6 : 0);
+  } else {
+    const tt = t - 3.3;
+    drawFlag(fx + tt * W * 0.35, g - 40 * S - tt * 420 * S + tt * tt * 120 * S, S, 'human', t, tt * 9, Math.max(0.12, 1 - tt * 0.3));
+  }
+  // Flagge der Delfine
+  if (t > 4.2) {
+    const k = clamp((t - 4.2) / 0.7, 0, 1);
+    drawFlag(fx, g - (1 - k * k) * 520 * S, S, 'dolphin', t);
+  }
+  for (const q of sc.dust) { ctx.fillStyle = `rgba(${q.col},${clamp(q.life, 0, 1)})`; ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, TAU); ctx.fill(); }
+  const ang = (m.look > 0 ? -0.08 : Math.PI + 0.08) + m.spin;
+  ctx.save(); if (m.hide) { ctx.translate(m.x, m.y); ctx.scale(1, 0.82); ctx.translate(-m.x, -m.y); }
+  drawDolphin(ctx, m.x, m.y, ang, m.look > 0 || m.spin ? 1 : -1, t * 4, sceneSkin(), 1.5 * S, null);
+  ctx.restore();
+  // viel zu kleiner Stein zum Verstecken, vor dem Delfin
+  ctx.fillStyle = '#8f939e'; ctx.beginPath(); ctx.ellipse(W * 0.3 + 30 * S, g - 2 * S, 30 * S, 22 * S, 0, Math.PI, 0); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.2)'; ctx.beginPath(); ctx.ellipse(W * 0.3 + 22 * S, g - 14 * S, 12 * S, 5 * S, -0.2, 0, TAU); ctx.fill();
+  for (const n of sc.notes) drawNote(n.x, n.y, S * 1.3, clamp(n.life, 0, 1));
+  if (t > 3.3 && t < 4.3) { ctx.save(); ctx.font = `${30 * S}px "Lilita One", sans-serif`; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center'; ctx.fillText('WUUUSCH!', fx + 120 * S, g - 260 * S); ctx.restore(); }
+  if (t < 1.0) sceneCaption('Psst …');
+  else if (t < 1.8) sceneCaption('Ganz unauffällig hinter diesem Stein …');
+  else if (t < 2.7) sceneCaption('*pfeif* … nichts zu sehen hier …');
+  else if (t < 3.3) sceneCaption('Hoppla, was ist das denn?');
+  else if (t < 4.2) sceneCaption('WEG DAMIT!');
+  else if (t < 5.1) sceneCaption('Neue Flagge!');
+  else sceneCaption('Ein kleiner Sprung für einen Delfin …', '… aber ein riesiger Sprung für die Delfinheit!');
+}
+function drawMarsScene(sc, t, S) {
+  const g = H * 0.72, cx = W * 0.48, ux = W * 0.62;
+  const sky = ctx.createLinearGradient(0, 0, 0, g); sky.addColorStop(0, '#d98f62'); sky.addColorStop(1, '#f5d2a6');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  const sg = ctx.createRadialGradient(W * 0.18, H * 0.18, 0, W * 0.18, H * 0.18, 90 * S);
+  sg.addColorStop(0, 'rgba(255,250,230,.9)'); sg.addColorStop(1, 'rgba(255,220,160,0)'); ctx.fillStyle = sg; ctx.fillRect(0, 0, W * 0.4, H * 0.4);
+  ctx.restore();
+  ctx.fillStyle = '#fffbe8'; ctx.beginPath(); ctx.arc(W * 0.18, H * 0.18, 16 * S, 0, TAU); ctx.fill();
+  const gr = ctx.createLinearGradient(0, g, 0, H); gr.addColorStop(0, '#c4602f'); gr.addColorStop(1, '#6d260f');
+  ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(0, g); ctx.quadraticCurveTo(W * 0.3, g - 20 * S, W * 0.6, g + 4 * S); ctx.quadraticCurveTo(W * 0.85, g + 10 * S, W, g - 8 * S); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+  ctx.fillStyle = 'rgba(80,25,10,.5)';
+  [[0.08, 0.84, 30], [0.3, 0.92, 18], [0.86, 0.86, 26], [0.7, 0.95, 14]].forEach(([a, b, r]) => { ctx.beginPath(); ctx.ellipse(W * a, H * b, r * S, r * 0.55 * S, 0, Math.PI, 0); ctx.fill(); });
+  // Rover im Hintergrund, macht ein Foto
+  if (t > 2.4 && t < 5.2) {
+    const rx = lerp(-80 * S, W + 80 * S, (t - 2.4) / 2.8), ry = g - 30 * S;
+    ctx.fillStyle = '#d9d4cc'; ctx.fillRect(rx - 25 * S, ry - 14 * S, 50 * S, 16 * S);
+    ctx.fillStyle = '#3a3a3a'; for (const wx of [-18, 0, 18]) { ctx.beginPath(); ctx.arc(rx + wx * S, ry + 6 * S, 6 * S, 0, TAU); ctx.fill(); }
+    ctx.fillStyle = '#d9d4cc'; ctx.fillRect(rx + 10 * S, ry - 36 * S, 3 * S, 22 * S); ctx.fillRect(rx + 6 * S, ry - 42 * S, 12 * S, 7 * S);
+    if (sc.flash > 0) {
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      const fg2 = ctx.createRadialGradient(rx + 12 * S, ry - 38 * S, 0, rx + 12 * S, ry - 38 * S, 120 * S * sc.flash);
+      fg2.addColorStop(0, `rgba(255,255,255,${sc.flash})`); fg2.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = fg2; ctx.fillRect(0, 0, W, H); ctx.restore();
+    }
+  }
+  // Sonnenschirm
+  ctx.strokeStyle = '#efe6d8'; ctx.lineWidth = 5 * S; ctx.beginPath(); ctx.moveTo(ux, g + 6 * S); ctx.lineTo(ux - 26 * S, g - 230 * S); ctx.stroke();
+  ctx.save(); ctx.translate(ux - 26 * S, g - 230 * S); ctx.rotate(-0.2);
+  for (let i = 0; i < 6; i++) { ctx.fillStyle = i % 2 ? '#ffffff' : '#e8323f'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, 120 * S, Math.PI + i * Math.PI / 6, Math.PI + (i + 1) * Math.PI / 6); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
+  // Liege
+  ctx.strokeStyle = '#8b5a2b'; ctx.lineWidth = 4 * S;
+  ctx.beginPath(); ctx.moveTo(cx - 120 * S, g); ctx.lineTo(cx - 100 * S, g - 42 * S); ctx.moveTo(cx + 60 * S, g); ctx.lineTo(cx + 40 * S, g - 42 * S); ctx.stroke();
+  ctx.save(); ctx.translate(cx - 130 * S, g - 50 * S);
+  for (let i = 0; i < 6; i++) { ctx.fillStyle = i % 2 ? '#ffffff' : '#2f7fd6'; ctx.fillRect(i * 30 * S, 0, 30 * S, 12 * S); }
+  ctx.translate(180 * S, 0); ctx.rotate(-0.55);
+  for (let i = 0; i < 3; i++) { ctx.fillStyle = i % 2 ? '#ffffff' : '#2f7fd6'; ctx.fillRect(i * 30 * S, 0, 30 * S, 12 * S); }
+  ctx.restore();
+  // Beistelltisch mit Cocktail
+  const tx = cx + 190 * S;
+  ctx.fillStyle = '#8b5a2b'; ctx.fillRect(tx - 2 * S, g - 60 * S, 4 * S, 60 * S); ctx.fillRect(tx - 26 * S, g - 62 * S, 52 * S, 5 * S);
+  ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.beginPath(); ctx.moveTo(tx - 14 * S, g - 100 * S); ctx.lineTo(tx + 14 * S, g - 100 * S); ctx.lineTo(tx, g - 78 * S); ctx.fill();
+  ctx.fillStyle = '#ff8a3d'; ctx.beginPath(); ctx.moveTo(tx - 11 * S, g - 97 * S); ctx.lineTo(tx + 11 * S, g - 97 * S); ctx.lineTo(tx, g - 80 * S); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.fillRect(tx - 1 * S, g - 78 * S, 2 * S, 16 * S);
+  ctx.strokeStyle = '#ff4fa0'; ctx.lineWidth = 2 * S; ctx.beginPath(); ctx.moveTo(tx + 4 * S, g - 96 * S); ctx.lineTo(tx + 12 * S, g - 116 * S); ctx.stroke();
+  ctx.fillStyle = '#ffd166'; ctx.beginPath(); ctx.moveTo(tx + 12 * S, g - 116 * S); ctx.arc(tx + 12 * S, g - 116 * S, 9 * S, Math.PI, 0); ctx.fill();
+  // Delfin plumpst auf die Liege und sonnt sich mit Sonnenbrille
+  const k = clamp(t / 0.8, 0, 1), rest = g - 88 * S;
+  const dy = t < 0.8 ? lerp(-160 * S, rest, k * k) : rest - Math.abs(Math.sin((t - 0.8) * 8)) * 10 * S * Math.exp(-(t - 0.8) * 4);
+  drawDolphin(ctx, cx - 10 * S, dy, -0.22, 1, t * 1.5, sceneSkin(), 1.35 * S, null, 'shades');
+  if (t > 3) {
+    ctx.save(); ctx.font = `${22 * S}px "Lilita One", sans-serif`; ctx.fillStyle = '#ffffff';
+    for (let i = 0; i < 3; i++) { const zt = (t * 0.8 + i * 0.33) % 1; ctx.globalAlpha = 1 - zt; ctx.fillText('z', cx + 90 * S + zt * 40 * S, dy - 50 * S - zt * 80 * S); }
+    ctx.restore();
+  }
+  if (t < 1) sceneCaption('Nächster Halt: Mars');
+  else sceneCaption('Sonnenbad auf dem Mars', 'Weiter weg von der Sonne als die Erde, aber dafür ist hier keine Liege mit Handtuch reserviert.');
+}
+function saturnPos(p, S) {
+  const cx = W / 2, cy = H * 0.55, rx = Math.min(W * 0.46, Math.min(W, H) * 0.6), ry = rx * 0.24;
+  const a = Math.PI * (1 - p), jump = p > 0.42 && p < 0.62 ? Math.sin((p - 0.42) / 0.2 * Math.PI) * 90 * S : 0;
+  const x = cx + rx * Math.cos(a), y = cy + ry * Math.sin(a) - 26 * S - jump;
+  return { x, y, ang: Math.atan2(-ry * Math.cos(a), rx * Math.sin(a)) };
+}
+function drawSaturnScene(sc, t, S) {
+  sceneSpace(S);
+  const cx = W / 2, cy = H * 0.55, r = Math.min(W, H) * 0.2, rx = Math.min(W * 0.46, Math.min(W, H) * 0.6), ry = rx * 0.24;
+  const ring = (a0, a1) => { ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, a0, a1); ctx.stroke(); };
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = 'rgba(230,210,165,.5)'; ctx.lineWidth = 30 * S; ring(Math.PI, TAU);
+  drawPlanet(cx, cy, r, ['#fff0c8', '#d9b77a', '#5a4220']);
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.clip(); ctx.fillStyle = 'rgba(150,100,50,.25)';
+  for (let i = -3; i <= 3; i++) ctx.fillRect(cx - r, cy + i * r * 0.26, r * 2, r * 0.08); ctx.restore();
+  ctx.strokeStyle = 'rgba(240,222,180,.85)'; ctx.lineWidth = 30 * S; ring(0, Math.PI);
+  ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 3 * S; ring(0, Math.PI);
+  for (const q of sc.dust) { ctx.fillStyle = `rgba(${q.col},${clamp(q.life * 1.5, 0, 1)})`; ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, TAU); ctx.fill(); }
+  const p = clamp((t - 0.3) / 3.8, 0, 1), sp = saturnPos(p, S);
+  ctx.save(); ctx.translate(sp.x, sp.y + 22 * S); ctx.rotate(sp.ang);
+  ctx.fillStyle = '#ff7b5c'; ctx.beginPath(); ctx.ellipse(0, 0, 70 * S, 9 * S, 0, 0, TAU); ctx.fill();
+  ctx.fillStyle = '#ffd166'; ctx.fillRect(-60 * S, -2 * S, 120 * S, 4 * S);
+  ctx.restore();
+  drawDolphin(ctx, sp.x, sp.y, sp.ang - 0.12, 1, t * 5, sceneSkin(), 1.05 * S, null, 'shades');
+  sceneCaption('Ringe-Surfen auf dem Saturn', 'Eis-Wellen mit 35.000 km/h – perfekter Swell.');
+}
+function drawScene() {
+  const sc = game.scene, info = SCENES[sc.id], t = sc.t, S = Math.min(W, H) / 800;
+  const a = Math.min(clamp(t / 0.3, 0, 1), clamp((info.dur - t) / 0.35, 0, 1));
+  ctx.save(); ctx.globalAlpha = a;
+  if (sc.id === 'moon') drawMoonScene(sc, t, S);
+  else if (sc.id === 'mars') drawMarsScene(sc, t, S);
+  else drawSaturnScene(sc, t, S);
+  ctx.restore();
+  if (t < 0.3) { ctx.fillStyle = `rgba(255,255,255,${(1 - t / 0.3) * 0.7})`; ctx.fillRect(0, 0, W, H); }
+  ctx.save(); ctx.globalAlpha = a * 0.75; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
+  ctx.font = '13px "Atkinson Hyperlegible", sans-serif';
+  ctx.fillText('Leertaste, Enter oder Tippen: überspringen', W / 2, H - Math.max(24, H * 0.05) - (isTouch ? 90 : 0));
   ctx.restore();
 }
 
@@ -1997,6 +2270,7 @@ function render() {
   if (game.flash > 0) { ctx.globalAlpha = game.flash; ctx.fillStyle = game.flashCol; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
 
   if (game.shoot) drawShoot();
+  if (game.scene) drawScene();
   if (game.state === 'play' || game.state === 'pause') drawOverlayHUD();
 }
 
@@ -2014,7 +2288,7 @@ function drawOverlayHUD() {
   ctx.fillStyle = '#7dffcf'; ctx.beginPath(); ctx.arc(x, toY(cur), 5, 0, TAU); ctx.fill();
 
   // Laufender Trick in der Luft
-  const photoUp = game.shoot && game.shoot.phase === 'photo';
+  const photoUp = (game.shoot && game.shoot.phase === 'photo') || !!game.scene;
   if (d.airborne && d.maxH > 80 && !photoUp) {
     const flips = Math.floor(Math.abs(d.rot) / TAU + 0.4), tw = Math.floor(d.twist / TAU + 0.2);
     const bits = [];
@@ -2095,7 +2369,7 @@ function updateHUD() {
 function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
-  game.ringsHit = 0; game.shoot = null; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
+  game.ringsHit = 0; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
   game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
@@ -2186,7 +2460,8 @@ function frame(now) {
   readInput();
   if (game.state !== 'pause') {
     if (game.shoot) updateShoot(rdt);
-    const frozen = game.shoot && game.shoot.phase === 'photo';
+    if (game.scene) updateScene(rdt);
+    const frozen = (game.shoot && game.shoot.phase === 'photo') || !!game.scene;
     if (!frozen) {
     const slow = game.shoot ? 0.15 : game.power.slow > 0 && d.airborne ? 0.45 : 1;
     const dt = rdt * slow;
