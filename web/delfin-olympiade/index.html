@@ -165,7 +165,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
 .newbest { color: var(--kelp); font-weight: 700; }
 
 /* ---------- Toast ---------- */
-.toasts { position: absolute; left: 50%; top: max(70px, calc(env(safe-area-inset-top, 0px) + 60px)); transform: translateX(-50%); display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: none; }
+.toasts { position: absolute; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 96px); transform: translateX(-50%); display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: none; }
 .toast {
   background: linear-gradient(90deg, rgba(95,211,166,.95), rgba(60,190,230,.95)); color: var(--abyss);
   padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
@@ -212,6 +212,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <div class="score" id="score">0</div>
       <div class="mult"><span id="mult">×1</span><div class="mult-bar"><i id="multBar"></i></div></div>
       <div class="boost" id="boost" hidden>Schwarm-Bonus +0 %</div>
+      <div class="boost" id="tempo" hidden>Tempo ×1</div>
     </div>
     <div class="hud-center">
       <span class="label" id="timerLabel">Zeit</span>
@@ -244,7 +245,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <div>
         <h1 class="title">Delfin-<br>Olympiade</h1>
       </div>
-      <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Schwimm durch Fischschwärme für 5.000 Punkte und einen Bonus auf alle Punkte. Ringe, Möwen, Himmelssterne und Perlen geben Extrapunkte.</p>
+      <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Jede Kombo-Stufe macht dich schneller, mit genug Tempo fliegst du am Mond vorbei und bis aus dem Universum. Schwimm durch Fischschwärme für 5.000 Punkte und einen Bonus auf alle Punkte. Ringe, Möwen, Himmelssterne und Perlen geben Extrapunkte.</p>
       <div class="modes">
         <button class="mode" type="button" data-mode="contest"><b>Wettkampf</b><span>2 Minuten, so viele Punkte wie möglich.</span><em id="best-contest">Rekord: –</em></button>
         <button class="mode" type="button" data-mode="rings"><b>Ring-Jagd</b><span>Flieg durch 15 Ringe, so schnell du kannst.</span><em id="best-rings">Rekord: –</em></button>
@@ -370,7 +371,8 @@ const SKINS = [
   { id: 'orca', name: 'Orca', back: '#141a22', mid: '#1e2630', belly: '#f4f7fa', orca: true, need: 0 },
   { id: 'pink', name: 'Amazonas', back: '#d9779a', mid: '#f0a4bd', belly: '#fde3ea', need: 0 },
   { id: 'gold', name: 'Gold', back: '#b8811c', mid: '#f2c14e', belly: '#fff2c4', shine: true, need: 5 },
-  { id: 'neon', name: 'Neon', back: '#0b1630', mid: '#142c5a', belly: '#1d4a7a', neon: '#46f0ff', need: 10 }
+  { id: 'neon', name: 'Neon', back: '#0b1630', mid: '#142c5a', belly: '#1d4a7a', neon: '#46f0ff', need: 10 },
+  { id: 'kosmos', name: 'Kosmos', back: '#140a35', mid: '#2d1c78', belly: '#86d4ff', neon: '#c9a8ff', need: 0, needAch: 'urdelfin', lockText: 'Triff den Urdelfin' }
 ];
 
 // ====================================================================
@@ -601,7 +603,12 @@ const ACH = [
   { id: 'rings25', name: 'Ringmeister', desc: '25 Ringe insgesamt' },
   { id: 'pearl5', name: 'Perlentaucher', desc: '5 Perlen insgesamt' },
   { id: 'moon', name: 'Mondsprung', desc: 'Perfekte Landung bei Nacht' },
-  { id: 'score50k', name: 'Olympiasieger', desc: '50.000 Punkte im Wettkampf' }
+  { id: 'score50k', name: 'Olympiasieger', desc: '50.000 Punkte im Wettkampf' },
+  { id: 'space', name: 'Astronaut', desc: 'Spring bis in den Weltraum' },
+  { id: 'mondflug', name: 'Mondflug', desc: 'Flieg am Mond vorbei' },
+  { id: 'galaxy', name: 'Intergalaktisch', desc: 'Verlass die Milchstraße' },
+  { id: 'universe', name: 'Raus hier!', desc: 'Verlass das beobachtbare Universum' },
+  { id: 'urdelfin', name: 'Urdelfin', desc: 'Triff den Urdelfin jenseits des Universums' }
 ];
 let achieved = store.get('ach', {});
 let lifetime = store.get('life', { rings: 0, pearls: 0 });
@@ -619,7 +626,7 @@ const input = { left: false, right: false, up: false, down: false, turbo: false 
 
 let d = null;
 function newDolphin() {
-  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1,
+  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0,
     energy: 100, tail: 0, invuln: 0, stun: 0, jRings: 0, jGulls: 0, jStars: 0, trail: [], chirpT: 3, turboOn: false, rocket: false };
 }
 
@@ -782,7 +789,8 @@ function updateDolphin(dt, rdt, ctl) {
     const turbo = ctl.turbo && (d.energy > 0 || p.turbo > 0) && d.stun <= 0;
     if (turbo && !d.turboOn) sfx.turbo();
     d.turboOn = turbo;
-    const acc = turbo ? 2600 : ctl.up && d.stun <= 0 ? 1150 : 0;
+    const sf = speedFactor();
+    const acc = (turbo ? 2600 : ctl.up && d.stun <= 0 ? 1150 : 0) * sf;
     d.vx += Math.cos(d.a) * acc * dt; d.vy += Math.sin(d.a) * acc * dt;
     if (turbo && !(p.turbo > 0)) d.energy = Math.max(0, d.energy - 32 * dt);
     else if (!turbo) d.energy = Math.min(100, d.energy + 5 * dt);
@@ -792,7 +800,7 @@ function updateDolphin(dt, rdt, ctl) {
     const sp = Math.hypot(d.vx, d.vy);
     const k = Math.min(1, 5.5 * dt);
     d.vx = lerp(d.vx, Math.cos(d.a) * sp, k); d.vy = lerp(d.vy, Math.sin(d.a) * sp, k);
-    const maxS = turbo ? 1650 : 1050;
+    const maxS = (turbo ? 1650 : 1050) * sf;
     if (sp > maxS) { d.vx *= maxS / sp; d.vy *= maxS / sp; }
     d.vy += 25 * dt; // leichter Abtrieb
     // Rollen: Bauch immer nach unten
@@ -811,7 +819,7 @@ function updateDolphin(dt, rdt, ctl) {
     // Absprung
     if (d.y < surf && d.vy < 0) {
       d.airborne = true; d.rot = 0; d.twist = 0; d.twistTarget = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
-      d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0;
+      d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0; d.lm = 0;
       if (d.rocket) { d.vx *= 1.25; d.vy *= 1.65; d.rocket = false; banner('Raketenstart!', '', POWER.rocket.col); for (let i = 0; i < 40; i++) addP({ t: 'spark', x: d.x, y: d.y, vx: rnd(-200, 200), vy: rnd(50, 300), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: '#ffb070' }); }
       if (Math.abs(d.vy) > 300) { splash(d.x, Math.abs(d.vy) * 0.7, false); sfx.jump(); }
     }
@@ -829,6 +837,7 @@ function updateDolphin(dt, rdt, ctl) {
     d.vx -= d.vx * 0.05 * dt;
     d.x += d.vx * dt; d.y += d.vy * dt;
     d.airT += dt; d.maxH = Math.max(d.maxH, -d.y);
+    while (d.lm < LANDMARKS.length && d.maxH >= LANDMARKS[d.lm].px) reachLandmark(LANDMARKS[d.lm++]);
     d.trail.push({ x: d.x, y: d.y, a: d.a, s: d.roll * Math.cos(d.twist) });
     if (d.trail.length > 14) d.trail.shift();
     if (Math.random() < 0.5) addP({ t: 'drop', x: d.x - Math.cos(d.a) * 50, y: d.y - Math.sin(d.a) * 50, vx: d.vx * 0.2 + rnd(-30, 30), vy: d.vy * 0.2 + rnd(-30, 30), life: 0.6, max: 0.6, r: rnd(1, 2.2) });
@@ -856,9 +865,9 @@ function land() {
 
   const flips = Math.floor(Math.abs(d.rot) / TAU + 0.4);
   const back = d.rot * d.launchCos < 0;
-  const meters = h / 100;
+  const meters = realAlt(h);
   const parts = [];
-  let base = Math.floor(meters * 12);
+  let base = Math.floor(Math.min(h, ALT_LIN) / 100 * 12);
   if (flips > 0) { base += 250 * flips * (flips + 1) / 2 * (back ? 1.2 : 1); parts.push(trickName(flips, back)); }
   if (twists > 0) { base += 320 * twists; parts.push(twists > 1 ? twists + '× Schraube' : 'Schraube'); }
   if (flips > 0 && twists > 0) { base += 500; parts.push('Kombi'); unlock('screw'); }
@@ -873,7 +882,8 @@ function land() {
 
   const st = game.stats;
   st.jumps++;
-  st.maxH = Math.max(st.maxH, meters);
+  st.maxPx = Math.max(st.maxPx, h);
+  if (speed > 3000) game.shake = Math.max(game.shake, Math.min(22, speed / 500));
   if (meters >= 10) unlock('h10');
   if (meters >= 20) unlock('h20');
 
@@ -901,7 +911,7 @@ function land() {
   if (flips >= 1) unlock('salto');
   if (flips >= 3) unlock('triple');
   const pts = addScore(base * mul * game.mult);
-  if (pts > st.bestJump) { st.bestJump = pts; st.bestTrick = parts.join(' + ') || meters.toFixed(1).replace('.', ',') + ' m Sprung'; }
+  if (pts > st.bestJump) { st.bestJump = pts; st.bestTrick = parts.join(' + ') || fmtAlt(meters) + ' Sprung'; }
   const head = quality === 'perfect' ? 'Perfekt!' : 'Sauber!';
   const sub = (parts.length ? parts.join(' + ') + '  ' : '') + '+' + fmt(pts) + (game.mult > 1 ? '  ×' + game.mult : '');
   banner(head, sub, quality === 'perfect' ? '#7dffcf' : '#ffd166');
@@ -1043,12 +1053,12 @@ function updateCamera(dt) {
   const base = clamp(Math.min(H / 820, W / 900), 0.5, 1.25);
   let tx = d.x + d.vx * 0.18, ty, tz = base;
   if (d.y < 120) {
-    const top = Math.min(d.y - 340, -260), bottom = 300;
-    tz = Math.min(base, H / (bottom - top));
-    ty = (top + bottom) / 2;
+    const top = Math.min(d.y - 340, -260), bottom = 300, zFit = H / (bottom - top), zMin = base * 0.42;
+    if (zFit >= zMin) { tz = Math.min(base, zFit); ty = (top + bottom) / 2; }
+    else { tz = zMin; ty = d.y + (d.vy > 0 ? 0.22 : -0.15) * H / zMin; } // Höhenflug: Kamera folgt dem Delfin
   } else { ty = d.y + 40; }
-  const k = 1 - Math.exp(-dt * 4);
-  cam.x = lerp(cam.x, tx, k); cam.y = lerp(cam.y, ty, k);
+  const k = 1 - Math.exp(-dt * 4), ky = 1 - Math.exp(-dt * (d.y < -6000 ? 10 : 4));
+  cam.x = lerp(cam.x, tx, k); cam.y = lerp(cam.y, ty, ky);
   // schnell herauszoomen, langsam wieder heran
   cam.z = lerp(cam.z, tz, 1 - Math.exp(-dt * (tz < cam.z ? 6 : 2.5)));
   // Delfin bleibt immer sichtbar
@@ -1063,6 +1073,308 @@ const SX = x => wrapD(x - cam.x) * cam.z + W / 2;
 const offX = (x, m) => { const s = SX(x); return s < -m || s > W + m; };
 const SY = y => (y - cam.y) * cam.z + H / 2;
 const WX = sx => (sx - W / 2) / cam.z + cam.x;
+
+// ====================================================================
+//  Kosmos: oberhalb von 30 m wächst die Höhe exponentiell
+// ====================================================================
+const ALT_LIN = 3000, ALT_K = 550;
+const realAlt = px => px <= ALT_LIN ? Math.max(0, px) / 100 : (ALT_LIN / 100) * Math.exp((px - ALT_LIN) / ALT_K);
+const pxOf = m => m <= ALT_LIN / 100 ? m * 100 : ALT_LIN + ALT_K * Math.log(m / (ALT_LIN / 100));
+const LY = 9.4607e15, EDGE_M = 4.4e26, PX_EDGE = pxOf(EDGE_M);
+function fmtAlt(m) {
+  const f1 = v => v.toLocaleString('de-DE', { maximumFractionDigits: 1 });
+  if (m < 1000) return f1(m) + ' m';
+  if (m < 1e9) return f1(Math.round(m / 100) / 10) + ' km';
+  if (m < 1e12) return f1(m / 1e9) + ' Mio. km';
+  if (m < LY * 0.1) return f1(m / 1e12) + ' Mrd. km';
+  if (m > EDGE_M * 1.001) return 'jenseits des Universums';
+  const ly = m / LY;
+  if (ly < 1e6) return f1(ly) + ' Lichtjahre';
+  if (ly < 1e9) return f1(ly / 1e6) + ' Mio. Lichtjahre';
+  return f1(ly / 1e9) + ' Mrd. Lichtjahre';
+}
+// Jede Kombo-Stufe macht den Delfin im Wasser schneller
+const speedFactor = () => 1 + 0.47 * (game.mult - 1);
+
+const LANDMARKS = [
+  { m: 1000, name: 'Wolkendecke', sub: '1 km über dem Meer', pts: 500 },
+  { m: 8849, name: 'Höher als der Mount Everest', sub: '8.849 m', pts: 1000 },
+  { m: 11000, name: 'Reiseflughöhe', sub: 'Ein Flugzeug winkt dir zu', pts: 1500, kind: 'plane' },
+  { m: 1e5, name: 'Weltraum!', sub: 'Kármán-Linie · 100 km', pts: 3000, ach: 'space', kind: 'karman' },
+  { m: 4.08e5, name: 'ISS', sub: 'Die Raumstation · 408 km', pts: 4000, kind: 'iss' },
+  { m: 3.844e8, name: 'Am Mond vorbei!', sub: '384.400 km', pts: 10000, ach: 'mondflug', kind: 'moon' },
+  { m: 5.46e10, name: 'Mars', sub: '54,6 Mio. km', pts: 15000, kind: 'planet', r: 0.55, c: ['#ffc39e', '#c1440e', '#4a1505'] },
+  { m: 1.496e11, name: '1 Astronomische Einheit', sub: 'So weit ist die Sonne von der Erde', pts: 20000, kind: 'sun' },
+  { m: 6.28e11, name: 'Jupiter', sub: '628 Mio. km', pts: 25000, kind: 'jupiter' },
+  { m: 1.28e12, name: 'Saturn', sub: '1,3 Mrd. km', pts: 30000, kind: 'saturn' },
+  { m: 4.35e12, name: 'Neptun', sub: '4,3 Mrd. km', pts: 35000, kind: 'planet', r: 0.7, c: ['#bfe3ff', '#3a6df0', '#0b1a5e'] },
+  { m: 2.5e13, name: 'Voyager 1 überholt', sub: '25 Mrd. km', pts: 40000, kind: 'voyager' },
+  { m: 4.01e16, name: 'Proxima Centauri', sub: 'Der nächste Stern · 4,24 Lichtjahre', pts: 60000, kind: 'star' },
+  { m: 2.46e20, name: 'Zentrum der Milchstraße', sub: '26.000 Lichtjahre', pts: 80000, kind: 'core' },
+  { m: 9.46e20, name: 'Milchstraße verlassen', sub: '100.000 Lichtjahre', pts: 100000, ach: 'galaxy', kind: 'galaxy' },
+  { m: 2.4e22, name: 'Andromeda', sub: '2,5 Mio. Lichtjahre', pts: 150000, kind: 'andromeda' },
+  { m: 5.1e23, name: 'Virgo-Haufen', sub: '54 Mio. Lichtjahre', pts: 200000, kind: 'cluster' },
+  { m: EDGE_M, name: 'Raus aus dem Universum!', sub: 'Rand des beobachtbaren Universums · 46,5 Mrd. Lichtjahre', pts: 500000, ach: 'universe', kind: 'edge' },
+  { m: realAlt(PX_EDGE + 1200), name: 'Multiversum', sub: 'Andere Universen schweben wie Blasen vorbei', pts: 1000000, kind: 'multi' },
+  { m: realAlt(PX_EDGE + 2500), name: 'Der Urdelfin', sub: 'Er träumt alle Ozeane aller Universen', pts: 2500000, ach: 'urdelfin', kind: 'urdelfin' }
+];
+LANDMARKS.forEach(l => { l.px = pxOf(l.m); });
+const LM = id => LANDMARKS.find(l => l.kind === id).px;
+
+function reachLandmark(l) {
+  if (game.state !== 'play') return;
+  const got = addScore(l.pts);
+  banner(l.name, l.sub + '  +' + fmt(got), l.ach ? '#d9c2ff' : '#bdf0ff');
+  if (l.ach) unlock(l.ach);
+  if (l.px > game.stats.farPx) { game.stats.farPx = l.px; game.stats.farName = l.name; }
+  sfx.star();
+}
+
+const galaxySprite = (() => {
+  const s = document.createElement('canvas'); s.width = s.height = 256;
+  const c = s.getContext('2d'), r = mulberry(77);
+  c.translate(128, 128); c.globalCompositeOperation = 'lighter';
+  const core = c.createRadialGradient(0, 0, 0, 0, 0, 46);
+  core.addColorStop(0, 'rgba(255,244,215,1)'); core.addColorStop(1, 'rgba(255,200,150,0)');
+  c.fillStyle = core; c.fillRect(-46, -46, 92, 92);
+  for (let i = 0; i < 1600; i++) {
+    const arm = i % 2, t = r(), ang = t * 4.4 + arm * Math.PI + (r() - 0.5) * 0.55, rad = 8 + t * 112 + (r() - 0.5) * 16;
+    c.fillStyle = `rgba(${r() < 0.3 ? '255,180,220' : '170,205,255'},${0.2 + r() * 0.55})`;
+    c.fillRect(Math.cos(ang) * rad, Math.sin(ang) * rad, 1 + r() * 1.6, 1 + r() * 1.6);
+  }
+  return s;
+})();
+const bubbleSprite = (() => {
+  const s = document.createElement('canvas'); s.width = s.height = 160;
+  const c = s.getContext('2d');
+  c.globalAlpha = 0.55; c.drawImage(galaxySprite, 40, 40, 80, 80); c.globalAlpha = 1;
+  const g = c.createRadialGradient(80, 80, 50, 80, 80, 78);
+  g.addColorStop(0, 'rgba(120,255,230,0)'); g.addColorStop(0.8, 'rgba(140,220,255,0.35)'); g.addColorStop(1, 'rgba(255,170,240,0.8)');
+  c.fillStyle = g; c.beginPath(); c.arc(80, 80, 78, 0, TAU); c.fill();
+  c.fillStyle = 'rgba(255,255,255,0.6)'; c.beginPath(); c.ellipse(55, 50, 16, 8, -0.6, 0, TAU); c.fill();
+  return s;
+})();
+const COSMIC_DOLPHIN = { back: '#0b1a44', mid: '#1f3f8f', belly: '#7fd0ff', neon: '#bff4ff' };
+
+function drawPlanet(x, y, r, c) {
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  const halo = ctx.createRadialGradient(x, y, r * 0.9, x, y, r * 1.35);
+  halo.addColorStop(0, c[1] + '55'); halo.addColorStop(1, c[1] + '00');
+  ctx.fillStyle = halo; ctx.fillRect(x - r * 1.4, y - r * 1.4, r * 2.8, r * 2.8);
+  ctx.restore();
+  const g = ctx.createRadialGradient(x - r * 0.4, y - r * 0.4, r * 0.1, x, y, r);
+  g.addColorStop(0, c[0]); g.addColorStop(0.55, c[1]); g.addColorStop(1, c[2]);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
+}
+function drawGalaxy(x, y, size, rot, squash, alpha) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(1, squash); ctx.rotate(game.time * 0.05);
+  ctx.globalAlpha = alpha; ctx.globalCompositeOperation = 'lighter';
+  ctx.drawImage(galaxySprite, -size / 2, -size / 2, size, size);
+  ctx.restore();
+}
+
+function drawLandmark(l, x, y, S, side) {
+  const t = game.time;
+  ctx.save();
+  switch (l.kind) {
+    case 'plane': {
+      ctx.translate(x, y); ctx.scale(-side * S, S);
+      const cg = ctx.createLinearGradient(0, 0, 260, 0); cg.addColorStop(0, 'rgba(255,255,255,.7)'); cg.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.strokeStyle = cg; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(30, -2); ctx.lineTo(290, -2); ctx.stroke();
+      ctx.fillStyle = '#f4f7fb'; ctx.beginPath(); ctx.ellipse(0, 0, 40, 7, 0, 0, TAU); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-6, 0); ctx.lineTo(16, 26); ctx.lineTo(24, 26); ctx.lineTo(12, 0); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(28, -2); ctx.lineTo(40, -20); ctx.lineTo(44, -20); ctx.lineTo(40, 0); ctx.fill();
+      ctx.fillStyle = '#5ab0e8'; ctx.fillRect(-30, -3, 4, 3);
+      break;
+    }
+    case 'karman': {
+      ctx.setLineDash([14 * S, 10 * S]); ctx.strokeStyle = 'rgba(190,230,255,.55)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(190,230,255,.8)'; ctx.font = `${13 * Math.max(1, S)}px "Atkinson Hyperlegible", sans-serif`;
+      ctx.textAlign = 'left'; ctx.fillText('Kármán-Linie · Grenze zum Weltraum', 24, y - 10);
+      break;
+    }
+    case 'iss': {
+      ctx.translate(x, y); ctx.rotate(0.15 * side); ctx.scale(S, S);
+      ctx.fillStyle = '#c9d2dc'; ctx.fillRect(-90, -3, 180, 6); ctx.fillRect(-14, -12, 28, 24);
+      ctx.fillStyle = '#1f4fa8'; ctx.strokeStyle = '#8fb7ff'; ctx.lineWidth = 1;
+      for (const px of [-86, -58, 34, 62]) for (const py of [-40, 8]) { ctx.fillRect(px, py, 24, 32); ctx.strokeRect(px, py, 24, 32); }
+      break;
+    }
+    case 'moon': {
+      const r = 150 * S;
+      drawPlanet(x, y, r, ['#f4f4f0', '#b9bcc4', '#4a4e5a']);
+      ctx.fillStyle = 'rgba(80,84,96,.35)';
+      [[-0.3, -0.2, 0.22], [0.25, 0.1, 0.16], [-0.05, 0.38, 0.12], [0.35, -0.35, 0.09], [-0.45, 0.25, 0.1]].forEach(([a, b, k]) => { ctx.beginPath(); ctx.arc(x + a * r, y + b * r, k * r, 0, TAU); ctx.fill(); });
+      break;
+    }
+    case 'planet': drawPlanet(x, y, 170 * l.r * S, l.c); break;
+    case 'sun': {
+      ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 260 * S);
+      g.addColorStop(0, 'rgba(255,250,220,1)'); g.addColorStop(0.15, 'rgba(255,214,120,.8)'); g.addColorStop(1, 'rgba(255,150,60,0)');
+      ctx.fillStyle = g; ctx.fillRect(x - 260 * S, y - 260 * S, 520 * S, 520 * S);
+      break;
+    }
+    case 'jupiter': {
+      const r = 190 * S;
+      drawPlanet(x, y, r, ['#f7e2c4', '#c99b6d', '#4d2f1a']);
+      ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.clip();
+      ctx.fillStyle = 'rgba(140,80,40,.35)';
+      for (let i = -4; i <= 4; i++) ctx.fillRect(x - r, y + i * r * 0.22 + Math.sin(i) * 6 * S, r * 2, r * (0.06 + (i & 1) * 0.04));
+      ctx.fillStyle = 'rgba(200,90,60,.7)'; ctx.beginPath(); ctx.ellipse(x + r * 0.3, y + r * 0.35, r * 0.18, r * 0.1, 0, 0, TAU); ctx.fill();
+      break;
+    }
+    case 'saturn': {
+      const r = 120 * S, ring = () => { ctx.beginPath(); ctx.ellipse(x, y, r * 2.2, r * 0.55, -0.3, 0, TAU); };
+      ctx.strokeStyle = 'rgba(230,210,170,.55)'; ctx.lineWidth = 18 * S; ring(); ctx.stroke();
+      drawPlanet(x, y, r, ['#fff0c8', '#d9b77a', '#5a4220']);
+      ctx.beginPath(); ctx.rect(0, y - r * 0.1, W, H); ctx.clip();
+      ctx.strokeStyle = 'rgba(240,222,180,.75)'; ring(); ctx.stroke();
+      break;
+    }
+    case 'voyager': {
+      ctx.translate(x, y); ctx.scale(S, S); ctx.rotate(0.4 * side);
+      ctx.strokeStyle = '#d6dbe2'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-60, 30); ctx.moveTo(0, 0); ctx.lineTo(50, 40); ctx.stroke();
+      ctx.fillStyle = '#e9edf2'; ctx.beginPath(); ctx.ellipse(0, -14, 30, 10, 0, 0, TAU); ctx.fill();
+      ctx.fillStyle = '#b08a3e'; ctx.fillRect(-8, -6, 16, 14);
+      break;
+    }
+    case 'star': {
+      ctx.globalCompositeOperation = 'lighter';
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 140 * S);
+      g.addColorStop(0, 'rgba(255,230,210,1)'); g.addColorStop(0.2, 'rgba(255,120,80,.8)'); g.addColorStop(1, 'rgba(255,60,40,0)');
+      ctx.fillStyle = g; ctx.fillRect(x - 140 * S, y - 140 * S, 280 * S, 280 * S);
+      break;
+    }
+    case 'core': drawGalaxy(W / 2, y, 900 * S, 0.2, 0.55, 0.95); break;
+    case 'galaxy': drawGalaxy(x, y, 520 * S, -0.4, 0.42, 0.9); break;
+    case 'andromeda': drawGalaxy(x, y, 420 * S, 0.7, 0.32, 0.85); break;
+    case 'cluster': for (let i = 0; i < 9; i++) drawGalaxy(x + Math.cos(i * 2.4) * 160 * S * (i % 3 + 1) / 2, y + Math.sin(i * 2.4) * 110 * S, (70 + (i * 37) % 80) * S, i, 0.4 + (i % 3) * 0.2, 0.8); break;
+    case 'edge': {
+      ctx.globalCompositeOperation = 'lighter';
+      for (let k = 0; k < 3; k++) {
+        ctx.strokeStyle = ['rgba(120,240,255,.5)', 'rgba(255,140,240,.4)', 'rgba(255,240,170,.35)'][k];
+        ctx.lineWidth = (26 - k * 8) * S; ctx.beginPath();
+        for (let sx = 0; sx <= W; sx += 12) ctx.lineTo(sx, y + Math.sin(sx * 0.012 + t * (1.5 + k) + k) * 16 * S);
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = 'rgba(230,250,255,.9)'; ctx.font = `${14 * Math.max(1, S)}px "Atkinson Hyperlegible", sans-serif`;
+      ctx.textAlign = 'left'; ctx.fillText('Kosmischer Horizont', 24, y - 28 * S);
+      break;
+    }
+    case 'multi': {
+      for (let i = 0; i < 8; i++) {
+        const bx = W * (0.1 + ((i * 0.37) % 0.8)), by = y + Math.sin(i * 1.7) * 320 * S, sz = (70 + (i * 53) % 110) * S * (1 + Math.sin(t + i) * 0.04);
+        ctx.globalAlpha = 0.9; ctx.drawImage(bubbleSprite, bx - sz / 2, by - sz / 2, sz, sz);
+      }
+      break;
+    }
+    case 'urdelfin': {
+      ctx.globalAlpha = 0.9;
+      drawDolphin(ctx, W / 2, y, -0.15 + Math.sin(t * 0.5) * 0.05, 1, t * 2.2, COSMIC_DOLPHIN, 5.5 * S, '#bff4ff');
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 40; i++) {
+        const a = i * 2.39, rr = (120 + (i * 47) % 300) * S;
+        ctx.fillStyle = `rgba(220,245,255,${0.4 + 0.4 * Math.sin(t * 3 + i)})`;
+        ctx.fillRect(W / 2 + Math.cos(a) * rr * 1.6, y + Math.sin(a) * rr * 0.6, 2.5, 2.5);
+      }
+      break;
+    }
+  }
+  ctx.restore();
+}
+
+function drawCosmos() {
+  const camPx = -cam.y, alt = realAlt(camPx), la = Math.log10(Math.max(1, alt)), t = game.time;
+  const S = Math.min(W, H) / 800;
+  const space = clamp((la - 3.6) / 1.4, 0, 1);
+  const ocean = clamp((camPx - PX_EDGE) / 700, 0, 1);
+  if (camPx < 4500 && !d.airborne) return;
+  if (space > 0) {
+    ctx.fillStyle = `rgba(2,4,14,${space})`; ctx.fillRect(0, 0, W, H);
+    for (const s of skyStars) {
+      const y = ((s.y * H + camPx * 0.03 * (0.4 + s.r)) % H + H) % H;
+      ctx.fillStyle = `rgba(255,255,245,${space * (0.55 + 0.45 * Math.sin(t * 2 + s.tw))})`;
+      ctx.fillRect(s.x * W, y, s.r * 1.3, s.r * 1.3);
+    }
+  }
+  // die Erde unter uns
+  if (la > 4.6 && la < 8.2) {
+    const r = H * 3 * Math.pow(1e5 / alt, 0.55);
+    if (r > 3) {
+      const cx = W / 2, cy = H + r * 0.8, a = clamp((la - 4.6) / 0.6, 0, 1);
+      ctx.save(); ctx.globalAlpha = a;
+      const atm = ctx.createRadialGradient(cx, cy, r, cx, cy, r * 1.08);
+      atm.addColorStop(0, 'rgba(120,200,255,.7)'); atm.addColorStop(1, 'rgba(120,200,255,0)');
+      ctx.fillStyle = atm; ctx.beginPath(); ctx.arc(cx, cy, r * 1.08, 0, TAU); ctx.fill();
+      const eg = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.6, r * 0.1, cx, cy, r);
+      eg.addColorStop(0, '#5fb8ff'); eg.addColorStop(0.6, '#1d5fb0'); eg.addColorStop(1, '#06204a');
+      ctx.fillStyle = eg; ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,.35)';
+      for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.ellipse(cx + Math.cos(i * 1.3) * r * 0.5, cy - r * (0.75 + 0.03 * i), r * 0.16, r * 0.02, i * 0.2, 0, TAU); ctx.fill(); }
+      ctx.restore();
+    }
+  }
+  // Nebel zwischen den Sternen
+  const neb = clamp((la - 14) / 2, 0, 1) * clamp((21.5 - la) / 1.5, 0, 1);
+  if (neb > 0) {
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    [[0.25, 0.3, '160,90,255'], [0.75, 0.65, '60,220,210'], [0.5, 0.95, '255,110,170']].forEach(([fx, fy, c], i) => {
+      const y = ((fy * H + camPx * 0.01) % (H * 1.4)) - H * 0.2, g = ctx.createRadialGradient(fx * W, y, 0, fx * W, y, H * 0.6);
+      g.addColorStop(0, `rgba(${c},${0.28 * neb})`); g.addColorStop(1, `rgba(${c},0)`);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    });
+    ctx.restore();
+  }
+  // ferne Galaxien
+  const gal = clamp((la - 20.5) / 1, 0, 1) * (1 - ocean);
+  if (gal > 0) for (let i = 0; i < 26; i++) {
+    const s = skyStars[i], y = ((s.y * H * 1.2 + camPx * 0.02) % (H * 1.2)) - H * 0.1;
+    drawGalaxy(s.x * W, y, (16 + s.r * 26) * S, s.tw, 0.35 + (i % 4) * 0.15, gal * 0.8);
+  }
+  // der kosmische Ozean jenseits des Universums
+  if (ocean > 0) {
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, `rgba(10,70,100,${0.92 * ocean})`); g.addColorStop(1, `rgba(46,16,96,${0.92 * ocean})`);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 6; i++) {
+      const x = W * (0.1 + i * 0.16) + Math.sin(t * 0.3 + i) * 40, rg = ctx.createLinearGradient(x, 0, x + 120, H);
+      rg.addColorStop(0, `rgba(170,255,240,${0.08 * ocean})`); rg.addColorStop(1, 'rgba(170,255,240,0)');
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.moveTo(x - 30, 0); ctx.lineTo(x + 30, 0); ctx.lineTo(x + 200, H); ctx.lineTo(x + 60, H); ctx.fill();
+    }
+    ctx.restore();
+    for (let i = 0; i < 14; i++) {
+      const s = skyStars[i + 30], y = ((s.y * H * 1.4 + camPx * 0.06 - t * 18) % (H * 1.4) + H * 1.4) % (H * 1.4) - H * 0.2;
+      const sz = (30 + s.r * 40) * S; ctx.globalAlpha = ocean * 0.85;
+      ctx.drawImage(bubbleSprite, s.x * W - sz / 2, y - sz / 2, sz, sz);
+    }
+    ctx.globalAlpha = 1;
+  }
+  // Wegmarken
+  LANDMARKS.forEach((l, i) => {
+    if (!l.kind) return;
+    const sy = SY(-l.px);
+    if (sy < -700 * S || sy > H + 700 * S) return;
+    const side = i % 2 ? 1 : -1;
+    drawLandmark(l, W / 2 + side * Math.min(W * 0.3, 330 * S), sy, S, side);
+  });
+  // Geschwindigkeitsstreifen
+  const sp = Math.abs(d.vy) * cam.z;
+  if (d.airborne && sp > 1500) {
+    const a = clamp((sp - 1500) / 3000, 0, 0.55), dir = d.vy < 0 ? 1 : -1;
+    ctx.strokeStyle = ocean > 0.5 ? `rgba(200,255,240,${a})` : `rgba(220,235,255,${a})`; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let i = 0; i < 34; i++) {
+      const s = skyStars[i + 60], len = sp * 0.035 * (0.5 + s.r);
+      const y = ((s.y * H + dir * t * sp * (0.5 + s.r * 0.4)) % H + H) % H;
+      ctx.moveTo(s.x * W, y); ctx.lineTo(s.x * W, y - dir * len);
+    }
+    ctx.stroke();
+  }
+}
 
 // ====================================================================
 //  Rendering
@@ -1371,6 +1683,7 @@ function render() {
 
   const horizon = SY(0);
   drawSky(pal, nt);
+  drawCosmos();
   if (horizon > -50) {
     drawClouds(pal, nt);
     drawRidge(ridgeFar, 0.12, 1, rgb(mix(pal.bot, pal.top, 0.45), 0.75), horizon);
@@ -1430,7 +1743,7 @@ function render() {
 
   // Delfin + Bewegungsspur
   const skin = SKINS.find(s => s.id === skinId) || SKINS[0];
-  const z = cam.z * 0.95;
+  const z = Math.max(cam.z * 0.95, 0.55); // im Höhenflug nicht winzig werden
   if (d.airborne && d.trail.length > 2) {
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
     for (let i = 0; i < d.trail.length - 1; i += 2) {
@@ -1496,11 +1809,13 @@ function render() {
 function drawOverlayHUD() {
   // Höhenmesser rechts
   const x = W - Math.max(16, 0) - 14, top = H * 0.22, bot = H * 0.72;
-  const maxM = 25, toY = m => bot - (m / maxM) * (bot - top);
+  const maxPx = LM('urdelfin') + 1500, toY = px => bot - clamp(px / maxPx, 0, 1) * (bot - top);
   ctx.fillStyle = 'rgba(4,30,56,.55)'; ctx.fillRect(x - 4, top - 8, 8, bot - top + 16);
   ctx.font = '11px "Atkinson Hyperlegible", sans-serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillStyle = 'rgba(234,248,255,.7)';
-  for (let m = 0; m <= maxM; m += 5) { ctx.fillRect(x - 8, toY(m), 4, 1); ctx.fillText(m + ' m', x - 12, toY(m)); }
-  const cur = clamp(-d.y / 100, 0, maxM), bm = clamp(game.stats.maxH, 0, maxM);
+  for (const [px, label] of [[0, 'Meer'], [LM('karman'), 'Weltraum'], [LM('moon'), 'Mond'], [LANDMARKS.find(l => l.name === 'Neptun').px, 'Neptun'], [LM('galaxy'), 'Milchstraße'], [PX_EDGE, 'Universum'], [LM('urdelfin'), 'Urdelfin']]) {
+    ctx.fillRect(x - 8, toY(px), 4, 1); ctx.fillText(label, x - 12, toY(px));
+  }
+  const cur = Math.max(0, -d.y), bm = game.stats.maxPx;
   ctx.fillStyle = '#ffd166'; ctx.fillRect(x - 6, toY(bm) - 1, 12, 2);
   ctx.fillStyle = '#7dffcf'; ctx.beginPath(); ctx.arc(x, toY(cur), 5, 0, TAU); ctx.fill();
 
@@ -1510,7 +1825,7 @@ function drawOverlayHUD() {
     const bits = [];
     if (flips) bits.push(trickName(flips, d.rot * d.launchCos < 0));
     if (tw) bits.push(tw > 1 ? tw + '× Schraube' : 'Schraube');
-    bits.push((d.maxH / 100).toFixed(1).replace('.', ',') + ' m');
+    bits.push(fmtAlt(realAlt(Math.max(0, -d.y))));
     ctx.textAlign = 'center'; ctx.font = '22px "Lilita One", sans-serif';
     ctx.fillStyle = 'rgba(0,20,40,.5)'; ctx.fillText(bits.join(' · '), W / 2 + 2, H * 0.2 + 2);
     ctx.fillStyle = '#fff'; ctx.fillText(bits.join(' · '), W / 2, H * 0.2);
@@ -1546,12 +1861,14 @@ function drawOverlayHUD() {
 //  HUD (DOM)
 // ====================================================================
 const $ = id => document.getElementById(id);
-const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost') };
+const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost'), tempo: $('tempo') };
 let chipState = '';
 function updateHUD() {
   hud.score.textContent = fmt(game.score);
   hud.mult.textContent = '×' + game.mult;
   hud.multBar.style.transform = `scaleX(${game.mult > 1 ? clamp(game.multTimer / 6, 0, 1) : 0})`;
+  hud.tempo.hidden = game.mult <= 1;
+  hud.tempo.textContent = 'Tempo ×' + speedFactor().toLocaleString('de-DE', { maximumFractionDigits: 2 });
   hud.boost.hidden = game.boost <= 0;
   hud.boost.textContent = 'Schwarm-Bonus +' + pct(game.boost);
   hud.energy.style.width = (game.power.turbo > 0 ? 100 : d.energy) + '%';
@@ -1584,7 +1901,7 @@ function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
   game.ringsHit = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
-  game.stats = { jumps: 0, maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
+  game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
   hud.timerLabel.textContent = mode === 'contest' ? 'Zeit' : mode === 'rings' ? 'Ringe 0 / 15' : 'Freies Spiel';
@@ -1595,6 +1912,7 @@ function startGame(mode) {
 function pauseGame() { if (game.state !== 'play') return; game.state = 'pause'; $('pause').hidden = false; $('resumeBtn').focus(); }
 function resumeGame() { if (game.state !== 'pause') return; game.state = 'play'; $('pause').hidden = true; lastT = performance.now(); }
 function toMenu() {
+  breakCombo();
   if (game.mode === 'free' && game.state !== 'menu' && game.score > best.free) { best.free = game.score; store.set('best', best); }
   game.state = 'menu'; $('pause').hidden = true; $('result').hidden = true; $('hud').hidden = true; touchEl.hidden = true;
   $('menu').hidden = false; buildMenu();
@@ -1617,7 +1935,7 @@ function endGame() {
   $('resScore').textContent = label;
   $('resBest').innerHTML = isBest ? '<span class="newbest">Neuer Rekord!</span>' : 'Rekord: ' + (mode === 'rings' ? best.rings.toFixed(1).replace('.', ',') + ' s' : fmt(best[mode]));
   const items = [
-    ['Höchster Sprung', st.maxH.toFixed(1).replace('.', ',') + ' m'], ['Beste Kombo', '×' + st.maxMult], ['Sprünge', st.jumps],
+    ['Höchster Sprung', fmtAlt(realAlt(st.maxPx)) + (st.farName ? ' · ' + st.farName : '')], ['Beste Kombo', '×' + st.maxMult], ['Sprünge', st.jumps],
     ['Perfekte Landungen', st.perfects], ['Ringe', st.rings], ['Schwärme · Bonus', st.schools + ' · +' + pct(game.boost)]
   ];
   $('resStats').innerHTML = items.map(([k, v]) => `<div class="stat"><span class="label">${k}</span><b>${v}</b></div>`).join('') +
@@ -1639,13 +1957,13 @@ function buildMenu() {
   $('ach').innerHTML = ACH.map(a => `<div class="${achieved[a.id] ? 'on' : ''}"><b>${a.name}</b>${a.desc}</div>`).join('');
   const sk = $('skins'); sk.innerHTML = '';
   for (const s of SKINS) {
-    const locked = count < s.need;
+    const locked = count < s.need || (s.needAch && !achieved[s.needAch]);
     const b = document.createElement('button'); b.type = 'button'; b.className = 'skin'; b.disabled = locked;
     b.setAttribute('aria-pressed', String(s.id === skinId));
     const c = document.createElement('canvas'); c.width = 168; c.height = 92;
     const cc = c.getContext('2d'); drawDolphin(cc, 88, 50, -0.12, 1, 0.6, s, 1.05, null);
     b.appendChild(c); b.appendChild(document.createTextNode(s.name));
-    if (locked) { const sm = document.createElement('small'); sm.textContent = `ab ${s.need} Erfolgen`; b.appendChild(sm); }
+    if (locked) { const sm = document.createElement('small'); sm.textContent = s.lockText || `ab ${s.need} Erfolgen`; b.appendChild(sm); }
     b.addEventListener('click', () => { skinId = s.id; store.set('skin', skinId); buildMenu(); sfx.chirp(); });
     sk.appendChild(b);
   }
