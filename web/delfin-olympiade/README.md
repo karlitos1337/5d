@@ -1,6 +1,6 @@
-# Delfin-Olympiade
+# Delfinitiv.. nicht! Hihihi
 
-Ein Delfin-Sprungspiel im Stil von *Dolphin Olympics*, komplett in einer HTML-Datei
+Ein Delfin-Sprungspiel, inspiriert von *Dolphin Olympics*, komplett in einer HTML-Datei
 (Canvas 2D + WebAudio, keine Abhängigkeiten außer Google Fonts).
 
 **Starten:** `index.html` im Browser öffnen. Läuft auch, wenn man den Inhalt in einen
@@ -36,6 +36,7 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - Zwischen-Szenen im All (einmal pro Runde, überspringbar): Auf dem Mond schleicht sich der Delfin pfeifend an,
   wirft die Flagge der Menschen weg und steckt die von „Delfine United“ hin; auf dem Mars sonnt er sich auf der
   Liege; am Saturn surft er auf den Ringen
+- Zwischen-Szenen und Fotoshooting lassen sich im Hauptmenü und im Pausenmenü abschalten (Punkte gibt es trotzdem)
 - Rammbock: ab Mond-Tempo (glühender Delfin) werden Quallen, Kraken und Anglerfische zerstört; ein Bauchklatscher mit
   hohem Tempo oder nach der Rückkehr aus dem All löst eine Schockwelle aus (Bauchplatscher-Bombe)
 - Tiefsee: wenige Quallen erst in der Tiefe, am Grund Kraken (Tintenwolke) und Anglerfische mit Leuchtköder
@@ -47,4 +48,4 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - Tag-Nacht-Zyklus mit Sonne, Mond, Sternen, Leuchtturm und Biolumineszenz bei Nacht
 - Grafik: Parallax-Hügel, Wolken, Lichtstrahlen unter Wasser, Wellen mit Ripples, Spritz- und
   Blasenpartikel, Bewegungsspur, Kamera-Zoom bei hohen Sprüngen
-- 14 Erfolge, 5 Delfin-Skins (Gold und Neon freischaltbar), Rekorde im `localStorage`
+- Über 30 Erfolge, davon 9 geheime (im Menü als ??? bis zum Freischalten), 5 Delfin-Skins (Gold und Neon freischaltbar), Rekorde im `localStorage`

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Delfin-Olympiade</title>
+<title>Delfinitiv.. nicht! Hihihi</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -114,6 +114,7 @@ body {
   -webkit-background-clip: text; background-clip: text; color: transparent;
   filter: drop-shadow(0 4px 0 rgba(0,20,50,.6)) drop-shadow(0 0 30px rgba(80,200,255,.35));
 }
+.tagline { margin: 6px 0 0; font-family: var(--font-display); font-size: clamp(18px, 3.4vw, 26px); color: var(--sun); letter-spacing: .02em; }
 .subtitle { margin: 0; color: var(--muted); font-size: 15px; max-width: 60ch; line-height: 1.5; }
 h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin: 0; letter-spacing: .02em; }
 .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
@@ -244,7 +245,8 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
   <div class="overlay" id="menu">
     <div class="panel">
       <div>
-        <h1 class="title">Delfin-<br>Olympiade</h1>
+        <h1 class="title">Delfinitiv..<br>nicht!</h1>
+        <p class="tagline">Hihihi · inspiriert von Dolphin Olympics</p>
       </div>
       <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Jede Kombo-Stufe macht dich schneller, mit genug Tempo fliegst du am Mond vorbei und bis aus dem Universum. Schwimm durch Fischschwärme für 5.000 Punkte und einen Bonus auf alle Punkte. Ringe geben einen Speed-Boost, Möwen, Himmelssterne und Perlen Extrapunkte.</p>
       <div class="modes">
@@ -269,6 +271,11 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
           <div class="seg" id="snd">
             <button type="button" data-snd="1" aria-pressed="true">An</button>
             <button type="button" data-snd="0">Aus</button>
+          </div>
+          <h2>Zwischen-Szenen</h2>
+          <div class="seg" id="scn">
+            <button type="button" data-scn="1" aria-pressed="true">An</button>
+            <button type="button" data-scn="0">Aus</button>
           </div>
         </div>
         <div>
@@ -297,6 +304,13 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
         <button class="btn" id="resumeBtn" type="button">Weiter</button>
         <button class="btn ghost" id="restartBtn" type="button">Neu starten</button>
         <button class="btn ghost" id="menuBtn" type="button">Menü</button>
+      </div>
+      <div>
+        <span class="label">Zwischen-Szenen (Mond, Mars, Saturn, Fotoshooting)</span>
+        <div class="seg" id="scnp" style="margin-top:6px">
+          <button type="button" data-scnp="1" aria-pressed="true">An</button>
+          <button type="button" data-scnp="0">Aus</button>
+        </div>
       </div>
     </div>
   </div>
@@ -638,11 +652,22 @@ const ACH = [
   { id: 'flag', name: 'Delfine United', desc: 'Tausch die Flagge auf dem Mond' },
   { id: 'sunbath', name: 'Marsurlaub', desc: 'Sonn dich auf dem Mars' },
   { id: 'stardust', name: 'Sternenstaub-Surfer', desc: 'Surf 5 Sternenstaub-Wellen in einem Flug' },
-  { id: 'rammbock', name: 'Rammbock', desc: 'Zerstör 5 Tiefsee-Gegner' }
+  { id: 'rammbock', name: 'Rammbock', desc: 'Zerstör 5 Tiefsee-Gegner' },
+  // geheime Erfolge: bis zum Freischalten nur ??? sichtbar
+  { id: 'schwarmgeist', secret: true, name: 'Schwarmgeist', desc: 'Sammle mindestens 10 Fischschwärme und triff danach in derselben Runde den Urdelfin' },
+  { id: 'pazifist', secret: true, name: 'Pazifist', desc: 'Flieg am Mond vorbei, ohne in der Runde gestochen zu werden oder einen Gegner zu zerstören' },
+  { id: 'bombenleger', secret: true, name: 'Bombenleger', desc: 'Feg mit einer Bauchplatscher-Bombe mindestens 3 Gegner auf einmal weg' },
+  { id: 'lichtjahre', secret: true, name: 'Schneller als das Licht', desc: 'Erreich die millionenfache Lichtgeschwindigkeit' },
+  { id: 'kapitaen', secret: true, name: 'Kosmischer Kapitän', desc: 'Surf 10 Sternenstaub-Wellen in einem Flug' },
+  { id: 'weltumsegler', secret: true, name: 'Weltumsegler', desc: 'Umrunde die ganze Lagune in einer Runde' },
+  { id: 'sanft', secret: true, name: 'Sanfte Rückkehr', desc: 'Lande nach einem Wurmloch-Rückflug perfekt' },
+  { id: 'blitzstart', secret: true, name: 'Blitzstart', desc: 'Flieg im Wettkampf in den ersten 30 Sekunden am Mond vorbei' },
+  { id: 'fototermin', secret: true, name: 'Fototermin mit Aussicht', desc: 'Lass dich fotografieren und flieg im selben Sprung am Mond vorbei' }
 ];
 let achieved = store.get('ach', {});
 let lifetime = store.get('life', { rings: 0, pearls: 0 });
 let skinId = store.get('skin', 'classic');
+let scenesOn = store.get('scenes', true);
 const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
@@ -729,7 +754,7 @@ function toast(msg) {
 function unlock(id) {
   if (achieved[id]) return;
   achieved[id] = true; store.set('ach', achieved);
-  const a = ACH.find(a => a.id === id); toast('Erfolg: ' + a.name);
+  const a = ACH.find(a => a.id === id); toast((a.secret ? 'Geheimer Erfolg: ' : 'Erfolg: ') + a.name);
   tone(988, 0.12, 'triangle', 0.08); tone(1318, 0.2, 'triangle', 0.08, 0, 0.1);
 }
 function breakCombo() { game.mult = 1; game.comboSchools = 0; }
@@ -854,7 +879,7 @@ function updateDolphin(dt, rdt, ctl) {
     if (d.y < surf && d.vy < 0) {
       d.airborne = true; d.rot = 0; d.twist = 0; d.twistTarget = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
       d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0; d.lm = 0; d.cosmo = 1;
-      d.space = null; d.rocketJump = false; d.dust = [];
+      d.space = null; d.rocketJump = false; d.dust = []; d.photoJump = false;
       if (d.rocket) { d.vx *= 1.25; d.vy *= 1.65; d.rocket = false; d.rocketJump = true; banner('Raketenstart!', '', POWER.rocket.col); for (let i = 0; i < 40; i++) addP({ t: 'spark', x: d.x, y: d.y, vx: rnd(-200, 200), vy: rnd(50, 300), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: '#ffb070' }); }
       if (Math.abs(d.vy) > 300) { splash(d.x, Math.abs(d.vy) * 0.7, false); sfx.jump(); }
     }
@@ -939,6 +964,7 @@ function land() {
   splash(d.x, speed * 0.55, false);
   const tricked = flips > 0 || twists > 0;
   let mul = quality === 'perfect' ? 1.5 : 1;
+  if (quality === 'perfect' && d.space === 'done') unlock('sanft');
   if (quality === 'perfect') { base += 150; game.perfectRun++; st.perfects++; sfx.perfect(); if (nightness() > 0.6) unlock('moon'); }
   else game.perfectRun = 0;
   if (game.perfectRun >= 5) unlock('perfect5');
@@ -1148,6 +1174,7 @@ function shockwave(x, y) {
   }
   for (let i = 0; i < 70; i++) { const a = i / 70 * TAU; addP({ t: 'spark', x: x + Math.cos(a) * 40, y: Math.max(20, y + Math.sin(a) * 40), vx: Math.cos(a) * 700, vy: Math.sin(a) * 700, life: 0.9, max: 0.9, r: 3, col: '#bff4ff' }); }
   game.shake = 26; game.flash = 0.5; game.flashCol = '#bff4ff';
+  if (n >= 3) unlock('bombenleger');
   banner('Bauchplatscher-Bombe!', n ? n + ' Gegner weggefegt' : 'Die Tiefsee bebt', '#ffb070');
 }
 
@@ -1246,6 +1273,12 @@ function reachLandmark(l) {
   const got = addScore(l.pts * d.cosmo);
   banner(l.name, (l.x ? 'Kombo ×' + fmtX(d.cosmo) + ' · ' : '') + l.sub + '  +' + fmt(got), l.ach || l.x ? '#d9c2ff' : '#bdf0ff');
   if (l.ach) unlock(l.ach);
+  if (l.kind === 'moon') {
+    if (game.stats.kills === 0 && game.stats.stings === 0) unlock('pazifist');
+    if (game.mode === 'contest' && game.playTime <= 30) unlock('blitzstart');
+    if (d.photoJump) unlock('fototermin');
+  }
+  if (l.kind === 'urdelfin' && game.stats.schools >= 10) unlock('schwarmgeist');
   if (l.kind === 'plane') startShoot();
   if (l.scene) startScene(l.scene);
   if (l.px > game.stats.farPx) { game.stats.farPx = l.px; game.stats.farName = l.name; }
@@ -1289,8 +1322,10 @@ function updateSpace(dt, ctl) {
       sfx.ring(true);
       for (let i = 0; i < 36; i++) addP({ t: 'spark', x: d.x + rnd(-120, 120), y: d.y + rnd(-20, 20), vx: rnd(-260, 260), vy: rnd(-80, 260), life: rnd(0.5, 1.1), max: 1.1, r: rnd(1.5, 3.5), col: i % 2 ? '#bff4ff' : '#ffb3f0' });
       if (d.dustHits >= 5 && game.state === 'play') unlock('stardust');
+      if (d.dustHits >= 10 && game.state === 'play') unlock('kapitaen');
     }
   }
+  if (game.state === 'play' && realSpeed() / 2.998e8 >= 1e6) unlock('lichtjahre');
   if (d.schwung <= 0) cosmicReturn('Der Sternenstaub ist alle');
   else if (hpx > PX_END) cosmicReturn('Am Ende aller Universen angekommen');
 }
@@ -1600,6 +1635,8 @@ function drawCosmos() {
 const SNAPSHOT_MODES = ['contest'];
 function startShoot() {
   if (game.shoot || !SNAPSHOT_MODES.includes(game.mode)) return;
+  d.photoJump = true;
+  if (!scenesOn) { const got = addScore(5000); game.stats.photos++; unlock('model'); floatText(d.x, d.y - 90, 'Fotoshooting +' + fmt(got), '#ffffff', 22); return; }
   game.shoot = { t: 0, phase: 'shoot', next: 0, bursts: [], photo: null, capture: false, pts: 0 };
   d.suit = true;
   banner('Fotoshooting!', 'Bitte lächeln …', '#ffffff');
@@ -1685,6 +1722,13 @@ const SCENES = {
 function startScene(id) {
   if (game.seen[id] || game.state !== 'play') return;
   game.seen[id] = true;
+  if (!scenesOn) {
+    // Szenen aus: Punkte und Erfolg sofort, ohne den Flow zu unterbrechen
+    const info = SCENES[id], got = addScore(info.pts);
+    floatText(d.x, d.y - 90, info.title + ' +' + fmt(got), '#ffd166', 22);
+    if (info.ach) unlock(info.ach);
+    return;
+  }
   if (game.scene) { game.sceneQueue.push(id); return; }
   game.scene = { id, t: 0, fired: {}, notes: [], dust: [], flash: 0 };
 }
@@ -2550,7 +2594,7 @@ function updateHUD() {
 function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
-  game.ringsHit = 0; game.lmPasses = []; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
+  game.ringsHit = 0; game.travel = 0; game.lmPasses = []; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
   game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, kills: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
@@ -2604,7 +2648,9 @@ function buildMenu() {
   $('best-free').textContent = 'Rekord: ' + (best.free ? fmt(best.free) : '–');
   const count = ACH.filter(a => achieved[a.id]).length;
   $('achTitle').textContent = `Erfolge ${count} / ${ACH.length}`;
-  $('ach').innerHTML = ACH.map(a => `<div class="${achieved[a.id] ? 'on' : ''}"><b>${a.name}</b>${a.desc}</div>`).join('');
+  $('ach').innerHTML = ACH.map(a => achieved[a.id] || !a.secret
+    ? `<div class="${achieved[a.id] ? 'on' : ''}"><b>${a.name}${a.secret ? ' · geheim' : ''}</b>${a.desc}</div>`
+    : '<div><b>???</b>???</div>').join('');
   const sk = $('skins'); sk.innerHTML = '';
   for (const s of SKINS) {
     const locked = count < s.need || (s.needAch && !achieved[s.needAch]);
@@ -2617,10 +2663,13 @@ function buildMenu() {
     b.addEventListener('click', () => { skinId = s.id; store.set('skin', skinId); buildMenu(); sfx.chirp(); });
     sk.appendChild(b);
   }
-  syncSeg('tod', todMode); syncSeg('snd', soundOn ? '1' : '0');
+  syncSeg('tod', todMode); syncSeg('snd', soundOn ? '1' : '0'); syncSeg('scn', scenesOn ? '1' : '0'); syncSeg('scnp', scenesOn ? '1' : '0');
 }
 document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => startGame(b.dataset.mode)));
 document.querySelectorAll('#tod button').forEach(b => b.addEventListener('click', () => { todMode = b.dataset.tod; store.set('tod', todMode); if (todMode !== 'auto') dayT = TOD_FIXED[todMode]; syncSeg('tod', todMode); }));
+function setScenes(on) { scenesOn = on; store.set('scenes', on); syncSeg('scn', on ? '1' : '0'); syncSeg('scnp', on ? '1' : '0'); }
+document.querySelectorAll('#scn button').forEach(b => b.addEventListener('click', () => setScenes(b.dataset.scn === '1')));
+document.querySelectorAll('#scnp button').forEach(b => b.addEventListener('click', () => setScenes(b.dataset.scnp === '1')));
 document.querySelectorAll('#snd button').forEach(b => b.addEventListener('click', () => { initAudio(); setSound(b.dataset.snd === '1'); }));
 $('pauseBtn').addEventListener('click', pauseGame);
 $('resumeBtn').addEventListener('click', resumeGame);
@@ -2655,6 +2704,8 @@ function frame(now) {
     updateCamera(rdt);
     if (game.state === 'play') {
       game.playTime += rdt;
+      game.travel += d.vx * dt;
+      if (Math.abs(game.travel) >= WORLD_W) unlock('weltumsegler');
       for (const k in game.power) if (game.power[k] > 0) game.power[k] -= rdt;
       if (game.mode === 'contest') {
         const before = Math.ceil(game.timeLeft);
