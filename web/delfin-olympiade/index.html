@@ -340,6 +340,7 @@ const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
 const fmt = n => Math.round(n).toLocaleString('de-DE');
 const pct = v => (v * 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) + ' %';
 // Fischschwarm: Punkte und Bonusverstärker, jedes weitere Mal 1 % weniger als das Mal davor
+const COMBO_TIME = 10;   // Sekunden im Wasser ohne neuen Trick, bis die Kombo abläuft
 const SCHOOL_PTS = 5000, SCHOOL_BOOST = 0.01, SCHOOL_DECAY = 0.99;
 
 const store = {
@@ -636,7 +637,8 @@ const ACH = [
   { id: 'model', name: 'Supermodel', desc: 'Lass dich am Flugzeug fotografieren (Wettkampf)' },
   { id: 'flag', name: 'Delfine United', desc: 'Tausch die Flagge auf dem Mond' },
   { id: 'sunbath', name: 'Marsurlaub', desc: 'Sonn dich auf dem Mars' },
-  { id: 'stardust', name: 'Sternenstaub-Surfer', desc: 'Surf 5 Sternenstaub-Wellen in einem Flug' }
+  { id: 'stardust', name: 'Sternenstaub-Surfer', desc: 'Surf 5 Sternenstaub-Wellen in einem Flug' },
+  { id: 'rammbock', name: 'Rammbock', desc: 'Zerstör 5 Tiefsee-Gegner' }
 ];
 let achieved = store.get('ach', {});
 let lifetime = store.get('life', { rings: 0, pearls: 0 });
@@ -927,11 +929,11 @@ function land() {
   if (quality === 'belly') {
     splash(d.x, speed * 1.3, true);
     sfx.belly(); game.shake = 14; game.flash = 0.25; game.flashCol = '#ff6b5a';
-    // Bauchklatscher bricht nur die Kombo: volle Punkte ohne Kombo-Multiplikator, kein Tempoverlust
+    // Bauchklatscher: volle Punkte ohne Kombo-Multiplikator, kein Tempoverlust; die Kombo läuft nur per Zeit ab
     const pts = addScore(base * d.cosmo);
-    banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', 'Kombo-Breaker' + (pts > 0 ? '  +' + fmt(pts) : ''), '#ff8a7a');
-    if (game.mult > 1) floatText(d.x, -80, 'Kombo verloren', '#ff9a8a', 18);
-    breakCombo(); game.multTimer = 0; game.perfectRun = 0;
+    banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', pts > 0 ? '+' + fmt(pts) : '', '#ff8a7a');
+    game.perfectRun = 0;
+    if (speed >= RAM_SPEED * 0.5 || d.space === 'done') shockwave(d.x, 200);
     return;
   }
   splash(d.x, speed * 0.55, false);
@@ -941,7 +943,7 @@ function land() {
   else game.perfectRun = 0;
   if (game.perfectRun >= 5) unlock('perfect5');
   if (tricked) { game.mult = Math.min(10, game.mult + 1); }
-  game.multTimer = 6;
+  if (tricked) game.multTimer = COMBO_TIME;
   st.maxMult = Math.max(st.maxMult, game.mult);
   if (game.mult >= 5) unlock('combo5');
   if (game.mult >= 10) unlock('combo10');
@@ -1037,7 +1039,11 @@ function updateWorld(dt) {
     }
   }
   // Quallen
+  const ram = isRamming();
+  if (ram && Math.random() < 0.7) addP({ t: 'spark', x: d.x - Math.cos(d.a) * 50, y: d.y - Math.sin(d.a) * 50, vx: rnd(-60, 60), vy: rnd(-60, 60), life: 0.4, max: 0.4, r: rnd(2, 4), col: '#ff8a3d' });
   for (const j of jellies) {
+    if (j.dead > 0) { j.dead -= dt; if (j.dead <= 0) j.x = rnd(500, WORLD_W - 500); continue; }
+    if (ram && near(j.x, j.y, 75)) { destroyEnemy(j, 'Qualle'); continue; }
     j.ph += dt; j.y = j.by + Math.sin(j.ph * 0.35) * 90; j.x += Math.sin(j.ph * 0.2) * 12 * dt;
     if (!d.airborne && d.invuln <= 0 && near(j.x, j.y, 48)) {
       d.invuln = 1.6; d.stun = 0.45; d.energy = Math.max(0, d.energy - 25);
@@ -1048,6 +1054,8 @@ function updateWorld(dt) {
   }
   // Kraken am Grund: Tintenwolke
   for (const k of krakens) {
+    if (k.dead > 0) { k.dead -= dt; if (k.dead <= 0) k.x = rnd(600, WORLD_W - 600); continue; }
+    if (ram && near(k.x, k.y, 90)) { destroyEnemy(k, 'Krake'); continue; }
     k.ph += dt; k.x = ((k.x + k.vx * dt) % WORLD_W + WORLD_W) % WORLD_W;
     k.jet = Math.max(0, k.jet - dt);
     if (Math.random() < dt * 0.15) k.jet = 1.2;
@@ -1062,6 +1070,8 @@ function updateWorld(dt) {
   }
   // Anglerfisch in der Tiefe: schnappt zu
   for (const a of anglers) {
+    if (a.dead > 0) { a.dead -= dt; if (a.dead <= 0) a.x = rnd(600, WORLD_W - 600); continue; }
+    if (ram && near(a.x, a.y, 85)) { destroyEnemy(a, 'Anglerfisch'); continue; }
     a.ph += dt; a.x = ((a.x + a.dir * 40 * dt) % WORLD_W + WORLD_W) % WORLD_W;
     a.y = floorY(a.x) - 290 + Math.sin(a.ph * 0.7) * 40;
     if (Math.random() < dt * 0.05) a.dir *= -1;
@@ -1111,6 +1121,34 @@ function updateWorld(dt) {
   for (let i = texts.length - 1; i >= 0; i--) { const x = texts[i]; x.life -= dt; x.y -= 50 * dt; if (x.life <= 0) texts.splice(i, 1); }
   while (ripples.length && t - ripples[0].t0 > 4) ripples.shift();
   for (const c of clouds) { c.x = ((c.x + c.v * dt) % WORLD_W + WORLD_W) % WORLD_W; }
+}
+
+// ====================================================================
+//  Rammbock: ab Mond-Tempo zerstört der Delfin Tiefsee-Gegner
+// ====================================================================
+const RAM_SPEED = 4700;   // grob das Unterwasser-Tempo, das für den Mond reicht (Kombo ×6 mit Turbo)
+const isRamming = () => !d.airborne && Math.hypot(d.vx, d.vy) >= RAM_SPEED;
+function destroyEnemy(o, name) {
+  o.dead = 20;
+  game.shake = Math.max(game.shake, 8);
+  sfx.thump(); noise(0.3, 3000, 0.2, 1.5, 'bandpass');
+  for (let i = 0; i < 40; i++) { const a = rnd(0, TAU); addP({ t: 'spark', x: o.x, y: o.y, vx: Math.cos(a) * rnd(120, 420), vy: Math.sin(a) * rnd(120, 420), life: rnd(0.5, 1.1), max: 1.1, r: rnd(2, 4.5), col: i % 2 ? '#ffb070' : '#ffe39a' }); }
+  for (let i = 0; i < 16; i++) addP({ t: 'bubble', x: o.x + rnd(-30, 30), y: o.y + rnd(-30, 30), vx: rnd(-60, 60), vy: rnd(-160, -60), life: rnd(1, 2), max: 2, r: rnd(2, 6) });
+  if (game.state === 'play') {
+    const got = addScore(1500);
+    floatText(o.x, o.y - 50, name + ' zerstört! +' + fmt(got), '#ffb070', 22);
+    game.stats.kills++;
+    if (game.stats.kills >= 5) unlock('rammbock');
+  }
+}
+function shockwave(x, y) {
+  let n = 0;
+  for (const list of [[jellies, 'Qualle'], [krakens, 'Krake'], [anglers, 'Anglerfisch']]) {
+    for (const o of list[0]) if (!(o.dead > 0) && Math.abs(wrapD(o.x - x)) < 1100) { destroyEnemy(o, list[1]); n++; }
+  }
+  for (let i = 0; i < 70; i++) { const a = i / 70 * TAU; addP({ t: 'spark', x: x + Math.cos(a) * 40, y: Math.max(20, y + Math.sin(a) * 40), vx: Math.cos(a) * 700, vy: Math.sin(a) * 700, life: 0.9, max: 0.9, r: 3, col: '#bff4ff' }); }
+  game.shake = 26; game.flash = 0.5; game.flashCol = '#bff4ff';
+  banner('Bauchplatscher-Bombe!', n ? n + ' Gegner weggefegt' : 'Die Tiefsee bebt', '#ffb070');
 }
 
 // ====================================================================
@@ -2144,7 +2182,7 @@ function drawUnderwater(pal, nt) {
   }
   // Quallen
   for (const j of jellies) {
-    if (offX(j.x, 200)) continue;
+    if (j.dead > 0 || offX(j.x, 200)) continue;
     const x = SX(j.x), y = SY(j.y), z = cam.z, pulse = 1 + Math.sin(j.ph * 3) * 0.12;
     ctx.save(); ctx.translate(x, y);
     ctx.globalCompositeOperation = nt > 0.4 ? 'lighter' : 'source-over';
@@ -2161,7 +2199,7 @@ function drawUnderwater(pal, nt) {
   }
   // Kraken
   for (const k of krakens) {
-    if (offX(k.x, 240)) continue;
+    if (k.dead > 0 || offX(k.x, 240)) continue;
     const x = SX(k.x), y = SY(k.y), z = cam.z, t = game.time;
     ctx.save(); ctx.translate(x, y); ctx.scale(z, z); ctx.lineCap = 'round';
     for (let i = 0; i < 8; i++) {
@@ -2184,7 +2222,7 @@ function drawUnderwater(pal, nt) {
   }
   // Anglerfische
   for (const a of anglers) {
-    if (offX(a.x, 180)) continue;
+    if (a.dead > 0 || offX(a.x, 180)) continue;
     const x = SX(a.x), y = SY(a.y), z = cam.z, t = game.time;
     ctx.save(); ctx.translate(x, y); ctx.scale(a.dir * z, z);
     const lx = 64 + Math.sin(t * 2 + a.ph) * 4, ly = -58 + Math.cos(t * 1.6 + a.ph) * 4;
@@ -2333,6 +2371,7 @@ function render() {
   if (game.power.turbo > 0 || d.turboOn) glow = '#46d6ff';
   if (game.power.x2 > 0) glow = '#ffd166';
   if (d.rocket) glow = '#ff5f8a';
+  if (isRamming()) glow = '#ff8a3d';
   if (d.invuln > 0 && Math.sin(t * 40) > 0) ctx.globalAlpha = 0.5;
   if (game.shoot) {
     // Model-Pose fürs Fotoshooting: waagerecht, größer, Blick zur Kamera
@@ -2475,7 +2514,7 @@ let chipState = '';
 function updateHUD() {
   hud.score.textContent = fmt(game.score);
   hud.mult.textContent = '×' + game.mult;
-  hud.multBar.style.transform = `scaleX(${game.mult > 1 ? clamp(game.multTimer / 6, 0, 1) : 0})`;
+  hud.multBar.style.transform = `scaleX(${game.mult > 1 ? clamp(game.multTimer / COMBO_TIME, 0, 1) : 0})`;
   hud.cosmo.hidden = !(d.airborne && d.cosmo > 1);
   hud.cosmo.textContent = 'Kosmos-Kombo ×' + fmtX(d.cosmo);
   hud.tempo.hidden = game.mult <= 1;
@@ -2512,7 +2551,7 @@ function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
   game.ringsHit = 0; game.lmPasses = []; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
-  game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
+  game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, kills: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
   hud.timerLabel.textContent = mode === 'contest' ? 'Zeit' : mode === 'rings' ? 'Ringe 0 / 15' : 'Freies Spiel';
@@ -2640,7 +2679,7 @@ requestAnimationFrame(frame);
 // Testhaken für automatisierte Prüfungen
 window.__delfin = { game, get d() { return d; }, startGame, endGame, keys,
   hitSchool() { const s = fishSchools[0]; d.x = s.x; d.y = s.y; d.vx = 0; d.vy = 0; },
-  get krakens() { return krakens; }, get anglers() { return anglers; }, get rings() { return rings; } };
+  get krakens() { return krakens; }, get anglers() { return anglers; }, get rings() { return rings; }, get jellies() { return jellies; } };
 })();
 </script>
 </body>

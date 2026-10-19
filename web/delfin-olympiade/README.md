@@ -20,7 +20,8 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 ## Features
 - 3 Modi: Wettkampf (2 min), Ring-Jagd (15 Ringe auf Zeit), Freies Spiel
 - Tricks: Saltos vorwärts/rückwärts (bis Mehrfach), Schrauben, Kombis; Bewertung der Landung
-  (Perfekt / Sauber / Bauchklatscher – der bricht nur die Kombo) und Kombo-Multiplikator bis ×10
+  (Perfekt / Sauber / Bauchklatscher) und Kombo-Multiplikator bis ×10; die Kombo läuft erst ab, wenn 10 s im Wasser kein
+  neuer Trick kommt
 - Jede Kombo-Stufe macht den Delfin im Wasser schneller (Tempo ×1 bis ×5,23). Oberhalb von 30 m wächst die
   Höhe exponentiell: Wolken, Weltraum, ISS, Mond, Planeten, Voyager 1, Proxima Centauri, Milchstraße, Andromeda,
   Virgo-Haufen, Rand des Universums und dahinter das Multiversum mit dem Urdelfin (schaltet den Kosmos-Skin frei)
@@ -35,6 +36,8 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - Zwischen-Szenen im All (einmal pro Runde, überspringbar): Auf dem Mond schleicht sich der Delfin pfeifend an,
   wirft die Flagge der Menschen weg und steckt die von „Delfine United“ hin; auf dem Mars sonnt er sich auf der
   Liege; am Saturn surft er auf den Ringen
+- Rammbock: ab Mond-Tempo (glühender Delfin) werden Quallen, Kraken und Anglerfische zerstört; ein Bauchklatscher mit
+  hohem Tempo oder nach der Rückkehr aus dem All löst eine Schockwelle aus (Bauchplatscher-Bombe)
 - Tiefsee: wenige Quallen erst in der Tiefe, am Grund Kraken (Tintenwolke) und Anglerfische mit Leuchtköder
 - Lagune ohne Wände: Wer seitlich rausschwimmt oder -springt, kommt auf der anderen Seite wieder rein
 - Fischschwärme durchkreuzen: 5.000 Punkte (in derselben Kombo jedes weitere Mal 1 % weniger) und
