@@ -213,6 +213,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <div class="mult"><span id="mult">×1</span><div class="mult-bar"><i id="multBar"></i></div></div>
       <div class="boost" id="boost" hidden>Schwarm-Bonus +0 %</div>
       <div class="boost" id="tempo" hidden>Tempo ×1</div>
+      <div class="boost" id="cosmo" hidden>Kosmos-Kombo ×1</div>
     </div>
     <div class="hud-center">
       <span class="label" id="timerLabel">Zeit</span>
@@ -245,7 +246,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <div>
         <h1 class="title">Delfin-<br>Olympiade</h1>
       </div>
-      <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Jede Kombo-Stufe macht dich schneller, mit genug Tempo fliegst du am Mond vorbei und bis aus dem Universum. Schwimm durch Fischschwärme für 5.000 Punkte und einen Bonus auf alle Punkte. Ringe, Möwen, Himmelssterne und Perlen geben Extrapunkte.</p>
+      <p class="subtitle">Schwimm Anlauf, schieß aus dem Wasser und dreh Saltos und Schrauben. Tauch mit der Nase voran wieder ein, dann wächst dein Kombo-Multiplikator. Jede Kombo-Stufe macht dich schneller, mit genug Tempo fliegst du am Mond vorbei und bis aus dem Universum. Schwimm durch Fischschwärme für 5.000 Punkte und einen Bonus auf alle Punkte. Ringe geben einen Speed-Boost, Möwen, Himmelssterne und Perlen Extrapunkte.</p>
       <div class="modes">
         <button class="mode" type="button" data-mode="contest"><b>Wettkampf</b><span>2 Minuten, so viele Punkte wie möglich.</span><em id="best-contest">Rekord: –</em></button>
         <button class="mode" type="button" data-mode="rings"><b>Ring-Jagd</b><span>Flieg durch 15 Ringe, so schnell du kannst.</span><em id="best-rings">Rekord: –</em></button>
@@ -641,7 +642,7 @@ const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
   state: 'menu', mode: 'contest', time: 0, playTime: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
-  ringsHit: 0, ringGoal: 15, shoot: null, scene: null, sceneQueue: [], seen: {}, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
+  ringsHit: 0, ringGoal: 15, shoot: null, scene: null, lmPasses: [], sceneQueue: [], seen: {}, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
 };
 const cam = { x: 900, y: 200, z: 1 };
 const keys = {};
@@ -650,7 +651,7 @@ const input = { left: false, right: false, up: false, down: false, turbo: false 
 
 let d = null;
 function newDolphin() {
-  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, suit: false,
+  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, cosmo: 1, suit: false,
     energy: 100, tail: 0, invuln: 0, stun: 0, jRings: 0, jGulls: 0, jStars: 0, trail: [], chirpT: 3, turboOn: false, rocket: false };
 }
 
@@ -662,7 +663,7 @@ function placeRing(r) {
   r.rad = r.gold ? 70 : 85; r.hit = false; r.cool = 0; r.ph = Math.random() * TAU;
 }
 function resetWorld() {
-  rings = []; for (let i = 0; i < 16; i++) { const r = {}; placeRing(r); rings.push(r); }
+  rings = []; for (let i = 0; i < (game.mode === 'rings' ? 10 : 6); i++) { const r = {}; placeRing(r); rings.push(r); }
   gulls = []; for (let i = 0; i < 5; i++) gulls.push({ x: rnd(0, WORLD_W), y: -rnd(450, 1400), v: rnd(70, 130) * (Math.random() < 0.5 ? -1 : 1), ph: Math.random() * TAU, hit: 0 });
   fishSchools = [];
   for (let i = 0; i < 6; i++) {
@@ -847,7 +848,7 @@ function updateDolphin(dt, rdt, ctl) {
     // Absprung
     if (d.y < surf && d.vy < 0) {
       d.airborne = true; d.rot = 0; d.twist = 0; d.twistTarget = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
-      d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0; d.lm = 0;
+      d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0; d.lm = 0; d.cosmo = 1;
       if (d.rocket) { d.vx *= 1.25; d.vy *= 1.65; d.rocket = false; banner('Raketenstart!', '', POWER.rocket.col); for (let i = 0; i < 40; i++) addP({ t: 'spark', x: d.x, y: d.y, vx: rnd(-200, 200), vy: rnd(50, 300), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: '#ffb070' }); }
       if (Math.abs(d.vy) > 300) { splash(d.x, Math.abs(d.vy) * 0.7, false); sfx.jump(); }
     }
@@ -918,9 +919,9 @@ function land() {
   if (quality === 'belly') {
     splash(d.x, speed * 1.3, true);
     sfx.belly(); game.shake = 14; game.flash = 0.25; game.flashCol = '#ff6b5a';
-    d.vx *= 0.25; d.vy *= 0.2;
-    const pts = addScore(base * 0.25);
-    banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', pts > 0 ? '+' + fmt(pts) : '', '#ff8a7a');
+    // Bauchklatscher bricht nur die Kombo: volle Punkte ohne Kombo-Multiplikator, kein Tempoverlust
+    const pts = addScore(base * d.cosmo);
+    banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', 'Kombo-Breaker' + (pts > 0 ? '  +' + fmt(pts) : ''), '#ff8a7a');
     if (game.mult > 1) floatText(d.x, -80, 'Kombo verloren', '#ff9a8a', 18);
     breakCombo(); game.multTimer = 0; game.perfectRun = 0;
     return;
@@ -938,10 +939,10 @@ function land() {
   if (game.mult >= 10) unlock('combo10');
   if (flips >= 1) unlock('salto');
   if (flips >= 3) unlock('triple');
-  const pts = addScore(base * mul * game.mult);
+  const pts = addScore(base * mul * game.mult * d.cosmo);
   if (pts > st.bestJump) { st.bestJump = pts; st.bestTrick = parts.join(' + ') || fmtAlt(meters) + ' Sprung'; }
   const head = quality === 'perfect' ? 'Perfekt!' : 'Sauber!';
-  const sub = (parts.length ? parts.join(' + ') + '  ' : '') + '+' + fmt(pts) + (game.mult > 1 ? '  ×' + game.mult : '');
+  const sub = (parts.length ? parts.join(' + ') + '  ' : '') + '+' + fmt(pts) + (game.mult > 1 ? '  ×' + game.mult : '') + (d.cosmo > 1 ? '  Kosmos ×' + fmtX(d.cosmo) : '');
   banner(head, sub, quality === 'perfect' ? '#7dffcf' : '#ffd166');
   if (quality === 'perfect' && tricked) for (let i = 0; i < 30; i++) addP({ t: 'spark', x: d.x + rnd(-40, 40), y: rnd(-20, 0), vx: rnd(-200, 200), vy: rnd(-420, -120), life: rnd(0.6, 1.2), max: 1.2, r: rnd(1.5, 3.5), col: '#bfffe8' });
 }
@@ -959,11 +960,14 @@ function updateWorld(dt) {
     const prevX = d.x - d.vx * dt;
     if (d.airborne && Math.abs(d.y - r.y) < r.rad * 0.8 && wrapD(prevX - r.x) * wrapD(d.x - r.x) <= 0 && Math.abs(wrapD(d.x - r.x)) < 200) {
       r.cool = 8; d.jRings++;
+      // einmaliger Speed-Boost in Flugrichtung
+      const boost = r.gold ? 1.45 : 1.35;
+      d.vx *= boost; d.vy *= boost; sfx.turbo();
+      floatText(d.x, d.y - 60, 'Boost!', r.gold ? '#ffd166' : '#5ce1ff', 26);
       if (playing) {
         game.ringsHit++; game.stats.rings++; lifetime.rings++; store.set('life', lifetime);
         if (lifetime.rings >= 25) unlock('rings25');
         addScore((r.gold ? 600 : 250) * game.mult, r.x, r.y - r.rad - 10, r.gold ? '#ffd166' : '#bdf0ff');
-        d.energy = Math.min(100, d.energy + (r.gold ? 40 : 20));
       }
       sfx.ring(r.gold);
       for (let i = 0; i < 28; i++) { const a = rnd(0, TAU); addP({ t: 'spark', x: r.x + Math.cos(a) * r.rad * 0.3, y: r.y + Math.sin(a) * r.rad, vx: Math.cos(a) * rnd(60, 220), vy: Math.sin(a) * rnd(60, 220), life: rnd(0.5, 1), max: 1, r: rnd(1.5, 3), col: r.gold ? '#ffe08a' : '#bff4ff' }); }
@@ -1175,12 +1179,26 @@ const LANDMARKS = [
   { m: realAlt(PX_EDGE + 2500), name: 'Der Urdelfin', sub: 'Er träumt alle Ozeane aller Universen', pts: 2500000, ach: 'urdelfin', kind: 'urdelfin' }
 ];
 LANDMARKS.forEach(l => { l.px = pxOf(l.m); });
+// Kosmos-Kombo: Wegmarken geben dem laufenden Sprung einen Multiplikator, bei jeder Wiederholung 1 % weniger
+const COSMO_X = {
+  'Reiseflughöhe': 2, 'Am Mond vorbei!': 5, 'Mars': 10, 'Jupiter': 25, 'Saturn': 50, 'Neptun': 100,
+  'Voyager 1 überholt': 250, 'Proxima Centauri': 500, 'Zentrum der Milchstraße': 1000, 'Milchstraße verlassen': 2500,
+  'Andromeda': 5000, 'Virgo-Haufen': 10000, 'Raus aus dem Universum!': 25000, 'Multiversum': 50000, 'Der Urdelfin': 100000
+};
+const COSMO_DECAY = 0.99;
+LANDMARKS.forEach(l => { l.x = COSMO_X[l.name] || 0; });
+const fmtX = v => v.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 const LM = id => LANDMARKS.find(l => l.kind === id).px;
 
 function reachLandmark(l) {
   if (game.state !== 'play') return;
-  const got = addScore(l.pts);
-  banner(l.name, l.sub + '  +' + fmt(got), l.ach ? '#d9c2ff' : '#bdf0ff');
+  if (l.x) {
+    const i = LANDMARKS.indexOf(l), n = game.lmPasses[i] || 0;
+    game.lmPasses[i] = n + 1;
+    d.cosmo = Math.max(d.cosmo, l.x * Math.pow(COSMO_DECAY, n));
+  }
+  const got = addScore(l.pts * d.cosmo);
+  banner(l.name, (l.x ? 'Kombo ×' + fmtX(d.cosmo) + ' · ' : '') + l.sub + '  +' + fmt(got), l.ach || l.x ? '#d9c2ff' : '#bdf0ff');
   if (l.ach) unlock(l.ach);
   if (l.kind === 'plane') startShoot();
   if (l.scene) startScene(l.scene);
@@ -2330,12 +2348,14 @@ function drawOverlayHUD() {
 //  HUD (DOM)
 // ====================================================================
 const $ = id => document.getElementById(id);
-const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost'), tempo: $('tempo') };
+const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost'), tempo: $('tempo'), cosmo: $('cosmo') };
 let chipState = '';
 function updateHUD() {
   hud.score.textContent = fmt(game.score);
   hud.mult.textContent = '×' + game.mult;
   hud.multBar.style.transform = `scaleX(${game.mult > 1 ? clamp(game.multTimer / 6, 0, 1) : 0})`;
+  hud.cosmo.hidden = !(d.airborne && d.cosmo > 1);
+  hud.cosmo.textContent = 'Kosmos-Kombo ×' + fmtX(d.cosmo);
   hud.tempo.hidden = game.mult <= 1;
   hud.tempo.textContent = 'Tempo ×' + speedFactor().toLocaleString('de-DE', { maximumFractionDigits: 2 });
   hud.boost.hidden = game.boost <= 0;
@@ -2369,7 +2389,7 @@ function updateHUD() {
 function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
-  game.ringsHit = 0; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
+  game.ringsHit = 0; game.lmPasses = []; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
   game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
@@ -2498,7 +2518,7 @@ requestAnimationFrame(frame);
 // Testhaken für automatisierte Prüfungen
 window.__delfin = { game, get d() { return d; }, startGame, endGame, keys,
   hitSchool() { const s = fishSchools[0]; d.x = s.x; d.y = s.y; d.vx = 0; d.vy = 0; },
-  get krakens() { return krakens; }, get anglers() { return anglers; } };
+  get krakens() { return krakens; }, get anglers() { return anglers; }, get rings() { return rings; } };
 })();
 </script>
 </body>
