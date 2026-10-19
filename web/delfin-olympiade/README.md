@@ -24,6 +24,9 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - Jede Kombo-Stufe macht den Delfin im Wasser schneller (Tempo ×1 bis ×5,23). Oberhalb von 30 m wächst die
   Höhe exponentiell: Wolken, Weltraum, ISS, Mond, Planeten, Voyager 1, Proxima Centauri, Milchstraße, Andromeda,
   Virgo-Haufen, Rand des Universums und dahinter das Multiversum mit dem Urdelfin (schaltet den Kosmos-Skin frei)
+- Fotoshooting am Flugzeug (11 km, nur im Wettkampf): Blitzlicht-Marathon in Zeitlupe, der Delfin posiert in Anzug,
+  Fliege und Sonnenbrille, danach friert das Bild als Magazin-Cover „Killer-Shot“ ein (+5.000)
+- Tiefsee: wenige Quallen erst in der Tiefe, am Grund Kraken (Tintenwolke) und Anglerfische mit Leuchtköder
 - Lagune ohne Wände: Wer seitlich rausschwimmt oder -springt, kommt auf der anderen Seite wieder rein
 - Fischschwärme durchkreuzen: 5.000 Punkte (in derselben Kombo jedes weitere Mal 1 % weniger) und
   ein Bonusverstärker auf alle Punkte (+1 %, jedes weitere Mal 1 % weniger als zuvor)

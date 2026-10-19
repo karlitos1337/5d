@@ -390,7 +390,7 @@ function bodyPath(c) {
   c.quadraticCurveTo(66, 6, 70, 4);
   c.closePath();
 }
-function drawDolphin(c, x, y, ang, sy, tail, skin, scale, glow) {
+function drawDolphin(c, x, y, ang, sy, tail, skin, scale, glow, suit) {
   c.save();
   c.translate(x, y); c.rotate(ang); c.scale(scale, scale * sy);
   const neon = skin.neon;
@@ -429,12 +429,27 @@ function drawDolphin(c, x, y, ang, sy, tail, skin, scale, glow) {
   gl.addColorStop(0, skin.shine ? 'rgba(255,255,220,.75)' : 'rgba(255,255,255,.45)'); gl.addColorStop(1, 'rgba(255,255,255,0)');
   c.fillStyle = gl; c.beginPath(); c.ellipse(5, -15, 48, 6, -0.06, 0, TAU); c.fill();
   c.restore();
+  // Anzug fürs Fotoshooting
+  if (suit) {
+    c.save(); bodyPath(c); c.clip();
+    c.fillStyle = '#15171f'; c.fillRect(-34, -30, 72, 60);
+    c.fillStyle = '#f4f6fa'; c.beginPath(); c.moveTo(38, -4); c.lineTo(24, 18); c.lineTo(44, 18); c.closePath(); c.fill();
+    c.strokeStyle = 'rgba(255,255,255,.25)'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(36, -6); c.lineTo(18, 16); c.stroke();
+    c.restore();
+    c.fillStyle = '#d6243a'; c.beginPath();
+    c.moveTo(37, 6); c.lineTo(31, 2); c.lineTo(31, 10); c.closePath(); c.moveTo(37, 6); c.lineTo(43, 2); c.lineTo(43, 10); c.closePath(); c.fill();
+  }
   // Brustflosse
-  c.fillStyle = skin.back;
+  c.fillStyle = suit ? '#15171f' : skin.back;
   c.beginPath(); c.moveTo(27, 9); c.bezierCurveTo(19, 21, 9, 27, 1, 30); c.bezierCurveTo(8, 21, 12, 15, 12, 9); c.closePath(); c.fill();
   // Auge, Maul
   c.fillStyle = neon ? neon : '#0b1320'; c.beginPath(); c.arc(44, -3, 2.6, 0, TAU); c.fill();
   c.fillStyle = '#fff'; c.beginPath(); c.arc(45, -3.8, 0.9, 0, TAU); c.fill();
+  if (suit) {
+    c.fillStyle = '#0b0d12'; c.beginPath(); c.ellipse(45, -3, 6.5, 4, -0.1, 0, TAU); c.fill();
+    c.strokeStyle = '#0b0d12'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(39, -4); c.lineTo(29, -7); c.stroke();
+    c.strokeStyle = 'rgba(255,255,255,.75)'; c.lineWidth = 1; c.beginPath(); c.moveTo(42, -5); c.lineTo(46, -6); c.stroke();
+  }
   c.strokeStyle = 'rgba(10,20,30,.45)'; c.lineWidth = 1.1; c.beginPath(); c.moveTo(68, 3.6); c.quadraticCurveTo(58, 7, 50, 4); c.stroke();
   c.restore();
 }
@@ -573,7 +588,10 @@ const sfx = {
   gull: () => { tone(1400, 0.15, 'sawtooth', 0.04, -500); tone(1300, 0.18, 'sawtooth', 0.04, -600, 0.18); },
   star: () => [0, 5, 9, 12, 17, 21].forEach((s, i) => tone(784 * Math.pow(2, s / 12), 0.35, 'sine', 0.07, 0, i * 0.04)),
   tick: () => tone(1000, 0.05, 'square', 0.04),
-  turbo: () => noise(0.3, 900, 0.06, 2, 'bandpass')
+  turbo: () => noise(0.3, 900, 0.06, 2, 'bandpass'),
+  shutter: () => { noise(0.05, 7000, 0.22, 1, 'highpass'); tone(2200, 0.03, 'square', 0.04, 0, 0.04); },
+  ink: () => { noise(0.5, 500, 0.25, 0.7); tone(110, 0.3, 'sine', 0.08, -50); },
+  bite: () => { tone(180, 0.12, 'sawtooth', 0.1, -90); noise(0.08, 2500, 0.15, 2, 'bandpass'); }
 };
 
 // ====================================================================
@@ -608,7 +626,8 @@ const ACH = [
   { id: 'mondflug', name: 'Mondflug', desc: 'Flieg am Mond vorbei' },
   { id: 'galaxy', name: 'Intergalaktisch', desc: 'Verlass die Milchstraße' },
   { id: 'universe', name: 'Raus hier!', desc: 'Verlass das beobachtbare Universum' },
-  { id: 'urdelfin', name: 'Urdelfin', desc: 'Triff den Urdelfin jenseits des Universums' }
+  { id: 'urdelfin', name: 'Urdelfin', desc: 'Triff den Urdelfin jenseits des Universums' },
+  { id: 'model', name: 'Supermodel', desc: 'Lass dich am Flugzeug fotografieren (Wettkampf)' }
 ];
 let achieved = store.get('ach', {});
 let lifetime = store.get('life', { rings: 0, pearls: 0 });
@@ -617,7 +636,7 @@ const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
   state: 'menu', mode: 'contest', time: 0, playTime: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
-  ringsHit: 0, ringGoal: 15, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
+  ringsHit: 0, ringGoal: 15, shoot: null, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
 };
 const cam = { x: 900, y: 200, z: 1 };
 const keys = {};
@@ -626,11 +645,11 @@ const input = { left: false, right: false, up: false, down: false, turbo: false 
 
 let d = null;
 function newDolphin() {
-  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0,
+  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, suit: false,
     energy: 100, tail: 0, invuln: 0, stun: 0, jRings: 0, jGulls: 0, jStars: 0, trail: [], chirpT: 3, turboOn: false, rocket: false };
 }
 
-let rings = [], gulls = [], fishSchools = [], jellies = [], powerUps = [], shells = [], stars = [];
+let rings = [], gulls = [], fishSchools = [], jellies = [], krakens = [], anglers = [], powerUps = [], shells = [], stars = [];
 let particles = [], texts = [], ripples = [];
 
 function placeRing(r) {
@@ -647,7 +666,9 @@ function resetWorld() {
     for (let k = 0; k < 11; k++) s.fish.push({ ox: rnd(-60, 60), oy: rnd(-30, 30), ph: Math.random() * TAU, alive: true, re: 0 });
     fishSchools.push(s);
   }
-  jellies = []; for (let i = 0; i < 8; i++) jellies.push({ x: rnd(500, WORLD_W - 500), by: rnd(350, DEPTH - 250), ph: Math.random() * TAU, hue: [290, 200, 330, 260][i % 4], y: 0 });
+  jellies = []; for (let i = 0; i < 4; i++) jellies.push({ x: rnd(500, WORLD_W - 500), by: rnd(DEPTH - 650, DEPTH - 320), ph: Math.random() * TAU, hue: [290, 200, 330, 260][i % 4], y: 0 });
+  krakens = []; for (let i = 0; i < 3; i++) { const x = rnd(600, WORLD_W - 600); krakens.push({ x, y: floorY(x) - 150, ph: Math.random() * TAU, vx: rnd(-25, 25), jet: 0 }); }
+  anglers = []; for (let i = 0; i < 2; i++) { const x = rnd(600, WORLD_W - 600); anglers.push({ x, y: floorY(x) - 290, dir: Math.random() < 0.5 ? -1 : 1, ph: Math.random() * TAU }); }
   powerUps = []; for (let i = 0; i < 4; i++) powerUps.push(spawnPower({}));
   shells = []; for (let i = 0; i < 9; i++) { const x = 350 + i * (WORLD_W - 700) / 8 + rnd(-120, 120); shells.push({ x, y: floorY(x) - 14, taken: false, re: 0, open: 0 }); }
   stars = []; for (let i = 0; i < 6; i++) stars.push({ x: rnd(500, WORLD_W - 500), y: -rnd(1500, 2200), taken: false, re: 0, ph: Math.random() * TAU });
@@ -855,7 +876,7 @@ function land() {
   const va = Math.atan2(d.vy, d.vx);
   const diff = Math.abs(angDiff(d.a, va));
   const h = d.maxH;
-  d.airborne = false; d.trail.length = 0;
+  d.airborne = false; d.trail.length = 0; d.suit = false;
   const frac = (d.twist % TAU) / TAU;
   const twists = Math.floor(d.twist / TAU) + (frac > 0.8 ? 1 : 0);
   const twisted = frac > 0.2 && frac < 0.8;
@@ -1006,6 +1027,32 @@ function updateWorld(dt) {
       if (playing) { game.stats.stings++; floatText(d.x, d.y - 50, 'Autsch!', '#e7b0ff', 22); }
     }
   }
+  // Kraken am Grund: Tintenwolke
+  for (const k of krakens) {
+    k.ph += dt; k.x = ((k.x + k.vx * dt) % WORLD_W + WORLD_W) % WORLD_W;
+    k.jet = Math.max(0, k.jet - dt);
+    if (Math.random() < dt * 0.15) k.jet = 1.2;
+    k.y = lerp(k.y, floorY(k.x) - 150 - k.jet * 140, Math.min(1, dt * 1.5));
+    if (!d.airborne && d.invuln <= 0 && near(k.x, k.y, 62)) {
+      d.invuln = 1.8; d.stun = 0.6; d.energy = Math.max(0, d.energy - 20);
+      d.vx = wrapD(d.x - k.x) * 7; d.vy = (d.y - k.y) * 7 - 200;
+      sfx.ink(); game.shake = 6; game.ink = 1.6;
+      for (let i = 0; i < 40; i++) addP({ t: 'ink', x: k.x + rnd(-40, 40), y: k.y + rnd(-30, 30), vx: rnd(-80, 80), vy: rnd(-60, 40), life: rnd(1.5, 3), max: 3, r: rnd(14, 34) });
+      if (playing) { game.stats.stings++; floatText(d.x, d.y - 50, 'Tintenwolke!', '#c7b8ff', 22); }
+    }
+  }
+  // Anglerfisch in der Tiefe: schnappt zu
+  for (const a of anglers) {
+    a.ph += dt; a.x = ((a.x + a.dir * 40 * dt) % WORLD_W + WORLD_W) % WORLD_W;
+    a.y = floorY(a.x) - 290 + Math.sin(a.ph * 0.7) * 40;
+    if (Math.random() < dt * 0.05) a.dir *= -1;
+    if (!d.airborne && d.invuln <= 0 && near(a.x, a.y, 56)) {
+      d.invuln = 1.6; d.stun = 0.4; d.energy = Math.max(0, d.energy - 30);
+      d.vx = wrapD(d.x - a.x) * 8; d.vy = (d.y - a.y) * 8;
+      sfx.bite(); game.flash = 0.25; game.flashCol = '#ff9a5a'; game.shake = 9;
+      if (playing) { game.stats.stings++; floatText(d.x, d.y - 50, 'Happs!', '#ffb27a', 24); }
+    }
+  }
   // Power-ups
   for (const pu of powerUps) {
     pu.ph += dt; pu.y -= 55 * dt; pu.x += Math.sin(pu.ph * 1.3) * 25 * dt;
@@ -1039,6 +1086,7 @@ function updateWorld(dt) {
     else if (q.t === 'bubble') { q.vy -= 60 * dt; q.vy = Math.max(q.vy, -160); q.x += (q.vx + Math.sin(q.life * 9) * 25) * dt; q.y += q.vy * dt; if (q.y < sy + 2) q.life = 0; }
     else if (q.t === 'foam') { q.x += q.vx * dt; q.vx *= 0.97; q.y = sy + 1; }
     else if (q.t === 'spark' || q.t === 'glow') { q.x += q.vx * dt; q.y += q.vy * dt; q.vx *= 0.96; q.vy *= 0.96; if (q.t === 'spark') q.vy += 200 * dt; }
+    else if (q.t === 'ink') { q.x += q.vx * dt; q.y += q.vy * dt; q.vx *= 0.97; q.vy *= 0.97; q.r += 10 * dt; }
     else if (q.t === 'feather') { q.vy += 120 * dt; q.vy = Math.min(q.vy, 60); q.vx *= 0.98; q.x += (q.vx + Math.sin(q.life * 4) * 40) * dt; q.y += q.vy * dt; q.rot += dt * 3; }
   }
   for (let i = texts.length - 1; i >= 0; i--) { const x = texts[i]; x.life -= dt; x.y -= 50 * dt; if (x.life <= 0) texts.splice(i, 1); }
@@ -1057,10 +1105,11 @@ function updateCamera(dt) {
     if (zFit >= zMin) { tz = Math.min(base, zFit); ty = (top + bottom) / 2; }
     else { tz = zMin; ty = d.y + (d.vy > 0 ? 0.22 : -0.15) * H / zMin; } // Höhenflug: Kamera folgt dem Delfin
   } else { ty = d.y + 40; }
-  const k = 1 - Math.exp(-dt * 4), ky = 1 - Math.exp(-dt * (d.y < -6000 ? 10 : 4));
+  if (game.shoot) { tz = base * 1.25; ty = d.y; } // Nahaufnahme fürs Fotoshooting
+  const k = 1 - Math.exp(-dt * 4), ky = 1 - Math.exp(-dt * (d.y < -6000 || game.shoot ? 10 : 4));
   cam.x = lerp(cam.x, tx, k); cam.y = lerp(cam.y, ty, ky);
   // schnell herauszoomen, langsam wieder heran
-  cam.z = lerp(cam.z, tz, 1 - Math.exp(-dt * (tz < cam.z ? 6 : 2.5)));
+  cam.z = lerp(cam.z, tz, 1 - Math.exp(-dt * (tz < cam.z || game.shoot ? 6 : 2.5)));
   // Delfin bleibt immer sichtbar
   const m = 110, mt = Math.max(150, H * 0.3);
   if (SY(d.y) < mt) cam.y = d.y + (H / 2 - mt) / cam.z;
@@ -1126,6 +1175,7 @@ function reachLandmark(l) {
   const got = addScore(l.pts);
   banner(l.name, l.sub + '  +' + fmt(got), l.ach ? '#d9c2ff' : '#bdf0ff');
   if (l.ach) unlock(l.ach);
+  if (l.kind === 'plane') startShoot();
   if (l.px > game.stats.farPx) { game.stats.farPx = l.px; game.stats.farName = l.name; }
   sfx.star();
 }
@@ -1374,6 +1424,86 @@ function drawCosmos() {
     }
     ctx.stroke();
   }
+}
+
+// ====================================================================
+//  Fotoshooting am Flugzeug: Blitzlicht-Marathon und Killer-Shot
+// ====================================================================
+const SNAPSHOT_MODES = ['contest'];
+function startShoot() {
+  if (game.shoot || !SNAPSHOT_MODES.includes(game.mode)) return;
+  game.shoot = { t: 0, phase: 'shoot', next: 0, bursts: [], photo: null, capture: false, pts: 0 };
+  d.suit = true;
+  banner('Fotoshooting!', 'Bitte lächeln …', '#ffffff');
+}
+function updateShoot(rdt) {
+  const s = game.shoot;
+  s.t += rdt;
+  for (const b of s.bursts) b.life -= rdt;
+  s.bursts = s.bursts.filter(b => b.life > 0);
+  if (s.phase === 'shoot') {
+    if (s.t >= s.next) {
+      s.next = s.t + rnd(0.09, 0.2);
+      game.flash = 0.75; game.flashCol = '#ffffff'; sfx.shutter();
+      s.bursts.push({ x: rnd(0.05, 0.95) * W, y: Math.random() < 0.5 ? rnd(0.03, 0.2) * H : rnd(0.8, 0.97) * H, life: 0.35 });
+    }
+    if (s.t > 1.6) { s.capture = true; s.phase = 'photo'; s.t = 0; }
+  } else if (s.t > 3.2) { game.shoot = null; unlock('model'); }
+}
+function captureShoot() {
+  const s = game.shoot;
+  const ph = document.createElement('canvas'); ph.width = cv.width; ph.height = cv.height;
+  ph.getContext('2d').drawImage(cv, 0, 0);
+  s.photo = ph; s.capture = false;
+  s.pts = addScore(5000); game.stats.photos++; sfx.perfect();
+}
+function drawShoot() {
+  const s = game.shoot;
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  for (const b of s.bursts) {
+    const a = b.life / 0.35, r = 120 * a + 40, g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, r);
+    g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(b.x - r, b.y - r, r * 2, r * 2);
+    ctx.strokeStyle = `rgba(255,255,255,${a})`; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(b.x - r * 1.4, b.y); ctx.lineTo(b.x + r * 1.4, b.y); ctx.moveTo(b.x, b.y - r * 1.4); ctx.lineTo(b.x, b.y + r * 1.4); ctx.stroke();
+  }
+  ctx.restore();
+  if (s.phase !== 'photo' || !s.photo) return;
+  const intro = clamp(s.t / 0.25, 0, 1), out = clamp((3.2 - s.t) / 0.35, 0, 1);
+  ctx.save(); ctx.globalAlpha = out;
+  ctx.fillStyle = 'rgba(0,6,16,.62)'; ctx.fillRect(0, 0, W, H);
+  const iw = Math.min(W * 0.62, H * 0.62 * W / H), ih = iw * H / W, pad = Math.max(10, iw * 0.03), strip = Math.max(44, iw * 0.11);
+  ctx.translate(W / 2, H * 0.47); ctx.rotate(-0.045); ctx.scale(1.25 - 0.25 * intro, 1.25 - 0.25 * intro);
+  ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 30;
+  ctx.fillStyle = '#fbfaf6'; ctx.fillRect(-iw / 2 - pad, -ih / 2 - pad, iw + pad * 2, ih + pad + strip);
+  ctx.shadowBlur = 0;
+  ctx.drawImage(s.photo, -iw / 2, -ih / 2, iw, ih);
+  // Magazin-Titel
+  ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.font = `${iw * 0.15}px "Lilita One", sans-serif`;
+  ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fillText('DELFIN', -iw / 2 + iw * 0.035 + 3, -ih / 2 + ih * 0.03 + 3);
+  ctx.fillStyle = '#ffffff'; ctx.fillText('DELFIN', -iw / 2 + iw * 0.035, -ih / 2 + ih * 0.03);
+  ctx.font = `700 ${Math.max(11, iw * 0.028)}px "Atkinson Hyperlegible", sans-serif`;
+  ctx.textBaseline = 'bottom';
+  ['EXKLUSIV AUS 11 KM HÖHE', 'Das Meeressäugetier des Jahres', 'Anzug, Fliege, Sonnenbrille: so geht Stil'].forEach((line, i) => {
+    ctx.fillStyle = i === 0 ? '#ffd166' : '#ffffff';
+    ctx.fillText(line, -iw / 2 + iw * 0.035, ih / 2 - ih * 0.04 - (2 - i) * iw * 0.036);
+  });
+  // Bildunterschrift
+  ctx.fillStyle = '#1b2430'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `${Math.max(16, strip * 0.42)}px "Lilita One", sans-serif`;
+  ctx.fillText('Killer-Shot  +' + fmt(s.pts), 0, ih / 2 + strip / 2 + pad * 0.2);
+  // Stempel
+  const st = clamp((s.t - 0.35) / 0.2, 0, 1);
+  if (st > 0) {
+    ctx.save(); ctx.translate(iw * 0.32, -ih * 0.3); ctx.rotate(0.22); ctx.scale(2 - st, 2 - st); ctx.globalAlpha = out * st;
+    ctx.strokeStyle = '#e8283f'; ctx.fillStyle = '#e8283f'; ctx.lineWidth = 4;
+    const sw = iw * 0.34, sh = iw * 0.09;
+    ctx.strokeRect(-sw / 2, -sh / 2, sw, sh);
+    ctx.font = `${sh * 0.62}px "Lilita One", sans-serif`; ctx.fillText('KILLER-SHOT!', 0, 2);
+    ctx.restore();
+  }
+  ctx.restore();
 }
 
 // ====================================================================
@@ -1634,6 +1764,57 @@ function drawUnderwater(pal, nt) {
     }
     ctx.restore();
   }
+  // Kraken
+  for (const k of krakens) {
+    if (offX(k.x, 240)) continue;
+    const x = SX(k.x), y = SY(k.y), z = cam.z, t = game.time;
+    ctx.save(); ctx.translate(x, y); ctx.scale(z, z); ctx.lineCap = 'round';
+    for (let i = 0; i < 8; i++) {
+      const bx = -30 + i * 8.5, sw = Math.sin(t * 2 + i * 0.9 + k.ph), o = i - 3.5;
+      ctx.strokeStyle = i % 2 ? '#a8364a' : '#c24a5c'; ctx.lineWidth = 9 - Math.abs(o) * 0.7;
+      ctx.beginPath(); ctx.moveTo(bx, 8);
+      ctx.bezierCurveTo(bx + sw * 20, 48, bx - sw * 30 + o * 12, 80, bx + o * 22 + sw * 18, 112 - k.jet * 30);
+      ctx.stroke();
+    }
+    const mg = ctx.createRadialGradient(-10, -40, 5, 0, -18, 52);
+    mg.addColorStop(0, '#ff9c9c'); mg.addColorStop(1, '#8f2034');
+    ctx.fillStyle = mg; ctx.beginPath(); ctx.ellipse(0, -20, 38, 48, 0, 0, TAU); ctx.fill();
+    ctx.fillStyle = 'rgba(120,20,40,.45)';
+    [[-14, -44, 5], [12, -50, 4], [4, -30, 3], [-20, -24, 3]].forEach(([a, b, r]) => { ctx.beginPath(); ctx.arc(a, b, r, 0, TAU); ctx.fill(); });
+    for (const ex of [-14, 14]) {
+      ctx.fillStyle = '#fff7e8'; ctx.beginPath(); ctx.arc(ex, -4, 7, 0, TAU); ctx.fill();
+      ctx.fillStyle = '#120a10'; ctx.fillRect(ex - 4, -5.5, 8, 3);
+    }
+    ctx.restore();
+  }
+  // Anglerfische
+  for (const a of anglers) {
+    if (offX(a.x, 180)) continue;
+    const x = SX(a.x), y = SY(a.y), z = cam.z, t = game.time;
+    ctx.save(); ctx.translate(x, y); ctx.scale(a.dir * z, z);
+    const lx = 64 + Math.sin(t * 2 + a.ph) * 4, ly = -58 + Math.cos(t * 1.6 + a.ph) * 4;
+    ctx.strokeStyle = '#3a3346'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(10, -36); ctx.quadraticCurveTo(48, -86, lx, ly); ctx.stroke();
+    ctx.globalCompositeOperation = 'lighter';
+    const lg = ctx.createRadialGradient(lx, ly, 0, lx, ly, 46);
+    lg.addColorStop(0, 'rgba(170,255,255,.9)'); lg.addColorStop(1, 'rgba(120,230,255,0)');
+    ctx.fillStyle = lg; ctx.fillRect(lx - 46, ly - 46, 92, 92);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#eaffff'; ctx.beginPath(); ctx.arc(lx, ly, 6, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#2a2234'; ctx.beginPath(); ctx.moveTo(-48, 0); ctx.lineTo(-82, -26 + Math.sin(t * 4) * 4); ctx.lineTo(-82, 26 + Math.sin(t * 4) * 4); ctx.closePath(); ctx.fill();
+    const bg = ctx.createRadialGradient(-5, -14, 6, 0, 0, 58);
+    bg.addColorStop(0, '#5b5070'); bg.addColorStop(1, '#17121f');
+    ctx.fillStyle = bg; ctx.beginPath(); ctx.ellipse(0, 0, 56, 40, 0, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#08050c'; ctx.beginPath(); ctx.moveTo(57, -6); ctx.lineTo(18, 9); ctx.lineTo(56, 24); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#f4f1e6';
+    for (let i = 0; i < 5; i++) {
+      const tx = 26 + i * 6.5;
+      ctx.beginPath(); ctx.moveTo(tx, 6 - i * 2.4); ctx.lineTo(tx + 3, 13 - i * 2.4); ctx.lineTo(tx + 6, 6 - i * 2.4); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(tx, 12 + i * 2.4); ctx.lineTo(tx + 3, 5 + i * 2.4); ctx.lineTo(tx + 6, 12 + i * 2.4); ctx.fill();
+    }
+    ctx.fillStyle = '#e8e07a'; ctx.beginPath(); ctx.arc(28, -16, 6, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#0a0710'; ctx.beginPath(); ctx.arc(29, -16, 3, 0, TAU); ctx.fill();
+    ctx.restore();
+  }
   // Power-up-Blasen
   for (const pu of powerUps) {
     if (offX(pu.x, 180)) continue;
@@ -1655,12 +1836,13 @@ function drawUnderwater(pal, nt) {
 function drawParticles(kind) {
   const t = game.time;
   for (const q of particles) {
-    const under = q.t === 'bubble' || q.t === 'glow';
+    const under = q.t === 'bubble' || q.t === 'glow' || q.t === 'ink';
     if (kind === 'under' ? !under : under) continue;
     const x = SX(q.x), y = SY(q.y), z = cam.z, a = clamp(q.life / q.max, 0, 1);
     if (x < -20 || x > W + 20 || y < -20 || y > H + 20) continue;
     if (q.t === 'drop') { ctx.fillStyle = `rgba(230,248,255,${0.85 * a})`; ctx.beginPath(); ctx.arc(x, y, q.r * z, 0, TAU); ctx.fill(); }
     else if (q.t === 'foam') { ctx.fillStyle = `rgba(255,255,255,${0.55 * a})`; ctx.beginPath(); ctx.ellipse(x, y, q.r * z * 1.6, q.r * z * 0.5, 0, 0, TAU); ctx.fill(); }
+    else if (q.t === 'ink') { ctx.fillStyle = `rgba(14,8,26,${0.7 * a})`; ctx.beginPath(); ctx.arc(x, y, q.r * z, 0, TAU); ctx.fill(); }
     else if (q.t === 'bubble') { ctx.strokeStyle = `rgba(220,245,255,${0.7 * a})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, q.r * z, 0, TAU); ctx.stroke(); ctx.fillStyle = `rgba(255,255,255,${0.5 * a})`; ctx.fillRect(x - q.r * z * 0.4, y - q.r * z * 0.5, 1.2, 1.2); }
     else if (q.t === 'spark' || q.t === 'glow') {
       ctx.globalCompositeOperation = 'lighter';
@@ -1757,7 +1939,11 @@ function render() {
   if (game.power.x2 > 0) glow = '#ffd166';
   if (d.rocket) glow = '#ff5f8a';
   if (d.invuln > 0 && Math.sin(t * 40) > 0) ctx.globalAlpha = 0.5;
-  drawDolphin(ctx, SX(d.x), SY(d.y), d.a, d.roll * Math.cos(d.twist), d.tail, skin, z, glow);
+  if (game.shoot) {
+    // Model-Pose fürs Fotoshooting: waagerecht, größer, Blick zur Kamera
+    const right = d.launchCos > 0;
+    drawDolphin(ctx, SX(d.x), SY(d.y), right ? -0.18 : Math.PI + 0.18, right ? 1 : -1, d.tail, skin, z * 1.7, '#ffffff', true);
+  } else drawDolphin(ctx, SX(d.x), SY(d.y), d.a, d.roll * Math.cos(d.twist), d.tail, skin, z, glow, d.suit);
   ctx.globalAlpha = 1;
 
   for (const r of rings) drawRing(r, 1);
@@ -1797,12 +1983,20 @@ function render() {
     ctx.globalAlpha = a; ctx.fillStyle = x.col; ctx.fillText(x.text, SX(x.x), SY(x.y)); ctx.globalAlpha = 1;
   }
   ctx.restore();
+  // Killer-Shot: das saubere Bild ohne Blitz und HUD festhalten
+  if (game.shoot && game.shoot.capture) captureShoot();
 
   // Bildschirm-Effekte
   if (vignette) ctx.drawImage(vignette, 0, 0, W, H);
   if (game.power.slow > 0 && d.airborne) { ctx.fillStyle = 'rgba(150,110,255,0.10)'; ctx.fillRect(0, 0, W, H); }
+  if (game.ink > 0) {
+    const ig = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.15, W / 2, H / 2, Math.max(W, H) * 0.7);
+    ig.addColorStop(0, 'rgba(8,4,20,0)'); ig.addColorStop(1, `rgba(8,4,20,${Math.min(0.85, game.ink * 0.6)})`);
+    ctx.fillStyle = ig; ctx.fillRect(0, 0, W, H);
+  }
   if (game.flash > 0) { ctx.globalAlpha = game.flash; ctx.fillStyle = game.flashCol; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
 
+  if (game.shoot) drawShoot();
   if (game.state === 'play' || game.state === 'pause') drawOverlayHUD();
 }
 
@@ -1820,7 +2014,8 @@ function drawOverlayHUD() {
   ctx.fillStyle = '#7dffcf'; ctx.beginPath(); ctx.arc(x, toY(cur), 5, 0, TAU); ctx.fill();
 
   // Laufender Trick in der Luft
-  if (d.airborne && d.maxH > 80) {
+  const photoUp = game.shoot && game.shoot.phase === 'photo';
+  if (d.airborne && d.maxH > 80 && !photoUp) {
     const flips = Math.floor(Math.abs(d.rot) / TAU + 0.4), tw = Math.floor(d.twist / TAU + 0.2);
     const bits = [];
     if (flips) bits.push(trickName(flips, d.rot * d.launchCos < 0));
@@ -1832,7 +2027,7 @@ function drawOverlayHUD() {
   }
   // Banner
   const b = game.banner;
-  if (b) {
+  if (b && !photoUp) {
     const p = 1 - b.life / b.max, a = p < 0.1 ? p / 0.1 : b.life < 0.4 ? b.life / 0.4 : 1, s = p < 0.1 ? 0.7 + p * 3 : 1;
     ctx.save(); ctx.translate(W / 2, H * 0.32); ctx.scale(s, s); ctx.globalAlpha = a; ctx.textAlign = 'center';
     ctx.font = `${Math.min(64, W / 9)}px "Lilita One", sans-serif`;
@@ -1900,8 +2095,8 @@ function updateHUD() {
 function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
-  game.ringsHit = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
-  game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
+  game.ringsHit = 0; game.shoot = null; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
+  game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
   hud.timerLabel.textContent = mode === 'contest' ? 'Zeit' : mode === 'rings' ? 'Ringe 0 / 15' : 'Freies Spiel';
@@ -1990,7 +2185,10 @@ function frame(now) {
   let rdt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   readInput();
   if (game.state !== 'pause') {
-    const slow = game.power.slow > 0 && d.airborne ? 0.45 : 1;
+    if (game.shoot) updateShoot(rdt);
+    const frozen = game.shoot && game.shoot.phase === 'photo';
+    if (!frozen) {
+    const slow = game.shoot ? 0.15 : game.power.slow > 0 && d.airborne ? 0.45 : 1;
     const dt = rdt * slow;
     game.time += dt;
     if (todMode === 'auto') dayT = (dayT + rdt / 240) % 1;
@@ -2011,9 +2209,11 @@ function frame(now) {
       if (game.mode === 'rings' && game.ringsHit >= game.ringGoal) endGame();
       updateHUD();
     }
+    }
     if (game.banner) { game.banner.life -= rdt; if (game.banner.life <= 0) game.banner = null; }
     game.shake = Math.max(0, game.shake - rdt * 40);
-    game.flash = Math.max(0, game.flash - rdt * 1.5);
+    game.flash = Math.max(0, game.flash - rdt * (game.shoot ? 5 : 1.5));
+    game.ink = Math.max(0, game.ink - rdt * 0.6);
   }
   render();
   requestAnimationFrame(frame);
@@ -2022,7 +2222,8 @@ requestAnimationFrame(frame);
 
 // Testhaken für automatisierte Prüfungen
 window.__delfin = { game, get d() { return d; }, startGame, endGame, keys,
-  hitSchool() { const s = fishSchools[0]; d.x = s.x; d.y = s.y; d.vx = 0; d.vy = 0; } };
+  hitSchool() { const s = fishSchools[0]; d.x = s.x; d.y = s.y; d.vx = 0; d.vy = 0; },
+  get krakens() { return krakens; }, get anglers() { return anglers; } };
 })();
 </script>
 </body>
