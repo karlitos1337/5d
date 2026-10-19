@@ -663,14 +663,14 @@ const ACH = [
   { id: 'model', name: 'Supermodel', desc: 'Lass dich am Flugzeug fotografieren (Wettkampf)' },
   { id: 'flag', name: 'Delfine United', desc: 'Tausch die Flagge auf dem Mond' },
   { id: 'sunbath', name: 'Marsurlaub', desc: 'Sonn dich auf dem Mars' },
-  { id: 'stardust', name: 'Sternenstaub-Surfer', desc: 'Surf 5 Sternenstaub-Wellen in einem Flug' },
+  { id: 'stardust', name: 'Sternenstaub-Surfer', desc: 'Surf auf 5 Abschnitten der Sternenstaub-Bahn in einem Flug' },
   { id: 'rammbock', name: 'Rammbock', desc: 'Zerstör 5 Tiefsee-Gegner' },
   // geheime Erfolge: bis zum Freischalten nur ??? sichtbar
   { id: 'schwarmgeist', secret: true, name: 'Schwarmgeist', desc: 'Sammle mindestens 10 Fischschwärme und triff danach in derselben Runde den Urdelfin' },
   { id: 'pazifist', secret: true, name: 'Pazifist', desc: 'Flieg am Mond vorbei, ohne in der Runde gestochen zu werden oder einen Gegner zu zerstören' },
   { id: 'bombenleger', secret: true, name: 'Bombenleger', desc: 'Feg mit einer Bauchplatscher-Bombe mindestens 3 Gegner auf einmal weg' },
   { id: 'lichtjahre', secret: true, name: 'Schneller als das Licht', desc: 'Erreich die millionenfache Lichtgeschwindigkeit' },
-  { id: 'kapitaen', secret: true, name: 'Kosmischer Kapitän', desc: 'Surf 10 Sternenstaub-Wellen in einem Flug' },
+  { id: 'kapitaen', secret: true, name: 'Kosmischer Kapitän', desc: 'Surf auf 10 Abschnitten der Sternenstaub-Bahn in einem Flug' },
   { id: 'weltumsegler', secret: true, name: 'Weltumsegler', desc: 'Umrunde die ganze Lagune in einer Runde' },
   { id: 'sanft', secret: true, name: 'Sanfte Rückkehr', desc: 'Lande nach einem Wurmloch-Rückflug perfekt' },
   { id: 'blitzstart', secret: true, name: 'Blitzstart', desc: 'Flieg im Wettkampf in den ersten 30 Sekunden am Mond vorbei' },
@@ -694,7 +694,7 @@ const input = { left: false, right: false, up: false, down: false, turbo: false 
 
 let d = null;
 function newDolphin() {
-  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, cosmo: 1, suit: false, space: null, schwung: 0, dust: [], dustBoost: 1, dustHits: 0, rocketJump: false,
+  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, cosmo: 1, suit: false, space: null, schwung: 0, rail: [], railX0: 0, surfing: false, surfAcc: 0, dustBoost: 1, dustHits: 0, rocketJump: false,
     energy: 100, tail: 0, invuln: 0, stun: 0, jRings: 0, jGulls: 0, jStars: 0, trail: [], chirpT: 3, turboOn: false, rocket: false };
 }
 
@@ -892,7 +892,7 @@ function updateDolphin(dt, rdt, ctl) {
     if (d.y < surf && d.vy < 0) {
       d.airborne = true; d.rot = 0; d.twist = 0; d.twistTarget = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
       d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0; d.lm = 0; d.cosmo = 1;
-      d.space = null; d.rocketJump = false; d.dust = []; d.photoJump = false;
+      d.space = null; d.rocketJump = false; d.rail = []; d.surfing = false; d.photoJump = false;
       if (d.rocket) { d.vx *= 1.25; d.vy *= 1.65; d.rocket = false; d.rocketJump = true; banner('Raketenstart!', '', POWER.rocket.col); for (let i = 0; i < 40; i++) addP({ t: 'spark', x: d.x, y: d.y, vx: rnd(-200, 200), vy: rnd(50, 300), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: '#ffb070' }); }
       if (Math.abs(d.vy) > 300) { splash(d.x, Math.abs(d.vy) * 0.7, false); sfx.jump(); }
     }
@@ -1312,40 +1312,55 @@ function reachLandmark(l) {
 //  je höher, desto schneller; Sternenstaub-Wellen füllen den Schwung auf
 // ====================================================================
 const PX_KARMAN = LM('karman'), PX_MOON = LM('moon'), PX_END = LM('urdelfin') + 900;
-const SCHWUNG_PX = 6000;   // so viele px Höhe trägt 100 % Schwung
+// Sternenstaub-Bahn: leuchtende Surf-Schiene zwischen den Planeten, mit Lücken
+const railX = px => d.railX0 + 260 * Math.sin(px * 0.0022) + 140 * Math.sin(px * 0.0009 + 1);
 function enterSpace() {
   d.space = 'on';
   d.schwung = clamp(0.45 + 0.07 * (game.mult - 1), 0.45, 1.1) + (d.rocketJump ? 0.5 : 0);
-  d.dustBoost = 1; d.dustHits = 0; d.dust = [];
-  let y = PX_MOON + 500, gap = 1200, x = d.x;
-  while (y < PX_END) { x += rnd(-350, 350); d.dust.push({ px: y, x, hit: false, seed: Math.random() * 100 }); y += gap; gap *= 1.1; }
+  d.dustBoost = 1; d.dustHits = 0; d.surfAcc = 0; d.surfing = false;
+  // die Bahn liegt dort, wo der Delfin ins All kommt, damit man sie erreichen kann
+  d.railX0 = d.x - 260 * Math.sin(PX_MOON * 0.0022) - 140 * Math.sin(PX_MOON * 0.0009 + 1);
+  d.rail = [];
+  const i0 = LANDMARKS.findIndex(l => l.kind === 'moon');
+  for (let i = i0; i < LANDMARKS.length - 1; i++) {
+    const a = LANDMARKS[i].px + 250, b = a + (LANDMARKS[i + 1].px - LANDMARKS[i].px) * 0.65;
+    d.rail.push({ a, b, hit: false });
+  }
   floatText(d.x, d.y + 120, 'Weltraum: die Nase lenkt, ← → für Saltos', '#bff4ff', 20);
 }
 function updateSpace(dt, ctl) {
-  const p = game.power, hpx = -d.y, prevY = d.y;
+  const p = game.power, hpx = -d.y;
   const prog = clamp((hpx - PX_KARMAN) / (PX_EDGE - PX_KARMAN), 0, 1.3);
+  // im All wird nur beschleunigt, nie gebremst: je höher, desto schneller
   const target = -(2400 + 3000 * prog) * d.dustBoost;
-  d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.6));
-  d.vy = lerp(d.vy, target, Math.min(1, dt * 1.2));
+  if (d.vy > target) d.vy = lerp(d.vy, target, Math.min(1, dt * 1.2));
   // der Delfin bleibt ein Delfin: Saltos wie in der Luft, die Nase lenkt sanft zur Seite
   d.vx += Math.cos(d.a) * 900 * dt;
   d.vx -= d.vx * 1.5 * dt;
-  d.x += d.vx * dt; d.y += d.vy * dt;
-  d.schwung -= Math.abs(d.vy) * dt / SCHWUNG_PX * (p.feather > 0 ? 0.6 : 1) * (hardcore ? 1 : 0.5);
-  for (const s of d.dust) {
-    if (s.hit) continue;
-    const ly = -s.px;
-    if ((prevY - ly) * (d.y - ly) <= 0 && Math.abs(wrapD(d.x - s.x)) < 230) {
-      s.hit = true; d.dustHits++;
-      d.schwung = Math.min(1.6, d.schwung + 0.4); d.dustBoost = 1.25; d.vy *= 1.2;
-      const got = game.state === 'play' ? addScore(2500 * d.cosmo) : 0;
-      floatText(d.x, d.y - 80, 'Sternenstaub-Surf! +' + fmt(got), '#bff4ff', 24);
-      sfx.ring(true);
-      for (let i = 0; i < 36; i++) addP({ t: 'spark', x: d.x + rnd(-120, 120), y: d.y + rnd(-20, 20), vx: rnd(-260, 260), vy: rnd(-80, 260), life: rnd(0.5, 1.1), max: 1.1, r: rnd(1.5, 3.5), col: i % 2 ? '#bff4ff' : '#ffb3f0' });
-      if (d.dustHits >= 5 && game.state === 'play') unlock('stardust');
-      if (d.dustHits >= 10 && game.state === 'play') unlock('kapitaen');
-    }
+  // Sternenstaub-Bahn: in der Nähe rastet der Delfin ein und surft
+  const seg = d.rail.find(r => hpx >= r.a && hpx <= r.b);
+  let surfing = false;
+  if (seg) {
+    const dx = wrapD(railX(hpx) - d.x);
+    if (Math.abs(dx) < 260) { d.vx += dx * 8 * dt; if (Math.abs(dx) < 130) surfing = true; }
   }
+  d.x += d.vx * dt; d.y += d.vy * dt;
+  if (surfing) {
+    if (!seg.hit) {
+      seg.hit = true; d.dustHits++;
+      floatText(d.x, d.y - 80, 'Sternenstaub-Bahn!', '#bff4ff', 24); sfx.ring(true);
+      if (game.state === 'play') { if (d.dustHits >= 5) unlock('stardust'); if (d.dustHits >= 10) unlock('kapitaen'); }
+    }
+    d.schwung = Math.min(1.6, d.schwung + 0.55 * dt);
+    d.dustBoost = Math.max(d.dustBoost, 1.35);
+    d.surfAcc += 2500 * dt * d.cosmo;
+    if (d.surfAcc >= 100 && game.state === 'play') { const n = Math.floor(d.surfAcc); addScore(n); d.surfAcc -= n; }
+    if (Math.random() < 0.9) addP({ t: 'spark', x: d.x + rnd(-30, 30), y: d.y + rnd(10, 40), vx: rnd(-120, 120), vy: rnd(60, 260), life: rnd(0.4, 0.9), max: 0.9, r: rnd(1.5, 3.2), col: Math.random() < 0.5 ? '#bff4ff' : '#ffb3f0' });
+  } else {
+    d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.6));
+    d.schwung -= dt / (hardcore ? 3.5 : 7) * (p.feather > 0 ? 0.6 : 1);
+  }
+  d.surfing = surfing;
   if (game.state === 'play' && realSpeed() / 2.998e8 >= 1e6) unlock('lichtjahre');
   // Hardcore: per Wurmloch nach Hause; normal: Rückfall zur Erde mit Wiedereintritt
   if (d.schwung <= 0) (hardcore ? cosmicReturn : startFall)('Der Sternenstaub ist alle');
@@ -1376,39 +1391,41 @@ function fmtSpeed(mps) {
   return fmt(mps) + ' m/s';
 }
 function drawStardust() {
-  if (!d.dust || !d.dust.length || d.space !== 'on') return;
-  const t = game.time, z = cam.z;
-  ctx.save(); ctx.globalCompositeOperation = 'lighter';
-  let next = null;
-  for (const s of d.dust) {
-    if (!s.hit && !next && s.px > -d.y) next = s;
-    const sx = SX(s.x), sy = SY(-s.px);
-    if (sy < -80 || sy > H + 80 || sx < -300 || sx > W + 300) continue;
-    const w = 230 * z * 2, a = s.hit ? 0.25 : 1;
-    const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, w * 0.6);
-    g.addColorStop(0, `rgba(190,245,255,${0.55 * a})`); g.addColorStop(1, 'rgba(190,245,255,0)');
-    ctx.fillStyle = g; ctx.save(); ctx.translate(sx, sy); ctx.scale(1, 0.18); ctx.translate(-sx, -sy);
-    ctx.beginPath(); ctx.arc(sx, sy, w * 0.6, 0, TAU); ctx.fill(); ctx.restore();
-    for (let i = 0; i < 26; i++) {
-      const k = (i * 37.7 + s.seed) % 1, ox = (k - 0.5) * w, oy = Math.sin(k * 12 + t * 3) * 8 * z;
-      ctx.fillStyle = `rgba(${i % 3 ? '220,250,255' : '255,180,240'},${a * (0.5 + 0.5 * Math.sin(t * 5 + i))})`;
-      ctx.fillRect(sx + ox, sy + oy, 2.5, 2.5);
+  if (d.space !== 'on' || !d.rail) return;
+  const z = cam.z, t = game.time, hpx = -d.y;
+  const top = -cam.y + H / 2 / z + 200, bot = -cam.y - H / 2 / z - 200;
+  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  for (const r of d.rail) {
+    const a = Math.max(r.a, bot), b = Math.min(r.b, top);
+    if (a >= b) continue;
+    const on = d.surfing && hpx >= r.a && hpx <= r.b ? 1.6 : 1;
+    const path = () => {
+      ctx.beginPath();
+      for (let px = a; px <= b + 29; px += 30) { const q = Math.min(px, b); const x = SX(railX(q)), y = SY(-q); if (px === a) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+    };
+    path(); ctx.strokeStyle = `rgba(120,230,255,${0.16 * on})`; ctx.lineWidth = 70 * z; ctx.stroke();
+    path(); ctx.strokeStyle = `rgba(255,150,240,${0.32 * on})`; ctx.lineWidth = 22 * z; ctx.stroke();
+    path(); ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = Math.max(1.5, 4 * z); ctx.stroke();
+    for (let px = Math.ceil(a / 70) * 70; px <= b; px += 70) {
+      const k = Math.sin(px * 0.37 + t * 5);
+      ctx.fillStyle = `rgba(${px % 140 ? '220,250,255' : '255,180,240'},${0.4 + 0.4 * k})`;
+      ctx.fillRect(SX(railX(px) + Math.sin(px * 1.3) * 40), SY(-px) + Math.cos(px) * 10, 2.5, 2.5);
     }
   }
   ctx.restore();
-  // Pfeil zur nächsten Sternenstaub-Welle, wenn sie seitlich außerhalb liegt
+  // Pfeil zur Bahn, wenn sie seitlich außerhalb des Bildes liegt
+  const cur = d.rail.find(r => hpx >= r.a && hpx <= r.b), next = cur || d.rail.find(r => r.a > hpx);
   if (next) {
-    const sx = SX(next.x), sy = clamp(SY(-next.px), 80, H - 60);
+    const px = cur ? hpx + 400 : next.a, sx = SX(railX(px)), sy = clamp(SY(-px), 90, H - 70);
     if (sx < 20 || sx > W - 20) {
-      const left = sx < 20, px = left ? 26 : W - 26;
+      const left = sx < 20, ax = left ? 26 : W - 26;
       ctx.fillStyle = '#bff4ff'; ctx.beginPath();
-      if (left) { ctx.moveTo(px - 12, sy); ctx.lineTo(px + 6, sy - 10); ctx.lineTo(px + 6, sy + 10); }
-      else { ctx.moveTo(px + 12, sy); ctx.lineTo(px - 6, sy - 10); ctx.lineTo(px - 6, sy + 10); }
+      if (left) { ctx.moveTo(ax - 12, sy); ctx.lineTo(ax + 6, sy - 10); ctx.lineTo(ax + 6, sy + 10); }
+      else { ctx.moveTo(ax + 12, sy); ctx.lineTo(ax - 6, sy - 10); ctx.lineTo(ax - 6, sy + 10); }
       ctx.fill();
     }
   }
 }
-
 const galaxySprite = (() => {
   const s = document.createElement('canvas'); s.width = s.height = 256;
   const c = s.getContext('2d'), r = mulberry(77);
