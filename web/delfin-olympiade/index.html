@@ -899,8 +899,8 @@ function updateDolphin(dt, rdt, ctl) {
   } else {
     // ---- In der Luft ----
     const spin = 6.6, inSpace = d.space === 'on';
-    if (!inSpace && ctl.left) { d.a -= spin * rdt; d.rot -= spin * rdt; }
-    if (!inSpace && ctl.right) { d.a += spin * rdt; d.rot += spin * rdt; }
+    if (ctl.left) { d.a -= spin * rdt; d.rot -= spin * rdt; }
+    if (ctl.right) { d.a += spin * rdt; d.rot += spin * rdt; }
     // Schraube läuft nach dem Loslassen bis zur nächsten vollen Umdrehung weiter
     const tstep = 9.5 * rdt;
     if (ctl.down) { d.twist += tstep; d.twistTarget = Math.ceil(d.twist / TAU) * TAU; }
@@ -1319,7 +1319,7 @@ function enterSpace() {
   d.dustBoost = 1; d.dustHits = 0; d.dust = [];
   let y = PX_MOON + 500, gap = 1200, x = d.x;
   while (y < PX_END) { x += rnd(-350, 350); d.dust.push({ px: y, x, hit: false, seed: Math.random() * 100 }); y += gap; gap *= 1.1; }
-  floatText(d.x, d.y + 120, 'Weltraum: lenken mit ← →', '#bff4ff', 20);
+  floatText(d.x, d.y + 120, 'Weltraum: die Nase lenkt, ← → für Saltos', '#bff4ff', 20);
 }
 function updateSpace(dt, ctl) {
   const p = game.power, hpx = -d.y, prevY = d.y;
@@ -1327,10 +1327,9 @@ function updateSpace(dt, ctl) {
   const target = -(2400 + 3000 * prog) * d.dustBoost;
   d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.6));
   d.vy = lerp(d.vy, target, Math.min(1, dt * 1.2));
-  if (ctl.left) d.vx -= 2200 * dt;
-  if (ctl.right) d.vx += 2200 * dt;
+  // der Delfin bleibt ein Delfin: Saltos wie in der Luft, die Nase lenkt sanft zur Seite
+  d.vx += Math.cos(d.a) * 900 * dt;
   d.vx -= d.vx * 1.5 * dt;
-  d.a += angDiff(d.a, Math.atan2(d.vy, d.vx)) * Math.min(1, dt * 8);
   d.x += d.vx * dt; d.y += d.vy * dt;
   d.schwung -= Math.abs(d.vy) * dt / SCHWUNG_PX * (p.feather > 0 ? 0.6 : 1) * (hardcore ? 1 : 0.5);
   for (const s of d.dust) {
