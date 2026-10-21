@@ -1289,9 +1289,25 @@ const WX = sx => (sx - W / 2) / cam.z + cam.x;
 // ====================================================================
 //  Kosmos: oberhalb von 30 m wächst die Höhe exponentiell
 // ====================================================================
+//  Zwischen Mond und Pluto ist die Strecke linear: die Abstände der Planeten stimmen im Verhältnis zueinander.
 const ALT_LIN = 3000, ALT_K = 550;
-const realAlt = px => px <= ALT_LIN ? Math.max(0, px) / 100 : (ALT_LIN / 100) * Math.exp((px - ALT_LIN) / ALT_K);
-const pxOf = m => m <= ALT_LIN / 100 ? m * 100 : ALT_LIN + ALT_K * Math.log(m / (ALT_LIN / 100));
+const M_MOON = 3.844e8, M_PLUTO = 5.76e12, SOL_LEN = 20000;
+const PX_MOON_ = ALT_LIN + ALT_K * Math.log(M_MOON / (ALT_LIN / 100)), PX_PLUTO = PX_MOON_ + SOL_LEN;
+const SOL_SLOPE = (M_PLUTO - M_MOON) / SOL_LEN;
+function realAlt(px) {
+  if (px <= ALT_LIN) return Math.max(0, px) / 100;
+  if (px <= PX_MOON_) return (ALT_LIN / 100) * Math.exp((px - ALT_LIN) / ALT_K);
+  if (px <= PX_PLUTO) return M_MOON + (px - PX_MOON_) * SOL_SLOPE;
+  return M_PLUTO * Math.exp((px - PX_PLUTO) / ALT_K);
+}
+function pxOf(m) {
+  if (m <= ALT_LIN / 100) return m * 100;
+  if (m <= M_MOON) return ALT_LIN + ALT_K * Math.log(m / (ALT_LIN / 100));
+  if (m <= M_PLUTO) return PX_MOON_ + (m - M_MOON) / SOL_SLOPE;
+  return PX_PLUTO + ALT_K * Math.log(m / M_PLUTO);
+}
+// Meter pro Pixel an einer Höhe (für die Geschwindigkeitsanzeige)
+const altSlope = px => px <= ALT_LIN ? 0.01 : px > PX_MOON_ && px <= PX_PLUTO ? SOL_SLOPE : realAlt(px) / ALT_K;
 const LY = 9.4607e15, EDGE_M = 4.4e26, PX_EDGE = pxOf(EDGE_M);
 function fmtAlt(m) {
   const f1 = v => v.toLocaleString('de-DE', { maximumFractionDigits: 1 });
@@ -1314,13 +1330,14 @@ const LANDMARKS = [
   { m: 11000, name: 'Reiseflughöhe', sub: 'Ein Flugzeug winkt dir zu', pts: 1500, kind: 'plane' },
   { m: 1e5, name: 'Weltraum!', sub: 'Kármán-Linie · 100 km', pts: 3000, ach: 'space', kind: 'karman' },
   { m: 4.08e5, name: 'ISS', sub: 'Die Raumstation · 408 km', pts: 4000, kind: 'iss' },
-  { m: 3.844e8, name: 'Am Mond vorbei!', sub: '384.400 km', pts: 10000, ach: 'mondflug', kind: 'moon', scene: 'moon' },
+  { m: M_MOON, name: 'Am Mond vorbei!', sub: '384.400 km', pts: 10000, ach: 'mondflug', kind: 'moon', scene: 'moon' },
   { m: 5.46e10, name: 'Mars', sub: '54,6 Mio. km', pts: 15000, scene: 'mars', kind: 'planet', r: 0.55, c: ['#ffc39e', '#c1440e', '#4a1505'] },
   { m: 1.496e11, name: '1 Astronomische Einheit', sub: 'So weit ist die Sonne von der Erde', pts: 20000, kind: 'sun' },
   { m: 6.28e11, name: 'Jupiter', sub: '628 Mio. km', pts: 25000, kind: 'jupiter' },
   { m: 1.28e12, name: 'Saturn', sub: '1,3 Mrd. km', pts: 30000, kind: 'saturn', scene: 'saturn' },
   { m: 4.35e12, name: 'Neptun', sub: '4,3 Mrd. km', pts: 35000, kind: 'planet', r: 0.7, c: ['#bfe3ff', '#3a6df0', '#0b1a5e'] },
-  { m: 2.5e13, name: 'Voyager 1 überholt', sub: '25 Mrd. km', pts: 40000, kind: 'voyager' },
+  { m: M_PLUTO, name: 'Pluto', sub: '5,8 Mrd. km · der letzte Brocken im Sonnensystem', pts: 37500, kind: 'planet', r: 0.32, c: ['#f6e7cf', '#b48a63', '#3b261a'] },
+  { m: 2.5e13, name: 'Voyager 1 überholt', sub: 'Raus aus dem Sonnensystem · 25 Mrd. km', pts: 40000, kind: 'voyager' },
   { m: 4.01e16, name: 'Proxima Centauri', sub: 'Der nächste Stern · 4,24 Lichtjahre', pts: 60000, kind: 'star' },
   { m: 2.46e20, name: 'Zentrum der Milchstraße', sub: '26.000 Lichtjahre', pts: 80000, kind: 'core' },
   { m: 9.46e20, name: 'Milchstraße verlassen', sub: '100.000 Lichtjahre', pts: 100000, ach: 'galaxy', kind: 'galaxy' },
@@ -1333,7 +1350,7 @@ const LANDMARKS = [
 LANDMARKS.forEach(l => { l.px = pxOf(l.m); });
 // Kosmos-Kombo: Wegmarken geben dem laufenden Sprung einen Multiplikator, bei jeder Wiederholung 1 % weniger
 const COSMO_X = {
-  'Reiseflughöhe': 2, 'Am Mond vorbei!': 5, 'Mars': 10, 'Jupiter': 25, 'Saturn': 50, 'Neptun': 100,
+  'Reiseflughöhe': 2, 'Am Mond vorbei!': 5, 'Mars': 10, 'Jupiter': 25, 'Saturn': 50, 'Neptun': 100, 'Pluto': 150,
   'Voyager 1 überholt': 250, 'Proxima Centauri': 500, 'Zentrum der Milchstraße': 1000, 'Milchstraße verlassen': 2500,
   'Andromeda': 5000, 'Virgo-Haufen': 10000, 'Raus aus dem Universum!': 25000, 'Multiversum': 50000, 'Der Urdelfin': 100000
 };
@@ -1371,7 +1388,7 @@ function reachLandmark(l) {
 const PX_KARMAN = LM('karman'), PX_MOON = LM('moon'), PX_END = LM('urdelfin') + 900;
 // Waagerechte Sternenbahnen nach jedem Planeten, die Abstände werden immer größer.
 // Mit ↓ beim Kreuzen einrasten, seitlich grinden, beim Loslassen mit Boost weiter nach oben.
-const RAIL_LEN = 1600;
+const RAIL_LEN = 1100;
 function nearRail() {
   const hpx = -d.y;
   if (d.grind) return true;
@@ -1379,21 +1396,17 @@ function nearRail() {
 }
 function enterSpace() {
   d.space = 'on';
-  d.schwung = clamp(0.45 + 0.07 * (game.mult - 1), 0.45, 1.1) + (d.rocketJump ? 0.5 : 0);
+  d.schwung = clamp(0.3 + 0.05 * (game.mult - 1), 0.3, 0.75) + (d.rocketJump ? 0.3 : 0);
   d.dustBoost = 1; d.dustHits = 0; d.surfAcc = 0; d.surfing = false; d.grind = null;
   d.rail = [];
-  let px = PX_MOON + 300, gap = 900;
-  while (px < PX_END) {
-    d.rail.push({ px, x: d.x, hit: false, placed: false });
-    px += gap; gap *= 1.35;
-  }
+  for (const l of LANDMARKS) if (l.px > PX_MOON + 100 && l.kind !== 'sun') d.rail.push({ px: l.px + 350, x: d.x, hit: false, placed: false });
   floatText(d.x, d.y + 120, 'Weltraum: ↓ an der Sternenbahn = grinden mit Boost', '#bff4ff', 20);
 }
 function endGrind(boost) {
   const g = d.grind;
   d.grind = null; d.surfing = false;
-  d.vy = -g.speed * boost; d.vx = g.dir * 250; d.dustBoost = Math.max(d.dustBoost, 1.4);
-  d.schwung = Math.min(1.6, d.schwung + 0.3);
+  d.vy = -g.speed * boost; d.vx = g.dir * 250; d.dustBoost = Math.max(d.dustBoost, 1.12);
+  d.schwung = Math.min(1.3, d.schwung + 0.12);
   d.a = -Math.PI / 2 + (d.vx >= 0 ? 0.3 : -0.3);
   floatText(d.x, d.y - 70, 'Boost!', '#ffb3f0', 24); sfx.turbo();
 }
@@ -1406,32 +1419,32 @@ function updateSpace(dt, ctl) {
     d.vx = g.dir * g.speed;
     d.x += d.vx * dt;
     d.a = g.dir > 0 ? -0.05 : Math.PI + 0.05; d.roll = g.dir;
-    d.schwung = Math.min(1.6, d.schwung + 0.4 * dt);
+    d.schwung = Math.min(1.3, d.schwung + 0.2 * dt);
     d.surfAcc += 3000 * dt * d.cosmo;
     if (d.surfAcc >= 100 && game.state === 'play') { const n = Math.floor(d.surfAcc); addScore(n); d.surfAcc -= n; }
     if (Math.random() < 0.95) addP({ t: 'spark', x: d.x - g.dir * 30, y: d.y + 22, vx: -g.dir * rnd(100, 400), vy: rnd(-80, 160), life: rnd(0.3, 0.8), max: 0.8, r: rnd(1.5, 3.2), col: Math.random() < 0.5 ? '#bff4ff' : '#ffb3f0' });
     const off = wrapD(d.x - g.rail.x);
-    if (!ctl.down) endGrind(1.3);
-    else if (Math.abs(off) > RAIL_LEN / 2) endGrind(1.45);
+    if (!ctl.down) endGrind(1.05);
+    else if (Math.abs(off) > RAIL_LEN / 2) endGrind(1.15);
     return;
   }
   const prog = clamp((hpx - PX_KARMAN) / (PX_EDGE - PX_KARMAN), 0, 1.3);
   // keine Gravitation im All; je höher, desto schneller, gebremst wird nie
-  const target = -(2400 + 3000 * prog) * d.dustBoost;
+  const target = -(2400 + 2400 * prog) * d.dustBoost;
   if (d.vy > target) d.vy = lerp(d.vy, target, Math.min(1, dt * 1.2));
   // Dynamik wie in der Luft: Saltos mit ← →, die Nase lenkt sanft zur Seite
   d.vx += Math.cos(d.a) * 900 * dt;
   d.vx -= d.vx * 1.5 * dt;
   d.x += d.vx * dt; d.y += d.vy * dt;
-  d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.4));
-  d.schwung -= dt / (hardcore ? 3.5 : 7) * (p.feather > 0 ? 0.6 : 1);
+  d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.8));
+  d.schwung -= dt / (hardcore ? 2.5 : 5) * (p.feather > 0 ? 0.6 : 1);
   // jede Bahn wird erst kurz vor dem Erscheinen dort platziert, wo der Delfin gerade fliegt
-  for (const r of d.rail) if (!r.placed && r.px - hpx < 1800) { r.x = d.x + rnd(-220, 220); r.placed = true; }
-  // Bahn kreuzen; ↓ zählt auch noch kurz danach (bis 350 px über der Bahn), dann rastet er zurück ein
+  for (const r of d.rail) if (!r.placed && r.px - hpx < 1800) { r.x = d.x + rnd(-650, 650); r.placed = true; }
+  // Bahn kreuzen; ↓ zählt auch noch kurz danach (bis 160 px über der Bahn), dann rastet er zurück ein
   for (const r of d.rail) {
     if (r.hit) continue;
-    const ly = -r.px, crossed = (prevY - ly) * (d.y - ly) <= 0 || (-d.y > r.px && -d.y - r.px < 350);
-    if (-d.y - r.px >= 350) { r.hit = true; continue; }
+    const ly = -r.px, crossed = (prevY - ly) * (d.y - ly) <= 0 || (-d.y > r.px && -d.y - r.px < 160);
+    if (-d.y - r.px >= 160) { r.hit = true; continue; }
     if (crossed) {
       if (ctl.down && Math.abs(wrapD(d.x - r.x)) < RAIL_LEN / 2) {
         r.hit = true; d.y = ly;
@@ -1461,7 +1474,7 @@ function cosmicReturn(why) {
 }
 function realSpeed() {
   const h = -d.y;
-  return h > ALT_LIN ? realAlt(h) / ALT_K * Math.abs(d.vy) : Math.abs(d.vy) / 100;
+  return altSlope(h) * Math.abs(d.vy);
 }
 function fmtSpeed(mps) {
   const f1 = v => v.toLocaleString('de-DE', { maximumFractionDigits: 1 });
@@ -2596,7 +2609,7 @@ function drawOverlayHUD() {
   const maxPx = LM('urdelfin') + 1500, toY = px => bot - clamp(px / maxPx, 0, 1) * (bot - top);
   ctx.fillStyle = 'rgba(4,30,56,.55)'; ctx.fillRect(x - 4, top - 8, 8, bot - top + 16);
   ctx.font = '11px "Atkinson Hyperlegible", sans-serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillStyle = 'rgba(234,248,255,.7)';
-  for (const [px, label] of [[0, 'Meer'], [LM('karman'), 'Weltraum'], [LM('moon'), 'Mond'], [LANDMARKS.find(l => l.name === 'Neptun').px, 'Neptun'], [LM('galaxy'), 'Milchstraße'], [PX_EDGE, 'Universum'], [LM('urdelfin'), 'Urdelfin']]) {
+  for (const [px, label] of [[0, 'Meer'], [LM('karman'), 'Weltraum'], [LM('moon'), 'Mond'], [LANDMARKS.find(l => l.name === 'Neptun').px, 'Neptun'], [LANDMARKS.find(l => l.name === 'Pluto').px, 'Pluto'], [LM('galaxy'), 'Milchstraße'], [PX_EDGE, 'Universum'], [LM('urdelfin'), 'Urdelfin']]) {
     ctx.fillRect(x - 8, toY(px), 4, 1); ctx.fillText(label, x - 12, toY(px));
   }
   const cur = Math.max(0, -d.y), bm = game.stats.maxPx;
@@ -2608,7 +2621,7 @@ function drawOverlayHUD() {
     ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     const by = H * 0.13 + 14;
     if (d.space === 'on') {
-      const bw = Math.min(260, W * 0.5), fill = clamp(d.schwung / 1.6, 0, 1);
+      const bw = Math.min(260, W * 0.5), fill = clamp(d.schwung / 1.3, 0, 1);
       ctx.fillStyle = 'rgba(4,20,40,.6)'; ctx.fillRect(W / 2 - bw / 2, by, bw, 10);
       const g = ctx.createLinearGradient(W / 2 - bw / 2, 0, W / 2 + bw / 2, 0); g.addColorStop(0, '#bff4ff'); g.addColorStop(1, '#ffb3f0');
       ctx.fillStyle = g; ctx.fillRect(W / 2 - bw / 2, by, bw * fill, 10);

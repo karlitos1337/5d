@@ -29,12 +29,12 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - Fotoshooting am Flugzeug (11 km, nur im Wettkampf): Blitzlicht-Marathon in Zeitlupe, der Delfin posiert in Anzug,
   Fliege und Sonnenbrille, danach friert das Bild als Magazin-Cover „Killer-Shot“ ein (+5.000)
 - Weltraum-Modus ab der Kármán-Linie: keine Erd-Schwerkraft, je höher desto schneller (Tempo-Anzeige bis zur
-  vielfachen Lichtgeschwindigkeit); der Delfin dreht wie in der Luft Saltos, die Nase lenkt sanft zur Seite; ab dem Mond waagerechte Sternenbahnen mit immer größeren Abständen:
+  vielfachen Lichtgeschwindigkeit); der Delfin dreht wie in der Luft Saltos, die Nase lenkt sanft zur Seite; nach dem Mond folgen Mars, Jupiter, Saturn, Neptun und Pluto, zwischen Mond und Pluto in echten Abstandsverhältnissen zueinander (lineare Strecke), danach geht es raus aus dem Sonnensystem; hinter jedem Planeten bzw. jeder Wegmarke liegt eine waagerechte Sternenbahn, die man erst ansteuern muss:
   mit ↓ beim Kreuzen einrasten, seitlich grinden (Schwung lädt, Punkte), loslassen = Boost nach oben; der Schwung läuft nach Zeit ab; ist er alle, fällt der Delfin mit normaler Luft-Physik in einer Parabel zurück, ohne künstliches Abbremsen; nur wer ganz oben ankommt,
   wird per Wurmloch nach Hause geportet. Hardcore (Menü/Pause): Schwung läuft doppelt so schnell leer, kein Portal,
   Wegmarken ×2 Punkte
 - Kosmos-Kombo: Wegmarken multiplizieren die Punkte des laufenden Sprungs (Flugzeug ×2, Mond ×5, Mars ×10, Jupiter ×25,
-  Saturn ×50, Neptun ×100 … bis Urdelfin ×100.000); es zählt der höchste im Sprung, jede Wiederholung derselben
+  Saturn ×50, Neptun ×100, Pluto ×150 … bis Urdelfin ×100.000); es zählt der höchste im Sprung, jede Wiederholung derselben
   Wegmarke in einer Runde 1 % weniger; nur bei sauberer Landung zählt er auch für die Sprungpunkte
 - Zwischen-Szenen im All (einmal pro Runde, überspringbar): Auf dem Mond schleicht sich der Delfin pfeifend an,
   wirft die Flagge der Menschen weg und steckt die von „Delfine United“ hin; auf dem Mars sonnt er sich auf der
