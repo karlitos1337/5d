@@ -212,6 +212,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin
       <span class="label">Punkte</span>
       <div class="score" id="score">0</div>
       <div class="mult"><span id="mult">×1</span><div class="mult-bar"><i id="multBar"></i></div></div>
+      <div class="boost" id="bank" hidden>Kombo-Kasse 0</div>
       <div class="boost" id="boost" hidden>Schwarm-Bonus +0 %</div>
       <div class="boost" id="tempo" hidden>Tempo ×1</div>
       <div class="boost" id="cosmo" hidden>Kosmos-Kombo ×1</div>
@@ -366,7 +367,7 @@ const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
 const fmt = n => Math.round(n).toLocaleString('de-DE');
 const pct = v => (v * 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) + ' %';
 // Fischschwarm: Punkte und Bonusverstärker, jedes weitere Mal 1 % weniger als das Mal davor
-const COMBO_TIME = 10;   // Sekunden im Wasser ohne neuen Trick, bis die Kombo abläuft
+const COMBO_TIME = 15;   // mindestens so viele Sekunden im Wasser nach jedem Trick, bis die Kombo abläuft
 const SCHOOL_PTS = 5000, SCHOOL_BOOST = 0.01, SCHOOL_DECAY = 0.99;
 
 const store = {
@@ -685,7 +686,7 @@ const best = store.get('best', { contest: 0, rings: 0, free: 0 });
 
 const game = {
   state: 'menu', mode: 'contest', time: 0, playTime: 0, timeLeft: 120, score: 0, mult: 1, multTimer: 0,
-  ringsHit: 0, ringGoal: 15, shoot: null, scene: null, lmPasses: [], sceneQueue: [], seen: {}, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
+  ringsHit: 0, ringGoal: 15, bank: 0, shoot: null, scene: null, lmPasses: [], sceneQueue: [], seen: {}, ink: 0, boost: 0, schoolRuns: 0, comboSchools: 0, stats: null, shake: 0, flash: 0, flashCol: '#fff', power: {}, perfectRun: 0, banner: null
 };
 const cam = { x: 900, y: 200, z: 1 };
 const keys = {};
@@ -694,7 +695,7 @@ const input = { left: false, right: false, up: false, down: false, turbo: false 
 
 let d = null;
 function newDolphin() {
-  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, cosmo: 1, suit: false, space: null, schwung: 0, rail: [], railX0: 0, surfing: false, surfAcc: 0, dustBoost: 1, dustHits: 0, rocketJump: false,
+  return { x: 900, y: 420, vx: 260, vy: 0, a: 0, roll: 1, twist: 0, twistTarget: 0, airborne: false, rot: 0, maxH: 0, airT: 0, launchCos: 1, lm: 0, waveSurf: false, cosmo: 1, suit: false, space: null, schwung: 0, rail: [], grind: null, surfing: false, surfAcc: 0, dustBoost: 1, dustHits: 0, rocketJump: false,
     energy: 100, tail: 0, invuln: 0, stun: 0, jRings: 0, jGulls: 0, jStars: 0, trail: [], chirpT: 3, turboOn: false, rocket: false };
 }
 
@@ -715,9 +716,9 @@ function resetWorld() {
     for (let k = 0; k < 11; k++) s.fish.push({ ox: rnd(-60, 60), oy: rnd(-30, 30), ph: Math.random() * TAU, alive: true, re: 0 });
     fishSchools.push(s);
   }
-  jellies = []; for (let i = 0; i < 4; i++) jellies.push({ x: rnd(500, WORLD_W - 500), by: rnd(DEPTH - 650, DEPTH - 320), ph: Math.random() * TAU, hue: [290, 200, 330, 260][i % 4], y: 0 });
-  krakens = []; for (let i = 0; i < 3; i++) { const x = rnd(600, WORLD_W - 600); krakens.push({ x, y: floorY(x) - 150, ph: Math.random() * TAU, vx: rnd(-25, 25), jet: 0 }); }
-  anglers = []; for (let i = 0; i < 2; i++) { const x = rnd(600, WORLD_W - 600); anglers.push({ x, y: floorY(x) - 290, dir: Math.random() < 0.5 ? -1 : 1, ph: Math.random() * TAU }); }
+  jellies = []; for (let i = 0; i < 0; i++) jellies.push({ x: rnd(500, WORLD_W - 500), by: rnd(DEPTH - 650, DEPTH - 320), ph: Math.random() * TAU, hue: [290, 200, 330, 260][i % 4], y: 0 });
+  krakens = []; for (let i = 0; i < 1; i++) { const x = rnd(600, WORLD_W - 600); krakens.push({ x, y: floorY(x) - 150, ph: Math.random() * TAU, vx: rnd(-25, 25), jet: 0 }); }
+  anglers = []; for (let i = 0; i < 1; i++) { const x = rnd(600, WORLD_W - 600); anglers.push({ x, y: floorY(x) - 290, dir: Math.random() < 0.5 ? -1 : 1, ph: Math.random() * TAU }); }
   powerUps = []; for (let i = 0; i < 4; i++) powerUps.push(spawnPower({}));
   shells = []; for (let i = 0; i < 9; i++) { const x = 350 + i * (WORLD_W - 700) / 8 + rnd(-120, 120); shells.push({ x, y: floorY(x) - 14, taken: false, re: 0, open: 0 }); }
   stars = []; for (let i = 0; i < 6; i++) stars.push({ x: rnd(500, WORLD_W - 500), y: -rnd(1500, 2200), taken: false, re: 0, ph: Math.random() * TAU });
@@ -771,6 +772,19 @@ function unlock(id) {
   tone(988, 0.12, 'triangle', 0.08); tone(1318, 0.2, 'triangle', 0.08, 0, 0.1);
 }
 function breakCombo() { game.mult = 1; game.comboSchools = 0; }
+// Kombo-Kasse: alle Trickpunkte sammeln sich, ausgezahlt wird mal Multiplikator, wenn die Kombo abläuft
+function cashCombo() {
+  if (game.bank > 0 && game.state === 'play') {
+    const got = addScore(game.bank * game.mult);
+    banner('Kombo eingelöst!', fmt(game.bank) + ' × ' + game.mult + ' = +' + fmt(got), '#7dffcf');
+    sfx.perfect();
+  }
+  game.bank = 0; breakCombo();
+}
+function loseCombo() {
+  if (game.bank > 0) floatText(d.x, d.y - 70, 'Kombo verloren: −' + fmt(game.bank * game.mult), '#ff9a8a', 22);
+  game.bank = 0; game.multTimer = 0; breakCombo();
+}
 function addScore(pts, x, y, col) {
   const p = Math.round(pts * (game.power.x2 > 0 ? 2 : 1) * (1 + game.boost));
   game.score += p;
@@ -853,6 +867,10 @@ function updateDolphin(dt, rdt, ctl) {
   if (d.invuln > 0) d.invuln -= dt;
   if (d.stun > 0) d.stun -= dt;
 
+  if (!d.airborne && d.waveSurf) {
+    updateWaveSurf(dt, ctl, surf);
+    return;
+  }
   if (!d.airborne) {
     // ---- Unter Wasser ----
     const rotSpd = 3.3;
@@ -878,7 +896,8 @@ function updateDolphin(dt, rdt, ctl) {
     // Rollen: Bauch immer nach unten
     const targetRoll = Math.cos(d.a) >= 0 ? 1 : -1;
     d.roll = lerp(d.roll, targetRoll, Math.min(1, 7 * dt));
-    if (game.multTimer > 0) { game.multTimer -= dt; if (game.multTimer <= 0 && game.mult > 1) { floatText(d.x, d.y - 60, 'Kombo verloren', '#ff9a8a', 18); breakCombo(); } }
+    if (game.multTimer > 0) game.multTimer -= dt;
+    if (game.multTimer <= 0 && (game.mult > 1 || game.bank > 0)) cashCombo();
     // Blasenspur
     if (Math.random() < (turbo ? 0.9 : 0.25)) addP({ t: 'bubble', x: d.x - Math.cos(d.a) * 55, y: d.y - Math.sin(d.a) * 55, vx: rnd(-20, 20), vy: rnd(-60, -20), life: rnd(0.8, 2), max: 2, r: rnd(1.2, 3.5) });
     if (nightness() > 0.4 && sp > 300 && Math.random() < 0.8) addP({ t: 'glow', x: d.x - Math.cos(d.a) * 50 + rnd(-10, 10), y: d.y - Math.sin(d.a) * 50 + rnd(-10, 10), vx: rnd(-15, 15), vy: rnd(-15, 15), life: rnd(0.6, 1.4), max: 1.4, r: rnd(1, 2.6) });
@@ -888,11 +907,13 @@ function updateDolphin(dt, rdt, ctl) {
     const fy = floorY(d.x) - 34;
     if (d.y > fy) { d.y = fy; d.vy = -Math.abs(d.vy) * 0.3; if (Math.sin(d.a) > 0) d.a = -d.a * 0.6; }
     d.x += d.vx * dt; d.y += d.vy * dt;
+    // Wellenreiten: mit S / ↓ beim Auftauchen auf der Oberfläche surfen statt abzuheben
+    if (d.y < surf && d.vy < 0 && ctl.down && !d.waveSurf && game.state !== 'menu') startWaveSurf();
     // Absprung
-    if (d.y < surf && d.vy < 0) {
+    if (d.y < surf && d.vy < 0 && !d.waveSurf) {
       d.airborne = true; d.rot = 0; d.twist = 0; d.twistTarget = 0; d.maxH = 0; d.airT = 0; d.launchCos = Math.cos(d.a) >= 0 ? 1 : -1;
       d.jRings = 0; d.jGulls = 0; d.jStars = 0; d.trail.length = 0; d.lm = 0; d.cosmo = 1;
-      d.space = null; d.rocketJump = false; d.rail = []; d.surfing = false; d.photoJump = false;
+      d.space = null; d.rocketJump = false; d.rail = []; d.surfing = false; d.grind = null; d.photoJump = false;
       if (d.rocket) { d.vx *= 1.25; d.vy *= 1.65; d.rocket = false; d.rocketJump = true; banner('Raketenstart!', '', POWER.rocket.col); for (let i = 0; i < 40; i++) addP({ t: 'spark', x: d.x, y: d.y, vx: rnd(-200, 200), vy: rnd(50, 300), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: '#ffb070' }); }
       if (Math.abs(d.vy) > 300) { splash(d.x, Math.abs(d.vy) * 0.7, false); sfx.jump(); }
     }
@@ -903,18 +924,18 @@ function updateDolphin(dt, rdt, ctl) {
     if (ctl.right) { d.a += spin * rdt; d.rot += spin * rdt; }
     // Schraube läuft nach dem Loslassen bis zur nächsten vollen Umdrehung weiter
     const tstep = 9.5 * rdt;
-    if (ctl.down) { d.twist += tstep; d.twistTarget = Math.ceil(d.twist / TAU) * TAU; }
+    const railDown = inSpace && ctl.down && nearRail();   // im All: ↓ an einer Sternenbahn = surfen statt Schraube
+    if (ctl.down && !railDown) { d.twist += tstep; d.twistTarget = Math.ceil(d.twist / TAU) * TAU; }
     else if (d.twist < d.twistTarget) d.twist = Math.min(d.twistTarget, d.twist + tstep);
     if (inSpace) updateSpace(dt, ctl);
     else {
-      const falling = d.space === 'fall' && -d.y > PX_KARMAN;
-      const gr = falling ? 5000 : G * (p.feather > 0 ? 0.55 : 1);
+      // gleiche Dynamik wie außerhalb des Wassers, auch beim Rückfall aus dem All
+      const gr = G * (p.feather > 0 ? 0.55 : 1);
       d.vy += gr * dt;
-      if (falling) d.vy = Math.min(d.vy, 6000);
-      d.vx -= d.vx * (falling ? 1.5 : 0.05) * dt;
+      d.vx -= d.vx * 0.05 * dt;
       if (d.space === 'fall' && !d.reentry && -d.y <= PX_KARMAN) {
         // Wiedereintritt in die Atmosphäre bremst den Rückfall
-        d.reentry = true; d.vy = Math.min(d.vy, 2500);
+        d.reentry = true;
         banner('Wiedereintritt!', 'Gleich wieder in der Lagune', '#ffb070');
         game.flash = 0.4; game.flashCol = '#ff8a3d'; sfx.whoosh();
         for (let i = 0; i < 50; i++) addP({ t: 'spark', x: d.x + rnd(-40, 40), y: d.y + rnd(-40, 40), vx: rnd(-220, 220), vy: rnd(-300, 0), life: rnd(0.4, 1), max: 1, r: rnd(2, 4), col: i % 2 ? '#ff8a3d' : '#ffe39a' });
@@ -931,8 +952,42 @@ function updateDolphin(dt, rdt, ctl) {
   }
 }
 
+function startWaveSurf() {
+  d.waveSurf = true; d.vy = 0;
+  const dir = Math.cos(d.a) >= 0 ? 1 : -1;
+  if (Math.abs(d.vx) < 400) d.vx = dir * 400;
+  game.mult = Math.min(10, game.mult + 1); game.multTimer = Math.max(game.multTimer, COMBO_TIME);
+  game.bank += 300;
+  floatText(d.x, d.y - 70, 'Wellenreiten!', '#bdf0ff', 24); sfx.whoosh();
+}
+function updateWaveSurf(dt, ctl, surf) {
+  const dir = d.vx >= 0 ? 1 : -1, sf = speedFactor();
+  if (!ctl.down) {
+    // loslassen = Absprung von der Welle
+    d.waveSurf = false; d.vy = -(700 + Math.abs(d.vx) * 0.3); d.a = dir > 0 ? -0.6 : Math.PI + 0.6; d.y = surf - 2;
+    return;
+  }
+  if (ctl.left) d.vx -= 1400 * dt;
+  if (ctl.right) d.vx += 1400 * dt;
+  if (ctl.up || ctl.turbo) d.vx += dir * 1200 * sf * dt;
+  d.vx -= d.vx * 0.25 * dt;
+  const maxS = 1650 * sf;
+  d.vx = clamp(d.vx, -maxS, maxS);
+  d.x += d.vx * dt;
+  d.y = waveY(d.x, game.time) - 8; d.vy = 0;
+  d.a = d.vx >= 0 ? -0.08 + Math.sin(game.time * 6) * 0.04 : Math.PI + 0.08 - Math.sin(game.time * 6) * 0.04;
+  d.roll = d.vx >= 0 ? 1 : -1;
+  d.tail += dt * 10;
+  game.multTimer = Math.max(game.multTimer, COMBO_TIME);
+  game.bank += Math.round(250 * dt * sf);
+  if (Math.random() < 0.9) addP({ t: 'drop', x: d.x - Math.sign(d.vx) * 50, y: d.y + 6, vx: -d.vx * 0.3 + rnd(-60, 60), vy: rnd(-260, -80), life: rnd(0.4, 0.9), max: 0.9, r: rnd(1.5, 3.5) });
+  if (Math.random() < 0.4) addP({ t: 'foam', x: d.x - Math.sign(d.vx) * 60, y: d.y + 8, vx: -d.vx * 0.1, vy: 0, life: rnd(0.8, 1.6), max: 1.6, r: rnd(4, 9) });
+}
+
+// Saltos zählen: jede volle Umdrehung über die kürzeste Ausrichtung hinaus, vorwärts wie rückwärts gleich
+const flipTurns = rot => Math.round((rot - angDiff(0, rot)) / TAU);
 function trickName(n, back) {
-  const pre = ['', '', 'Doppel-', 'Dreifach-', 'Vierfach-', 'Fünffach-', 'Sechsfach-'][n] || n + '-fach-';
+  const pre = n <= 1 ? '' : ['', '', 'Doppel-', 'Dreifach-', 'Vierfach-', 'Fünffach-', 'Sechsfach-'][n] || n + '-fach-';
   return back ? pre + 'Rückwärtssalto' : (pre ? pre + 'Salto' : 'Salto') + ' vorwärts';
 }
 
@@ -949,8 +1004,8 @@ function land() {
   if (game.state !== 'play') { splash(d.x, speed, diff > 1); return; }
   if (h < 80) { splash(d.x, speed * 0.6, false); return; }
 
-  const flips = Math.floor(Math.abs(d.rot) / TAU + 0.4);
-  const back = d.rot * d.launchCos < 0;
+  const turns = flipTurns(d.rot), flips = Math.abs(turns);
+  const back = turns * d.launchCos < 0;
   const meters = realAlt(h);
   const parts = [];
   let base = Math.floor(Math.min(h, ALT_LIN) / 100 * 12);
@@ -976,9 +1031,9 @@ function land() {
   if (quality === 'belly') {
     splash(d.x, speed * 1.3, true);
     sfx.belly(); game.shake = 14; game.flash = 0.25; game.flashCol = '#ff6b5a';
-    // Bauchklatscher: volle Punkte ohne Kombo-Multiplikator, kein Tempoverlust; die Kombo läuft nur per Zeit ab
-    const pts = addScore(base * d.cosmo);
-    banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', pts > 0 ? '+' + fmt(pts) : '', '#ff8a7a');
+    // Bauchklatscher beendet die Kombo: die Kombo-Kasse und der Sprung sind verloren
+    banner(twisted ? 'Verdreht!' : 'Bauchklatscher!', game.bank > 0 ? 'Kombo beendet' : '', '#ff8a7a');
+    loseCombo();
     game.perfectRun = 0;
     if (speed >= RAM_SPEED * 0.5 || d.space === 'done' || d.space === 'fall') shockwave(d.x, 200);
     return;
@@ -991,16 +1046,18 @@ function land() {
   else game.perfectRun = 0;
   if (game.perfectRun >= 5) unlock('perfect5');
   if (tricked) { game.mult = Math.min(10, game.mult + 1); }
-  if (tricked) game.multTimer = COMBO_TIME;
+  if (tricked) game.multTimer = Math.max(game.multTimer, COMBO_TIME);
   st.maxMult = Math.max(st.maxMult, game.mult);
   if (game.mult >= 5) unlock('combo5');
   if (game.mult >= 10) unlock('combo10');
   if (flips >= 1) unlock('salto');
   if (flips >= 3) unlock('triple');
-  const pts = addScore(base * mul * game.mult * d.cosmo);
+  const jumpPts = Math.round(base * mul * d.cosmo);
+  game.bank += jumpPts;
+  const pts = jumpPts * game.mult;
   if (pts > st.bestJump) { st.bestJump = pts; st.bestTrick = parts.join(' + ') || fmtAlt(meters) + ' Sprung'; }
   const head = quality === 'perfect' ? 'Perfekt!' : 'Sauber!';
-  const sub = (parts.length ? parts.join(' + ') + '  ' : '') + '+' + fmt(pts) + (game.mult > 1 ? '  ×' + game.mult : '') + (d.cosmo > 1 ? '  Kosmos ×' + fmtX(d.cosmo) : '');
+  const sub = (parts.length ? parts.join(' + ') + '  ' : '') + '+' + fmt(jumpPts) + ' in die Kombo-Kasse' + (game.mult > 1 ? ' (×' + game.mult + ')' : '') + (d.cosmo > 1 ? '  Kosmos ×' + fmtX(d.cosmo) : '');
   banner(head, sub, quality === 'perfect' ? '#7dffcf' : '#ffd166');
   if (quality === 'perfect' && tricked) for (let i = 0; i < 30; i++) addP({ t: 'spark', x: d.x + rnd(-40, 40), y: rnd(-20, 0), vx: rnd(-200, 200), vy: rnd(-420, -120), life: rnd(0.6, 1.2), max: 1.2, r: rnd(1.5, 3.5), col: '#bfffe8' });
 }
@@ -1016,7 +1073,7 @@ function updateWorld(dt) {
   for (const r of rings) {
     if (r.cool > 0) { r.cool -= dt; if (r.cool <= 0) placeRing(r); continue; }
     const prevX = d.x - d.vx * dt;
-    if (d.airborne && Math.abs(d.y - r.y) < r.rad * 0.8 && wrapD(prevX - r.x) * wrapD(d.x - r.x) <= 0 && Math.abs(wrapD(d.x - r.x)) < 200) {
+    if (d.airborne && Math.abs(d.y - r.y) < r.rad * 1.5 && wrapD(prevX - r.x) * wrapD(d.x - r.x) <= 0 && Math.abs(wrapD(d.x - r.x)) < 300) {
       r.cool = 8; d.jRings++;
       // einmaliger Speed-Boost in Flugrichtung
       const boost = r.gold ? 1.45 : 1.35;
@@ -1312,59 +1369,84 @@ function reachLandmark(l) {
 //  je höher, desto schneller; Sternenstaub-Wellen füllen den Schwung auf
 // ====================================================================
 const PX_KARMAN = LM('karman'), PX_MOON = LM('moon'), PX_END = LM('urdelfin') + 900;
-// Sternenstaub-Bahn: leuchtende Surf-Schiene zwischen den Planeten, mit Lücken
-const railX = px => d.railX0 + 260 * Math.sin(px * 0.0022) + 140 * Math.sin(px * 0.0009 + 1);
+// Waagerechte Sternenbahnen nach jedem Planeten, die Abstände werden immer größer.
+// Mit ↓ beim Kreuzen einrasten, seitlich grinden, beim Loslassen mit Boost weiter nach oben.
+const RAIL_LEN = 1600;
+function nearRail() {
+  const hpx = -d.y;
+  if (d.grind) return true;
+  return d.rail.some(r => !r.hit && r.px - hpx > -40 && r.px - hpx < 700 && Math.abs(wrapD(d.x - r.x)) < RAIL_LEN / 2);
+}
 function enterSpace() {
   d.space = 'on';
   d.schwung = clamp(0.45 + 0.07 * (game.mult - 1), 0.45, 1.1) + (d.rocketJump ? 0.5 : 0);
-  d.dustBoost = 1; d.dustHits = 0; d.surfAcc = 0; d.surfing = false;
-  // die Bahn liegt dort, wo der Delfin ins All kommt, damit man sie erreichen kann
-  d.railX0 = d.x - 260 * Math.sin(PX_MOON * 0.0022) - 140 * Math.sin(PX_MOON * 0.0009 + 1);
+  d.dustBoost = 1; d.dustHits = 0; d.surfAcc = 0; d.surfing = false; d.grind = null;
   d.rail = [];
-  const i0 = LANDMARKS.findIndex(l => l.kind === 'moon');
-  for (let i = i0; i < LANDMARKS.length - 1; i++) {
-    const a = LANDMARKS[i].px + 250, b = a + (LANDMARKS[i + 1].px - LANDMARKS[i].px) * 0.65;
-    d.rail.push({ a, b, hit: false });
+  let px = PX_MOON + 300, gap = 900;
+  while (px < PX_END) {
+    d.rail.push({ px, x: d.x, hit: false, placed: false });
+    px += gap; gap *= 1.35;
   }
-  floatText(d.x, d.y + 120, 'Weltraum: die Nase lenkt, ← → für Saltos', '#bff4ff', 20);
+  floatText(d.x, d.y + 120, 'Weltraum: ↓ an der Sternenbahn = grinden mit Boost', '#bff4ff', 20);
+}
+function endGrind(boost) {
+  const g = d.grind;
+  d.grind = null; d.surfing = false;
+  d.vy = -g.speed * boost; d.vx = g.dir * 250; d.dustBoost = Math.max(d.dustBoost, 1.4);
+  d.schwung = Math.min(1.6, d.schwung + 0.3);
+  d.a = -Math.PI / 2 + (d.vx >= 0 ? 0.3 : -0.3);
+  floatText(d.x, d.y - 70, 'Boost!', '#ffb3f0', 24); sfx.turbo();
 }
 function updateSpace(dt, ctl) {
-  const p = game.power, hpx = -d.y;
+  const p = game.power, hpx = -d.y, prevY = d.y;
+  if (d.grind) {
+    // auf der Bahn: seitlich gleiten, Schwung lädt, Punkte steigen
+    const g = d.grind;
+    d.vy = 0; d.y = -g.rail.px;
+    d.vx = g.dir * g.speed;
+    d.x += d.vx * dt;
+    d.a = g.dir > 0 ? -0.05 : Math.PI + 0.05; d.roll = g.dir;
+    d.schwung = Math.min(1.6, d.schwung + 0.4 * dt);
+    d.surfAcc += 3000 * dt * d.cosmo;
+    if (d.surfAcc >= 100 && game.state === 'play') { const n = Math.floor(d.surfAcc); addScore(n); d.surfAcc -= n; }
+    if (Math.random() < 0.95) addP({ t: 'spark', x: d.x - g.dir * 30, y: d.y + 22, vx: -g.dir * rnd(100, 400), vy: rnd(-80, 160), life: rnd(0.3, 0.8), max: 0.8, r: rnd(1.5, 3.2), col: Math.random() < 0.5 ? '#bff4ff' : '#ffb3f0' });
+    const off = wrapD(d.x - g.rail.x);
+    if (!ctl.down) endGrind(1.3);
+    else if (Math.abs(off) > RAIL_LEN / 2) endGrind(1.45);
+    return;
+  }
   const prog = clamp((hpx - PX_KARMAN) / (PX_EDGE - PX_KARMAN), 0, 1.3);
-  // im All wird nur beschleunigt, nie gebremst: je höher, desto schneller
+  // keine Gravitation im All; je höher, desto schneller, gebremst wird nie
   const target = -(2400 + 3000 * prog) * d.dustBoost;
   if (d.vy > target) d.vy = lerp(d.vy, target, Math.min(1, dt * 1.2));
-  // der Delfin bleibt ein Delfin: Saltos wie in der Luft, die Nase lenkt sanft zur Seite
+  // Dynamik wie in der Luft: Saltos mit ← →, die Nase lenkt sanft zur Seite
   d.vx += Math.cos(d.a) * 900 * dt;
   d.vx -= d.vx * 1.5 * dt;
-  // Sternenstaub-Bahn: in der Nähe rastet der Delfin ein und surft
-  const seg = d.rail.find(r => hpx >= r.a && hpx <= r.b);
-  let surfing = false;
-  if (seg) {
-    const dx = wrapD(railX(hpx) - d.x);
-    if (Math.abs(dx) < 260) { d.vx += dx * 8 * dt; if (Math.abs(dx) < 130) surfing = true; }
-  }
   d.x += d.vx * dt; d.y += d.vy * dt;
-  if (surfing) {
-    if (!seg.hit) {
-      seg.hit = true; d.dustHits++;
-      floatText(d.x, d.y - 80, 'Sternenstaub-Bahn!', '#bff4ff', 24); sfx.ring(true);
-      if (game.state === 'play') { if (d.dustHits >= 5) unlock('stardust'); if (d.dustHits >= 10) unlock('kapitaen'); }
+  d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.4));
+  d.schwung -= dt / (hardcore ? 3.5 : 7) * (p.feather > 0 ? 0.6 : 1);
+  // jede Bahn wird erst kurz vor dem Erscheinen dort platziert, wo der Delfin gerade fliegt
+  for (const r of d.rail) if (!r.placed && r.px - hpx < 1800) { r.x = d.x + rnd(-220, 220); r.placed = true; }
+  // Bahn kreuzen; ↓ zählt auch noch kurz danach (bis 350 px über der Bahn), dann rastet er zurück ein
+  for (const r of d.rail) {
+    if (r.hit) continue;
+    const ly = -r.px, crossed = (prevY - ly) * (d.y - ly) <= 0 || (-d.y > r.px && -d.y - r.px < 350);
+    if (-d.y - r.px >= 350) { r.hit = true; continue; }
+    if (crossed) {
+      if (ctl.down && Math.abs(wrapD(d.x - r.x)) < RAIL_LEN / 2) {
+        r.hit = true; d.y = ly;
+        d.grind = { rail: r, dir: d.vx >= 0 ? 1 : -1, speed: Math.max(2500, Math.abs(d.vy)) };
+        d.surfing = true; d.dustHits++;
+        floatText(d.x, d.y - 80, 'Sternenbahn!', '#bff4ff', 26); sfx.ring(true);
+        if (game.state === 'play') { if (d.dustHits >= 5) unlock('stardust'); if (d.dustHits >= 10) unlock('kapitaen'); }
+        return;
+      }
     }
-    d.schwung = Math.min(1.6, d.schwung + 0.55 * dt);
-    d.dustBoost = Math.max(d.dustBoost, 1.35);
-    d.surfAcc += 2500 * dt * d.cosmo;
-    if (d.surfAcc >= 100 && game.state === 'play') { const n = Math.floor(d.surfAcc); addScore(n); d.surfAcc -= n; }
-    if (Math.random() < 0.9) addP({ t: 'spark', x: d.x + rnd(-30, 30), y: d.y + rnd(10, 40), vx: rnd(-120, 120), vy: rnd(60, 260), life: rnd(0.4, 0.9), max: 0.9, r: rnd(1.5, 3.2), col: Math.random() < 0.5 ? '#bff4ff' : '#ffb3f0' });
-  } else {
-    d.dustBoost = lerp(d.dustBoost, 1, Math.min(1, dt * 0.6));
-    d.schwung -= dt / (hardcore ? 3.5 : 7) * (p.feather > 0 ? 0.6 : 1);
   }
-  d.surfing = surfing;
   if (game.state === 'play' && realSpeed() / 2.998e8 >= 1e6) unlock('lichtjahre');
-  // Hardcore: per Wurmloch nach Hause; normal: Rückfall zur Erde mit Wiedereintritt
-  if (d.schwung <= 0) (hardcore ? cosmicReturn : startFall)('Der Sternenstaub ist alle');
-  else if (hpx > PX_END) (hardcore ? cosmicReturn : startFall)('Am Ende aller Universen angekommen');
+  // Portal nach Hause nur ganz oben und nur im Normalmodus; sonst fällt er einfach
+  if (hpx > PX_END) (hardcore ? startFall : cosmicReturn)('Am Ende aller Universen angekommen');
+  else if (d.schwung <= 0) startFall('Der Sternenstaub ist alle');
 }
 function startFall(why) {
   d.space = 'fall'; d.reentry = false;
@@ -1392,39 +1474,24 @@ function fmtSpeed(mps) {
 }
 function drawStardust() {
   if (d.space !== 'on' || !d.rail) return;
-  const z = cam.z, t = game.time, hpx = -d.y;
-  const top = -cam.y + H / 2 / z + 200, bot = -cam.y - H / 2 / z - 200;
-  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  const z = cam.z, t = game.time;
+  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round';
   for (const r of d.rail) {
-    const a = Math.max(r.a, bot), b = Math.min(r.b, top);
-    if (a >= b) continue;
-    const on = d.surfing && hpx >= r.a && hpx <= r.b ? 1.6 : 1;
-    const path = () => {
-      ctx.beginPath();
-      for (let px = a; px <= b + 29; px += 30) { const q = Math.min(px, b); const x = SX(railX(q)), y = SY(-q); if (px === a) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
-    };
-    path(); ctx.strokeStyle = `rgba(120,230,255,${0.16 * on})`; ctx.lineWidth = 70 * z; ctx.stroke();
-    path(); ctx.strokeStyle = `rgba(255,150,240,${0.32 * on})`; ctx.lineWidth = 22 * z; ctx.stroke();
-    path(); ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = Math.max(1.5, 4 * z); ctx.stroke();
-    for (let px = Math.ceil(a / 70) * 70; px <= b; px += 70) {
-      const k = Math.sin(px * 0.37 + t * 5);
-      ctx.fillStyle = `rgba(${px % 140 ? '220,250,255' : '255,180,240'},${0.4 + 0.4 * k})`;
-      ctx.fillRect(SX(railX(px) + Math.sin(px * 1.3) * 40), SY(-px) + Math.cos(px) * 10, 2.5, 2.5);
+    const y = SY(-r.px);
+    if (y < -60 || y > H + 60) continue;
+    const x0 = SX(r.x - RAIL_LEN / 2), x1 = SX(r.x + RAIL_LEN / 2);
+    const on = d.grind && d.grind.rail === r ? 1.8 : r.hit ? 0.35 : 1;
+    const line = (w, col) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke(); };
+    line(70 * z, `rgba(120,230,255,${0.14 * on})`);
+    line(24 * z, `rgba(255,150,240,${0.3 * on})`);
+    line(Math.max(1.5, 4 * z), `rgba(255,255,255,${0.9 * Math.min(1, on)})`);
+    for (let i = 0; i < 40; i++) {
+      const k = (i * 37.7) % 1, sx = lerp(x0, x1, k), tw = Math.sin(t * 6 + i);
+      ctx.fillStyle = `rgba(${i % 3 ? '220,250,255' : '255,180,240'},${(0.4 + 0.4 * tw) * Math.min(1, on)})`;
+      ctx.fillRect(sx, y + Math.sin(i * 2.1 + t * 3) * 12 * z, 2.5, 2.5);
     }
   }
   ctx.restore();
-  // Pfeil zur Bahn, wenn sie seitlich außerhalb des Bildes liegt
-  const cur = d.rail.find(r => hpx >= r.a && hpx <= r.b), next = cur || d.rail.find(r => r.a > hpx);
-  if (next) {
-    const px = cur ? hpx + 400 : next.a, sx = SX(railX(px)), sy = clamp(SY(-px), 90, H - 70);
-    if (sx < 20 || sx > W - 20) {
-      const left = sx < 20, ax = left ? 26 : W - 26;
-      ctx.fillStyle = '#bff4ff'; ctx.beginPath();
-      if (left) { ctx.moveTo(ax - 12, sy); ctx.lineTo(ax + 6, sy - 10); ctx.lineTo(ax + 6, sy + 10); }
-      else { ctx.moveTo(ax + 12, sy); ctx.lineTo(ax - 6, sy - 10); ctx.lineTo(ax - 6, sy + 10); }
-      ctx.fill();
-    }
-  }
 }
 const galaxySprite = (() => {
   const s = document.createElement('canvas'); s.width = s.height = 256;
@@ -2555,9 +2622,9 @@ function drawOverlayHUD() {
   // Laufender Trick in der Luft
   const photoUp = (game.shoot && game.shoot.phase === 'photo') || !!game.scene;
   if (d.airborne && d.maxH > 80 && !photoUp) {
-    const flips = Math.floor(Math.abs(d.rot) / TAU + 0.4), tw = Math.floor(d.twist / TAU + 0.2);
+    const turns = flipTurns(d.rot), flips = Math.abs(turns), tw = Math.floor(d.twist / TAU + 0.2);
     const bits = [];
-    if (flips) bits.push(trickName(flips, d.rot * d.launchCos < 0));
+    if (flips) bits.push(trickName(flips, turns * d.launchCos < 0));
     if (tw) bits.push(tw > 1 ? tw + '× Schraube' : 'Schraube');
     bits.push(fmtAlt(realAlt(Math.max(0, -d.y))));
     ctx.textAlign = 'center'; ctx.font = '22px "Lilita One", sans-serif';
@@ -2596,11 +2663,13 @@ function drawOverlayHUD() {
 //  HUD (DOM)
 // ====================================================================
 const $ = id => document.getElementById(id);
-const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost'), tempo: $('tempo'), cosmo: $('cosmo') };
+const hud = { score: $('score'), mult: $('mult'), multBar: $('multBar'), timer: $('timer'), timerLabel: $('timerLabel'), energy: $('energy'), chips: $('chips'), boost: $('boost'), tempo: $('tempo'), cosmo: $('cosmo'), bank: $('bank') };
 let chipState = '';
 function updateHUD() {
   hud.score.textContent = fmt(game.score);
   hud.mult.textContent = '×' + game.mult;
+  hud.bank.hidden = game.bank <= 0;
+  hud.bank.textContent = 'Kombo-Kasse ' + fmt(game.bank) + ' × ' + game.mult + (game.mult > 1 ? ' · ' + Math.ceil(Math.max(0, game.multTimer)) + ' s' : '');
   hud.multBar.style.transform = `scaleX(${game.mult > 1 ? clamp(game.multTimer / COMBO_TIME, 0, 1) : 0})`;
   hud.cosmo.hidden = !(d.airborne && d.cosmo > 1);
   hud.cosmo.textContent = 'Kosmos-Kombo ×' + fmtX(d.cosmo);
@@ -2637,7 +2706,7 @@ function updateHUD() {
 function startGame(mode) {
   initAudio();
   game.mode = mode; game.state = 'play'; game.time = 0; game.playTime = 0; game.timeLeft = 120; game.score = 0; game.mult = 1; game.multTimer = 0;
-  game.ringsHit = 0; game.travel = 0; game.lmPasses = []; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
+  game.ringsHit = 0; game.bank = 0; game.travel = 0; game.lmPasses = []; game.shoot = null; game.scene = null; game.sceneQueue = []; game.seen = {}; game.ink = 0; game.boost = 0; game.schoolRuns = 0; game.comboSchools = 0; game.power = {}; game.perfectRun = 0; game.banner = null; game.flash = 0; game.shake = 0;
   game.stats = { jumps: 0, maxPx: 0, farPx: 0, farName: '', maxH: 0, maxMult: 1, rings: 0, gulls: 0, fish: 0, schools: 0, photos: 0, pearls: 0, stars: 0, stings: 0, kills: 0, perfects: 0, powers: 0, bestJump: 0, bestTrick: '–' };
   resetWorld(); d = newDolphin(); chipState = null;
   cam.x = d.x; cam.y = d.y;
@@ -2649,13 +2718,14 @@ function startGame(mode) {
 function pauseGame() { if (game.state !== 'play') return; game.state = 'pause'; $('pause').hidden = false; $('resumeBtn').focus(); }
 function resumeGame() { if (game.state !== 'pause') return; game.state = 'play'; $('pause').hidden = true; lastT = performance.now(); }
 function toMenu() {
-  breakCombo();
+  game.bank = 0; breakCombo();
   if (game.mode === 'free' && game.state !== 'menu' && game.score > best.free) { best.free = game.score; store.set('best', best); }
   game.state = 'menu'; $('pause').hidden = true; $('result').hidden = true; $('hud').hidden = true; touchEl.hidden = true;
   $('menu').hidden = false; buildMenu();
   resetWorld(); d = newDolphin();
 }
 function endGame() {
+  cashCombo();
   game.state = 'over';
   const st = game.stats, mode = game.mode;
   let value, label, isBest = false;

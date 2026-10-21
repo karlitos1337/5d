@@ -20,17 +20,19 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 ## Features
 - 3 Modi: Wettkampf (2 min), Ring-Jagd (15 Ringe auf Zeit), Freies Spiel
 - Tricks: Saltos vorwärts/rückwärts (bis Mehrfach), Schrauben, Kombis; Bewertung der Landung
-  (Perfekt / Sauber / Bauchklatscher) und Kombo-Multiplikator bis ×10; die Kombo läuft erst ab, wenn 10 s im Wasser kein
-  neuer Trick kommt
+  (Perfekt / Sauber / Bauchklatscher); alle Trickpunkte landen in der Kombo-Kasse und werden mal Multiplikator (bis ×10)
+  ausgezahlt, wenn 15 s im Wasser kein neuer Trick kommt; ein Bauchklatscher beendet die Kombo und die Kasse ist weg
+- Wellenreiten: mit S / ↓ beim Auftauchen auf der Oberfläche surfen, loslassen = Absprung
 - Jede Kombo-Stufe macht den Delfin im Wasser schneller (Tempo ×1 bis ×5,23). Oberhalb von 30 m wächst die
   Höhe exponentiell: Wolken, Weltraum, ISS, Mond, Planeten, Voyager 1, Proxima Centauri, Milchstraße, Andromeda,
   Virgo-Haufen, Rand des Universums und dahinter das Multiversum mit dem Urdelfin (schaltet den Kosmos-Skin frei)
 - Fotoshooting am Flugzeug (11 km, nur im Wettkampf): Blitzlicht-Marathon in Zeitlupe, der Delfin posiert in Anzug,
   Fliege und Sonnenbrille, danach friert das Bild als Magazin-Cover „Killer-Shot“ ein (+5.000)
 - Weltraum-Modus ab der Kármán-Linie: keine Erd-Schwerkraft, je höher desto schneller (Tempo-Anzeige bis zur
-  vielfachen Lichtgeschwindigkeit); der Delfin dreht wie in der Luft Saltos, die Nase lenkt sanft zur Seite; ab dem Mond eine leuchtende Sternenstaub-Bahn zwischen den Planeten
-  (mit Lücken), auf der man einrastet und surft: Schwung lädt, Tempo und Punkte steigen; der Schwung läuft nach Zeit ab; ist er alle, fällt der Delfin zur Erde zurück (Wiedereintritt).
-  Hardcore-Modus (Menü/Pause): Schwung läuft doppelt so schnell leer, leer = Wurmloch nach Hause, Wegmarken ×2 Punkte
+  vielfachen Lichtgeschwindigkeit); der Delfin dreht wie in der Luft Saltos, die Nase lenkt sanft zur Seite; ab dem Mond waagerechte Sternenbahnen mit immer größeren Abständen:
+  mit ↓ beim Kreuzen einrasten, seitlich grinden (Schwung lädt, Punkte), loslassen = Boost nach oben; der Schwung läuft nach Zeit ab; ist er alle, fällt der Delfin mit normaler Luft-Physik in einer Parabel zurück, ohne künstliches Abbremsen; nur wer ganz oben ankommt,
+  wird per Wurmloch nach Hause geportet. Hardcore (Menü/Pause): Schwung läuft doppelt so schnell leer, kein Portal,
+  Wegmarken ×2 Punkte
 - Kosmos-Kombo: Wegmarken multiplizieren die Punkte des laufenden Sprungs (Flugzeug ×2, Mond ×5, Mars ×10, Jupiter ×25,
   Saturn ×50, Neptun ×100 … bis Urdelfin ×100.000); es zählt der höchste im Sprung, jede Wiederholung derselben
   Wegmarke in einer Runde 1 % weniger; nur bei sauberer Landung zählt er auch für die Sprungpunkte
@@ -40,7 +42,7 @@ Touch-Buttons erscheinen automatisch auf Handys, Gamepads werden ebenfalls unter
 - Zwischen-Szenen und Fotoshooting lassen sich im Hauptmenü und im Pausenmenü abschalten (Punkte gibt es trotzdem)
 - Rammbock: ab Mond-Tempo (glühender Delfin) werden Quallen, Kraken und Anglerfische zerstört; ein Bauchklatscher mit
   hohem Tempo oder nach der Rückkehr aus dem All löst eine Schockwelle aus (Bauchplatscher-Bombe)
-- Tiefsee: wenige Quallen erst in der Tiefe, am Grund Kraken (Tintenwolke) und Anglerfische mit Leuchtköder
+- Tiefsee: am Grund nur ein Krake (Tintenwolke) und ein Anglerfisch mit Leuchtköder
 - Lagune ohne Wände: Wer seitlich rausschwimmt oder -springt, kommt auf der anderen Seite wieder rein
 - Fischschwärme durchkreuzen: 5.000 Punkte (in derselben Kombo jedes weitere Mal 1 % weniger) und
   ein Bonusverstärker auf alle Punkte (+1 %, jedes weitere Mal 1 % weniger als zuvor)
