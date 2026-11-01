@@ -104,18 +104,41 @@
   <details open>
     <summary>Was passiert mit meinen Antworten?</summary>
     <ul>
-      <li><strong>Nichts.</strong> Deine Antworten werden nur in diesem Browserfenster ausgewertet. Es gibt keine Cookies, kein Tracking und keine Speicherung. Schließt du die Seite, sind die Antworten weg.</li>
-      <li><strong>Datenspende: in Vorbereitung.</strong> Später sollst du deine Antworten am Ende freiwillig und pseudonym spenden können, nur als Zahlen und ohne E-Mail-Adresse. Bevor das freigeschaltet wird, steht hier genau, welcher Dienst die Daten speichert, wo die Server stehen und wann gelöscht wird.</li>
+      <li><strong>Standard: nichts.</strong> Deine Antworten werden nur in diesem Browserfenster ausgewertet. Es gibt keine Cookies, kein Tracking und keine Speicherung. Schließt du die Seite, sind die Antworten weg.</li>
+      <li data-donation="on" hidden><strong>Nur wenn du willst: Datenspende.</strong> Am Ende kannst du deine Antworten freiwillig und pseudonym spenden. Erst wenn du ausdrücklich zustimmst und auf „Spenden“ klickst, werden sie gesendet. Die Details stehen unten.</li>
+      <li data-donation="off"><strong>Datenspende: in Vorbereitung.</strong> Später sollst du deine Antworten am Ende freiwillig und pseudonym spenden können, nur als Zahlen und ohne E-Mail-Adresse. Bevor das freigeschaltet wird, steht hier genau, welcher Dienst die Daten speichert, wo die Server stehen und wann gelöscht wird.</li>
     </ul>
   </details>
   <details>
     <summary>Wer ist verantwortlich?</summary>
     <p>Verantwortlich für diese Seite ist <span data-contact-name></span>, erreichbar unter <a data-contact-mail></a>.</p>
   </details>
+  <details data-donation="on" hidden>
+    <summary>Welche Daten enthält eine Spende?</summary>
+    <ul>
+      <li>deine 30 Antworten als Zahlen (25 zu den fünf Bereichen, 5 zur Lebenszufriedenheit)</li>
+      <li>das Ergebnis der Aufmerksamkeitsfrage</li>
+      <li>freiwillig deine Altersgruppe</li>
+      <li>einen zufälligen Teilnahme-Code und den Monat der Spende</li>
+    </ul>
+    <p><strong>Nicht enthalten:</strong> Name, E-Mail-Adresse, Freitext, Uhrzeit. Die Spende ist pseudonym: Nur über deinen Teilnahme-Code lässt sie sich wiederfinden, zum Beispiel für einen Widerruf.</p>
+  </details>
+  <details data-donation="on" hidden>
+    <summary>Wo werden die Daten gespeichert?</summary>
+    <p>Die Spenden landen in einer Datenbank bei <strong>Supabase</strong> (Supabase Inc., USA). Der Speicherort ist <strong>Frankfurt am Main (EU)</strong>. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung.</p>
+    <p>Beim Absenden sieht der Dienst technisch deine IP-Adresse, wie jede Website. Sie wird <strong>nicht</strong> in der Tabelle gespeichert und kann höchstens kurzzeitig in den Server-Protokollen des Anbieters auftauchen.</p>
+    <p>Rechtsgrundlage ist deine ausdrückliche Einwilligung (Art. 6 Abs. 1 a und Art. 9 Abs. 2 a DSGVO), weil die Fragen Rückschlüsse auf das seelische Befinden zulassen.</p>
+  </details>
+  <details data-donation="on" hidden>
+    <summary>Wird etwas veröffentlicht, und wann wird gelöscht?</summary>
+    <p>Jede Spende wird zuerst von Hand geprüft. Nur freigegebene Spenden kommen als Zahlenreihe in einen öffentlichen Datensatz im <a href="https://github.com/karlitos1337/5d">GitHub-Repository</a>, damit die Auswertung nachprüfbar ist (offene Wissenschaft).</p>
+    <p>Nicht freigegebene Spenden werden gelöscht. Die Datenbank bei Supabase wird nach Ende der Pilotphase geleert, spätestens 12 Monate nach deiner Spende.</p>
+  </details>
   <details>
     <summary>Meine Rechte und Widerruf</summary>
     <ul>
       <li>Die Teilnahme ist freiwillig. Du kannst jederzeit abbrechen, ohne Nachteile.</li>
+      <li data-donation="on" hidden>Du kannst deine Einwilligung jederzeit widerrufen. Schick dazu deinen Teilnahme-Code an die oben genannte Adresse. Deine Spende wird dann gelöscht und verschwindet beim nächsten Export aus dem öffentlichen Datensatz. In der Versionsgeschichte von GitHub bleibt eine frühere Fassung technisch erhalten, sie ist aber auch dort nicht mit dir verknüpfbar.</li>
       <li>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung sowie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde.</li>
     </ul>
   </details>
@@ -128,7 +151,8 @@
     <div class="card">
       <label class="check"><input type="checkbox" id="c-age" required> <span>Ich bin mindestens 18 Jahre alt.</span></label>
       <label class="check"><input type="checkbox" id="c-read" required> <span>Ich habe Zweck und Datenschutzhinweise gelesen und nehme freiwillig teil.</span></label>
-      <p class="muted">Es werden keine Antworten gesendet oder gespeichert.</p>
+      <p class="muted" data-donation="off">Es werden keine Antworten gesendet oder gespeichert.</p>
+      <p class="muted" data-donation="on" hidden>Ob du deine Antworten spendest, entscheidest du erst am Ende, nachdem du deine Auswertung gesehen hast.</p>
     </div>
 
     <div id="questions" hidden>
@@ -162,8 +186,15 @@
     <p class="muted">Diese Werte zeigen eine Momentaufnahme, kein festes Merkmal. Das Denkmodell dahinter wird mit dieser Studie gerade erst geprüft.</p>
 
     <h2>6. Datenspende</h2>
-    <div class="card">
+    <div class="card" data-donation="off">
       <p>Die freiwillige Datenspende wird gerade auf ein Verfahren ohne E-Mail umgestellt, damit deine Antworten nicht mit deiner Adresse zusammenkommen. Bis dahin bleibt alles bei dir. Danke, dass du mitgemacht hast!</p>
+    </div>
+    <div class="card" data-donation="on" hidden>
+      <p>Mit deiner Spende hilfst du zu prüfen, ob das Modell stimmt oder verworfen werden muss. Beides ist ein wertvolles Ergebnis.</p>
+      <label class="check"><input type="checkbox" id="c-donate"> <span>Ich willige ausdrücklich ein, dass meine Antworten wie im Abschnitt „Rechtliches und Datenschutz“ beschrieben pseudonym gespeichert und nach Prüfung anonym veröffentlicht werden. Mir ist bewusst, dass sie Rückschlüsse auf mein seelisches Befinden zulassen.</span></label>
+      <p><button type="button" id="donate" disabled>Antworten pseudonym spenden</button></p>
+      <p id="donate-status" role="status"></p>
+      <p class="muted">Dein Teilnahme-Code für einen späteren Widerruf: <strong id="pid"></strong>. Notiere ihn dir.</p>
     </div>
   </section>
 </main>
@@ -173,6 +204,15 @@
   // Kontakt der verantwortlichen Person. Vor Veröffentlichung prüfen.
   const CONTACT_NAME = "Patrick Karletz";
   const CONTACT_MAIL = "pkarletz@gmail.com";
+
+  // Supabase-Projekt (Region Frankfurt). Der anon-Schlüssel ist öffentlich und darf laut
+  // supabase/pilot_schema.sql nur einfügen. Leer = Datenspende abgeschaltet.
+  const SUPABASE_URL = "";
+  const SUPABASE_ANON_KEY = "";
+  const DONATION_ENABLED = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.length > 0;
+  document.querySelectorAll("[data-donation]").forEach(el => {
+    el.hidden = (el.dataset.donation === "on") !== DONATION_ENABLED;
+  });
 
   const IMP = [
     ["A",  "Autonomie", [
@@ -357,12 +397,47 @@
       <p class="muted">Skala nach Diener et al. (1985), Einordnung nach Pavot und Diener (2008).</p>`;
     sr.querySelector("strong").textContent = swlsSum;
     sr.querySelector("span").textContent = band;
+    document.getElementById("pid").textContent = payload.id;
 
     document.getElementById("survey").hidden = true;
     document.getElementById("result").hidden = false;
     document.getElementById("result").scrollIntoView({ behavior: "smooth" });
   }
 
+  const donateBox = document.getElementById("c-donate");
+  const donateBtn = document.getElementById("donate");
+  const donateStatus = document.getElementById("donate-status");
+  donateBox.addEventListener("change", () => { donateBtn.disabled = !donateBox.checked; });
+  donateBtn.addEventListener("click", async () => {
+    if (!DONATION_ENABLED || !donateBox.checked || !payload) return;
+    donateBtn.disabled = true;
+    donateBox.disabled = true;
+    donateStatus.textContent = "Wird gesendet …";
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/pilot_submissions`, {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({
+          participant_code: payload.id,
+          age_group: payload.age,
+          attention_ok: payload.att,
+          imp: payload.imp,
+          swls: payload.swls,
+        }),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      donateStatus.textContent = "Danke! Deine Spende ist angekommen. Sie wird geprüft, bevor sie in die Auswertung geht.";
+    } catch (err) {
+      donateStatus.textContent = "Das hat leider nicht geklappt. Bitte versuch es später noch einmal.";
+      donateBtn.disabled = false;
+      donateBox.disabled = false;
+    }
+  });
 })();
 </script>
 </body>
