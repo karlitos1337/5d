@@ -61,3 +61,6 @@
 ## 2026-08-29 - Skip Link Dark Mode Contrast
 **Learning:** When defining a fixed background color like focus:bg-white for accessibility elements such as skip links, the text color must also be explicitly set (e.g., focus:text-gray-900) because elements may inherit a light text color from a dark mode parent component (e.g., text-gray-100), leading to invisible text against the white background.
 **Action:** Always explicitly pair text colors with background colors for interactive state classes, especially when overriding a parent's dark mode styling.
+## 2024-05-24 - Navigation Focus Rings
+**Learning:** Relying on basic active/inactive text colors in navigation headers without `aria-current` hides the context from screen readers, while missing `focus-visible:ring` implementations leave keyboard-only users with invisible focus indicators, particularly on dynamic dark mode toggles.
+**Action:** Add `aria-current="true"` conditionally to the active tab, and ensure all interactive elements receive high-contrast focus rings (`focus-visible:ring-2 focus-visible:ring-offset-*`) styled dynamically for light and dark contexts.
