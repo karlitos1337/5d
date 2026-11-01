@@ -37,6 +37,8 @@ const App = () => {
       const url = refData.substring(0, separatorIndex).trim();
       const indexNum = refData.substring(separatorIndex + 1).trim();
 
+      if (!el.textContent?.trim() && el.tagName !== 'IMG') return;
+
       let parsedUrl;
       try {
         parsedUrl = new URL(url);
@@ -52,15 +54,15 @@ const App = () => {
       btn.setAttribute('aria-label', `Quelle ${indexNum} öffnen`);
       btn.title = `Quelle ${indexNum} öffnen`;
 
-btn.onkeydown = (e) => {
-  if (e.repeat) return;
-  const isSpace = e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
-  if (e.key === 'Enter' || isSpace) {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
-  }
-};
+      btn.onkeydown = (e) => {
+        if (e.repeat) return;
+        const isSpace = e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
+        if (e.key === 'Enter' || isSpace) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(parsedUrl.href, '_blank', 'noopener,noreferrer');
+        }
+      };
 
       btn.onfocus = () => Object.assign(btn.style, { outline: '2px solid #3b82f6', outlineOffset: '2px' });
       btn.onblur = () => Object.assign(btn.style, { outline: 'none' });
@@ -163,10 +165,7 @@ btn.onkeydown = (e) => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                aria-label={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
-                aria-pressed={darkMode}
-                title={darkMode ? 'Heller Modus aktivieren' : 'Dunkler Modus aktivieren'}
-                className={`p-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                className={`p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -175,10 +174,7 @@ btn.onkeydown = (e) => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
-                aria-expanded={mobileMenuOpen}
-                aria-controls={mobileMenuOpen ? 'mobile-navigation' : undefined}
-                className={`md:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                   darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                 }`}
               >
@@ -191,7 +187,6 @@ btn.onkeydown = (e) => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <motion.div
-            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className={`md:hidden border-t ${darkMode ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'}`}
@@ -216,10 +211,7 @@ btn.onkeydown = (e) => {
       </header>
 
       {/* Main Content */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3">
-        Zum Hauptinhalt springen
-      </a>
-      <main id="main-content" tabIndex={-1} className="pt-16">
+      <main className="pt-16">
         {/* Hero Section */}
         <section id="einleitung" className={`py-20 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -288,8 +280,6 @@ btn.onkeydown = (e) => {
                     src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/c3263f72-c6ff-49f7-878f-1f904ff343d3.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                     alt="Eine moderne Infografik, die die fünf Dimensionen des 5D-Intelligence Frameworks visuell darstellt. Die Grafik zeigt ein zentrales Symbol in Form eines menschlichen Gehirns oder einer Blume mit fünf ausgehenden Strahlen, die jeweils eine der Dimensionen repräsentieren. Jeder Strahl ist farbcodiert: Blau für Autonomie, Grün für intrinsische Motivation, Gelb für Resilienz, Rot für soziale Partizipation und Lila für Authentizität. Um das Zentrum herum befinden sich stilisierte Symbole, die mit jeder Dimension assoziiert werden: eine freie Hand für Autonomie, eine Flamme für Motivation, einen Baum für Resilienz, eine Gruppe von Personen für soziale Partizipation und einen Spiegel für Authentizität. Der Hintergrund ist hell mit subtilen geometrischen Mustern, und alle Elemente sind in einem modernen, flachen Designstil gehalten."
                     className="w-full rounded-xl shadow-lg"
-                    decoding="async"
-                    loading="lazy"
                     data-ref="https://selfdeterminationtheory.org/theory/|6"
                 />
               </div>
@@ -325,7 +315,7 @@ btn.onkeydown = (e) => {
                   <div>
                     <h4 className="font-medium mb-2">Human Development Index (HDI)</h4>
                     <p className="text-sm" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                      Hochoptionale HDI-Schätzungen für zweitebene administrative Einheiten (z.B. Gemeinden/Kreise, N = 61.591) und ein 0,1 × 0,1 Grad Raster (N = 806.361), entwickelt unter Verwendung von Satellitenbildern und maschinellem Lernen.
+                      Hochoptionale HDI-Schätzungen für zweitebene administrative Einheiten (z.B. Gemeinden/Kreise, N = 61.591) und ein 0,1 &times; 0,1 Grad Raster (N = 806.361), entwickelt unter Verwendung von Satellitenbildern und maschinellem Lernen.
                     </p>
                   </div>
                 </div>
@@ -337,7 +327,7 @@ btn.onkeydown = (e) => {
                   <div>
                     <h4 className="font-medium mb-2">Validierungskriterien</h4>
                     <p className="text-sm" data-ref="https://pmc.ncbi.nlm.nih.gov/articles/PMC8869198/|5">
-                      Nachweis hoher interner Konsistenz (Cronbach&apos;s α &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
+                      Nachweis hoher interner Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8), theoretischer Unterschiedlichkeit der Dimensionen und praktischer Anwendbarkeit, insbesondere im Kontext persönlicher Entwicklungsprojekte.
                     </p>
                   </div>
                   <div>
@@ -355,7 +345,7 @@ btn.onkeydown = (e) => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-blue-500">Reliabilität</h4>
-                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s α &gt; 0.8)</p>
+                  <p className="text-sm">Interne Konsistenz (Cronbach&apos;s &alpha; &gt; 0.8)</p>
                 </div>
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
                   <h4 className="font-semibold text-green-500">Validität</h4>
@@ -379,11 +369,11 @@ btn.onkeydown = (e) => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Korrelationsanalysen</h3>
                 <p className="mb-4" data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1">
-                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu & Robinson (2012).
+                  Die bisherige Analyse zeigt vielversprechende Korrelationen (r = 0.68–0.73) zwischen Autonomie und sozioökonomischen Outcomes, konsistent mit der Theorie inklusiver Institutionen nach Acemoglu &amp; Robinson (2012).
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Autonomie ↔ Sozioökonomische Outcomes</span>
+                    <span>Autonomie &harr; Sozioökonomische Outcomes</span>
                     <span className="font-semibold">r = 0.68–0.73</span>
                   </div>
                 </div>
@@ -412,8 +402,6 @@ btn.onkeydown = (e) => {
                   src="https://cdn.qwenlm.ai/5c2bdb57-0d45-4823-a416-983c5d6749f3/2fc73407-022d-409f-9d66-19f282f42835/13f179b6-03ad-45f7-9f79-54a7d2e529b0.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNWMyYmRiNTctMGQ0NS00ODIzLWE0MTYtOTgzYzVkNjc0OWYzIiwicmVzb3VyY2VfaWQiOiIyZmM3MzQwNy0wMjJkLTQwOWYtOWQ2Ni0xOWYyODJmNDI4MzUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.EfzxKgEUs_wB3WAlTjJxrlRdB1ZR0sALXR0-HaXSOec"
                   alt="Ein wissenschaftliches Diagramm mit zwei Achsen, das die Beziehung zwischen Autonomie und sozioökonomischen Ergebnissen visualisiert. Die x-Achse ist beschriftet mit 'Autonomie-Score (0-100)' und die y-Achse mit 'Sozioökonomische Ergebnisse (0-100)'. Punkte sind als blaue Kreise dargestellt, die eine positive Korrelation zeigen. Eine durchgezogene Linie verläuft diagonal von unten links nach oben rechts, die die Regressionslinie darstellt. Oben im Diagramm steht der Titel 'Korrelation zwischen Autonomie und sozioökonomischen Outcomes (r = 0.68-0.73)' in großer, fettgedruckter Schrift. Die Diagrammfläche hat einen hellen Hintergrund mit subtilen Gitterlinien, und die Achsen sind klar beschriftet mit schwarzer Schrift auf weißem Hintergrund."
                   className="w-full rounded-xl shadow-lg"
-                  loading="lazy"
-                  decoding="async"
                   data-ref="https://www.researchgate.net/publication/369555022_Global_High-Resolution_Estimates_of_the_United_Nations_Human_Development_Index_Using_Satellite_Imagery_and_Machine-Learning|1"
               />
             </div>
@@ -440,19 +428,19 @@ btn.onkeydown = (e) => {
               <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
                 <h3 className="text-xl font-semibold mb-4">Reliabilität</h3>
                 <p className="mb-4" data-ref="https://www.sbp-journal.com/index.php/sbp/article/view/13907|11">
-                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist α &gt; 0.8 für hohe Reliabilität.
+                  Die interne Konsistenz der einzelnen Dimensionen wird mittels Cronbach&apos;s Alpha gemessen. Die Zielvorgabe ist &alpha; &gt; 0.8 für hohe Reliabilität.
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Unreliability (α)</span>
+                    <span>Unreliability (&alpha;)</span>
                     <span className="font-semibold">.80</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Gullibility (α)</span>
+                    <span>Gullibility (&alpha;)</span>
                     <span className="font-semibold">.79</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Irrationality (α)</span>
+                    <span>Irrationality (&alpha;)</span>
                     <span className="font-semibold">.78</span>
                   </div>
                 </div>
@@ -500,7 +488,7 @@ btn.onkeydown = (e) => {
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} shadow-lg`}>
               <h3 className="text-xl font-semibold mb-4">Theoretische Fundierung</h3>
               <p className="mb-4" data-ref="https://www.tandfonline.com/doi/full/10.1080/10447318.2025.2542881?src=|12">
-                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci & Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
+                Das Framework integriert mehrere etablierte Theorien: Selbstbestimmungstheorie (Deci &amp; Ryan), Maslowsche Bedürfnispyramide, ERG-Theorie (Alderfer), Flow-Theorie (Csikszentmihalyi) und die Inner Development Goals (IDGs).
               </p>
               <p data-ref="https://doi.org/10.3390/challe13020058|13">
                 Die sieben Kernelemente des Flourish-Modells - Sicherheit, Beziehung, Unabhängigkeit, Engagement, Erfüllung, Beitrag und Wachstum - werden explizit den Dimensionen des 5D-Intelligence Frameworks zugeordnet.
@@ -593,14 +581,14 @@ btn.onkeydown = (e) => {
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
                   <h4 className="font-semibold text-blue-500 mb-2">Aktueller Status</h4>
                   <p className="text-sm">
-                    Kleine Stichprobe von 9 Ländern • Promisinge Korrelationen r = 0.68–0.73 • Validitätsprüfungen laufen
+                    Kleine Stichprobe von 9 Ländern &bull; Promisinge Korrelationen r = 0.68–0.73 &bull; Validitätsprüfungen laufen
                   </p>
                 </div>
 
                 <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
                   <h4 className="font-semibold text-green-500 mb-2">Zielvorgaben</h4>
                   <p className="text-sm">
-                    α &gt; 0.8 Reliabilität • Theoretische Unterschiedlichkeit • Praktische Anwendbarkeit • Über 150 Länder
+                    &alpha; &gt; 0.8 Reliabilität &bull; Theoretische Unterschiedlichkeit &bull; Praktische Anwendbarkeit &bull; Über 150 Länder
                   </p>
                 </div>
               </div>
@@ -617,7 +605,7 @@ btn.onkeydown = (e) => {
       <footer className={`py-8 ${darkMode ? 'bg-gray-800 border-t border-gray-700' : 'bg-gray-50 border-t border-gray-200'}`}>
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-sm">
-            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks • Alle Angaben ohne Gewähr
+            Forschungsprojekt zur Validierung des 5D-Intelligence Frameworks &bull; Alle Angaben ohne Gewähr
           </p>
         </div>
       </footer>
