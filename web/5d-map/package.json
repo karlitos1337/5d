@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@playwright/test": "^1.40.0",
-    "@vitest/ui": "^1.6.1",
+    "@vitest/ui": "^4.1.11",
     "jsdom": "^27.3.0",
     "vitest": "^3.2.6"
   },
